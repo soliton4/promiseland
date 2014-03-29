@@ -1,0 +1,8 @@
+return {
+  fun: (){
+    if (1 < 0){
+      *b; // code that will never be called but indicates a promise
+    };
+    return 4;
+  }
+};

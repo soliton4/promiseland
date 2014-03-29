@@ -1,0 +1,77 @@
+<script src="requirejs/require.js"></script>
+<script>
+  require.config({
+    baseUrl: "../",
+    paths: {
+        "promiseland": "promiseland"
+        , "test": "test"
+    },
+    waitSeconds: 15
+  });
+  
+  var testObj = {
+    
+  };
+  
+  testObj.basicmodule = false;
+  try{
+    require( ["promiseland", "test/basicmodule"],
+      function(promiseland, basicmodule) {
+        basicmodule.then(function(mod){
+          if (typeof mod == "object"){
+            testObj.basicmodule = true;
+          };
+        });
+      }
+    );
+  }catch(e){
+  };
+  
+  testObj.creatingpromise = false;
+  try{
+    require( ["promiseland", "test/creatingpromise"],
+      function(promiseland, creatingpromise) {
+        creatingpromise.then(function(mod){
+          mod.fun().then(function(res){
+            if (res == 4){
+              testObj.creatingpromise = true;
+            };
+          });
+        });
+      }
+    );
+  }catch(e){
+  };
+  
+  testObj.creatingpromise2 = false;
+  try{
+    require( ["promiseland", "test/creatingpromise2"],
+      function(promiseland, creatingpromise2) {
+        creatingpromise2.then(function(mod){
+          mod.fun().then(function(res){
+            if (res == 4){
+              testObj.creatingpromise2 = true;
+            };
+          });
+        });
+      }
+    );
+  }catch(e){
+  };
+  
+  setTimeout(function(){
+    var c = 0;
+    var s = 0;
+    var f = 0;
+    for (var m in testObj){
+      c++;
+      if (testObj[m]){
+        s++;
+      }else{
+        console.log(m + " failed!");
+        f++;
+      };
+    };
+    console.log("run " + c + " tests. " + s + " successful, " + f + " failed");
+  }, 2000);
+</script>

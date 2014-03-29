@@ -10366,7 +10366,7 @@
       }
       
       function parse_FunctionDeclaration() {
-        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14;
+        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16;
         var pos0, pos1;
         
         pos0 = pos;
@@ -10408,33 +10408,54 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            if (input.charCodeAt(pos) === 123) {
-                              result10 = "{";
+                            if (input.charCodeAt(pos) === 42) {
+                              result10 = "*";
                               pos++;
                             } else {
                               result10 = null;
                               if (reportFailures === 0) {
-                                matchFailed("\"{\"");
+                                matchFailed("\"*\"");
                               }
                             }
+                            result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();
                               if (result11 !== null) {
-                                result12 = parse_FunctionBody();
+                                if (input.charCodeAt(pos) === 123) {
+                                  result12 = "{";
+                                  pos++;
+                                } else {
+                                  result12 = null;
+                                  if (reportFailures === 0) {
+                                    matchFailed("\"{\"");
+                                  }
+                                }
                                 if (result12 !== null) {
                                   result13 = parse___();
                                   if (result13 !== null) {
-                                    if (input.charCodeAt(pos) === 125) {
-                                      result14 = "}";
-                                      pos++;
-                                    } else {
-                                      result14 = null;
-                                      if (reportFailures === 0) {
-                                        matchFailed("\"}\"");
-                                      }
-                                    }
+                                    result14 = parse_FunctionBody();
                                     if (result14 !== null) {
-                                      result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14];
+                                      result15 = parse___();
+                                      if (result15 !== null) {
+                                        if (input.charCodeAt(pos) === 125) {
+                                          result16 = "}";
+                                          pos++;
+                                        } else {
+                                          result16 = null;
+                                          if (reportFailures === 0) {
+                                            matchFailed("\"}\"");
+                                          }
+                                        }
+                                        if (result16 !== null) {
+                                          result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16];
+                                        } else {
+                                          result0 = null;
+                                          pos = pos1;
+                                        }
+                                      } else {
+                                        result0 = null;
+                                        pos = pos1;
+                                      }
                                     } else {
                                       result0 = null;
                                       pos = pos1;
@@ -10496,14 +10517,15 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, name, params, elements) {
+          result0 = (function(offset, name, params, promise, elements) {
               return {
                 type:     "Function",
                 name:     name,
                 params:   params !== "" ? params : [],
-                elements: elements
+                elements: elements,
+                promise:  promise
               };
-            })(pos0, result0[2], result0[6], result0[12]);
+            })(pos0, result0[2], result0[6], result0[10], result0[14]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -10512,7 +10534,7 @@
       }
       
       function parse_FunctionExpression() {
-        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14;
+        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16;
         var pos0, pos1;
         
         pos0 = pos;
@@ -10556,33 +10578,54 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            if (input.charCodeAt(pos) === 123) {
-                              result10 = "{";
+                            if (input.charCodeAt(pos) === 42) {
+                              result10 = "*";
                               pos++;
                             } else {
                               result10 = null;
                               if (reportFailures === 0) {
-                                matchFailed("\"{\"");
+                                matchFailed("\"*\"");
                               }
                             }
+                            result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();
                               if (result11 !== null) {
-                                result12 = parse_FunctionBody();
+                                if (input.charCodeAt(pos) === 123) {
+                                  result12 = "{";
+                                  pos++;
+                                } else {
+                                  result12 = null;
+                                  if (reportFailures === 0) {
+                                    matchFailed("\"{\"");
+                                  }
+                                }
                                 if (result12 !== null) {
                                   result13 = parse___();
                                   if (result13 !== null) {
-                                    if (input.charCodeAt(pos) === 125) {
-                                      result14 = "}";
-                                      pos++;
-                                    } else {
-                                      result14 = null;
-                                      if (reportFailures === 0) {
-                                        matchFailed("\"}\"");
-                                      }
-                                    }
+                                    result14 = parse_FunctionBody();
                                     if (result14 !== null) {
-                                      result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14];
+                                      result15 = parse___();
+                                      if (result15 !== null) {
+                                        if (input.charCodeAt(pos) === 125) {
+                                          result16 = "}";
+                                          pos++;
+                                        } else {
+                                          result16 = null;
+                                          if (reportFailures === 0) {
+                                            matchFailed("\"}\"");
+                                          }
+                                        }
+                                        if (result16 !== null) {
+                                          result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16];
+                                        } else {
+                                          result0 = null;
+                                          pos = pos1;
+                                        }
+                                      } else {
+                                        result0 = null;
+                                        pos = pos1;
+                                      }
                                     } else {
                                       result0 = null;
                                       pos = pos1;
@@ -10644,14 +10687,15 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, name, params, elements) {
+          result0 = (function(offset, name, params, promise, elements) {
               return {
                 type:     "Function",
                 name:     name !== "" ? name : null,
                 params:   params !== "" ? params : [],
-                elements: elements
+                elements: elements,
+                promise:  promise
               };
-            })(pos0, result0[2], result0[6], result0[12]);
+            })(pos0, result0[2], result0[6], result0[10], result0[14]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -12872,9 +12916,6 @@
   
   return result;
 })()
-  
-  
-  
   
   });
 })();

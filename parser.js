@@ -49,6 +49,10 @@
       throw(what);
     };
     
+    var newPromiseStr = function(){
+      return "new __Promise()";
+    };
+    
     
     /* pre processors */
     
@@ -59,9 +63,12 @@
       if (par.type == "UnaryExpression" && par.operator == "*"){
         par.promising = true;
       };
+      if (par.type == "Function" && par.promise == "*"){
+        par.promising = true;
+      };
       var i;
       for (i in par){
-        if (findPromises(par[i])){
+        if (findPromises(par[i]) && par[i].type != "Function"){
           par.promising = true;
         };
       };
@@ -246,18 +253,19 @@
         findPromises(entry);
         var res = this.newResult();
         resStr = "";
-        if (entry.promising){
-          res.makePromising();
-          res.push("var _returnPs = new Promise();\n");
-          this.promising = true;
-          this.returnPromise = "_returnPs";
-        };
+        //if (entry.promising){
+        res.makePromising();
+        res.push("(function(){\n");
+        this.promising = true;
+        this.returnPromise = "__module";
+        //};
         var elements = this.parseProgElements(entry.elements);
         var i = 0;
         for (i = 0; i < this.declarations.length; ++i){
           res.push("var " + this.declarations[i] + ";\n");
         };
         res.push(elements);
+        res.push("})();\n");
         return res;
       };
       
@@ -294,7 +302,7 @@
         res.push("){\n");
         
         if (par.promising){
-          res.push("var _returnPs = new Promise();\n");
+          res.push("var _returnPs = " + newPromiseStr() + ";\n");
           this.promising = true;
           this.returnPromise = "_returnPs";
           res.push("try{");
@@ -476,7 +484,7 @@
         this.breakCode = promiseName + ".resolve(false); return;\n";
         this.continueCode = promiseName + ".resolve(true); return;\n";
         
-        res.push("var " + promiseName + " = new Promise();\n");
+        res.push("var " + promiseName + " = " + newPromiseStr() + ";\n");
         
         if (par.preCondition){
           res.push("if(");
@@ -504,7 +512,7 @@
         var loopFun = this.getUniqueName();
         var loopEndPromise = this.getUniqueName();
         
-        res.push("var " + loopEndPromise + " = new Promise();\n");
+        res.push("var " + loopEndPromise + " = " + newPromiseStr() + ";\n");
         
         res.push("var " + loopFun + " = function(){");
         
@@ -637,7 +645,7 @@
         var continueCode;
         if (promising) {
           continuePromise = this.getUniqueName();
-          res.push("var " + continuePromise + " = new Promise();\n");
+          res.push("var " + continuePromise + " = " + newPromiseStr() + ";\n");
           continueCode = continuePromise + ".resolve();";
         };
         res.push("if(");
@@ -669,11 +677,16 @@
             statement.push(continueCode);
           };
           res.push(makeCompleteStatement(statement));
+        }else if (promising){
+          res.push("\n}else{\n");
+          statement = this.newResult();
+          statement.push(continueCode);
+          res.push(makeCompleteStatement(statement));
         };
         res.push("}");
         if (promising){
           res.push("; " + continuePromise + ".then(function(){");
-          res.addPost(")};");
+          res.addPost("});");
         };
         return res;
       };
@@ -689,7 +702,7 @@
           var tempValue = this.getUniqueName();
           res.addPre("var ");
           res.addPre(tempPromise);
-          res.addPre(" = new Promise();\n");
+          res.addPre(" = " + newPromiseStr() + ";\n");
           res.addPre("if(");
           res.addPre(this.parseExpression(par.condition));
           res.addPre("){");
@@ -742,7 +755,7 @@
           var tempValue = this.getUniqueName();
           res.addPre("var ");
           res.addPre(tempPromise);
-          res.addPre(" = new Promise();\n");
+          res.addPre(" = " + newPromiseStr() + ";\n");
           res.addPre("var ");
           res.addPre(tempValue);
           res.addPre(" = ");
@@ -955,30 +968,18 @@
       */
       
       this.returnStatement = function(par, closingFun){
-        var resStr = "";
-        var promising = par.value && par.value.promising;
-        if (promising){ // function and value promising
-          resStr += " " + this.parseExpression(par.value, closingFun);
-          resStr += this.returnPromise + ".resolve(";
-          resStr += par.value.promiseName + ");\n";
-
-        }else if (this.promising){ // only function promising
-          resStr += this.returnPromise + ".resolve(";
-          if (par.value){
-            resStr += " " + this.parseExpression(par.value, closingFun);
-          };
-          resStr += ");\n";
-
-        }else{
-          resStr += "return";
-          if (par.value){
-            resStr += " " + this.parseExpression(par.value, closingFun);
-          };
+        var res = this.newResult();
+        if (this.promising){
+          res.push(this.returnPromise + ".resolve(");
+        }else{;
+          res.push("return ");
         };
-        return resStr;
+        res.push(this.parseExpression(par.value));
+        if (this.promising){
+          res.push("); return " + this.returnPromise);
+        };
+        return res;
       };
-      
-    
       
       
       this._start();
@@ -1020,11 +1021,11 @@
     };
     
     var promiseLandRequireStr = function(){
-      return "var __Promise = promiseLand.Promise;\nvar module = new __Promise();\n";
+      return "var __Promise = promiseLand.Promise;\nvar __module = new __Promise();\n";
     };
     
     var loaderEndStr = function(){
-      return "return module.promise.then;});\n})();";
+      return "return __module.promise.then;});\n})();";
     };
     
     
@@ -1037,8 +1038,8 @@
           var parsedAr = parser.parse(promiseLandCodeStr);
           var resStr = "";
           var cp;
-          //resStr += loaderStr();
-          //resStr += promiseLandRequireStr();
+          resStr += loaderStr();
+          resStr += promiseLandRequireStr();
           if (parsedAr.length === undefined){
             if (parsedAr.type == "Program"){
               cp = new CodeParser({toParse: parsedAr});
@@ -1059,7 +1060,7 @@
               };
             };
           };
-          //resStr += loaderEndStr();
+          resStr += loaderEndStr();
           p.resolve(resStr);
         });
         console.log("returning promise");
