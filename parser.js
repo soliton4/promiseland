@@ -513,22 +513,26 @@
         
         res.push("var " + promiseName + " = " + newPromiseStr() + ";\n");
         
+        var outerBlock = this.newResult();
+        
         if (par.preCondition){
-          res.push("if(");
-          res.push(par.preCondition);
-          res.push("){");
+          outerBlock.push("if(");
+          outerBlock.push(par.preCondition);
+          outerBlock.push("){");
         };
         
         var block = this.blockAndContinue(par.block);
         //block.push(this.continueCode);
         
-        res.push(makeCompleteStatement(block));
+        outerBlock.push(makeCompleteStatement(block));
         
         if (par.preCondition){
-          res.push("}else{");
-          res.push(this.breakCode);
-          res.push("};\n");
+          outerBlock.push("}else{");
+          outerBlock.push(this.breakCode);
+          outerBlock.push("};\n");
         };
+        
+        res.push(makeCompleteStatement(outerBlock));
         
         this.breakCode = oldBreakCode;
         this.continueCode = oldContinueCode;
