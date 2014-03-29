@@ -560,8 +560,8 @@ PropertySetParameterList
 
 MemberExpression
   = base:(
-        PrimaryExpression
-      / FunctionExpression
+      FunctionExpression
+      / PrimaryExpression
       / NewToken __ constructor:MemberExpression __ arguments:Arguments {
           return {
             type:        "NewOperator",
@@ -1074,6 +1074,36 @@ AssignmentOperator
   / "^="
   / "|="
 
+FunctionDeclaration
+  =  FunctionToken __ name:Identifier __
+    "(" __ params:FormalParameterList? __ ")" __
+    promise:"*"? __
+    "{" __ elements:FunctionBody __ "}" {
+      return {
+        type:     "Function",
+        name:     name,
+        params:   params !== "" ? params : [],
+        elements: elements,
+        promise:  promise
+      };
+    }
+// promiseland adding __?
+FunctionExpression
+  =  FunctionToken?  __ name:Identifier? __
+    "(" __ params:FormalParameterList? __ ")" __
+    promise:"*"? __
+    "{" __ elements:FunctionBody __ "}" {
+      return {
+        type:     "Function",
+        name:     name !== "" ? name : null,
+        params:   params !== "" ? params : [],
+        elements: elements,
+        promise:  promise
+      };
+    }
+
+
+
 Expression
   = head:AssignmentExpression
     tail:(__ "," __ AssignmentExpression)* {
@@ -1201,33 +1231,6 @@ EmptyStatement
   = ";" { return { type: "EmptyStatement" }; }
 
 
-FunctionDeclaration
-  =  FunctionToken __ name:Identifier __
-    "(" __ params:FormalParameterList? __ ")" __
-    promise:"*"? __
-    "{" __ elements:FunctionBody __ "}" {
-      return {
-        type:     "Function",
-        name:     name,
-        params:   params !== "" ? params : [],
-        elements: elements,
-        promise:  promise
-      };
-    }
-// promiseland adding __?
-FunctionExpression
-  =  FunctionToken?  __ name:Identifier? __
-    "(" __ params:FormalParameterList? __ ")" __
-    promise:"*"? __
-    "{" __ elements:FunctionBody __ "}" {
-      return {
-        type:     "Function",
-        name:     name !== "" ? name : null,
-        params:   params !== "" ? params : [],
-        elements: elements,
-        promise:  promise
-      };
-    }
 
 
 ExpressionStatement

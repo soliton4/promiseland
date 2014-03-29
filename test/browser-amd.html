@@ -59,6 +59,31 @@
   }catch(e){
   };
   
+  var createTest = function(parModuleName, parFun){
+    testObj[parModuleName] = false;
+    var successFun = function(){
+      testObj[parModuleName] = true;
+    };
+    try{
+      require( ["test/" + parModuleName],
+        function(modPs) {
+          modPs.then(function(mod){
+            parFun(mod, successFun);
+          });
+        }
+      );
+    }catch(e){
+    };
+  };
+  
+  createTest("conditional", function(mod, success){
+    mod.fun().then(function(value){
+      if (value == 4){
+        success();
+      };
+    });
+  });
+  
   setTimeout(function(){
     var c = 0;
     var s = 0;
