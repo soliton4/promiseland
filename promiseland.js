@@ -82,8 +82,8 @@
     
     var require = requireFun;
     
-    var Promise;
-    var Promise2 = function(){
+    //var Promise;
+    var Promise = function(){
       
       var thenAr = [];
       var elseAr = [];
@@ -159,11 +159,19 @@
     };
     
     
+    var Callback = function(){
+      var promise = new Promise();
+      this.promise = promise.promise;
+      this.callback = function(){
+        promise.resolve(arguments);
+      };
+    };
     
     
     
     
-    Promise = Promise2;
+    
+    //Promise = Promise;
     
     
     /*var functionPromise = function(promise){
@@ -179,6 +187,7 @@
     
     var promiseLand = {
       Promise: Promise,
+      Callback: Callback,
       
       _getParser: function(){
         if (_parserPs){

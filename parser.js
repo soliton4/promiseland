@@ -327,6 +327,14 @@
       
 
       
+      this.makeStatement = function(par){
+        var statementRes = this.newResult();
+        statementRes.setStatement();
+        statementRes.push(par);
+        statementRes.push(";\n");
+        return statementRes;
+      };
+      
       // heart of code elements
       /*
         openingcode
@@ -346,11 +354,7 @@
         var i = 0;
         var l = elements.length;
         for (i; i < l; ++i){
-          var statementRes = this.newResult();
-          statementRes.setStatement();
-          statementRes.push(this.parseExpression(elements[i]));
-          statementRes.push(";\n");
-          res.push(statementRes);
+          res.push(this.makeStatement(this.parseExpression(elements[i])));
         };
         
         return res;
@@ -427,6 +431,9 @@
             
           case "ForStatement":
             return this.forStatement(value);
+            
+          case "NewOperator":
+            return this.newOperator(value);
 
           default:
             unknownType(value);
@@ -461,10 +468,30 @@
       };
       
       
+      this.newOperator = function(par){
+        //{type: "NewOperator", constructor: Object, arguments: Array[0]}
+        var res = this.newResult();
+        res.push("new ");
+        res.push(this.parseExpression(par.constructor));
+        res.push("(");
+        var i = 0;
+        for (i; i < par.arguments.lengh; ++i){
+          if (i){
+            res.push(", ");
+          };
+          res.push(this.parseExpression(par.arguments[i]));
+        };
+        res.push(")");
+        return res;
+        
+      };
+      
+      
+      
       this.blockAndContinue = function(par){
         var res = this.newResult();
         res.push(this.parseProgElements(par.statements));
-        res.push(this.continueStatement);
+        res.push(this.continueCode);
         return res;
       };
       
@@ -481,8 +508,8 @@
         var oldBreakCode = this.breakCode;
         var oldContinueCode = this.continueCode;
         
-        this.breakCode = promiseName + ".resolve(false); return;\n";
-        this.continueCode = promiseName + ".resolve(true); return;\n";
+        this.breakCode = promiseName + ".resolve(false); return " + promiseName + ";\n";
+        this.continueCode = promiseName + ".resolve(true); return " + promiseName + ";\n";
         
         res.push("var " + promiseName + " = " + newPromiseStr() + ";\n");
         
@@ -492,7 +519,10 @@
           res.push("){");
         };
         
-        res.push(makeCompleteStatement(this.blockAndContinue(par.block)));
+        var block = this.blockAndContinue(par.block);
+        //block.push(this.continueCode);
+        
+        res.push(makeCompleteStatement(block));
         
         if (par.preCondition){
           res.push("}else{");
@@ -521,10 +551,10 @@
           , preCondition: par.preCondition
           , postCode: par.postCode
         });
-        res.push(makeCompleteStatement(loopCode));
+        res.push(this.makeStatement(makeCompleteStatement(loopCode)));
         
-        loopCode.push("return ");
-        loopCode.push(loopCode.getPromiseNameStr() + ";\n");
+        res.push("return ");
+        res.push(loopCode.getPromiseNameStr() + ";\n");
         
         res.push("};\n");
         
@@ -537,7 +567,7 @@
         
         var doFunStatement = this.newResult();
         if (par.postCode){
-          doFunStatement.push(par.postCode);
+          doFunStatement.push(this.makeStatement(par.postCode));
         };
         doFunStatement.push(doFun + "();");
         res.push(makeCompleteStatement(doFunStatement));
@@ -568,8 +598,7 @@
         };
         
         if (promising){
-          res.push(this.parseExpression(par.initializer));
-          res.push(";");
+          res.push(this.makeStatement(this.parseExpression(par.initializer)));
           res.push(this.generateLoop({
             block: par.statement
             , preCondition: this.parseExpression(par.test)
@@ -922,7 +951,7 @@
       */
       
       this.functionCall = function(element){
-        res = this.newResult();
+        var res = this.newResult();
         var i = 0;
         var l;
         res.push(this.parseExpression(element.name));
@@ -1023,11 +1052,23 @@
     var promiseLandRequireStr = function(){
       return "var __Promise = promiseLand.Promise;\nvar __module = new __Promise();\n";
     };
+    var callbackRequireStr = function(){
+      return "var Callback = promiseLand.Callback;\n";
+    };
     
     var loaderEndStr = function(){
       return "return __module.promise.then;});\n})();";
     };
     
+    
+    
+    
+    
+    
+    
+    /* 
+      the main parser object
+    */
     
     var parser = {
       parse: function(promiseLandCodeStr){
@@ -1040,6 +1081,7 @@
           var cp;
           resStr += loaderStr();
           resStr += promiseLandRequireStr();
+          resStr += callbackRequireStr();
           if (parsedAr.length === undefined){
             if (parsedAr.type == "Program"){
               cp = new CodeParser({toParse: parsedAr});

@@ -76,13 +76,22 @@
     };
   };
   
-  createTest("conditional", function(mod, success){
+  var funReturning4 = function(mod, success){
     mod.fun().then(function(value){
       if (value == 4){
         success();
       };
     });
-  });
+  };
+  
+  createTest("conditional", funReturning4);
+  createTest("conditional2", funReturning4);
+  createTest("conditional3", funReturning4);
+  
+  createTest("callback", funReturning4);
+  createTest("callback2", funReturning4);
+  
+  createTest("forloop", funReturning4);
   
   setTimeout(function(){
     var c = 0;
