@@ -1,0 +1,14 @@
+var z = function(Context&context){
+  if (*x()){
+    doSome();
+  };
+};
+
+
+var y = ()["server"]{
+  *z(&context);
+};
+
+var x = ()["client"]{
+  return "x";
+};

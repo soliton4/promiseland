@@ -1,0 +1,8 @@
+
+var x = ()["server"]{
+  console.log("yes yes yes!!!");
+};
+
+setTimeout((){
+  x();
+}, 1000);
