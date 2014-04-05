@@ -27,7 +27,7 @@
     
   };
   
-  defineFun(["promiseland", "./md5"], function(promiseLand, md5){
+  defineFun(["promiseland", "./md5", "./_parser"], function(promiseland, md5, _parser){
     
     var currentPromise;
     var promiseClass = "__Promise";
@@ -60,7 +60,7 @@
       if (!par || typeof par == "string"){
         return false;
       };
-      if (par.type == "UnaryExpression" && par.operator == "*"){
+      if (par.type == "UnaryExpression" && (par.operator == "*" || par.operator == "require")){
         par.promising = true;
       };
       if (par.type == "Function" && par.promise == "*"){
@@ -282,6 +282,7 @@
         //if (entry.promising){
         res.makePromising();
         res.push("(function(){\n");
+        res.addPost("})();\n");
         this.promising = true;
         this.returnPromise = "__module";
         //};
@@ -291,7 +292,6 @@
           res.push("var " + this.declarations[i] + ";\n");
         };
         res.push(elements);
-        res.push("})();\n");
         return res;
       };
       
@@ -365,7 +365,7 @@
           funRes.addPost(this.returnPromise + ".reject(__returnError);\n");
           funRes.addPost("};\n");
           funRes.addPost("return " + this.returnPromise + ";\n");
-          funRes.addPost("};"); // function end
+          funRes.addPost("}"); // function end
         }else{
           funRes.push("}"); // function end
         };
@@ -377,16 +377,16 @@
           uniqueNameStr = this.getUniqueName();
           res.addPre("var " + uniqueNameStr + " = ");
           res.addPre(completeFunStr);
-          res.addPre(";\npromiseLand.registerRemote(\"" + par.profile + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
+          res.addPre(";\npromiseland.registerRemote(\"" + par.profile + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
           res.push("function");
           if (par.name){
             res.push(" " + par.name);
           };
           res.push("(){"); // function start
-          res.push("if (promiseLand.profileHas(\"" + par.profile + "\")){\n");
+          res.push("if (promiseland.profileHas(\"" + par.profile + "\")){\n");
           res.push("return " + uniqueNameStr + ".apply(this, arguments);\n");
           res.push("}else{\n");
-          res.push("return promiseLand.remoteExec(\"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", arguments);\n");
+          res.push("return promiseland.remoteExec(\"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", arguments);\n");
           res.push("};\n");
           res.push("}"); // end of function
         }else{
@@ -477,6 +477,9 @@
             if (value.operator == "*"){
               return this.promiseExpression(value.expression);
             };
+            if (value.operator == "require"){
+              return this.requireExpression(value.expression);
+            };
             var res = this.newResult();
             res.push(value.operator);
             res.push(this.parseExpression(value.expression));
@@ -540,6 +543,29 @@
         res.setPromiseName(this.getUniqueName());
         res.addPre(res.getPromiseNameStr());
         res.addPre("){try{");
+        res.addPost("}catch(__returnError){" + this.returnPromise + ".reject(__returnError);\n }; });");
+        return res;
+      };
+      
+      /*
+       this expression is the result of a require
+       its also a promise
+      */
+      this.requireExpression = function(parExpression){
+        var res = this.newResult();
+        res.makePromising();
+        res.setPromiseName(this.getUniqueName());
+        
+        var tempRes = this.newResult();
+        tempRes.push("__requireFun(");
+        tempRes.push(this.parseExpression(parExpression));
+        tempRes.push(").then(function(");
+        tempRes.push(res.getPromiseNameStr());
+        tempRes.push("){");
+        
+        res.addPre(makeCompleteStatement(tempRes));
+        
+        res.addPre("try{");
         res.addPost("}catch(__returnError){" + this.returnPromise + ".reject(__returnError);\n }; });");
         return res;
       };
@@ -1145,7 +1171,25 @@
     };\n\
     \n\
   }else if (typeof define == \"function\" && define.amd){ // AMD\n\
-    defineFun = define;\n\
+    var _define = define;\n\
+    requireFun = require;\n\
+    \n\
+    defineFun = function(par1, par2){\n\
+      if (par1 instanceof Array){\n\
+        par1.unshift(\"require\");\n\
+      }else{\n\
+        par2 = par1;\n\
+        par1 = [\"require\"];\n\
+      };\n\
+      _define(par1, function(){\n\
+        requireFun = arguments[0];\n\
+        var args = [];\n\
+        for (var i = 1; i < arguments.length; ++i){\n\
+          args.push(arguments[i]);\n\
+        };\n\
+        return par2.apply(par2, args);\n\
+      });\n\
+    };\n\
     requireFun = require;\n\
     \n\
   }else{ // Plain browser env\n\
@@ -1153,14 +1197,30 @@
     \n\
   };\n\
   \n\
-  defineFun([\"promiseland\"], function(promiseLand){\n";
+  defineFun([\"promiseland\"], function(promiseland){ var __require = requireFun;\n\
+  \n\
+  var __Promise = promiseland.Promise;\n\
+  var __module = new __Promise();\n\
+  var __requireFun = function(parModule){\n\
+    var returnPromise = new __Promise();\n\
+    try{__require([parModule], function(m){\n\
+    if (promiseland.isPromiseLandModule(m)){\n\
+      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});\n\
+    }else{\n\
+      returnPromise.resolve(m);\n\
+    };\n\
+    });\n\
+    }catch(e){returnPromise.reject(e);};\n\
+  return returnPromise.promise;};\n\
+  \n\
+  \n";
     };
     
-    var promiseLandRequireStr = function(){
-      return "var __Promise = promiseLand.Promise;\nvar __module = new __Promise();\n";
+    var promiselandRequireStr = function(){
+      return "";
     };
     var callbackRequireStr = function(){
-      return "var Callback = promiseLand.Callback;\n";
+      return "var Callback = promiseland.Callback;\n";
     };
     
     var loaderEndStr = function(){
@@ -1178,18 +1238,19 @@
     */
     
     var parser = {
-      parse: function(promiseLandCodeStr){
-        var p = new promiseLand.Promise();
+      parse: function(promiselandCodeStr){
+        var p = new promiseland.Promise();
         console.log("2");
-        promiseLand._getParser().then(function(parser){
-          console.log(parser);
-          var hashStr = md5(promiseLandCodeStr);
-          var parsedAr = parser.parse(promiseLandCodeStr);
+        var parser = _parser;
+          //console.log(parser);
+          var hashStr = md5(promiselandCodeStr);
+          var parsedAr = parser.parse(promiselandCodeStr);
           var resStr = "";
           var cp;
           resStr += loaderStr();
-          resStr += promiseLandRequireStr();
+          resStr += promiselandRequireStr();
           resStr += callbackRequireStr();
+          resStr += "if (!promiseland._registerModule(\"" + hashStr + "\", __module.promise.then)){ return promiseland._getModule(\"" + hashStr + "\"); };\n";
           if (parsedAr.length === undefined){
             if (parsedAr.type == "Program"){
               cp = new CodeParser({toParse: parsedAr, hashStr: hashStr});
@@ -1212,7 +1273,6 @@
           };
           resStr += loaderEndStr();
           p.resolve(resStr);
-        });
         console.log("returning promise");
         return p.promise;
       }

@@ -144,6 +144,7 @@ Keyword
       / "instanceof"
       / "in"
       / "new"
+      / "require"
       / "return"
       / "switch"
       / "this"
@@ -380,6 +381,7 @@ InstanceofToken = "instanceof"       !IdentifierPart { return "instanceof"; }
 InToken         = "in"               !IdentifierPart { return "in"; }
 NewToken        = "new"              !IdentifierPart
 NullToken       = "null"             !IdentifierPart
+RequireToken    = "require"          !IdentifierPart { return "require"; }
 ReturnToken     = "return"           !IdentifierPart
 SetToken        = "set"              !IdentifierPart
 SwitchToken     = "switch"           !IdentifierPart
@@ -709,6 +711,7 @@ UnaryOperator
   = DeleteToken
   / VoidToken
   / TypeofToken
+  / RequireToken
   / "++"
   / "--"
   / "+"

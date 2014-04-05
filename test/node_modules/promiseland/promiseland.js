@@ -64,12 +64,12 @@
     };
     defineFun = function(requireAr, callback){
       requireFun(requireAr, function(){
-        var originalPromiseLand = this["promiseLand"];
-        this["promiseLand"] = callback.apply(callback, arguments);
+        var originalPromiseLand = this["promiseland"];
+        this["promiseland"] = callback.apply(callback, arguments);
         if (originalPromiseLand){
           for (var i in originalPromiseLand){
-            if (this["promiseLand"][i] === undefined){
-              this["promiseLand"][i] = originalPromiseLand[i];
+            if (this["promiseland"][i] === undefined){
+              this["promiseland"][i] = originalPromiseLand[i];
             };
           };
         };
@@ -81,7 +81,7 @@
   defineFun([], function(){
     
     var require = requireFun;
-    var promiseLand;
+    var promiseland;
     
     //var Promise;
     var Promise = function(){
@@ -274,7 +274,7 @@
       console.log(moduleEntry);
       var funEntry = moduleEntry.functions[data.nameStr];
       console.log(funEntry);
-      if (promiseLand.profileHas(funEntry.profile)){
+      if (promiseland.profileHas(funEntry.profile)){
         console.log("got it");
         funEntry.fun.apply(undefined, data.args);
       };
@@ -388,25 +388,45 @@
       return profiles[profileNameStr];
     };
     
-    promiseLand = {
+    var _getParser = function(){
+      if (_parserPs){
+        return _parserPs;
+      };
+      var p = new Promise();
+      _parserPs = p.promise;
+      try{
+        require(["./parser"], function(parser){
+          p.resolve(parser);
+        });
+      }catch(e){
+        p.reject(e);
+      };
+      return _parserPs;
+    };
+    
+    var ParserClass = function(par){
+      this.parse = function(parStr){
+        var p = new Promise();
+        _getParser().then(function(parser){
+          parser.parse(parStr).then(function(javascript){
+            p.resolve({
+              javascript: javascript
+            });
+          });
+        });
+        return p.promise;
+      };
+    };
+    
+    promiseland = {
       Promise: Promise,
       Callback: Callback,
+      Parser: ParserClass,
       
       ProfileBaseClass: Profile,
       ConnectionBaseClass: Connection,
       
-      _getParser: function(){
-        if (_parserPs){
-          return _parserPs;
-        };
-        var p = new Promise();
-        _parserPs = p.promise;
-        require(["./_parser"], function(parser){
-          p.resolve(parser);
-        });
-        return _parserPs;
-      }
-      , set: function(parWhat, parValue){
+      set: function(parWhat, parValue){
         if (!setable[parWhat]){
           return;
         };
@@ -436,8 +456,9 @@
       
       , registerRemote: function(profileNameStr, hashStr, nameStr, fun){
         if (!modules[hashStr]){
-          modules[hashStr] = {
-            functions: {}
+          throw {
+            code: 5,
+            msg: "invalid module"
           };
         };
         var moduleEntry = modules[hashStr];
@@ -446,6 +467,32 @@
           fun: fun
         };
       }
+      
+      , _registerModule: function(parHashStr, parM){
+        if (modules[parHashStr]){
+          return false;
+        };
+        modules[parHashStr] = {
+          promise: parM,
+          functions: {}
+        };
+        return true;
+      }
+      
+      , _getModule: function(parHashStr){
+        return modules[parHashStr];
+      }
+      
+      , isPromiseLandModule: function(parM){
+        var i;
+        for (i in modules){
+          if (modules[i].promise === parM){
+            return true;
+          };
+        };
+        return false;
+      }
+      
       , remoteExec: function(hashStr, nameStr, args){
         var promise = new Promise();
         var ret = promise.promise;
@@ -487,7 +534,7 @@
       }
     };
     
-    return promiseLand;
+    return promiseland;
     
   });
 })();

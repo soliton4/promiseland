@@ -63,24 +63,9 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("b9fe70e2292feba8038c937139fbc428", __module.promise.then)){ return promiseland._getModule("b9fe70e2292feba8038c937139fbc428"); };
+if (!promiseland._registerModule("7290ddfc54abadc0b3d1b97eb01129b3", __module.promise.then)){ return promiseland._getModule("7290ddfc54abadc0b3d1b97eb01129b3"); };
 (function(){
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
-try{var __UNIQUENAME1 = new __Promise();
-if((1 < 0)){
-b.then(function(__UNIQUENAME2){try{__UNIQUENAME2;
-__UNIQUENAME1.resolve();}catch(__returnError){_returnPs.reject(__returnError);
- }; });
-}else{
-__UNIQUENAME1.resolve();}; __UNIQUENAME1.then(function(){;
-;
-_returnPs.resolve(4); return _returnPs;
-});}catch(__returnError){
-_returnPs.reject(__returnError);
-};
-return _returnPs;
-}}); return __module;
+__module.resolve({"msg": "this is the message"}); return __module;
 })();
 return __module.promise.then;});
 })();

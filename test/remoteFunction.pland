@@ -1,4 +1,4 @@
-var z = function(Context&context){
+var z = function(context){
   if (*x()){
     doSome();
   };
@@ -6,7 +6,7 @@ var z = function(Context&context){
 
 
 var y = ()["server"]{
-  *z(&context);
+  *z(context);
 };
 
 var x = ()["client"]{

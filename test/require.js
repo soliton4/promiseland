@@ -63,24 +63,12 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("b9fe70e2292feba8038c937139fbc428", __module.promise.then)){ return promiseland._getModule("b9fe70e2292feba8038c937139fbc428"); };
+if (!promiseland._registerModule("524c2cb43ebcf6938632c4e670e1adb2", __module.promise.then)){ return promiseland._getModule("524c2cb43ebcf6938632c4e670e1adb2"); };
 (function(){
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
-try{var __UNIQUENAME1 = new __Promise();
-if((1 < 0)){
-b.then(function(__UNIQUENAME2){try{__UNIQUENAME2;
-__UNIQUENAME1.resolve();}catch(__returnError){_returnPs.reject(__returnError);
- }; });
-}else{
-__UNIQUENAME1.resolve();}; __UNIQUENAME1.then(function(){;
-;
-_returnPs.resolve(4); return _returnPs;
-});}catch(__returnError){
-_returnPs.reject(__returnError);
-};
-return _returnPs;
-}}); return __module;
-})();
+var y;
+__requireFun("./requiredModule").then(function(__UNIQUENAME1){try{y = __UNIQUENAME1;
+console["log"](y["msg"]);
+}catch(__returnError){__module.reject(__returnError);
+ }; });})();
 return __module.promise.then;});
 })();

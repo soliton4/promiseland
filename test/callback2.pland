@@ -3,7 +3,7 @@ var somefun = (par){
   setTimeout(function(){
     c.callback(5);
   }, 100);
-  var x = *(c.promise);
+  var x = (*c.promise)[0];
   return par + x;
 };
 
@@ -16,7 +16,7 @@ return {
     if (*somefun(a) == 6){
       return 4;
     };
-    console.log(*somefun(a);
+    //console.log(*somefun(a));
     return 0;
   }
 };

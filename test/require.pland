@@ -1,0 +1,4 @@
+var y = require "./requiredModule";
+
+console.log(y.msg);
+
