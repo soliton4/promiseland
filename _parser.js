@@ -14,8 +14,14 @@
     };
     defineFun = function(requireAr, callback){
       requireFun(requireAr, function(){
-        module.exports = callback.apply(callback, arguments);
+        var i = 0;
+        var ar = [];
+        for (i = 0 ; i < arguments.length; ++i){
+          ar.push(arguments[0]);
+        };
+        module.exports = callback.apply(callback, ar);
       });
+
     };
     
   }else if (typeof define == "function" && define.amd){ // AMD
@@ -225,6 +231,7 @@
         "AssignmentExpressionNoIn": parse_AssignmentExpressionNoIn,
         "AssignmentOperator": parse_AssignmentOperator,
         "ProfileDeclaration": parse_ProfileDeclaration,
+        "PromiseOperator": parse_PromiseOperator,
         "FunctionDeclaration": parse_FunctionDeclaration,
         "FunctionExpression": parse_FunctionExpression,
         "Expression": parse_Expression,
@@ -2191,6 +2198,9 @@
           }
           if (result0 === null) {
             result0 = parse_LineContinuation();
+            if (result0 === null) {
+              result0 = parse_LineTerminator();
+            }
           }
         }
         return result0;
@@ -2284,6 +2294,9 @@
           }
           if (result0 === null) {
             result0 = parse_LineContinuation();
+            if (result0 === null) {
+              result0 = parse_LineTerminator();
+            }
           }
         }
         return result0;
@@ -5807,11 +5820,11 @@
               pos = pos3;
             }
             if (result0 !== null) {
-              result0 = (function(offset, constructor, arguments) {
+              result0 = (function(offset, constructor, args) {
                       return {
                         type:        "NewOperator",
                         constructor: constructor,
-                        arguments:   arguments
+                        args:   args
                       };
                     })(pos2, result0[2], result0[4]);
             }
@@ -6094,7 +6107,7 @@
                 return {
                   type:        "NewOperator",
                   constructor: constructor,
-                  arguments:   []
+                  args:   []
                 };
               })(pos0, result0[2]);
           }
@@ -6146,11 +6159,11 @@
           pos = pos3;
         }
         if (result0 !== null) {
-          result0 = (function(offset, name, profileArguments, arguments) {
+          result0 = (function(offset, name, profileArguments, args) {
                 return {
                   type:             "FunctionCall",
                   name:             name,
-                  arguments:        arguments,
+                  args:        args,
                   profileArguments: profileArguments
                 };
               })(pos2, result0[0], result0[2], result0[4]);
@@ -6189,10 +6202,10 @@
             pos = pos3;
           }
           if (result2 !== null) {
-            result2 = (function(offset, profileArguments, arguments) {
+            result2 = (function(offset, profileArguments, args) {
                     return {
                       type:      "FunctionCallArguments",
-                      arguments: arguments,
+                      args: args,
                       profileArguments: profileArguments
                     };
                   })(pos2, result2[1], result2[3]);
@@ -6347,10 +6360,10 @@
               pos = pos3;
             }
             if (result2 !== null) {
-              result2 = (function(offset, profileArguments, arguments) {
+              result2 = (function(offset, profileArguments, args) {
                       return {
                         type:      "FunctionCallArguments",
-                        arguments: arguments,
+                        args: args,
                         profileArguments: profileArguments
                       };
                     })(pos2, result2[1], result2[3]);
@@ -6494,7 +6507,7 @@
                     result = {
                       type:      "FunctionCall",
                       name:      result,
-                      arguments: argumentsOrAccessors[i].arguments,
+                      args: argumentsOrAccessors[i].args,
                       profileArguments: argumentsOrAccessors[i].profileArguments
                     };
                     break;
@@ -6575,8 +6588,8 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, arguments) {
-            return arguments !== "" ? arguments : [];
+          result0 = (function(offset, args) {
+            return args !== "" ? args : [];
           })(pos0, result0[2]);
         }
         if (result0 === null) {
@@ -6883,13 +6896,24 @@
                             }
                           }
                           if (result0 === null) {
-                            if (input.charCodeAt(pos) === 42) {
-                              result0 = "*";
+                            if (input.charCodeAt(pos) === 10017) {
+                              result0 = "\u2721";
                               pos++;
                             } else {
                               result0 = null;
                               if (reportFailures === 0) {
-                                matchFailed("\"*\"");
+                                matchFailed("\"\\u2721\"");
+                              }
+                            }
+                            if (result0 === null) {
+                              if (input.charCodeAt(pos) === 42) {
+                                result0 = "*";
+                                pos++;
+                              } else {
+                                result0 = null;
+                                if (reportFailures === 0) {
+                                  matchFailed("\"*\"");
+                                }
                               }
                             }
                           }
@@ -9729,6 +9753,32 @@
         return result0;
       }
       
+      function parse_PromiseOperator() {
+        var result0;
+        
+        if (input.charCodeAt(pos) === 10017) {
+          result0 = "\u2721";
+          pos++;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"\\u2721\"");
+          }
+        }
+        if (result0 === null) {
+          if (input.charCodeAt(pos) === 42) {
+            result0 = "*";
+            pos++;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"*\"");
+            }
+          }
+        }
+        return result0;
+      }
+      
       function parse_FunctionDeclaration() {
         var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16, result17, result18;
         var pos0, pos1;
@@ -9772,15 +9822,7 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            if (input.charCodeAt(pos) === 42) {
-                              result10 = "*";
-                              pos++;
-                            } else {
-                              result10 = null;
-                              if (reportFailures === 0) {
-                                matchFailed("\"*\"");
-                              }
-                            }
+                            result10 = parse_PromiseOperator();
                             result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();
@@ -9956,15 +9998,7 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            if (input.charCodeAt(pos) === 42) {
-                              result10 = "*";
-                              pos++;
-                            } else {
-                              result10 = null;
-                              if (reportFailures === 0) {
-                                matchFailed("\"*\"");
-                              }
-                            }
+                            result10 = parse_PromiseOperator();
                             result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();

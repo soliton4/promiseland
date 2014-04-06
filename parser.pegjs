@@ -261,11 +261,13 @@ DoubleStringCharacter
   = !('"' / "\\" / LineTerminator) char_:SourceCharacter { return char_;     }
   / "\\" sequence:EscapeSequence                         { return sequence;  }
   / LineContinuation
+  / LineTerminator
 
 SingleStringCharacter
   = !("'" / "\\" / LineTerminator) char_:SourceCharacter { return char_;     }
   / "\\" sequence:EscapeSequence                         { return sequence;  }
   / LineContinuation
+  / LineTerminator
 
 LineContinuation
   = "\\" sequence:LineTerminatorSequence { return sequence; }
@@ -572,11 +574,11 @@ MemberExpression
   = base:(
       FunctionExpression
       / PrimaryExpression
-      / NewToken __ constructor:MemberExpression __ arguments:Arguments {
+      / NewToken __ constructor:MemberExpression __ args:Arguments {
           return {
             type:        "NewOperator",
             constructor: constructor,
-            arguments:   arguments
+            args:   args
           };
         }
     )
@@ -601,27 +603,27 @@ NewExpression
       return {
         type:        "NewOperator",
         constructor: constructor,
-        arguments:   []
+        args:   []
       };
     }
 
 
 CallExpression
   = base:(
-      name:MemberExpression __ profileArguments:ProfileArguments? __ arguments:Arguments {
+      name:MemberExpression __ profileArguments:ProfileArguments? __ args:Arguments {
         return {
           type:             "FunctionCall",
           name:             name,
-          arguments:        arguments,
+          args:        args,
           profileArguments: profileArguments
         };
       }
     )
     argumentsOrAccessors:(
-         __ profileArguments:ProfileArguments? __ arguments:Arguments {
+         __ profileArguments:ProfileArguments? __ args:Arguments {
           return {
             type:      "FunctionCallArguments",
-            arguments: arguments,
+            args: args,
             profileArguments: profileArguments
           };
         }
@@ -645,7 +647,7 @@ CallExpression
             result = {
               type:      "FunctionCall",
               name:      result,
-              arguments: argumentsOrAccessors[i].arguments,
+              args: argumentsOrAccessors[i].args,
               profileArguments: argumentsOrAccessors[i].profileArguments
             };
             break;
@@ -666,8 +668,8 @@ CallExpression
     }
 
 Arguments
-  = "(" __ arguments:ArgumentList? __ ")" {
-    return arguments !== "" ? arguments : [];
+  = "(" __ args:ArgumentList? __ ")" {
+    return args !== "" ? args : [];
   }
 
 ArgumentList
@@ -717,8 +719,9 @@ UnaryOperator
   / "+"
   / "-"
   / "~"
-  /  "!"
-  /  "*" // promiseland modification
+  / "!"
+  / "✡" // promiseland modifications
+  / "*" // 
 
 MultiplicativeExpression
   = head:UnaryExpression
@@ -1091,11 +1094,15 @@ AssignmentOperator
 
 ProfileDeclaration
   = "[" __ name:StringLiteral __ "]" { return name; }
+  
+PromiseOperator
+  = "✡"
+  / "*"
 
 FunctionDeclaration
   =  FunctionToken __ name:Identifier __
     "(" __ params:FormalParameterList? __ ")" __
-    promise:"*"? __
+    promise:PromiseOperator? __
     profile:ProfileDeclaration? __
     "{" __ elements:FunctionBody __ "}" {
       return {
@@ -1111,7 +1118,7 @@ FunctionDeclaration
 FunctionExpression
   =  FunctionToken?  __ name:Identifier? __
     "(" __ params:FormalParameterList? __ ")" __
-    promise:"*"? __
+    promise:PromiseOperator? __
     profile:ProfileDeclaration? __
     "{" __ elements:FunctionBody __ "}" {
       return {

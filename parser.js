@@ -14,7 +14,12 @@
     };
     defineFun = function(requireAr, callback){
       requireFun(requireAr, function(){
-        module.exports = callback.apply(callback, arguments);
+        var i = 0;
+        var ar = [];
+        for (i = 0 ; i < arguments.length; ++i){
+          ar.push(arguments[0]);
+        };
+        module.exports = callback.apply(callback, ar);
       });
     };
     
@@ -578,11 +583,11 @@
         res.push(this.parseExpression(par.constructor));
         res.push("(");
         var i = 0;
-        for (i; i < par.arguments.lengh; ++i){
+        for (i; i < par["args"].lengh; ++i){
           if (i){
             res.push(", ");
           };
-          res.push(this.parseExpression(par.arguments[i]));
+          res.push(this.parseExpression(par["args"][i]));
         };
         res.push(")");
         return res;
@@ -1089,13 +1094,13 @@
         var l;
         res.push(this.parseExpression(element.name));
         res.push("(");
-        if (element.arguments){
-          l = element.arguments.length;
+        if (element["args"]){
+          l = element["args"].length;
           for (i = 0; i < l; ++i){
             if (i){
               res.push(", ");
             };
-            res.push(this.parseExpression(element.arguments[i]));
+            res.push(this.parseExpression(element["args"][i]));
           };
         };
         res.push(")");

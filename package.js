@@ -3,6 +3,8 @@ var miniExcludes = {
 	amdExcludes = {
 	},
 	copyOnly = {
+      "parser.js": true,
+      "_parser.js": true
 	},
 	isJsRe = /\.js$/,
 	isTestRe = /\/test\//;
@@ -22,7 +24,8 @@ var profile = {
 		},
 
 		copyOnly: function(filename, mid){
-			return mid in copyOnly || filename == "_parser.js";
+          return true;
+			return filename == "_parser.js" || filename == "parser.js" || (mid in copyOnly);
 		}
 	}
 };
