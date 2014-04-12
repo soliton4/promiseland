@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,9 +63,12 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("d8cfe155f6465ad0394e452a1407953e", __module.promise.then)){ return promiseland._getModule("d8cfe155f6465ad0394e452a1407953e"); };
-(function(){
-__module.resolve({}); return __module;
+if (promiseland._hasModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e" })){ return promiseland._getModule("d8cfe155f6465ad0394e452a1407953e"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
+return {};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

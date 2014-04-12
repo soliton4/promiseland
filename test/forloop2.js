@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,57 +63,60 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("4e84e403eb11ef3aad15c8c7b151734b", __module.promise.then)){ return promiseland._getModule("4e84e403eb11ef3aad15c8c7b151734b"); };
-(function(){
+if (promiseland._hasModule({ hashStr: "4e84e403eb11ef3aad15c8c7b151734b" })){ return promiseland._getModule("4e84e403eb11ef3aad15c8c7b151734b"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
 var somefun;
 somefun = function(par){
-var _returnPs = new __Promise();
+var __UNIQUENAME2 = new __Promise();
 try{var c;
 c = new Callback();
 setTimeout(c["callback"], 100);
-c["promise"].then(function(__UNIQUENAME1){try{__UNIQUENAME1;
-_returnPs.resolve((par + 1)); return _returnPs;
-}catch(__returnError){_returnPs.reject(__returnError);
+c["promise"].then(function(__UNIQUENAME3){try{__UNIQUENAME3;
+__UNIQUENAME2.resolve((par + 1)); return __UNIQUENAME2;
+}catch(__returnError){__UNIQUENAME2.reject(__returnError);
  }; });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME2.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME2;
 };
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
+return {"fun": function(){
+var __UNIQUENAME4 = new __Promise();
 try{var a;
 var i;
 a = 1;
 i = 0;
 i = 0;
-var __UNIQUENAME4 = new __Promise();
-var __UNIQUENAME3 = function(){var __UNIQUENAME5 = new __Promise();
+var __UNIQUENAME7 = new __Promise();
+var __UNIQUENAME6 = function(){var __UNIQUENAME8 = new __Promise();
 if((i < 4)){a = (a + 1);
-__UNIQUENAME5.resolve(true); return __UNIQUENAME5;
-}else{__UNIQUENAME5.resolve(false); return __UNIQUENAME5;
+__UNIQUENAME8.resolve(true); return __UNIQUENAME8;
+}else{__UNIQUENAME8.resolve(false); return __UNIQUENAME8;
 };
-__UNIQUENAME5;
-return __UNIQUENAME5;
+__UNIQUENAME8;
+return __UNIQUENAME8;
 };
-var __UNIQUENAME6 = function(){__UNIQUENAME3().then(function(contLoop){
-if (contLoop){somefun(i).then(function(__UNIQUENAME2){try{i = __UNIQUENAME2;
-__UNIQUENAME6();}catch(__returnError){_returnPs.reject(__returnError);
- }; });}else{__UNIQUENAME4.resolve();};
+var __UNIQUENAME9 = function(){__UNIQUENAME6().then(function(contLoop){
+if (contLoop){somefun(i).then(function(__UNIQUENAME5){try{i = __UNIQUENAME5;
+__UNIQUENAME9();}catch(__returnError){__UNIQUENAME4.reject(__returnError);
+ }; });}else{__UNIQUENAME7.resolve();};
 });
 };
-__UNIQUENAME6();
-__UNIQUENAME4.then(function(){;
+__UNIQUENAME9();
+__UNIQUENAME7.then(function(){;
 ;
 if((a == 5)){
-_returnPs.resolve(4); return _returnPs;
+__UNIQUENAME4.resolve(4); return __UNIQUENAME4;
 };
 ;
-_returnPs.resolve(0); return _returnPs;
+__UNIQUENAME4.resolve(0); return __UNIQUENAME4;
 });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME4.reject(__returnError);
 };
-return _returnPs;
-}}); return __module;
+return __UNIQUENAME4;
+}};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "4e84e403eb11ef3aad15c8c7b151734b", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

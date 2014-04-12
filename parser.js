@@ -17,7 +17,7 @@
         var i = 0;
         var ar = [];
         for (i = 0 ; i < arguments.length; ++i){
-          ar.push(arguments[0]);
+          ar.push(arguments[i]);
         };
         module.exports = callback.apply(callback, ar);
       });
@@ -56,6 +56,16 @@
     
     var newPromiseStr = function(){
       return "new __Promise()";
+    };
+    
+    var stringEncodeStr = function(par){
+      var s = par.replace(new RegExp("\\\\", "g"), "\\\\");
+      s = s.replace(new RegExp("\\n", "g"), "\\n");
+      s = s.replace(new RegExp("\\r", "g"), "\\r");
+      s = s.replace(new RegExp("\\\"", "g"), "\\\"");
+      s = s.replace(new RegExp("\\u2028", "g"), "\\u2028");
+      s = s.replace(new RegExp("\\u2029", "g"), "\\u2029");
+      return "\"" + s + "\"";
     };
     
     
@@ -280,23 +290,27 @@
       /*
         complete program
       */
-      this.parseProgram = function(entry){
-        findPromises(entry);
+      this.parseProgram = function(par){
+        findPromises(par);
         var res = this.newResult();
-        resStr = "";
-        //if (entry.promising){
-        res.makePromising();
-        res.push("(function(){\n");
-        res.addPost("})();\n");
-        this.promising = true;
-        this.returnPromise = "__module";
-        //};
-        var elements = this.parseProgElements(entry.elements);
-        var i = 0;
-        for (i = 0; i < this.declarations.length; ++i){
-          res.push("var " + this.declarations[i] + ";\n");
+        
+        var extraRes = this.newResult();
+        extraRes.push("\"use strict\";\n");
+        par.addFront = extraRes;
+        
+        if (checkPromising(par.promising)){
+          this.programPromiseStr = this.getUniqueName();
         };
-        res.push(elements);
+        
+        this.resultNameStr = this.getUniqueName();
+        
+        res.push("var " + this.resultNameStr + " = (");
+        var functionStatement = this._parseFunction(par, this.programPromiseStr);
+        
+        res.push(makeCompleteStatement(functionStatement));
+        res.push(")();\n");
+        //res.push("return __result;\n");
+        
         return res;
       };
       
@@ -310,6 +324,7 @@
       /*
         function [name]([param]){[code]}
         -> new parser instance
+        parGivenPromiseNameStr is provided by parseProgram to access the return promise before declaring the funciton
       */
       this.parseFunction = function(par){
         //type: "Function", name: null, params: Array[0], elements: Array[1]}
@@ -317,25 +332,44 @@
         this.stack("isFunction");
         this.isFunction = true;
         
-        var hasProfile = false;
-        if (par.profile && par.profile.length){
-          hasProfile = true;
-          par.promising = true;
-          if (this.dynamicCode){
-            somethingsWrong({
-              msg: "function profile is not allowed in dynamic code"
-            });
+        var res = this._parseFunction(par);
+        
+        this.unstack("isFunction");
+        return res;
+      };
+      
+      
+      this._parseFunction = function(par, parGivenPromiseNameStr){
+        
+        // check for hints
+        var hasFrameInfo = false;
+        var runRemote = false;
+        var runExclusive = false;
+        if (par.frame && par.frame.name){
+          hasFrameInfo = true;
+          if (par.frame.type == "frame"){
+            runRemote = true;
+            par.promising = true;
+            if (this.dynamicCode){
+              somethingsWrong({
+                msg: "function frame is not allowed in dynamic code"
+              });
+            };
+          }else if (par.frame.type == "exclusive"){
+            runExclusive = true;
           };
         };
         
+        // main result
         var res = this.newResult(); 
         
-        
+        // function result
         var funRes = this.newResult();
         
+        // function keyword and parameters
         var i = 0;
         funRes.push("function");
-        if (par.name && !hasProfile){
+        if (par.name && !runRemote){
           funRes.push(" " + par.name);
         };
         funRes.push("("); // function start
@@ -352,23 +386,60 @@
         funRes.push("){\n");
         
         
+        // exclusive hint
+        if (runExclusive){
+          funRes.push("if (!promiseland.profileHas(\"" + par.frame.name + "\")){\n");
+          if (par.promising){
+            funRes.push("var p = " + newPromiseStr() + ";\n");
+            funRes.push("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");
+            funRes.push("return p;\n");
+          }else{
+            funRes.push("return;\n");
+          };
+          funRes.push("};\n");
+        };
+        
+        
+        // evtl. "use strict"
+        if (par.addFront){
+          funRes.push(par.addFront);
+        };
+        
+        // promising preparations
         if (par.promising){
-          funRes.push("var _returnPs = " + newPromiseStr() + ";\n");
+          if (parGivenPromiseNameStr){
+            this.returnPromise = parGivenPromiseNameStr;
+            
+          }else{
+            this.returnPromise = this.getUniqueName();
+            funRes.push("var " + this.returnPromise + " = " + newPromiseStr() + ";\n");
+            
+          };
+          
+          this.tryCatchFunctionStr = this.getUniqueName();
+          funRes.push("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + this.returnPromise + ".reject(e); }; }; };\n");
+          
+          this.catchFunctionStr = this.getUniqueName();
+          funRes.push("var " + this.catchFunctionStr + " = function(e){ " + this.returnPromise + ".reject(e); };\n");
+          
           this.promising = true;
           res.makePromising();
-          this.returnPromise = "_returnPs";
-          funRes.push("try{");
+          funRes.push(this.tryCatchFunctionStr + "(function(){");
         };
+        
+        // variable declarations and main part
         var elements = this.parseProgElements(par.elements);
+        if (par.promising){
+          elements.push(this.returnPromise + ".resolve(); return;"); // in case no return statement was given
+        };
         for (i = 0; i < this.declarations.length; ++i){
           funRes.push("var " + this.declarations[i] + ";\n");
         };
         funRes.push(elements);
         
+        // promising additions
         if (par.promising){
-          funRes.addPost("}catch(__returnError){\n");
-          funRes.addPost(this.returnPromise + ".reject(__returnError);\n");
-          funRes.addPost("};\n");
+          funRes.addPost("})();\n");
           funRes.addPost("return " + this.returnPromise + ";\n");
           funRes.addPost("}"); // function end
         }else{
@@ -377,18 +448,19 @@
         
         var completeFunStr = makeCompleteStatement(funRes);
         
+        // remote execution check
         var uniqueNameStr;
-        if (hasProfile){
+        if (runRemote){
           uniqueNameStr = this.getUniqueName();
           res.addPre("var " + uniqueNameStr + " = ");
           res.addPre(completeFunStr);
-          res.addPre(";\npromiseland.registerRemote(\"" + par.profile + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
+          res.addPre(";\npromiseland.registerRemote(\"" + par.frame.name + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
           res.push("function");
           if (par.name){
             res.push(" " + par.name);
           };
           res.push("(){"); // function start
-          res.push("if (promiseland.profileHas(\"" + par.profile + "\")){\n");
+          res.push("if (promiseland.profileHas(\"" + par.frame.name + "\")){\n");
           res.push("return " + uniqueNameStr + ".apply(this, arguments);\n");
           res.push("}else{\n");
           res.push("return promiseland.remoteExec(\"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", arguments);\n");
@@ -398,15 +470,92 @@
           res.push(completeFunStr);
         };
         
-        
-        this.unstack("isFunction");
         return res;
       };
+      
+      // try catch / finally (why do we need finally?)
+      this.tryStatement = function(par){
+        var res = this.newResult();
+        //{type: "TryStatement", block: Object, catch: Object, finally: null}
+        
+        var catchPromise;
+        var continuePromise;
+        
+        if (checkPromising(par)){
+          this.stack("tryCatchFunctionStr");
+          this.stack("catchFunctionStr");
+          
+          continuePromise = this.getUniqueName();
+          res.addPre("var " + continuePromise + " = " + newPromiseStr() + ";\n");
+          
+          catchPromise = this.getUniqueName();
+          res.addPre("var " + catchPromise + " = " + newPromiseStr() + ";\n");
+          
+          this.tryCatchFunctionStr = this.getUniqueName();
+          res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".reject(e); }; }; };\n");
+          
+          this.catchFunctionStr = this.getUniqueName();
+          res.addPre("var " + this.catchFunctionStr + " = function(e){ " + catchPromise + ".reject(e); };\n");
+          
+          res.push(this.tryCatchFunctionStr + "(function(){");
+          
+        }else{
+          res.push("try{\n");
+        };
+        
+        par.block.statements.resolvePromise = catchPromise;
+        var block = this.makeBlock(par.block.statements);
+        
+        res.push(makeCompleteStatement(block));
+        
+        // catch part
+        if (checkPromising(par)){
+          this.unstack("tryCatchFunctionStr");
+          this.unstack("catchFunctionStr");
+          res.push("})();\n");
+          res.push(catchPromise + ".then(function(){" + continuePromise + ".resolve();}, " + this.tryCatchFunctionStr + "(function(");
+          res.push(par.catch.identifier);
+          res.push("){\n");
+        }else{
+          
+          res.push("\n}catch(");
+          res.push(par.catch.identifier);
+          res.push("){\n");
+        };
+        
+        var catchBlock = this.makeBlock(par.catch.block.statements);
+        if (checkPromising(par)){
+          catchBlock.push(continuePromise + ".resolve();");
+        };
+        
+        res.push(makeCompleteStatement(catchBlock));
+        res.push("}");
+        
+        if (checkPromising(par)){
+          res.push("));\n");
+          
+          res.push(continuePromise);
+          res.push(".then(" + this.tryCatchFunctionStr + "(function(){");
+          
+          res.addPost("}), " + this.catchFunctionStr + ")");
+        };
+        
+        if (par.finally){
+          res.push("finally{");
+          var finallyBlock = this.makeBlock(par.finally);
+          res.push(makeCompleteStatement(finallyBlock));
+          res.push("}");
+        };
+        return res;
+      };
+      
+      
+      
       
       this.getModuleHashStr = function(){
         return this.hashStr || "unknownhash";
       };
-
+      
       
       this.makeStatement = function(par){
         var statementRes = this.newResult();
@@ -428,18 +577,29 @@
           ...
         closingcode
       */
-      this.parseProgElements = function(elements){
-        
+      this.parseProgElements = function(par){
+        var res = this.makeBlock(par);
+        return res;
+      };
+      
+      
+      this.makeBlock = function(par){
         var res = this.newResult();
-
+        
         var i = 0;
-        var l = elements.length;
+        var l = par.length;
         for (i; i < l; ++i){
-          res.push(this.makeStatement(this.parseExpression(elements[i])));
+          res.push(this.makeStatement(this.parseExpression(par[i])));
+        };
+        
+        if (par.resolvePromise){
+          res.push(par.resolvePromise + ".resolve();");
         };
         
         return res;
       };
+
+      
       
       
       this.parseExpression = function(value){
@@ -452,10 +612,13 @@
             return "" + value.value;
             
           case "StringLiteral":
-            return "\"" + value.value.replace(/\"/, "\"") + "\"";
+            return stringEncodeStr(value.value);
             
           case "VariableStatement":
             return this.variableStatement(value);
+            
+          case "VariableDeclaration":
+            return this.variableDeclaration(value);
             
           case "FunctionCall":
             return this.functionCall(value);
@@ -517,8 +680,14 @@
           case "ForStatement":
             return this.forStatement(value);
             
+          case "ForInStatement":
+            return this.forInStatement(value);
+            
           case "NewOperator":
             return this.newOperator(value);
+            
+          case "TryStatement":
+            return this.tryStatement(value);
 
           default:
             unknownType(value);
@@ -544,13 +713,17 @@
         var res = this.newResult();
         res.makePromising();
         res.addPre(this.parseExpression(parExpression));
-        res.addPre(".then(function(");
+        res.addPre(".then(" + this.tryCatchFunctionStr + "(function(");
         res.setPromiseName(this.getUniqueName());
         res.addPre(res.getPromiseNameStr());
-        res.addPre("){try{");
-        res.addPost("}catch(__returnError){" + this.returnPromise + ".reject(__returnError);\n }; });");
+        res.addPre("){");
+        res.addPost("}), " + this.catchFunctionStr + ");");
         return res;
       };
+      
+      
+      
+      
       
       /*
        this expression is the result of a require
@@ -570,8 +743,8 @@
         
         res.addPre(makeCompleteStatement(tempRes));
         
-        res.addPre("try{");
-        res.addPost("}catch(__returnError){" + this.returnPromise + ".reject(__returnError);\n }; });");
+        res.addPre(this.tryCatchFunctionStr + "(function(){");
+        res.addPost("});\n});");
         return res;
       };
       
@@ -593,6 +766,8 @@
         return res;
         
       };
+      
+      
       
       
       
@@ -739,6 +914,81 @@
         
         this.unstack("dynamicCode");
         return res;
+      };
+      
+      
+      this.forInStatement = function(par){
+        // {type: "ForInStatement", iterator: Object, collection: Object, statement: Object}
+        this.stack("dynamicCode");
+        this.dynamicCode = true;
+        
+        var res = this.newResult();
+        var statement;
+        
+        var promising = false;
+        if (checkPromising(par.statement)){
+          promising = true;
+        };
+        
+        if (promising){
+          var iteratorRes = this.parseExpression(par.iterator);
+          var iteratorAccess = iteratorRes;
+          if (iteratorRes.promising){
+            iteratorAccess = iteratorRes.getPromiseName();
+          };
+          
+          var arrayName = this.getUniqueName();
+          res.addPre("var " + arrayName + " = [];");
+          
+          res.push("for(");
+          res.push(iteratorRes);
+          res.push(" in ");
+          res.push(this.parseExpression(par.collection));
+          res.push("){");
+          res.push(arrayName + ".push(");
+          res.push(iteratorAccess);
+          res.push(");");
+          res.push("};");
+          
+          res.push(iteratorRes);
+          res.push(" = " + arrayName + "[0];");
+          
+          var iName = this.getUniqueName();
+          res.push("var " + iName + " = 0;");
+          
+          var conditionRes = this.newResult();
+          conditionRes.push(iName + " < " + arrayName + ".length");
+          
+          var postCodeRes = this.newResult();
+          postCodeRes.push(iName + "++;");
+          postCodeRes.push(iteratorRes);
+          postCodeRes.push(" = " + arrayName + "[" + iName + "];");
+          
+          res.push(this.generateLoop({
+            block: par.statement
+            , preCondition: conditionRes
+            , postCode: this.parseExpression(par.counter)
+          }));
+          
+          res.push("}");
+          
+        }else{
+          res.push("for(");
+          res.push(this.parseExpression(par.iterator));
+          res.push(" in ");
+          res.push(this.parseExpression(par.collection));
+          res.push("){");
+          
+          statement = this.newResult();
+          statement.push(this.parseProgElements(par.statement.statements));
+          res.push(makeCompleteStatement(statement));
+          
+          res.push("}");
+        };
+        
+        this.unstack("dynamicCode");
+        return res;
+        
       };
       
       
@@ -1047,19 +1297,11 @@
           return "";
         };
         
-        var promising = false;
-        
         var i = 0;
         var l = declarations.length;
         for (i; i < l; ++i){
           if (declarations[i].type == "VariableDeclaration"){
-            res.addVariableDeclaration(declarations[i].name);
-            if (declarations[i].value){
-              res.push(declarations[i].name);
-              var value = declarations[i].value;
-              res.push(" = ");
-              res.push(this.parseExpression(value));
-            };
+            res.push(this.parseExpression(declarations[i]));
           }else{
             unknownType(declarations[i]);
           };
@@ -1067,6 +1309,22 @@
         return res;
 
       };
+      
+      //Object {type: "VariableDeclaration", name: "i", value: null}
+      
+      this.variableDeclaration = function(par){
+        var res = this.newResult();
+        
+        res.addVariableDeclaration(par.name);
+        res.push(par.name);
+        if (par.value){
+          res.push(" = ");
+          res.push(this.parseExpression(par.value));
+        };
+        return res;
+        
+      };
+      
       
       /*
         something = value
@@ -1205,11 +1463,11 @@
   defineFun([\"promiseland\"], function(promiseland){ var __require = requireFun;\n\
   \n\
   var __Promise = promiseland.Promise;\n\
-  var __module = new __Promise();\n\
+  var __modulePromise = new __Promise();\n\
   var __requireFun = function(parModule){\n\
     var returnPromise = new __Promise();\n\
     try{__require([parModule], function(m){\n\
-    if (promiseland.isPromiseLandModule(m)){\n\
+    if (promiseland.isPromiseLandPromisingModule(m)){\n\
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});\n\
     }else{\n\
       returnPromise.resolve(m);\n\
@@ -1229,7 +1487,7 @@
     };
     
     var loaderEndStr = function(){
-      return "return __module.promise.then;});\n})();";
+      return "});\n})();";
     };
     
     
@@ -1245,26 +1503,41 @@
     var parser = {
       parse: function(promiselandCodeStr){
         var p = new promiseland.Promise();
-        console.log("2");
+        //console.log("parsing ...");
         var parser = _parser;
           //console.log(parser);
+        //console.log(md5);
           var hashStr = md5(promiselandCodeStr);
+        //console.log("parsing ...2");
           var parsedAr = parser.parse(promiselandCodeStr);
           var resStr = "";
           var cp;
           resStr += loaderStr();
           resStr += promiselandRequireStr();
           resStr += callbackRequireStr();
-          resStr += "if (!promiseland._registerModule(\"" + hashStr + "\", __module.promise.then)){ return promiseland._getModule(\"" + hashStr + "\"); };\n";
+        resStr += "if (promiseland._hasModule({ hashStr: \"" + hashStr + "\" })){ return promiseland._getModule(\"" + hashStr + "\"); };\n";
           if (parsedAr.length === undefined){
             if (parsedAr.type == "Program"){
               cp = new CodeParser({toParse: parsedAr, hashStr: hashStr});
-              resStr += cp.getResult();
+              var programStr = cp.getResult();
+              if (cp.programPromiseStr){
+                // promising module
+                resStr += "var " + cp.programPromiseStr + " = " + newPromiseStr() + ";\n";
+                resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
+                resStr += programStr;
+              }else{
+                resStr += programStr;
+                resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
+                resStr += "return " + cp.resultNameStr + ";\n";
+              };
             }else{
               unknownType(parsedAr[i]);
             };
             
           }else{
+            somethingsWrong({
+              msg: "several program elements"
+            });
             var i = 0;
             var l = parsedAr.length;
             for (i; i < l; ++i){
@@ -1278,7 +1551,7 @@
           };
           resStr += loaderEndStr();
           p.resolve(resStr);
-        console.log("returning promise");
+        //console.log("returning promise");
         return p.promise;
       }
     };

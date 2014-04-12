@@ -266,6 +266,10 @@
       on: _onFun
     };
     
+    var sendRespond = function(par, data){
+      
+    };
+    
     var remoteExecRequest = function(connection, par){
       console.log("remote");
       var data = par.data;
@@ -276,8 +280,14 @@
       console.log(funEntry);
       if (promiseland.profileHas(funEntry.profile)){
         console.log("got it");
-        funEntry.fun.apply(undefined, data.args);
+        return funEntry.fun.apply(undefined, data.args);
       };
+      var rejectPs = new Promise();
+      rejectPs.reject({
+        id: 10
+        , msg: "requested function not found"
+      });
+      return rejectPs;
     };
     
     var maxId = 10000000;
@@ -299,12 +309,27 @@
         return id;
       };
       
+      
+      var rejectFun = function(parId){
+        return function(parReason){
+          sendData({
+            response: parId
+            , reject: true
+            , data: parReason
+          });
+        };
+      };
+      var resolveFun = function(parId){
+        return function(parResult){
+          sendData({
+            response: parId
+            , resolve: true
+            , data: parResult
+          });
+        };
+      };
       var respondError = function(parId, parError){
-        sendData({
-          response: parId
-          , reject: true
-          , data: parError
-        });
+        return (rejectFun(parId))(parError);
       };
       
       var queue = function(par){
@@ -315,7 +340,8 @@
           };
           if (par.request){
             if (par.data && par.data.type == "remoteexec"){
-              remoteExecRequest(connection, par);
+              var p = remoteExecRequest(connection, par);
+              p.then(resolveFun(par.id), rejectFun(par.id));
             }else{
               respondError(par.id, {
                 msg: "unknownRequest"
@@ -354,7 +380,7 @@
           , data: data
         });
         requests[id] = ps;
-        return ps.promise; 
+        return ps.promise;
       };
       
     };
@@ -408,11 +434,18 @@
       this.parse = function(parStr){
         var p = new Promise();
         _getParser().then(function(parser){
+          try{
+            console.log(parser.parse);
           parser.parse(parStr).then(function(javascript){
             p.resolve({
               javascript: javascript
             });
           });
+          }catch(e){
+            console.log("reject parse");
+            console.log(e);
+            p.reject(e);
+          };
         });
         return p.promise;
       };
@@ -468,29 +501,63 @@
         };
       }
       
-      , _registerModule: function(parHashStr, parM){
-        if (modules[parHashStr]){
+      , _registerModule: function(par){
+        if (this._hasModule(par.hashStr)){
           return false;
         };
-        modules[parHashStr] = {
-          promise: parM,
+        modules[par.hashStr] = {
+          "promising": par["promising"],
+          "module": par["module"],
           functions: {}
         };
         return true;
       }
       
       , _getModule: function(parHashStr){
-        return modules[parHashStr];
+        return modules[parHashStr]["module"];
+      }
+      
+      , _hasModule: function(parHashStr){
+        if (modules[parHashStr]){
+          return true;
+        };
+        return false;
       }
       
       , isPromiseLandModule: function(parM){
         var i;
         for (i in modules){
-          if (modules[i].promise === parM){
+          if (modules[i] && modules[i]["module"] === parM){
             return true;
           };
         };
         return false;
+      }
+      
+      , isPromiseLandPromisingModule: function(parM){
+        var i;
+        for (i in modules){
+          if (modules[i] && modules[i]["module"] === parM){
+            return modules[i].promising;
+          };
+        };
+        return false;
+      }
+      
+      // for future use
+      , getPromise: function(par){
+        return par;
+      }
+      
+      // to import promisies from outside
+      , importPromise: function(par){
+        var p = new Promise();
+        par.then(function(res){
+          p.resolve(res);
+        }, function(rea){
+          p.reject(rea);
+        });
+        return p.promise;
       }
       
       , remoteExec: function(hashStr, nameStr, args){

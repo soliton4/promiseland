@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,40 +63,43 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("f7fc351a75b46f42352d9622b55af737", __module.promise.then)){ return promiseland._getModule("f7fc351a75b46f42352d9622b55af737"); };
-(function(){
+if (promiseland._hasModule({ hashStr: "f7fc351a75b46f42352d9622b55af737" })){ return promiseland._getModule("f7fc351a75b46f42352d9622b55af737"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
 var somefun;
 somefun = function(){
-var _returnPs = new __Promise();
-try{_returnPs.resolve(1); return _returnPs;
+var __UNIQUENAME2 = new __Promise();
+try{__UNIQUENAME2.resolve(1); return __UNIQUENAME2;
 }catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME2.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME2;
 };
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
+return {"fun": function(){
+var __UNIQUENAME3 = new __Promise();
 try{var a;
 a = 1;
-var __UNIQUENAME1 = new __Promise();
+var __UNIQUENAME4 = new __Promise();
 if(((a + 1) == 3)){
 a = 0;
-__UNIQUENAME1.resolve();
+__UNIQUENAME4.resolve();
 }else{
-somefun().then(function(__UNIQUENAME2){try{a = (a + __UNIQUENAME2);
-__UNIQUENAME1.resolve();}catch(__returnError){_returnPs.reject(__returnError);
- }; });}; __UNIQUENAME1.then(function(){;
+somefun().then(function(__UNIQUENAME5){try{a = (a + __UNIQUENAME5);
+__UNIQUENAME4.resolve();}catch(__returnError){__UNIQUENAME3.reject(__returnError);
+ }; });}; __UNIQUENAME4.then(function(){;
 ;
 if((a == 2)){
-_returnPs.resolve(4); return _returnPs;
+__UNIQUENAME3.resolve(4); return __UNIQUENAME3;
 };
 ;
-_returnPs.resolve(0); return _returnPs;
+__UNIQUENAME3.resolve(0); return __UNIQUENAME3;
 });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME3.reject(__returnError);
 };
-return _returnPs;
-}}); return __module;
+return __UNIQUENAME3;
+}};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "f7fc351a75b46f42352d9622b55af737", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

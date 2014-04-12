@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,9 +63,12 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("7290ddfc54abadc0b3d1b97eb01129b3", __module.promise.then)){ return promiseland._getModule("7290ddfc54abadc0b3d1b97eb01129b3"); };
-(function(){
-__module.resolve({"msg": "this is the message"}); return __module;
+if (promiseland._hasModule({ hashStr: "7290ddfc54abadc0b3d1b97eb01129b3" })){ return promiseland._getModule("7290ddfc54abadc0b3d1b97eb01129b3"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
+return {"msg": "this is the message"};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "7290ddfc54abadc0b3d1b97eb01129b3", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

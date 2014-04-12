@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,54 +63,57 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("db64fb1066e3280fe3178c0aa4936df0", __module.promise.then)){ return promiseland._getModule("db64fb1066e3280fe3178c0aa4936df0"); };
-(function(){
+if (promiseland._hasModule({ hashStr: "db64fb1066e3280fe3178c0aa4936df0" })){ return promiseland._getModule("db64fb1066e3280fe3178c0aa4936df0"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
 var z;
 var y;
 var x;
 z = function(context){
-var _returnPs = new __Promise();
-try{x().then(function(__UNIQUENAME1){try{if(__UNIQUENAME1){
+var __UNIQUENAME2 = new __Promise();
+try{x().then(function(__UNIQUENAME3){try{if(__UNIQUENAME3){
 doSome();
 };
 ;
-}catch(__returnError){_returnPs.reject(__returnError);
+}catch(__returnError){__UNIQUENAME2.reject(__returnError);
  }; });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME2.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME2;
 };
-var __UNIQUENAME3 = function(){
-var _returnPs = new __Promise();
-try{z(context).then(function(__UNIQUENAME2){try{__UNIQUENAME2;
-}catch(__returnError){_returnPs.reject(__returnError);
+var __UNIQUENAME6 = function(){
+var __UNIQUENAME4 = new __Promise();
+try{z(context).then(function(__UNIQUENAME5){try{__UNIQUENAME5;
+}catch(__returnError){__UNIQUENAME4.reject(__returnError);
  }; });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME4.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME4;
 };
-promiseland.registerRemote("server", "db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME3", __UNIQUENAME3);
+promiseland.registerRemote("server", "db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME6", __UNIQUENAME6);
 y = function(){if (promiseland.profileHas("server")){
-return __UNIQUENAME3.apply(this, arguments);
+return __UNIQUENAME6.apply(this, arguments);
 }else{
-return promiseland.remoteExec("db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME3", arguments);
+return promiseland.remoteExec("db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME6", arguments);
 };
 };
-var __UNIQUENAME4 = function(){
-var _returnPs = new __Promise();
-try{_returnPs.resolve("x"); return _returnPs;
+var __UNIQUENAME8 = function(){
+var __UNIQUENAME7 = new __Promise();
+try{__UNIQUENAME7.resolve("x"); return __UNIQUENAME7;
 }catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME7.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME7;
 };
-promiseland.registerRemote("client", "db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME4", __UNIQUENAME4);
+promiseland.registerRemote("client", "db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME8", __UNIQUENAME8);
 x = function(){if (promiseland.profileHas("client")){
-return __UNIQUENAME4.apply(this, arguments);
+return __UNIQUENAME8.apply(this, arguments);
 }else{
-return promiseland.remoteExec("db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME4", arguments);
+return promiseland.remoteExec("db64fb1066e3280fe3178c0aa4936df0", "__UNIQUENAME8", arguments);
 };
 };
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "db64fb1066e3280fe3178c0aa4936df0", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

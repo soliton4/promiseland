@@ -63,59 +63,13 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "14b6f31abad6dca33694f096a369ac7a" })){ return promiseland._getModule("14b6f31abad6dca33694f096a369ac7a"); };
+if (promiseland._hasModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422" })){ return promiseland._getModule("d0d05d8b6f945e95ec00d89fe45c6422"); };
 var __UNIQUENAME1 = (function(){
 "use strict";
-var somefun;
-somefun = function(par){
-var __UNIQUENAME2 = new __Promise();
-try{var c;
-c = new Callback();
-setTimeout(c["callback"], 100);
-c["promise"].then(function(__UNIQUENAME3){try{__UNIQUENAME3;
-__UNIQUENAME2.resolve((par + 1)); return __UNIQUENAME2;
-}catch(__returnError){__UNIQUENAME2.reject(__returnError);
- }; });}catch(__returnError){
-__UNIQUENAME2.reject(__returnError);
-};
-return __UNIQUENAME2;
-};
-return {"fun": function(){
-var __UNIQUENAME4 = new __Promise();
-try{var a;
-var i;
-a = 1;
-i = 0;
-var __UNIQUENAME6 = new __Promise();
-var __UNIQUENAME5 = function(){var __UNIQUENAME7 = new __Promise();
-if((i < 4)){somefun(i).then(function(__UNIQUENAME8){try{i = __UNIQUENAME8;
-a = (a + 1);
-__UNIQUENAME7.resolve(true); return __UNIQUENAME7;
-}catch(__returnError){__UNIQUENAME4.reject(__returnError);
- }; });}else{__UNIQUENAME7.resolve(false); return __UNIQUENAME7;
-};
-__UNIQUENAME7;
-return __UNIQUENAME7;
-};
-var __UNIQUENAME9 = function(){__UNIQUENAME5().then(function(contLoop){
-if (contLoop){__UNIQUENAME9();}else{__UNIQUENAME6.resolve();};
-});
-};
-__UNIQUENAME9();
-__UNIQUENAME6.then(function(){;
-;
-if((a == 5)){
-__UNIQUENAME4.resolve(4); return __UNIQUENAME4;
-};
-;
-__UNIQUENAME4.resolve(0); return __UNIQUENAME4;
-});}catch(__returnError){
-__UNIQUENAME4.reject(__returnError);
-};
-return __UNIQUENAME4;
-}};
+return {"a": "\n\r\u2028\u2029\"'",
+"b": "xxx\n  xxx"};
 })();
-promiseland._registerModule({ hashStr: "14b6f31abad6dca33694f096a369ac7a", "module": __UNIQUENAME1, promising: false });
+promiseland._registerModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422", "module": __UNIQUENAME1, promising: false });
 return __UNIQUENAME1;
 });
 })();

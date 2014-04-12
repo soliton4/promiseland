@@ -232,6 +232,8 @@
         "AssignmentOperator": parse_AssignmentOperator,
         "ProfileDeclaration": parse_ProfileDeclaration,
         "PromiseOperator": parse_PromiseOperator,
+        "FrameKeyword": parse_FrameKeyword,
+        "FrameInformation": parse_FrameInformation,
         "FunctionDeclaration": parse_FunctionDeclaration,
         "FunctionExpression": parse_FunctionExpression,
         "Expression": parse_Expression,
@@ -9779,6 +9781,66 @@
         return result0;
       }
       
+      function parse_FrameKeyword() {
+        var result0;
+        
+        if (input.substr(pos, 5) === "frame") {
+          result0 = "frame";
+          pos += 5;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"frame\"");
+          }
+        }
+        if (result0 === null) {
+          if (input.substr(pos, 9) === "exclusive") {
+            result0 = "exclusive";
+            pos += 9;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"exclusive\"");
+            }
+          }
+        }
+        return result0;
+      }
+      
+      function parse_FrameInformation() {
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_FrameKeyword();
+        if (result0 !== null) {
+          result1 = parse___();
+          if (result1 !== null) {
+            result2 = parse_StringLiteral();
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, keyword, name) { return {name: name, "type": keyword}; })(pos0, result0[0], result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
       function parse_FunctionDeclaration() {
         var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13, result14, result15, result16, result17, result18;
         var pos0, pos1;
@@ -9822,12 +9884,12 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            result10 = parse_PromiseOperator();
+                            result10 = parse_FrameInformation();
                             result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();
                               if (result11 !== null) {
-                                result12 = parse_ProfileDeclaration();
+                                result12 = parse_PromiseOperator();
                                 result12 = result12 !== null ? result12 : "";
                                 if (result12 !== null) {
                                   result13 = parse___();
@@ -9936,14 +9998,14 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, name, params, promise, profile, elements) {
+          result0 = (function(offset, name, params, frame, promise, elements) {
               return {
                 type:     "Function",
                 name:     name,
                 params:   params !== "" ? params : [],
                 elements: elements,
                 promise:  promise,
-                profile:  profile
+                frame:    frame
               };
             })(pos0, result0[2], result0[6], result0[10], result0[12], result0[16]);
         }
@@ -9998,12 +10060,12 @@
                         if (result8 !== null) {
                           result9 = parse___();
                           if (result9 !== null) {
-                            result10 = parse_PromiseOperator();
+                            result10 = parse_FrameInformation();
                             result10 = result10 !== null ? result10 : "";
                             if (result10 !== null) {
                               result11 = parse___();
                               if (result11 !== null) {
-                                result12 = parse_ProfileDeclaration();
+                                result12 = parse_PromiseOperator();
                                 result12 = result12 !== null ? result12 : "";
                                 if (result12 !== null) {
                                   result13 = parse___();
@@ -10112,14 +10174,14 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, name, params, promise, profile, elements) {
+          result0 = (function(offset, name, params, frame, promise, elements) {
               return {
                 type:     "Function",
                 name:     name !== "" ? name : null,
                 params:   params !== "" ? params : [],
                 elements: elements,
                 promise:  promise,
-                profile:  profile
+                frame:    frame
               };
             })(pos0, result0[2], result0[6], result0[10], result0[12], result0[16]);
         }

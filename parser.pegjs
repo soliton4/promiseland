@@ -1099,11 +1099,20 @@ PromiseOperator
   = "✡"
   / "*"
 
+
+FrameKeyword
+  = "frame"
+  / "exclusive"
+
+FrameInformation
+  = keyword:FrameKeyword __ name:StringLiteral { return {name: name, "type": keyword}; }
+
+
 FunctionDeclaration
   =  FunctionToken __ name:Identifier __
     "(" __ params:FormalParameterList? __ ")" __
+    frame:FrameInformation? __
     promise:PromiseOperator? __
-    profile:ProfileDeclaration? __
     "{" __ elements:FunctionBody __ "}" {
       return {
         type:     "Function",
@@ -1111,15 +1120,15 @@ FunctionDeclaration
         params:   params !== "" ? params : [],
         elements: elements,
         promise:  promise,
-        profile:  profile
+        frame:    frame
       };
     }
 // promiseland adding __?
 FunctionExpression
   =  FunctionToken?  __ name:Identifier? __
     "(" __ params:FormalParameterList? __ ")" __
+    frame:FrameInformation? __
     promise:PromiseOperator? __
-    profile:ProfileDeclaration? __
     "{" __ elements:FunctionBody __ "}" {
       return {
         type:     "Function",
@@ -1127,7 +1136,7 @@ FunctionExpression
         params:   params !== "" ? params : [],
         elements: elements,
         promise:  promise,
-        profile:  profile
+        frame:    frame
       };
     }
 

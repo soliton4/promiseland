@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,24 +63,27 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("b9fe70e2292feba8038c937139fbc428", __module.promise.then)){ return promiseland._getModule("b9fe70e2292feba8038c937139fbc428"); };
-(function(){
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
-try{var __UNIQUENAME1 = new __Promise();
+if (promiseland._hasModule({ hashStr: "b9fe70e2292feba8038c937139fbc428" })){ return promiseland._getModule("b9fe70e2292feba8038c937139fbc428"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
+return {"fun": function(){
+var __UNIQUENAME2 = new __Promise();
+try{var __UNIQUENAME3 = new __Promise();
 if((1 < 0)){
-b.then(function(__UNIQUENAME2){try{__UNIQUENAME2;
-__UNIQUENAME1.resolve();}catch(__returnError){_returnPs.reject(__returnError);
+b.then(function(__UNIQUENAME4){try{__UNIQUENAME4;
+__UNIQUENAME3.resolve();}catch(__returnError){__UNIQUENAME2.reject(__returnError);
  }; });
 }else{
-__UNIQUENAME1.resolve();}; __UNIQUENAME1.then(function(){;
+__UNIQUENAME3.resolve();}; __UNIQUENAME3.then(function(){;
 ;
-_returnPs.resolve(4); return _returnPs;
+__UNIQUENAME2.resolve(4); return __UNIQUENAME2;
 });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME2.reject(__returnError);
 };
-return _returnPs;
-}}); return __module;
+return __UNIQUENAME2;
+}};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "b9fe70e2292feba8038c937139fbc428", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

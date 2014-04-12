@@ -48,11 +48,11 @@
   defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
   var __Promise = promiseland.Promise;
-  var __module = new __Promise();
+  var __modulePromise = new __Promise();
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandModule(m)){
+    if (promiseland.isPromiseLandPromisingModule(m)){
       m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
     }else{
       returnPromise.resolve(m);
@@ -63,66 +63,69 @@
   
   
 var Callback = promiseland.Callback;
-if (!promiseland._registerModule("9c6570a898dcb766ee6ffe5c83918b6e", __module.promise.then)){ return promiseland._getModule("9c6570a898dcb766ee6ffe5c83918b6e"); };
-(function(){
+if (promiseland._hasModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e" })){ return promiseland._getModule("9c6570a898dcb766ee6ffe5c83918b6e"); };
+var __UNIQUENAME1 = (function(){
+"use strict";
 var somefun;
 var fourfun;
 somefun = function(par){
-var _returnPs = new __Promise();
+var __UNIQUENAME2 = new __Promise();
 try{var c;
 c = new Callback();
 setTimeout(c["callback"], 100);
-c["promise"].then(function(__UNIQUENAME1){try{__UNIQUENAME1;
-_returnPs.resolve((par + 1)); return _returnPs;
-}catch(__returnError){_returnPs.reject(__returnError);
+c["promise"].then(function(__UNIQUENAME3){try{__UNIQUENAME3;
+__UNIQUENAME2.resolve((par + 1)); return __UNIQUENAME2;
+}catch(__returnError){__UNIQUENAME2.reject(__returnError);
  }; });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME2.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME2;
 };
 fourfun = function(){
-var _returnPs = new __Promise();
-try{_returnPs.resolve(4); return _returnPs;
+var __UNIQUENAME4 = new __Promise();
+try{__UNIQUENAME4.resolve(4); return __UNIQUENAME4;
 }catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME4.reject(__returnError);
 };
-return _returnPs;
+return __UNIQUENAME4;
 };
-__module.resolve({"fun": function(){
-var _returnPs = new __Promise();
+return {"fun": function(){
+var __UNIQUENAME5 = new __Promise();
 try{var a;
 var i;
 a = 1;
 i = 0;
-var __UNIQUENAME4 = new __Promise();
-var __UNIQUENAME3 = function(){var __UNIQUENAME5 = new __Promise();
-fourfun().then(function(__UNIQUENAME2){try{if((i < __UNIQUENAME2)){somefun(i).then(function(__UNIQUENAME6){try{i = __UNIQUENAME6;
+var __UNIQUENAME8 = new __Promise();
+var __UNIQUENAME7 = function(){var __UNIQUENAME9 = new __Promise();
+fourfun().then(function(__UNIQUENAME6){try{if((i < __UNIQUENAME6)){somefun(i).then(function(__UNIQUENAME10){try{i = __UNIQUENAME10;
 a = (a + 1);
-__UNIQUENAME5.resolve(true); return __UNIQUENAME5;
-}catch(__returnError){_returnPs.reject(__returnError);
- }; });}else{__UNIQUENAME5.resolve(false); return __UNIQUENAME5;
+__UNIQUENAME9.resolve(true); return __UNIQUENAME9;
+}catch(__returnError){__UNIQUENAME5.reject(__returnError);
+ }; });}else{__UNIQUENAME9.resolve(false); return __UNIQUENAME9;
 };
-}catch(__returnError){_returnPs.reject(__returnError);
- }; });__UNIQUENAME5;
-return __UNIQUENAME5;
+}catch(__returnError){__UNIQUENAME5.reject(__returnError);
+ }; });__UNIQUENAME9;
+return __UNIQUENAME9;
 };
-var __UNIQUENAME7 = function(){__UNIQUENAME3().then(function(contLoop){
-if (contLoop){__UNIQUENAME7();}else{__UNIQUENAME4.resolve();};
+var __UNIQUENAME11 = function(){__UNIQUENAME7().then(function(contLoop){
+if (contLoop){__UNIQUENAME11();}else{__UNIQUENAME8.resolve();};
 });
 };
-__UNIQUENAME7();
-__UNIQUENAME4.then(function(){;
+__UNIQUENAME11();
+__UNIQUENAME8.then(function(){;
 ;
 if((a == 5)){
-_returnPs.resolve(4); return _returnPs;
+__UNIQUENAME5.resolve(4); return __UNIQUENAME5;
 };
 ;
-_returnPs.resolve(0); return _returnPs;
+__UNIQUENAME5.resolve(0); return __UNIQUENAME5;
 });}catch(__returnError){
-_returnPs.reject(__returnError);
+__UNIQUENAME5.reject(__returnError);
 };
-return _returnPs;
-}}); return __module;
+return __UNIQUENAME5;
+}};
 })();
-return __module.promise.then;});
+promiseland._registerModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e", "module": __UNIQUENAME1, promising: false });
+return __UNIQUENAME1;
+});
 })();

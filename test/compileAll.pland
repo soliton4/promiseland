@@ -1,10 +1,14 @@
+
 var fs = require "fs";
+
 
 var callback = new Callback();
 
 fs.readdir(".", callback.callback);
 
-files = (*callback.promise)[1];
+
+
+var files = (*callback.promise)[1];
 
 
 if (files){
@@ -19,9 +23,11 @@ if (files){
             encoding: "utf8"
           }, callback.callback);
       var codeStr = (*callback.promise)[1];
-      parser = new promiseland.Parser();
+      var parser = new promiseland.Parser();
+      console.log("step0");
       
       var jsStr = (*parser.parse(codeStr)).javascript;
+      console.log("step2");
       
       callback = new Callback();
       fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", jsStr, callback.callback);
