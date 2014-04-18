@@ -58,14 +58,17 @@
       return "new __Promise()";
     };
     
-    var stringEncodeStr = function(par){
+    var _stringEncodeStr = function(par){
       var s = par.replace(new RegExp("\\\\", "g"), "\\\\");
       s = s.replace(new RegExp("\\n", "g"), "\\n");
       s = s.replace(new RegExp("\\r", "g"), "\\r");
       s = s.replace(new RegExp("\\\"", "g"), "\\\"");
       s = s.replace(new RegExp("\\u2028", "g"), "\\u2028");
       s = s.replace(new RegExp("\\u2029", "g"), "\\u2029");
-      return "\"" + s + "\"";
+      return s;
+    };
+    var stringEncodeStr = function(par){
+      return "\"" + _stringEncodeStr(par) + "\"";
     };
     
     
@@ -206,6 +209,12 @@
       , addVariableDeclaration: function(par){
         this._cp._addVariableDeclaration(par);
       }
+      , addUsedVariable: function(par){
+        this._cp._addUsedVariable(par);
+      }
+      , addParameter: function(par){
+        this._cp._addParameter(par);
+      }
     };
     
     
@@ -216,6 +225,7 @@
       this.dynamicCode = par.dynamicCode;
       this.hashStr = par.hashStr;
       
+      
       this.stack = function(parStr){
         var stackNameStr = "_stack_" + parStr;
         if (!this[stackNameStr]){
@@ -225,7 +235,7 @@
       };
       this.unstack = function(parStr){
         var stackNameStr = "_stack_" + parStr;
-        this[stackNameStr].pop();
+        this[parStr] = this[stackNameStr].pop();
       };
       
       this._start = function(){
@@ -239,6 +249,30 @@
         };
       };
       
+      
+      this.usedVariables = {
+      };
+      
+      this._addUsedVariable = function(par){
+        this.usedVariables[par] = true;
+      };
+      
+      this._getUsedVairables = function(){
+        return this.usedVariables;
+      };
+      
+      
+      this.declarations = [];
+      this._addVariableDeclaration = function(par){
+        this.declarations.push(par);
+      };
+      
+      this.parameters = {};
+      this._addParameter = function(par){
+        this.parameters[par] = true;
+      };
+      
+      
       if (par.uniquebasis){
         this.uniquebasis = par.uniquebasis;
       }else{
@@ -247,15 +281,32 @@
         };
       };
       
+      if (par.common){
+        this.common = par.common;
+      }else{
+        this.common = {
+          givenNames: {}
+        };
+      }
+      
       this.getUniqueName = function(){
-        var retStr = "__UNIQUENAME" + this.uniquebasis.index++;
+        var retStr = "_V" + this.uniquebasis.index++;
         return retStr;
+      };
+      
+      this.getVariableName = function(name){
+        if (!this.common.givenNames[name]){
+          this.common.givenNames[name] = this.getUniqueName() + "/*" + name + "*/";
+        };
+        return this.common.givenNames[name];
+        
       };
       
       this.newInstance = function(element, extras){
         var param = {
           toParse: element
           , uniquebasis: this.uniquebasis
+          , common: this.common
           , hashStr: this.hashStr
         };
         if (extras){
@@ -287,6 +338,8 @@
       };
       
       
+      
+      
       /*
         complete program
       */
@@ -304,9 +357,21 @@
         
         this.resultNameStr = this.getUniqueName();
         
-        res.push("var " + this.resultNameStr + " = (");
         var functionStatement = this._parseFunction(par, this.programPromiseStr);
         
+        var name;
+        for (name in this.usedVariables){
+          if (this.usedVariables[name] === true){
+            res.push("var " + this.getVariableName(name) + ";");
+            res.push("try{");
+            res.push(this.getVariableName(name));
+            res.push(" = ");
+            res.push(name);
+            res.push(";}catch(e){};\n");
+          };
+        };
+        
+        res.push("var " + this.resultNameStr + " = (");
         res.push(makeCompleteStatement(functionStatement));
         res.push(")();\n");
         //res.push("return __result;\n");
@@ -315,10 +380,6 @@
       };
       
       
-      this.declarations = [];
-      this._addVariableDeclaration = function(par){
-        this.declarations.push(par);
-      };
       
       
       /*
@@ -370,7 +431,7 @@
         var i = 0;
         funRes.push("function");
         if (par.name && !runRemote){
-          funRes.push(" " + par.name);
+          funRes.push(" " + this.getVariableName(par.name));
         };
         funRes.push("("); // function start
         if (par.params && par.params.length){
@@ -380,7 +441,8 @@
             if (i){
               funRes.push(", ");
             };
-            funRes.push(par.params[i]);
+            funRes.push(this.getVariableName(par.params[i]));
+            funRes.addParameter(par.params[i]);
           };
         };
         funRes.push("){\n");
@@ -424,17 +486,32 @@
           
           this.promising = true;
           res.makePromising();
-          funRes.push(this.tryCatchFunctionStr + "(function(){");
         };
         
         // variable declarations and main part
         var elements = this.parseProgElements(par.elements);
         if (par.promising){
+          // in front of the function
+          if (this.usingThis){
+            funRes.push("var " + this.thisExpression + " = this;\n");
+          };
+          funRes.push(this.tryCatchFunctionStr + "(function(){");
+          
+          // after the elements
           elements.push(this.returnPromise + ".resolve(); return;"); // in case no return statement was given
         };
         for (i = 0; i < this.declarations.length; ++i){
-          funRes.push("var " + this.declarations[i] + ";\n");
+          var varname = this.declarations[i];
+          funRes.push("var " + this.getVariableName(varname) + ";\n");
+          this.usedVariables[varname] = false;
         };
+        var parname;
+        for (parname in this.parameters){
+          if (this.parameters[parname] === true){
+            this.usedVariables[parname] = false;
+          };
+        };
+        
         funRes.push(elements);
         
         // promising additions
@@ -457,7 +534,7 @@
           res.addPre(";\npromiseland.registerRemote(\"" + par.frame.name + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
           res.push("function");
           if (par.name){
-            res.push(" " + par.name);
+            res.push(" " + this.getVariableName(par.name));
           };
           res.push("(){"); // function start
           res.push("if (promiseland.profileHas(\"" + par.frame.name + "\")){\n");
@@ -471,6 +548,17 @@
         };
         
         return res;
+      };
+      
+      this.thisStatement = function(par){
+        if (!this.promising){
+          return "this";
+        };
+        if (!this.usingThis){
+          this.usingThis = true;
+          this.thisExpression = this.getUniqueName();
+        };
+        return this.thisExpression;
       };
       
       // try catch / finally (why do we need finally?)
@@ -491,7 +579,7 @@
           catchPromise = this.getUniqueName();
           res.addPre("var " + catchPromise + " = " + newPromiseStr() + ";\n");
           
-          this.tryCatchFunctionStr = this.getUniqueName();
+          this.tryCatchFunctionStr = this.getUniqueName() + "/*try catch*/";
           res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".reject(e); }; }; };\n");
           
           this.catchFunctionStr = this.getUniqueName();
@@ -549,7 +637,19 @@
         return res;
       };
       
-      
+      this.classStatement = function(par){
+        var res = this.newResult();
+        
+        res.push("promiseland.createClass(");
+        if (par.body.literal){
+          res.push(this.parseExpression(par.body.literal));
+        }else{
+          res.push(this.parseExpression(par.body.expression));
+        };
+        res.push(")");
+        
+        return res;
+      };
       
       
       this.getModuleHashStr = function(){
@@ -606,7 +706,7 @@
         
         switch(value.type){
           case "Variable":
-            return value.name;
+            return this.variable(value);
             
           case "NumericLiteral":
             return "" + value.value;
@@ -624,9 +724,7 @@
             return this.functionCall(value);
 
           case "Function":
-            var cp = this.newInstance(value, {dynamicCode: this.dynamicCode || this.isFunction});
-            var funRes = cp.getFunctionRes();
-            return funRes || cp.getResult();
+            return this.function(value);
             
           case "EmptyStatement":
             // why does this exist?
@@ -688,11 +786,34 @@
             
           case "TryStatement":
             return this.tryStatement(value);
+            
+          case "Class":
+            return this.classStatement(value);
+            
+          case "This":
+            return this.thisStatement(value);
 
           default:
             unknownType(value);
         };
         return "/*this should not happen*/";
+      };
+      
+      // the function statement
+      this.function = function(value){
+        var cp = this.newInstance(value, {dynamicCode: this.dynamicCode || this.isFunction});
+        var funRes = cp.getFunctionRes();
+        
+        var uv = cp._getUsedVairables();
+        var name;
+        for (name in uv){
+          if (uv[name] === true){
+            this._addUsedVariable(name);
+          };
+        };
+        
+        return funRes || cp.getResult();
+        
       };
       
       
@@ -701,6 +822,15 @@
         //{type: "PostfixExpression", operator: "++", expression: Object}
         res.push(this.parseExpression(par.expression));
         res.push(par.operator);
+        
+        return res;
+      };
+      
+      this.variable = function(par){
+        var res = this.newResult();
+        
+        res.push(this.getVariableName(par.name));
+        res.addUsedVariable(par.name);
         
         return res;
       };
@@ -737,14 +867,12 @@
         var tempRes = this.newResult();
         tempRes.push("__requireFun(");
         tempRes.push(this.parseExpression(parExpression));
-        tempRes.push(").then(function(");
-        tempRes.push(res.getPromiseNameStr());
-        tempRes.push("){");
+        tempRes.push(").then(");
         
         res.addPre(makeCompleteStatement(tempRes));
         
-        res.addPre(this.tryCatchFunctionStr + "(function(){");
-        res.addPost("});\n});");
+        res.addPre(this.tryCatchFunctionStr + "(function(" + res.getPromiseNameStr() + "){");
+        res.addPost("}));"); // trycatch) then)
         return res;
       };
       
@@ -1316,7 +1444,7 @@
         var res = this.newResult();
         
         res.addVariableDeclaration(par.name);
-        res.push(par.name);
+        res.push(this.getVariableName(par.name));
         if (par.value){
           res.push(" = ");
           res.push(this.parseExpression(par.value));

@@ -1,3 +1,5 @@
+var b = function()*{};
+
 return {
   fun: (){
     if (1 < 0){

@@ -64,19 +64,19 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "524c2cb43ebcf6938632c4e670e1adb2" })){ return promiseland._getModule("524c2cb43ebcf6938632c4e670e1adb2"); };
-var __UNIQUENAME1 = (function(){
+var _V7/*console*/;try{_V7/*console*/ = console;}catch(e){};
+var _V1 = (function(){
 "use strict";
-var __UNIQUENAME2 = new __Promise();
-try{var y;
-__requireFun("./requiredModule").then(function(__UNIQUENAME3){try{y = __UNIQUENAME3;
-console["log"](y["msg"]);
-}catch(__returnError){__UNIQUENAME2.reject(__returnError);
- }; });}catch(__returnError){
-__UNIQUENAME2.reject(__returnError);
-};
-return __UNIQUENAME2;
+var _V2 = new __Promise();
+var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
+var _V4 = function(e){ _V2.reject(e); };
+_V3(function(){var _V5/*y*/;
+__requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
+_V7/*console*/["log"](_V5/*y*/["msg"]);
+_V2.resolve(); return;}));})();
+return _V2;
 })();
-promiseland._registerModule({ hashStr: "524c2cb43ebcf6938632c4e670e1adb2", "module": __UNIQUENAME1, promising: false });
-return __UNIQUENAME1;
+promiseland._registerModule({ hashStr: "524c2cb43ebcf6938632c4e670e1adb2", "module": _V1, promising: false });
+return _V1;
 });
 })();

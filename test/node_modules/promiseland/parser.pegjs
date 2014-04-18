@@ -145,6 +145,7 @@ Keyword
       / "in"
       / "new"
       / "require"
+      / "class"
       / "return"
       / "switch"
       / "this"
@@ -160,13 +161,13 @@ Keyword
 
 FutureReservedWord
   = (
-        "class"
-      / "const"
+        "const"
       / "enum"
       / "export"
       / "extends"
       / "import"
       / "super"
+      // "class"
     )
     !IdentifierPart
 
@@ -367,6 +368,7 @@ RegularExpressionFlags
 BreakToken      = "break"            !IdentifierPart
 CaseToken       = "case"             !IdentifierPart
 CatchToken      = "catch"            !IdentifierPart
+ClassToken      = "class"            !IdentifierPart { return "class"; }
 ContinueToken   = "continue"         !IdentifierPart
 DebuggerToken   = "debugger"         !IdentifierPart
 DefaultToken    = "default"          !IdentifierPart
@@ -573,6 +575,7 @@ PropertySetParameterList
 MemberExpression
   = base:(
       FunctionExpression
+      / ClassExpression
       / PrimaryExpression
       / NewToken __ constructor:MemberExpression __ args:Arguments {
           return {
@@ -1123,7 +1126,7 @@ FunctionDeclaration
         frame:    frame
       };
     }
-// promiseland adding __?
+
 FunctionExpression
   =  FunctionToken?  __ name:Identifier? __
     "(" __ params:FormalParameterList? __ ")" __
@@ -1137,6 +1140,34 @@ FunctionExpression
         elements: elements,
         promise:  promise,
         frame:    frame
+      };
+    }
+    
+ClassBody
+  = literal:ObjectLiteral { return { "literal": literal }; }
+  / exp:Expression  { return { "expression": exp }; }
+
+
+ClassCombinations
+  = name:Identifier __ body:ClassBody { return { name: name, body: body } }
+  / body:ClassBody { return { body: body } }
+
+ClassExtendsClaus
+  = "extends" __ exp:Expression {
+    return {
+      "type": "extends",
+      "baseClass": exp
+    }
+  }
+
+
+ClassExpression
+  =  ClassToken __ ext:ClassExtendsClaus? __ combination:ClassCombinations {
+      return {
+        type:     "Class",
+        name:      combination.name,
+        body:      combination.body,
+        "extends": ext
       };
     }
 
@@ -1197,6 +1228,7 @@ Statement
   / DebuggerStatement
   / FunctionDeclaration
   / FunctionExpression
+  / ClassExpression
 
 Block
   = "{" __ statements:(StatementList __)? "}" {

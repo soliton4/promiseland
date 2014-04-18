@@ -64,12 +64,12 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422" })){ return promiseland._getModule("d0d05d8b6f945e95ec00d89fe45c6422"); };
-var __UNIQUENAME1 = (function(){
+var _V1 = (function(){
 "use strict";
 return {"a": "\n\r\u2028\u2029\"'",
 "b": "xxx\n  xxx"};
 })();
-promiseland._registerModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422", "module": __UNIQUENAME1, promising: false });
-return __UNIQUENAME1;
+promiseland._registerModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422", "module": _V1, promising: false });
+return _V1;
 });
 })();

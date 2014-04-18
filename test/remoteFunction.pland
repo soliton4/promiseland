@@ -5,10 +5,10 @@ var z = function(context){
 };
 
 
-var y = ()["server"]{
+var y = () frame "server"{
   *z(context);
 };
 
-var x = ()["client"]{
+var x = () frame "client"{
   return "x";
 };

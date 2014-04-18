@@ -1,0 +1,15 @@
+var C1 = class {
+  constructor: (){
+    this.a = 1;
+  }
+  , b: 1
+  , doSomething: (){
+    return this.a + this.b;
+  }
+}
+
+var c = new C1();
+
+console.log(c.a);
+console.log(c.b);
+console.log(c.doSomething());

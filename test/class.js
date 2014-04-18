@@ -63,26 +63,25 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de" })){ return promiseland._getModule("eb2da6464c8ef09a7c4e9bb772e7d8de"); };
+if (promiseland._hasModule({ hashStr: "799e3eb38bcb4eaea6aa5131710c22c5" })){ return promiseland._getModule("799e3eb38bcb4eaea6aa5131710c22c5"); };
+var _V4/*console*/;try{_V4/*console*/ = console;}catch(e){};
 var _V1 = (function(){
 "use strict";
-var _V2/*a*/;
-var _V3/*namesStr*/;
-var _V4/*cnt*/;
-var _V5/*i*/;
-_V2/*a*/ = {"a": 1,
-"b": 2,
-"c": 3};
-_V3/*namesStr*/ = "";
-_V4/*cnt*/ = 0;
-for(_V5/*i*/ in _V2/*a*/){_V3/*namesStr*/ += _V5/*i*/;
-_V4/*cnt*/ += _V2/*a*/[_V5/*i*/];
-};
-;
-return {"names": _V3/*namesStr*/,
-"cnt": _V4/*cnt*/};
+var _V2/*C1*/;
+var _V3/*c*/;
+_V2/*C1*/ = promiseland.createClass({"constructor": function(){
+this["a"] = 1;
+},
+"b": 1,
+"doSomething": function(){
+return (this["a"] + this["b"]);
+}});
+_V3/*c*/ = new _V2/*C1*/();
+_V4/*console*/["log"](_V3/*c*/["a"]);
+_V4/*console*/["log"](_V3/*c*/["b"]);
+_V4/*console*/["log"](_V3/*c*/["doSomething"]());
 })();
-promiseland._registerModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de", "module": _V1, promising: false });
+promiseland._registerModule({ hashStr: "799e3eb38bcb4eaea6aa5131710c22c5", "module": _V1, promising: false });
 return _V1;
 });
 })();

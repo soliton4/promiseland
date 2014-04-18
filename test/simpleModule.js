@@ -64,11 +64,11 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "919d187b1564f9849d0220baee38ed31" })){ return promiseland._getModule("919d187b1564f9849d0220baee38ed31"); };
-var __UNIQUENAME1 = (function(){
+var _V1 = (function(){
 "use strict";
 return {"member": 4};
 })();
-promiseland._registerModule({ hashStr: "919d187b1564f9849d0220baee38ed31", "module": __UNIQUENAME1, promising: false });
-return __UNIQUENAME1;
+promiseland._registerModule({ hashStr: "919d187b1564f9849d0220baee38ed31", "module": _V1, promising: false });
+return _V1;
 });
 })();

@@ -64,43 +64,44 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "b84ffe21642945e905a4c3f179551605" })){ return promiseland._getModule("b84ffe21642945e905a4c3f179551605"); };
-var __UNIQUENAME1 = (function(){
+var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
+var _V9/*setTimeout*/;try{_V9/*setTimeout*/ = setTimeout;}catch(e){};
+var _V16/*console*/;try{_V16/*console*/ = console;}catch(e){};
+var _V1 = (function(){
 "use strict";
-var somefun;
-somefun = function(par){
-var __UNIQUENAME2 = new __Promise();
-try{var c;
-var x;
-c = new Callback();
-setTimeout(function(){
-c["callback"](5);
+var _V2/*somefun*/;
+_V2/*somefun*/ = function(_V3/*par*/){
+var _V4 = new __Promise();
+var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
+var _V6 = function(e){ _V4.reject(e); };
+_V5(function(){var _V7/*c*/;
+var _V10/*x*/;
+_V7/*c*/ = new _V8/*Callback*/();
+_V9/*setTimeout*/(function(){
+_V7/*c*/["callback"](5);
 }, 100);
-c["promise"].then(function(__UNIQUENAME3){try{x = __UNIQUENAME3[0];
-__UNIQUENAME2.resolve((par + x)); return __UNIQUENAME2;
-}catch(__returnError){__UNIQUENAME2.reject(__returnError);
- }; });}catch(__returnError){
-__UNIQUENAME2.reject(__returnError);
-};
-return __UNIQUENAME2;
+_V7/*c*/["promise"].then(_V5(function(_V11){_V10/*x*/ = _V11[0];
+_V4.resolve((_V3/*par*/ + _V10/*x*/)); return _V4;
+_V4.resolve(); return;}), _V6);})();
+return _V4;
 };
 return {"fun": function(){
-var __UNIQUENAME4 = new __Promise();
-try{var a;
-a = 1;
-console["log"]("1");
-somefun(a).then(function(__UNIQUENAME5){try{if((__UNIQUENAME5 == 6)){
-__UNIQUENAME4.resolve(4); return __UNIQUENAME4;
+var _V12 = new __Promise();
+var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
+var _V14 = function(e){ _V12.reject(e); };
+_V13(function(){var _V15/*a*/;
+_V15/*a*/ = 1;
+_V16/*console*/["log"]("1");
+_V2/*somefun*/(_V15/*a*/).then(_V13(function(_V17){if((_V17 == 6)){
+_V12.resolve(4); return _V12;
 };
 ;
-__UNIQUENAME4.resolve(0); return __UNIQUENAME4;
-}catch(__returnError){__UNIQUENAME4.reject(__returnError);
- }; });}catch(__returnError){
-__UNIQUENAME4.reject(__returnError);
-};
-return __UNIQUENAME4;
+_V12.resolve(0); return _V12;
+_V12.resolve(); return;}), _V14);})();
+return _V12;
 }};
 })();
-promiseland._registerModule({ hashStr: "b84ffe21642945e905a4c3f179551605", "module": __UNIQUENAME1, promising: false });
-return __UNIQUENAME1;
+promiseland._registerModule({ hashStr: "b84ffe21642945e905a4c3f179551605", "module": _V1, promising: false });
+return _V1;
 });
 })();

@@ -430,6 +430,75 @@
       return _parserPs;
     };
     
+    var mixinPrototype = function(parProto, parMixin, gotit){
+      if (!parMixin || !parMixin.prototype){
+        return;
+      };
+      if (!gotit){
+        gotit = {};
+      };
+      var i;
+      for (i in parMixin){
+        if (i === "prototype" || gotit[i]){
+          continue;
+        };
+        parProto[i] = parMixin[i];
+        gotit[i] = true;
+      };
+      if (parMixin.prototype){
+        mixinPrototype(parProto, parMixin.prototype, gotit);
+      };
+      
+    };
+    
+    var createClass = function(par, parExtends){
+      var constructorFun = par.constructor || function(){};
+      var proto = {};
+      var i;
+      var l;
+      
+      if (parExtends){
+        var realConstructorFun = constructorFun;
+        
+        if (parExtends instanceof Array){
+          l = parExtends.length;
+          var extendConstructors = [];
+          for (i = 0; i < l; ++i){
+            mixinPrototype(proto, parExtends[i]);
+            if (typeof parExtends[i] === "function"){
+              extendConstructors.push(parExtends[i]);
+            };
+          };
+          var cl = extendConstructors.length;
+          if (cl){
+            constructorFun = function(){
+              var i;
+              for (i = 0; i < cl; ++i){
+                extendConstructors[i].apply(this, arguments);
+              };
+              return realConstructorFun.apply(this, arguments);
+            };
+          };
+        }else{
+          mixinPrototype(proto, parExtends);
+          if (typeof parExtends === "function"){
+            constructorFun = function(){
+              parExtends.apply(this, arguments);
+              return realConstructorFun.apply(this, arguments);
+            };
+          };
+        };
+        
+      };
+      
+      for (i in par){
+        proto[i] = par[i];
+      };
+      constructorFun.prototype = proto;
+      return constructorFun;
+    };
+    
+    
     var ParserClass = function(par){
       this.parse = function(parStr){
         var p = new Promise();
@@ -458,6 +527,10 @@
       
       ProfileBaseClass: Profile,
       ConnectionBaseClass: Connection,
+      
+      createClass: function(par){
+        return createClass(par);
+      },
       
       set: function(parWhat, parValue){
         if (!setable[parWhat]){
@@ -600,6 +673,107 @@
         return promise.promise;
       }
     };
+    
+    
+    var _ClassToken;
+    
+    var classSystem = {
+      
+      classes: {}
+      
+      , registerClass: function(parClass, classHash){
+        var C = this.classes[classHash];
+        if (C){
+          return C;
+        };
+        C = function(){
+          _ClassToken = parClass;
+        };
+        this.classes[classHash] = C;
+        return C;
+      }
+      
+      , getClass: function(C){
+        _ClassToken = undefined;
+        C();
+        return _ClassToken;
+      }
+      
+      , classPossibilities: {
+        
+      }
+      
+      /*
+      [
+        { // untyped part
+        
+        },
+        ... // members
+      ]
+      */
+      , createClass: function(untyped, typed, hash){
+        var CAr = [];
+        var index = Car.length -1;
+        var pusher = function(par){
+          Car.push(par);
+          ++index;
+        };
+        pusher(untyped);
+        
+        var possibility = {};
+        classPossibilities[hash] = possibility;
+        possibility[hash] = true;
+        
+        var map = {};
+        
+        var memberCreator = function(t, T, i){
+          Car.push(T.default);
+          
+          var m = {
+            set: function(v){
+              Car[i] = v;
+            }, 
+            get: function(){
+              return Car[i];
+            },
+            hash: hash
+          };
+          map[t] = m;
+          
+          return i;
+        };
+        
+        var t;
+        for (t in typed){
+          memberCreator(t, typed[t], index);
+        };
+        
+        
+        
+        return CAr;
+      }
+      
+      
+      , getAssign: function(hash, assignmentHash){
+        var p = this.classPossibilities[assignmentHash];
+        if (!p || !p[hash]){
+          return function(){
+            throw {
+              id: 100,
+              msg: "assignment not allowed"
+            };
+          };
+        };
+        // is this possible any faster?
+        return function(v){
+          return v;
+        };
+      }
+      
+    };
+    
+    
+    
     
     return promiseland;
     

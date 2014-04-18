@@ -64,68 +64,67 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e" })){ return promiseland._getModule("9c6570a898dcb766ee6ffe5c83918b6e"); };
-var __UNIQUENAME1 = (function(){
+var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
+var _V9/*setTimeout*/;try{_V9/*setTimeout*/ = setTimeout;}catch(e){};
+var _V1 = (function(){
 "use strict";
-var somefun;
-var fourfun;
-somefun = function(par){
-var __UNIQUENAME2 = new __Promise();
-try{var c;
-c = new Callback();
-setTimeout(c["callback"], 100);
-c["promise"].then(function(__UNIQUENAME3){try{__UNIQUENAME3;
-__UNIQUENAME2.resolve((par + 1)); return __UNIQUENAME2;
-}catch(__returnError){__UNIQUENAME2.reject(__returnError);
- }; });}catch(__returnError){
-__UNIQUENAME2.reject(__returnError);
+var _V2/*somefun*/;
+var _V11/*fourfun*/;
+_V2/*somefun*/ = function(_V3/*par*/){
+var _V4 = new __Promise();
+var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
+var _V6 = function(e){ _V4.reject(e); };
+_V5(function(){var _V7/*c*/;
+_V7/*c*/ = new _V8/*Callback*/();
+_V9/*setTimeout*/(_V7/*c*/["callback"], 100);
+_V7/*c*/["promise"].then(_V5(function(_V10){_V10;
+_V4.resolve((_V3/*par*/ + 1)); return _V4;
+_V4.resolve(); return;}), _V6);})();
+return _V4;
 };
-return __UNIQUENAME2;
-};
-fourfun = function(){
-var __UNIQUENAME4 = new __Promise();
-try{__UNIQUENAME4.resolve(4); return __UNIQUENAME4;
-}catch(__returnError){
-__UNIQUENAME4.reject(__returnError);
-};
-return __UNIQUENAME4;
+_V11/*fourfun*/ = function(){
+var _V12 = new __Promise();
+var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
+var _V14 = function(e){ _V12.reject(e); };
+_V13(function(){_V12.resolve(4); return _V12;
+_V12.resolve(); return;})();
+return _V12;
 };
 return {"fun": function(){
-var __UNIQUENAME5 = new __Promise();
-try{var a;
-var i;
-a = 1;
-i = 0;
-var __UNIQUENAME8 = new __Promise();
-var __UNIQUENAME7 = function(){var __UNIQUENAME9 = new __Promise();
-fourfun().then(function(__UNIQUENAME6){try{if((i < __UNIQUENAME6)){somefun(i).then(function(__UNIQUENAME10){try{i = __UNIQUENAME10;
-a = (a + 1);
-__UNIQUENAME9.resolve(true); return __UNIQUENAME9;
-}catch(__returnError){__UNIQUENAME5.reject(__returnError);
- }; });}else{__UNIQUENAME9.resolve(false); return __UNIQUENAME9;
+var _V15 = new __Promise();
+var _V16 = function(code){ return function(res){ try{code(res);}catch(e){ _V15.reject(e); }; }; };
+var _V17 = function(e){ _V15.reject(e); };
+_V16(function(){var _V18/*a*/;
+var _V19/*i*/;
+_V18/*a*/ = 1;
+_V19/*i*/ = 0;
+var _V22 = new __Promise();
+var _V21 = function(){var _V23 = new __Promise();
+_V11/*fourfun*/().then(_V16(function(_V20){if((_V19/*i*/ < _V20)){_V2/*somefun*/(_V19/*i*/).then(_V16(function(_V24){_V19/*i*/ = _V24;
+_V18/*a*/ = (_V18/*a*/ + 1);
+_V23.resolve(true); return _V23;
+}), _V17);}else{_V23.resolve(false); return _V23;
 };
-}catch(__returnError){__UNIQUENAME5.reject(__returnError);
- }; });__UNIQUENAME9;
-return __UNIQUENAME9;
+}), _V17);_V23;
+return _V23;
 };
-var __UNIQUENAME11 = function(){__UNIQUENAME7().then(function(contLoop){
-if (contLoop){__UNIQUENAME11();}else{__UNIQUENAME8.resolve();};
+var _V25 = function(){_V21().then(function(contLoop){
+if (contLoop){_V25();}else{_V22.resolve();};
 });
 };
-__UNIQUENAME11();
-__UNIQUENAME8.then(function(){;
+_V25();
+_V22.then(function(){;
 ;
-if((a == 5)){
-__UNIQUENAME5.resolve(4); return __UNIQUENAME5;
+if((_V18/*a*/ == 5)){
+_V15.resolve(4); return _V15;
 };
 ;
-__UNIQUENAME5.resolve(0); return __UNIQUENAME5;
-});}catch(__returnError){
-__UNIQUENAME5.reject(__returnError);
-};
-return __UNIQUENAME5;
+_V15.resolve(0); return _V15;
+_V15.resolve(); return;});})();
+return _V15;
 }};
 })();
-promiseland._registerModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e", "module": __UNIQUENAME1, promising: false });
-return __UNIQUENAME1;
+promiseland._registerModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e", "module": _V1, promising: false });
+return _V1;
 });
 })();
