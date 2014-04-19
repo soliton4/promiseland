@@ -36,6 +36,7 @@
     
     var currentPromise;
     var promiseClass = "__Promise";
+    var errorMsg;
     
     /* error handlers */
     var unknownType = function(entry){
@@ -215,6 +216,12 @@
       , addParameter: function(par){
         this._cp._addParameter(par);
       }
+      , addConstant: function(par){
+        return this._cp._addConstant(par);
+      }
+      , registerType: function(par){
+        return this._cp._registerType(par);
+      }
     };
     
     
@@ -224,6 +231,16 @@
       this.toParse = par.toParse;
       this.dynamicCode = par.dynamicCode;
       this.hashStr = par.hashStr;
+      
+      this.types = {};
+      if (par.types){
+        var ti;
+        for (ti in par.types){
+          this.types[ti] = par.types[ti];
+        };
+      };
+      
+      this.algorithmicCode = false;
       
       
       this.stack = function(parStr){
@@ -273,6 +290,28 @@
       };
       
       
+      this.constants = {};
+      this._addConstant = function(par){
+        if (this.constants[par] === true){
+          return false;
+        };
+        this.constants[par] = true;
+        return true;
+      };
+      
+      this._registerType = function(par){
+        var name = par.name;
+        if (this.types[name]){
+          throw errorMessage.typeExists;
+        };
+        this.types[name] = par;
+        return true;
+      };
+      this.getType = function(name){
+        return this.types[name];
+      };
+      
+      
       if (par.uniquebasis){
         this.uniquebasis = par.uniquebasis;
       }else{
@@ -308,6 +347,7 @@
           , uniquebasis: this.uniquebasis
           , common: this.common
           , hashStr: this.hashStr
+          , types: this.types
         };
         if (extras){
           var i;
@@ -1018,11 +1058,17 @@
         
         if (promising){
           res.push(this.makeStatement(this.parseExpression(par.initializer)));
+          
+          this.stack("algorithmicCode");
+          this.algorithmicCode = true;
+          
           res.push(this.generateLoop({
             block: par.statement
             , preCondition: this.parseExpression(par.test)
             , postCode: this.parseExpression(par.counter)
           }));
+          
+          this.unstack("algorithmicCode");
           
         }else{
           res.push("for(");
@@ -1033,9 +1079,14 @@
           res.push(this.parseExpression(par.counter));
           res.push("){");
           
+          this.stack("algorithmicCode");
+          this.algorithmicCode = true;
+          
           statement = this.newResult();
           statement.push(this.parseProgElements(par.statement.statements));
           res.push(makeCompleteStatement(statement));
+          
+          this.unstack("algorithmicCode");
           
           res.push("}");
         };
@@ -1049,6 +1100,9 @@
         // {type: "ForInStatement", iterator: Object, collection: Object, statement: Object}
         this.stack("dynamicCode");
         this.dynamicCode = true;
+        
+        this.stack("algorithmicCode");
+        this.algorithmicCode = true;
         
         var res = this.newResult();
         var statement;
@@ -1115,6 +1169,7 @@
         };
         
         this.unstack("dynamicCode");
+        this.unstack("algorithmicCode");
         return res;
         
       };
@@ -1125,6 +1180,9 @@
         
         this.stack("dynamicCode");
         this.dynamicCode = true;
+        
+        this.stack("algorithmicCode");
+        this.algorithmicCode = true;
         
         var res = this.newResult();
         if (!par.statement || par.statement.type != "Block"){
@@ -1154,6 +1212,7 @@
         };
         
         this.unstack("dynamicCode");
+        this.unstack("algorithmicCode");
         return res;
       };
       
@@ -1163,6 +1222,9 @@
         
         this.stack("conditionalCode");
         this.conditionalCode = true;
+        
+        this.stack("algorithmicCode");
+        this.algorithmicCode = true;
         
         var res = this.newResult();
         
@@ -1224,6 +1286,8 @@
         };
         
         this.unstack("conditionalCode");
+        this.unstack("algorithmicCode");
+        
         return res;
       };
       
@@ -1682,6 +1746,10 @@
         //console.log("returning promise");
         return p.promise;
       }
+    };
+    
+    errorMsg = {
+      
     };
     
     return parser;

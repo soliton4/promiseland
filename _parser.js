@@ -240,6 +240,10 @@
         "ClassBody": parse_ClassBody,
         "ClassCombinations": parse_ClassCombinations,
         "ClassExtendsClaus": parse_ClassExtendsClaus,
+        "ClassTypedClaus": parse_ClassTypedClaus,
+        "ClassSyncClaus": parse_ClassSyncClaus,
+        "ClassKeyword": parse_ClassKeyword,
+        "ClassKeywords": parse_ClassKeywords,
         "ClassExpression": parse_ClassExpression,
         "Expression": parse_Expression,
         "ExpressionNoIn": parse_ExpressionNoIn,
@@ -10314,7 +10318,7 @@
       }
       
       function parse_ClassExtendsClaus() {
-        var result0, result1, result2;
+        var result0, result1, result2, result3;
         var pos0, pos1;
         
         pos0 = pos;
@@ -10333,7 +10337,13 @@
           if (result1 !== null) {
             result2 = parse_Expression();
             if (result2 !== null) {
-              result0 = [result0, result1, result2];
+              result3 = parse___();
+              if (result3 !== null) {
+                result0 = [result0, result1, result2, result3];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
             } else {
               result0 = null;
               pos = pos1;
@@ -10360,6 +10370,225 @@
         return result0;
       }
       
+      function parse_ClassTypedClaus() {
+        var result0, result1;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 4) === "type") {
+          result0 = "type";
+          pos += 4;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"type\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse___();
+          if (result1 !== null) {
+            result0 = [result0, result1];
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset) { return { "type": "type" } })(pos0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
+      function parse_ClassSyncClaus() {
+        var result0, result1, result2, result3;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 4) === "sync") {
+          result0 = "sync";
+          pos += 4;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"sync\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = parse___();
+          if (result1 !== null) {
+            if (input.substr(pos, 3) === "all") {
+              result2 = "all";
+              pos += 3;
+            } else {
+              result2 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"all\"");
+              }
+            }
+            if (result2 !== null) {
+              result3 = parse___();
+              if (result3 !== null) {
+                result0 = [result0, result1, result2, result3];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset) { return { "type": "sync", "all": 1 }; })(pos0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "sync") {
+            result0 = "sync";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"sync\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse___();
+            if (result1 !== null) {
+              if (input.substr(pos, 4) === "some") {
+                result2 = "some";
+                pos += 4;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\"some\"");
+                }
+              }
+              if (result2 !== null) {
+                result3 = parse___();
+                if (result3 !== null) {
+                  result0 = [result0, result1, result2, result3];
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset) { return { "type": "sync", "all": 0 }; })(pos0);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          if (result0 === null) {
+            pos0 = pos;
+            pos1 = pos;
+            if (input.substr(pos, 4) === "sync") {
+              result0 = "sync";
+              pos += 4;
+            } else {
+              result0 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"sync\"");
+              }
+            }
+            if (result0 !== null) {
+              result1 = parse___();
+              if (result1 !== null) {
+                result0 = [result0, result1];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+            if (result0 !== null) {
+              result0 = (function(offset) { return { "type": "sync", "all": 1 }; })(pos0);
+            }
+            if (result0 === null) {
+              pos = pos0;
+            }
+          }
+        }
+        return result0;
+      }
+      
+      function parse_ClassKeyword() {
+        var result0;
+        
+        result0 = parse_ClassExtendsClaus();
+        if (result0 === null) {
+          result0 = parse_ClassTypedClaus();
+          if (result0 === null) {
+            result0 = parse_ClassSyncClaus();
+          }
+        }
+        return result0;
+      }
+      
+      function parse_ClassKeywords() {
+        var result0, result1;
+        var pos0;
+        
+        pos0 = pos;
+        result1 = parse_ClassKeyword();
+        if (result1 !== null) {
+          result0 = [];
+          while (result1 !== null) {
+            result0.push(result1);
+            result1 = parse_ClassKeyword();
+          }
+        } else {
+          result0 = null;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, arr) {
+          var present = {};
+          arr.filter(function (e, i, arr) {
+            if (present[e.type]){
+              error('Class keyword ' + e.type + ' can only be used once' + text());
+            };
+          });
+          return arr;
+        })(pos0, result0);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
       function parse_ClassExpression() {
         var result0, result1, result2, result3, result4;
         var pos0, pos1;
@@ -10370,7 +10599,7 @@
         if (result0 !== null) {
           result1 = parse___();
           if (result1 !== null) {
-            result2 = parse_ClassExtendsClaus();
+            result2 = parse_ClassKeywords();
             result2 = result2 !== null ? result2 : "";
             if (result2 !== null) {
               result3 = parse___();
@@ -10399,12 +10628,12 @@
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, ext, combination) {
+          result0 = (function(offset, keywords, combination) {
               return {
-                type:     "Class",
-                name:      combination.name,
-                body:      combination.body,
-                "extends": ext
+                type:       "Class",
+                name:       combination.name,
+                body:       combination.body,
+                "keywords": keywords
               };
             })(pos0, result0[2], result0[4]);
         }

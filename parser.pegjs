@@ -1,4 +1,7 @@
 /*
+ * promiseLand parser.
+ * adapted from peg.js example javascript parser
+ *
  * JavaScript parser based on the grammar described in ECMA-262, 5th ed.
  * (http://www.ecma-international.org/publications/standards/Ecma-262.htm)
  *
@@ -1153,21 +1156,44 @@ ClassCombinations
   / body:ClassBody { return { body: body } }
 
 ClassExtendsClaus
-  = "extends" __ exp:Expression {
+  = "extends" __ exp:Expression __ {
     return {
       "type": "extends",
       "baseClass": exp
     }
   }
 
+ClassTypedClaus
+  = "type" __ { return { "type": "type" } }
+
+ClassSyncClaus
+  = "sync" __ "all" __ { return { "type": "sync", "all": 1 }; }
+  / "sync" __ "some" __ { return { "type": "sync", "all": 0 }; }
+  / "sync" __ { return { "type": "sync", "all": 1 }; }
+
+ClassKeyword
+  = ClassExtendsClaus
+  / ClassTypedClaus
+  / ClassSyncClaus
+  
+ClassKeywords
+  = arr:ClassKeyword+ {
+  var present = {};
+  arr.filter(function (e, i, arr) {
+    if (present[e.type]){
+      error('Class keyword ' + e.type + ' can only be used once' + text());
+    };
+  });
+  return arr;
+}  
 
 ClassExpression
-  =  ClassToken __ ext:ClassExtendsClaus? __ combination:ClassCombinations {
+  =  ClassToken __ keywords:ClassKeywords? __ combination:ClassCombinations {
       return {
-        type:     "Class",
-        name:      combination.name,
-        body:      combination.body,
-        "extends": ext
+        type:       "Class",
+        name:       combination.name,
+        body:       combination.body,
+        "keywords": keywords
       };
     }
 
