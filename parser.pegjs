@@ -1183,6 +1183,7 @@ ClassKeywords
     if (present[e.type]){
       error('Class keyword ' + e.type + ' can only be used once' + text());
     };
+    present[e.type] = true;
   });
   return arr;
 }  
