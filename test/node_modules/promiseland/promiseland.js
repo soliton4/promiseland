@@ -162,10 +162,12 @@
     
     var Callback = function(){
       var promise = new Promise();
-      this.promise = promise.promise;
-      this.callback = function(){
+      var callback = function(){
         promise.resolve(arguments);
       };
+      callback.promise = promise.promise;
+      callback.callback = callback;
+      return callback;
     };
     
     

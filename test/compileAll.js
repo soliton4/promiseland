@@ -63,7 +63,7 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "25bcf5ef1698c801a9faad645665ceec" })){ return promiseland._getModule("25bcf5ef1698c801a9faad645665ceec"); };
+if (promiseland._hasModule({ hashStr: "22da56b26d2bce9c8f5947b3bc4655bc" })){ return promiseland._getModule("22da56b26d2bce9c8f5947b3bc4655bc"); };
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V18/*console*/;try{_V18/*console*/ = console;}catch(e){};
 var _V26/*promiseland*/;try{_V26/*promiseland*/ = promiseland;}catch(e){};
@@ -83,7 +83,7 @@ var _V25/*parser*/;
 var _V27/*jsStr*/;
 __requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
 _V7/*callback*/ = new _V8/*Callback*/();
-_V5/*fs*/["readdir"](".", _V7/*callback*/["callback"]);
+_V5/*fs*/["readdir"](".", _V7/*callback*/);
 _V7/*callback*/["promise"].then(_V3(function(_V10){_V9/*files*/ = _V10[1];
 var _V11 = new __Promise();
 if(_V9/*files*/){
@@ -141,7 +141,7 @@ _V11.resolve();}; _V11.then(function(){;
 _V2.resolve(); return;});}), _V4);}));})();
 return _V2;
 })();
-promiseland._registerModule({ hashStr: "25bcf5ef1698c801a9faad645665ceec", "module": _V1, promising: false });
+promiseland._registerModule({ hashStr: "22da56b26d2bce9c8f5947b3bc4655bc", "module": _V1, promising: false });
 return _V1;
 });
 })();

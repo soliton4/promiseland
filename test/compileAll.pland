@@ -5,7 +5,7 @@ var fs = require "fs";
 
 var callback = new Callback();
 
-fs.readdir(".", callback.callback);
+fs.readdir(".", callback);
 
 var files = (*callback.promise)[1];
 
