@@ -47,9 +47,26 @@
  * insertion) and also served to double check that I converted the original
  * grammar correctly.
  */
+ 
+{
+  
+  function result(r){
+    if (r && r.line === undefined){
+      r.line = line();
+    };
+    if (r && r.column === undefined){
+      r.column = column();
+    };
+    if (r && r.offset === undefined){
+      r.offset = offset();
+    };
+    return r;
+  }
+  
+}
 
 start
-  = __ program:Program __ { return program; }
+  = __ program:Program __ { return result(program); }
 
 /* ===== A.1 Lexical Grammar ===== */
 
@@ -155,7 +172,6 @@ Keyword
       / "throw"
       / "try"
       / "typeof"
-      / "var"
       / "void"
       / "while"
       / "with"
@@ -397,7 +413,6 @@ ThrowToken      = "throw"            !IdentifierPart
 TrueToken       = "true"             !IdentifierPart
 TryToken        = "try"              !IdentifierPart
 TypeofToken     = "typeof"           !IdentifierPart { return "typeof"; }
-VarToken        = "var"              !IdentifierPart
 VoidToken       = "void"             !IdentifierPart { return "void"; }
 WhileToken      = "while"            !IdentifierPart
 WithToken       = "with"             !IdentifierPart
@@ -486,7 +501,7 @@ __
 
 PrimaryExpression
   = ThisToken       { return { type: "This" }; }
-  / name:Identifier { return { type: "Variable", name: name }; }
+  / name:Identifier { return result({ type: "Variable", name: name }); }
   / Literal
   / ArrayLiteral
   / ObjectLiteral
@@ -1273,14 +1288,42 @@ StatementList
       }
       return result;
     }
+    
+VariableStatementCoreSingle
+  = typename:Identifier __ declarations:VariableDeclarationList {
+      var i = 0;
+      for (i = 0; i < declarations.length; ++i){
+        declarations[i].typename = typename;
+      };
+      if (declarations.length > 1){
+        throw new Error('Only one declaration allowed here ');
+      };
+      return result({
+        type:         "VariableStatement",
+        declarations: declarations,
+        typename:     typename
+      });
+    }
+
+
+VariableStatementCore
+  = typename:Identifier __ declarations:VariableDeclarationList {
+      var i = 0;
+      for (i = 0; i < declarations.length; ++i){
+        declarations[i].typename = typename;
+      };
+      return result({
+        type:         "VariableStatement",
+        declarations: declarations,
+        typename:     typename
+      });
+    }
 
 VariableStatement
-  = VarToken __ declarations:VariableDeclarationList EOS {
-      return {
-        type:         "VariableStatement",
-        declarations: declarations
-      };
+  = statment:VariableStatementCore EOS {
+      return result(statment);
     }
+
 
 VariableDeclarationList
   = head:VariableDeclaration tail:(__ "," __ VariableDeclaration)* {
@@ -1296,26 +1339,26 @@ VariableDeclarationListNoIn
       var result = [head];
       for (var i = 0; i < tail.length; i++) {
         result.push(tail[i][3]);
-      }
+      };
       return result;
     }
 
 VariableDeclaration
   = name:Identifier __ value:Initialiser? {
-      return {
+      return result({
         type:  "VariableDeclaration",
         name:  name,
         value: value !== "" ? value : null
-      };
+      });
     }
 
 VariableDeclarationNoIn
   = name:Identifier __ value:InitialiserNoIn? {
-      return {
+      return result({
         type:  "VariableDeclaration",
         name:  name,
         value: value !== "" ? value : null
-      };
+      });
     }
 
 Initialiser
@@ -1338,12 +1381,12 @@ IfStatement
     "(" __ condition:Expression __ ")" __
     ifStatement:Statement
     elseStatement:(__ ElseToken __ Statement)? {
-      return {
+      return result({
         type:          "IfStatement",
         condition:     condition,
         ifStatement:   ifStatement,
         elseStatement: elseStatement !== "" ? elseStatement[3] : null
-      };
+      });
     }
 
 IterationStatement
@@ -1376,12 +1419,7 @@ ForStatement
   = ForToken __
     "(" __
     initializer:(
-        VarToken __ declarations:VariableDeclarationListNoIn {
-          return {
-            type:         "VariableStatement",
-            declarations: declarations
-          };
-        }
+      VariableStatementCore
       / ExpressionNoIn?
     ) __
     ";" __
@@ -1404,7 +1442,8 @@ ForInStatement
   = ForToken __
     "(" __
     iterator:(
-        VarToken __ declaration:VariableDeclarationNoIn { return declaration; }
+      /*  VarToken __ declaration:VariableDeclarationNoIn { return declaration; }*/
+      VariableStatementCoreSingle
       / LeftHandSideExpression
     ) __
     InToken __

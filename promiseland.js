@@ -83,6 +83,8 @@
     var require = requireFun;
     var promiseland;
     
+    var errorMsg;
+    
     //var Promise;
     var Promise = function(){
       
@@ -679,31 +681,35 @@
     
     var _ClassToken;
     
+    /*
+      the classLiteral is used to ensure consistency between
+      compiletime type safety and runtime type safety
+      
+      it contains class objects for members that are replaced with their names in sourcecode.
+      
+      structure:
+      {
+        members:[
+          {
+            name: "nameliteral",
+            type: typeObject
+          },
+          ...
+        ],
+        extends: [typeObject, ...],
+        hasFreePart: true / false
+      }
+      
+    */
+    
+    var _actClass;
+    var getClass = function(cf){
+      _actClass = undefined;
+      cf();
+      return _actClass;
+    };
+    
     var classSystem = {
-      
-      classes: {}
-      
-      , registerClass: function(parClass, classHash){
-        var C = this.classes[classHash];
-        if (C){
-          return C;
-        };
-        C = function(){
-          _ClassToken = parClass;
-        };
-        this.classes[classHash] = C;
-        return C;
-      }
-      
-      , getClass: function(C){
-        _ClassToken = undefined;
-        C();
-        return _ClassToken;
-      }
-      
-      , classPossibilities: {
-        
-      }
       
       /*
       [
@@ -713,69 +719,254 @@
         ... // members
       ]
       */
-      , createClass: function(untyped, typed, hash){
-        var CAr = [];
-        var index = Car.length -1;
-        var pusher = function(par){
-          Car.push(par);
-          ++index;
+      createClass: function(classLiteral, parDefaults){
+        var cAr = [];
+        
+        var map = {
+          members: {},
+          "extends": []
         };
-        pusher(untyped);
         
-        var possibility = {};
-        classPossibilities[hash] = possibility;
-        possibility[hash] = true;
+        var cDef = {
+          constructor: undefined, // later
+          map: map
+        };
+        cAr.push(cDef); // cAr[0] is allways the class definition
         
-        var map = {};
+        if (classLiteral.hasFreePart){
+          var freepart = {};
+          map.freePart = cAr.length;
+          cAr.push(freepart);
+          map.getMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "]"];
+          map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE];
+        };
         
-        var memberCreator = function(t, T, i){
-          Car.push(T.default);
-          
-          var m = {
-            set: function(v){
-              Car[i] = v;
-            }, 
-            get: function(){
-              return Car[i];
-            },
-            hash: hash
+        var addMember = function(m){
+          var mDef = {
+            index: cAr.length
           };
-          map[t] = m;
-          
-          return i;
+          map.members[m.name] = mDef;
+          var def = parDefaults ? parDefaults[m.name] : undefined;
+          cAr.push(def);
+          mDef.type = m.type;
+          mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
+          mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] = ", MAKRO_VALUE];
         };
         
-        var t;
-        for (t in typed){
-          memberCreator(t, typed[t], index);
+        var i;
+        
+        if (classLiteral.members){
+          i = 0;
+          for (i; i < classLiteral.members.length; ++i){
+            addMember(classLiteral.members[i]);
+          };
         };
         
-        
-        
-        return CAr;
-      }
-      
-      
-      , getAssign: function(hash, assignmentHash){
-        var p = this.classPossibilities[assignmentHash];
-        if (!p || !p[hash]){
-          return function(){
-            throw {
-              id: 100,
-              msg: "assignment not allowed"
+        if (classLiteral.hasFreePart){
+          var proto = {};
+          if (parDefaults){
+            for (i in parDefaults){
+              if (!map.members[i]){
+                proto[i] = parDefaults[i];
+              };
             };
           };
+          var freeFun = function(){};
+          freeFun.prototype = proto;
+          var f = map.freePart;
+          
+          cDef.constructor = function(){
+            var r = cAr.slice();
+            r[f] = new freeFun();
+            return r;
+          };
+        }else{
+          cDef.constructor = function(){
+            return cAr.slice();
+          };
         };
-        // is this possible any faster?
-        return function(v){
-          return v;
+        
+        cf = function(){
+          _actClass = cDef;
         };
+        return cf;
+      }
+      
+      , getGetPropertyCode: function(par){
+        var cDef = getClass(par["type"]);
+        var map = cDef.map;
+        
+        if (par.property){
+          if (map.members[par.property]){
+            return assembleCode(map.members[par.property].getCode, par);
+          };
+        };
+        if (map.getMemberCode){
+          return assembleCode(map.getMemberCode, par);
+        };
+        return runtimeError(errorMsg.accessNotAllowd);
+      }
+      
+      , getPropertyType: function(par){
+        var cDef = getClass(par["type"]);
+        var map = cDef.map;
+        
+        if (map.members[par.property]){
+          return map.members[par.property]["type"];
+        };
+      }
+      
+      , getSetPropertyCode: function(par){
+        var cDef = getClass(par["type"]);
+        var map = cDef.map;
+        
+        if (par.property){
+          if (map.members[par.property]){
+            var propertyType = this.getPropertyType({
+              "type": par["type"],
+              property: par.property
+            });
+            if (!this.canSet(propertyType, par.valueType)){
+              return runtimeError(errorMsg.typeMissmatch);
+            };
+            return assembleCode(map.members[par.property].setCode, par);
+          };
+        };
+        if (map.setMemberCode){
+          if (!this.canSet(undefined, par.valueType)){
+            return runtimeError(errorMsg.typeMissmatch);
+          };
+          return assembleCode(map.setMemberCode, par);
+        };
+        return runtimeError(errorMsg.accessNotAllowd);
+      }
+      
+      , getSetVariableCode: function(par){
+        var cDef = getClass(par["type"]);
+        var vcDef = getClass(par["valueType"]);
+        
+        if (par.instance){
+          if (!this.canSet(par["type"], par.valueType)){
+            return runtimeError(errorMsg.typeMissmatch);
+          };
+          var operator = par.operator || "=";
+          if (operator != "="){
+            if (!(cDef.isVar && vcDef.isVar)){
+              return runtimeError(errorMsg.operatorMissmatch);
+            };
+          };
+          return assembleCode([MAKRO_SELF, " = ", MAKRO_VALUE], par);
+        };
+        return runtimeError(errorMsg.missingVariable);
+      }
+      
+      , canSet: function(parTagetType, parSourceType){
+        if (parTagetType === undefined && parSourceType === undefined){
+          return true;
+        };
+        if (parTagetType === undefined || parSourceType === undefined){
+          return false;
+        };
+        if (parTagetType === parSourceType){
+          return true;
+        };
+        return false;
       }
       
     };
     
+    var runtimeError = function(par){
+      return "(function(){ throw { id:" + par.id + ", msg: " + stringEncodeStr(par.msg) + " } })()";
+    };
     
     
+    var _stringEncodeStr = function(par){
+      var s = par.replace(new RegExp("\\\\", "g"), "\\\\");
+      s = s.replace(new RegExp("\\n", "g"), "\\n");
+      s = s.replace(new RegExp("\\r", "g"), "\\r");
+      s = s.replace(new RegExp("\\\"", "g"), "\\\"");
+      s = s.replace(new RegExp("\\u2028", "g"), "\\u2028");
+      s = s.replace(new RegExp("\\u2029", "g"), "\\u2029");
+      return s;
+    };
+    var stringEncodeStr = function(par){
+      return "\"" + _stringEncodeStr(par) + "\"";
+    };
+    
+    
+    var assembleCode = function(ar, par){
+      var res = par.result;
+      var resStr = "";
+      if (!res){
+        res = {
+          push: function(parStr){
+            resStr += parStr;
+          }
+        };
+      };
+      var i = 0;
+      var r = "";
+      for (i = 0; i < ar.length; ++i){
+        if (typeof ar[i] == "string"){
+          res.push(ar[i]);
+        }else{
+          switch(ar[i]){
+            case MAKRO_SELF:
+              res.push(par.instance);
+              break;
+            case MAKRO_PROPERTY:
+              res.push(par.property);
+              break;
+            case MAKRO_PROPERTYSTRING:
+              res.push(stringEncodeStr(par.property));
+              break;
+            case MAKRO_PROPERTYVALUE:
+              if (par.propertyValue){
+                res.push(par.propertyValue);
+              }else{
+                res.push(stringEncodeStr(par.property));
+              };
+              break;
+            case MAKRO_VALUE:
+              res.push(par.value);
+              break;
+          };
+        };
+      };
+      if (par.result){
+        return res;
+      };
+      return resStr;
+    };
+    
+    var MAKRO_SELF = 0;
+    var MAKRO_PROPERTY = 1;
+    var MAKRO_PROPERTYSTRING = 2;
+    var MAKRO_PROPERTYVALUE = 3;
+    var MAKRO_VALUE = 4;
+    
+    
+    errorMsg = {
+      accessNotAllowd: {
+        id: 200
+        , msg: "access to member not allowed"
+      },
+      typeMissmatch: {
+        id: 201
+        , msg: "type missmatch"
+      },
+      missingVariable: {
+        id: 202
+        , msg: "variable missing"
+      },
+      operatorMissmatch: {
+        id: 203
+        , msg: "operator missmatch"
+      }
+    };
+    
+    
+    promiseland.classSystem = classSystem;
     
     return promiseland;
     

@@ -1,0 +1,8 @@
+var y = (){
+  var bla = 1;
+  bla = 3;
+  var z = function x(){
+    var bla2 = 4;
+  };
+  x();
+}
