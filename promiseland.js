@@ -709,6 +709,17 @@
       return _actClass;
     };
     
+    var classHider = function(toHide){
+      return function(){
+        _actClass = toHide;
+      };
+    };
+    var builtinTypes = {
+      "var": classHider({
+        isVar: true
+      })
+    };
+    
     var classSystem = {
       
       /*
@@ -786,10 +797,12 @@
           };
         };
         
-        cf = function(){
-          _actClass = cDef;
-        };
+        cf = classHider(cDef);
         return cf;
+      }
+      
+      , getBuiltinType: function(parName){
+        return builtinTypes[parName];
       }
       
       , getGetPropertyCode: function(par){

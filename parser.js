@@ -38,43 +38,6 @@
     var promiseClass = "__Promise";
     var errorMsg;
     
-    var builtinTypes = {
-      "var": {
-        "type": {
-          name: "var"
-          , builtin: true
-          , isVar: true
-        }
-      },
-      "int": {
-        "type": {
-          name: "int"
-          , builtin: true
-          , reserved: true
-        }
-      },
-      "double": {
-        "type": {
-          name: "double"
-          , builtin: true
-          , reserved: true
-        }
-      },
-      "String": {
-        "type": {
-          name: "String"
-          , builtin: true
-          , system: true
-        }
-      },
-      "Array": {
-        "type": {
-          name: "Array"
-          , builtin: true
-          , system: true
-        }
-      }
-    };
     var statementType = {
       builtin: true
       , statement: true
@@ -198,6 +161,7 @@
       
       pushType: function(par){
         this.push(par);
+        this.setType(par.getType());
       },
       
       push: function(par){
@@ -329,6 +293,12 @@
       /* initializing type identifiers */
       
       this.types = mixin({}, par.types);
+      if (!this.types["var"]){
+        this.types["var"] = {
+          name: "var",
+          "type": promiseland.classSystem.getBuiltinType("var")
+        };
+      }
       this.variables = mixin({}, par.variables);
       
       /* flags */
@@ -417,7 +387,7 @@
       this.getVariableType = function(name){
         var entry = this.variables[name];
         if (!entry){
-          this.getType("var");
+          return this.getType("var");
         };
         return this.getType(entry.typename);
       };
@@ -1052,7 +1022,7 @@
       */
       this._registerType = function(par){
         var name = par.name;
-        if (this.types[name]){
+        if (this.types.hasOwnProperty[name]){
           throw errorMsg.typeExists;
         };
         this.types[name] = {
@@ -1070,18 +1040,6 @@
         };
         if (this.types.hasOwnProperty(name)){
           return this.types[name]["type"];
-        };
-        if (builtinTypes.hasOwnProperty(name)){
-          var t = builtinTypes[name]["type"];
-          if (t.reserved || r.system){
-            if (!throwError){
-              return;
-            };
-            error(errorMsg.typeUnavailable, {
-              name: name
-            });
-          };
-          return t;
         };
         if (!throwError){
           return;
@@ -1290,7 +1248,7 @@
             return this.arrayLiteral(value);
             
           case "PropertyAccess":
-            return this.propertyAccess(value);
+            return this.expPropertyAccess(value);
             
           case "ConditionalExpression":
             return this.conditionalExpression(value);
@@ -1362,7 +1320,6 @@
       };
       
       this.expVariable = function(par){
-        res.addUsedVariable(par.name);
         return this.getVariable(par.name);
       };
       
@@ -1913,9 +1870,14 @@
       };
       
       
-      this.propertyAccess = function(par){
+      this.expPropertyAccess = function(par){
         var res = this.newResult();
-        res.push(this.parseExpression(par.base));
+        var base = this.parseExpression(par.base);
+        if (base.getType() !== this.getType("var")){
+          error(errorMsg.notImplemented);
+        };
+        res.setType("var");
+        res.push(base);
         res.push("[");
         if (typeof par.name == "string"){
           res.push(stringEncodeStr(par.name));
@@ -1947,7 +1909,7 @@
           var prop = par.properties[i];
           if (prop.type == "PropertyAssignment"){
             res.push(stringEncodeStr(prop.name) + ": ");
-            res.push(expectTypeVar(this.parseExpression(prop.value)));
+            res.push(this.expectTypeVar(this.parseExpression(prop.value)));
           }else{
             somethingsWrong({
               msg: "unknown property assignment: " + prop.type
@@ -1994,9 +1956,9 @@
       /*
         (typename | var) name [= value];
       */
-      this.expVariableStatement = function(element){
+      this.expVariableStatement = function(par){
         var res = this.newResult();
-        var declarations = element.declarations;
+        var declarations = par.declarations;
         if (!declarations){
           parseError("missing declarations");
           return "";
@@ -2004,13 +1966,19 @@
         
         var i = 0;
         var l = declarations.length;
+        var usedType = this.getType(par.typename);
         for (i; i < l; ++i){
           if (declarations[i].type == "VariableDeclaration"){
-            res.push(this.parseExpression(declarations[i]));
+            var r = this.parseExpression(declarations[i]);
+            if (r.getType() !== usedType){
+              error(errorMsg.differentTypesInVariableDeclaration, par);
+            };
+            res.push(r);
           }else{
             unknownType(declarations[i]);
           };
         };
+        res.setType(usedType);
         return res;
 
       };
@@ -2037,6 +2005,8 @@
       
       this.getVariable = function(par){
         var res = this.newResult();
+        
+        res.addUsedVariable(par);
         
         res.push(this.getVariableName(par));
         res.setType(this.getVariableType(par));
@@ -2336,9 +2306,21 @@
         id: 104,
         msg: "type missmatch: expected var"
       },
+      typeUndeclared: {
+        id: 105,
+        msg: "type undeclared"
+      },
       internalMissingResultType: {
         id: 1000,
         msg: "internal: result type missing"
+      }, 
+      differentTypesInVariableDeclaration: {
+        id: 1001,
+        msg: "internal: different type in variable declaration"
+      },
+      notImplemented: {
+        id: 1002,
+        msg: "internal: not implemented"
       }
     };
     

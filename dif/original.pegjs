@@ -1,7 +1,4 @@
 /*
- * promiseLand parser.
- * adapted from peg.js example javascript parser
- *
  * JavaScript parser based on the grammar described in ECMA-262, 5th ed.
  * (http://www.ecma-international.org/publications/standards/Ecma-262.htm)
  *
@@ -47,26 +44,9 @@
  * insertion) and also served to double check that I converted the original
  * grammar correctly.
  */
- 
-{
-  
-  function result(r){
-    if (r && r.line === undefined){
-      r.line = line();
-    };
-    if (r && r.column === undefined){
-      r.column = column();
-    };
-    if (r && r.offset === undefined){
-      r.offset = offset();
-    };
-    return r;
-  }
-  
-}
 
 start
-  = __ program:Program __ { return result(program); }
+  = __ program:Program __ { return program; }
 
 /* ===== A.1 Lexical Grammar ===== */
 
@@ -164,14 +144,13 @@ Keyword
       / "instanceof"
       / "in"
       / "new"
-      / "require"
-      / "class"
       / "return"
       / "switch"
       / "this"
       / "throw"
       / "try"
       / "typeof"
+      / "var"
       / "void"
       / "while"
       / "with"
@@ -180,13 +159,13 @@ Keyword
 
 FutureReservedWord
   = (
-        "const"
+        "class"
+      / "const"
       / "enum"
       / "export"
       / "extends"
       / "import"
       / "super"
-      // "class"
     )
     !IdentifierPart
 
@@ -224,24 +203,17 @@ NumericLiteral "number"
     }
 
 DecimalLiteral
-  = before:DecimalIntegerLiteral
-    "."
-    after:DecimalDigits?
-    exponent:ExponentPart? {
-      return parseFloat(before + "." + after + exponent);
+  = parts:$(DecimalIntegerLiteral "." DecimalDigits? ExponentPart?) {
+      return parseFloat(parts);
     }
-  / "." after:DecimalDigits exponent:ExponentPart? {
-      return parseFloat("." + after + exponent);
-    }
-  / before:DecimalIntegerLiteral exponent:ExponentPart? {
-      return parseFloat(before + exponent);
-    }
+  / parts:$("." DecimalDigits ExponentPart?)     { return parseFloat(parts); }
+  / parts:$(DecimalIntegerLiteral ExponentPart?) { return parseFloat(parts); }
 
 DecimalIntegerLiteral
-  = "0" / digit:NonZeroDigit digits:DecimalDigits? { return digit + digits; }
+  = "0" / NonZeroDigit DecimalDigits?
 
 DecimalDigits
-  = digits:DecimalDigit+ { return digits.join(""); }
+  = DecimalDigit+
 
 DecimalDigit
   = [0-9]
@@ -250,18 +222,16 @@ NonZeroDigit
   = [1-9]
 
 ExponentPart
-  = indicator:ExponentIndicator integer:SignedInteger {
-      return indicator + integer;
-    }
+  = ExponentIndicator SignedInteger
 
 ExponentIndicator
   = [eE]
 
 SignedInteger
-  = sign:[-+]? digits:DecimalDigits { return sign + digits; }
+  = [-+]? DecimalDigits
 
 HexIntegerLiteral
-  = "0" [xX] digits:HexDigit+ { return parseInt("0x" + digits.join("")); }
+  = "0" [xX] digits:$HexDigit+ { return parseInt("0x" + digits); }
 
 HexDigit
   = [0-9a-fA-F]
@@ -281,13 +251,11 @@ DoubleStringCharacter
   = !('"' / "\\" / LineTerminator) char_:SourceCharacter { return char_;     }
   / "\\" sequence:EscapeSequence                         { return sequence;  }
   / LineContinuation
-  / LineTerminator
 
 SingleStringCharacter
   = !("'" / "\\" / LineTerminator) char_:SourceCharacter { return char_;     }
   / "\\" sequence:EscapeSequence                         { return sequence;  }
   / LineContinuation
-  / LineTerminator
 
 LineContinuation
   = "\\" sequence:LineTerminatorSequence { return sequence; }
@@ -303,7 +271,7 @@ CharacterEscapeSequence
   / NonEscapeCharacter
 
 SingleEscapeCharacter
-  = char_:[\'"\\bfnrtv] {
+  = char_:['"\\bfnrtv] {
       return char_
         .replace("b", "\b")
         .replace("f", "\f")
@@ -323,13 +291,13 @@ EscapeCharacter
   / "u"
 
 HexEscapeSequence
-  = "x" h1:HexDigit h2:HexDigit {
-      return String.fromCharCode(parseInt("0x" + h1 + h2));
+  = "x" digits:$(HexDigit HexDigit) {
+      return String.fromCharCode(parseInt("0x" + digits));
     }
 
 UnicodeEscapeSequence
-  = "u" h1:HexDigit h2:HexDigit h3:HexDigit h4:HexDigit {
-      return String.fromCharCode(parseInt("0x" + h1 + h2 + h3 + h4));
+  = "u" digits:$(HexDigit HexDigit HexDigit HexDigit) {
+      return String.fromCharCode(parseInt("0x" + digits));
     }
 
 RegularExpressionLiteral "regular expression"
@@ -387,7 +355,6 @@ RegularExpressionFlags
 BreakToken      = "break"            !IdentifierPart
 CaseToken       = "case"             !IdentifierPart
 CatchToken      = "catch"            !IdentifierPart
-ClassToken      = "class"            !IdentifierPart { return "class"; }
 ContinueToken   = "continue"         !IdentifierPart
 DebuggerToken   = "debugger"         !IdentifierPart
 DefaultToken    = "default"          !IdentifierPart
@@ -404,7 +371,6 @@ InstanceofToken = "instanceof"       !IdentifierPart { return "instanceof"; }
 InToken         = "in"               !IdentifierPart { return "in"; }
 NewToken        = "new"              !IdentifierPart
 NullToken       = "null"             !IdentifierPart
-RequireToken    = "require"          !IdentifierPart { return "require"; }
 ReturnToken     = "return"           !IdentifierPart
 SetToken        = "set"              !IdentifierPart
 SwitchToken     = "switch"           !IdentifierPart
@@ -413,6 +379,7 @@ ThrowToken      = "throw"            !IdentifierPart
 TrueToken       = "true"             !IdentifierPart
 TryToken        = "try"              !IdentifierPart
 TypeofToken     = "typeof"           !IdentifierPart { return "typeof"; }
+VarToken        = "var"              !IdentifierPart
 VoidToken       = "void"             !IdentifierPart { return "void"; }
 WhileToken      = "while"            !IdentifierPart
 WithToken       = "with"             !IdentifierPart
@@ -501,7 +468,7 @@ __
 
 PrimaryExpression
   = ThisToken       { return { type: "This" }; }
-  / name:Identifier { return result({ type: "Variable", name: name }); }
+  / name:Identifier { return { type: "Variable", name: name }; }
   / Literal
   / ArrayLiteral
   / ObjectLiteral
@@ -533,14 +500,6 @@ ObjectLiteral
   = "{" __ properties:(PropertyNameAndValueList __ ("," __)?)? "}" {
       return {
         type:       "ObjectLiteral",
-        properties: properties !== "" ? properties[0] : []
-      };
-    }
-
-ProfileArguments
-  = "<" __ properties:(PropertyNameAndValueList __ ("," __)?)? ">" {
-      return {
-        type:       "ProfileArguments",
         properties: properties !== "" ? properties[0] : []
       };
     }
@@ -592,14 +551,13 @@ PropertySetParameterList
 
 MemberExpression
   = base:(
-      FunctionExpression
-      / ClassExpression
-      / PrimaryExpression
+        PrimaryExpression
+      / FunctionExpression
       / NewToken __ constructor:MemberExpression __ args:Arguments {
           return {
             type:        "NewOperator",
             constructor: constructor,
-            args:   args
+            arguments:   args
           };
         }
     )
@@ -624,28 +582,25 @@ NewExpression
       return {
         type:        "NewOperator",
         constructor: constructor,
-        args:   []
+        arguments:   []
       };
     }
 
-
 CallExpression
   = base:(
-      name:MemberExpression __ profileArguments:ProfileArguments? __ args:Arguments {
+      name:MemberExpression __ args:Arguments {
         return {
-          type:             "FunctionCall",
-          name:             name,
-          args:        args,
-          profileArguments: profileArguments
+          type:      "FunctionCall",
+          name:      name,
+          arguments: args
         };
       }
     )
     argumentsOrAccessors:(
-         __ profileArguments:ProfileArguments? __ args:Arguments {
+        __ args:Arguments {
           return {
             type:      "FunctionCallArguments",
-            args: args,
-            profileArguments: profileArguments
+            arguments: args
           };
         }
       / __ "[" __ name:Expression __ "]" {
@@ -668,8 +623,7 @@ CallExpression
             result = {
               type:      "FunctionCall",
               name:      result,
-              args: argumentsOrAccessors[i].args,
-              profileArguments: argumentsOrAccessors[i].profileArguments
+              arguments: argumentsOrAccessors[i].arguments
             };
             break;
           case "PropertyAccessProperty":
@@ -734,15 +688,12 @@ UnaryOperator
   = DeleteToken
   / VoidToken
   / TypeofToken
-  / RequireToken
   / "++"
   / "--"
   / "+"
   / "-"
   / "~"
-  / "!"
-  / "✡" // promiseland modifications
-  / "*" // 
+  /  "!"
 
 MultiplicativeExpression
   = head:UnaryExpression
@@ -1113,108 +1064,6 @@ AssignmentOperator
   / "^="
   / "|="
 
-ProfileDeclaration
-  = "[" __ name:StringLiteral __ "]" { return name; }
-  
-PromiseOperator
-  = "✡"
-  / "*"
-
-
-FrameKeyword
-  = "frame"
-  / "exclusive"
-
-FrameInformation
-  = keyword:FrameKeyword __ name:StringLiteral { return {name: name, "type": keyword}; }
-
-
-FunctionDeclaration
-  =  FunctionToken __ name:Identifier __
-    "(" __ params:FormalParameterList? __ ")" __
-    frame:FrameInformation? __
-    promise:PromiseOperator? __
-    "{" __ elements:FunctionBody __ "}" {
-      return {
-        type:     "Function",
-        name:     name,
-        params:   params !== "" ? params : [],
-        elements: elements,
-        promise:  promise,
-        frame:    frame
-      };
-    }
-
-FunctionExpression
-  =  FunctionToken?  __ name:Identifier? __
-    "(" __ params:FormalParameterList? __ ")" __
-    frame:FrameInformation? __
-    promise:PromiseOperator? __
-    "{" __ elements:FunctionBody __ "}" {
-      return {
-        type:     "Function",
-        name:     name !== "" ? name : null,
-        params:   params !== "" ? params : [],
-        elements: elements,
-        promise:  promise,
-        frame:    frame
-      };
-    }
-    
-ClassBody
-  = literal:ObjectLiteral { return { "literal": literal }; }
-  / exp:Expression  { return { "expression": exp }; }
-
-
-ClassCombinations
-  = name:Identifier __ body:ClassBody { return { name: name, body: body } }
-  / body:ClassBody { return { body: body } }
-
-ClassExtendsClaus
-  = "extends" __ exp:Expression __ {
-    return {
-      "type": "extends",
-      "baseClass": exp
-    }
-  }
-
-ClassTypedClaus
-  = "type" __ { return { "type": "type" } }
-
-ClassSyncClaus
-  = "sync" __ "all" __ { return { "type": "sync", "all": 1 }; }
-  / "sync" __ "some" __ { return { "type": "sync", "all": 0 }; }
-  / "sync" __ { return { "type": "sync", "all": 1 }; }
-
-ClassKeyword
-  = ClassExtendsClaus
-  / ClassTypedClaus
-  / ClassSyncClaus
-  
-ClassKeywords
-  = arr:ClassKeyword+ {
-  var present = {};
-  arr.filter(function (e, i, arr) {
-    if (present[e.type]){
-      error('Class keyword ' + e.type + ' can only be used once' + text());
-    };
-    present[e.type] = true;
-  });
-  return arr;
-}  
-
-ClassExpression
-  =  ClassToken __ keywords:ClassKeywords? __ combination:ClassCombinations {
-      return {
-        type:       "Class",
-        name:       combination.name,
-        body:       combination.body,
-        "keywords": keywords
-      };
-    }
-
-
-
 Expression
   = head:AssignmentExpression
     tail:(__ "," __ AssignmentExpression)* {
@@ -1270,7 +1119,6 @@ Statement
   / DebuggerStatement
   / FunctionDeclaration
   / FunctionExpression
-  / ClassExpression
 
 Block
   = "{" __ statements:(StatementList __)? "}" {
@@ -1288,42 +1136,14 @@ StatementList
       }
       return result;
     }
-    
-VariableStatementCoreSingle
-  = typename:Identifier __ declarations:VariableDeclarationList {
-      var i = 0;
-      for (i = 0; i < declarations.length; ++i){
-        declarations[i].typename = typename;
-      };
-      if (declarations.length > 1){
-        throw new Error('Only one declaration allowed here ');
-      };
-      return result({
-        type:         "VariableStatement",
-        declarations: declarations,
-        typename:     typename
-      });
-    }
-
-
-VariableStatementCore
-  = typename:Identifier __ declarations:VariableDeclarationList {
-      var i = 0;
-      for (i = 0; i < declarations.length; ++i){
-        declarations[i].typename = typename;
-      };
-      return result({
-        type:         "VariableStatement",
-        declarations: declarations,
-        typename:     typename
-      });
-    }
 
 VariableStatement
-  = statment:VariableStatementCore EOS {
-      return result(statment);
+  = VarToken __ declarations:VariableDeclarationList EOS {
+      return {
+        type:         "VariableStatement",
+        declarations: declarations
+      };
     }
-
 
 VariableDeclarationList
   = head:VariableDeclaration tail:(__ "," __ VariableDeclaration)* {
@@ -1339,26 +1159,26 @@ VariableDeclarationListNoIn
       var result = [head];
       for (var i = 0; i < tail.length; i++) {
         result.push(tail[i][3]);
-      };
+      }
       return result;
     }
 
 VariableDeclaration
-  = name:Identifier __ value:Initialiser? {
-      return result({
+  = name:Identifier value:(__ Initialiser)? {
+      return {
         type:  "VariableDeclaration",
         name:  name,
-        value: value !== "" ? value : null
-      });
+        value: value !== "" ? value[1] : null
+      };
     }
 
 VariableDeclarationNoIn
-  = name:Identifier __ value:InitialiserNoIn? {
-      return result({
+  = name:Identifier value:(__ InitialiserNoIn)? {
+      return {
         type:  "VariableDeclaration",
         name:  name,
-        value: value !== "" ? value : null
-      });
+        value: value !== "" ? value[1] : null
+      };
     }
 
 Initialiser
@@ -1370,47 +1190,21 @@ InitialiserNoIn
 EmptyStatement
   = ";" { return { type: "EmptyStatement" }; }
 
-
-
-
 ExpressionStatement
   = !("{" / FunctionToken) expression:Expression EOS { return expression; }
 
-/*IfStatement
+IfStatement
   = IfToken __
     "(" __ condition:Expression __ ")" __
     ifStatement:Statement
     elseStatement:(__ ElseToken __ Statement)? {
-      return result({
+      return {
         type:          "IfStatement",
         condition:     condition,
         ifStatement:   ifStatement,
         elseStatement: elseStatement !== "" ? elseStatement[3] : null
-      });
-    }*/
-    
-IfStatement
-  = IfToken __ "(" __ test:Expression __ ")" __
-    consequent:Statement __
-    ElseToken __
-    alternate:Statement
-    {
-      return result({
-        type:       "IfStatement",
-        test:       test,
-        consequent: consequent,
-        alternate:  alternate
-      });
+      };
     }
-  / IfToken __ "(" __ test:Expression __ ")" __
-    consequent:Statement {
-      return result({
-        type:       "IfStatement",
-        test:       test,
-        consequent: consequent,
-        alternate:  null
-      });
-    }    
 
 IterationStatement
   = DoWhileStatement
@@ -1442,7 +1236,12 @@ ForStatement
   = ForToken __
     "(" __
     initializer:(
-      VariableStatementCore
+        VarToken __ declarations:VariableDeclarationListNoIn {
+          return {
+            type:         "VariableStatement",
+            declarations: declarations
+          };
+        }
       / ExpressionNoIn?
     ) __
     ";" __
@@ -1465,8 +1264,7 @@ ForInStatement
   = ForToken __
     "(" __
     iterator:(
-      /*  VarToken __ declaration:VariableDeclarationNoIn { return declaration; }*/
-      VariableStatementCoreSingle
+        VarToken __ declaration:VariableDeclarationNoIn { return declaration; }
       / LeftHandSideExpression
     ) __
     InToken __
@@ -1646,6 +1444,29 @@ DebuggerStatement
 
 /* ===== A.5 Functions and Programs ===== */
 
+FunctionDeclaration
+  = FunctionToken __ name:Identifier __
+    "(" __ params:FormalParameterList? __ ")" __
+    "{" __ elements:FunctionBody __ "}" {
+      return {
+        type:     "Function",
+        name:     name,
+        params:   params !== "" ? params : [],
+        elements: elements
+      };
+    }
+
+FunctionExpression
+  = FunctionToken __ name:Identifier? __
+    "(" __ params:FormalParameterList? __ ")" __
+    "{" __ elements:FunctionBody __ "}" {
+      return {
+        type:     "Function",
+        name:     name !== "" ? name : null,
+        params:   params !== "" ? params : [],
+        elements: elements
+      };
+    }
 
 FormalParameterList
   = head:Identifier tail:(__ "," __ Identifier)* {
