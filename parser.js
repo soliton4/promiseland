@@ -32,7 +32,7 @@
     
   };
   
-  defineFun(["promiseland", "./md5", "./_parser2"], function(promiseland, md5, _parser){
+  defineFun(["promiseland", "./md5", "./_parser"], function(promiseland, md5, _parser){
     
     var currentPromise;
     var promiseClass = "__Promise";
