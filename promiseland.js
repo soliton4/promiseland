@@ -801,6 +801,11 @@
         return cf;
       }
       
+      , getTypeConstructor: function(parType){
+        var cDef = getClass(parType);
+        return cDef.constructor;
+      }
+      
       , getBuiltinType: function(parName){
         return builtinTypes[parName];
       }
