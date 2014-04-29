@@ -81,8 +81,8 @@ return {"fun": function(){
 var _V7 = new __Promise();
 var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
 var _V9 = function(e){ _V7.reject(e); };
-_V8(function(){var _V10/*a*/;
-_V10/*a*/ = 1;
+var _V10/*a*/;
+_V8(function(){_V10/*a*/ = 1;
 _V2/*somefun*/(_V10/*a*/).then(_V8(function(_V11){if((_V11 == 2)){
 _V7.resolve( 4); return _V7;
 };

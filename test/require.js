@@ -70,8 +70,8 @@ var _V1 = (function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){var _V5/*y*/;
-__requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
+var _V5/*y*/;
+_V3(function(){__requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
 _V7/*console*/["log"](_V5/*y*/["msg"]);;
 _V2.resolve(); return;;
 }));})();

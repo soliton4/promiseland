@@ -80,8 +80,8 @@ return {"fun": function(){
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };
-_V7(function(){var _V9/*a*/;
-_V9/*a*/ = 1;
+var _V9/*a*/;
+_V7(function(){_V9/*a*/ = 1;
 var _V10 = new __Promise();
 if(((_V9/*a*/ + 1) == 2)){
 _V2/*somefun*/().then(_V7(function(_V11){_V9/*a*/ = (_V9/*a*/ + _V11);;

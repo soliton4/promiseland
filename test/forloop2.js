@@ -74,8 +74,8 @@ _V2/*somefun*/ = function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
-_V5(function(){var _V7/*c*/;
-_V7/*c*/ = new _V8/*Callback*/();
+var _V7/*c*/;
+_V5(function(){_V7/*c*/ = new _V8/*Callback*/();
 _V9/*setTimeout*/(_V7/*c*/["callback"], 100);;
 _V7/*c*/["promise"].then(_V5(function(_V10){_V10;;
 _V4.resolve( (_V3/*par*/ + 1)); return _V4;
@@ -87,9 +87,9 @@ return {"fun": function(){
 var _V11 = new __Promise();
 var _V12 = function(code){ return function(res){ try{code(res);}catch(e){ _V11.reject(e); }; }; };
 var _V13 = function(e){ _V11.reject(e); };
-_V12(function(){var _V14/*a*/;
+var _V14/*a*/;
 var _V15/*i*/;
-_V14/*a*/ = 1;
+_V12(function(){_V14/*a*/ = 1;
 _V15/*i*/ = 0;
 _V15/*i*/ = 0;
 var _V18 = new __Promise();

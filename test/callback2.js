@@ -75,9 +75,9 @@ _V2/*somefun*/ = function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
-_V5(function(){var _V7/*c*/;
+var _V7/*c*/;
 var _V10/*x*/;
-_V7/*c*/ = new _V8/*Callback*/();
+_V5(function(){_V7/*c*/ = new _V8/*Callback*/();
 _V9/*setTimeout*/(function(){
 _V7/*c*/["callback"](5);;
 }, 100);;
@@ -91,8 +91,8 @@ return {"fun": function(){
 var _V12 = new __Promise();
 var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
 var _V14 = function(e){ _V12.reject(e); };
-_V13(function(){var _V15/*a*/;
-_V15/*a*/ = 1;
+var _V15/*a*/;
+_V13(function(){_V15/*a*/ = 1;
 _V16/*console*/["log"]("1");;
 _V2/*somefun*/(_V15/*a*/).then(_V13(function(_V17){if((_V17 == 6)){
 _V12.resolve( 4); return _V12;

@@ -73,7 +73,7 @@ var _V1 = (function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){var _V5/*fs*/;
+var _V5/*fs*/;
 var _V7/*callback*/;
 var _V9/*files*/;
 var _V12/*i*/;
@@ -81,7 +81,7 @@ var _V16/*filename*/;
 var _V23/*codeStr*/;
 var _V25/*parser*/;
 var _V27/*jsStr*/;
-__requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
+_V3(function(){__requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
 _V7/*callback*/ = new _V8/*Callback*/();
 _V5/*fs*/["readdir"](".", _V7/*callback*/);;
 _V7/*callback*/["promise"].then(_V3(function(_V10){_V9/*files*/ = _V10[1];

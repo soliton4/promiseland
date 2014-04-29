@@ -69,9 +69,9 @@ var _V1 = (function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){var _V5/*fs*/;
+var _V5/*fs*/;
 var _V11/*getter*/;
-function(){
+_V3(function(){function(){
 if (!promiseland.profileHas("[object Object]")){
 var p = new __Promise();
 p.reject({id: 14, msg: "function does not execute in this frame."});

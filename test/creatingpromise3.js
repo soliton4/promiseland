@@ -69,8 +69,8 @@ var _V1 = (function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){var _V5/*x*/;
-_V5/*x*/ = function(){
+var _V5/*x*/;
+_V3(function(){_V5/*x*/ = function(){
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };

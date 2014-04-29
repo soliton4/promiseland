@@ -70,11 +70,11 @@ var _V1 = (function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){var _V5/*result*/;
+var _V5/*result*/;
 var _V6/*dootherStuff*/;
 var _V7/*dostuff*/;
 var _V12/*x*/;
-_V5/*result*/ = {"res": 1};
+_V3(function(){_V5/*result*/ = {"res": 1};
 _V6/*dootherStuff*/ = function(){
 _V5/*result*/["res"] = 4;;
 };
