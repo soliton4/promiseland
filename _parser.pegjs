@@ -1113,9 +1113,6 @@ AssignmentOperator
   / "^="
   / "|="
 
-ProfileDeclaration
-  = "[" __ name:StringLiteral __ "]" { return name; }
-  
 PromiseOperator
   = "✡"
   / "*"

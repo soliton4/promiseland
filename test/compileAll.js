@@ -63,7 +63,7 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "22da56b26d2bce9c8f5947b3bc4655bc" })){ return promiseland._getModule("22da56b26d2bce9c8f5947b3bc4655bc"); };
+if (promiseland._hasModule({ hashStr: "328b6769aba3d7c3fd97fdefa3f4d854" })){ return promiseland._getModule("328b6769aba3d7c3fd97fdefa3f4d854"); };
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V18/*console*/;try{_V18/*console*/ = console;}catch(e){};
 var _V26/*promiseland*/;try{_V26/*promiseland*/ = promiseland;}catch(e){};
@@ -83,44 +83,44 @@ var _V25/*parser*/;
 var _V27/*jsStr*/;
 __requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
 _V7/*callback*/ = new _V8/*Callback*/();
-_V5/*fs*/["readdir"](".", _V7/*callback*/);
+_V5/*fs*/["readdir"](".", _V7/*callback*/);;
 _V7/*callback*/["promise"].then(_V3(function(_V10){_V9/*files*/ = _V10[1];
 var _V11 = new __Promise();
 if(_V9/*files*/){
 _V12/*i*/ = 0;
 var _V14 = new __Promise();
 var _V13 = function(){var _V15 = new __Promise();
-if((_V12/*i*/ < _V9/*files*/["length"])){_V7/*callback*/ = new _V8/*Callback*/();
+if((_V12/*i*/ < _V9/*files*/["length"])){_V7/*callback*/ = new _V8/*Callback*/();;
 _V16/*filename*/ = _V9/*files*/[_V12/*i*/];
 var _V17 = new __Promise();
 if((_V16/*filename*/["substr"]((_V16/*filename*/["length"] - 6)) == ".pland")){
-_V18/*console*/["log"](("processing:" + _V16/*filename*/));
+_V18/*console*/["log"](("processing:" + _V16/*filename*/));;
 var _V19 = new __Promise();
 var _V20 = new __Promise();
-var _V21/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V20.reject(e); }; }; };
-var _V22 = function(e){ _V20.reject(e); };
-_V21/*try catch*/(function(){_V5/*fs*/["readFile"](_V16/*filename*/, {"encoding": "utf8"}, _V7/*callback*/["callback"]);
+var _V21/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V20.resolve(e); }; }; };
+var _V22 = function(e){ _V20.resolve(e); };
+_V21/*try catch*/(function(){_V5/*fs*/["readFile"](_V16/*filename*/, {"encoding": "utf8"}, _V7/*callback*/["callback"]);;
 _V7/*callback*/["promise"].then(_V21/*try catch*/(function(_V24){_V23/*codeStr*/ = _V24[1];
 _V25/*parser*/ = new _V26/*promiseland*/["Parser"]();
-_V18/*console*/["log"]("step0");
 _V25/*parser*/["parse"](_V23/*codeStr*/).then(_V21/*try catch*/(function(_V28){_V27/*jsStr*/ = _V28["javascript"];
-_V18/*console*/["log"]("step2");
-_V7/*callback*/ = new _V8/*Callback*/();
-_V5/*fs*/["writeFile"]((_V16/*filename*/["substr"](0, (_V16/*filename*/["length"] - 6)) + ".js"), _V27/*jsStr*/, _V7/*callback*/["callback"]);
-_V7/*callback*/["promise"].then(_V21/*try catch*/(function(_V29){_V29;
-_V18/*console*/["log"]("done");
-_V20.resolve();}), _V22);}), _V22);}), _V22);})();
-_V20.then(function(){_V19.resolve();}, _V3(function(e){
-_V18/*console*/["log"](_V30/*e*/);
-_V18/*console*/["log"]("error");
-_V19.resolve();}));
+_V7/*callback*/ = new _V8/*Callback*/();;
+_V5/*fs*/["writeFile"]((_V16/*filename*/["substr"](0, (_V16/*filename*/["length"] - 6)) + ".js"), _V27/*jsStr*/, _V7/*callback*/["callback"]);;
+_V7/*callback*/["promise"].then(_V21/*try catch*/(function(_V29){_V29;;
+_V19.resolve();
+}), _V22);}), _V22);}), _V22);})();
+_V20.then(_V3(function(e){_V18/*console*/["log"](_V30/*e*/);;
+_V18/*console*/["log"]("error");;
+_V19.resolve();;
+}));
 _V19.then(_V3(function(){;
 ;
-_V17.resolve();}), _V4)
+_V17.resolve();;
+}), _V4)
 }else{
 _V17.resolve();}; _V17.then(function(){;
 ;
 _V15.resolve(true); return _V15;
+;
 });}else{_V15.resolve(false); return _V15;
 };
 _V15;
@@ -134,14 +134,16 @@ _V31();}else{_V14.resolve();};
 _V31();
 _V14.then(function(){;
 ;
-_V11.resolve();});
+_V11.resolve();;
+});
 }else{
 _V11.resolve();}; _V11.then(function(){;
 ;
-_V2.resolve(); return;});}), _V4);}));})();
+_V2.resolve(); return;;
+});}), _V4);}));})();
 return _V2;
 })();
-promiseland._registerModule({ hashStr: "22da56b26d2bce9c8f5947b3bc4655bc", "module": _V1, promising: false });
+promiseland._registerModule({ hashStr: "328b6769aba3d7c3fd97fdefa3f4d854", "module": _V1, promising: false });
 return _V1;
 });
 })();

@@ -72,8 +72,9 @@ var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.rej
 var _V4 = function(e){ _V2.reject(e); };
 _V3(function(){var _V5/*y*/;
 __requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
-_V7/*console*/["log"](_V5/*y*/["msg"]);
-_V2.resolve(); return;}));})();
+_V7/*console*/["log"](_V5/*y*/["msg"]);;
+_V2.resolve(); return;;
+}));})();
 return _V2;
 })();
 promiseland._registerModule({ hashStr: "524c2cb43ebcf6938632c4e670e1adb2", "module": _V1, promising: false });

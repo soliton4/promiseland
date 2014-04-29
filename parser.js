@@ -32,7 +32,7 @@
     
   };
   
-  defineFun(["promiseland", "./md5", "./_parser"], function(promiseland, md5, _parser){
+  defineFun(["promiseland", "./md5", "./_parser2"], function(promiseland, md5, _parser){
     
     var currentPromise;
     var promiseClass = "__Promise";
@@ -89,6 +89,13 @@
       return t;
     };
     
+    var identifierName = function(par){
+      if (typeof par == "string"){
+        return par;
+      };
+      return par.name;
+    };
+    
     
     /* pre processors */
     
@@ -99,7 +106,7 @@
       if (par.type == "UnaryExpression" && (par.operator == "*" || par.operator == "require")){
         par.promising = true;
       };
-      if (par.type == "Function" && par.promise == "*"){
+      if (par.type == "FunctionExpression" && par.promise == "*"){
         par.promising = true;
       };
       var i;
@@ -107,7 +114,7 @@
         if (i == "_extrainfo"){
           continue;
         };
-        if (findPromises(par[i]) && par[i].type != "Function"){
+        if (findPromises(par[i]) && par[i].type != "FunctionExpression"){
           par.promising = true;
         };
       };
@@ -277,6 +284,7 @@
         };
         if (typeof par == "string"){
           this.providesType = this._cp.getType(par);
+          return;
         };
         this.providesType = par;
       }
@@ -326,7 +334,7 @@
         if (this.toParse){
           if (this.toParse.type == "Program"){
             this.result += makeCompleteStatement(this.parseProgram(this.toParse));
-          }else if (this.toParse.type == "Function"){
+          }else if (this.toParse.type == "FunctionExpression"){
             this.functionRes = this.parseFunction(this.toParse);
             this.result += makeCompleteStatement(this.functionRes);
           };
@@ -360,13 +368,13 @@
             return;
           };
           if (par.type == "VariableDeclaration"){
-            addVar(par.name, par.typename, par);
+            addVar(identifierName(par.id), identifierName(par.typename), par);
           }else if (par.type == "Class"){
             var ci = self.identifyClass(par);
             if (ci.hasName){
               addVar(par.name, "var", par);
             };
-          }else if (par.type == "Function"){
+          }else if (par.type == "FunctionExpression"){
             if (par.name){
               addVar(par.name, "var", par);
             };
@@ -480,10 +488,13 @@
       };
       
       this.getVariableName = function(name){
-        if (!this.common.givenNames[name]){
-          this.common.givenNames[name] = this.getUniqueName() + "/*" + name + "*/";
+        
+        var n = identifierName(name);
+        
+        if (!this.common.givenNames[n]){
+          this.common.givenNames[n] = this.getUniqueName() + "/*" + n + "*/";
         };
-        return this.common.givenNames[name];
+        return this.common.givenNames[n];
         
       };
       
@@ -597,7 +608,7 @@
         parGivenPromiseNameStr is provided by parseProgram to access the return promise before declaring the funciton
       */
       this.parseFunction = function(par){
-        //type: "Function", name: null, params: Array[0], elements: Array[1]}
+        //type: "FunctionExpression", name: null, params: Array[0], elements: Array[1]}
         
         this.stack("isFunction");
         this.isFunction = true;
@@ -636,7 +647,7 @@
         // function result
         var funRes = this.newResult();
         
-        this.localVariables = this.scanVariables(par);
+        this.localVariables = this.scanVariables(par.body);
         this.variables = mixin(this.variables, this.localVariables);
         
         // function keyword and parameters
@@ -656,7 +667,7 @@
             if (i){
               funRes.push(", ");
             };
-            funRes.push(this.getVariableName(par.params[i]));
+            funRes.push(this.getVariableName(identifierName(par.params[i])));
             funRes.addParameter(par.params[i]);
           };
         };
@@ -704,29 +715,28 @@
         };
         
         // variable declarations and main part
-        var elements = this.parseProgElements(par.elements);
+        var b = par.body;
+        b.brackets = false;
         if (par.promising){
-          // in front of the function
-          if (this.usingThis){
-            funRes.push("var " + this.thisExpression + " = this;\n");
-          };
-          funRes.push(this.tryCatchFunctionStr + "(function(){");
-          
-          // after the elements
-          elements.push(this.returnPromise + ".resolve(); return;"); // in case no return statement was given
+          b.postCode = this.newResult(this.returnPromise + ".resolve(); return;");
         };
+        var block = this.blockCreator(b);
+        
+        
         
         for (i in this.localVariables){
           var varname = i;
           funRes.push("var " + this.getVariableName(varname) + ";\n");
           this.usedVariables[varname] = false;
         };
-        
+        if (this.usedVariables["arguments"]){
+          funRes.push("var " + this.getVariableName("arguments") + " = arguments;\n");
+          this.usedVariables["arguments"] = false;
+        };
         for (i in this.typedeclarations){
           var typename = i;
           funRes.push("var " + this.getTypeName(typename) + ";\n");
         };
-        
         for(i = 0; i < this.functionsAr.length; ++i){
           funRes.push(this.functionsAr[i]);
           funRes.push(";\n");
@@ -739,7 +749,18 @@
           };
         };
         
-        funRes.push(elements);
+        if (par.promising){
+          // in front of the function
+          if (this.usingThis){
+            funRes.push("var " + this.thisExpression + " = this;\n");
+          };
+          funRes.push(this.tryCatchFunctionStr + "(function(){");
+        };
+        
+        
+        
+        
+        funRes.push(block);
         
         // promising additions
         if (par.promising){
@@ -774,21 +795,27 @@
           res.push(completeFunStr);
         };
         
+        res.setType("var");
+        
         return res;
       };
       
       /*
         this
       */
-      this.thisStatement = function(par){
+      this.expThisExpression = function(par){
+        var res = this.newResult();
         if (!this.promising){
-          return "this";
+          res.push("this");
+        }else{
+          if (!this.usingThis){
+            this.usingThis = true;
+            this.thisExpression = this.getUniqueName("this");
+          };
+          res.push(this.thisExpression);
         };
-        if (!this.usingThis){
-          this.usingThis = true;
-          this.thisExpression = this.getUniqueName();
-        };
-        return this.thisExpression;
+        res.setType("var");
+        return res;
       };
       
       
@@ -847,7 +874,7 @@
         if (!par || typeof par == "string"){
           return;
         };
-        if (par.type == "Function"){
+        if (par.type == "FunctionExpression"){
           return;
         };
         
@@ -884,7 +911,7 @@
         
       */
       
-      this.classStatement = function(par){
+      this.expClassStatement = function(par){
         var res = this.newResult();
         
         var classRes = this.newResult();
@@ -897,6 +924,8 @@
         var extendsClause = ci.extendsClause;
         var syncClause = ci.syncClause;
         
+        var resultType = this.getType("var");
+        
         if (isTyped){
           classRes.push("promiseland.classSystem.createClass(");
           if (par.body.literal){
@@ -905,7 +934,7 @@
             classRes.push(", ");
             classRes.push(this.createClassDefaults(par.body.literal));
             if (hasName){
-              res.registerType({
+              resultType = res.registerType({
                 name: par.name, 
                 literal: literal,
                 par: par
@@ -942,6 +971,8 @@
         }else{
           res.push(classRes);
         };
+        
+        res.setType(resultType);
         
         return res;
       };
@@ -1051,7 +1082,7 @@
       
       
       // try catch / finally (why do we need finally?)
-      this.tryStatement = function(par){
+      this.expTryStatement = function(par){
         var res = this.newResult();
         //{type: "TryStatement", block: Object, catch: Object, finally: null}
         
@@ -1069,44 +1100,46 @@
           res.addPre("var " + catchPromise + " = " + newPromiseStr() + ";\n");
           
           this.tryCatchFunctionStr = this.getUniqueName() + "/*try catch*/";
-          res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".reject(e); }; }; };\n");
+          res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".resolve(e); }; }; };\n");
           
           this.catchFunctionStr = this.getUniqueName();
-          res.addPre("var " + this.catchFunctionStr + " = function(e){ " + catchPromise + ".reject(e); };\n");
+          res.addPre("var " + this.catchFunctionStr + " = function(e){ " + catchPromise + ".resolve(e); };\n");
           
-          res.push(this.tryCatchFunctionStr + "(function(){");
+          res.push(this.tryCatchFunctionStr + "(function()");
           
         }else{
-          res.push("try{\n");
+          res.push("try\n");
         };
         
-        par.block.statements.resolvePromise = catchPromise;
-        var block = this.makeBlock(par.block.statements);
-        
-        res.push(makeCompleteStatement(block));
+        var b = par.block;
+        b.brackets = true;
+        if (checkPromising(par)){
+          b.postCode = this.newResult(continuePromise + ".resolve()");
+        };
+        res.push(makeCompleteStatement(this.blockCreator(b)));
         
         // catch part
         if (checkPromising(par)){
           this.unstack("tryCatchFunctionStr");
           this.unstack("catchFunctionStr");
-          res.push("})();\n");
-          res.push(catchPromise + ".then(function(){" + continuePromise + ".resolve();}, " + this.tryCatchFunctionStr + "(function(");
-          res.push(par.catch.identifier);
-          res.push("){\n");
+          res.push(")();\n");
+          res.push(catchPromise + ".then(" + this.tryCatchFunctionStr + "(function(");
         }else{
           
-          res.push("\n}catch(");
-          res.push(par.catch.identifier);
-          res.push("){\n");
+          res.push("catch(");
         };
         
-        var catchBlock = this.makeBlock(par.catch.block.statements);
+        if (par.handler.param){
+          res.push(identifierName(par.handler.param));
+        };
+        res.push(")");
+        
+        b = par.handler.body;
+        b.brackets = true;
         if (checkPromising(par)){
-          catchBlock.push(continuePromise + ".resolve();");
+          b.postCode = this.newResult(continuePromise + ".resolve();");
         };
-        
-        res.push(makeCompleteStatement(catchBlock));
-        res.push("}");
+        res.push(makeCompleteStatement(this.blockCreator(b)));
         
         if (checkPromising(par)){
           res.push("));\n");
@@ -1118,11 +1151,12 @@
         };
         
         if (par.finally){
-          res.push("finally{");
-          var finallyBlock = this.makeBlock(par.finally);
-          res.push(makeCompleteStatement(finallyBlock));
-          res.push("}");
+          res.push("finally");
+          b = par.finally;
+          b.brackers = true;
+          res.push(makeCompleteStatement(this.blockCreator(b)));
         };
+        res.setType(statementType);
         return res;
       };
       
@@ -1143,6 +1177,15 @@
         return statementRes;
       };
       
+      
+      this.expBlockStatement = function(par){
+        var res = this.newResult();
+        par.brackets = true;
+        res.pushType(this.blockCreator(par));
+        return res;
+      };
+      
+      
       // heart of code elements
       /*
         openingcode
@@ -1155,28 +1198,53 @@
           ...
         closingcode
       */
-      this.parseProgElements = function(par){
-        var res = this.makeBlock(par);
-        return res;
-      };
       
-      
-      this.makeBlock = function(par){
+      this.blockCreator = function(par){
         var res = this.newResult();
+        res.setType(statementType);
+        
+        if (par.brackets){
+          res.push("{");
+        };
+        
+        var blockRes = this.newResult();
+        
+        var sAr = [];
+        if (par instanceof Array){
+          sAr = par;
+        }else{
+          if(par["type"] == "BlockStatement"){
+            sAr = par.body;
+          }else{
+            sAr.push(this.parseExpression(par));
+          };
+        };
+        
+        if (par.preCode){
+          blockRes.push(this.makeStatement(par.preCode));
+        };
         
         var i = 0;
-        var l = par.length;
+        var l = sAr.length;
         for (i; i < l; ++i){
-          res.push(this.makeStatement(this.parseExpression(par[i])));
+          blockRes.push(this.makeStatement(this.parseExpression(sAr[i])));
         };
         
-        if (par.resolvePromise){
-          res.push(par.resolvePromise + ".resolve();");
+        if (par.postCode){
+          blockRes.push(this.makeStatement(par.postCode));
+        };
+        
+        res.push(makeCompleteStatement(blockRes));
+        
+        if (par.brackets){
+          res.push("}");
         };
         
         return res;
       };
-
+      
+      
+      
       
       this.parseExpression = function(par){
         var res = this._parseExpression(par);
@@ -1190,14 +1258,11 @@
         var res;
         
         switch(value.type){
-          case "Variable":
-            return this.expVariable(value);
+          case "Identifier":
+            return this.expIdentifier(value);
             
-          case "NumericLiteral":
-            return this.expNumericLiteral(value);
-            
-          case "StringLiteral":
-            return this.expStringLiteral(value);
+          case "Literal":
+            return this.expLiteral(value);
             
           case "VariableStatement":
             return this.expVariableStatement(value);
@@ -1205,11 +1270,11 @@
           case "VariableDeclaration":
             return this.expVariableDeclaration(value);
             
-          case "FunctionCall":
-            return this.expFunctionCall(value);
+          case "CallExpression":
+            return this.expCallExpression(value);
 
-          case "Function":
-            return this.function(value);
+          case "FunctionExpression":
+            return this.expFunctionExpression(value);
             
           case "EmptyStatement":
             // why does this exist?
@@ -1220,65 +1285,65 @@
           case "AssignmentExpression":
             return this.expAssignmentExpression(value);
 
-          case "ObjectLiteral":
-            return this.expObjectLiteral(value);
+          case "ObjectExpression":
+            return this.expObjectExpression(value);
 
           case "ReturnStatement":
             return this.expReturnStatement(value);
 
           case "UnaryExpression":
             if (value.operator == "*"){
-              return this.expPromiseExpression(value.expression);
+              return this.expPromiseExpression(value.argument);
             };
             if (value.operator == "require"){
-              return this.expRequireExpression(value.expression);
+              return this.expRequireExpression(value.argument);
             };
             res = this.newResult();
             res.push(value.operator);
-            res.pushType(this.expectTypeVar(this.parseExpression(value.expression)));
+            res.pushType(this.expectTypeVar(this.parseExpression(value.argument)));
             return res;
             
           case "BinaryExpression":
-            return this.binaryExpression(value);
+            return this.expBinaryExpression(value);
             
-          case "PostfixExpression":
-            return this.postfixExpression(value);
+          case "UpdateExpression":
+            return this.expUpdateExpression(value);
 
           case "ArrayLiteral":
             return this.arrayLiteral(value);
             
-          case "PropertyAccess":
-            return this.expPropertyAccess(value);
+          case "MemberExpression":
+            return this.expMemberExpression(value);
             
           case "ConditionalExpression":
             return this.conditionalExpression(value);
             
           case "IfStatement":
-            return this.ifStatement(value);
+            return this.expIfStatement(value);
             
           case "WhileStatement":
             return this.whileStatement(value);
             
-          case "Block":
-            return this.parseProgElements(value.statements);
-            
           case "ForStatement":
-            return this.forStatement(value);
+            return this.expForStatement(value);
             
           case "ForInStatement":
-            return this.forInStatement(value);
+            return this.expForInStatement(value);
             
-          case "NewOperator":
-            return this.newOperator(value);
+          case "NewExpression":
+            return this.expNewExpression(value);
             
           case "TryStatement":
-            return this.tryStatement(value);
+            return this.expTryStatement(value);
             
           case "Class":
-            return this.classStatement(value);
+            return this.expClassStatement(value);
             
-          case "This":
-            return this.thisStatement(value);
+          case "ThisExpression":
+            return this.expThisExpression(value);
+            
+          case "ExpressionStatement":
+            return this.expExpressionStatement(value);
 
           default:
             unknownType(value);
@@ -1286,8 +1351,16 @@
         return "/*this should not happen*/";
       };
       
+      this.expExpressionStatement = function(par){
+        var res = this.newResult();
+        res.push(this._parseExpression(par.expression));
+        res.push(";");
+        res.setType(statementType);
+        return res;
+      };
+      
       // the function statement
-      this.function = function(value){
+      this.expFunctionExpression = function(value){
         var cp = this.newInstance(value, {dynamicCode: this.dynamicCode || this.isFunction});
         var funName = cp.getFunctionName();
         var funRes = cp.getFunctionRes();
@@ -1302,7 +1375,9 @@
         
         if (funName && funRes){
           this.addFunction(funRes);
-          return this.newResult(funName);
+          var res = this.newResult(funName);
+          res.setType(funRes.getType());
+          return res;
         };
         
         return funRes || cp.getResult();
@@ -1310,29 +1385,43 @@
       };
       
       
-      this.postfixExpression = function(par){
+      this.expUpdateExpression = function(par){
         var res = this.newResult();
-        //{type: "PostfixExpression", operator: "++", expression: Object}
-        res.push(this.parseExpression(par.expression));
-        res.push(par.operator);
+        //{type: "UpdateExpression", operator: "++", argument: Object}
+        if (par.prefix){
+          res.push(par.operator);
+        };
+        res.pushType(this.expectTypeVar(this.parseExpression(par.argument)));
+        if (!par.prefix){
+          res.push(par.operator);
+        };
         
         return res;
       };
       
-      this.expVariable = function(par){
-        return this.getVariable(par.name);
+      this.expIdentifier = function(par){
+        return this.getVariable(identifierName(par.name));
       };
       
-      this.expNumericLiteral = function(par){
+      this.expLiteral = function(par){
         var res = this.newResult();
-        res.push("" + par.value);
-        res.setType(this.getType("var"));
-        return res;
-      };
-      
-      this.expStringLiteral = function(par){
-        var res = this.newResult();
-        res.push(stringEncodeStr(par.value));
+        switch (typeof par.value){
+          case "string":
+            res.push(stringEncodeStr(par.value));
+            break;
+          case "number":
+            res.push("" + par.value);
+            break;
+          case "boolean":
+            if (par.value){
+              res.push("true");
+            }else{
+              res.push("false");
+            };
+            break;
+          default:
+            error(errorMsg.internalUnknownLiteralType);
+        };
         res.setType(this.getType("var"));
         return res;
       };
@@ -1381,34 +1470,33 @@
       };
       
       
-      this.newOperator = function(par){
-        //{type: "NewOperator", constructor: Object, arguments: Array[0]}
+      this.expNewExpression = function(par){
+        //{type: "NewExpression", callee: Object, arguments: Array[0]}
         var res = this.newResult();
+        if (par.callee && par.callee.type == "Identifier"){
+          var t = this.getType(identifierName(par.callee), { dontThrow: true });
+          if (t){
+            error(errorMsg.notImplemented, par);
+          };
+        };
         res.push("new ");
-        res.push(this.parseExpression(par.constructor));
+        res.push(this.expectTypeVar(this.parseExpression(par.callee)));
         res.push("(");
         var i = 0;
-        for (i; i < par["args"].lengh; ++i){
+        for (i; i < par["arguments"].lengh; ++i){
           if (i){
             res.push(", ");
           };
-          res.push(this.parseExpression(par["args"][i]));
+          res.push(this.expectTypeVar(this.parseExpression(par["arguments"][i])));
         };
         res.push(")");
+        res.setType("var");
         return res;
         
       };
       
       
       
-      
-      
-      this.blockAndContinue = function(par){
-        var res = this.newResult();
-        res.push(this.parseProgElements(par.statements));
-        res.push(this.continueCode);
-        return res;
-      };
       
       
       
@@ -1420,9 +1508,8 @@
         var promiseName = par.promiseName || this.getUniqueName();
         res.setPromiseName(promiseName);
         
-        var oldBreakCode = this.breakCode;
-        var oldContinueCode = this.continueCode;
-        
+        this.stack("breakCode");
+        this.stack("continueCode");
         this.breakCode = promiseName + ".resolve(false); return " + promiseName + ";\n";
         this.continueCode = promiseName + ".resolve(true); return " + promiseName + ";\n";
         
@@ -1436,8 +1523,12 @@
           outerBlock.push("){");
         };
         
-        var block = this.blockAndContinue(par.block);
-        //block.push(this.continueCode);
+        //createBlock
+        var b = par.block;
+        b.postCode = this.newResult(this.continueCode);
+        b.brackets = false;
+        var block = this.blockCreator(b);
+        
         
         outerBlock.push(makeCompleteStatement(block));
         
@@ -1449,8 +1540,8 @@
         
         res.push(makeCompleteStatement(outerBlock));
         
-        this.breakCode = oldBreakCode;
-        this.continueCode = oldContinueCode;
+        this.unstack("breakCode");
+        this.unstack("continueCode");
         
         return res;
       };
@@ -1506,8 +1597,8 @@
       };
       
       
-      this.forStatement = function(par){
-        //{type: "ForStatement", initializer: Object, test: Object, counter: Object, statement: Object}
+      this.expForStatement = function(par){
+        //{type: "ForStatement", init: Object, test: Object, update: Object, body: Object}
         
         this.stack("dynamicCode");
         this.dynamicCode = true;
@@ -1516,38 +1607,38 @@
         var statement;
         
         var promising = false;
-        if (checkPromising(par.test) || checkPromising(par.counter) || checkPromising(par.statement)){
+        if (checkPromising(par.test) || checkPromising(par.update) || checkPromising(par.body)){
           promising = true;
         };
         
         if (promising){
-          res.push(this.makeStatement(this.parseExpression(par.initializer)));
+          res.push(this.makeStatement(this.parseExpression(par.init)));
           
           this.stack("algorithmicCode");
           this.algorithmicCode = true;
           
           res.push(this.generateLoop({
-            block: par.statement
+            block: par.body
             , preCondition: this.parseExpression(par.test)
-            , postCode: this.parseExpression(par.counter)
+            , postCode: this.parseExpression(par.update)
           }));
           
           this.unstack("algorithmicCode");
           
         }else{
           res.push("for(");
-          res.push(this.parseExpression(par.initializer));
+          res.push(this.parseExpression(par.init));
           res.push(";");
           res.push(this.parseExpression(par.test));
           res.push(";");
-          res.push(this.parseExpression(par.counter));
+          res.push(this.parseExpression(par.update));
           res.push("){");
           
           this.stack("algorithmicCode");
           this.algorithmicCode = true;
           
           statement = this.newResult();
-          statement.push(this.parseProgElements(par.statement.statements));
+          statement.push(this.expBlockStatement(par.body));
           res.push(makeCompleteStatement(statement));
           
           this.unstack("algorithmicCode");
@@ -1556,11 +1647,12 @@
         };
         
         this.unstack("dynamicCode");
+        res.setType(statementType);
         return res;
       };
       
       
-      this.forInStatement = function(par){
+      this.expForInStatement = function(par){
         // {type: "ForInStatement", iterator: Object, collection: Object, statement: Object}
         this.stack("dynamicCode");
         this.dynamicCode = true;
@@ -1572,12 +1664,12 @@
         var statement;
         
         var promising = false;
-        if (checkPromising(par.statement)){
+        if (checkPromising(par.body)){
           promising = true;
         };
         
         if (promising){
-          var iteratorRes = this.parseExpression(par.iterator);
+          var iteratorRes = this.expectTypeVar(this.parseExpression(par.left));
           var iteratorAccess = iteratorRes;
           if (iteratorRes.promising){
             iteratorAccess = iteratorRes.getPromiseName();
@@ -1589,7 +1681,7 @@
           res.push("for(");
           res.push(iteratorRes);
           res.push(" in ");
-          res.push(this.parseExpression(par.collection));
+          res.push(this.expectTypeVar(this.parseExpression(par.right)));
           res.push("){");
           res.push(arrayName + ".push(");
           res.push(iteratorAccess);
@@ -1611,29 +1703,33 @@
           postCodeRes.push(" = " + arrayName + "[" + iName + "];");
           
           res.push(this.generateLoop({
-            block: par.statement
+            block: par.body
             , preCondition: conditionRes
-            , postCode: this.parseExpression(par.counter)
+            , postCode: postCodeRes
           }));
           
           res.push("}");
           
         }else{
           res.push("for(");
-          res.push(this.parseExpression(par.iterator));
+          res.push(this.expectTypeVar(this.parseExpression(par.left)));
           res.push(" in ");
-          res.push(this.parseExpression(par.collection));
-          res.push("){");
+          res.push(this.expectTypeVar(this.parseExpression(par.right)));
+          res.push(")");
           
           statement = this.newResult();
-          statement.push(this.parseProgElements(par.statement.statements));
+          
+          var b = par.body;
+          b.brackets = true;
+          this.blockCreator(b);
+          statement.push(this.blockCreator(b));
           res.push(makeCompleteStatement(statement));
           
-          res.push("}");
         };
         
         this.unstack("dynamicCode");
         this.unstack("algorithmicCode");
+        res.setType(statementType);
         return res;
         
       };
@@ -1649,40 +1745,34 @@
         this.algorithmicCode = true;
         
         var res = this.newResult();
-        if (!par.statement || par.statement.type != "Block"){
-          somethingsWrong({
-            msg: "unknown while statement "
-          });
-          return "";
-        };
         
         var statements;
-        var condition = this.parseExpression(par.condition);
-        if (checkPromising(condition) || checkPromising(par.statement)){
+        var condition = this.expectTypeVar(this.parseExpression(par.test));
+        if (checkPromising(condition) || checkPromising(par.body)){
           
           res.push(this.generateLoop({
-            block: par.statement
+            block: par.body
             , preCondition: condition
           }));
           
         }else{
-          statements = this.parseExpression(par.statement);
           res.push("while(");
           res.push(condition);
           res.push("){\n");
-          res.push(makeCompleteStatement(statements));
+          res.push(makeCompleteStatement(this.parseExpression(par.body)));
           res.push("}");
           
         };
         
         this.unstack("dynamicCode");
         this.unstack("algorithmicCode");
+        res.setType(statementType);
         return res;
       };
       
       
-      this.ifStatement = function(par){
-        //{type: "IfStatement", condition: Object, ifStatement: Object, elseStatement: null}
+      this.expIfStatement = function(par){
+        //{type: "IfStatement", test: Object, consequet: Object, alternate: null}
         
         this.stack("conditionalCode");
         this.conditionalCode = true;
@@ -1694,10 +1784,11 @@
         
         var promising = false;
         
-        if (par.ifStatement && checkPromising(par.ifStatement)){
+        
+        if (par.consequent && checkPromising(par.consequent)){
           promising = true;
         };
-        if (par.elseStatement && checkPromising(par.elseStatement)){
+        if (par.alternate && checkPromising(par.alternate)){
           promising = true;
         };
         
@@ -1709,33 +1800,39 @@
           continueCode = continuePromise + ".resolve();";
         };
         res.push("if(");
-        res.push(this.parseExpression(par.condition));
+        res.push(this.expectTypeVar(this.parseExpression(par.test)));
         res.push("){\n");
-        if (!par.ifStatement || par.ifStatement.type != "Block"){
+        if (!par.consequent || par.consequent.type != "BlockStatement"){
             somethingsWrong({
               msg: "unknown if statement "
             });
           return "";
         };
         var statement = this.newResult();
-        statement.push(this.parseProgElements(par.ifStatement.statements));
+        var b = par.consequent.body;
+        b.brackets = false;
         if (promising){
-          statement.push(continueCode);
+          b.postCode = this.newResult(continueCode);
         };
+        statement.push(this.blockCreator(b));
+        
         res.push(makeCompleteStatement(statement));
-        if (par.elseStatement){
+        if (par.alternate){
           res.push("\n}else{\n");
-          if (par.elseStatement.type != "Block"){
+          if (par.alternate.type != "BlockStatement"){
             somethingsWrong({
               msg: "unknown else statement "
             });
             return "";
           };
           statement = this.newResult();
-          statement.push(this.parseProgElements(par.elseStatement.statements));
+          b = par.alternate.body;
+          b.brackets = false;
           if (promising){
-            statement.push(continueCode);
+            b.postCode = this.newResult(continueCode);
           };
+          statement.push(this.blockCreator(b));
+          
           res.push(makeCompleteStatement(statement));
         }else if (promising){
           res.push("\n}else{\n");
@@ -1751,6 +1848,7 @@
         
         this.unstack("conditionalCode");
         this.unstack("algorithmicCode");
+        res.setType(statementType);
         
         return res;
       };
@@ -1819,8 +1917,19 @@
         *x || *y -> special case
         *x && *y -> normal case
       */
-      this.binaryExpression = function(par){
+      this.expBinaryExpression = function(par){
         var res = this.newResult();
+        
+        var left = this.parseExpression(par.left);
+        var right = this.parseExpression(par.right);
+        
+        var ltype = left.getType();
+        var rtype = right.getType();
+        if (ltype !== this.getType("var") || rtype !== this.getType("var")){
+          error(errorMsg.notImplemented, par);
+        };
+        res.setType("var");
+        
         if (par.operator == "||" && par.right.promising){
           // so the right expression only needs to be evaluated if the left is false
           res.makePromising();
@@ -1832,7 +1941,7 @@
           res.addPre("var ");
           res.addPre(tempValue);
           res.addPre(" = ");
-          res.addPre(this.parseExpression(par.left));
+          res.addPre(left);
           res.addPre(";\n");
           res.addPre("if (");
           res.addPre(tempValue);
@@ -1844,7 +1953,7 @@
           var rightExtraCode = this.newResult();
           rightExtraCode.push(tempPromise);
           rightExtraCode.push(".resolve(");
-          rightExtraCode.push(this.parseExpression(par.right));
+          rightExtraCode.push(right);
           rightExtraCode.push(");\n");
           res.addPre(makeCompleteStatement(rightExtraCode));
           res.addPre("};\n");
@@ -1857,11 +1966,11 @@
           
         }else{
           res.push("(");
-          res.push(this.parseExpression(par.left));
+          res.push(left);
           res.push(" ");
           res.push(par.operator);
           res.push(" ");
-          res.push(this.parseExpression(par.right));
+          res.push(right);
           res.push(")");
           
         };
@@ -1870,19 +1979,19 @@
       };
       
       
-      this.expPropertyAccess = function(par){
+      this.expMemberExpression = function(par){
         var res = this.newResult();
-        var base = this.parseExpression(par.base);
+        var base = this.parseExpression(par.object);
         if (base.getType() !== this.getType("var")){
           error(errorMsg.notImplemented);
         };
         res.setType("var");
         res.push(base);
         res.push("[");
-        if (typeof par.name == "string"){
-          res.push(stringEncodeStr(par.name));
+        if (par.computed){
+          res.push(this.expectTypeVar(this.parseExpression(par.property)));
         }else{
-          res.push(this.parseExpression(par.name));
+          res.push(stringEncodeStr(identifierName(par.property)));
         };
         res.push("]");
         return res;
@@ -1896,7 +2005,7 @@
         }
       */
       
-      this.expObjectLiteral = function(par){
+      this.expObjectExpression = function(par){
         //{type: "ObjectLiteral", properties: Array[2]}
         var res = this.newResult();
         res.push("{");
@@ -1907,8 +2016,8 @@
             res.push(",\n");
           };
           var prop = par.properties[i];
-          if (prop.type == "PropertyAssignment"){
-            res.push(stringEncodeStr(prop.name) + ": ");
+          if (prop.kind == "init"){
+            res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
             res.push(this.expectTypeVar(this.parseExpression(prop.value)));
           }else{
             somethingsWrong({
@@ -1966,7 +2075,7 @@
         
         var i = 0;
         var l = declarations.length;
-        var usedType = this.getType(par.typename);
+        var usedType = this.getType(identifierName(par.typename));
         for (i; i < l; ++i){
           if (declarations[i].type == "VariableDeclaration"){
             var r = this.parseExpression(declarations[i]);
@@ -1990,14 +2099,14 @@
       this.expVariableDeclaration = function(par){
         var res = this.newResult();
         
-        if (par.value){
+        if (par.init){
           res.pushType(this.getSetVariableCode({
-            instance: this.getVariable(par.name),
-            value: this.parseExpression(par.value),
+            instance: this.getVariable(identifierName(par.id)),
+            value: this.parseExpression(par.init),
             operator: "="
           }));
         }else{
-          res.pushType(this.getVariable(par.name));
+          res.pushType(this.getVariable(identifierName(par.id)));
         };
         return res;
         
@@ -2069,19 +2178,19 @@
         funname([par1, par2, ...]);
       */
       
-      this.expFunctionCall = function(element){
+      this.expCallExpression = function(par){
         var res = this.newResult();
         var i = 0;
         var l;
-        res.push(this.parseExpression(element.name));
+        res.push(this.parseExpression(par.callee));
         res.push("(");
-        if (element["args"]){
-          l = element["args"].length;
+        if (par["arguments"]){
+          l = par["arguments"].length;
           for (i = 0; i < l; ++i){
             if (i){
               res.push(", ");
             };
-            res.push(this.parseExpression(element["args"][i]));
+            res.push(this.expectTypeVar(this.parseExpression(par["arguments"][i])));
           };
         };
         res.push(")");
@@ -2121,9 +2230,12 @@
         if (this.promising){
           res.push(this.returnPromise + ".resolve(");
         }else{;
-          res.push("return ");
+          res.push("return");
         };
-        res.push(this.parseExpression(par.value));
+        if (par.argument){
+          res.push(" ");
+          res.push(this.parseExpression(par.argument));
+        };
         if (this.promising){
           res.push("); return " + this.returnPromise);
         };
@@ -2310,6 +2422,10 @@
         id: 105,
         msg: "type undeclared"
       },
+      notABlockStatment: {
+        id: 106,
+        msg: "not a block statement"
+      },
       internalMissingResultType: {
         id: 1000,
         msg: "internal: result type missing"
@@ -2321,6 +2437,10 @@
       notImplemented: {
         id: 1002,
         msg: "internal: not implemented"
+      },
+      internalUnknownLiteralType: {
+        id: 1003,
+        msg: "internal: unknown literal type"
       }
     };
     

@@ -75,8 +75,8 @@ _V2/*a*/ = {"a": 1,
 "c": 3};
 _V3/*namesStr*/ = "";
 _V4/*cnt*/ = 0;
-for(_V5/*i*/ in _V2/*a*/){_V3/*namesStr*/ += _V5/*i*/;
-_V4/*cnt*/ += _V2/*a*/[_V5/*i*/];
+for(_V5/*i*/ in _V2/*a*/){_V3/*namesStr*/ = _V5/*i*/;;
+_V4/*cnt*/ = _V2/*a*/[_V5/*i*/];;
 };
 ;
 return {"names": _V3/*namesStr*/,

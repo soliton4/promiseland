@@ -74,19 +74,22 @@ _V5/*x*/ = function(){
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };
-_V7(function(){_V6.resolve({"fun": function(){
+_V7(function(){_V6.resolve( {"fun": function(){
 var _V9 = new __Promise();
 var _V10 = function(code){ return function(res){ try{code(res);}catch(e){ _V9.reject(e); }; }; };
 var _V11 = function(e){ _V9.reject(e); };
-_V10(function(){_V9.resolve(4); return _V9;
-_V9.resolve(); return;})();
+_V10(function(){_V9.resolve( 4); return _V9;
+_V9.resolve(); return;;
+})();
 return _V9;
 }}); return _V6;
-_V6.resolve(); return;})();
+_V6.resolve(); return;;
+})();
 return _V6;
 };
-_V5/*x*/().then(_V3(function(_V12){_V2.resolve(_V12); return _V2;
-_V2.resolve(); return;}), _V4);})();
+_V5/*x*/().then(_V3(function(_V12){_V2.resolve( _V12); return _V2;
+_V2.resolve(); return;;
+}), _V4);})();
 return _V2;
 })();
 promiseland._registerModule({ hashStr: "bd9d6daff691126a54d403e075368a5e", "module": _V1, promising: false });

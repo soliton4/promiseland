@@ -71,7 +71,8 @@ _V2/*b*/ = function(){
 var _V3 = new __Promise();
 var _V4 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
 var _V5 = function(e){ _V3.reject(e); };
-_V4(function(){_V3.resolve(); return;})();
+_V4(function(){_V3.resolve(); return;;
+})();
 return _V3;
 };
 return {"fun": function(){
@@ -80,13 +81,15 @@ var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.rej
 var _V8 = function(e){ _V6.reject(e); };
 _V7(function(){var _V9 = new __Promise();
 if((1 < 0)){
-_V2/*b*/.then(_V7(function(_V10){_V10;
-_V9.resolve();}), _V8);
+_V2/*b*/.then(_V7(function(_V10){_V10;;
+_V9.resolve();;
+}), _V8);
 }else{
 _V9.resolve();}; _V9.then(function(){;
 ;
-_V6.resolve(4); return _V6;
-_V6.resolve(); return;});})();
+_V6.resolve( 4); return _V6;
+_V6.resolve(); return;;
+});})();
 return _V6;
 }};
 })();

@@ -71,8 +71,9 @@ _V2/*somefun*/ = function(){
 var _V3 = new __Promise();
 var _V4 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
 var _V5 = function(e){ _V3.reject(e); };
-_V4(function(){_V3.resolve(1); return _V3;
-_V3.resolve(); return;})();
+_V4(function(){_V3.resolve( 1); return _V3;
+_V3.resolve(); return;;
+})();
 return _V3;
 };
 return {"fun": function(){
@@ -83,18 +84,21 @@ _V7(function(){var _V9/*a*/;
 _V9/*a*/ = 1;
 var _V10 = new __Promise();
 if(((_V9/*a*/ + 1) == 3)){
-_V9/*a*/ = 0;
-_V10.resolve();
+_V9/*a*/ = 0;;
+_V10.resolve();;
+
 }else{
-_V2/*somefun*/().then(_V7(function(_V11){_V9/*a*/ = (_V9/*a*/ + _V11);
-_V10.resolve();}), _V8);}; _V10.then(function(){;
+_V2/*somefun*/().then(_V7(function(_V11){_V9/*a*/ = (_V9/*a*/ + _V11);;
+_V10.resolve();;
+}), _V8);}; _V10.then(function(){;
 ;
 if((_V9/*a*/ == 2)){
-_V6.resolve(4); return _V6;
+_V6.resolve( 4); return _V6;
 };
 ;
-_V6.resolve(0); return _V6;
-_V6.resolve(); return;});})();
+_V6.resolve( 0); return _V6;
+_V6.resolve(); return;;
+});})();
 return _V6;
 }};
 })();

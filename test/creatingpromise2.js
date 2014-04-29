@@ -70,8 +70,9 @@ return {"fun": function(){
 var _V2 = new __Promise();
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V2.reject(e); }; }; };
 var _V4 = function(e){ _V2.reject(e); };
-_V3(function(){_V2.resolve(4); return _V2;
-_V2.resolve(); return;})();
+_V3(function(){_V2.resolve( 4); return _V2;
+_V2.resolve(); return;;
+})();
 return _V2;
 }};
 })();

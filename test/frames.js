@@ -72,7 +72,7 @@ var _V4 = function(e){ _V2.reject(e); };
 _V3(function(){var _V5/*fs*/;
 var _V11/*getter*/;
 function(){
-if (!promiseland.profileHas("server")){
+if (!promiseland.profileHas("[object Object]")){
 var p = new __Promise();
 p.reject({id: 14, msg: "function does not execute in this frame."});
 return p;
@@ -80,26 +80,29 @@ return p;
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };
-_V7(function(){__requireFun("fs").then(_V7(function(_V9){_V6.resolve(_V9); return _V6;
-_V6.resolve(); return;}));})();
+_V7(function(){__requireFun("fs").then(_V7(function(_V9){_V6.resolve( _V9); return _V6;
+_V6.resolve(); return;;
+}));})();
 return _V6;
 }().then(_V3(function(_V10){_V5/*fs*/ = _V10;
 var _V15 = function(){
 var _V12 = new __Promise();
 var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
 var _V14 = function(e){ _V12.reject(e); };
-_V13(function(){_V12.resolve(_V5/*fs*/["readFile"]("somefile.txt")); return _V12;
-_V12.resolve(); return;})();
+_V13(function(){_V12.resolve( _V5/*fs*/["readFile"]("somefile.txt")); return _V12;
+_V12.resolve(); return;;
+})();
 return _V12;
 };
-promiseland.registerRemote("server", "cae0507e04a7312601e16db3b4c02736", "_V15", _V15);
-_V11/*getter*/ = function(){if (promiseland.profileHas("server")){
+promiseland.registerRemote("[object Object]", "cae0507e04a7312601e16db3b4c02736", "_V15", _V15);
+_V11/*getter*/ = function(){if (promiseland.profileHas("[object Object]")){
 return _V15.apply(this, arguments);
 }else{
 return promiseland.remoteExec("cae0507e04a7312601e16db3b4c02736", "_V15", arguments);
 };
 };
-_V2.resolve(); return;}), _V4);})();
+_V2.resolve(); return;;
+}), _V4);})();
 return _V2;
 })();
 promiseland._registerModule({ hashStr: "cae0507e04a7312601e16db3b4c02736", "module": _V1, promising: false });

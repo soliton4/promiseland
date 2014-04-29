@@ -508,7 +508,7 @@
         var p = new Promise();
         _getParser().then(function(parser){
           try{
-            console.log(parser.parse);
+            //console.log(parser.parse);
           parser.parse(parStr).then(function(javascript){
             p.resolve({
               javascript: javascript
