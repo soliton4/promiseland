@@ -600,9 +600,13 @@ PropertyNameAndValueList
     }
 
 PropertyAssignment
-  = key:PropertyName __ ":" __ value:AssignmentExpression {
-      return { key: key, value: value, kind: "init" };
+  = /*typename:IdentifierName? __*/ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+      return { key: key, value: value, kind: "init", typename: "var" }; // promiseland
     }
+  / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+      return { key: key, value: value, kind: "init", typename: typename }; // promiseland
+    }
+  / FunctionDeclaration
   / GetToken __ key:PropertyName __
     "(" __ ")" __
     "{" __ body:FunctionBody __ "}"

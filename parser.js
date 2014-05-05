@@ -500,7 +500,22 @@
       };
       
       this.getTypeName = function(parName){
-        var name = identifierName(parName);
+        var name;
+        if (typeof parName == "function"){
+          var i;
+          for (i in this.types){
+            if (this.types[i]["type"] === parName){
+              name = i;
+              if (!this.common.givenTypeNames[name]){
+                this.common.givenTypeNames[name] = this.getUniqueName() + "/*type:" + name + "*/";
+              };
+              return this.common.givenTypeNames[name];
+            };
+          };
+          error(errorMsg.internalMissingType);
+        }else{
+          name = identifierName(parName);
+        };
         if (!this.common.givenTypeNames[name]){
           this.common.givenTypeNames[name] = this.getUniqueName() + "/*type:" + name + "*/";
         };
@@ -592,6 +607,8 @@
             res.push(";}catch(e){};\n");
           };
         };
+        
+        res.push("var " + this.getTypeName("var") + " = __classSystem.getBuiltinType(\"var\");\n");
         
         res.push("var " + this.resultNameStr + " = (");
         res.push(makeCompleteStatement(functionStatement));
@@ -982,10 +999,11 @@
         var l = (par.properties && par.properties.length) || 0;
         for (i; i < l; ++i){
           var prop = par.properties[i];
-          if (prop.type == "PropertyAssignment"){
-            /*ret.members.push({
-              name: prop.name
-            });*/
+          if (prop.kind == "init"){
+            ret.members.push({
+              name: identifierName(prop.key),
+              "type": this.getType(prop.typename)
+            });
           };
         };
         
@@ -1007,7 +1025,7 @@
           };
           res.push("{");
           res.push("\"name\":" + stringEncodeStr(m.name));
-          res.push(",\"type\":" + this.getTypeName(m["type"].name));
+          res.push(",\"type\":" + this.getTypeName(m["type"]));
           res.push("}");
           
         };
@@ -1027,11 +1045,16 @@
         
         var i = 0;
         var l = (par.properties && par.properties.length) || 0;
+        var comma;
         for (i; i < l; ++i){
           var prop = par.properties[i];
-          if (prop.type == "PropertyAssignment"){
-            res.push("\"" + prop.name + "\": ");
+          if (prop.kind == "init"){
+            if (comma){
+              res.push(", ");
+            };
+            res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
             res.push(this.parseExpression(prop.value));
+            comma = true;
           };
         };
         
@@ -1944,14 +1967,15 @@
         var left = this.parseExpression(par.left);
         var right = this.parseExpression(par.right);
         
-        var ltype = left.getType();
-        var rtype = right.getType();
-        if (ltype !== this.getType("var") || rtype !== this.getType("var")){
-          error(errorMsg.notImplemented, par);
-        };
         res.setType("var");
         
         if (par.operator == "||" && par.right.promising){
+          var ltype = left.getType();
+          var rtype = right.getType();
+          if (ltype !== this.getType("var") || rtype !== this.getType("var")){
+            error(errorMsg.notImplemented, par);
+          };
+          
           // so the right expression only needs to be evaluated if the left is false
           res.makePromising();
           var tempPromise = this.getUniqueName();
@@ -1986,13 +2010,12 @@
           res.addPost("});");
           
         }else{
-          res.push("(");
-          res.push(left);
-          res.push(" ");
-          res.push(par.operator);
-          res.push(" ");
-          res.push(right);
-          res.push(")");
+          
+          res.push(this.getBinaryExpressionCode({
+            left: left,
+            right: right,
+            operator: par.operator
+          }));
           
         };
         return res;
@@ -2003,18 +2026,13 @@
       this.expMemberExpression = function(par){
         var res = this.newResult();
         var base = this.parseExpression(par.object);
-        if (base.getType() !== this.getType("var")){
-          error(errorMsg.notImplemented);
-        };
-        res.setType("var");
-        res.push(base);
-        res.push("[");
-        if (par.computed){
-          res.push(this.expectTypeVar(this.parseExpression(par.property)));
-        }else{
-          res.push(stringEncodeStr(identifierName(par.property)));
-        };
-        res.push("]");
+        
+        res.pushType(this.getGetPropertyCode({
+          instance: base,
+          property: par.computed ? undefined : identifierName(par.property),
+          propertyValue: par.computed ? this.expectTypeVar(this.parseExpression(par.property)) : undefined
+        }));
+        
         return res;
       };
       
@@ -2027,7 +2045,7 @@
       */
       
       this.expObjectExpression = function(par){
-        //{type: "ObjectLiteral", properties: Array[2]}
+        //{type: "ObjectLiteral", properties: Array[]}
         var res = this.newResult();
         res.push("{");
         var i = 0;
@@ -2039,7 +2057,15 @@
           var prop = par.properties[i];
           if (prop.kind == "init"){
             res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
-            res.push(this.expectTypeVar(this.parseExpression(prop.value)));
+            if (prop.value){
+              var v = this.parseExpression(prop.value);
+              
+              res.push(this.expectTypeVar(this.getPassAsTypeCode({ // only var type is allowed in regular object literal
+                value: v,
+                valueType: v.getType(),
+                "type": this.getType(prop.typename)
+              })));
+            };
           }else{
             somethingsWrong({
               msg: "unknown property assignment: " + prop.type
@@ -2158,6 +2184,25 @@
         return t;
       };
       
+      
+      this.getPassAsTypeCode = function(par){
+        var res = this.newResult();
+        var tempRes = this.newResult();
+        
+        res.push(promiseland.classSystem.getPassAsTypeCode({
+          "type": par["type"],
+          value: par.value,
+          valueType: this.getResultType(par.value),
+          result: tempRes
+        }));
+        
+        res.setType(par["type"]);
+        
+        return res;
+        
+      };
+      
+      
       this.getSetVariableCode = function(par){
         var res = this.newResult();
         var tempRes = this.newResult();
@@ -2176,6 +2221,41 @@
         return res;
       };
       
+      this.getGetPropertyCode = function(par){
+        var res = this.newResult();
+        var tempRes = this.newResult();
+        
+        res.push(promiseland.classSystem.getGetPropertyCode({
+          instance: par.instance,
+          "type": this.getResultType(par.instance),
+          property: par.property,
+          propertyValue: par.propertyValue,
+          result: tempRes
+        }));
+        
+        res.setType(this.getResultType(par.instance));
+        
+        return res;
+      };
+      
+      this.getBinaryExpressionCode = function(par){
+        var res = this.newResult();
+        var tempRes = this.newResult();
+        
+        res.push(promiseland.classSystem.getBinaryExpressionCode({
+          left: par.left,
+          leftType: this.getResultType(par.left),
+          right: par.right,
+          rightType: this.getResultType(par.right),
+          operator: par.operator,
+          result: tempRes
+        }));
+        
+        res.setType("var");
+        
+        return res;
+      };
+
       
       /*
         something = value
@@ -2333,6 +2413,7 @@
     });\n\
     }catch(e){returnPromise.reject(e);};\n\
   return returnPromise.promise;};\n\
+  var __classSystem = promiseland.classSystem;\n\
   \n\
   \n";
     };
@@ -2462,6 +2543,10 @@
       internalUnknownLiteralType: {
         id: 1003,
         msg: "internal: unknown literal type"
+      },
+      internalMissingType: {
+        id: 1004,
+        msg: "internal: missing type"
       }
     };
     

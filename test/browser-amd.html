@@ -115,6 +115,18 @@
   createTest("arguments", returning4);
   
   
+  var successFun = function(mod, success){
+    if (mod.success){
+      success();
+    };
+  };
+  
+  /* typesafety */
+  
+  createTestNp("typesafetyassign", successFun);
+  createTestNp("typesafetyMembers", successFun);
+  
+  
   setTimeout(function(){
     var c = 0;
     var s = 0;
