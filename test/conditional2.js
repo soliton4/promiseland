@@ -60,10 +60,12 @@
     });
     }catch(e){returnPromise.reject(e);};
   return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
   
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "3d967a2fc2c58e3c614e3a48c072b07e" })){ return promiseland._getModule("3d967a2fc2c58e3c614e3a48c072b07e"); };
+var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;

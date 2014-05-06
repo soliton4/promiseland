@@ -811,7 +811,12 @@
       }
       
       , getGetPropertyCode: function(par){
+        
         var cDef = getClass(par["type"]);
+        if (cDef.isVar){
+          return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "]"], par);
+        };
+        
         var map = cDef.map;
         
         if (par.property){
@@ -859,6 +864,20 @@
         return runtimeError(errorMsg.accessNotAllowd);
       }
       
+      , getPassAsTypeCode: function(par){
+        var cDef = getClass(par["type"]);
+        var vcDef = getClass(par["valueType"]);
+        
+        if (par.value){
+          if (!this.canSet(par["type"], par.valueType)){
+            return runtimeError(errorMsg.typeMissmatch);
+          };
+          return assembleCode([MAKRO_VALUE], par);
+        };
+        return runtimeError(errorMsg.missingVariable);
+        
+      }
+      
       , getSetVariableCode: function(par){
         var cDef = getClass(par["type"]);
         var vcDef = getClass(par["valueType"]);
@@ -876,6 +895,25 @@
           return assembleCode([MAKRO_SELF, " = ", MAKRO_VALUE], par);
         };
         return runtimeError(errorMsg.missingVariable);
+      }
+      
+      , getBinaryExpressionCode: function(par){
+        var lcDef = getClass(par["leftType"]);
+        var rcDef = getClass(par["rightType"]);
+
+        if (lcDef.isVar && rcDef.isVar){
+          return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
+        };
+        
+        switch (par.operator){
+          case "==":
+          case "===":
+          case "!=":
+          case "!==":
+            return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
+        };
+        
+        return runtimeError(errorMsg.operatorMissmatch);
       }
       
       , canSet: function(parTagetType, parSourceType){
@@ -948,6 +986,15 @@
             case MAKRO_VALUE:
               res.push(par.value);
               break;
+            case MAKRO_LEFT:
+              res.push(par.left);
+              break;
+            case MAKRO_RIGHT:
+              res.push(par.right);
+              break;
+            case MAKRO_OPERATOR:
+              res.push(par.operator);
+              break;
           };
         };
       };
@@ -962,6 +1009,9 @@
     var MAKRO_PROPERTYSTRING = 2;
     var MAKRO_PROPERTYVALUE = 3;
     var MAKRO_VALUE = 4;
+    var MAKRO_LEFT = 5;
+    var MAKRO_OPERATOR = 6;
+    var MAKRO_RIGHT = 7;
     
     
     errorMsg = {

@@ -60,6 +60,7 @@
     });
     }catch(e){returnPromise.reject(e);};
   return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
   
   
 var Callback = promiseland.Callback;
@@ -68,6 +69,7 @@ var _V10/*Callback*/;try{_V10/*Callback*/ = Callback;}catch(e){};
 var _V11/*setTimeout*/;try{_V11/*setTimeout*/ = setTimeout;}catch(e){};
 var _V15/*para*/;try{_V15/*para*/ = para;}catch(e){};
 var _V16/*parb*/;try{_V16/*parb*/ = parb;}catch(e){};
+var _V23/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2 = new __Promise();

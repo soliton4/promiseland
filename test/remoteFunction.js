@@ -60,12 +60,14 @@
     });
     }catch(e){returnPromise.reject(e);};
   return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
   
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b" })){ return promiseland._getModule("52359e7398cbfbfaf29d768d9b7a668b"); };
 var _V9/*doSome*/;try{_V9/*doSome*/ = doSome;}catch(e){};
 var _V3/*context*/;try{_V3/*context*/ = context;}catch(e){};
+var _V20/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*z*/;

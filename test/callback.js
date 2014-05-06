@@ -60,6 +60,7 @@
     });
     }catch(e){returnPromise.reject(e);};
   return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
   
   
 var Callback = promiseland.Callback;
@@ -67,6 +68,7 @@ if (promiseland._hasModule({ hashStr: "3a26e21b5c50a7dfbba0e9c0d8fb68a6" })){ re
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V9/*setTimeout*/;try{_V9/*setTimeout*/ = setTimeout;}catch(e){};
 var _V3/*par*/;try{_V3/*par*/ = par;}catch(e){};
+var _V17/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;
