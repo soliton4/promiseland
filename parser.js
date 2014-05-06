@@ -43,22 +43,16 @@
       , statement: true
     };
     
-    /* error handlers */
-    var unknownType = function(entry){
-      throw {
-        msg: "unknown type - " + entry.type
+    /* error function */
+    var errorFun = function(par, err){
+      if (!par.line){
+        debugger;
       };
+      err.line = par.line;
+      err.column = par.column;
+      throw err;
     };
     
-    var parseError = function(msg){
-      throw {
-        msg: msg
-      };
-    };
-    
-    var somethingsWrong = function(what){
-      throw(what);
-    };
     
     var newPromiseStr = function(){
       return "new __Promise()";
@@ -276,11 +270,7 @@
       
       , setType: function(par){
         if (this.providesType){
-          throw {
-            id: 45
-            , msg: "so what do we provide then?"
-            , additional: "pls provide this error to a github issue"
-          };
+          errorFun({}, errorMsg.multipleTypeProviding);
         };
         if (typeof par == "string"){
           this.providesType = this._cp.getType(par);
@@ -354,7 +344,7 @@
           var entry = variables[name];
           if (entry){
             if (entry.typename != typename){
-              error(errorMsg.variableRedefinition, par);
+              this.error(par, errorMsg.variableRedefinition);
             };
             return;
           };
@@ -479,9 +469,39 @@
       }else{
         this.common = {
           givenNames: {},
-          givenTypeNames: {}
+          givenTypeNames: {},
+          warnings: []
         };
       }
+      this.warnings = this.common.warnings;
+      
+      this.getWarnings = function(){
+        return this.warnings;
+      };
+      
+      this.getWarningFun = function(par){
+        var self = this;
+        return function(err){
+          self.warning(par, err);
+        };
+      };
+      
+      this.warning = function(par, err){
+        if (!par.line){
+          debugger;
+        };
+        this.warnings.push({
+          line: par.line,
+          column: par.column,
+          msg: err.id + ": " + err.msg
+        });
+      };
+      
+      this.error = function(par, err){
+        errorFun(par, err);
+      };
+      
+      
       
       this.getUniqueName = function(){
         var retStr = "_V" + this.uniquebasis.index++;
@@ -512,7 +532,7 @@
               return this.common.givenTypeNames[name];
             };
           };
-          error(errorMsg.internalMissingType);
+          this.error(parName, errorMsg.internalMissingType);
         }else{
           name = identifierName(parName);
         };
@@ -651,9 +671,7 @@
             runRemote = true;
             par.promising = true;
             if (this.dynamicCode){
-              somethingsWrong({
-                msg: "function frame is not allowed in dynamic code"
-              });
+              this.error(par, errorMsg.functionFrameInDynamicCode);
             };
           }else if (par.frame.type == "exclusive"){
             runExclusive = true;
@@ -895,11 +913,11 @@
           if (ci.isTyped){
             // found a typed class
             
-            if (!par.body.literal){
-              throw errorMsg.needsClassBodyLiteral;
-            };
             if (ci.hasName){
               par.classalias = this.getVariableName(par.name);
+              if (!par.body.literal){
+                this.error(par, errorMsg.needsClassBodyLiteral);
+              };
             }else{
               par.classalias = this.getUniqueName();
             };
@@ -1053,7 +1071,11 @@
               res.push(", ");
             };
             res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
-            res.push(this.parseExpression(prop.value));
+            if (prop.value){
+              res.push(this.parseExpression(prop.value));
+            }else{
+              res.push("undefined");
+            }
             comma = true;
           };
         };
@@ -1070,7 +1092,7 @@
       this._registerType = function(par){
         var name = par.name;
         if (this.types.hasOwnProperty[name]){
-          throw errorMsg.typeExists;
+          this.error({}, errorMsg.typeExists);
         };
         this.types[name] = {
           name: par.name,
@@ -1092,9 +1114,16 @@
         if (!throwError){
           return;
         };
-        error(errorMsg.typeUndeclared, {
+        this.error(parName, errorMsg.typeUndeclared, {
           name: name
         });
+      };
+      
+      this.getReturnType = function(){
+        if (this._returnType){
+          return this._returnType;
+        };
+        return this.getType("var");
       };
       
       this.localClassConstructors = {};
@@ -1109,7 +1138,7 @@
           };
           return t.constructorName;
         };
-        error(errorMsg.typeUndeclared, {
+        this.error(parName, errorMsg.typeUndeclared, {
           name: name
         });
       };
@@ -1284,7 +1313,7 @@
       this.parseExpression = function(par){
         var res = this._parseExpression(par);
         if (!res.getType()){
-          error(errorMsg.internalMissingResultType);
+          this.error(par, errorMsg.internalMissingResultType);
         };
         return res;
       };
@@ -1381,7 +1410,7 @@
             return this.expExpressionStatement(value);
 
           default:
-            unknownType(value);
+            this.error(value, errorMsg.unknownType);
         };
         return "/*this should not happen*/";
       };
@@ -1455,7 +1484,7 @@
             };
             break;
           default:
-            error(errorMsg.internalUnknownLiteralType);
+            this.error(par, errorMsg.internalUnknownLiteralType);
         };
         res.setType(this.getType("var"));
         return res;
@@ -1847,10 +1876,7 @@
         res.push(this.expectTypeVar(this.parseExpression(par.test)));
         res.push("){\n");
         if (!par.consequent || par.consequent.type != "BlockStatement"){
-            somethingsWrong({
-              msg: "unknown if statement "
-            });
-          return "";
+          this.error(par, errorMsg.unknownIfStatement);
         };
         var statement = this.newResult();
         var b = par.consequent.body;
@@ -1864,9 +1890,7 @@
         if (par.alternate){
           res.push("\n}else{\n");
           if (par.alternate.type != "BlockStatement"){
-            somethingsWrong({
-              msg: "unknown else statement "
-            });
+            this.error(par, errorMsg.unknownElseStatement);
             return "";
           };
           statement = this.newResult();
@@ -1973,7 +1997,7 @@
           var ltype = left.getType();
           var rtype = right.getType();
           if (ltype !== this.getType("var") || rtype !== this.getType("var")){
-            error(errorMsg.notImplemented, par);
+            this.error(par, errorMsg.notImplemented);
           };
           
           // so the right expression only needs to be evaluated if the left is false
@@ -2015,6 +2039,7 @@
             left: left,
             right: right,
             operator: par.operator
+            , errorFun: this.getWarningFun(par)
           }));
           
         };
@@ -2031,6 +2056,7 @@
           instance: base,
           property: par.computed ? undefined : identifierName(par.property),
           propertyValue: par.computed ? this.expectTypeVar(this.parseExpression(par.property)) : undefined
+          , errorFun: this.getWarningFun(par)
         }));
         
         return res;
@@ -2064,12 +2090,11 @@
                 value: v,
                 valueType: v.getType(),
                 "type": this.getType(prop.typename)
+                , errorFun: this.getWarningFun(par)
               })));
             };
           }else{
-            somethingsWrong({
-              msg: "unknown property assignment: " + prop.type
-            });
+            this.error(par, errorMsg.unknownPropertyAssignmentType);
           };
         };
         res.push("}");
@@ -2081,32 +2106,9 @@
         if (par.getType() === this.getType("var")){
           return par;
         };
-        error(errorMsg.expectedVar, par);
+        this.error(par, errorMsg.expectedVar);
       };
       
-      
-      /*
-        1
-        1.0
-        "hi world"
-      */
-      this.parseValue = function(parValue){
-        if (!parValue){
-          somethingsWrong({
-            msg: "empty value"
-          });
-          return "";
-        };
-        if (parValue.type == "NumericLiteral"){
-          return "" + parValue.value;
-        }else{
-          somethingsWrong({
-            msg: "unknown value type: " + parValue.type
-          });
-          return "";
-        };
-
-      };
       
       
       /*
@@ -2116,7 +2118,7 @@
         var res = this.newResult();
         var declarations = par.declarations;
         if (!declarations){
-          parseError("missing declarations");
+          this.error(par, errorMsg.missingDeclarations);
           return "";
         };
         
@@ -2127,11 +2129,11 @@
           if (declarations[i].type == "VariableDeclaration"){
             var r = this.parseExpression(declarations[i]);
             if (r.getType() !== usedType){
-              error(errorMsg.differentTypesInVariableDeclaration, par);
+              this.error(par, errorMsg.differentTypesInVariableDeclaration);
             };
             res.push(r);
           }else{
-            unknownType(declarations[i]);
+            this.error(declarations[i], errorMsg.unknownType);
           };
         };
         res.setType(usedType);
@@ -2151,6 +2153,7 @@
             instance: this.getVariable(identifierName(par.id)),
             value: this.parseExpression(par.init),
             operator: "="
+            , errorFun: this.getWarningFun(par)
           }));
         }else{
           res.pushType(this.getVariable(identifierName(par.id)));
@@ -2185,6 +2188,13 @@
       };
       
       
+      
+      /*
+        
+        class system code generation 
+        
+      */
+      
       this.getPassAsTypeCode = function(par){
         var res = this.newResult();
         var tempRes = this.newResult();
@@ -2193,7 +2203,8 @@
           "type": par["type"],
           value: par.value,
           valueType: this.getResultType(par.value),
-          result: tempRes
+          result: tempRes,
+          errorFun: par.errorFun
         }));
         
         res.setType(par["type"]);
@@ -2213,7 +2224,8 @@
           value: par.value,
           valueType: this.getResultType(par.value),
           result: tempRes,
-          operator: par.operator || "="
+          operator: par.operator || "=",
+          errorFun: par.errorFun
         }));
         
         res.setType(this.getResultType(par.instance));
@@ -2230,10 +2242,18 @@
           "type": this.getResultType(par.instance),
           property: par.property,
           propertyValue: par.propertyValue,
-          result: tempRes
+          result: tempRes,
+          errorFun: par.errorFun
         }));
         
-        res.setType(this.getResultType(par.instance));
+        if (par.property){
+          res.setType(promiseland.classSystem.getPropertyType({
+            "type": this.getResultType(par.instance),
+            property: par.property
+          }));
+        }else{
+          res.setType("var");
+        };
         
         return res;
       };
@@ -2248,27 +2268,31 @@
           right: par.right,
           rightType: this.getResultType(par.right),
           operator: par.operator,
-          result: tempRes
+          result: tempRes,
+          errorFun: par.errorFun
         }));
         
         res.setType("var");
         
         return res;
       };
-
+      
+      
+      
       
       /*
         something = value
         something = some.complex["expression"]
       */
       
-      this.expAssignmentExpression = function(entry){
+      this.expAssignmentExpression = function(par){
         //{type: "AssignmentExpression", operator: "=", left: Object, right: Object}
         var res = this.newResult();
         res.pushType(this.getSetVariableCode({
-          instance: this.parseExpression(entry.left),
-          value: this.parseExpression(entry.right),
-          operator: entry.operator
+          instance: this.parseExpression(par.left),
+          value: this.parseExpression(par.right),
+          operator: par.operator
+          , errorFun: this.getWarningFun(par)
         }));
         
         return res;
@@ -2334,8 +2358,14 @@
           res.push("return");
         };
         if (par.argument){
+          var v = this.parseExpression(par.argument);
           res.push(" ");
-          res.push(this.parseExpression(par.argument));
+          res.push(this.getPassAsTypeCode({ // only var type is allowed in regular object literal
+            value: v,
+            valueType: v.getType(),
+            "type": this.getReturnType()
+            , errorFun: this.getWarningFun(par)
+          }));
         };
         if (this.promising){
           res.push("); return " + this.returnPromise);
@@ -2442,62 +2472,46 @@
     var parser = {
       parse: function(promiselandCodeStr){
         var p = new promiseland.Promise();
-        //console.log("parsing ...");
         var parser = _parser;
-          //console.log(parser);
-        //console.log(md5);
-          var hashStr = md5(promiselandCodeStr);
-        //console.log("parsing ...2");
-          var parsedAr = parser.parse(promiselandCodeStr);
-          var resStr = "";
-          var cp;
-          resStr += loaderStr();
-          resStr += promiselandRequireStr();
-          resStr += callbackRequireStr();
+        var hashStr = md5(promiselandCodeStr);
+        var parsedAr = parser.parse(promiselandCodeStr);
+        var resStr = "";
+        var cp;
+        var res = {};
+        resStr += loaderStr();
+        resStr += promiselandRequireStr();
+        resStr += callbackRequireStr();
         resStr += "if (promiseland._hasModule({ hashStr: \"" + hashStr + "\" })){ return promiseland._getModule(\"" + hashStr + "\"); };\n";
-          if (parsedAr.length === undefined){
-            if (parsedAr.type == "Program"){
-              cp = new CodeParser({toParse: parsedAr, hashStr: hashStr});
-              var programStr = cp.getResult();
-              if (cp.programPromiseStr){
-                // promising module
-                resStr += "var " + cp.programPromiseStr + " = " + newPromiseStr() + ";\n";
-                resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
-                resStr += programStr;
-              }else{
-                resStr += programStr;
-                resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
-                resStr += "return " + cp.resultNameStr + ";\n";
-              };
+        if (parsedAr.length === undefined){
+          if (parsedAr.type == "Program"){
+            cp = new CodeParser({toParse: parsedAr, hashStr: hashStr});
+            var programStr = cp.getResult();
+            res.warnings = cp.getWarnings();
+            if (cp.programPromiseStr){
+              // promising module
+              resStr += "var " + cp.programPromiseStr + " = " + newPromiseStr() + ";\n";
+              resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
+              resStr += programStr;
             }else{
-              unknownType(parsedAr[i]);
+              resStr += programStr;
+              resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
+              resStr += "return " + cp.resultNameStr + ";\n";
             };
-            
           }else{
-            somethingsWrong({
-              msg: "several program elements"
-            });
-            var i = 0;
-            var l = parsedAr.length;
-            for (i; i < l; ++i){
-              if (parsedAr[i].type == "Program"){
-                cp = new CodeParser({toParse: parsedAr[i], hashStr: hashStr});
-                resStr += cp.getResult();
-              }else{
-                unknownType(parsedAr[i]);
-              };
-            };
+            this.error(parsedAr[i], errorMsg.unknownType);
           };
-          resStr += loaderEndStr();
-          p.resolve(resStr);
-        //console.log("returning promise");
+
+        }else{
+          errorFun(parsedAr, errorMsg.severalProgramElements);
+        };
+        resStr += loaderEndStr();
+        res.javascript = resStr;
+        p.resolve(res);
+
         return p.promise;
       }
     };
     
-    var error = function(par){
-      throw par;
-    };
     
     errorMsg = {
       typeExists: {
@@ -2528,6 +2542,31 @@
         id: 106,
         msg: "not a block statement"
       },
+      missingDeclarations: {
+        id: 107,
+        msg: "missing Declarations"
+      },
+      functionFrameInDynamicCode: {
+        id: 108,
+        msg: "function frame is not allowed in dynamic code"
+      },
+      unknownIfStatement: {
+        id: 109,
+        msg: "unknown if statement "
+      },
+      unknownElseStatement: {
+        id: 109,
+        msg: "unknown else statement "
+      },
+      unknownPropertyAssignmentType: {
+        id: 110,
+        msg: "unknown property assignment"
+      },
+      severalProgramElements:{
+        id: 111,
+        msg: "several Program Elements"
+      },
+
       internalMissingResultType: {
         id: 1000,
         msg: "internal: result type missing"
@@ -2547,6 +2586,15 @@
       internalMissingType: {
         id: 1004,
         msg: "internal: missing type"
+      },
+      unknownType: {
+        id: 1005,
+        msg: "internal: unknown script element type"
+      },
+      multipleTypeProviding: {
+        id: 1006
+        , msg: "internal: multiple types provided"
+        , additional: "pls provide this error to a github issue"
       }
     };
     

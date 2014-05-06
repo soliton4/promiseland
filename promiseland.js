@@ -509,10 +509,8 @@
         _getParser().then(function(parser){
           try{
             //console.log(parser.parse);
-          parser.parse(parStr).then(function(javascript){
-            p.resolve({
-              javascript: javascript
-            });
+          parser.parse(parStr).then(function(res){
+            p.resolve(res);
           });
           }catch(e){
             console.log("reject parse");
@@ -801,6 +799,16 @@
         return cf;
       }
       
+      , createFunctionType: function(par){
+        var cDef = {
+          isFunction: true,
+          returnType: par.returnType || this.getBuiltinType("var"),
+          parameters: par.parameters || []
+        };
+        cf = classHider(cDef);
+        return cf;
+      }
+      
       , getTypeConstructor: function(parType){
         var cDef = getClass(parType);
         return cDef.constructor;
@@ -827,11 +835,14 @@
         if (map.getMemberCode){
           return assembleCode(map.getMemberCode, par);
         };
-        return runtimeError(errorMsg.accessNotAllowd);
+        return runtimeError(errorMsg.accessNotAllowd, par);
       }
       
       , getPropertyType: function(par){
         var cDef = getClass(par["type"]);
+        if (cDef.isVar){
+          return this.getBuiltinType("var");
+        };
         var map = cDef.map;
         
         if (map.members[par.property]){
@@ -850,18 +861,18 @@
               property: par.property
             });
             if (!this.canSet(propertyType, par.valueType)){
-              return runtimeError(errorMsg.typeMissmatch);
+              return runtimeError(errorMsg.typeMissmatch, par);
             };
             return assembleCode(map.members[par.property].setCode, par);
           };
         };
         if (map.setMemberCode){
           if (!this.canSet(undefined, par.valueType)){
-            return runtimeError(errorMsg.typeMissmatch);
+            return runtimeError(errorMsg.typeMissmatch, par);
           };
           return assembleCode(map.setMemberCode, par);
         };
-        return runtimeError(errorMsg.accessNotAllowd);
+        return runtimeError(errorMsg.accessNotAllowd, par);
       }
       
       , getPassAsTypeCode: function(par){
@@ -870,11 +881,11 @@
         
         if (par.value){
           if (!this.canSet(par["type"], par.valueType)){
-            return runtimeError(errorMsg.typeMissmatch);
+            return runtimeError(errorMsg.typeMissmatch, par);
           };
           return assembleCode([MAKRO_VALUE], par);
         };
-        return runtimeError(errorMsg.missingVariable);
+        return runtimeError(errorMsg.missingVariable, par);
         
       }
       
@@ -884,17 +895,17 @@
         
         if (par.instance){
           if (!this.canSet(par["type"], par.valueType)){
-            return runtimeError(errorMsg.typeMissmatch);
+            return runtimeError(errorMsg.typeMissmatch, par);
           };
           var operator = par.operator || "=";
           if (operator != "="){
             if (!(cDef.isVar && vcDef.isVar)){
-              return runtimeError(errorMsg.operatorMissmatch);
+              return runtimeError(errorMsg.operatorMissmatch, par);
             };
           };
           return assembleCode([MAKRO_SELF, " = ", MAKRO_VALUE], par);
         };
-        return runtimeError(errorMsg.missingVariable);
+        return runtimeError(errorMsg.missingVariable, par);
       }
       
       , getBinaryExpressionCode: function(par){
@@ -913,25 +924,47 @@
             return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
         };
         
-        return runtimeError(errorMsg.operatorMissmatch);
+        return runtimeError(errorMsg.operatorMissmatch, par);
       }
       
-      , canSet: function(parTagetType, parSourceType){
-        if (parTagetType === undefined && parSourceType === undefined){
+      , canSet: function(parTargetType, parSourceType){
+        if (parTargetType === undefined && parSourceType === undefined){
           return true;
         };
-        if (parTagetType === undefined || parSourceType === undefined){
+        if (parTargetType === undefined || parSourceType === undefined){
           return false;
         };
-        if (parTagetType === parSourceType){
+        if (parTargetType === parSourceType){
           return true;
+        };
+        if (
+          parTargetType.isFunction && parSourceType.isFunction
+          && this.canSet(parTargetType.returnType, parSourceType.returnType)
+          && parTargetType.parameters.length == parSourceType.parameters.length
+        ){
+          var allOk = true;
+          var i = 0;
+          var l = parTargetType.parameters.length;
+          for (i; i < l; ++i){
+            var tp = parTargetType.parameters[i];
+            var sp = parSourceType.parameters[i];
+            if (!this.canSet(sp, tp)){
+              allOk = false;
+            };
+          };
+          if (allOk){
+            return true;
+          };
         };
         return false;
       }
       
     };
     
-    var runtimeError = function(par){
+    var runtimeError = function(par, par2){
+      if (par2 && par2.errorFun){
+        par2.errorFun(par);
+      };
       return "(function(){ throw { id:" + par.id + ", msg: " + stringEncodeStr(par.msg) + " } })()";
     };
     

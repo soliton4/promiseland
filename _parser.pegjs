@@ -95,23 +95,23 @@
 
   function buildBinaryExpression(first, rest) {
     return buildTree(first, rest, function(result, element) {
-      return {
+      return posRes({
         type:     "BinaryExpression",
         operator: element[1],
         left:     result,
         right:    element[3]
-      };
+      });
     });
   }
 
   function buildLogicalExpression(first, rest) {
     return buildTree(first, rest, function(result, element) {
-      return {
+      return posRes({
         type:     "LogicalExpression",
         operator: element[1],
         left:     result,
         right:    element[3]
-      };
+      });
     });
   }
 
@@ -256,11 +256,11 @@ Literal
   / RegularExpressionLiteral
 
 NullLiteral
-  = NullToken { return { type: "Literal", value: null }; }
+  = NullToken { return posRes({ type: "Literal", value: null }); }
 
 BooleanLiteral
-  = TrueToken  { return { type: "Literal", value: true  }; }
-  / FalseToken { return { type: "Literal", value: false }; }
+  = TrueToken  { return posRes({ type: "Literal", value: true  }); }
+  / FalseToken { return posRes({ type: "Literal", value: false }); }
 
 /*
  * The "!(IdentifierStart / DecimalDigit)" predicate is not part of the official
@@ -276,13 +276,13 @@ NumericLiteral "number"
 
 DecimalLiteral
   = DecimalIntegerLiteral "." DecimalDigit* ExponentPart? {
-      return { type: "Literal", value: parseFloat(text()) };
+      return posRes({ type: "Literal", value: parseFloat(text()) });
     }
   / "." DecimalDigit+ ExponentPart? {
-      return { type: "Literal", value: parseFloat(text()) };
+      return posRes({ type: "Literal", value: parseFloat(text()) });
     }
   / DecimalIntegerLiteral ExponentPart? {
-      return { type: "Literal", value: parseFloat(text()) };
+      return posRes({ type: "Literal", value: parseFloat(text()) });
     }
 
 DecimalIntegerLiteral
@@ -306,7 +306,7 @@ SignedInteger
 
 HexIntegerLiteral
   = "0x"i digits:$HexDigit+ {
-      return { type: "Literal", value: parseInt(digits, 16) };
+      return posRes({ type: "Literal", value: parseInt(digits, 16) });
      }
 
 HexDigit
@@ -314,10 +314,10 @@ HexDigit
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {
-      return { type: "Literal", value: chars.join("") };
+      return posRes({ type: "Literal", value: chars.join("") });
     }
   / "'" chars:SingleStringCharacter* "'" {
-      return { type: "Literal", value: chars.join("") };
+      return posRes({ type: "Literal", value: chars.join("") });
     }
 
 DoubleStringCharacter
@@ -385,7 +385,7 @@ RegularExpressionLiteral "regular expression"
         error(e.message);
       }
 
-      return { type: "Literal", value: value };
+      return posRes({ type: "Literal", value: value });
     }
 
 RegularExpressionBody
@@ -552,22 +552,22 @@ PrimaryExpression
 
 ArrayLiteral
   = "[" __ elision:(Elision __)? "]" {
-      return {
+      return posRes({
         type:     "ArrayExpression",
         elements: optionalList(extractOptional(elision, 0))
-      };
+      });
     }
   / "[" __ elements:ElementList __ "]" {
-      return {
+      return posRes({
         type:     "ArrayExpression",
         elements: elements
-      };
+      });
     }
   / "[" __ elements:ElementList __ "," __ elision:(Elision __)? "]" {
-      return {
+      return posRes({
         type:     "ArrayExpression",
         elements: elements.concat(optionalList(extractOptional(elision, 0)))
-      };
+      });
     }
 
 ElementList
@@ -587,12 +587,12 @@ Elision
   = "," commas:(__ ",")* { return filledArray(commas.length + 1, null); }
 
 ObjectLiteral
-  = "{" __ "}" { return { type: "ObjectExpression", properties: [] }; }
+  = "{" __ "}" { return posRes({ type: "ObjectExpression", properties: [] }); }
   / "{" __ properties:PropertyNameAndValueList __ "}" {
-       return { type: "ObjectExpression", properties: properties };
+       return posRes({ type: "ObjectExpression", properties: properties });
      }
   / "{" __ properties:PropertyNameAndValueList __ "," __ "}" {
-       return { type: "ObjectExpression", properties: properties };
+       return posRes({ type: "ObjectExpression", properties: properties });
      }
 PropertyNameAndValueList
   = first:PropertyAssignment rest:(__ "," __ PropertyAssignment)* {
@@ -601,17 +601,17 @@ PropertyNameAndValueList
 
 PropertyAssignment
   = /*typename:IdentifierName? __*/ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
-      return { key: key, value: value, kind: "init", typename: "var" }; // promiseland
+      return posRes({ key: key, value: value, kind: "init", typename: "var" }); // promiseland
     }
   / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
-      return { key: key, value: value, kind: "init", typename: typename }; // promiseland
+      return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
     }
   / FunctionDeclaration
   / GetToken __ key:PropertyName __
     "(" __ ")" __
     "{" __ body:FunctionBody __ "}"
     {
-      return {
+      return posRes({
         key:   key,
         value: {
           type:   "FunctionExpression",
@@ -620,13 +620,13 @@ PropertyAssignment
           body:   body
         },
         kind:  "get"
-      };
+      });
     }
   / SetToken __ key:PropertyName __
     "(" __ params:PropertySetParameterList __ ")" __
     "{" __ body:FunctionBody __ "}"
     {
-      return {
+      return posRes({
         key:   key,
         value: {
           type:   "FunctionExpression",
@@ -635,7 +635,7 @@ PropertyAssignment
           body:   body
         },
         kind:  "set"
-      };
+      });
     }
 
 PropertyName
@@ -659,48 +659,48 @@ MemberExpression
     )
     rest:(
         __ "[" __ property:Expression __ "]" {
-          return { property: property, computed: true };
+          return posRes({ property: property, computed: true });
         }
       / __ "." __ property:IdentifierName {
-          return { property: property, computed: false };
+          return posRes({ property: property, computed: false });
         }
     )*
     {
       return buildTree(first, rest, function(result, element) {
-        return {
+        return posRes({
           type:     "MemberExpression",
           object:   result,
           property: element.property,
           computed: element.computed
-        };
+        });
       });
     }
 
 NewExpression
   = MemberExpression
   / NewToken __ callee:NewExpression {
-      return { type: "NewExpression", callee: callee, arguments: [] };
+      return posRes({ type: "NewExpression", callee: callee, arguments: [] });
     }
 
 
 ProfileArguments  // promiseland
   = "<" __ properties:(PropertyNameAndValueList __ ("," __)?)? ">" {
-      return {
+      return posRes({
         type:       "ProfileArguments",
         properties: properties !== "" ? properties[0] : []
-      };
+      });
     }
     
 
 CallExpression
   = first:(
       callee:MemberExpression __ profileArguments:ProfileArguments? __ args:Arguments { // promiseland
-        return { 
+        return posRes({ 
           type: "CallExpression", 
           callee: callee, 
           arguments: args,
           profileArguments: profileArguments  // promiseland
-        };
+        });
       }
     )
     rest:(
@@ -712,18 +712,18 @@ CallExpression
           });
         }
       / __ "[" __ property:Expression __ "]" {
-          return {
+          return posRes({
             type:     "MemberExpression",
             property: property,
             computed: true
-          };
+          });
         }
       / __ "." __ property:IdentifierName {
-          return {
+          return posRes({
             type:     "MemberExpression",
             property: property,
             computed: false
-          };
+          });
         }
     )*
     {
@@ -750,12 +750,12 @@ LeftHandSideExpression
 
 PostfixExpression
   = argument:LeftHandSideExpression _ operator:PostfixOperator {
-      return {
+      return posRes({
         type:     "UpdateExpression",
         operator: operator,
         argument: argument,
         prefix:   false
-      };
+      });
     }
   / LeftHandSideExpression
 
@@ -770,12 +770,12 @@ UnaryExpression
         ? "UpdateExpression"
         : "UnaryExpression";
 
-      return {
+      return posRes({
         type:     type,
         operator: operator,
         argument: argument,
         prefix:   true
-      };
+      });
     }
     
 PromiseOperator // promiseland
@@ -937,12 +937,12 @@ ConditionalExpression
     "?" __ consequent:AssignmentExpression __
     ":" __ alternate:AssignmentExpression
     {
-      return {
+      return posRes({
         type:       "ConditionalExpression",
         test:       test,
         consequent: consequent,
         alternate:  alternate
-      };
+      });
     }
   / LogicalORExpression
 
@@ -951,12 +951,12 @@ ConditionalExpressionNoIn
     "?" __ consequent:AssignmentExpression __
     ":" __ alternate:AssignmentExpressionNoIn
     {
-      return {
+      return posRes({
         type:       "ConditionalExpression",
         test:       test,
         consequent: consequent,
         alternate:  alternate
-      };
+      });
     }
   / LogicalORExpressionNoIn
 
@@ -965,23 +965,23 @@ AssignmentExpression
     "=" !"=" __
     right:AssignmentExpression
     {
-      return {
+      return posRes({
         type:     "AssignmentExpression",
         operator: "=",
         left:     left,
         right:    right
-      };
+      });
     }
   / left:LeftHandSideExpression __
     operator:AssignmentOperator __
     right:AssignmentExpression
     {
-      return {
+      return posRes({
         type:     "AssignmentExpression",
         operator: operator,
         left:     left,
         right:    right
-      };
+      });
     }
   / ConditionalExpression
 
@@ -990,23 +990,23 @@ AssignmentExpressionNoIn
     "=" !"=" __
     right:AssignmentExpressionNoIn
     {
-      return {
+      return posRes({
         type:     "AssignmentExpression",
         operator: "=",
         left:     left,
         right:    right
-      };
+      });
     }
   / left:LeftHandSideExpression __
     operator:AssignmentOperator __
     right:AssignmentExpressionNoIn
     {
-      return {
+      return posRes({
         type:     "AssignmentExpression",
         operator: operator,
         left:     left,
         right:    right
-      };
+      });
     }
   / ConditionalExpressionNoIn
 
@@ -1059,10 +1059,10 @@ Statement
 
 Block
   = "{" __ body:(StatementList __)? "}" {
-      return {
+      return posRes({
         type: "BlockStatement",
         body: optionalList(extractOptional(body, 0))
-      };
+      });
     }
 
 StatementList
@@ -1148,14 +1148,14 @@ InitialiserNoIn
   = "=" !"=" __ expression:AssignmentExpressionNoIn { return expression; }
 
 EmptyStatement
-  = ";" { return { type: "EmptyStatement" }; }
+  = ";" { return posRes({ type: "EmptyStatement" }); }
 
 ExpressionStatement
   = !("{" / FunctionToken) expression:Expression EOS {
-      return {
+      return posRes({
         type:       "ExpressionStatement",
         expression: expression
-      };
+      });
     }
 
 IfStatement
@@ -1164,31 +1164,31 @@ IfStatement
     ElseToken __
     alternate:Statement
     {
-      return {
+      return posRes({
         type:       "IfStatement",
         test:       test,
         consequent: consequent,
         alternate:  alternate
-      };
+      });
     }
   / IfToken __ "(" __ test:Expression __ ")" __
     consequent:Statement {
-      return {
+      return posRes({
         type:       "IfStatement",
         test:       test,
         consequent: consequent,
         alternate:  null
-      };
+      });
     }
 
 IterationStatement
   = DoToken __
     body:Statement __
     WhileToken __ "(" __ test:Expression __ ")" EOS
-    { return { type: "DoWhileStatement", body: body, test: test }; }
+    { return posRes({ type: "DoWhileStatement", body: body, test: test }); }
   / WhileToken __ "(" __ test:Expression __ ")" __
     body:Statement
-    { return { type: "WhileStatement", test: test, body: body }; }
+    { return posRes({ type: "WhileStatement", test: test, body: body }); }
   / ForToken __
     "(" __
     init:(ExpressionNoIn __)? ";" __
@@ -1197,13 +1197,13 @@ IterationStatement
     ")" __
     body:Statement
     {
-      return {
+      return posRes({
         type:   "ForStatement",
         init:   extractOptional(init, 0),
         test:   extractOptional(test, 0),
         update: extractOptional(update, 0),
         body:   body
-      };
+      });
     }
   / ForToken __
     "(" __
@@ -1213,13 +1213,13 @@ IterationStatement
     ")" __
     body:Statement
     {
-      return {
+      return posRes({
         type:   "ForStatement",
         init:   init, // promiseland
         test:   extractOptional(test, 0),
         update: extractOptional(update, 0),
         body:   body
-      };
+      });
     }
   / ForToken __
     "(" __
@@ -1229,12 +1229,12 @@ IterationStatement
     ")" __
     body:Statement
     {
-      return {
+      return posRes({
         type:  "ForInStatement",
         left:  left,
         right: right,
         body:  body
-      };
+      });
     }
   / ForToken __
     "(" __
@@ -1244,52 +1244,52 @@ IterationStatement
     ")" __
     body:Statement
     {
-      return {
+      return posRes({
         type:  "ForInStatement",
         left:  left, // promiseland
         right: right,
         body:  body
-      };
+      });
     }
 
 ContinueStatement
   = ContinueToken EOS {
-      return { type: "ContinueStatement", label: null };
+      return posRes({ type: "ContinueStatement", label: null });
     }
   / ContinueToken _ label:Identifier EOS {
-      return { type: "ContinueStatement", label: label };
+      return posRes({ type: "ContinueStatement", label: label });
     }
 
 BreakStatement
   = BreakToken EOS {
-      return { type: "BreakStatement", label: null };
+      return posRes({ type: "BreakStatement", label: null });
     }
   / BreakToken _ label:Identifier EOS {
-      return { type: "BreakStatement", label: label };
+      return posRes({ type: "BreakStatement", label: label });
     }
 
 ReturnStatement
   = ReturnToken EOS {
-      return { type: "ReturnStatement", argument: null };
+      return posRes({ type: "ReturnStatement", argument: null });
     }
   / ReturnToken _ argument:Expression EOS {
-      return { type: "ReturnStatement", argument: argument };
+      return posRes({ type: "ReturnStatement", argument: argument });
     }
 
 WithStatement
   = WithToken __ "(" __ object:Expression __ ")" __
     body:Statement
-    { return { type: "WithStatement", object: object, body: body }; }
+    { return posRes({ type: "WithStatement", object: object, body: body }); }
 
 SwitchStatement
   = SwitchToken __ "(" __ discriminant:Expression __ ")" __
     cases:CaseBlock
     {
-      return {
+      return posRes({
         type:         "SwitchStatement",
         discriminant: discriminant,
         cases:        cases
-      };
+      });
     }
 
 CaseBlock
@@ -1301,9 +1301,9 @@ CaseBlock
     default_:DefaultClause __
     after:(CaseClauses __)? "}"
     {
-      return optionalList(extractOptional(before, 0))
+      return posRes(optionalList(extractOptional(before, 0))
         .concat(default_)
-        .concat(optionalList(extractOptional(after, 0)));
+        .concat(optionalList(extractOptional(after, 0))));
     }
 
 CaseClauses
@@ -1311,100 +1311,100 @@ CaseClauses
 
 CaseClause
   = CaseToken __ test:Expression __ ":" consequent:(__ StatementList)? {
-      return {
+      return posRes({
         type:       "SwitchCase",
         test:       test,
         consequent: optionalList(extractOptional(consequent, 1))
-      };
+      });
     }
 
 DefaultClause
   = DefaultToken __ ":" consequent:(__ StatementList)? {
-      return {
+      return posRes({
         type:       "SwitchCase",
         test:       null,
         consequent: optionalList(extractOptional(consequent, 1))
-      };
+      });
     }
 
 LabelledStatement
   = label:Identifier __ ":" __ body:Statement {
-      return { type: "LabeledStatement", label: label, body: body };
+      return posRes({ type: "LabeledStatement", label: label, body: body });
     }
 
 ThrowStatement
   = ThrowToken _ argument:Expression EOS {
-      return { type: "ThrowStatement", argument: argument };
+      return posRes({ type: "ThrowStatement", argument: argument });
     }
 
 TryStatement
   = TryToken __ block:Block __ handler:Catch __ finalizer:Finally {
-      return {
+      return posRes({
         type:      "TryStatement",
         block:     block,
         handler:   handler,
         finalizer: finalizer
-      };
+      });
     }
   / TryToken __ block:Block __ handler:Catch {
-      return {
+      return posRes({
         type:      "TryStatement",
         block:     block,
         handler:   handler,
         finalizer: null
-      };
+      });
     }
   / TryToken __ block:Block __ finalizer:Finally {
-      return {
+      return posRes({
         type:      "TryStatement",
         block:     block,
         handler:   null,
         finalizer: finalizer
-      };
+      });
     }
 
 Catch
   = CatchToken __ "(" __ param:Identifier __ ")" __ body:Block {
-      return {
+      return posRes({
         type:  "CatchClause",
         param: param,
         body:  body
-      };
+      });
     }
 
 Finally
   = FinallyToken __ block:Block { return block; }
 
 DebuggerStatement
-  = DebuggerToken EOS { return { type: "DebuggerStatement" }; }
+  = DebuggerToken EOS { return posRes({ type: "DebuggerStatement" }); }
   
   
   /* class system */  // promiseland
   
 ClassBody
-  = literal:ObjectLiteral { return { "literal": literal }; }
-  / exp:Expression  { return { "expression": exp }; }
+  = literal:ObjectLiteral { return posRes({ "literal": literal }); }
+  / exp:Expression  { return posRes({ "expression": exp }); }
 
 
 ClassCombinations
-  = name:Identifier __ body:ClassBody { return { name: name, body: body } }
-  / body:ClassBody { return { body: body } }
+  = name:Identifier __ body:ClassBody { return posRes({ name: name, body: body }) }
+  / body:ClassBody { return posRes({ body: body }) }
 
 ClassExtendsClaus
   = "extends" __ exp:Expression __ {
-    return {
+    return posRes({
       "type": "extends",
       "baseClass": exp
-    }
+    });
   }
 
 ClassTypedClaus
-  = "type" __ { return { "type": "type" } }
+  = "type" __ { return posRes({ "type": "type" }); }
 
 ClassSyncClaus
-  = "sync" __ "all" __ { return { "type": "sync", "all": 1 }; }
-  / "sync" __ "some" __ { return { "type": "sync", "all": 0 }; }
-  / "sync" __ { return { "type": "sync", "all": 1 }; }
+  = "sync" __ "all" __ { return posRes({ "type": "sync", "all": 1 }); }
+  / "sync" __ "some" __ { return posRes({ "type": "sync", "all": 0 }); }
+  / "sync" __ { return posRes({ "type": "sync", "all": 1 }); }
 
 ClassKeyword
   = ClassExtendsClaus
@@ -1425,12 +1425,12 @@ ClassKeywords
 
 ClassExpression
   =  ClassToken __ keywords:ClassKeywords? __ combination:ClassCombinations {
-      return {
+      return posRes({
         type:       "Class",
         name:       combination.name,
         body:       combination.body,
         "keywords": keywords
-      };
+      });
     }
   
   
@@ -1452,14 +1452,14 @@ FunctionDeclaration
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
-      return {
+      return posRes({
         type:   "FunctionDeclaration",
         id:     id,
         params: optionalList(extractOptional(params, 0)),
         body:   body,
         promise:  promise, // promiseland
         frame:    frame    // promiseland
-      };
+      });
     }
 
 FunctionExpression
@@ -1469,14 +1469,14 @@ FunctionExpression
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
-      return {
+      return posRes({
         type:   "FunctionExpression",
         id:     extractOptional(id, 0),
         params: optionalList(extractOptional(params, 0)),
         body:   body,
         promise:  promise, // promiseland
         frame:    frame    // promiseland
-      };
+      });
     }
 
 FormalParameterList
@@ -1486,18 +1486,18 @@ FormalParameterList
 
 FunctionBody
   = body:SourceElements? {
-      return {
+      return posRes({
         type: "BlockStatement",
         body: optionalList(body)
-      };
+      });
     }
 
 Program
   = body:SourceElements? {
-      return {
+      return posRes({
         type: "Program",
         body: optionalList(body)
-      };
+      });
     }
 
 SourceElements

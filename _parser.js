@@ -137,9 +137,9 @@ return (function() {
         peg$c49 = { type: "literal", value: "\u200C", description: "\"\\u200C\"" },
         peg$c50 = "\u200D",
         peg$c51 = { type: "literal", value: "\u200D", description: "\"\\u200D\"" },
-        peg$c52 = function() { return { type: "Literal", value: null }; },
-        peg$c53 = function() { return { type: "Literal", value: true  }; },
-        peg$c54 = function() { return { type: "Literal", value: false }; },
+        peg$c52 = function() { return posRes({ type: "Literal", value: null }); },
+        peg$c53 = function() { return posRes({ type: "Literal", value: true  }); },
+        peg$c54 = function() { return posRes({ type: "Literal", value: false }); },
         peg$c55 = { type: "other", description: "number" },
         peg$c56 = function(literal) {
               return literal;
@@ -148,7 +148,7 @@ return (function() {
         peg$c58 = { type: "literal", value: ".", description: "\".\"" },
         peg$c59 = null,
         peg$c60 = function() {
-              return { type: "Literal", value: parseFloat(text()) };
+              return posRes({ type: "Literal", value: parseFloat(text()) });
             },
         peg$c61 = "0",
         peg$c62 = { type: "literal", value: "0", description: "\"0\"" },
@@ -163,7 +163,7 @@ return (function() {
         peg$c71 = "0x",
         peg$c72 = { type: "literal", value: "0x", description: "\"0x\"" },
         peg$c73 = function(digits) {
-              return { type: "Literal", value: parseInt(digits, 16) };
+              return posRes({ type: "Literal", value: parseInt(digits, 16) });
              },
         peg$c74 = /^[0-9a-f]/i,
         peg$c75 = { type: "class", value: "[0-9a-f]i", description: "[0-9a-f]i" },
@@ -171,7 +171,7 @@ return (function() {
         peg$c77 = "\"",
         peg$c78 = { type: "literal", value: "\"", description: "\"\\\"\"" },
         peg$c79 = function(chars) {
-              return { type: "Literal", value: chars.join("") };
+              return posRes({ type: "Literal", value: chars.join("") });
             },
         peg$c80 = "'",
         peg$c81 = { type: "literal", value: "'", description: "\"'\"" },
@@ -215,7 +215,7 @@ return (function() {
                 error(e.message);
               }
 
-              return { type: "Literal", value: value };
+              return posRes({ type: "Literal", value: value });
             },
         peg$c112 = /^[*\\\/[]/,
         peg$c113 = { type: "class", value: "[*\\\\\\/[]", description: "[*\\\\\\/[]" },
@@ -336,24 +336,24 @@ return (function() {
         peg$c228 = { type: "literal", value: ")", description: "\")\"" },
         peg$c229 = function(expression) { return posRes(expression); },
         peg$c230 = function(elision) {
-              return {
+              return posRes({
                 type:     "ArrayExpression",
                 elements: optionalList(extractOptional(elision, 0))
-              };
+              });
             },
         peg$c231 = function(elements) {
-              return {
+              return posRes({
                 type:     "ArrayExpression",
                 elements: elements
-              };
+              });
             },
         peg$c232 = ",",
         peg$c233 = { type: "literal", value: ",", description: "\",\"" },
         peg$c234 = function(elements, elision) {
-              return {
+              return posRes({
                 type:     "ArrayExpression",
                 elements: elements.concat(optionalList(extractOptional(elision, 0)))
-              };
+              });
             },
         peg$c235 = function(elision, element) {
                 return optionalList(extractOptional(elision, 0)).concat(element);
@@ -362,9 +362,9 @@ return (function() {
         peg$c237 = function(commas) { return filledArray(commas.length + 1, null); },
         peg$c238 = "{",
         peg$c239 = { type: "literal", value: "{", description: "\"{\"" },
-        peg$c240 = function() { return { type: "ObjectExpression", properties: [] }; },
+        peg$c240 = function() { return posRes({ type: "ObjectExpression", properties: [] }); },
         peg$c241 = function(properties) {
-               return { type: "ObjectExpression", properties: properties };
+               return posRes({ type: "ObjectExpression", properties: properties });
              },
         peg$c242 = function(first, rest) {
               return buildList(first, rest, 3);
@@ -372,13 +372,13 @@ return (function() {
         peg$c243 = ":",
         peg$c244 = { type: "literal", value: ":", description: "\":\"" },
         peg$c245 = function(key, value) { // promiseland
-              return { key: key, value: value, kind: "init", typename: "var" }; // promiseland
+              return posRes({ key: key, value: value, kind: "init", typename: "var" }); // promiseland
             },
         peg$c246 = function(typename, key, value) { // promiseland
-              return { key: key, value: value, kind: "init", typename: typename }; // promiseland
+              return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
             },
         peg$c247 = function(key, body) {
-              return {
+              return posRes({
                 key:   key,
                 value: {
                   type:   "FunctionExpression",
@@ -387,10 +387,10 @@ return (function() {
                   body:   body
                 },
                 kind:  "get"
-              };
+              });
             },
         peg$c248 = function(key, params, body) {
-              return {
+              return posRes({
                 key:   key,
                 value: {
                   type:   "FunctionExpression",
@@ -399,48 +399,48 @@ return (function() {
                   body:   body
                 },
                 kind:  "set"
-              };
+              });
             },
         peg$c249 = function(id) { return [id]; },
         peg$c250 = function(callee, args) {
                   return posRes({ type: "NewExpression", callee: callee, arguments: args }); // promiseland
                 },
         peg$c251 = function(property) {
-                  return { property: property, computed: true };
+                  return posRes({ property: property, computed: true });
                 },
         peg$c252 = function(property) {
-                  return { property: property, computed: false };
+                  return posRes({ property: property, computed: false });
                 },
         peg$c253 = function(first, rest) {
               return buildTree(first, rest, function(result, element) {
-                return {
+                return posRes({
                   type:     "MemberExpression",
                   object:   result,
                   property: element.property,
                   computed: element.computed
-                };
+                });
               });
             },
         peg$c254 = function(callee) {
-              return { type: "NewExpression", callee: callee, arguments: [] };
+              return posRes({ type: "NewExpression", callee: callee, arguments: [] });
             },
         peg$c255 = "<",
         peg$c256 = { type: "literal", value: "<", description: "\"<\"" },
         peg$c257 = ">",
         peg$c258 = { type: "literal", value: ">", description: "\">\"" },
         peg$c259 = function(properties) {
-              return {
+              return posRes({
                 type:       "ProfileArguments",
                 properties: properties !== "" ? properties[0] : []
-              };
+              });
             },
         peg$c260 = function(callee, profileArguments, args) { // promiseland
-                return { 
+                return posRes({ 
                   type: "CallExpression", 
                   callee: callee, 
                   arguments: args,
                   profileArguments: profileArguments  // promiseland
-                };
+                });
               },
         peg$c261 = function(profileArguments, args) { // promiseland
                   return posRes({ 
@@ -450,18 +450,18 @@ return (function() {
                   });
                 },
         peg$c262 = function(property) {
-                  return {
+                  return posRes({
                     type:     "MemberExpression",
                     property: property,
                     computed: true
-                  };
+                  });
                 },
         peg$c263 = function(property) {
-                  return {
+                  return posRes({
                     type:     "MemberExpression",
                     property: property,
                     computed: false
-                  };
+                  });
                 },
         peg$c264 = function(first, rest) {
               return buildTree(first, rest, function(result, element) {
@@ -474,12 +474,12 @@ return (function() {
               return optionalList(extractOptional(args, 0));
             },
         peg$c266 = function(argument, operator) {
-              return {
+              return posRes({
                 type:     "UpdateExpression",
                 operator: operator,
                 argument: argument,
                 prefix:   false
-              };
+              });
             },
         peg$c267 = "++",
         peg$c268 = { type: "literal", value: "++", description: "\"++\"" },
@@ -490,12 +490,12 @@ return (function() {
                 ? "UpdateExpression"
                 : "UnaryExpression";
 
-              return {
+              return posRes({
                 type:     type,
                 operator: operator,
                 argument: argument,
                 prefix:   true
-              };
+              });
             },
         peg$c272 = "\u2721",
         peg$c273 = { type: "literal", value: "\u2721", description: "\"\\u2721\"" },
@@ -553,28 +553,28 @@ return (function() {
         peg$c325 = "?",
         peg$c326 = { type: "literal", value: "?", description: "\"?\"" },
         peg$c327 = function(test, consequent, alternate) {
-              return {
+              return posRes({
                 type:       "ConditionalExpression",
                 test:       test,
                 consequent: consequent,
                 alternate:  alternate
-              };
+              });
             },
         peg$c328 = function(left, right) {
-              return {
+              return posRes({
                 type:     "AssignmentExpression",
                 operator: "=",
                 left:     left,
                 right:    right
-              };
+              });
             },
         peg$c329 = function(left, operator, right) {
-              return {
+              return posRes({
                 type:     "AssignmentExpression",
                 operator: operator,
                 left:     left,
                 right:    right
-              };
+              });
             },
         peg$c330 = "*=",
         peg$c331 = { type: "literal", value: "*=", description: "\"*=\"" },
@@ -604,10 +604,10 @@ return (function() {
                 : first;
             },
         peg$c353 = function(body) {
-              return {
+              return posRes({
                 type: "BlockStatement",
                 body: optionalList(extractOptional(body, 0))
-              };
+              });
             },
         peg$c354 = function(first, rest) { return buildList(first, rest, 1); },
         peg$c355 = function(typename, declarations) {
@@ -646,173 +646,173 @@ return (function() {
               });
             },
         peg$c359 = function(expression) { return expression; },
-        peg$c360 = function() { return { type: "EmptyStatement" }; },
+        peg$c360 = function() { return posRes({ type: "EmptyStatement" }); },
         peg$c361 = function(expression) {
-              return {
+              return posRes({
                 type:       "ExpressionStatement",
                 expression: expression
-              };
+              });
             },
         peg$c362 = function(test, consequent, alternate) {
-              return {
+              return posRes({
                 type:       "IfStatement",
                 test:       test,
                 consequent: consequent,
                 alternate:  alternate
-              };
+              });
             },
         peg$c363 = function(test, consequent) {
-              return {
+              return posRes({
                 type:       "IfStatement",
                 test:       test,
                 consequent: consequent,
                 alternate:  null
-              };
+              });
             },
-        peg$c364 = function(body, test) { return { type: "DoWhileStatement", body: body, test: test }; },
-        peg$c365 = function(test, body) { return { type: "WhileStatement", test: test, body: body }; },
+        peg$c364 = function(body, test) { return posRes({ type: "DoWhileStatement", body: body, test: test }); },
+        peg$c365 = function(test, body) { return posRes({ type: "WhileStatement", test: test, body: body }); },
         peg$c366 = function(init, test, update, body) {
-              return {
+              return posRes({
                 type:   "ForStatement",
                 init:   extractOptional(init, 0),
                 test:   extractOptional(test, 0),
                 update: extractOptional(update, 0),
                 body:   body
-              };
+              });
             },
         peg$c367 = function(init, test, update, body) {
-              return {
+              return posRes({
                 type:   "ForStatement",
                 init:   init, // promiseland
                 test:   extractOptional(test, 0),
                 update: extractOptional(update, 0),
                 body:   body
-              };
+              });
             },
         peg$c368 = function(left, right, body) {
-              return {
+              return posRes({
                 type:  "ForInStatement",
                 left:  left,
                 right: right,
                 body:  body
-              };
+              });
             },
         peg$c369 = function(left, right, body) {
-              return {
+              return posRes({
                 type:  "ForInStatement",
                 left:  left, // promiseland
                 right: right,
                 body:  body
-              };
+              });
             },
         peg$c370 = function() {
-              return { type: "ContinueStatement", label: null };
+              return posRes({ type: "ContinueStatement", label: null });
             },
         peg$c371 = function(label) {
-              return { type: "ContinueStatement", label: label };
+              return posRes({ type: "ContinueStatement", label: label });
             },
         peg$c372 = function() {
-              return { type: "BreakStatement", label: null };
+              return posRes({ type: "BreakStatement", label: null });
             },
         peg$c373 = function(label) {
-              return { type: "BreakStatement", label: label };
+              return posRes({ type: "BreakStatement", label: label });
             },
         peg$c374 = function() {
-              return { type: "ReturnStatement", argument: null };
+              return posRes({ type: "ReturnStatement", argument: null });
             },
         peg$c375 = function(argument) {
-              return { type: "ReturnStatement", argument: argument };
+              return posRes({ type: "ReturnStatement", argument: argument });
             },
-        peg$c376 = function(object, body) { return { type: "WithStatement", object: object, body: body }; },
+        peg$c376 = function(object, body) { return posRes({ type: "WithStatement", object: object, body: body }); },
         peg$c377 = function(discriminant, cases) {
-              return {
+              return posRes({
                 type:         "SwitchStatement",
                 discriminant: discriminant,
                 cases:        cases
-              };
+              });
             },
         peg$c378 = function(clauses) {
               return optionalList(extractOptional(clauses, 0));
             },
         peg$c379 = function(before, default_, after) {
-              return optionalList(extractOptional(before, 0))
+              return posRes(optionalList(extractOptional(before, 0))
                 .concat(default_)
-                .concat(optionalList(extractOptional(after, 0)));
+                .concat(optionalList(extractOptional(after, 0))));
             },
         peg$c380 = function(test, consequent) {
-              return {
+              return posRes({
                 type:       "SwitchCase",
                 test:       test,
                 consequent: optionalList(extractOptional(consequent, 1))
-              };
+              });
             },
         peg$c381 = function(consequent) {
-              return {
+              return posRes({
                 type:       "SwitchCase",
                 test:       null,
                 consequent: optionalList(extractOptional(consequent, 1))
-              };
+              });
             },
         peg$c382 = function(label, body) {
-              return { type: "LabeledStatement", label: label, body: body };
+              return posRes({ type: "LabeledStatement", label: label, body: body });
             },
         peg$c383 = function(argument) {
-              return { type: "ThrowStatement", argument: argument };
+              return posRes({ type: "ThrowStatement", argument: argument });
             },
         peg$c384 = function(block, handler, finalizer) {
-              return {
+              return posRes({
                 type:      "TryStatement",
                 block:     block,
                 handler:   handler,
                 finalizer: finalizer
-              };
+              });
             },
         peg$c385 = function(block, handler) {
-              return {
+              return posRes({
                 type:      "TryStatement",
                 block:     block,
                 handler:   handler,
                 finalizer: null
-              };
+              });
             },
         peg$c386 = function(block, finalizer) {
-              return {
+              return posRes({
                 type:      "TryStatement",
                 block:     block,
                 handler:   null,
                 finalizer: finalizer
-              };
+              });
             },
         peg$c387 = function(param, body) {
-              return {
+              return posRes({
                 type:  "CatchClause",
                 param: param,
                 body:  body
-              };
+              });
             },
         peg$c388 = function(block) { return block; },
-        peg$c389 = function() { return { type: "DebuggerStatement" }; },
-        peg$c390 = function(literal) { return { "literal": literal }; },
-        peg$c391 = function(exp) { return { "expression": exp }; },
-        peg$c392 = function(name, body) { return { name: name, body: body } },
-        peg$c393 = function(body) { return { body: body } },
+        peg$c389 = function() { return posRes({ type: "DebuggerStatement" }); },
+        peg$c390 = function(literal) { return posRes({ "literal": literal }); },
+        peg$c391 = function(exp) { return posRes({ "expression": exp }); },
+        peg$c392 = function(name, body) { return posRes({ name: name, body: body }) },
+        peg$c393 = function(body) { return posRes({ body: body }) },
         peg$c394 = function(exp) {
-            return {
+            return posRes({
               "type": "extends",
               "baseClass": exp
-            }
+            });
           },
         peg$c395 = "type",
         peg$c396 = { type: "literal", value: "type", description: "\"type\"" },
-        peg$c397 = function() { return { "type": "type" } },
+        peg$c397 = function() { return posRes({ "type": "type" }); },
         peg$c398 = "sync",
         peg$c399 = { type: "literal", value: "sync", description: "\"sync\"" },
         peg$c400 = "all",
         peg$c401 = { type: "literal", value: "all", description: "\"all\"" },
-        peg$c402 = function() { return { "type": "sync", "all": 1 }; },
+        peg$c402 = function() { return posRes({ "type": "sync", "all": 1 }); },
         peg$c403 = "some",
         peg$c404 = { type: "literal", value: "some", description: "\"some\"" },
-        peg$c405 = function() { return { "type": "sync", "all": 0 }; },
+        peg$c405 = function() { return posRes({ "type": "sync", "all": 0 }); },
         peg$c406 = function(arr) {
           var present = {};
           arr.filter(function (e, i, arr) {
@@ -824,12 +824,12 @@ return (function() {
           return arr;
         },
         peg$c407 = function(keywords, combination) {
-              return {
+              return posRes({
                 type:       "Class",
                 name:       combination.name,
                 body:       combination.body,
                 "keywords": keywords
-              };
+              });
             },
         peg$c408 = "frame",
         peg$c409 = { type: "literal", value: "frame", description: "\"frame\"" },
@@ -837,36 +837,36 @@ return (function() {
         peg$c411 = { type: "literal", value: "exclusive", description: "\"exclusive\"" },
         peg$c412 = function(keyword, name) { return posRes({name: name, "type": keyword}); },
         peg$c413 = function(id, params, frame, promise, body) {
-              return {
+              return posRes({
                 type:   "FunctionDeclaration",
                 id:     id,
                 params: optionalList(extractOptional(params, 0)),
                 body:   body,
                 promise:  promise, // promiseland
                 frame:    frame    // promiseland
-              };
+              });
             },
         peg$c414 = function(id, params, frame, promise, body) {
-              return {
+              return posRes({
                 type:   "FunctionExpression",
                 id:     extractOptional(id, 0),
                 params: optionalList(extractOptional(params, 0)),
                 body:   body,
                 promise:  promise, // promiseland
                 frame:    frame    // promiseland
-              };
+              });
             },
         peg$c415 = function(body) {
-              return {
+              return posRes({
                 type: "BlockStatement",
                 body: optionalList(body)
-              };
+              });
             },
         peg$c416 = function(body) {
-              return {
+              return posRes({
                 type: "Program",
                 body: optionalList(body)
-              };
+              });
             },
         peg$c417 = function(first, rest) {
               return buildList(first, rest, 1);
@@ -5759,6 +5759,9 @@ return (function() {
             s4 = peg$parse__();
             if (s4 !== peg$FAILED) {
               s5 = peg$parseAssignmentExpression();
+              if (s5 === peg$FAILED) {
+                s5 = peg$c59;
+              }
               if (s5 !== peg$FAILED) {
                 peg$reportedPos = s0;
                 s1 = peg$c245(s1, s5);
@@ -5804,6 +5807,9 @@ return (function() {
                   s6 = peg$parse__();
                   if (s6 !== peg$FAILED) {
                     s7 = peg$parseAssignmentExpression();
+                    if (s7 === peg$FAILED) {
+                      s7 = peg$c59;
+                    }
                     if (s7 !== peg$FAILED) {
                       peg$reportedPos = s0;
                       s1 = peg$c246(s1, s3, s7);
@@ -13565,23 +13571,23 @@ return (function() {
 
       function buildBinaryExpression(first, rest) {
         return buildTree(first, rest, function(result, element) {
-          return {
+          return posRes({
             type:     "BinaryExpression",
             operator: element[1],
             left:     result,
             right:    element[3]
-          };
+          });
         });
       }
 
       function buildLogicalExpression(first, rest) {
         return buildTree(first, rest, function(result, element) {
-          return {
+          return posRes({
             type:     "LogicalExpression",
             operator: element[1],
             left:     result,
             right:    element[3]
-          };
+          });
         });
       }
 

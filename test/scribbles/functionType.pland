@@ -1,0 +1,7 @@
+function a;
+
+void function b;
+
+var function(var, var) c;
+
+var function(var, var)<This> d;
