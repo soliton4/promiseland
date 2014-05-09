@@ -13,7 +13,7 @@ class type Type2 {
 var f1 = (){
   Type1 a = new Type1();
   return a;
-}
+};
 
 
 try {

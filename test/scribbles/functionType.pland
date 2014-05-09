@@ -1,7 +1,18 @@
-function a;
 
-void function b;
+<types: {
+  Extra: someTypeVariable
+}> function(a, b) {
+  Extra c = new Extra();
+  return false;
+};
 
-var function(var, var) c;
+var (){
+  this;
+}
 
-var function(var, var)<This> d;
+
+(function(){
+  var temp = {fun: undefined};
+  eval("temp.fun = " + "function(){};");
+  return temp.fun;
+})()

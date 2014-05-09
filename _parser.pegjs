@@ -586,6 +586,18 @@ ElementList
 Elision
   = "," commas:(__ ",")* { return filledArray(commas.length + 1, null); }
 
+// promiseland
+
+TemplateLiteral
+  = "<{" __ "}>" { return posRes({ type: "TemplateExpression", properties: [] }); }
+  / "<{" __ properties:PropertyNameAndValueList __ "}>" {
+       return posRes({ type: "TemplateExpression", properties: properties });
+     }
+  / "<{" __ properties:PropertyNameAndValueList __ "," __ "}>" {
+       return posRes({ type: "TemplateExpression", properties: properties });
+     }
+
+
 ObjectLiteral
   = "{" __ "}" { return posRes({ type: "ObjectExpression", properties: [] }); }
   / "{" __ properties:PropertyNameAndValueList __ "}" {
@@ -594,6 +606,7 @@ ObjectLiteral
   / "{" __ properties:PropertyNameAndValueList __ "," __ "}" {
        return posRes({ type: "ObjectExpression", properties: properties });
      }
+     
 PropertyNameAndValueList
   = first:PropertyAssignment rest:(__ "," __ PropertyAssignment)* {
       return buildList(first, rest, 3);
@@ -687,7 +700,7 @@ ProfileArguments  // promiseland
   = "<" __ properties:(PropertyNameAndValueList __ ("," __)?)? ">" {
       return posRes({
         type:       "ProfileArguments",
-        properties: properties !== "" ? properties[0] : []
+        properties: properties ? properties[0] : []
       });
     }
     
@@ -749,15 +762,22 @@ LeftHandSideExpression
   / NewExpression
 
 PostfixExpression
-  = argument:LeftHandSideExpression _ operator:PostfixOperator {
+  = argument:LeftHandSideExpression rest: (_ operator:PostfixOperator {
+      return {
+        operator: operator
+      };
+    })?
+    {
+      if (!rest){
+        return argument;
+      };
       return posRes({
         type:     "UpdateExpression",
-        operator: operator,
+        operator: rest.operator,
         argument: argument,
         prefix:   false
       });
     }
-  / LeftHandSideExpression
 
 PostfixOperator
   = "++"
@@ -932,80 +952,123 @@ LogicalORExpressionNoIn
 LogicalOROperator
   = "||"
 
+Operator
+  = LogicalOROperator
+  / LogicalANDOperator
+  / BitwiseOROperator
+  / BitwiseXOROperator
+  / BitwiseANDOperator
+  / EqualityOperator
+  / RelationalOperator
+  / ShiftOperator
+  / AdditiveOperator
+  / MultiplicativeOperator
+  
+OperatorNoIn
+  = LogicalOROperator
+  / LogicalANDOperator
+  / BitwiseOROperator
+  / BitwiseXOROperator
+  / BitwiseANDOperator
+  / EqualityOperator
+  / RelationalOperatorNoIn
+  / ShiftOperator
+  / AdditiveOperator
+  / MultiplicativeOperator
+
+
 ConditionalExpression
-  = test:LogicalORExpression __
-    "?" __ consequent:AssignmentExpression __
-    ":" __ alternate:AssignmentExpression
+  = test:LogicalORExpression
+    rest:(__ "?" __ consequent:AssignmentExpression __
+      ":" __ alternate:AssignmentExpression
+      {
+        return {
+          consequent: consequent,
+          alternate:  alternate
+        }
+      })?
     {
-      return posRes({
-        type:       "ConditionalExpression",
-        test:       test,
-        consequent: consequent,
-        alternate:  alternate
-      });
+      if (rest){
+        return posRes({
+          type:       "ConditionalExpression",
+          test:       test,
+          consequent: rest.consequent,
+          alternate:  rest.alternate
+        });
+      };
+      return test;
     }
-  / LogicalORExpression
 
 ConditionalExpressionNoIn
-  = test:LogicalORExpressionNoIn __
-    "?" __ consequent:AssignmentExpression __
-    ":" __ alternate:AssignmentExpressionNoIn
+  = test:LogicalORExpressionNoIn
+    rest:(__ "?" __ consequent:AssignmentExpression __
+      ":" __ alternate:AssignmentExpressionNoIn
+      {
+        return {
+          consequent: consequent,
+          alternate:  alternate
+        }
+      })?
     {
-      return posRes({
-        type:       "ConditionalExpression",
-        test:       test,
-        consequent: consequent,
-        alternate:  alternate
-      });
+      if (rest){
+        return posRes({
+          type:       "ConditionalExpression",
+          test:       test,
+          consequent: rest.consequent,
+          alternate:  rest.alternate
+        });
+      };
+      return test;
     }
-  / LogicalORExpressionNoIn
 
 AssignmentExpression
-  = left:LeftHandSideExpression __
-    "=" !"=" __
-    right:AssignmentExpression
+  = left:(exp:LeftHandSideExpression !( __ Operator) !( __ UnaryOperator){
+      return exp;
+    })
+    rest: ( __ operator:AssignmentOperator __
+      right:AssignmentExpression
+      {
+        return {
+          operator: operator,
+          right:    right
+        }
+      }
+    )?
     {
+      if (!rest){
+        return left;
+      };
       return posRes({
         type:     "AssignmentExpression",
-        operator: "=",
+        operator: rest.operator,
         left:     left,
-        right:    right
-      });
-    }
-  / left:LeftHandSideExpression __
-    operator:AssignmentOperator __
-    right:AssignmentExpression
-    {
-      return posRes({
-        type:     "AssignmentExpression",
-        operator: operator,
-        left:     left,
-        right:    right
+        right:    rest.right
       });
     }
   / ConditionalExpression
 
 AssignmentExpressionNoIn
-  = left:LeftHandSideExpression __
-    "=" !"=" __
-    right:AssignmentExpressionNoIn
+  = left:(exp:LeftHandSideExpression !( __ Operator) !( __ UnaryOperator){
+      return exp;
+    })
+    rest: ( __ operator:AssignmentOperator __
+      right:AssignmentExpressionNoIn
+      {
+        return {
+          operator: operator,
+          right:    right
+        }
+      }
+    )?
     {
+      if (!rest){
+        return left;
+      };
       return posRes({
         type:     "AssignmentExpression",
-        operator: "=",
+        operator: rest.operator,
         left:     left,
-        right:    right
-      });
-    }
-  / left:LeftHandSideExpression __
-    operator:AssignmentOperator __
-    right:AssignmentExpressionNoIn
-    {
-      return posRes({
-        type:     "AssignmentExpression",
-        operator: operator,
-        left:     left,
-        right:    right
+        right:    rest.right
       });
     }
   / ConditionalExpressionNoIn
@@ -1022,6 +1085,8 @@ AssignmentOperator
   / "&="
   / "^="
   / "|="
+  / "=" !"=" {return "="}
+
 
 Expression
   = first:AssignmentExpression rest:(__ "," __ AssignmentExpression)* {
@@ -1461,6 +1526,22 @@ FunctionDeclaration
         frame:    frame    // promiseland
       });
     }
+  / template:TemplateLiteral __ FunctionToken? __ id:Identifier __ // promiseland
+    "(" __ params:(FormalParameterList __)? ")" __
+    frame:FrameInformation? __
+    promise:PromiseOperator? __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return posRes({
+        type:   "FunctionDeclaration",
+        id:     id,
+        params: optionalList(extractOptional(params, 0)),
+        body:   body,
+        promise:  promise, // promiseland
+        frame:    frame,   // promiseland
+        template: template // promiseland
+      });
+    }
 
 FunctionExpression
   = FunctionToken? __ id:(Identifier __)?  // promiseland
@@ -1476,6 +1557,22 @@ FunctionExpression
         body:   body,
         promise:  promise, // promiseland
         frame:    frame    // promiseland
+      });
+    }
+  / template:TemplateLiteral __ FunctionToken? __ id:(Identifier __)?  // promiseland
+    "(" __ params:(FormalParameterList __)? ")" __
+    frame:FrameInformation? __
+    promise:PromiseOperator? __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return posRes({
+        type:   "FunctionExpression",
+        id:     extractOptional(id, 0),
+        params: optionalList(extractOptional(params, 0)),
+        body:   body,
+        promise:  promise, // promiseland
+        frame:    frame,   // promiseland
+        template: template // promiseland
       });
     }
 

@@ -49,7 +49,6 @@
   
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
@@ -65,31 +64,8 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "cb0cacb00014ff9e927d09985ddc4811" })){ return promiseland._getModule("cb0cacb00014ff9e927d09985ddc4811"); };
-var _V2/*type:var*/ = __classSystem.getBuiltinType("var");
-var _V1 = (function(){
-"use strict";
-var _V3/*Type1*/;
-var _V6/*Type2*/;
-var _V9/*f1*/;
-var _V4;
-var _V7;
-var _V5/*type:Type1*/;
-var _V8/*type:Type2*/;
-_V3/*Type1*/ = classSystem.createClass({members: [{"name":"a","type":_V2/*type:var*/},{"name":"b","type":_V2/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2});_V5/*type:Type1*/ = _V3/*Type1*/;_V4 = promiseland.classSystem.getTypeConstructor(_V5/*type:Type1*/);_V3/*Type1*/;;
-_V6/*Type2*/ = classSystem.createClass({members: [{"name":"x","type":_V2/*type:var*/},{"name":"y","type":_V2/*type:var*/}], "extends": [], "hasFreePart": true}, {"x": 3, "y": 4});_V8/*type:Type2*/ = _V6/*Type2*/;_V7 = promiseland.classSystem.getTypeConstructor(_V8/*type:Type2*/);_V6/*Type2*/;;
-_V9/*f1*/ = function(){
-var _V10/*a*/;
-_V10/*a*/ = new _V4();
-return (function(){ throw { id:201, msg: "type missmatch" } })();
-};
-try
-{_V9/*f1*/();;
-}catch(e){return {"success": true};
-};
-return {"success": false};
-})();
-promiseland._registerModule({ hashStr: "cb0cacb00014ff9e927d09985ddc4811", "module": _V1, promising: false });
+if (promiseland._hasModule({ hashStr: "9d57e55726d9ae19340e0d6d5780c0ef" })){ return promiseland._getModule("9d57e55726d9ae19340e0d6d5780c0ef"); };
+[object Object]promiseland._registerModule({ hashStr: "9d57e55726d9ae19340e0d6d5780c0ef", "module": _V1, promising: false });
 return _V1;
 });
 })();
