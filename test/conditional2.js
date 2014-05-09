@@ -49,6 +49,7 @@
   
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
+  var classSystem = promiseland.classSystem; 
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){

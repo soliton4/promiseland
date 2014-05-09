@@ -49,6 +49,7 @@
   
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
+  var classSystem = promiseland.classSystem; 
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
@@ -78,8 +79,8 @@ var _V3;
 var _V6;
 var _V4/*type:Type1*/;
 var _V7/*type:Type2*/;
-_V2/*Type1*/ = promiseland.classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V4/*type:Type1*/ = _V2/*Type1*/;_V3 = promiseland.classSystem.getTypeConstructor(_V4/*type:Type1*/);_V2/*Type1*/;;
-_V5/*Type2*/ = promiseland.classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V7/*type:Type2*/ = _V5/*Type2*/;_V6 = promiseland.classSystem.getTypeConstructor(_V7/*type:Type2*/);_V5/*Type2*/;;
+_V2/*Type1*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V4/*type:Type1*/ = _V2/*Type1*/;_V3 = promiseland.classSystem.getTypeConstructor(_V4/*type:Type1*/);_V2/*Type1*/;;
+_V5/*Type2*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V7/*type:Type2*/ = _V5/*Type2*/;_V6 = promiseland.classSystem.getTypeConstructor(_V7/*type:Type2*/);_V5/*Type2*/;;
 try
 {_V8/*a*/;
 _V9/*b*/;

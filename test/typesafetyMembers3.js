@@ -49,6 +49,7 @@
   
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
+  var classSystem = promiseland.classSystem; 
   var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
@@ -79,9 +80,9 @@ var _V10;
 var _V5/*type:Mt1*/;
 var _V8/*type:Type1*/;
 var _V11/*type:Type2*/;
-_V3/*Mt1*/ = promiseland.classSystem.createClass({members: [{"name":"a1","type":_V2/*type:var*/},{"name":"a2","type":_V2/*type:var*/}], "extends": [], "hasFreePart": true}, {"a1": 20, "a2": 30});_V5/*type:Mt1*/ = _V3/*Mt1*/;_V4 = promiseland.classSystem.getTypeConstructor(_V5/*type:Mt1*/);_V3/*Mt1*/;;
-_V6/*Type1*/ = promiseland.classSystem.createClass({members: [{"name":"a","type":_V2/*type:var*/},{"name":"b","type":_V2/*type:var*/},{"name":"m1","type":_V5/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2, "m1": undefined});_V8/*type:Type1*/ = _V6/*Type1*/;_V7 = promiseland.classSystem.getTypeConstructor(_V8/*type:Type1*/);_V6/*Type1*/;;
-_V9/*Type2*/ = promiseland.classSystem.createClass({members: [{"name":"x","type":_V2/*type:var*/},{"name":"y","type":_V2/*type:var*/},{"name":"m2","type":_V5/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"x": 3, "y": 4, "m2": undefined});_V11/*type:Type2*/ = _V9/*Type2*/;_V10 = promiseland.classSystem.getTypeConstructor(_V11/*type:Type2*/);_V9/*Type2*/;;
+_V3/*Mt1*/ = classSystem.createClass({members: [{"name":"a1","type":_V2/*type:var*/},{"name":"a2","type":_V2/*type:var*/}], "extends": [], "hasFreePart": true}, {"a1": 20, "a2": 30});_V5/*type:Mt1*/ = _V3/*Mt1*/;_V4 = promiseland.classSystem.getTypeConstructor(_V5/*type:Mt1*/);_V3/*Mt1*/;;
+_V6/*Type1*/ = classSystem.createClass({members: [{"name":"a","type":_V2/*type:var*/},{"name":"b","type":_V2/*type:var*/},{"name":"m1","type":_V5/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2, "m1": undefined});_V8/*type:Type1*/ = _V6/*Type1*/;_V7 = promiseland.classSystem.getTypeConstructor(_V8/*type:Type1*/);_V6/*Type1*/;;
+_V9/*Type2*/ = classSystem.createClass({members: [{"name":"x","type":_V2/*type:var*/},{"name":"y","type":_V2/*type:var*/},{"name":"m2","type":_V5/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"x": 3, "y": 4, "m2": undefined});_V11/*type:Type2*/ = _V9/*Type2*/;_V10 = promiseland.classSystem.getTypeConstructor(_V11/*type:Type2*/);_V9/*Type2*/;;
 try
 {_V12/*a*/ = new _V7();
 _V13/*b*/ = new _V10();
