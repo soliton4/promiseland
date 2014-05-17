@@ -685,7 +685,7 @@
         extraRes.push("\"use strict\";\n");
         addExtraToPar(par, "addFront", extraRes);
         
-        if (checkPromising(par.promising)){
+        if (checkPromising(par)){
           this.programPromiseStr = this.getUniqueName();
         };
         
@@ -1575,8 +1575,8 @@
           case "UpdateExpression":
             return this.expUpdateExpression(value);
 
-          case "ArrayLiteral":
-            return this.arrayLiteral(value);
+          case "ArrayExpression":
+            return this.expArrayExpression(value);
             
           case "MemberExpression":
             return this.expMemberExpression(value);
@@ -1766,7 +1766,7 @@
           res.push("(");
         };
         var i = 0;
-        for (i; i < par["arguments"].lengh; ++i){
+        for (i; i < par["arguments"].length; ++i){
           if (i){
             res.push(", ");
           };
@@ -2598,7 +2598,7 @@
         [[value][, ...]]
       */
       
-      this.arrayLiteral = function(par){
+      this.expArrayExpression = function(par){
         var res = this.newResult();
         res.push("[");
         var i = 0;
@@ -2607,9 +2607,10 @@
           if (i){
             res.push(", ");
           };
-          res.push(this.parseExpression(par.elements[i]));
+          res.push(this.expectTypeVar(this.parseExpression(par.elements[i])));
         };
         res.push("]");
+        res.setType("var");
         return res;
       };
       
@@ -2760,6 +2761,7 @@
               resStr += "var " + cp.programPromiseStr + " = " + newPromiseStr() + ";\n";
               resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
               resStr += programStr;
+              resStr += ";\nreturn " + cp.programPromiseStr;
             }else{
               resStr += programStr;
               resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
