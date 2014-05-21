@@ -38,6 +38,8 @@
     var promiseClass = "__Promise";
     var errorMsg;
     
+    var classSystem = promiseland.classSystem;
+    
     var statementType = {
       builtin: true
       , statement: true
@@ -103,12 +105,15 @@
       if (par.type == "FunctionExpression" && par.promise == "*"){
         par.promising = true;
       };
+      if (par.type == "FunctionDeclaration" && par.promise == "*"){
+        par.promising = true;
+      };
       var i;
       for (i in par){
         if (i == "_extrainfo"){
           continue;
         };
-        if (findPromises(par[i]) && par[i].type != "FunctionExpression"){
+        if (findPromises(par[i]) && par[i].type != "FunctionExpression" && par[i].type != "FunctionDeclaration"){
           par.promising = true;
         };
       };
@@ -368,6 +373,9 @@
           }else if (this.toParse.type == "FunctionExpression"){
             this.functionRes = this.parseFunction(this.toParse);
             this.result = this.makeCompleteStatement(this.functionRes);
+          }else if (this.toParse.type == "FunctionDeclaration"){
+            this.functionRes = this.parseFunction(this.toParse);
+            this.result = this.makeCompleteStatement(this.functionRes);
           };
         };
       };
@@ -420,8 +428,35 @@
             };
             return;
           };
+          if (self.parameters[name]){
+            entry = self.variables[name];
+            if (entry){
+              if (entry.typename != typename){
+                self.error(par, errorMsg.variableRedefinition);
+              };
+            };
+          };
           entry = {
             typename: typename
+            , name: name
+          };
+          variables[name] = entry;
+        };
+        var addFunction = function(parName, type, par){
+          var name = identifierName(parName);
+          var entry = variables[name];
+          if (entry){
+            self.error(par, errorMsg.variableRedefinition);
+            return;
+          };
+          if (self.parameters[name]){
+            entry = self.variables[name];
+            if (entry){
+              self.error(par, errorMsg.variableRedefinition);
+            };
+          };
+          entry = {
+            type: type
             , name: name
           };
           variables[name] = entry;
@@ -438,8 +473,13 @@
               addVar(par.name, "var", par);
             };
           }else if (par.type == "FunctionExpression"){
-            if (par.name){
-              addVar(par.name, "var", par);
+            if (par.id){
+              addFunction(par.id, self.getFunctionType(par), par);
+            };
+            return;
+          }else if (par.type == "FunctionDeclaration"){
+            if (par.id){
+              addFunction(par.id, self.getFunctionType(par), par);
             };
             return;
           };
@@ -460,7 +500,13 @@
         if (!entry){
           return this.getType("var");
         };
-        return this.getType(entry.typename);
+        if (entry["type"]){
+          return entry["type"];
+        };
+        if (entry.typename){
+          return this.getType(entry.typename);
+        };
+        this.error(name, errorMsg.variableHasNoType);
       };
       
       this.usedVariables = {
@@ -497,7 +543,11 @@
       
       this.parameters = {};
       this._addParameter = function(par){
-        this.parameters[par] = true;
+        this.variables[identifierName(par.name)] = {
+          name: identifierName(par.name),
+          typename: identifierName(par.typename || "var")
+        };
+        this.parameters[identifierName(par.name)] = true;
       };
       
       this.isLocallyUntypedDeclared = function(name){
@@ -724,7 +774,6 @@
         parGivenPromiseNameStr is provided by parseProgram to access the return promise before declaring the funciton
       */
       this.parseFunction = function(par){
-        //type: "FunctionExpression", name: null, params: Array[0], elements: Array[1]}
         
         this.stack("isFunction");
         this.isFunction = true;
@@ -781,7 +830,55 @@
         
       };
       
+      this.getFunctionType = function(par){
+        var isTyped = false;
+        var functionTypeParam = {
+          "return": this.getType("var"),
+          "arguments": []
+        };
+        if (par.returnTypename){
+          isTyped = true;
+          functionTypeParam["return"] = this.getType(par.returnTypename);
+        };
+        
+        // parameters
+        if (par.params && par.params.length){
+          i = 0;
+          var l = par.params.length;
+          for (i; i < l; ++i){
+            var tempTypename = identifierName(par.params[i].typename || "var");
+            functionTypeParam["arguments"].push(this.getType(tempTypename));
+            if (tempTypename != "var"){
+              isTyped = true;
+            };
+          };
+        };
+        
+        if (isTyped){
+          return this.createFunctionType(functionTypeParam);
+        };
+        return this.getType("var");
+      };
       
+      this.createFunctionType = function(par){
+        var isDynamic = false;
+        if (par["return"].isDynamic){
+          isDynamic = true;
+        };
+        var i = 0;
+        for (i = 0; i < par["arguments"].length; ++i){
+          if (par["arguments"][i].isDynamic){
+            isDynamic = true;
+          };
+        };
+        if (isDynamic){
+          debugger;
+        }else{
+          return classSystem.createFunctionType(par);
+        };
+      };
+
+
       this._parseFunction = function(par, parGivenPromiseNameStr){
         
         // check for hints
@@ -792,6 +889,29 @@
         var typename;
         
         var funClosure;
+        
+        // has it a name?
+        var hasName = false;
+        var nameStr;
+        if (par.id){
+          nameStr = identifierName(par.id);
+          hasName = true;
+        };
+        
+        
+        
+        /* -------------------------------------------------------------------------
+            return Type
+        */
+        
+        if (par.returnTypename){
+          this._returnType = this.getType(par.returnTypename);
+        };
+        
+        
+        /* -------------------------------------------------------------------------
+            frame Information
+        */
         
         if (par.frame && par.frame.name){
           hasFrameInfo = true;
@@ -805,6 +925,10 @@
             runExclusive = true;
           };
         };
+        
+        /* -------------------------------------------------------------------------
+            template
+        */
         
         var templateTypesAr = [];
         
@@ -847,21 +971,26 @@
         // main result
         var res = this.newResult(); 
         
+        
+        /* -------------------------------------------------------------------------
+            the function
+        */
+        
         // function result
         var funRes = this.newResult();
         
-        this.localVariables = this.scanVariables(par.body);
-        this.variables = mixin(this.variables, this.localVariables);
         
         // function keyword and parameters
         i = 0;
         funRes.push("function");
-        if (par.name){
-          this.functionName = this.getVariableName(par.name);
+        if (hasName){
+          this.functionName = this.getVariableName(nameStr);
         };
-        if (par.name && !runRemote){
-          funRes.push(" " + this.getVariableName(par.name));
+        if (hasName && !runRemote){
+          funRes.push(" " + this.getVariableName(nameStr));
         };
+        
+        // parameters
         funRes.push("("); // function start
         if (par.params && par.params.length){
           i = 0;
@@ -870,16 +999,19 @@
             if (i){
               funRes.push(", ");
             };
-            funRes.push(this.getVariableName(identifierName(par.params[i])));
+            funRes.push(this.getVariableName(identifierName(par.params[i].name)));
             funRes.addParameter(par.params[i]);
           };
         };
         funRes.push("){\n");
         
+        this.localVariables = this.scanVariables(par.body);
+        this.variables = mixin(this.variables, this.localVariables);
+        
         
         // exclusive hint
         if (runExclusive){
-          funRes.push("if (!promiseland.profileHas(\"" + par.frame.name + "\")){\n");
+          funRes.push("if (!promiseland.profileHas(\"" + identifierName(par.frame.name) + "\")){\n");
           if (par.promising){
             funRes.push("var p = " + newPromiseStr() + ";\n");
             funRes.push("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");
@@ -965,8 +1097,6 @@
         };
         
         
-        
-        
         funRes.push(block);
         
         // promising additions
@@ -1011,13 +1141,13 @@
           uniqueNameStr = this.getUniqueName();
           res.addPre("var " + uniqueNameStr + " = ");
           res.addPre(completeFunStr);
-          res.addPre(";\npromiseland.registerRemote(\"" + par.frame.name + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
+          res.addPre(";\npromiseland.registerRemote(\"" + identifierName(par.frame.name) + "\", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
           res.push("function");
-          if (par.name){
-            res.push(" " + this.getVariableName(par.name));
+          if (hasName){
+            res.push(" " + this.getVariableName(nameStr));
           };
           res.push("(){"); // function start
-          res.push("if (promiseland.profileHas(\"" + par.frame.name + "\")){\n");
+          res.push("if (promiseland.profileHas(\"" + identifierName(par.frame.name) + "\")){\n");
           res.push("return " + uniqueNameStr + ".apply(this, arguments);\n");
           res.push("}else{\n");
           res.push("return promiseland.remoteExec(\"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", arguments);\n");
@@ -1027,7 +1157,7 @@
           res.push(completeFunStr);
         };
         
-        res.setType("var");
+        res.setType(this.getFunctionType(par));
         
         return res;
       };
@@ -1096,6 +1226,9 @@
           return;
         };
         if (par.type == "FunctionExpression"){
+          return;
+        };
+        if (par.type == "FunctionDeclaration"){
           return;
         };
         
@@ -1541,6 +1674,8 @@
 
           case "FunctionExpression":
             return this.expFunctionExpression(value);
+          case "FunctionDeclaration":
+            return this.expFunctionDeclaration(value);
             
           case "EmptyStatement":
             // why does this exist?
@@ -1650,7 +1785,7 @@
         };
         
         if (funName && funRes){
-          this.addFunction(funRes);
+          this.addFunction(funRes, funName);
           var res = this.newResult(funName);
           res.setType(funRes.getType());
           return res;
@@ -1658,6 +1793,9 @@
         
         return funRes || cp.getResult();
         
+      };
+      this.expFunctionDeclaration = function(value){
+        return this.expFunctionExpression(value);
       };
       
       
@@ -2835,6 +2973,10 @@
       severalProgramElements:{
         id: 111,
         msg: "several Program Elements"
+      },
+      variableHasNoType: {
+        id: 112,
+        msg: "variable has no type"
       },
       
       

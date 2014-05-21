@@ -68,7 +68,6 @@ var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "4e84e403eb11ef3aad15c8c7b151734b" })){ return promiseland._getModule("4e84e403eb11ef3aad15c8c7b151734b"); };
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V9/*setTimeout*/;try{_V9/*setTimeout*/ = setTimeout;}catch(e){};
-var _V3/*par*/;try{_V3/*par*/ = par;}catch(e){};
 var _V21/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";

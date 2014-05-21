@@ -35,6 +35,8 @@ if (files){
       }catch(e){
         console.log(e);
         console.log("error");
+        fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", "", callback.callback);
+        *callback.promise;
       };
     };
   };

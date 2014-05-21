@@ -802,8 +802,8 @@
       , createFunctionType: function(par){
         var cDef = {
           isFunction: true,
-          returnType: par.returnType || this.getBuiltinType("var"),
-          parameters: par.parameters || []
+          "return": par["return"] || this.getBuiltinType("var"),
+          "arguments": par["arguments"] || []
         };
         cf = classHider(cDef);
         return cf;

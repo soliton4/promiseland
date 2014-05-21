@@ -68,7 +68,6 @@ var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "b84ffe21642945e905a4c3f179551605" })){ return promiseland._getModule("b84ffe21642945e905a4c3f179551605"); };
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V9/*setTimeout*/;try{_V9/*setTimeout*/ = setTimeout;}catch(e){};
-var _V3/*par*/;try{_V3/*par*/ = par;}catch(e){};
 var _V16/*console*/;try{_V16/*console*/ = console;}catch(e){};
 var _V18/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){

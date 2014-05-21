@@ -76,7 +76,7 @@ var _V4 = function(e){ _V1.reject(e); };
 var _V5/*fs*/;
 var _V11/*getter*/;
 _V3(function(){function(){
-if (!promiseland.profileHas("[object Object]")){
+if (!promiseland.profileHas("undefined")){
 var p = new __Promise();
 p.reject({id: 14, msg: "function does not execute in this frame."});
 return p;
@@ -98,8 +98,8 @@ _V12.resolve(); return;;
 })();
 return _V12;
 };
-promiseland.registerRemote("[object Object]", "cae0507e04a7312601e16db3b4c02736", "_V15", _V15);
-_V11/*getter*/ = function(){if (promiseland.profileHas("[object Object]")){
+promiseland.registerRemote("undefined", "cae0507e04a7312601e16db3b4c02736", "_V15", _V15);
+_V11/*getter*/ = function(){if (promiseland.profileHas("undefined")){
 return _V15.apply(this, arguments);
 }else{
 return promiseland.remoteExec("cae0507e04a7312601e16db3b4c02736", "_V15", arguments);

@@ -65,25 +65,63 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "b11400ba0e9c7ad1138441a5da323a02" })){ return promiseland._getModule("b11400ba0e9c7ad1138441a5da323a02"); };
-var _V6/*x*/;try{_V6/*x*/ = x;}catch(e){};
-var _V7/*type:var*/ = __classSystem.getBuiltinType("var");
-var _V1 = (function(){
+if (promiseland._hasModule({ hashStr: "eebfd8846a03586e8029663b626fa333" })){ return promiseland._getModule("eebfd8846a03586e8029663b626fa333"); };
+var _V1 = new __Promise();
+promiseland._registerModule({ hashStr: "eebfd8846a03586e8029663b626fa333", "module": _V1, promising: true });
+var _V16/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V2 = (function(){
 "use strict";
-var _V2/*y*/;
-_V2/*y*/ = function(){
-var _V3/*bla*/;
-var _V4/*z*/;
-_V3/*bla*/ = 1;
-_V3/*bla*/ = 3;;
-_V4/*z*/ = function(){
-var _V5/*bla2*/;
-_V5/*bla2*/ = 4;
+var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
+var _V4 = function(e){ _V1.reject(e); };
+var _V5/*fmain*/;
+function _V5/*fmain*/(){
+var _V7 = new __Promise();
+var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
+var _V9 = function(e){ _V7.reject(e); };
+var _V10/*fa*/;
+var _V11/*res*/;
+var _V12/*fb*/;
+var _V13/*fc*/;
+function _V10/*fa*/(){
+return 1;
 };
-_V6/*x*/();;
+function _V12/*fb*/(){
+return 2;
 };
-})();
-promiseland._registerModule({ hashStr: "b11400ba0e9c7ad1138441a5da323a02", "module": _V1, promising: false });
+function _V13/*fc*/(){
+return 3;
+};
+_V8(function(){_V10/*fa*/;
+;
+_V11/*res*/ = ((_V10/*fa*/() + _V12/*fb*/()) + _V13/*fc*/());
+_V12/*fb*/;
+;
+_V7.resolve( _V11/*res*/); return _V7;
+var _V14 = new __Promise();
+if(false){
+_V12/*fb*/().then(_V8(function(_V15){_V15;;
+_V14.resolve();;
+}), _V9);
+}else{
+_V14.resolve();}; _V14.then(function(){;
+;
+_V13/*fc*/;
+;
+_V7.resolve(); return;;
+});})();
+return _V7;
+};
+_V3(function(){_V5/*fmain*/().then(_V3(function(_V6){if((_V6 == 6)){
+_V1.resolve( {"success": true}); return _V1;
+};
+;
+_V1.resolve( {"success": false}); return _V1;
+_V5/*fmain*/;
+;
+_V1.resolve(); return;;
+}), _V4);})();
 return _V1;
-});
+})();
+;
+return _V1});
 })();

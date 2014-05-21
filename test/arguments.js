@@ -70,8 +70,6 @@ var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "2f48921929fe5412fc241c2e109a33b6", "module": _V1, promising: true });
 var _V10/*Callback*/;try{_V10/*Callback*/ = Callback;}catch(e){};
 var _V11/*setTimeout*/;try{_V11/*setTimeout*/ = setTimeout;}catch(e){};
-var _V15/*para*/;try{_V15/*para*/ = para;}catch(e){};
-var _V16/*parb*/;try{_V16/*parb*/ = parb;}catch(e){};
 var _V23/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
