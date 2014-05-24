@@ -69,18 +69,18 @@ if (promiseland._hasModule({ hashStr: "1521f2775b4173c536ae637258c8a819" })){ re
 var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
-var _V2/*Type1*/;
-var _V5/*Type2*/;
+var _V4/*Type1*/;
+var _V6/*Type2*/;
 var _V8/*a*/;
 var _V9/*b*/;
 var _V10/*c*/;
 var _V11/*d*/;
-var _V3;
-var _V6;
-var _V4/*type:Type1*/;
+var _V2/*Type1-constructor*/;
+var _V3/*Type2-constructor*/;
+var _V5/*type:Type1*/;
 var _V7/*type:Type2*/;
-_V2/*Type1*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V4/*type:Type1*/ = _V2/*Type1*/;_V3 = promiseland.classSystem.getTypeConstructor(_V4/*type:Type1*/);_V2/*Type1*/;;
-_V5/*Type2*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V7/*type:Type2*/ = _V5/*Type2*/;_V6 = promiseland.classSystem.getTypeConstructor(_V7/*type:Type2*/);_V5/*Type2*/;;
+_V4/*Type1*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V5/*type:Type1*/ = _V4/*Type1*/;_V2/*Type1-constructor*/ = promiseland.classSystem.getTypeConstructor(_V5/*type:Type1*/);_V4/*Type1*/;;
+_V6/*Type2*/ = classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {});_V7/*type:Type2*/ = _V6/*Type2*/;_V3/*Type2-constructor*/ = promiseland.classSystem.getTypeConstructor(_V7/*type:Type2*/);_V6/*Type2*/;;
 try
 {_V8/*a*/;
 _V9/*b*/;

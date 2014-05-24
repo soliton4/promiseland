@@ -434,7 +434,7 @@
       return _parserPs;
     };
     
-    var mixinPrototype = function(parProto, parMixin, gotit){
+    var mixinPrototype = function(parProto, parMixin, inheritedObject, gotit){
       if (!parMixin || !parMixin.prototype){
         return;
       };
@@ -442,21 +442,30 @@
         gotit = {};
       };
       var i;
-      for (i in parMixin){
+      var proto = parMixin.prototype;
+      for (i in proto){
         if (i === "prototype" || gotit[i]){
           continue;
         };
-        parProto[i] = parMixin[i];
+        parProto[i] = proto[i];
+        inheritedObject[i] = parProto[i];
         gotit[i] = true;
       };
       if (parMixin.prototype){
-        mixinPrototype(parProto, parMixin.prototype, gotit);
+        mixinPrototype(parProto, parMixin.prototype, inheritedObject, gotit);
       };
       
     };
     
-    var createClass = function(par, parExtends){
-      var constructorFun = par.constructor || function(){};
+    var getProperty = function(par, parProperty, parDefault){
+      if (par.hasOwnProperty(parProperty)){
+        return par[parProperty];
+      };
+      return parDefault;
+    };
+    
+    var createClass = function(par, parExtends, inheritedObject){
+      var constructorFun = getProperty(par, "constructor", function(){});
       var proto = {};
       var i;
       var l;
@@ -468,7 +477,7 @@
           l = parExtends.length;
           var extendConstructors = [];
           for (i = 0; i < l; ++i){
-            mixinPrototype(proto, parExtends[i]);
+            mixinPrototype(proto, parExtends[i], inheritedObject);
             if (typeof parExtends[i] === "function"){
               extendConstructors.push(parExtends[i]);
             };
@@ -484,7 +493,7 @@
             };
           };
         }else{
-          mixinPrototype(proto, parExtends);
+          mixinPrototype(proto, parExtends, inheritedObject);
           if (typeof parExtends === "function"){
             constructorFun = function(){
               parExtends.apply(this, arguments);
@@ -530,8 +539,8 @@
       ProfileBaseClass: Profile,
       ConnectionBaseClass: Connection,
       
-      createClass: function(par){
-        return createClass(par);
+      createClass: function(par, parExtends, inheritedObject){
+        return createClass(par, parExtends, inheritedObject);
       },
       
       set: function(parWhat, parValue){
@@ -809,6 +818,14 @@
         return cf;
       }
       
+      , getFunctionReturnType: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.isVar){
+          return this.getBuiltinType("var");
+        };
+        return cDef["return"];
+      }
+      
       , getTypeConstructor: function(parType){
         var cDef = getClass(parType);
         return cDef.constructor;
@@ -908,6 +925,52 @@
         return runtimeError(errorMsg.missingVariable, par);
       }
       
+      , getCallCode: function(par){
+        var cDef = getClass(par["type"]);
+        var i;
+        var l;
+        var args;
+        var assembly;
+        if (cDef.isVar){
+          args = par["arguments"];
+          l = args.length;
+          assembly = [MAKRO_SELF, "("];
+          for (i = 0; i < l; ++i){
+            if (i > 0){
+              assembly.push(", ");
+            };
+            assembly.push({
+              _internFun: "getPassAsTypeCode",
+              "type": this.getBuiltinType("var"),
+              "value": args[i].value,
+              "valueType": args[i]["type"]
+            });
+          };
+          assembly.push(")");
+          return assembleCode(assembly, par);
+        };
+        if (!cDef.isFunction){
+          return runtimeError(errorMsg.expectedCallable, par);
+        };
+        
+        args = par["arguments"];
+        l = args.length;
+        assembly = [MAKRO_SELF, "("];
+        for (i = 0; i < l; ++i){
+          if (i > 0){
+            assembly.push(", ");
+          };
+          assembly.push({
+            _internFun: "getPassAsTypeCode",
+            "type": cDef.arguments[i] || this.getBuiltinType("var"),
+            "value": args[i].value,
+            "valueType": args[i]["type"]
+          });
+        };
+        assembly.push(")");
+        return assembleCode(assembly, par);
+      }
+      
       , getBinaryExpressionCode: function(par){
         var lcDef = getClass(par["leftType"]);
         var rcDef = getClass(par["rightType"]);
@@ -998,6 +1061,14 @@
       for (i = 0; i < ar.length; ++i){
         if (typeof ar[i] == "string"){
           res.push(ar[i]);
+        }else if(ar[i]._internFun){
+          var tempPar = ar[i];
+          tempPar.result = par.result;
+          tempPar.errorFun = par.errorFun;
+          var tempRes = classSystem[ar[i]._internFun](tempPar);
+          if (!par.result){
+            res.push(tempRes);
+          };
         }else{
           switch(ar[i]){
             case MAKRO_SELF:
@@ -1063,6 +1134,10 @@
       operatorMissmatch: {
         id: 203
         , msg: "operator missmatch"
+      },
+      expectedCallable: {
+        id: 204
+        , msg: "expected callable expression"
       }
     };
     

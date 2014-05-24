@@ -92,6 +92,16 @@
       return par.name;
     };
     
+    var checkIsFunction = function(par){
+      if (
+        par.type == "FunctionExpression"
+        || par.type == "FunctionDeclaration"
+        || par.type == "MemberFunction"
+      ){
+        return true;
+      };
+      return false;
+    };
     
     /* pre processors */
     
@@ -102,10 +112,7 @@
       if (par.type == "UnaryExpression" && (par.operator == "*" || par.operator == "require")){
         par.promising = true;
       };
-      if (par.type == "FunctionExpression" && par.promise == "*"){
-        par.promising = true;
-      };
-      if (par.type == "FunctionDeclaration" && par.promise == "*"){
+      if (checkIsFunction(par) && par.promise == "*"){
         par.promising = true;
       };
       var i;
@@ -113,7 +120,7 @@
         if (i == "_extrainfo"){
           continue;
         };
-        if (findPromises(par[i]) && par[i].type != "FunctionExpression" && par[i].type != "FunctionDeclaration"){
+        if (findPromises(par[i]) && !checkIsFunction(par[i])){
           par.promising = true;
         };
       };
@@ -132,6 +139,7 @@
       };
       return par.promising || par.isPromising;
     };
+    
     
     
     
@@ -370,10 +378,7 @@
         if (this.toParse){
           if (this.toParse.type == "Program"){
             this.result = this.makeCompleteStatement(this.parseProgram(this.toParse));
-          }else if (this.toParse.type == "FunctionExpression"){
-            this.functionRes = this.parseFunction(this.toParse);
-            this.result = this.makeCompleteStatement(this.functionRes);
-          }else if (this.toParse.type == "FunctionDeclaration"){
+          }else if (checkIsFunction(this.toParse)){
             this.functionRes = this.parseFunction(this.toParse);
             this.result = this.makeCompleteStatement(this.functionRes);
           };
@@ -472,13 +477,8 @@
             if (ci.hasName){
               addVar(par.name, "var", par);
             };
-          }else if (par.type == "FunctionExpression"){
-            if (par.id){
-              addFunction(par.id, self.getFunctionType(par), par);
-            };
-            return;
-          }else if (par.type == "FunctionDeclaration"){
-            if (par.id){
+          }else if (checkIsFunction(par)){
+            if (par.id && par.type != "MemberFunction"){
               addFunction(par.id, self.getFunctionType(par), par);
             };
             return;
@@ -493,7 +493,7 @@
         };
         findVariables(par);
         return variables;
-
+        
       };
       this.getVariableType = function(name){
         var entry = this.variables[name];
@@ -586,6 +586,12 @@
         };
       };
       
+      if (par._locals){
+        for (var i in par._locals){
+          this[i] = par._locals[i];
+        };
+      };
+      
       if (par.common){
         this.common = par.common;
       }else{
@@ -623,10 +629,17 @@
         errorFun(par, err);
       };
       
+      this.runtimeError = function(par, par2){
+        this.getWarningFun(par)(par2);
+        return "(function(){ throw { id:" + par2.id + ", msg: " + stringEncodeStr(par2.msg) + " } })()";
+      };
       
       
-      this.getUniqueName = function(){
+      this.getUniqueName = function(name){
         var retStr = "_V" + this.uniquebasis.index++;
+        if (name){
+          retStr += "/*" + name + "*/";
+        };
         return retStr;
       };
       
@@ -676,6 +689,9 @@
           , hashStr: this.hashStr
           , types: this.types
           , variables: this.variables
+          , _locals: {
+            inheritedSystem: this.inheritedSystem
+          }
         };
         if (extras){
           var i;
@@ -898,7 +914,14 @@
           hasName = true;
         };
         
+        // if this is a member function, we can call inherited
+        // but only within this function!
         
+        this.stack("isClassObject");
+        this.isClassObject = false;
+        
+        this.stack("inheritedAvailable");
+        this.inheritedAvailable = true;
         
         /* -------------------------------------------------------------------------
             return Type
@@ -1005,6 +1028,7 @@
         };
         funRes.push("){\n");
         
+        this.findClasses(par.body); // scan for classes
         this.localVariables = this.scanVariables(par.body);
         this.variables = mixin(this.variables, this.localVariables);
         
@@ -1159,6 +1183,8 @@
         
         res.setType(this.getFunctionType(par));
         
+        this.unstack("isClassObject");
+        this.unstack("inheritedAvailable");
         return res;
       };
       
@@ -1225,10 +1251,7 @@
         if (!par || typeof par == "string"){
           return;
         };
-        if (par.type == "FunctionExpression"){
-          return;
-        };
-        if (par.type == "FunctionDeclaration"){
+        if (checkIsFunction(par)){
           return;
         };
         
@@ -1237,16 +1260,22 @@
           if (ci.isTyped){
             // found a typed class
             
-            if (ci.hasName){
-              par.classalias = this.getVariableName(par.name);
-              if (!par.body.literal){
-                this.error(par, errorMsg.needsClassBodyLiteral);
+            if (par.body.literal){
+              var literal = this.createClassLiteral(par.body.literal);
+              if (ci.hasName){
+                par._type = this._registerType({
+                  name: identifierName(par.name), 
+                  literal: literal,
+                  par: par
+                });
+                
+                this._addTypeDeclaration(par.name, this.getConstructorName(par.name));
+                
               };
-            }else{
-              par.classalias = this.getUniqueName();
+
             };
-            
           };
+          return;
         };
         var i;
         for (i in par){
@@ -1273,10 +1302,14 @@
         var hasName = ci.hasName;
         
         var isTyped = ci.isTyped;
-        var extendsClause = ci.extendsClause;
+        var extendsClause = par.extendsClause;
         var syncClause = ci.syncClause;
         
         var resultType = this.getType("var");
+        
+        this.stack("inheritedSystem");
+        this.inheritedSystem = this.newInherited();
+        
         
         if (isTyped){
           classRes.push("classSystem.createClass(");
@@ -1286,26 +1319,56 @@
             classRes.push(", ");
             classRes.push(this.createClassDefaults(par.body.literal));
             if (hasName){
-              resultType = res.registerType({
-                name: identifierName(par.name), 
-                literal: literal,
-                par: par
-              });
+              resultType = par._type;
             };
+            
           }else{
             classRes.push("{}, ");
             classRes.push(this.parseExpression(par.body.expression));
+            
           };
           classRes.push(")");
-
+          
         }else{
-          classRes.push("promiseland.createClass(");
+          var inheritedObjName = this.getUniqueName("inherited");
+          
+          classRes.push("(function(){");
+          classRes.push("var " + inheritedObjName + " = {};\n");
+          
+          var tempRes = this.newResult();
+          
+          tempRes.push("var res = promiseland.createClass(");
           if (par.body.literal){
-            classRes.push(this.parseExpression(par.body.literal));
+            tempRes.push(this.expectTypeVar(this.parseExpression(par.body.literal)));
+            
           }else{
-            classRes.push(this.parseExpression(par.body.expression));
+            tempRes.push(this.expectTypeVar(this.parseExpression(par.body.expression)));
+            
           };
-          classRes.push(")");
+          tempRes.push(", [");
+          var baseClasses = (extendsClause && extendsClause.baseClasses) || [];
+          var i = 0;
+          for (i = 0; i < baseClasses.length; ++i){
+            if (i){
+              tempRes.push(", ");
+            };
+            tempRes.push(this.expectTypeVar(this.parseExpression(baseClasses[i])));
+          };
+          tempRes.push("], ");
+          tempRes.push(inheritedObjName);
+          tempRes.push(");");
+          
+          
+          classRes.push(tempRes);
+          classRes.push("\n");
+          
+          var used = this.inheritedSystem.used;
+          var u;
+          for (u in used){
+            classRes.push("var " + used[u] + " = " + inheritedObjName + "[" + stringEncodeStr(u) + "];\n");
+          };
+          
+          classRes.push("return res; })()");
         };
         
         
@@ -1315,16 +1378,21 @@
           res.addPre(classRes);
           res.addPre(";");
           if (isTyped){
-            res.addTypeDeclaration(par.name, this.getConstructorName(par.name));
+            //res.addTypeDeclaration(par.name, this.getConstructorName(par.name));
             res.addPre(this.getTypeName(par.name) + " = " + this.getVariableName(par.name) + ";");
             res.addPre(this.getConstructorName(par.name) + " = promiseland.classSystem.getTypeConstructor(" + this.getTypeName(par.name) + ");");
+            
           };
           res.push(this.getVariableName(par.name));
+          
         }else{
           res.push(classRes);
+          
         };
         
         res.setType(resultType);
+        
+        this.unstack("inheritedSystem");
         
         return res;
       };
@@ -1346,6 +1414,8 @@
               name: identifierName(prop.key),
               "type": this.getType(prop.typename)
             });
+          }else{
+            this.error(par, errorMsg.unknownPropertyAssignmentType);
           };
         };
         
@@ -1399,7 +1469,7 @@
               res.push(this.parseExpression(prop.value));
             }else{
               res.push("undefined");
-            }
+            };
             comma = true;
           };
         };
@@ -1657,41 +1727,82 @@
         var res;
         
         switch(value.type){
-          case "Identifier":
-            return this.expIdentifier(value);
+          case "ArrayExpression":
+            return this.expArrayExpression(value);
             
-          case "Literal":
-            return this.expLiteral(value);
-            
-          case "VariableStatement":
-            return this.expVariableStatement(value);
-            
-          case "VariableDeclaration":
-            return this.expVariableDeclaration(value);
+          case "AssignmentExpression":
+            return this.expAssignmentExpression(value);
+
+          case "BinaryExpression":
+            return this.expBinaryExpression(value);
             
           case "CallExpression":
             return this.expCallExpression(value);
-
-          case "FunctionExpression":
-            return this.expFunctionExpression(value);
-          case "FunctionDeclaration":
-            return this.expFunctionDeclaration(value);
             
+          case "Class":
+            return this.expClassStatement(value);
+            
+          case "ClassObjectExpression":
+            return this.expClassObjectExpression(value);
+            
+          case "ConditionalExpression":
+            return this.conditionalExpression(value);
+            
+          case "DebuggerStatement":
+            return this.expDebuggerStatement(value);
+
           case "EmptyStatement":
             // why does this exist?
             res = this.newResult();
             res.setType("var");
             return res;
 
-          case "AssignmentExpression":
-            return this.expAssignmentExpression(value);
-
+          case "ExpressionStatement":
+            return this.expExpressionStatement(value);
+            
+          case "ForInStatement":
+            return this.expForInStatement(value);
+            
+          case "ForStatement":
+            return this.expForStatement(value);
+            
+          case "FunctionExpression":
+            return this.expFunctionExpression(value);
+          case "FunctionDeclaration":
+            return this.expFunctionDeclaration(value);
+          case "MemberFunction":
+            return this.expMemberFunction(value);
+            
+          case "Identifier":
+            return this.expIdentifier(value);
+            
+          case "IfStatement":
+            return this.expIfStatement(value);
+            
+          case "InheritedExpression":
+            return this.expInheritedExpression(value);
+            
+          case "Literal":
+            return this.expLiteral(value);
+            
+          case "MemberExpression":
+            return this.expMemberExpression(value);
+            
+          case "NewExpression":
+            return this.expNewExpression(value);
+            
           case "ObjectExpression":
             return this.expObjectExpression(value);
 
           case "ReturnStatement":
             return this.expReturnStatement(value);
 
+          case "ThisExpression":
+            return this.expThisExpression(value);
+            
+          case "TryStatement":
+            return this.expTryStatement(value);
+            
           case "UnaryExpression":
             if (value.operator == "*"){
               return this.expPromiseExpression(value.argument);
@@ -1704,51 +1815,18 @@
             res.pushType(this.expectTypeVar(this.parseExpression(value.argument)));
             return res;
             
-          case "BinaryExpression":
-            return this.expBinaryExpression(value);
-            
           case "UpdateExpression":
             return this.expUpdateExpression(value);
 
-          case "ArrayExpression":
-            return this.expArrayExpression(value);
+          case "VariableStatement":
+            return this.expVariableStatement(value);
             
-          case "MemberExpression":
-            return this.expMemberExpression(value);
-            
-          case "ConditionalExpression":
-            return this.conditionalExpression(value);
-            
-          case "IfStatement":
-            return this.expIfStatement(value);
+          case "VariableDeclaration":
+            return this.expVariableDeclaration(value);
             
           case "WhileStatement":
             return this.whileStatement(value);
             
-          case "ForStatement":
-            return this.expForStatement(value);
-            
-          case "ForInStatement":
-            return this.expForInStatement(value);
-            
-          case "NewExpression":
-            return this.expNewExpression(value);
-            
-          case "TryStatement":
-            return this.expTryStatement(value);
-            
-          case "Class":
-            return this.expClassStatement(value);
-            
-          case "ThisExpression":
-            return this.expThisExpression(value);
-            
-          case "ExpressionStatement":
-            return this.expExpressionStatement(value);
-            
-          case "DebuggerStatement":
-            return this.expDebuggerStatement(value);
-
           default:
             this.error(value, errorMsg.unknownType);
         };
@@ -1795,6 +1873,10 @@
         
       };
       this.expFunctionDeclaration = function(value){
+        return this.expFunctionExpression(value);
+      };
+      this.expMemberFunction = function(value){
+        value.id = undefined;
         return this.expFunctionExpression(value);
       };
       
@@ -2413,6 +2495,26 @@
       };
       
       
+      this.newInherited = function(){
+        return new InheritedSystem(this);
+      };
+      
+      var InheritedSystem = function(par){
+        this.instance = par;
+        this.used = {};
+      };
+      InheritedSystem.prototype = {
+        setCurrent: function(par){
+          this.currentMember = par;
+        },
+        getCurrent: function(){
+          if (!this.used[this.currentMember]){
+            this.used[this.currentMember] = this.instance.getUniqueName("inherited " + this.currentMember);
+          };
+          return this.used[this.currentMember];
+        }
+      };
+      
       /*
         {
           ["name": value]
@@ -2427,11 +2529,17 @@
         var i = 0;
         var l = (par.properties && par.properties.length) || 0;
         for (i; i < l; ++i){
+          var currentMember;
+          //this.inheritedSystem
           if (i){
             res.push(",\n");
           };
           var prop = par.properties[i];
           if (prop.kind == "init"){
+            currentMember = identifierName(prop.key);
+            if (this.inheritedSystem){
+              this.inheritedSystem.setCurrent(currentMember);
+            };
             res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
             if (prop.value){
               var v = this.parseExpression(prop.value);
@@ -2443,14 +2551,38 @@
                 , errorFun: this.getWarningFun(par)
               })));
             };
+            
+          }else if (prop.kind == "function"){
+            var name = identifierName(prop.id);
+            currentMember = name;
+            if (this.inheritedSystem){
+              this.inheritedSystem.setCurrent(currentMember);
+            };
+            prop.id = undefined; // remove id
+            res.push(stringEncodeStr(name) + ": ");
+            
+            var functionRes = this.expectTypeVar(this.parseExpression(prop));
+            res.push(functionRes);
+            
           }else{
             this.error(par, errorMsg.unknownPropertyAssignmentType);
           };
+          
         };
         res.push("}");
         res.setType("var");
         return res;
       };
+      
+      this.expClassObjectExpression = function(par){
+        this.stack("isClassObject");
+        this.isClassObject = true;
+        
+        var res = this.expObjectExpression(par);
+        this.unstack("isClassObject");
+        return res;
+      };
+      
       
       this.expectTypeVar = function(par){
         if (par.getType() === this.getType("var")){
@@ -2703,6 +2835,9 @@
         return res;
       };
       
+      this.isCallableType = function(){
+        
+      };
       
       /*
         funname([par1, par2, ...]);
@@ -2712,24 +2847,71 @@
         var res = this.newResult();
         var i = 0;
         var l;
-        res.push(this.parseExpression(par.callee));
-        res.push("(");
+        var calleeRes = this.parseExpression(par.callee);
+        
+        var args = [];
         if (par["arguments"]){
+          l = par["arguments"].length;
+          for (i = 0; i < l; ++i){
+            var argRes = this.parseExpression(par["arguments"][i]);
+            args.push({
+              "type": argRes.getType(),
+              "value": argRes
+            });
+          };
+        };
+        
+        res.push(this.callClassSystem("getCallCode", {
+          "type": calleeRes.getType(),
+          instance: calleeRes,
+          "arguments": args
+        }));
+        
+        res.setType(this.getFunctionReturnType(calleeRes.getType()));
+        return res;
+      };
+      
+      this.getFunctionReturnType = function(parType){
+        return classSystem.getFunctionReturnType(parType);
+      };
+      
+      this.expInheritedExpression = function(par){
+        if (!this.inheritedAvailable){
+          this.error(par, errorMsg.inheritedOnlyInMember);
+          return;
+        };
+        
+        var res = this.newResult();
+        var i = 0;
+        var l;
+        
+        res.push(this.inheritedSystem.getCurrent());
+        res.push(".apply(this");
+        
+        var args = [];
+        if (par["arguments"]){
+          res.push(", [");
           l = par["arguments"].length;
           for (i = 0; i < l; ++i){
             if (i){
               res.push(", ");
             };
-            res.push(this.expectTypeVar(this.parseExpression(par["arguments"][i])));
+            var argRes = this.expectTypeVar(this.parseExpression(par["arguments"][i]));
+            res.push(argRes);
           };
+          res.push("]");
+          
+        }else if (par.expression){
+          res.push(", ");
+          this.expectTypeVar(this.parseExpression(par.expression));
+          
         };
         res.push(")");
-        res.setType(this.getType("var"));
+        
+        res.setType("var");
         return res;
+        
       };
-    
-      
-      
       
       
       /*
@@ -2977,6 +3159,10 @@
       variableHasNoType: {
         id: 112,
         msg: "variable has no type"
+      },
+      expectedCallable: {
+        id: 113,
+        msg: "expected callable expression"
       },
       
       

@@ -54,11 +54,13 @@
   };
   
   var funReturning4 = function(mod, success){
-    mod.fun().then(function(value){
-      if (value == 4){
-        success();
-      };
-    });
+    try{
+      mod.fun().then(function(value){
+        if (value == 4){
+          success();
+        };
+      });
+    }catch(e){};
   };
   
   var returning4 = function(mod, success){
@@ -80,6 +82,7 @@
   createTestNp("simpleArray", successFun);
   createTestNp("newParameter", successFun);
   
+  createTestNp("classInheritence", successFun);
 
   
   createTestNp("conditional", funReturning4);
@@ -135,6 +138,7 @@
   createTestNp("typesafetyMembers3", successFun);
   
   createTestNp("typesafetyFunction", successFun);
+  createTestNp("typesafetyFunction2", successFun);
   
   createTestNp("typesafetyDynamic", successFun);
   

@@ -66,23 +66,25 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "799e3eb38bcb4eaea6aa5131710c22c5" })){ return promiseland._getModule("799e3eb38bcb4eaea6aa5131710c22c5"); };
-var _V4/*console*/;try{_V4/*console*/ = console;}catch(e){};
-var _V5/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V5/*console*/;try{_V5/*console*/ = console;}catch(e){};
+var _V6/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*C1*/;
-var _V3/*c*/;
-_V2/*C1*/ = promiseland.createClass({"constructor": function(){
+var _V4/*c*/;
+_V2/*C1*/ = (function(){var _V3/*inherited*/ = {};
+var res = promiseland.createClass({"constructor": function(){
 this["a"] = 1;;
 },
 "b": 1,
 "doSomething": function(){
 return (this["a"] + this["b"]);
-}});
-_V3/*c*/ = new _V2/*C1*/();
-_V4/*console*/["log"](_V3/*c*/["a"]);;
-_V4/*console*/["log"](_V3/*c*/["b"]);;
-_V4/*console*/["log"](_V3/*c*/["doSomething"]());;
+}}, [], _V3/*inherited*/);
+return res; })();
+_V4/*c*/ = new _V2/*C1*/();
+_V5/*console*/["log"](_V4/*c*/["a"]);;
+_V5/*console*/["log"](_V4/*c*/["b"]);;
+_V5/*console*/["log"](_V4/*c*/["doSomething"]());;
 })();
 promiseland._registerModule({ hashStr: "799e3eb38bcb4eaea6aa5131710c22c5", "module": _V1, promising: false });
 return _V1;

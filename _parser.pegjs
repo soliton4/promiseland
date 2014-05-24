@@ -244,7 +244,7 @@ FutureReservedWord
   = ConstToken
   / EnumToken
   / ExportToken
-  / ExtendsToken
+  // ExtendsToken // promiseland
   / ImportToken
   / SuperToken
 
@@ -498,6 +498,7 @@ FunctionToken   = "function"   !IdentifierPart
 GetToken        = "get"        !IdentifierPart
 IfToken         = "if"         !IdentifierPart
 ImportToken     = "import"     !IdentifierPart
+InheritedToken  = "inherited"  !IdentifierPart   // promiseland
 InstanceofToken = "instanceof" !IdentifierPart
 InToken         = "in"         !IdentifierPart
 NewToken        = "new"        !IdentifierPart
@@ -598,6 +599,19 @@ TemplateLiteral
      }
 
 
+ClassObjectLiteral // promiseland
+  = objLit:ObjectLiteral {
+      objLit.type = "ClassObjectExpression";
+      return objLit;
+    }
+  / "{" __ properties:PropertyNameAndValueList __ "}" {
+       return posRes({ type: "ClassObjectExpression", properties: properties });
+     }
+  / "{" __ properties:PropertyNameAndValueList __ "," __ "}" {
+       return posRes({ type: "ClassObjectExpression", properties: properties });
+     }
+
+
 ObjectLiteral
   = "{" __ "}" { return posRes({ type: "ObjectExpression", properties: [] }); }
   / "{" __ properties:PropertyNameAndValueList __ "}" {
@@ -619,7 +633,11 @@ PropertyAssignment
   / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
     }
-  / FunctionDeclaration
+  / funcDec:FunctionDeclaration {
+      funcDec.kind = "function";
+      funcDec.type = "MemberFunction";
+      return funcDec;
+    }
   / GetToken __ key:PropertyName __
     "(" __ ")" __
     "{" __ body:FunctionBody __ "}"
@@ -703,7 +721,26 @@ ProfileArguments  // promiseland
         properties: properties ? properties[0] : []
       });
     }
-    
+
+InheritedExpression // promiseland
+  = InheritedToken __ args:Arguments {
+      return posRes({
+        type: "InheritedExpression",
+        arguments: args
+      });
+    }
+  / InheritedToken __ exp:MemberExpression {
+      return posRes({
+        type: "InheritedExpression",
+        expression: exp
+      });
+    }
+  / InheritedToken {
+      return posRes({
+        type: "InheritedExpression"
+      });
+    }
+
 
 CallExpression
   = first:(
@@ -758,7 +795,8 @@ ArgumentList
     }
 
 LeftHandSideExpression
-  = CallExpression
+  = InheritedExpression // promiseland
+  / CallExpression
   / NewExpression
 
 PostfixExpression
@@ -807,7 +845,7 @@ UnaryOperator
   = $DeleteToken
   / $VoidToken
   / $TypeofToken
-  / $RequireToken // promiseland
+  / $RequireToken   // promiseland
   / "++"
   / "--"
   / $("+" !"=")
@@ -1447,19 +1485,31 @@ DebuggerStatement
   /* class system */  // promiseland
   
 ClassBody
-  = literal:ObjectLiteral { return posRes({ "literal": literal }); }
+  = literal:ClassObjectLiteral { return posRes({ "literal": literal }); }
   / exp:Expression  { return posRes({ "expression": exp }); }
 
 
 ClassCombinations
-  = name:Identifier __ body:ClassBody { return posRes({ name: name, body: body }) }
-  / body:ClassBody { return posRes({ body: body }) }
+  = !ExtendsToken name:Identifier __ extendsClause:ClassExtendsClaus? __ body:ClassBody 
+    { 
+      return posRes({ name: name, body: body, extendsClause: extendsClause }) 
+    }
+  / extendsClause:ClassExtendsClaus? __ body:ClassBody 
+    { 
+      return posRes({ body: body, extendsClause: extendsClause }) 
+    }
+
+
+ClassExtendsList
+  = first:Expression rest:(__ "," __ MemberExpression)* {
+      return buildList(first, rest, 3);
+    }
 
 ClassExtendsClaus
-  = "extends" __ exp:Expression __ {
+  = ExtendsToken __ expList:ClassExtendsList __ {
     return posRes({
       "type": "extends",
-      "baseClass": exp
+      "baseClasses": expList
     });
   }
 
@@ -1472,8 +1522,7 @@ ClassSyncClaus
   / "sync" __ { return posRes({ "type": "sync", "all": 1 }); }
 
 ClassKeyword
-  = ClassExtendsClaus
-  / ClassTypedClaus
+  = ClassTypedClaus
   / ClassSyncClaus
   
 ClassKeywords
@@ -1491,10 +1540,11 @@ ClassKeywords
 ClassExpression
   =  ClassToken __ keywords:ClassKeywords? __ combination:ClassCombinations {
       return posRes({
-        type:       "Class",
-        name:       combination.name,
-        body:       combination.body,
-        "keywords": keywords
+        type:          "Class",
+        name:          combination.name,
+        body:          combination.body,
+        extendsClause: combination.extendsClause,
+        "keywords":    keywords
       });
     }
   
