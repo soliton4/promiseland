@@ -83,6 +83,9 @@ _V7/*T2*/ = classSystem.createClass({members: [{"name":"a","type":_V4/*type:var*
 _V9/*a*/ = (function(){var _V11/*type:Tx*/ = _V5/*T1*/;
 var _V12/*Tx*/ = _V11/*type:Tx*/
 ;var _V10/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
+var _V14/*type:Ty*/ = _V7/*T2*/;
+var _V15/*Ty*/ = _V14/*type:Ty*/
+;var _V13/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
 var _V11/*type:Tx*/ = _V5/*T1*/;
 var _V12/*Tx*/ = _V11/*type:Tx*/
 ;var _V10/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
@@ -94,6 +97,9 @@ eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\nvar _V11/*
 _V18/*b*/ = (function(){var _V11/*type:Tx*/ = _V5/*T1*/;
 var _V12/*Tx*/ = _V11/*type:Tx*/
 ;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
+var _V14/*type:Ty*/ = _V5/*T1*/;
+var _V15/*Ty*/ = _V14/*type:Ty*/
+;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
 var _V11/*type:Tx*/ = _V5/*T1*/;
 var _V12/*Tx*/ = _V11/*type:Tx*/
 ;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);

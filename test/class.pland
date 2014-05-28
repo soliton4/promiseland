@@ -10,6 +10,12 @@ var C1 = class {
 
 var c = new C1();
 
-console.log(c.a);
-console.log(c.b);
-console.log(c.doSomething());
+if (c.a == 1 && c.b == 1 && c.doSomething() == 2){
+  return {
+    success: true
+  };
+};
+
+  return {
+    success: false
+  };

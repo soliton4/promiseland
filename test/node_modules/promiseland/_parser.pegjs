@@ -628,7 +628,7 @@ PropertyNameAndValueList
 
 PropertyAssignment
   = /*typename:IdentifierName? __*/ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
-      return posRes({ key: key, value: value, kind: "init", typename: "var" }); // promiseland
+      return posRes({ key: key, value: value, kind: "init"}); // promiseland
     }
   / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland

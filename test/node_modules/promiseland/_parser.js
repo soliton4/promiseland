@@ -389,7 +389,7 @@ return (function() {
         peg$c253 = ":",
         peg$c254 = { type: "literal", value: ":", description: "\":\"" },
         peg$c255 = function(key, value) { // promiseland
-              return posRes({ key: key, value: value, kind: "init", typename: "var" }); // promiseland
+              return posRes({ key: key, value: value, kind: "init"}); // promiseland
             },
         peg$c256 = function(typename, key, value) { // promiseland
               return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
