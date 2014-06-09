@@ -66,48 +66,48 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "e1f0833736acaa653e77399b8fc0fa66" })){ return promiseland._getModule("e1f0833736acaa653e77399b8fc0fa66"); };
-var _V4/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V8/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
-var _V5/*T1*/;
-var _V7/*T2*/;
+var _V3/*T1*/;
+var _V6/*T2*/;
 var _V9/*a*/;
 var _V18/*b*/;
 var _V21/*catched*/;
-var _V2/*T1-constructor*/;
-var _V3/*T2-constructor*/;
-var _V6/*type:T1*/;
-var _V8/*type:T2*/;
-_V5/*T1*/ = classSystem.createClass({members: [{"name":"a","type":_V4/*type:var*/},{"name":"b","type":_V4/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2});_V6/*type:T1*/ = _V5/*T1*/;_V2/*T1-constructor*/ = promiseland.classSystem.getTypeConstructor(_V6/*type:T1*/);_V5/*T1*/;;
-_V7/*T2*/ = classSystem.createClass({members: [{"name":"a","type":_V4/*type:var*/},{"name":"b","type":_V4/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 3, "b": 4});_V8/*type:T2*/ = _V7/*T2*/;_V3/*T2-constructor*/ = promiseland.classSystem.getTypeConstructor(_V8/*type:T2*/);_V7/*T2*/;;
-_V9/*a*/ = (function(){var _V11/*type:Tx*/ = _V5/*T1*/;
-var _V12/*Tx*/ = _V11/*type:Tx*/
-;var _V10/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
-var _V14/*type:Ty*/ = _V7/*T2*/;
-var _V15/*Ty*/ = _V14/*type:Ty*/
-;var _V13/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
-var _V11/*type:Tx*/ = _V5/*T1*/;
-var _V12/*Tx*/ = _V11/*type:Tx*/
-;var _V10/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
-var _V14/*type:Ty*/ = _V7/*T2*/;
-var _V15/*Ty*/ = _V14/*type:Ty*/
-;var _V13/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
+var _V2/*type:T1*/ = classSystem._createProvisionalClass();
+_V3/*T1*/ = _V2/*type:T1*/;
+var _V4/*T1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:T1*/).then(function(parType){_V2/*type:T1*/ = parType;_V4/*T1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:T1*/);});var _V5/*type:T2*/ = classSystem._createProvisionalClass();
+_V6/*T2*/ = _V5/*type:T2*/;
+var _V7/*T2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:T2*/).then(function(parType){_V5/*type:T2*/ = parType;_V7/*T2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:T2*/);});classSystem._resolveProvisional(_V2/*type:T1*/, classSystem.createClass({members: [{"name":"a","type":_V8/*type:var*/},{"name":"b","type":_V8/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2}));_V3/*T1*/;;
+classSystem._resolveProvisional(_V5/*type:T2*/, classSystem.createClass({members: [{"name":"a","type":_V8/*type:var*/},{"name":"b","type":_V8/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 3, "b": 4}));_V6/*T2*/;;
+_V9/*a*/ = (function(){var _V10/*type:Tx*/ = _V3/*T1*/;
+var _V11/*Tx*/ = _V10/*type:Tx*/
+;var _V12/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+var _V13/*type:Ty*/ = _V6/*T2*/;
+var _V14/*Ty*/ = _V13/*type:Ty*/
+;var _V15/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
+var _V10/*type:Tx*/ = _V3/*T1*/;
+var _V11/*Tx*/ = _V10/*type:Tx*/
+;var _V12/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+var _V13/*type:Ty*/ = _V6/*T2*/;
+var _V14/*Ty*/ = _V13/*type:Ty*/
+;var _V15/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
 var communicator = {fun: undefined};
-eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\nvar _V11/*type:Tx*/;\nvar _V14/*type:Ty*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V11/*type:Tx*/, "value":"new _V10/*Tx-constructor*/()", "valueType":_V11/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V14/*type:Ty*/, "value":"new _V13/*Ty-constructor*/()", "valueType":_V14/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V11/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V14/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
-_V18/*b*/ = (function(){var _V11/*type:Tx*/ = _V5/*T1*/;
-var _V12/*Tx*/ = _V11/*type:Tx*/
-;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
-var _V14/*type:Ty*/ = _V5/*T1*/;
-var _V15/*Ty*/ = _V14/*type:Ty*/
-;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
-var _V11/*type:Tx*/ = _V5/*T1*/;
-var _V12/*Tx*/ = _V11/*type:Tx*/
-;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V11/*type:Tx*/);
-var _V14/*type:Ty*/ = _V5/*T1*/;
-var _V15/*Ty*/ = _V14/*type:Ty*/
-;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V14/*type:Ty*/);
+eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V12/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V13/*type:Ty*/, "value":"new _V15/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
+_V18/*b*/ = (function(){var _V10/*type:Tx*/ = _V3/*T1*/;
+var _V11/*Tx*/ = _V10/*type:Tx*/
+;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+var _V13/*type:Ty*/ = _V3/*T1*/;
+var _V14/*Ty*/ = _V13/*type:Ty*/
+;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
+var _V10/*type:Tx*/ = _V3/*T1*/;
+var _V11/*Tx*/ = _V10/*type:Tx*/
+;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+var _V13/*type:Ty*/ = _V3/*T1*/;
+var _V14/*Ty*/ = _V13/*type:Ty*/
+;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
 var communicator = {fun: undefined};
-eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\nvar _V11/*type:Tx*/;\nvar _V14/*type:Ty*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V11/*type:Tx*/, "value":"new _V19/*Tx-constructor*/()", "valueType":_V11/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V14/*type:Ty*/, "value":"new _V20/*Ty-constructor*/()", "valueType":_V14/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V11/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V14/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
+eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V19/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V13/*type:Ty*/, "value":"new _V20/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
 _V21/*catched*/ = false;
 try
 {_V9/*a*/();;

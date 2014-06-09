@@ -8,6 +8,7 @@ var p = function(){
 
 var res = {};
 
+
 var x = (para, parb){
   res.a = para;
   

@@ -72,6 +72,7 @@ var _V1 = (function(){
 var _V2/*T*/;
 var _V4/*t*/;
 _V2/*T*/ = function(_V3/*par*/){
+var _V3/*par*/;
 this["par"] = _V3/*par*/;;
 };
 _V4/*t*/ = new _V2/*T*/({"id": 4});

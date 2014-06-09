@@ -76,6 +76,7 @@ _V2/*somefun*/ = function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
+var _V3/*par*/;
 var _V7/*c*/;
 _V5(function(){_V7/*c*/ = new _V8/*Callback*/();
 _V9/*setTimeout*/(_V7/*c*/["callback"], 100);;

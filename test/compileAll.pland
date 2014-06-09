@@ -19,6 +19,7 @@ if (files){
     
     if (filename.substr( filename.length - 6 ) == ".pland"){
       console.log("processing:" + filename);
+      var jsStr = "";
       try{
         fs.readFile(filename, {
               encoding: "utf8"
@@ -26,18 +27,24 @@ if (files){
         var codeStr = (*callback.promise)[1];
         var parser = new promiseland.Parser();
 
-        var jsStr = (*parser.parse(codeStr)).javascript;
-
-        callback = new Callback();
-        fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", jsStr, callback.callback);
-        *callback.promise;
-        //console.log("done");
+        
+        var res = (*parser.parse(codeStr));
+        if (res.errors && res.errors.length){
+          console.log(res.errors[0]);
+          jsStr = "";
+        }else{
+          jsStr = res.javascript;
+        };
+        
       }catch(e){
         console.log(e);
         console.log("error");
-        fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", "", callback.callback);
-        *callback.promise;
+        
       };
+      
+      callback = new Callback();
+      fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", jsStr, callback.callback);
+      *callback.promise;
     };
   };
 };

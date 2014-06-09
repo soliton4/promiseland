@@ -66,22 +66,22 @@
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "0c11ca25206ec42f77a70d97f2323884" })){ return promiseland._getModule("0c11ca25206ec42f77a70d97f2323884"); };
-var _V3/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V5/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
-var _V4/*C1*/;
+var _V3/*C1*/;
 var _V6/*b*/;
 var _V7/*fun1*/;
-var _V2/*C1-constructor*/;
-var _V5/*type:C1*/;
 function _V7/*fun1*/(){
 var _V8/*c*/;
-_V8/*c*/ = new _V2/*C1-constructor*/();
+_V8/*c*/ = new _V4/*C1-constructor*/();
 _V8/*c*/[2] = 2;;
 return _V8/*c*/;
 };
-_V4/*C1*/ = classSystem.createClass({members: [{"name":"a","type":_V3/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1});_V5/*type:C1*/ = _V4/*C1*/;_V2/*C1-constructor*/ = promiseland.classSystem.getTypeConstructor(_V5/*type:C1*/);_V4/*C1*/;;
-_V6/*b*/ = new _V2/*C1-constructor*/();
+var _V2/*type:C1*/ = classSystem._createProvisionalClass();
+_V3/*C1*/ = _V2/*type:C1*/;
+var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":_V5/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1}));_V3/*C1*/;;
+_V6/*b*/ = new _V4/*C1-constructor*/();
 _V7/*fun1*/;
 ;
 _V6/*b*/ = _V7/*fun1*/();;

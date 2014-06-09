@@ -512,6 +512,41 @@
     };
     
     
+    var all = function(promisesAr){
+      var res = new Promise();
+      resAr = promisesAr ? promisesAr.slice() : [];
+      
+      var check = function(){
+        if (cnt){
+          return;
+        };
+        res.resolve(resAr);
+      };
+      var cnt = 1;
+      
+      var thenFun = function(parI){
+        return function(r){
+          resAr[parI] = r;
+          --cnt;
+          check();
+        };
+      };
+      
+      var i = 0;
+      var l = resAr.length;
+      for (i; i < l; ++i){
+        ++cnt;
+        resAr[i].then(thenFun(i));
+      };
+      
+      --cnt;
+      
+      check();
+      
+      return res;
+    };
+    
+    
     var ParserClass = function(par){
       this.parse = function(parStr){
         var p = new Promise();
@@ -535,6 +570,7 @@
       Promise: Promise,
       Callback: Callback,
       Parser: ParserClass,
+      all: all,
       
       ProfileBaseClass: Profile,
       ConnectionBaseClass: Connection,
@@ -686,6 +722,12 @@
     };
     
     
+    
+    
+    /* --------------------------------------------------------------------------------------------
+        Class System
+    */
+    
     var _ClassToken;
     
     /*
@@ -723,11 +765,102 @@
     };
     var builtinTypes = {
       "var": classHider({
-        isVar: true
+        isVar: true,
+        isReady: true
+      }),
+      "statement": classHider({
+        isStatement: true,
+        isReady: true
       })
     };
     
     var classSystem = {
+      
+      _createProvisionalClass: function(){
+        var cDef = {
+          provisional: true,
+          promise: new Promise(),
+          type: undefined
+        };
+        cDef.promise.then(function(type){
+          cDef.type = type;
+        });
+        var cf = classHider(cDef);
+        return cf;
+      },
+      
+      _resolveProvisional: function(parType, parResult){
+        var self = this;
+        var typeDef = getClass(parType);
+        var resultDef = getClass(parResult);
+        
+        if (resultDef.provisional){
+          resultDef.promise.then(function(result){
+            self.resolveProvisional(parType, result);
+          });
+        }else{
+          typeDef.promise.resolve(parResult);
+        };
+      },
+      
+      isProvisional: function(parType){
+        var typeDef = getClass(parType);
+        if (typeDef.provisional){
+          return true;
+        };
+        return false;
+      },
+      
+      definitionPromise: function(parType){
+        var typeDef = getClass(parType);
+        if (typeDef.provisional){
+          return typeDef.promise;
+        };
+        var p = new Promise();
+        p.resolve(parType);
+        return p;
+      },
+      readyPromise: function(_parType){
+        var p = new Promise();
+        this.definitionPromise(_parType).then(function(parType){
+          var typeDef = getClass(parType);
+          if (typeDef.isReady){
+            p.resolve(parType);
+            return;
+          };
+          typeDef.readyPromise.then(function(parType){
+            p.resolve(parType);
+          });
+          return;
+        });
+        return p;
+      },
+      
+      isSameType: function(type1, type2){
+        if (type1 === type2){
+          return true;
+        };
+        cDef1 = getClass(type1);
+        if (cDef1.provisional){
+          if (!cDef1.type){
+            return false;
+          };
+          type1 = cDef1.type;
+          cDef1 = getClass(type1);
+        };
+        cDef2 = getClass(type2);
+        if (cDef2.provisional){
+          if (!cDef2.type){
+            return false;
+          };
+          type2 = cDef2.type;
+          cDef2 = getClass(type2);
+        };
+        if (type1 === type2){
+          return true;
+        };
+        return false;
+      },
       
       /*
       [
@@ -739,6 +872,7 @@
       */
       createClass: function(classLiteral, parDefaults){
         var cAr = [];
+        var self = this;
         
         var map = {
           members: {},
@@ -747,7 +881,8 @@
         
         var cDef = {
           constructor: undefined, // later
-          map: map
+          map: map,
+          isReady: false
         };
         cAr.push(cDef); // cAr[0] is allways the class definition
         
@@ -759,6 +894,12 @@
           map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE];
         };
         
+        var isReady = true;
+        
+        var membersAr = [];
+        
+        var checkReady = function(){};
+        
         var addMember = function(m){
           var mDef = {
             index: cAr.length
@@ -769,6 +910,15 @@
           mDef.type = m.type;
           mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
           mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] = ", MAKRO_VALUE];
+          membersAr.push(mDef);
+          if (self.isProvisional(m.type)){
+            isReady = false;
+            self.definitionPromise(m.type).then(function(parType){
+              mDef.type = parType;
+              checkReady();
+            });
+          };
+          
         };
         
         var i;
@@ -798,13 +948,33 @@
             r[f] = new freeFun();
             return r;
           };
+          
         }else{
           cDef.constructor = function(){
             return cAr.slice();
           };
         };
         
-        cf = classHider(cDef);
+        var cf = classHider(cDef);
+        
+        if (!isReady){
+          cDef.readyPromise = new Promise();
+          checkReady = function(){
+            var i = 0;
+            for (i = 0; i < membersAr.length; ++i){
+              if (self.isProvisional(membersAr[i].type)){
+                return;
+              };
+            };
+            cDef.isReady = true;
+            cDef.readyPromise.resolve(cf);
+          };
+          checkReady();
+          
+        }else{
+          cDef.isReady = true;
+        };
+        
         return cf;
       }
       
@@ -812,9 +982,61 @@
         var cDef = {
           isFunction: true,
           "return": par["return"] || this.getBuiltinType("var"),
-          "arguments": par["arguments"] || []
+          "arguments": par["arguments"] || [],
+          isReady: false
         };
-        cf = classHider(cDef);
+        
+        var checkReady = function(){};
+        
+        isReady = true;
+        var self = this;
+        
+        if (self.isProvisional(cDef.return)){
+          isReady = false;
+          self.definitionPromise(cDef.return).then(function(parType){
+            cDef.return = parType;
+            checkReady();
+          });
+        };
+        
+        var resolveTypeFun = function(parI){
+          return function(parType){
+            cDef.arguments[parI] = parType;
+            checkReady();
+          };
+        };
+        var i = 0;
+        for (i = 0; i < cDef.arguments.length; ++i){
+          if (self.isProvisional(cDef.arguments[i])){
+            isReady = false;
+            self.definitionPromise(cDef.arguments[i]).then(resolveTypeFun(i));
+          };
+        };
+        
+        var cf = classHider(cDef);
+        
+        if (!isReady){
+          cDef.readyPromise = new Promise();
+          checkReady = function(){
+            if (self.isProvisional(cDef.return)){
+              return;
+            };
+            var i = 0;
+            for (i = 0; i < cDef.arguments.length; ++i){
+              if (self.isProvisional(cDef.arguments[i])){
+                return;
+              };
+            };
+            cDef.isReady = true;
+            cDef.readyPromise.resolve(cf);
+          };
+          checkReady();
+          
+        }else{
+          cDef.isReady = true;
+        };
+        
+        
         return cf;
       }
       

@@ -1,2 +1,19 @@
 
-class type ca {};
+class type Ca {
+  Cb m:,
+  Ca s:,
+  id: 1
+};
+
+class type Cb {
+  Ca m:,
+  Cb s:,
+  id: 2
+};
+
+Ca a = new Ca();
+Cb b = new Cb();
+b.m = a; 
+
+console.log(a.id); 
+console.log(b.id); 

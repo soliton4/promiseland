@@ -65,9 +65,9 @@
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "2f48921929fe5412fc241c2e109a33b6" })){ return promiseland._getModule("2f48921929fe5412fc241c2e109a33b6"); };
+if (promiseland._hasModule({ hashStr: "dc01d7039f5b3fa03ccb1991f4aef666" })){ return promiseland._getModule("dc01d7039f5b3fa03ccb1991f4aef666"); };
 var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "2f48921929fe5412fc241c2e109a33b6", "module": _V1, promising: true });
+promiseland._registerModule({ hashStr: "dc01d7039f5b3fa03ccb1991f4aef666", "module": _V1, promising: true });
 var _V10/*Callback*/;try{_V10/*Callback*/ = Callback;}catch(e){};
 var _V11/*setTimeout*/;try{_V11/*setTimeout*/ = setTimeout;}catch(e){};
 var _V23/*type:var*/ = __classSystem.getBuiltinType("var");
@@ -96,6 +96,8 @@ _V14/*x*/ = function(_V15/*para*/, _V16/*parb*/){
 var _V17 = new __Promise();
 var _V18 = function(code){ return function(res){ try{code(res);}catch(e){ _V17.reject(e); }; }; };
 var _V19 = function(e){ _V17.reject(e); };
+var _V15/*para*/;
+var _V16/*parb*/;
 var _V21/*arguments*/ = arguments;
 _V18(function(){_V13/*res*/["a"] = _V15/*para*/;;
 _V5/*p*/().then(_V18(function(_V20){_V20;;

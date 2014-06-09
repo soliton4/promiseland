@@ -74,6 +74,7 @@ _V2/*somefun*/ = function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
+var _V3/*par*/;
 _V5(function(){_V4.resolve( (_V3/*par*/ + 1)); return _V4;
 _V4.resolve(); return;;
 })();

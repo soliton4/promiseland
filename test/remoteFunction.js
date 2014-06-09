@@ -78,6 +78,7 @@ _V2/*z*/ = function(_V3/*context*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
+var _V3/*context*/;
 _V5(function(){_V7/*x*/().then(_V5(function(_V8){if(_V8){
 _V9/*doSome*/();;
 };
