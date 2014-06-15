@@ -978,6 +978,19 @@
         return cf;
       }
       
+      , isFunctionType: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.isFunction){
+          return true;
+        };
+        return false;
+      }
+      
+      /*, getFunctionTypeJsStr: function(parType){
+        var cDef = getClass(parType);
+        return "classSystem.createFunctionType({";
+      }*/
+      
       , createFunctionType: function(par){
         var cDef = {
           isFunction: true,
@@ -1046,6 +1059,20 @@
           return this.getBuiltinType("var");
         };
         return cDef["return"];
+      }
+      , getFunctionArgumentCount: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.arguments){
+          return cDef.arguments.length;
+        };
+        return 0;
+        
+      }
+      
+      , getFunctionArgumentType: function(parType, parIndex){
+        var cDef = getClass(parType);
+        return cDef.arguments[parIndex];
+        
       }
       
       , getTypeConstructor: function(parType){
