@@ -749,121 +749,10 @@
         };
         return this.getType("var");
         
-        /*if (this.localVariables.hasOwnProperty(name)){
-          return this.localVariables[name].type || this.getType(this.localVariables[name].typename);
-        };
-        
-        var ret = this.getProvisionalType();
-        
-        var self = this;
-        this.variablesPromise.then(function(){
-          if (self.variables[name]){
-            if (self.variables[name].type){
-              self.resolveProvisional(ret, self.variables[name].type);
-              return;
-            };
-            self.getType(self.variables[name].typename).then(function(type){
-              self.resolveProvisional(ret, type);
-            });
-          }else{
-            self.resolveProvisional(ret, varType);
-          };
-        });
-        
-        return ret;*/
       };
       
       /* keeping track of declarations */
       
-      /*this.scanVariables = function(par){
-        variables = {
-          
-        };
-        var self = this;
-        var addVar = function(parName, typename, par){
-          var name = identifierName(parName);
-          var entry = variables[name];
-          if (entry){
-            if (entry.typename != typename){
-              self.error(par, errorMsg.variableRedefinition);
-            };
-            return;
-          };
-          if (self.parameters[name]){
-            entry = self.variables[name];
-            if (entry){
-              if (entry.typename != typename){
-                self.error(par, errorMsg.variableRedefinition);
-              };
-            };
-          };
-          entry = {
-            typename: typename
-            , name: name
-          };
-          variables[name] = entry;
-        };
-        var addFunction = function(parName, type, par){
-          var name = identifierName(parName);
-          var entry = variables[name];
-          if (entry){
-            self.error(par, errorMsg.variableRedefinition);
-            return;
-          };
-          if (self.parameters[name]){
-            entry = self.variables[name];
-            if (entry){
-              self.error(par, errorMsg.variableRedefinition);
-            };
-          };
-          entry = {
-            type: type
-            , name: name
-          };
-          variables[name] = entry;
-        };
-        var findVariables = function(par){
-          if (!par || typeof par == "string"){
-            return;
-          };
-          if (par.type == "VariableDeclaration"){
-            addVar(identifierName(par.id), identifierName(par.typename), par);
-          }else if (par.type == "Class"){
-            var ci = self.identifyClass(par);
-            if (ci.hasName){
-              addVar(par.name, "var", par);
-            };
-          }else if (checkIsFunction(par)){
-            if (par.id && par.type != "MemberFunction"){
-              addFunction(par.id, self.getFunctionType(par), par);
-            };
-            return;
-          };
-          var i;
-          for (i in par){
-            if (i == "_extrainfo"){
-              continue;
-            };
-            findVariables(par[i]);
-          };
-        };
-        findVariables(par);
-        return variables;
-        
-      };*/
-      /*this.getVariableType = function(name){
-        var entry = this.variables[name];
-        if (!entry){
-          return this.getType("var");
-        };
-        if (entry["type"]){
-          return entry["type"];
-        };
-        if (entry.typename){
-          return this.getType(entry.typename);
-        };
-        this.error(name, errorMsg.variableHasNoType);
-      };*/
       
       this.usedVariables = {
       };
@@ -1053,7 +942,7 @@
                 if (i){
                   replace.push(", ");
                 };
-                replace.push(self.renderType(self.getFunctionArgumentType(resolvedType, i)));
+                replace.push(self.renderType(self.getFunctionArgumentType(resolvedType, i, parParsed), parParsed));
               };
               replace.push("]}))");
               res.push(replace);
@@ -1088,34 +977,6 @@
         
       };
       
-      /*this.getTypeName = function(parName, parParsed){
-        var name;
-        if (typeof parName == "function" || parName.isDynamic || parName.provisional){
-          var i;
-          for (i in this.types){
-            if (this.types[i]["type"] === parName){
-              name = i;
-              if (!this.common.givenTypeNames[name]){
-                this.common.givenTypeNames[name] = this.getUniqueName() + "/*type:" + name + "* /";
-              };
-              return this.common.givenTypeNames[name];
-            };
-          };
-          // maybe its a function type
-          if (classSystem.isFunctionType(parName)){
-            var resStr = "(classSystem.createFunctionType)";
-            
-          };
-          this.error(parParsed, errorMsg.internalMissingType);
-        }else{
-          name = identifierName(parName);
-        };
-        if (!this.common.givenTypeNames[name]){
-          this.common.givenTypeNames[name] = this.getUniqueName() + "/*type:" + name + "* /";
-        };
-        return this.common.givenTypeNames[name];
-        
-      };*/
       
       
       // make a new instance of parser for subfunctions etc.
@@ -1255,25 +1116,25 @@
         };
       };
       
-      /*this.createExtraDynamicType = function(parType, par){
+      this.createExtraDynamicType = function(parType, par, parParsed){
         if (!parType.extraTypes){
           parType.extraTypes = [];
         };
         parType.extraTypes.push(par);
         par.res = this.newResult();
-        var name = this.getTypeName(parType) + "::" + par.property;
-        this._registerType({
-          name: name,
-          parent: parType,
-          par: par,
-          isDynamic: true
-        });
+        var res = par.res;
+        var name = this.getTypeName(parType, parParsed) + "::property::" + par.property;
+        this.addType({name: name, dynamic: true}, parParsed);
         
-        res.push("var " + this.getTypeName(name) + " = ");
+        res.push("var " + this.renderType(name) + " = ");
         
         if (par.property){
-          res.push("classSystem.getPropertyType({\"type\":");
-          res.push(this.getTypeName(parType));
+          if (par.property == "constructor"){
+            res.push("classSystem.getConstructorType({\"type\":");
+          }else{
+            res.push("classSystem.getPropertyType({\"type\":");
+          };
+          res.push(this.renderType(name));
           res.push(", property: " + stringEncodeStr(par.property));
           res.push("});\n");
           
@@ -1283,7 +1144,7 @@
         
         return this.getType(name);
         
-      };*/
+      };
       
       this.getFunctionType = function(par){
         var isTyped = false;
@@ -2066,6 +1927,16 @@
         
       };
       
+      this.getTypeName = function(parType, parParsed){
+        var name;
+        for (name in this.types){
+          if (this.types[name].type === parType){
+            return this.types[name].name;
+          };
+        };
+        this.error(parParsed, errorMsg.internalTypeHasNoName);
+      };
+      
       this.createType = function(par){
         var name = identifierName(par.name);
         var entry = this._getTypeEntry(par.name);
@@ -2563,14 +2434,15 @@
         //{type: "NewExpression", callee: Object, arguments: Array[0]}
         var res = this.newResult();
         var typed = false;
+        var type = "var";
         if (par.callee && par.callee.type == "Identifier"){
-          var t = this.getType(identifierName(par.callee), { dontThrow: true });
-          if (t){
+          type = this.getType(identifierName(par.callee), { dontThrow: true });
+          if (type){
             res.push("new ");
             res.push(this.getConstructorName(par.callee));
             res.push("(");
             typed = true;
-            res.setType(t);
+            res.setType(type);
           };
         };
         if (!typed){
@@ -2579,11 +2451,27 @@
           res.push("(");
         };
         var i = 0;
+        var constructorType;
+        if (typed){
+          constructorType = this.getConstructorType({
+            "type": type
+          }, par);
+        };
         for (i; i < par["arguments"].length; ++i){
           if (i){
             res.push(", ");
           };
-          res.push(this.expectTypeVar(this.parseExpression(par["arguments"][i])));
+          var expression = this.parseExpression(par["arguments"][i]);
+          if (typed){
+            res.push(this.getPassAsTypeCode({ // only var type is allowed in regular object literal
+                value: expression,
+                valueType: expression.getType(),
+                "type": this.getFunctionArgumentType(constructorType, i, par)
+                , errorFun: this.getWarningFun(par)
+              }));
+          }else{
+            res.push(this.expectTypeVar(expression));
+          };
         };
         res.push(")");
         if (!typed){
@@ -3275,6 +3163,17 @@
       };
       
       
+      this.getFunctionArgumentType = function(parType, parIndex, parsed){
+        var retType = this.getProvisionalType(parsed);
+        var self = this;
+        
+        classSystem.readyPromise(parType).then(function(parType){
+          self.resolveProvisional(retType, classSystem.getFunctionArgumentType(parType, parIndex));
+        });
+        
+        return retType;
+      };
+      
       
       /*
         
@@ -3435,7 +3334,7 @@
         if (type.isDynamic){
           return this.createExtraDynamicType(type, {
             property: par.property
-          });
+          }, parParsed);
         }else{
           var r = this.getProvisionalType(parParsed);
           classSystem.readyPromise(par.type).then(function(resultType){
@@ -3446,6 +3345,29 @@
           });
           return r;
         };
+      };
+      
+      this.getConstructorType = function(par, parParsed){
+        var type = par["type"];
+        var self = this;
+        if (type.isDynamic){
+          return this.createExtraDynamicType(type, {
+            property: "constructor"
+          }, parParsed);
+        }else{
+          var r = this.getProvisionalType(parParsed);
+          classSystem.readyPromise(par.type).then(function(resultType){
+            try{
+              self.resolveProvisional(r, promiseland.classSystem.getConstructorType({
+                type: resultType
+              }));
+            }catch(e){
+              self.error(parParsed, e);
+            };
+          });
+          return r;
+        };
+        
       };
       
       this.getGetPropertyCode = function(par){
@@ -3935,6 +3857,12 @@
         id: 1010
         , msg: "internal: negative string encode"
         , additional: "pls provide this error in a github issue"
+      },
+      internalTypeHasNoName: {
+        id: 1011
+        , msg: "internal: type has no name"
+        , additional: "pls provide this error in a github issue"
+        
       }
       
     };

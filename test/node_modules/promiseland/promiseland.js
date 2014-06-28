@@ -373,7 +373,7 @@
       };
       
       connection.on("data", function(dataStr){
-        obj = JSON.parse(dataStr);
+        var obj = JSON.parse(dataStr);
         queue(obj);
       });
       
@@ -773,7 +773,112 @@
         isReady: true
       })
     };
-    
+
+
+
+    var LifeTime = function(destroyFun){
+      this.bestweight = Number.POSITIVE_INFINITY;
+      this.weight = Number.POSITIVE_INFINITY;
+      this.line = {
+        next: {
+          fun: function(){
+            return Number.POSITIVE_INFINITY;
+          }
+        }
+      };
+      this.cnt = 0;
+      this.destroy = destroyFun;
+    };
+    LifeTime.prototype = {
+      getLifeLine: function(tracker){
+        var self = this;
+
+        var line = {
+          next: this.line,
+          fun: function(tempweight){
+            var w = tracker.getWeight(self.token);
+            if (w < tempweight){
+              tempweight = w;
+              if (w < self.bestweight){
+                self.bestweight = w;
+                self.besttracker = tracker;
+                self.weight = w + 1;
+              };
+              if (w === 1){
+                return 1;
+              };
+            };
+            return this.next.fun(tempweight); // will error
+          }
+        };
+
+        line.next.prev = line;
+        this.line = line;
+        this.cnt++;
+
+        if (tracker.weight < this.bestweight){
+          this.bestweight = master.weight;
+          this.besttracker = tracker;
+          this.weight = this.bestweight + 1;
+        };
+
+        return function(){
+          self.cnt--;
+          if (line.prev){
+            line.prev.next = line.next;
+            line.next.prev = line.prev;
+            if (!self.cnt){
+              // this is the end
+              self.destroy();
+              return;
+            };
+          }else{
+            self.line = line.next;
+            line.next.prev = undefined;
+          };
+          if (self.bestracker === tracker){
+            if (self.getWeight() === Number.POSITIVE_INFINITY){
+              self.destroy();
+            };
+          };
+        };
+      }
+
+      , checkAlive: function(){
+        if (this.getWeight() === Number.POSITIVE_INFINITY){
+          this.destroy();
+        };
+      }
+
+      // really get down to 1 or return infinity
+      , getWeight: function(token){
+        if (this.token === token){
+          return Number.POSITIVE_INFINITY;
+        };
+        //this.tempweight = Number.POSITIVE_INFINITY;
+        this.token = token || {
+        };
+        return this.line.fun(Number.POSITIVE_INFINITY) + 1;
+      }
+
+    };
+
+
+
+
+
+    var RootTracker = function(){
+      this.weight = 1;
+    };
+    RootTracker.prototype = {
+      
+      getWeight: function(){
+        return 1;
+      }
+      
+    };
+
+
     var classSystem = {
       
       _createProvisionalClass: function(){
@@ -802,6 +907,8 @@
           typeDef.promise.resolve(parResult);
         };
       },
+      
+      RootTracker: RootTracker,
       
       isProvisional: function(parType){
         var typeDef = getClass(parType);
@@ -862,6 +969,7 @@
         return false;
       },
       
+      
       /*
       [
         { // untyped part
@@ -882,9 +990,14 @@
         var cDef = {
           constructor: undefined, // later
           map: map,
-          isReady: false
+          isReady: false,
+          tracked: classLiteral.tracked
         };
         cAr.push(cDef); // cAr[0] is allways the class definition
+        
+        if (classLiteral.tracked){
+          cAr.push(undefined); // cAr[1] is allways lifeline if tracked
+        };
         
         if (classLiteral.hasFreePart){
           var freepart = {};
@@ -900,6 +1013,12 @@
         
         var checkReady = function(){};
         
+        var constructorDef;
+        var constructorFun;
+        
+        var defineConstructor;
+        var provisionalConstructor = false;
+        
         var addMember = function(m){
           var mDef = {
             index: cAr.length
@@ -907,16 +1026,31 @@
           map.members[m.name] = mDef;
           var def = parDefaults ? parDefaults[m.name] : undefined;
           cAr.push(def);
+          
+          if (m.name == "constructor"){
+            // this is the constructor
+            constructorDef = mDef;
+            constructorFun = def;
+          };
+          
           mDef.type = m.type;
           mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
           mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] = ", MAKRO_VALUE];
           membersAr.push(mDef);
           if (self.isProvisional(m.type)){
             isReady = false;
+            if (m.name == "constructor"){
+              provisionalConstructor = true;
+            };
             self.definitionPromise(m.type).then(function(parType){
               mDef.type = parType;
+              if (m.name == "constructor"){
+                constructorDef.type = parType;
+                defineConstructor();
+              };
               checkReady();
             });
+
           };
           
         };
@@ -943,19 +1077,70 @@
           freeFun.prototype = proto;
           var f = map.freePart;
           
-          cDef.constructor = function(){
-            var r = cAr.slice();
-            r[f] = new freeFun();
-            return r;
+          if (classLiteral.tracked){
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              r[f] = new freeFun();
+              return r;
+            };
+            
+          }else{
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              r[1] = new LifeTime();
+              r[f] = new freeFun();
+              return r;
+            };
+            
           };
           
         }else{
-          cDef.constructor = function(){
-            return cAr.slice();
+          if (classLiteral.tracked){
+            cDef.constructor = function(){
+              return cAr.slice();
+            };
+            
+          }else{
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              r[1] = new LifeTime();
+              return r;
+            };
+            
           };
         };
-        
+        //constructorType
         var cf = classHider(cDef);
+        
+        defineConstructor = function(){
+          var conDef = getClass(constructorDef.type);
+          cDef.constructorType = self.createFunctionType({
+            "return": cf,
+            arguments: conDef.arguments
+          });
+          
+        };
+        
+        if (constructorDef){
+          cDef.constructorArguments = [];
+          var realConstructor = cDef.constructor;
+          cDef.constructor = function(){
+            var instance = realConstructor();
+            constructorFun.apply(instance, arguments);
+            return instance;
+          };
+          
+          if (!provisionalConstructor){
+            defineConstructor();
+          };
+          
+        }else{
+          cDef.constructorType = this.createFunctionType({
+            "return": cf
+          });
+          
+        };
+        
         
         if (!isReady){
           cDef.readyPromise = new Promise();
@@ -966,6 +1151,7 @@
                 return;
               };
             };
+            
             cDef.isReady = true;
             cDef.readyPromise.resolve(cf);
           };
@@ -973,6 +1159,7 @@
           
         }else{
           cDef.isReady = true;
+          
         };
         
         return cf;
@@ -1071,7 +1258,23 @@
       
       , getFunctionArgumentType: function(parType, parIndex){
         var cDef = getClass(parType);
-        return cDef.arguments[parIndex];
+        if (cDef.arguments[parIndex]){
+          return cDef.arguments[parIndex];
+        }
+        return this.getBuiltinType("var");
+        
+      }
+      
+      , getConstructorArgumentType: function(parType, parIndex){
+        var cDef = getClass(parType);
+        var t;
+        if (cDef.constructorArguments){
+          t = cDef.constructorArguments[parIndex];
+        };
+        if (t){
+          return t;
+        };
+        return this.getBuiltinType("var");
         
       }
       
@@ -1114,6 +1317,22 @@
         if (map.members[par.property]){
           return map.members[par.property]["type"];
         };
+        
+        return this.getBuiltinType("var");
+      }
+      
+      , getConstructorType: function(par){
+        var cDef = getClass(par["type"]);
+        if (cDef.isVar){
+          return this.getBuiltinType("var");
+        };
+        
+        if (cDef.constructorType){
+          return cDef.constructorType;
+        };
+        
+        throw errorMsg.noConstructorAvailable;
+        
       }
       
       , getSetPropertyCode: function(par){
@@ -1387,6 +1606,10 @@
       expectedCallable: {
         id: 204
         , msg: "expected callable expression"
+      },
+      noConstructorAvailable: {
+        id: 205
+        , msg: "no Constructor available"
       }
     };
     

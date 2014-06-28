@@ -72,8 +72,8 @@ var _V1 = (function(){
 var _V3/*T1*/;
 var _V6/*T2*/;
 var _V9/*a*/;
-var _V18/*b*/;
-var _V21/*catched*/;
+var _V20/*b*/;
+var _V23/*catched*/;
 var _V2/*type:T1*/ = classSystem._createProvisionalClass();
 _V3/*T1*/ = _V2/*type:T1*/;
 var _V4/*T1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:T1*/).then(function(parType){_V2/*type:T1*/ = parType;_V4/*T1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:T1*/);});var _V5/*type:T2*/ = classSystem._createProvisionalClass();
@@ -93,32 +93,32 @@ var _V13/*type:Ty*/ = _V6/*T2*/;
 var _V14/*Ty*/ = _V13/*type:Ty*/
 ;var _V15/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
 var communicator = {fun: undefined};
-eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V12/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V13/*type:Ty*/, "value":"new _V15/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
-_V18/*b*/ = (function(){var _V10/*type:Tx*/ = _V3/*T1*/;
+eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V18/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V12/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V18/*y*/", "type":_V13/*type:Ty*/, "value":"new _V15/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V18/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
+_V20/*b*/ = (function(){var _V10/*type:Tx*/ = _V3/*T1*/;
 var _V11/*Tx*/ = _V10/*type:Tx*/
-;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+;var _V21/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
 var _V13/*type:Ty*/ = _V3/*T1*/;
 var _V14/*Ty*/ = _V13/*type:Ty*/
-;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
+;var _V22/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
 var _V10/*type:Tx*/ = _V3/*T1*/;
 var _V11/*Tx*/ = _V10/*type:Tx*/
-;var _V19/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
+;var _V21/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);
 var _V13/*type:Ty*/ = _V3/*T1*/;
 var _V14/*Ty*/ = _V13/*type:Ty*/
-;var _V20/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
+;var _V22/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);
 var communicator = {fun: undefined};
-eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V17/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V19/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V17/*y*/", "type":_V13/*type:Ty*/, "value":"new _V20/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V17/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
-_V21/*catched*/ = false;
+eval("communicator.fun = function(){\nvar _V16/*x*/;\nvar _V18/*y*/;\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V21/*Tx-constructor*/()", "valueType":_V10/*type:Tx*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V18/*y*/", "type":_V13/*type:Ty*/, "value":"new _V22/*Ty-constructor*/()", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V18/*y*/", "valueType":_V13/*type:Ty*/, "operator":"="}) + ";;\n};"); return communicator.fun; })();
+_V23/*catched*/ = false;
 try
 {_V9/*a*/();;
-}catch(e){_V21/*catched*/ = true;;
+}catch(e){_V23/*catched*/ = true;;
 };
-if(!_V21/*catched*/){
+if(!_V23/*catched*/){
 return {"success": false};
 };
 ;
 try
-{_V18/*b*/();;
+{_V20/*b*/();;
 }catch(e){return {"success": false};
 };
 return {"success": true};

@@ -1,0 +1,15 @@
+class type ClassA { // typesafety is indicated by the type keyword
+  a: 1,
+  b: 2
+};
+
+class type ClassB {
+  c: 3,
+  d: 4
+};
+
+var var1 = 1;
+ClassA varA = new ClassA();
+ClassA varB = new ClassA();
+
+varA = varB; // will cause runtime error.
