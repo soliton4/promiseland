@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -71,12 +71,14 @@ var _V1 = (function(){
 "use strict";
 var _V2/*a*/;
 var _V3/*b*/;
+try{;
 _V2/*a*/ = [];
 _V3/*b*/ = [_V2/*a*/, 0, ""];
 if(((_V2/*a*/["length"] == 0) && (_V3/*b*/["length"] == 3))){
-return {"success": true};
+return (function(ret){ return ret; })({"success": true});;
 };
-return {"success": false};
+return (function(ret){ return ret; })({"success": false});;
+}catch(e){throw e};;
 })();
 promiseland._registerModule({ hashStr: "8d22e85c82a82de38038caa802287378", "module": _V1, promising: false });
 return _V1;

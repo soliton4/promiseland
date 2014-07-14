@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -71,21 +71,27 @@ var _V1 = (function(){
 "use strict";
 var _V2/*C1*/;
 var _V4/*c*/;
+try{;
 _V2/*C1*/ = (function(){var _V3/*inherited*/ = {};
-var res = promiseland.createClass({"constructor": function(){
+var res = promiseland.createClass({"constructor": (function(){
+;
 this["a"] = 1;;
-},
+;
+}),
 "b": 1,
-"doSomething": function(){
-return (this["a"] + this["b"]);
-}}, [], _V3/*inherited*/);
+"doSomething": (function(){
+;
+return (this["a"] + this["b"]);;
+;
+})}, [], _V3/*inherited*/);
 return res; })();
 _V4/*c*/ = new _V2/*C1*/();
 if((((_V4/*c*/["a"] == 1) && (_V4/*c*/["b"] == 1)) && (_V4/*c*/["doSomething"]() == 2))){
-return {"success": true};
+return (function(ret){ return ret; })({"success": true});;
 };
 ;
-return {"success": false};
+return (function(ret){ return ret; })({"success": false});;
+}catch(e){throw e};;
 })();
 promiseland._registerModule({ hashStr: "ab5c44392ce9b1c0b80c13161fb244c0", "module": _V1, promising: false });
 return _V1;

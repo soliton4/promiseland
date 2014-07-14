@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -74,19 +74,25 @@ var _V6/*v1*/;
 var _V7/*v2*/;
 var _V2/*type:C1*/ = classSystem._createProvisionalClass();
 _V3/*C1*/ = _V2/*type:C1*/;
-var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":_V5/*type:var*/},{"name":"b","type":_V5/*type:var*/},{"name":"c","type":(classSystem.createFunctionType({ "return": _V2/*type:C1*/, arguments: []}))}], "extends": [], "hasFreePart": true}, {"a": 1, "b": function(){
-this[2] = 2;;
-}, "c": function(){
-return this;
-}}));_V3/*C1*/;;
+var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});try{;
+classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":_V5/*type:var*/},{"name":"b","type":_V5/*type:var*/},{"name":"c","type":(classSystem.createFunctionType({ "return": _V2/*type:C1*/, arguments: []}))}], "extends": [], "hasFreePart": true}, {"a": 1, "b": (function(){
+;
+this[3] = 2;;
+;
+}), "c": (function(){
+;
+return this;;
+;
+})}));_V3/*C1*/;;
 _V6/*v1*/ = new _V4/*C1-constructor*/();
-_V7/*v2*/ = _V6/*v1*/[4]();
-_V6/*v1*/[3]();;
-if((_V7/*v2*/[2] == 2)){
-return {"success": true};
+_V7/*v2*/ = _V6/*v1*/[5]();
+_V6/*v1*/[4]();;
+if((_V7/*v2*/[3] == 2)){
+return (function(ret){ return ret; })({"success": true});;
 };
 ;
-return {"success": false};
+return (function(ret){ return ret; })({"success": false});;
+}catch(e){throw e};;
 })();
 promiseland._registerModule({ hashStr: "0ed06f66d2783c4b7f338ed58b63db59", "module": _V1, promising: false });
 return _V1;

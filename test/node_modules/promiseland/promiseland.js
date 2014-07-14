@@ -6,6 +6,7 @@
 // promiseLand is a very promising Language
 //
 //
+// licence lgpl
 
 
 (function(){
@@ -47,7 +48,7 @@
         for (var i = 1; i < arguments.length; ++i){
           args.push(arguments[i]);
         };
-        return par2.apply(args);
+        return par2.apply(null, args);
       });
     };
     requireFun = require;
@@ -78,14 +79,22 @@
     
   };
   
-  defineFun([], function(){
+  defineFun(["./Chainable", "./Tracker"], function(ChainableModule, TrackerModule){
+  //defineFun([], function(ChainableModule){
     
     var require = requireFun;
     var promiseland;
     
     var errorMsg;
     
-    //var Promise;
+    
+    // extra modules
+    
+    var Chainable;
+    var Tracker;
+    
+    
+    // main promise implementation
     var Promise = function(){
       
       var thenAr = [];
@@ -557,8 +566,11 @@
             p.resolve(res);
           });
           }catch(e){
-            console.log("reject parse");
-            console.log(e);
+            //console.log("reject parse");
+            //console.log(e);
+            if (!e.msg){
+              e.msg = e.message;
+            };
             p.reject(e);
           };
         });
@@ -721,6 +733,8 @@
       }
     };
     
+    var internals = {};
+    
     
     
     
@@ -776,107 +790,6 @@
 
 
 
-    var LifeTime = function(destroyFun){
-      this.bestweight = Number.POSITIVE_INFINITY;
-      this.weight = Number.POSITIVE_INFINITY;
-      this.line = {
-        next: {
-          fun: function(){
-            return Number.POSITIVE_INFINITY;
-          }
-        }
-      };
-      this.cnt = 0;
-      this.destroy = destroyFun;
-    };
-    LifeTime.prototype = {
-      getLifeLine: function(tracker){
-        var self = this;
-
-        var line = {
-          next: this.line,
-          fun: function(tempweight){
-            var w = tracker.getWeight(self.token);
-            if (w < tempweight){
-              tempweight = w;
-              if (w < self.bestweight){
-                self.bestweight = w;
-                self.besttracker = tracker;
-                self.weight = w + 1;
-              };
-              if (w === 1){
-                return 1;
-              };
-            };
-            return this.next.fun(tempweight); // will error
-          }
-        };
-
-        line.next.prev = line;
-        this.line = line;
-        this.cnt++;
-
-        if (tracker.weight < this.bestweight){
-          this.bestweight = master.weight;
-          this.besttracker = tracker;
-          this.weight = this.bestweight + 1;
-        };
-
-        return function(){
-          self.cnt--;
-          if (line.prev){
-            line.prev.next = line.next;
-            line.next.prev = line.prev;
-            if (!self.cnt){
-              // this is the end
-              self.destroy();
-              return;
-            };
-          }else{
-            self.line = line.next;
-            line.next.prev = undefined;
-          };
-          if (self.bestracker === tracker){
-            if (self.getWeight() === Number.POSITIVE_INFINITY){
-              self.destroy();
-            };
-          };
-        };
-      }
-
-      , checkAlive: function(){
-        if (this.getWeight() === Number.POSITIVE_INFINITY){
-          this.destroy();
-        };
-      }
-
-      // really get down to 1 or return infinity
-      , getWeight: function(token){
-        if (this.token === token){
-          return Number.POSITIVE_INFINITY;
-        };
-        //this.tempweight = Number.POSITIVE_INFINITY;
-        this.token = token || {
-        };
-        return this.line.fun(Number.POSITIVE_INFINITY) + 1;
-      }
-
-    };
-
-
-
-
-
-    var RootTracker = function(){
-      this.weight = 1;
-    };
-    RootTracker.prototype = {
-      
-      getWeight: function(){
-        return 1;
-      }
-      
-    };
 
 
     var classSystem = {
@@ -907,8 +820,6 @@
           typeDef.promise.resolve(parResult);
         };
       },
-      
-      RootTracker: RootTracker,
       
       isProvisional: function(parType){
         var typeDef = getClass(parType);
@@ -943,11 +854,47 @@
         return p;
       },
       
+      _createTemporaryTrackedClass: function(parType){
+        if (this.isProvisional(parType)){
+          throw errorMsg.trackedProvisionalNotImplemented;
+        };
+        if (this.isTemporaryTrackedClass(parType)){
+          return parType;
+        };
+        if (!this.isTrackedClass(parType)){
+          return parType;
+        };
+        var cDef = {
+          temporaryTracked: true,
+          type: parType,
+          isReady: true
+        };
+        var cf = classHider(cDef);
+        return cf;
+      },
+      
+      isTemporaryTrackedClass: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.temporaryTracked){
+          return true;
+        };
+        return false;
+      },
+      
+      getClassFromTemporaryTracked: function(parType){
+        if (this.isTemporaryTrackedClass(parType)){
+          var cDef = getClass(parType);
+          return cDef.type;
+        };
+        return parType;
+      },
+      
+      
       isSameType: function(type1, type2){
         if (type1 === type2){
           return true;
         };
-        cDef1 = getClass(type1);
+        var cDef1 = getClass(type1);
         if (cDef1.provisional){
           if (!cDef1.type){
             return false;
@@ -955,7 +902,7 @@
           type1 = cDef1.type;
           cDef1 = getClass(type1);
         };
-        cDef2 = getClass(type2);
+        var cDef2 = getClass(type2);
         if (cDef2.provisional){
           if (!cDef2.type){
             return false;
@@ -991,12 +938,24 @@
           constructor: undefined, // later
           map: map,
           isReady: false,
-          tracked: classLiteral.tracked
+          track: classLiteral.track
         };
         cAr.push(cDef); // cAr[0] is allways the class definition
         
-        if (classLiteral.tracked){
+        var trackerIdx;
+        var trackRootIdx;
+        var trackMemberIdx;
+        
+        if (cDef.track){
+          map.trackerIdx = cAr.length;
           cAr.push(undefined); // cAr[1] is allways lifeline if tracked
+          map.trackRootIdx = cAr.length;
+          cAr.push(undefined); // cAr[1] is allways lifeline if tracked
+          map.trackMemberIdx = cAr.length;
+          cAr.push(undefined); // cAr[1] is allways lifeline if tracked
+          trackerIdx = map.trackerIdx;
+          trackRootIdx = map.trackRootIdx;
+          trackMemberIdx = map.trackMemberIdx;
         };
         
         if (classLiteral.hasFreePart){
@@ -1007,6 +966,26 @@
           map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE];
         };
         
+        var helpAr = [];
+        var makeHelpAr = function(){
+          return helpAr.slice();
+        };
+        
+        map.connectIdx = cAr.length;
+        var conIdx = map.connectIdx;
+        cAr.push(function(){
+          var helpAr = makeHelpAr();
+          this[conIdx] = function(idx, fun, base){
+            var chain = helpAr[idx];
+            if (!chain){
+              chain = Chainable(this, idx);
+              helpAr[idx] = chain;
+            };
+            return chain(fun, base);
+          };
+          return this[conIdx].apply(this, arguments);
+        });
+        
         var isReady = true;
         
         var membersAr = [];
@@ -1015,6 +994,9 @@
         
         var constructorDef;
         var constructorFun;
+        
+        var destroyDef;
+        var destroyFun;
         
         var defineConstructor;
         var provisionalConstructor = false;
@@ -1033,9 +1015,17 @@
             constructorFun = def;
           };
           
+          if (m.name == "destroy"){
+            // this is the destructor
+            destroyDef = mDef;
+            destroyFun = def;
+          };
+          
           mDef.type = m.type;
           mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
           mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] = ", MAKRO_VALUE];
+          mDef.connectFunCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, ")"];
+          mDef.connectSlotCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, "[", MAKRO_VALUEPROPERTY, "], ", MAKRO_VALUE, ")"];
           membersAr.push(mDef);
           if (self.isProvisional(m.type)){
             isReady = false;
@@ -1077,38 +1067,60 @@
           freeFun.prototype = proto;
           var f = map.freePart;
           
-          if (classLiteral.tracked){
+          if (cDef.track){
             cDef.constructor = function(){
               var r = cAr.slice();
               r[f] = new freeFun();
-              return r;
+              var t = Tracker(function(){
+                destroyFun.apply(r);
+              });
+              r[trackerIdx] = t[0];
+              r[trackRootIdx] = t[1];
+              r[trackMemberIdx] = t[2];
+              return [r, r[trackRootIdx]()];
+              
             };
             
           }else{
             cDef.constructor = function(){
               var r = cAr.slice();
-              r[1] = new LifeTime();
               r[f] = new freeFun();
               return r;
+              
             };
             
           };
           
         }else{
-          if (classLiteral.tracked){
+          if (cDef.track){
             cDef.constructor = function(){
-              return cAr.slice();
+              var r = cAr.slice();
+              var t = Tracker(function(){
+                destroyFun.apply(r);
+              });
+              r[trackerIdx] = t[0];
+              r[trackRootIdx] = t[1];
+              r[trackMemberIdx] = t[2];
+              return [r, r[trackRootIdx]()];
             };
             
           }else{
             cDef.constructor = function(){
               var r = cAr.slice();
-              r[1] = new LifeTime();
               return r;
             };
             
           };
         };
+        
+        
+        
+        //helperArray
+        for (i = 0; i < cAr.length; ++i){
+          helpAr.push(undefined);
+        };
+        
+        
         //constructorType
         var cf = classHider(cDef);
         
@@ -1139,6 +1151,20 @@
             "return": cf
           });
           
+        };
+        
+        if (cDef.track){
+          if (destroyDef){
+            var _destroyFun = destroyFun;
+            destroyFun = function(){
+              _destroyFun.apply(this);
+              this.splice(0,this.length);
+            };
+          }else{
+            destroyFun = function(){
+              this.splice(0,this.length);
+            };
+          };
         };
         
         
@@ -1173,12 +1199,21 @@
         return false;
       }
       
+      , isTrackedClass: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.track){
+          return true;
+        };
+        return false;
+      }
+      
       /*, getFunctionTypeJsStr: function(parType){
         var cDef = getClass(parType);
         return "classSystem.createFunctionType({";
       }*/
       
       , createFunctionType: function(par){
+        var self = this;
         var cDef = {
           isFunction: true,
           "return": par["return"] || this.getBuiltinType("var"),
@@ -1186,10 +1221,18 @@
           isReady: false
         };
         
-        var checkReady = function(){};
+        var checkReady = function(){
+          makeTemporaries();
+        };
+        var makeTemporaries = function(){
+          cDef.return = self._createTemporaryTrackedClass(cDef.return);
+          var i = 0;
+          for (i = 0; i < cDef.arguments.length; ++i){
+            cDef.arguments[i] = self._createTemporaryTrackedClass(cDef.arguments[i]);
+          };
+        };
         
         isReady = true;
-        var self = this;
         
         if (self.isProvisional(cDef.return)){
           isReady = false;
@@ -1227,17 +1270,28 @@
                 return;
               };
             };
+            makeTemporaries();
             cDef.isReady = true;
             cDef.readyPromise.resolve(cf);
           };
           checkReady();
           
         }else{
+          checkReady();
           cDef.isReady = true;
+          
         };
         
         
         return cf;
+      }
+      
+      , isVar: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.isVar){
+          return true;
+        };
+        return false;
       }
       
       , getFunctionReturnType: function(parType){
@@ -1307,6 +1361,21 @@
         return runtimeError(errorMsg.accessNotAllowd, par);
       }
       
+      , getPropertyAlias: function(par){
+        var cDef = getClass(par["type"]);
+        if (cDef.isVar){
+          return par.property;
+        };
+        
+        var map = cDef.map;
+        
+        if (map && map.members && map.members[par.property]){
+          return map.members[par.property].index;
+        };
+        return par.property;
+        
+      }
+      
       , getPropertyType: function(par){
         var cDef = getClass(par["type"]);
         if (cDef.isVar){
@@ -1315,7 +1384,11 @@
         var map = cDef.map;
         
         if (map.members[par.property]){
-          return map.members[par.property]["type"];
+          if (par.original){
+            return map.members[par.property]["originalType"] || map.members[par.property]["type"];
+          }else{
+            return map.members[par.property]["type"];
+          };
         };
         
         return this.getBuiltinType("var");
@@ -1360,6 +1433,32 @@
         return runtimeError(errorMsg.accessNotAllowd, par);
       }
       
+      , getConnectCode: function(par){
+        var cDef = getClass(par["type"]);
+        var map = cDef.map;
+        
+        
+        if (par.valueProperty){
+          var valuePropertyType = this.getPropertyType({
+            "type": par.valueType,
+            property: par.valueProperty
+          });
+
+          if (!this.canConnect(par["type"], par.property, valuePropertyType)){
+            return runtimeError(errorMsg.connectNotPossible, par);
+          };
+          par.valueProperty = "" + this.getPropertyAlias({"type": par.valueType, property: par.valueProperty});
+          return assembleCode(map.members[par.property].connectSlotCode, par);
+        }else{
+          if (!this.canConnect(par["type"], par.property, par.valueType)){
+            return runtimeError(errorMsg.connectNotPossible, par);
+          };
+          return assembleCode(map.members[par.property].connectFunCode, par);
+        };
+        return runtimeError(errorMsg.connectNotPossible, par);
+      }
+      
+      
       , getPassAsTypeCode: function(par){
         var cDef = getClass(par["type"]);
         var vcDef = getClass(par["valueType"]);
@@ -1368,30 +1467,102 @@
           if (!this.canSet(par["type"], par.valueType)){
             return runtimeError(errorMsg.typeMissmatch, par);
           };
+          if (this.isTemporaryTrackedClass(par["type"])){
+            return this.getCreateTemporaryClassCode(par);
+          };
           return assembleCode([MAKRO_VALUE], par);
         };
         return runtimeError(errorMsg.missingVariable, par);
         
       }
       
+      , getCreateTemporaryClassCode: function(par){
+        if (this.isTemporaryTrackedClass(par["type"])){
+          return assembleCode([MAKRO_VALUE], par);
+        };
+        if (!this.isTrackedClass(par["type"])){
+          return assembleCode([MAKRO_VALUE], par);
+        };
+        var cDef = getClass(par["type"]);
+        
+        var codeAr = ["(function(v){ return [v, v[" + cDef.map.trackRootIdx + "]()];})(", MAKRO_VALUE, ")"];
+        return assembleCode(codeAr, par);
+        
+      }
+      
+      , getDestroyTemporaryClassCode: function(par){
+        if (this.isTemporaryTrackedClass(par.valueType) || !this.isTrackedClass(par.valueType)){
+          if (par.noValueRequired){
+            return assembleCode([], par);
+          };
+          return assembleCode([MAKRO_VALUE], par);
+        };
+        
+        var codeAr = ["(function(v){ v[1](); return v; })(", MAKRO_VALUE, ")"];
+        return assembleCode(codeAr, par);
+        
+      }
+      
+      
       , getSetVariableCode: function(par){
         var cDef = getClass(par["type"]);
         var vcDef = getClass(par["valueType"]);
         
         if (par.instance){
-          if (!this.canSet(par["type"], par.valueType)){
-            return runtimeError(errorMsg.typeMissmatch, par);
-          };
           var operator = par.operator || "=";
           if (operator != "="){
             if (!(cDef.isVar && vcDef.isVar)){
               return runtimeError(errorMsg.operatorMissmatch, par);
             };
           };
-          return assembleCode([MAKRO_SELF, " = ", MAKRO_VALUE], par);
+          
+          if (!this.canSet(par["type"], par.valueType)){
+            if ( this.canSet(par["type"], this.getClassFromTemporaryTracked(par.valueType)) ){
+              // tracked temporary
+              if (par.assignmentType == "Identifier"){
+                return assembleCode([
+                  "(function(vAr){ var v = vAr[0]; ", // temp value
+                  MAKRO_SELF, " ", operator, " v; ",  // assign to variable
+                  "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); }; ",  // call old tracker
+                  "_T", MAKRO_SELF, " = vAr[1]; ",                       // reuse existing tracker to save function calls
+                  "return v; })",                         // reuse existing tracker to save function calls
+                  "(", MAKRO_VALUE, ")"                   // call closure
+                ], par);
+              };
+            };
+            return runtimeError(errorMsg.typeMissmatch, par);
+          };
+          return assembleCode([MAKRO_SELF, " ", operator, " ", MAKRO_VALUE], par);
         };
         return runtimeError(errorMsg.missingVariable, par);
       }
+      
+      , getDeclareVariableCode: function(par){
+        var cDef = getClass(par["type"]);
+        
+        var assemblyAr = ["var ", par.name, ";\n"];
+        if (cDef.track){
+          assemblyAr.push("var _T");
+          assemblyAr.push(par.name);
+          assemblyAr.push(";\n");
+        };
+        return assembleCode(assemblyAr, par);
+      }
+      
+      , getDestroyVariableCode: function(par){
+        var cDef = getClass(par["type"]);
+        
+        var assemblyAr = [];
+        if (cDef.track){
+          assemblyAr.push("if (_T");
+          assemblyAr.push(par.name);
+          assemblyAr.push("){ _T");
+          assemblyAr.push(par.name);
+          assemblyAr.push("();};");
+        };
+        return assembleCode(assemblyAr, par);
+      }
+      
       
       , getCallCode: function(par){
         var cDef = getClass(par["type"]);
@@ -1468,6 +1639,22 @@
         if (parTargetType === parSourceType){
           return true;
         };
+        
+        // temporary check
+        if (this.isTemporaryTrackedClass(parSourceType)){
+          // temporary sourcetype can only pass as temporary target
+          if (this.isTemporaryTrackedClass(parTargetType)){
+            return this.canSet(this.getClassFromTemporaryTracked(parTargetType), this.getClassFromTemporaryTracked(parSourceType));
+          };
+          return false;
+        };
+        if (this.isTemporaryTrackedClass(parTargetType)){
+          // temporary target is allways possible
+          // code is generated in getPassAsTypeCode
+          return this.canSet(this.getClassFromTemporaryTracked(parTargetType), parSourceType);
+        };
+        
+        
         if (
           parTargetType.isFunction && parSourceType.isFunction
           && this.canSet(parTargetType.returnType, parSourceType.returnType)
@@ -1487,6 +1674,39 @@
             return true;
           };
         };
+        return false;
+      }
+      
+      , canConnect: function(parType, parProperty, parFunType){
+        var cDef = getClass(parType);
+        var map = cDef.map;
+        
+        if (map.members[parProperty]){
+          var mDef = map.members[parProperty];
+          
+          var propertyType = this.getPropertyType({
+            "type": parType,
+            property: parProperty
+          });
+          
+          /*if (!mDef.connectable){
+            return false;
+          };*/
+          
+          if (!this.canSet(propertyType, parFunType)){
+            return false;
+          };
+          
+          if (!(this.isVar(propertyType) || this.isFunctionType(propertyType))){
+            return false;
+          };
+          if (!(this.isVar(parFunType) || this.isFunctionType(parFunType))){
+            return false;
+          };
+          
+          return true;
+        };
+        
         return false;
       }
       
@@ -1558,6 +1778,9 @@
             case MAKRO_VALUE:
               res.push(par.value);
               break;
+            case MAKRO_VALUEPROPERTY:
+              res.push(par.valueProperty);
+              break;
             case MAKRO_LEFT:
               res.push(par.left);
               break;
@@ -1584,6 +1807,7 @@
     var MAKRO_LEFT = 5;
     var MAKRO_OPERATOR = 6;
     var MAKRO_RIGHT = 7;
+    var MAKRO_VALUEPROPERTY = 8;
     
     
     errorMsg = {
@@ -1610,11 +1834,32 @@
       noConstructorAvailable: {
         id: 205
         , msg: "no Constructor available"
+      },
+      connectNotPossible: {
+        id: 206
+        , msg: "connect not possible"
+      },
+      trackedProvisionalNotImplemented: {
+        id: 207
+        , msg: "tracked provisional type feature is not implemented"
       }
     };
     
     
     promiseland.classSystem = classSystem;
+    
+    
+    // extra modules
+    
+    if (ChainableModule){
+      Chainable = ChainableModule(promiseland, internals);
+      
+    };
+    
+    if (TrackerModule){
+      Tracker = TrackerModule(promiseland, internals);
+      
+    };
     
     return promiseland;
     

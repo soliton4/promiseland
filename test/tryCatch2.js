@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -78,24 +78,29 @@ var _V5/*result*/;
 var _V6/*dootherStuff*/;
 var _V7/*dostuff*/;
 var _V12/*x*/;
-_V3(function(){_V5/*result*/ = {"res": 1};
-_V6/*dootherStuff*/ = function(){
+_V3(function(){;
+_V5/*result*/ = {"res": 1};
+_V6/*dootherStuff*/ = (function(){
+;
 _V5/*result*/["res"] = 4;;
-};
-_V7/*dostuff*/ = function(){
+;
+});
+_V7/*dostuff*/ = (function(){
 var _V8 = new __Promise();
 var _V9 = function(code){ return function(res){ try{code(res);}catch(e){ _V8.reject(e); }; }; };
 var _V10 = function(e){ _V8.reject(e); };
-_V9(function(){_V8.resolve( _V11/*domoreStuff*/()); return _V8;
+_V9(function(){;
+_V8.resolve(_V11/*domoreStuff*/()); return;;
 _V8.resolve(); return;;
 })();
 return _V8;
-};
-_V12/*x*/ = function(){
+});
+_V12/*x*/ = (function(){
 var _V13 = new __Promise();
 var _V14 = function(code){ return function(res){ try{code(res);}catch(e){ _V13.reject(e); }; }; };
 var _V15 = function(e){ _V13.reject(e); };
-_V14(function(){var _V16 = new __Promise();
+_V14(function(){;
+var _V16 = new __Promise();
 var _V17 = new __Promise();
 var _V18/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V17.resolve(e); }; }; };
 var _V19 = function(e){ _V17.resolve(e); };
@@ -110,9 +115,9 @@ _V16.then(_V14(function(){;
 _V13.resolve(); return;;
 }), _V15)})();
 return _V13;
-};
+});
 _V12/*x*/().then(_V3(function(_V21){_V21;;
-_V1.resolve( _V5/*result*/); return _V1;
+_V1.resolve((function(ret){ return ret; })(_V5/*result*/)); return;;
 _V1.resolve(); return;;
 }), _V4);})();
 return _V1;

@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -69,7 +69,9 @@ if (promiseland._hasModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e" })){ re
 var _V2/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
-return {};
+;
+return {};;
+;
 })();
 promiseland._registerModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e", "module": _V1, promising: false });
 return _V1;

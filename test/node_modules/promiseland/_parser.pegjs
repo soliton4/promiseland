@@ -214,6 +214,7 @@ Keyword
   / CaseToken
   / CatchToken
   / ClassToken  // promiseland
+  / ConnectToken // promiseland
   / ContinueToken
   / DebuggerToken
   / DefaultToken
@@ -481,6 +482,7 @@ BreakToken      = "break"      !IdentifierPart
 CaseToken       = "case"       !IdentifierPart
 CatchToken      = "catch"      !IdentifierPart
 ClassToken      = "class"      !IdentifierPart
+ConnectToken    = "connect"    !IdentifierPart
 ConstToken      = "const"      !IdentifierPart
 ContinueToken   = "continue"   !IdentifierPart
 DebuggerToken   = "debugger"   !IdentifierPart
@@ -633,10 +635,14 @@ PropertyAssignment
   / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
     }
-  / funcDec:FunctionDeclaration {
+  / funcDec:FunctionDeclaration { // promiseland
       funcDec.kind = "function";
       funcDec.type = "MemberFunction";
       return funcDec;
+    }
+  / block:Block {
+      block.kind = "block"
+      return block;
     }
   / GetToken __ key:PropertyName __
     "(" __ ")" __
@@ -681,8 +687,9 @@ PropertySetParameterList
 
 MemberExpression
   = first:(
-      FunctionExpression // promiseland
-      / ClassExpression
+      FunctionExpression  // promiseland
+      / ConnectExpression // promiseland
+      / ClassExpression   // promiseland
       / PrimaryExpression
       / NewToken __ callee:MemberExpression __ args:Arguments {
           return posRes({ type: "NewExpression", callee: callee, arguments: args }); // promiseland
@@ -706,6 +713,7 @@ MemberExpression
         });
       });
     }
+    
 
 NewExpression
   = MemberExpression
@@ -1060,7 +1068,13 @@ ConditionalExpressionNoIn
     }
 
 AssignmentExpression
-  = left:(exp:LeftHandSideExpression !( __ Operator) !( __ UnaryOperator){
+  = left:(exp:LeftHandSideExpression !( __ Operator) !( __ UnaryOperator) !( __ AssignmentOperator) !( __ "?"){
+      return exp;
+    })
+    {
+      return left;
+    }
+  / left:(exp:LeftHandSideExpression !( __ Operator) !( __ UnaryOperator){
       return exp;
     })
     rest: ( __ operator:AssignmentOperator __
@@ -1071,11 +1085,8 @@ AssignmentExpression
           right:    right
         }
       }
-    )?
+    )
     {
-      if (!rest){
-        return left;
-      };
       return posRes({
         type:     "AssignmentExpression",
         operator: rest.operator,
@@ -1152,7 +1163,7 @@ Statement
   / ContinueStatement
   / BreakStatement
   / ReturnStatement
-  / WithStatement
+  // WithStatement // promiseland
   / LabelledStatement
   / SwitchStatement
   / ThrowStatement
@@ -1439,6 +1450,20 @@ ThrowStatement
   = ThrowToken _ argument:Expression EOS {
       return posRes({ type: "ThrowStatement", argument: argument });
     }
+    
+    
+// promiseland
+
+ConnecteeExpression
+  = MemberExpression
+
+ConnectExpression
+  = ConnectToken __ signal:ConnecteeExpression __ slot:ConnecteeExpression {
+      return posRes({ type: "ConnectExpression", signal: signal, slot: slot });
+    }
+  / ConnectToken __ signal:ConnecteeExpression __ fun:Expression {
+      return posRes({ type: "ConnectExpression", signal: signal, fun: fun });
+    }
 
 TryStatement
   = TryToken __ block:Block __ handler:Catch __ finalizer:Finally {
@@ -1521,10 +1546,15 @@ ClassSyncClaus
   / "sync" __ "some" __ { return posRes({ "type": "sync", "all": 0 }); }
   / "sync" __ { return posRes({ "type": "sync", "all": 1 }); }
 
+ClassTrackClaus
+  = "track" { return posRes({ "type": "track" }); }
+
+
 ClassKeyword
   = ClassTypedClaus
   / ClassSyncClaus
-  
+  / ClassTrackClaus
+
 ClassKeywords
   = arr:ClassKeyword+ {
   var present = {};
@@ -1686,12 +1716,28 @@ FunctionBody
       });
     }
 
-Program
-  = body:SourceElements? {
+ProgramConfig
+  = TemplateLiteral
+
+ProgramElements 
+  = body:SourceElements { // promiseland
       return posRes({
         type: "Program",
         body: optionalList(body)
       });
+    }
+  / EOS { // promiseland
+      return posRes({
+        type: "Program",
+        body: []
+      });
+    }
+
+Program
+  = ProgramElements
+  / config:ProgramConfig __ program:ProgramElements { // promiseland
+      program.config = config;
+      return program;
     }
 
 SourceElements

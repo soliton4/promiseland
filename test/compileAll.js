@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -86,7 +86,8 @@ var _V19/*jsStr*/;
 var _V24/*codeStr*/;
 var _V26/*parser*/;
 var _V28/*res*/;
-_V3(function(){__requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
+_V3(function(){;
+__requireFun("fs").then(_V3(function(_V6){_V5/*fs*/ = _V6;
 _V7/*callback*/ = new _V8/*Callback*/();
 _V5/*fs*/["readdir"](".", _V7/*callback*/);;
 _V7/*callback*/["promise"].then(_V3(function(_V10){_V9/*files*/ = _V10[1];

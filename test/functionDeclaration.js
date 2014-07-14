@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -83,20 +83,27 @@ var _V11/*res*/;
 var _V12/*fb*/;
 var _V13/*fc*/;
 function _V10/*fa*/(){
-return 1;
+;
+return 1;;
+;
 };
 function _V12/*fb*/(){
-return 2;
+;
+return 2;;
+;
 };
 function _V13/*fc*/(){
-return 3;
+;
+return 3;;
+;
 };
-_V8(function(){_V10/*fa*/;
+_V8(function(){;
+_V10/*fa*/;
 ;
 _V11/*res*/ = ((_V10/*fa*/() + _V12/*fb*/()) + _V13/*fc*/());
 _V12/*fb*/;
 ;
-_V7.resolve( _V11/*res*/); return _V7;
+_V7.resolve((function(ret){ return ret; })(_V11/*res*/)); return;;
 var _V14 = new __Promise();
 if(false){
 _V12/*fb*/().then(_V8(function(_V15){_V15;;
@@ -111,11 +118,12 @@ _V7.resolve(); return;;
 });})();
 return _V7;
 };
-_V3(function(){_V5/*fmain*/().then(_V3(function(_V6){if((_V6 == 6)){
-_V1.resolve( {"success": true}); return _V1;
+_V3(function(){;
+_V5/*fmain*/().then(_V3(function(_V6){if((_V6 == 6)){
+_V1.resolve((function(ret){ return ret; })({"success": true})); return;;
 };
 ;
-_V1.resolve( {"success": false}); return _V1;
+_V1.resolve((function(ret){ return ret; })({"success": false})); return;;
 _V5/*fmain*/;
 ;
 _V1.resolve(); return;;

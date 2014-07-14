@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -70,38 +70,46 @@ var _V11/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*a*/;
+try{;
 _V2/*a*/ = 2;
-return function(){
+return (function(ret){ return ret; })((function(){
 var _V4/*C1*/;
 var _V5/*v2*/;
 var _V6/*v1*/;
 var _V9/*C2*/;
 var _V10/*v3*/;
+try{;
 _V4/*C1*/ = (function(){var _V3/*inherited*/ = {};
-var res = promiseland.createClass({"a": function(){
-return 1;
-},
+var res = promiseland.createClass({"a": (function(){
+;
+return 1;;
+;
+}),
 "b": 3}, [], _V3/*inherited*/);
 return res; })();_V4/*C1*/;;
 _V5/*v2*/ = _V2/*a*/;
 _V6/*v1*/ = new _V4/*C1*/();
 if((_V5/*v2*/ != 2)){
-return {"success": false};
+return (function(ret){ return ret; })({"success": false});;
 };
 ;
 _V9/*C2*/ = (function(){var _V7/*inherited*/ = {};
-var res = promiseland.createClass({"a": function(){
-return (_V8/*inherited a*/.apply(this, []) + 1);
-}}, [_V4/*C1*/], _V7/*inherited*/);
+var res = promiseland.createClass({"a": (function(){
+;
+return (_V8/*inherited a*/.apply(this, []) + 1);;
+;
+})}, [_V4/*C1*/], _V7/*inherited*/);
 var _V8/*inherited a*/ = _V7/*inherited*/["a"];
 return res; })();_V9/*C2*/;;
 _V10/*v3*/ = new _V9/*C2*/();
 if(((_V10/*v3*/["a"]() != 2) || (_V10/*v3*/["b"] != 3))){
-return {"success": false};
+return (function(ret){ return ret; })({"success": false});;
 };
 ;
-return {"success": true};
-}();
+return (function(ret){ return ret; })({"success": true});;
+}catch(e){throw e};;
+})());;
+}catch(e){throw e};;
 })();
 promiseland._registerModule({ hashStr: "2154142e298e5f0d8297b28f9c829070", "module": _V1, promising: false });
 return _V1;

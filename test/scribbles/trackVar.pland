@@ -1,0 +1,5 @@
+var a;
+
+a = trackRet();
+
+a = trackRet() || track2Ret();

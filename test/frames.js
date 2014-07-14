@@ -45,8 +45,8 @@
     
   };
   
-  defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
-  
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
   var classSystem = promiseland.classSystem; 
@@ -75,7 +75,8 @@ var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.rej
 var _V4 = function(e){ _V1.reject(e); };
 var _V5/*fs*/;
 var _V11/*getter*/;
-_V3(function(){function(){
+_V3(function(){;
+(function(){
 if (!promiseland.profileHas("undefined")){
 var p = new __Promise();
 p.reject({id: 14, msg: "function does not execute in this frame."});
@@ -84,27 +85,29 @@ return p;
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };
-_V7(function(){__requireFun("fs").then(_V7(function(_V9){_V6.resolve( _V9); return _V6;
+_V7(function(){;
+__requireFun("fs").then(_V7(function(_V9){_V6.resolve(_V9); return;;
 _V6.resolve(); return;;
 }));})();
 return _V6;
-}().then(_V3(function(_V10){_V5/*fs*/ = _V10;
+})().then(_V3(function(_V10){_V5/*fs*/ = _V10;
 var _V15 = function(){
 var _V12 = new __Promise();
 var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
 var _V14 = function(e){ _V12.reject(e); };
-_V13(function(){_V12.resolve( _V5/*fs*/["readFile"]("somefile.txt")); return _V12;
+_V13(function(){;
+_V12.resolve(_V5/*fs*/["readFile"]("somefile.txt")); return;;
 _V12.resolve(); return;;
 })();
 return _V12;
 };
 promiseland.registerRemote("undefined", "cae0507e04a7312601e16db3b4c02736", "_V15", _V15);
-_V11/*getter*/ = function(){if (promiseland.profileHas("undefined")){
+_V11/*getter*/ = (function(){if (promiseland.profileHas("undefined")){
 return _V15.apply(this, arguments);
 }else{
 return promiseland.remoteExec("cae0507e04a7312601e16db3b4c02736", "_V15", arguments);
 };
-};
+});
 _V1.resolve(); return;;
 }), _V4);})();
 return _V1;

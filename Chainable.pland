@@ -1,0 +1,82 @@
+<{__promiseLandModule: true}>;
+
+
+
+var dummy = {
+  newNext: function(){},
+  newPrev: function(){},
+  fun: function(){}
+};
+
+
+return function(base, property){
+  
+  
+  var orig = base[property];
+  var last;
+
+
+  var setFun = (parFun){
+    base[property] = parFun;
+  };
+
+  var first = (function(){
+    return {
+      newNext: function(n){
+        if (n){
+          var nextFun = n.fun;
+          setFun(function(){
+            orig.apply(base, arguments);
+            nextFun.apply(null, arguments);
+          });
+        }else{
+          setFun(orig);
+          last = first;
+        };
+      },
+      newPrev: function(){}
+    };
+  })();
+
+  last = first;
+
+
+  return function (conFun, newBase){
+    var next = dummy;
+    var nextFun = next.fun;
+    var prev = last;
+
+    var s = {
+      newNext: function(n){
+        if (n){
+          next = n;
+        }else{
+          next = dummy;
+          last = s;
+        };
+        nextFun = next.fun;
+      },
+      newPrev: function(p){
+        prev = p;
+      },
+      fun: newBase ? (){
+        conFun.apply(newBase, arguments);
+        nextFun.apply(null, arguments);
+      } : (){
+        conFun.apply(null, arguments);
+        nextFun.apply(null, arguments);
+      }
+    };
+    last.newNext(s);
+    last = s;
+
+    return  function(){
+      prev.newNext(next);
+      next.newPrev(prev);
+      prev = dummy;
+      next = dummy; // so it cant be called repeatedly jtbs;
+    };
+  };
+  
+  
+};
