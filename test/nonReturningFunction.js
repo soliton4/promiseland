@@ -99,7 +99,7 @@ _V11.resolve(); return;;
 return _V11;
 });
 _V10/*x*/().then(_V3(function(_V15){_V15;;
-_V1.resolve((function(ret){ return ret; })(_V5/*result*/)); return;;
+_V1.resolve(_V5/*result*/); return;;
 _V1.resolve(); return;;
 }), _V4);})();
 return _V1;

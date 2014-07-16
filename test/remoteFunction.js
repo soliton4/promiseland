@@ -74,7 +74,7 @@ var _V1 = (function(){
 var _V2/*z*/;
 var _V10/*y*/;
 var _V7/*x*/;
-try{;
+;
 _V2/*z*/ = (function(_V3/*context*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
@@ -122,7 +122,7 @@ return _V19.apply(this, arguments);
 return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V19", arguments);
 };
 });
-}catch(e){throw e};;
+;
 })();
 promiseland._registerModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b", "module": _V1, promising: false });
 return _V1;

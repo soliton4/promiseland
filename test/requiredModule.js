@@ -76,8 +76,8 @@ var _V4 = function(e){ _V1.reject(e); };
 var _V5/*mod*/;
 _V3(function(){;
 __requireFun("./requiredModule2").then(_V3(function(_V6){_V5/*mod*/ = _V6;
-_V1.resolve((function(ret){ return ret; })({"msg": "this is the message",
-"id": _V5/*mod*/["id"]})); return;;
+_V1.resolve({"msg": "this is the message",
+"id": _V5/*mod*/["id"]}); return;;
 _V1.resolve(); return;;
 }));})();
 return _V1;

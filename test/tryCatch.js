@@ -73,7 +73,7 @@ var _V1 = (function(){
 var _V2/*result*/;
 var _V3/*dootherStuff*/;
 var _V4/*x*/;
-try{;
+;
 _V2/*result*/ = {"res": 1};
 _V3/*dootherStuff*/ = (function(){
 ;
@@ -90,8 +90,8 @@ try
 ;
 });
 _V4/*x*/();;
-return (function(ret){ return ret; })(_V2/*result*/);;
-}catch(e){throw e};;
+return _V2/*result*/;;
+;
 })();
 promiseland._registerModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f", "module": _V1, promising: false });
 return _V1;

@@ -55,8 +55,8 @@
     
     /* error function */
     var errorFun = function(par, err){
-      if (!par.line){
-        debugger;
+      if (!par || !par.line){
+        throw errorMsg.internalParserInfoMissing;
       };
       err.line = par.line;
       err.column = par.column;
@@ -717,7 +717,7 @@
       
       this.getProvisionalType = function(parParsed){
         if (!parParsed){
-          debugger;
+          errorFun({}, errorMsg.internalParserInfoMissing);
         };
         var type = classSystem._createProvisionalClass();
         var ps = this.addError(parParsed, errorMsg.unresolvedType);
@@ -812,7 +812,7 @@
       
       this.warning = function(par, err){
         if (!par.line){
-          debugger;
+          errorFun({}, errorMsg.internalParserInfoMissing);
         };
         this.addWarning(par, err);
       };
@@ -1241,7 +1241,10 @@
       
       this.addBeforeReturn = function(parRes, parCondition){
         
-        var condition = parCondition || true;
+        var condition = parCondition;
+        if (parCondition === undefined){
+          condition = true;
+        };
         
         var conditional = this.createConditionalCode(parRes);
         conditional.addCondition(condition);
@@ -3456,9 +3459,9 @@
         for (i; i < l; ++i){
           if (declarations[i].type == "VariableDeclaration"){
             var r = this.parseExpression(declarations[i]);
-            if (!this.isSameType(r.getType(), usedType)){
+            /*if (!this.canSetisSameType(r.getType(), usedType)){
               this.error(par, errorMsg.differentTypesInVariableDeclaration);
-            };
+            };*/
             res.push(r);
           }else{
             this.error(declarations[i], errorMsg.unknownType);
@@ -3552,7 +3555,7 @@
         parsed = parsed || par.left && par.left.getParsed();
         parsed = parsed || par.right && par.right.getParsed();
         if (!parsed){
-          debugger;
+          errorFun({}, errorMsg.internalParserInfoMissing);;
         };
         var errRes = this.runtimeError(parsed, errorMsg.typeLookupFailed);
         var self = this;
@@ -3683,11 +3686,9 @@
               res.replace(parTrueRes);
               return;
             };
-            /*if (parCondition === false){
-              isDecided = true;
-              res.replace(parFalseRes);
+            if (parCondition === false){
               return;
-            };*/
+            };
             
             conditions.push(parCondition);
             
@@ -3796,6 +3797,31 @@
         return resType;
       };
       
+      this.getSetPropertyCode = function(par){
+        var res = this.newResult();
+        
+        res.push(this.callClassSystem("getSetPropertyCode", {
+          instance: par.instance,
+          "type": this.getResultType(par.instance),
+          property: par.property,
+          propertyValue: par.propertyValue,
+          computed: par.computed,
+          value: par.value,
+          valueType: this.getResultType(par.value),
+          operator: par.operator || "=",
+          errorFun: par.errorFun
+        }));
+
+        res.setType(this.getPropertyType({
+          "type": this.getResultType(par.instance),
+          property: par.property
+        }, par.instance));
+
+
+        return res;
+        
+      };
+      
       
       this.getSetVariableCode = function(par){
         var res = this.newResult();
@@ -3810,7 +3836,7 @@
           assignmentType: par.assignmentType
         }));
         
-        res.setType(this.getResultType(par.instance));
+        res.setType( this.getClassFromTemporaryTracked(this.getResultType(par.value), par.value.getParsed()) );
         
         return res;
       };
@@ -3969,13 +3995,41 @@
       this.expAssignmentExpression = function(par){
         //{type: "AssignmentExpression", operator: "=", left: Object, right: Object}
         var res = this.newResult();
-        res.pushType(this.getSetVariableCode({
-          instance: this.parseExpression(par.left),
-          assignmentType: par.left.type, //Identifier
-          value: this.parseExpression(par.right),
-          operator: par.operator
-          , errorFun: this.getWarningFun(par)
-        }));
+        
+        if (par.left.type == "MemberExpression"){
+          
+          var base = this.parseExpression(par.left.object);
+          var property;
+          var propertyValue;
+          if (par.left.computed){
+            propertyValue = this.expectTypeVar(this.parseExpression(par.left.property));
+          }else{
+            property = identifierName(par.left.property);
+          };
+          
+          res.pushType(this.getSetPropertyCode({
+            instance: base,
+            
+            propertyValue: propertyValue,
+            property: property,
+            computed: par.left.computed,
+            
+            value: this.parseExpression(par.right),
+            
+            operator: par.operator,
+            errorFun: this.getWarningFun(par)
+          }));
+          
+        }else{
+          res.pushType(this.getSetVariableCode({
+            instance: this.parseExpression(par.left),
+            assignmentType: par.left.type, //Identifier
+            value: this.parseExpression(par.right),
+            operator: par.operator,
+            errorFun: this.getWarningFun(par)
+          }));
+          
+        };
         
         return res;
       };
@@ -4486,6 +4540,11 @@
       internalTypeHasNoName: {
         id: 1011
         , msg: "internal: type has no name"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalParserInfoMissing: {
+        id: 1012
+        , msg: "internal: missing parser info"
         , additional: "pls provide this error in a github issue"
         
       }

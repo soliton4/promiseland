@@ -79,23 +79,23 @@ var _V2/*type:Type1*/ = classSystem._createProvisionalClass();
 _V3/*Type1*/ = _V2/*type:Type1*/;
 var _V4/*Type1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:Type1*/).then(function(parType){_V2/*type:Type1*/ = parType;_V4/*Type1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:Type1*/);});var _V5/*type:Type2*/ = classSystem._createProvisionalClass();
 _V6/*Type2*/ = _V5/*type:Type2*/;
-var _V7/*Type2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Type2*/).then(function(parType){_V5/*type:Type2*/ = parType;_V7/*Type2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Type2*/);});try{;
+var _V7/*Type2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Type2*/).then(function(parType){_V5/*type:Type2*/ = parType;_V7/*Type2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Type2*/);});;
 classSystem._resolveProvisional(_V2/*type:Type1*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));_V3/*Type1*/;;
 classSystem._resolveProvisional(_V5/*type:Type2*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));_V6/*Type2*/;;
 try
 {_V8/*a*/;
 _V9/*b*/;
 _V8/*a*/ = _V9/*b*/;;
-}catch(e){return (function(ret){ return ret; })({"success": false});;
+}catch(e){return {"success": false};;
 };
 try
 {_V10/*c*/;
 _V11/*d*/;
 (function(){ throw { id:201, msg: "type missmatch" } })();;
-}catch(e){return (function(ret){ return ret; })({"success": true});;
+}catch(e){return {"success": true};;
 };
-return (function(ret){ return ret; })({"success": false});;
-}catch(e){throw e};;
+return {"success": false};;
+;
 })();
 promiseland._registerModule({ hashStr: "1521f2775b4173c536ae637258c8a819", "module": _V1, promising: false });
 return _V1;

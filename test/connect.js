@@ -78,26 +78,26 @@ var _V2/*type:Emitter*/ = classSystem._createProvisionalClass();
 _V3/*Emitter*/ = _V2/*type:Emitter*/;
 var _V4/*Emitter-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:Emitter*/).then(function(parType){_V2/*type:Emitter*/ = parType;_V4/*Emitter-constructor*/ = classSystem.getTypeConstructor(_V2/*type:Emitter*/);});var _V5/*type:Reciever*/ = classSystem._createProvisionalClass();
 _V6/*Reciever*/ = _V5/*type:Reciever*/;
-var _V7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Reciever*/).then(function(parType){_V5/*type:Reciever*/ = parType;_V7/*Reciever-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Reciever*/);});try{;
+var _V7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Reciever*/).then(function(parType){_V5/*type:Reciever*/ = parType;_V7/*Reciever-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Reciever*/);});;
 classSystem._resolveProvisional(_V2/*type:Emitter*/, classSystem.createClass({members: [{"name":"event","type":_V9/*type:var*/}], "extends": [], "hasFreePart": true}, {"event": (function(_V8/*amount*/){
-try{;
-}catch(e){throw e};;
+;
+;
 })}));_V3/*Emitter*/;;
 classSystem._resolveProvisional(_V5/*type:Reciever*/, classSystem.createClass({members: [{"name":"eventSlot","type":_V9/*type:var*/},{"name":"amount","type":_V9/*type:var*/}], "extends": [], "hasFreePart": true}, {"eventSlot": (function(_V8/*amount*/){
-try{;
+;
 this[4] += _V8/*amount*/;;
-}catch(e){throw e};;
+;
 }), "amount": 1}));_V6/*Reciever*/;;
 _V10/*e*/ = new _V4/*Emitter-constructor*/();
 _V11/*r*/ = new _V7/*Reciever-constructor*/();
 _V12/*c*/ = _V10/*e*/[2](3, _V11/*r*/[3], _V11/*r*/);
 _V10/*e*/[3](2);;
 if((_V11/*r*/[4] == 3)){
-return (function(ret){ return ret; })({"success": true});;
+return {"success": true};;
 };
 ;
-return (function(ret){ return ret; })({"success": false});;
-}catch(e){throw e};;
+return {"success": false};;
+;
 })();
 promiseland._registerModule({ hashStr: "e643581b5bf99c16f02e46ed934f17d4", "module": _V1, promising: false });
 return _V1;

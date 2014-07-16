@@ -51,10 +51,10 @@ return (destroyFun){
     
     var cut = (){
       if (prev){
-        prev.setNext(next);
+        prev.newNext(next);
       };
       if (next){
-        next.setPrev(prev);
+        next.newPrev(prev);
       };
     };
     
@@ -76,7 +76,13 @@ return (destroyFun){
       last = entry;
     };
     
+    var done = false;
+    
     return (){
+      if (done){
+        return;
+      };
+      done = true;
       cut();
       if (last === entry){
         last = prev;
@@ -90,7 +96,9 @@ return (destroyFun){
   
   var checkFun = (){
     if (!getBest()){
-      destroyFun();
+      var f = destroyFun;
+      destroyFun = (){};
+      f();
     };
   };
   
@@ -154,11 +162,15 @@ return (destroyFun){
   return [tracker,
     (){
       ++rootCnt;
+      var done = false;
       return (){
+        if (done){
+          return;
+        };
+        done = true;
         if (!(--rootCnt)){
           checkFun({});
         };
-        
       };
     },
 

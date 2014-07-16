@@ -71,7 +71,7 @@ var _V1 = (function(){
 "use strict";
 var _V2/*C1*/;
 var _V4/*c*/;
-try{;
+;
 _V2/*C1*/ = (function(){var _V3/*inherited*/ = {};
 var res = promiseland.createClass({"constructor": (function(){
 ;
@@ -87,11 +87,11 @@ return (this["a"] + this["b"]);;
 return res; })();
 _V4/*c*/ = new _V2/*C1*/();
 if((((_V4/*c*/["a"] == 1) && (_V4/*c*/["b"] == 1)) && (_V4/*c*/["doSomething"]() == 2))){
-return (function(ret){ return ret; })({"success": true});;
+return {"success": true};;
 };
 ;
-return (function(ret){ return ret; })({"success": false});;
-}catch(e){throw e};;
+return {"success": false};;
+;
 })();
 promiseland._registerModule({ hashStr: "ab5c44392ce9b1c0b80c13161fb244c0", "module": _V1, promising: false });
 return _V1;

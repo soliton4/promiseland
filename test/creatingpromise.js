@@ -70,7 +70,7 @@ var _V11/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*b*/;
-try{;
+;
 _V2/*b*/ = (function(){
 var _V3 = new __Promise();
 var _V4 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
@@ -80,7 +80,7 @@ _V3.resolve(); return;;
 })();
 return _V3;
 });
-return (function(ret){ return ret; })({"fun": (function(){
+return {"fun": (function(){
 var _V6 = new __Promise();
 var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
 var _V8 = function(e){ _V6.reject(e); };
@@ -97,8 +97,8 @@ _V6.resolve(4); return;;
 _V6.resolve(); return;;
 });})();
 return _V6;
-})});;
-}catch(e){throw e};;
+})};;
+;
 })();
 promiseland._registerModule({ hashStr: "7e2ff512946bcef40a808431919fd11a", "module": _V1, promising: false });
 return _V1;

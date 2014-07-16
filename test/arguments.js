@@ -109,7 +109,7 @@ _V17.resolve(); return;;
 return _V17;
 });
 _V14/*x*/(1, 1, 2).then(_V3(function(_V22){_V22;;
-_V1.resolve((function(ret){ return ret; })(((_V13/*res*/["a"] + _V13/*res*/["b"]) + _V13/*res*/["c"]))); return;;
+_V1.resolve(((_V13/*res*/["a"] + _V13/*res*/["b"]) + _V13/*res*/["c"])); return;;
 _V1.resolve(); return;;
 }), _V4);})();
 return _V1;

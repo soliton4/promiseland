@@ -77,9 +77,9 @@ var _V5/*y*/;
 _V3(function(){;
 __requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
 if((_V5/*y*/["id"] == 4)){
-_V1.resolve((function(ret){ return ret; })({"success": true})); return;;
+_V1.resolve({"success": true}); return;;
 };
-_V1.resolve((function(ret){ return ret; })({"success": false})); return;;
+_V1.resolve({"success": false}); return;;
 _V1.resolve(); return;;
 }));})();
 return _V1;

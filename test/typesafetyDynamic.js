@@ -72,13 +72,13 @@ var _V1 = (function(){
 var _V3/*T1*/;
 var _V6/*T2*/;
 var _V9/*a*/;
-var _V23/*b*/;
-var _V26/*catched*/;
+var _V26/*b*/;
+var _V29/*catched*/;
 var _V2/*type:T1*/ = classSystem._createProvisionalClass();
 _V3/*T1*/ = _V2/*type:T1*/;
 var _V4/*T1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:T1*/).then(function(parType){_V2/*type:T1*/ = parType;_V4/*T1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:T1*/);});var _V5/*type:T2*/ = classSystem._createProvisionalClass();
 _V6/*T2*/ = _V5/*type:T2*/;
-var _V7/*T2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:T2*/).then(function(parType){_V5/*type:T2*/ = parType;_V7/*T2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:T2*/);});try{;
+var _V7/*T2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:T2*/).then(function(parType){_V5/*type:T2*/ = parType;_V7/*T2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:T2*/);});;
 classSystem._resolveProvisional(_V2/*type:T1*/, classSystem.createClass({members: [{"name":"a","type":_V8/*type:var*/},{"name":"b","type":_V8/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2}));_V3/*T1*/;;
 classSystem._resolveProvisional(_V5/*type:T2*/, classSystem.createClass({members: [{"name":"a","type":_V8/*type:var*/},{"name":"b","type":_V8/*type:var*/}], "extends": [], "hasFreePart": true}, {"a": 3, "b": 4}));_V6/*T2*/;;
 _V9/*a*/ = ((function(){var _V10/*type:Tx*/ = _V3/*T1*/;
@@ -89,39 +89,45 @@ var _V14/*Ty*/ = _V13/*type:Ty*/
 ;var _V15/*Ty-constructor*/ = undefined;
 classSystem.readyPromise(_V13/*type:Ty*/).then(function(parType){_V13/*type:Ty*/ = parType;_V15/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);});var communicator = {fun: undefined};
 var /*extratyperender*/ _V17/*type:Tx::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V10/*type:Tx*/);
+var /*extratyperender*/ _V19/*type:Tx::temporaryTracked::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V17/*type:Tx::temporaryTracked*/);
 var /*extratyperender*/ _V18/*type:Tx::property::constructor*/ = classSystem.getConstructorType({"type":_V10/*type:Tx*/, property: "constructor"});
-var /*extratyperender*/ _V22/*type:Tx::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V10/*type:Tx*/);
-var /*extratyperender*/ _V20/*type:Ty::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V13/*type:Ty*/);
-var /*extratyperender*/ _V21/*type:Ty::property::constructor*/ = classSystem.getConstructorType({"type":_V13/*type:Ty*/, property: "constructor"});
-eval("communicator.fun = function(){\n" + classSystem.getDeclareVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "" + classSystem.getDeclareVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("try{") : ("")) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V12/*Tx-constructor*/()", "valueType":_V17/*type:Tx::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V19/*y*/", "type":_V13/*type:Ty*/, "value":"new _V15/*Ty-constructor*/()", "valueType":_V20/*type:Ty::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getDestroyTemporaryClassCode({"value":"" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V19/*y*/", "valueType":_V13/*type:Ty*/, "operator":"=", "assignmentType":"Identifier"}) + "", "valueType":_V10/*type:Tx*/}) + ";;\n" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "") : ("")) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("}catch(e){" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "") : ("")) + "throw e};") : ("")) + ";\n};"); return communicator.fun; })());
-_V23/*b*/ = ((function(){var _V10/*type:Tx*/ = _V3/*T1*/;
+var /*extratyperender*/ _V21/*type:Ty::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V13/*type:Ty*/);
+var /*extratyperender*/ _V23/*type:Ty::temporaryTracked::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V21/*type:Ty::temporaryTracked*/);
+var /*extratyperender*/ _V22/*type:Ty::property::constructor*/ = classSystem.getConstructorType({"type":_V13/*type:Ty*/, property: "constructor"});
+var /*extratyperender*/ _V24/*type:Ty::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V13/*type:Ty*/);
+var /*extratyperender*/ _V25/*type:Ty::temporaryTrackedResolved::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V24/*type:Ty::temporaryTrackedResolved*/);
+eval("communicator.fun = function(){\n" + classSystem.getDeclareVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "" + classSystem.getDeclareVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("try{") : ("")) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V12/*Tx-constructor*/()", "valueType":_V17/*type:Tx::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V20/*y*/", "type":_V13/*type:Ty*/, "value":"new _V15/*Ty-constructor*/()", "valueType":_V21/*type:Ty::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getDestroyTemporaryClassCode({"value":"" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V20/*y*/", "valueType":_V13/*type:Ty*/, "operator":"=", "assignmentType":"Identifier"}) + "", "valueType":_V24/*type:Ty::temporaryTrackedResolved*/}) + ";;\n" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "") : ("")) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("}catch(e){" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "") : ("")) + "throw e};") : ("")) + ";\n};"); return communicator.fun; })());
+_V26/*b*/ = ((function(){var _V10/*type:Tx*/ = _V3/*T1*/;
 var _V11/*Tx*/ = _V10/*type:Tx*/
-;var _V24/*Tx-constructor*/ = undefined;
-classSystem.readyPromise(_V10/*type:Tx*/).then(function(parType){_V10/*type:Tx*/ = parType;_V24/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);});var _V13/*type:Ty*/ = _V3/*T1*/;
+;var _V27/*Tx-constructor*/ = undefined;
+classSystem.readyPromise(_V10/*type:Tx*/).then(function(parType){_V10/*type:Tx*/ = parType;_V27/*Tx-constructor*/ = classSystem.getTypeConstructor(_V10/*type:Tx*/);});var _V13/*type:Ty*/ = _V3/*T1*/;
 var _V14/*Ty*/ = _V13/*type:Ty*/
-;var _V25/*Ty-constructor*/ = undefined;
-classSystem.readyPromise(_V13/*type:Ty*/).then(function(parType){_V13/*type:Ty*/ = parType;_V25/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);});var communicator = {fun: undefined};
+;var _V28/*Ty-constructor*/ = undefined;
+classSystem.readyPromise(_V13/*type:Ty*/).then(function(parType){_V13/*type:Ty*/ = parType;_V28/*Ty-constructor*/ = classSystem.getTypeConstructor(_V13/*type:Ty*/);});var communicator = {fun: undefined};
 var /*extratyperender*/ _V17/*type:Tx::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V10/*type:Tx*/);
+var /*extratyperender*/ _V19/*type:Tx::temporaryTracked::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V17/*type:Tx::temporaryTracked*/);
 var /*extratyperender*/ _V18/*type:Tx::property::constructor*/ = classSystem.getConstructorType({"type":_V10/*type:Tx*/, property: "constructor"});
-var /*extratyperender*/ _V22/*type:Tx::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V10/*type:Tx*/);
-var /*extratyperender*/ _V20/*type:Ty::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V13/*type:Ty*/);
-var /*extratyperender*/ _V21/*type:Ty::property::constructor*/ = classSystem.getConstructorType({"type":_V13/*type:Ty*/, property: "constructor"});
-eval("communicator.fun = function(){\n" + classSystem.getDeclareVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "" + classSystem.getDeclareVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("try{") : ("")) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V24/*Tx-constructor*/()", "valueType":_V17/*type:Tx::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V19/*y*/", "type":_V13/*type:Ty*/, "value":"new _V25/*Ty-constructor*/()", "valueType":_V20/*type:Ty::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getDestroyTemporaryClassCode({"value":"" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V19/*y*/", "valueType":_V13/*type:Ty*/, "operator":"=", "assignmentType":"Identifier"}) + "", "valueType":_V10/*type:Tx*/}) + ";;\n" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "") : ("")) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("}catch(e){" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V19/*y*/"}) + "") : ("")) + "throw e};") : ("")) + ";\n};"); return communicator.fun; })());
-_V26/*catched*/ = false;
+var /*extratyperender*/ _V21/*type:Ty::temporaryTracked*/ = classSystem._createTemporaryTrackedClass(_V13/*type:Ty*/);
+var /*extratyperender*/ _V23/*type:Ty::temporaryTracked::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V21/*type:Ty::temporaryTracked*/);
+var /*extratyperender*/ _V22/*type:Ty::property::constructor*/ = classSystem.getConstructorType({"type":_V13/*type:Ty*/, property: "constructor"});
+var /*extratyperender*/ _V24/*type:Ty::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V13/*type:Ty*/);
+var /*extratyperender*/ _V25/*type:Ty::temporaryTrackedResolved::temporaryTrackedResolved*/ = classSystem.getClassFromTemporaryTracked(_V24/*type:Ty::temporaryTrackedResolved*/);
+eval("communicator.fun = function(){\n" + classSystem.getDeclareVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "" + classSystem.getDeclareVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("try{") : ("")) + ";\n" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"new _V27/*Tx-constructor*/()", "valueType":_V17/*type:Tx::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getSetVariableCode({"instance":"_V20/*y*/", "type":_V13/*type:Ty*/, "value":"new _V28/*Ty-constructor*/()", "valueType":_V21/*type:Ty::temporaryTracked*/, "operator":"=", "assignmentType":"Identifier"}) + ";\n" + classSystem.getDestroyTemporaryClassCode({"value":"" + classSystem.getSetVariableCode({"instance":"_V16/*x*/", "type":_V10/*type:Tx*/, "value":"_V20/*y*/", "valueType":_V13/*type:Ty*/, "operator":"=", "assignmentType":"Identifier"}) + "", "valueType":_V24/*type:Ty::temporaryTrackedResolved*/}) + ";;\n" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "") : ("")) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V10/*type:Tx*/) && classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("}catch(e){" + ((classSystem.isTrackedClass(_V10/*type:Tx*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V10/*type:Tx*/, "name":"_V16/*x*/"}) + "") : ("")) + "" + ((classSystem.isTrackedClass(_V13/*type:Ty*/)) ? ("" + classSystem.getDestroyVariableCode({"type":_V13/*type:Ty*/, "name":"_V20/*y*/"}) + "") : ("")) + "throw e};") : ("")) + ";\n};"); return communicator.fun; })());
+_V29/*catched*/ = false;
 try
 {_V9/*a*/();;
-}catch(e){_V26/*catched*/ = true;;
+}catch(e){_V29/*catched*/ = true;;
 };
-if(!_V26/*catched*/){
-return (function(ret){ return ret; })({"success": false});;
+if(!_V29/*catched*/){
+return {"success": false};;
 };
 ;
 try
-{_V23/*b*/();;
-}catch(e){return (function(ret){ return ret; })({"success": false});;
+{_V26/*b*/();;
+}catch(e){return {"success": false};;
 };
-return (function(ret){ return ret; })({"success": true});;
-}catch(e){throw e};;
+return {"success": true};;
+;
 })();
 promiseland._registerModule({ hashStr: "e1f0833736acaa653e77399b8fc0fa66", "module": _V1, promising: false });
 return _V1;

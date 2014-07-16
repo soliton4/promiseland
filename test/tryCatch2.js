@@ -117,7 +117,7 @@ _V13.resolve(); return;;
 return _V13;
 });
 _V12/*x*/().then(_V3(function(_V21){_V21;;
-_V1.resolve((function(ret){ return ret; })(_V5/*result*/)); return;;
+_V1.resolve(_V5/*result*/); return;;
 _V1.resolve(); return;;
 }), _V4);})();
 return _V1;

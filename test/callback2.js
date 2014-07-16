@@ -73,7 +73,7 @@ var _V18/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;
-try{;
+;
 _V2/*somefun*/ = (function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
@@ -88,12 +88,12 @@ _V7/*c*/["callback"](5);;
 ;
 }), 100);;
 _V7/*c*/["promise"].then(_V5(function(_V11){_V10/*x*/ = _V11[0];
-_V4.resolve((function(ret){ return ret; })((_V3/*par*/ + _V10/*x*/))); return;;
+_V4.resolve((_V3/*par*/ + _V10/*x*/)); return;;
 _V4.resolve(); return;;
 }), _V6);})();
 return _V4;
 });
-return (function(ret){ return ret; })({"fun": (function(){
+return {"fun": (function(){
 var _V12 = new __Promise();
 var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
 var _V14 = function(e){ _V12.reject(e); };
@@ -102,15 +102,15 @@ _V13(function(){;
 _V15/*a*/ = 1;
 _V16/*console*/["log"]("1");;
 _V2/*somefun*/(_V15/*a*/).then(_V13(function(_V17){if((_V17 == 6)){
-_V12.resolve((function(ret){ return ret; })(4)); return;;
+_V12.resolve(4); return;;
 };
 ;
-_V12.resolve((function(ret){ return ret; })(0)); return;;
+_V12.resolve(0); return;;
 _V12.resolve(); return;;
 }), _V14);})();
 return _V12;
-})});;
-}catch(e){throw e};;
+})};;
+;
 })();
 promiseland._registerModule({ hashStr: "b84ffe21642945e905a4c3f179551605", "module": _V1, promising: false });
 return _V1;

@@ -70,18 +70,18 @@ var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;
-try{;
+;
 _V2/*somefun*/ = (function(_V3/*par*/){
 var _V4 = new __Promise();
 var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
 var _V6 = function(e){ _V4.reject(e); };
 _V5(function(){;
-_V4.resolve((function(ret){ return ret; })((_V3/*par*/ + 1))); return;;
+_V4.resolve((_V3/*par*/ + 1)); return;;
 _V4.resolve(); return;;
 })();
 return _V4;
 });
-return (function(ret){ return ret; })({"fun": (function(){
+return {"fun": (function(){
 var _V7 = new __Promise();
 var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
 var _V9 = function(e){ _V7.reject(e); };
@@ -89,15 +89,15 @@ var _V10/*a*/;
 _V8(function(){;
 _V10/*a*/ = 1;
 _V2/*somefun*/(_V10/*a*/).then(_V8(function(_V11){if((_V11 == 2)){
-_V7.resolve((function(ret){ return ret; })(4)); return;;
+_V7.resolve(4); return;;
 };
 ;
-_V7.resolve((function(ret){ return ret; })(0)); return;;
+_V7.resolve(0); return;;
 _V7.resolve(); return;;
 }), _V9);})();
 return _V7;
-})});;
-}catch(e){throw e};;
+})};;
+;
 })();
 promiseland._registerModule({ hashStr: "5a8727f5d27e395d615f6beceb415ee1", "module": _V1, promising: false });
 return _V1;

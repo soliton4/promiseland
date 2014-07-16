@@ -793,7 +793,12 @@
 
 
     var classSystem = {
-      
+      /*
+        a placeholder for a class that will be constructed in the future
+        can be used wildly generic for multiple purposes
+        the class object itself is different from the final class object
+        you can access the final class object via definitionPromise or readyPromise
+      */
       _createProvisionalClass: function(){
         var cDef = {
           provisional: true,
@@ -829,6 +834,12 @@
         return false;
       },
       
+      /*
+        returns the actual class object (hidefunction)
+        the basic attributes of the class are available (such as track / sync / frame etc )
+        however members are not available yet, the class can not be used to generate code for its members, nor can it be constructed
+        isReady indicates weather or not a class is ready to be used
+      */
       definitionPromise: function(parType){
         var typeDef = getClass(parType);
         if (typeDef.provisional){
@@ -838,6 +849,10 @@
         p.resolve(parType);
         return p;
       },
+      /*
+        the final class everything is ready to use. it could be that some of the member types are not ready yet,
+        however this has no influence on the class itself. you can use it within the classsystem without limits
+      */
       readyPromise: function(_parType){
         var p = new Promise();
         this.definitionPromise(_parType).then(function(parType){
@@ -855,8 +870,13 @@
       },
       
       _createTemporaryTrackedClass: function(parType){
+        var self = this;
         if (this.isProvisional(parType)){
-          throw errorMsg.trackedProvisionalNotImplemented;
+          var pr = this._createProvisionalClass();
+          this.definitionPromise(parType).then(function(parDefinedClass){
+            self._resolveProvisional(pr, self._createTemporaryTrackedClass(parDefinedClass));
+          });
+          return pr;
         };
         if (this.isTemporaryTrackedClass(parType)){
           return parType;
@@ -867,9 +887,16 @@
         var cDef = {
           temporaryTracked: true,
           type: parType,
-          isReady: true
+          isReady: false,
+          readyPromise: new Promise()
         };
         var cf = classHider(cDef);
+        
+        self.readyPromise(parType).then(function(){
+          cDef.ready = true;
+          cDef.readyPromise.resolve(cf);
+        });
+        
         return cf;
       },
       
@@ -917,6 +944,47 @@
       },
       
       
+      // wrap arround _createClass
+      createClass: function(classLiteral, parDefaults){
+        var self = this;
+        return self._createClass(classLiteral, parDefaults);
+        
+      },
+      _membersDefined: function(classLiteral){
+        var self = this;
+        
+        var cnt = 1;
+        var retPs = new Promise();
+        
+        var check = function(){
+          if (cnt){
+            return;
+          };
+          retPs.resolve(classLiteral);
+        };
+        
+        var addMember = function(m){
+          ++cnt;
+          self.definitionPromise(m.type).then(function(definedType){
+            m.type = definedType;
+            --cnt;
+            check();
+          });
+        };
+        
+        if (classLiteral.members){
+          i = 0;
+          for (i; i < classLiteral.members.length; ++i){
+            addMember(classLiteral.members[i]);
+          };
+        };
+        --cnt;
+        check();
+        
+        return retPs;
+        
+      },
+      
       /*
       [
         { // untyped part
@@ -925,7 +993,7 @@
         ... // members
       ]
       */
-      createClass: function(classLiteral, parDefaults){
+      _createClass: function(classLiteral, parDefaults){
         var cAr = [];
         var self = this;
         
@@ -934,14 +1002,21 @@
           "extends": []
         };
         
+        // -------------------------------------------------------------------------
+        // basice unfinished definition
         var cDef = {
           constructor: undefined, // later
           map: map,
           isReady: false,
-          track: classLiteral.track
+          track: classLiteral.track,
+          sync: classLiteral.sync,
+          readyPromise: new Promise()
         };
         cAr.push(cDef); // cAr[0] is allways the class definition
         
+        
+        // -------------------------------------------------------------------------
+        // track
         var trackerIdx;
         var trackRootIdx;
         var trackMemberIdx;
@@ -958,19 +1033,25 @@
           trackMemberIdx = map.trackMemberIdx;
         };
         
+        
+        // -------------------------------------------------------------------------
+        // free part
         if (classLiteral.hasFreePart){
           var freepart = {};
           map.freePart = cAr.length;
           cAr.push(freepart);
           map.getMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "]"];
-          map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE];
+          map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE];
         };
+        
         
         var helpAr = [];
         var makeHelpAr = function(){
           return helpAr.slice();
         };
         
+        // -------------------------------------------------------------------------
+        // connect
         map.connectIdx = cAr.length;
         var conIdx = map.connectIdx;
         cAr.push(function(){
@@ -986,20 +1067,16 @@
           return this[conIdx].apply(this, arguments);
         });
         
-        var isReady = true;
         
-        var membersAr = [];
         
-        var checkReady = function(){};
-        
+        // -------------------------------------------------------------------------
+        // members
         var constructorDef;
         var constructorFun;
         
         var destroyDef;
         var destroyFun;
-        
-        var defineConstructor;
-        var provisionalConstructor = false;
+        var untrackIdxAr = [];
         
         var addMember = function(m){
           var mDef = {
@@ -1023,36 +1100,53 @@
           
           mDef.type = m.type;
           mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
-          mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] = ", MAKRO_VALUE];
+          mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] ", MAKRO_OPERATOR, " " , MAKRO_VALUE];
+          if (self.isTrackedClass(mDef.type)){
+            var mCDef = getClass(mDef.type);
+            var memberTrackMemberIdx = mCDef.map.trackMemberIdx;
+            
+            mDef.trackIndex = cAr.length;
+            cAr.push(undefined);
+            untrackIdxAr.push(mDef.trackIndex);
+            
+            if (cDef.track){
+              mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+              mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+            }else{
+              mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)];
+              mDef.setCodeFromTemporary = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)];
+            };
+          };
           mDef.connectFunCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, ")"];
           mDef.connectSlotCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, "[", MAKRO_VALUEPROPERTY, "], ", MAKRO_VALUE, ")"];
-          membersAr.push(mDef);
-          if (self.isProvisional(m.type)){
-            isReady = false;
-            if (m.name == "constructor"){
-              provisionalConstructor = true;
-            };
-            self.definitionPromise(m.type).then(function(parType){
-              mDef.type = parType;
-              if (m.name == "constructor"){
-                constructorDef.type = parType;
-                defineConstructor();
-              };
-              checkReady();
-            });
-
-          };
           
         };
         
+        var createMembersPs = function(){
+          var donePs = new Promise();
+          self._membersDefined(classLiteral).then(function(){
+            
+            var i;
+            if (classLiteral.members){
+              i = 0;
+              for (i; i < classLiteral.members.length; ++i){
+                addMember(classLiteral.members[i]);
+              };
+            };
+            
+            donePs.resolve();
+          });
+          return donePs;
+        };
+        var memberPs = new createMembersPs();
+        
+        
         var i;
         
-        if (classLiteral.members){
-          i = 0;
-          for (i; i < classLiteral.members.length; ++i){
-            addMember(classLiteral.members[i]);
-          };
-        };
+        
+        
+        // ------------------------------------------------------------------
+        // constructor creation
         
         if (classLiteral.hasFreePart){
           var proto = {};
@@ -1078,7 +1172,6 @@
               r[trackRootIdx] = t[1];
               r[trackMemberIdx] = t[2];
               return [r, r[trackRootIdx]()];
-              
             };
             
           }else{
@@ -1086,7 +1179,6 @@
               var r = cAr.slice();
               r[f] = new freeFun();
               return r;
-              
             };
             
           };
@@ -1115,81 +1207,99 @@
         
         
         
-        //helperArray
-        for (i = 0; i < cAr.length; ++i){
-          helpAr.push(undefined);
-        };
-        
-        
-        //constructorType
+        //class hider to pass type arround without changing it
         var cf = classHider(cDef);
         
-        defineConstructor = function(){
-          var conDef = getClass(constructorDef.type);
-          cDef.constructorType = self.createFunctionType({
-            "return": cf,
-            arguments: conDef.arguments
-          });
-          
-        };
-        
-        if (constructorDef){
-          cDef.constructorArguments = [];
-          var realConstructor = cDef.constructor;
-          cDef.constructor = function(){
-            var instance = realConstructor();
-            constructorFun.apply(instance, arguments);
-            return instance;
+        var finalPs = new Promise();
+        memberPs.then(function(){
+
+          //helperArray
+          for (i = 0; i < cAr.length; ++i){
+            helpAr.push(undefined);
           };
           
-          if (!provisionalConstructor){
-            defineConstructor();
-          };
-          
-        }else{
-          cDef.constructorType = this.createFunctionType({
-            "return": cf
-          });
-          
-        };
-        
-        if (cDef.track){
-          if (destroyDef){
-            var _destroyFun = destroyFun;
-            destroyFun = function(){
-              _destroyFun.apply(this);
-              this.splice(0,this.length);
+          if (constructorDef){
+            cDef.constructorArguments = [];
+            var realConstructor = cDef.constructor;
+            cDef.constructor = function(){
+              var instance = realConstructor();
+              constructorFun.apply(instance, arguments);
+              return instance;
             };
+            var conDef = getClass(constructorDef.type);
+            cDef.constructorType = self.createFunctionType({
+              "return": cf,
+              arguments: conDef.arguments
+            });
+
           }else{
-            destroyFun = function(){
-              this.splice(0,this.length);
-            };
+            cDef.constructorType = self.createFunctionType({
+              "return": cf
+            });
+
           };
-        };
-        
-        
-        if (!isReady){
-          cDef.readyPromise = new Promise();
-          checkReady = function(){
-            var i = 0;
-            for (i = 0; i < membersAr.length; ++i){
-              if (self.isProvisional(membersAr[i].type)){
-                return;
+
+
+          if (cDef.track){
+            var _destroyFun;
+            if (untrackIdxAr.length){
+              // has tracked members
+              if (destroyDef){
+                _destroyFun = destroyFun;
+                destroyFun = function(){
+                  var i;
+                  for (i = 0; i < untrackIdxAr.length; ++i){
+                    var curIdx = untrackIdxAr[i];
+                    var tFun = this[curIdx];
+                    this[curIdx] = undefined;
+                    if (tFun){
+                      tFun();
+                    };
+                  };
+                  _destroyFun.apply(this);
+                  this.splice(0,this.length);
+                };
+              }else{
+                destroyFun = function(){
+                  var i;
+                  for (i = 0; i < untrackIdxAr.length; ++i){
+                    var tFun = this[untrackIdxAr[i]];
+                    if (tFun){
+                      tFun();
+                    };
+                  };
+                  this.splice(0,this.length);
+                };
               };
+
+            }else{
+              if (destroyDef){
+                _destroyFun = destroyFun;
+                destroyFun = function(){
+                  _destroyFun.apply(this);
+                  this.splice(0,this.length);
+                };
+              }else{
+                destroyFun = function(){
+                  this.splice(0,this.length);
+                };
+              };
+
             };
-            
-            cDef.isReady = true;
-            cDef.readyPromise.resolve(cf);
           };
-          checkReady();
-          
-        }else{
+
+          finalPs.resolve();
+        });
+        
+
+        finalPs.then(function(){
           cDef.isReady = true;
-          
-        };
+          cDef.readyPromise.resolve(cf);
+        });
         
         return cf;
       }
+      
       
       , isFunctionType: function(parType){
         var cDef = getClass(parType);
@@ -1410,22 +1520,33 @@
       
       , getSetPropertyCode: function(par){
         var cDef = getClass(par["type"]);
+        if (cDef.isVar){
+          if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
+            return runtimeError(errorMsg.typeMissmatch, par);
+          };
+          return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE], par);
+        };
         var map = cDef.map;
         
-        if (par.property){
+        if (map && par.property){
           if (map.members[par.property]){
             var propertyType = this.getPropertyType({
               "type": par["type"],
               property: par.property
             });
             if (!this.canSet(propertyType, par.valueType)){
+              if ( this.canSet(propertyType, this.getClassFromTemporaryTracked(par.valueType)) ){
+                // tracked temporary
+                return assembleCode(map.members[par.property].setCodeFromTemporary, par);
+              };
+
               return runtimeError(errorMsg.typeMissmatch, par);
             };
             return assembleCode(map.members[par.property].setCode, par);
           };
         };
-        if (map.setMemberCode){
-          if (!this.canSet(undefined, par.valueType)){
+        if (map && map.setMemberCode){
+          if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
             return runtimeError(errorMsg.typeMissmatch, par);
           };
           return assembleCode(map.setMemberCode, par);
@@ -1491,14 +1612,14 @@
       }
       
       , getDestroyTemporaryClassCode: function(par){
-        if (this.isTemporaryTrackedClass(par.valueType) || !this.isTrackedClass(par.valueType)){
+        if (!this.isTemporaryTrackedClass(par.valueType)){
           if (par.noValueRequired){
             return assembleCode([], par);
           };
           return assembleCode([MAKRO_VALUE], par);
         };
         
-        var codeAr = ["(function(v){ v[1](); return v; })(", MAKRO_VALUE, ")"];
+        var codeAr = ["(function(v){ v[1](); return v[0]; })(", MAKRO_VALUE, ")"];
         return assembleCode(codeAr, par);
         
       }
@@ -1842,6 +1963,10 @@
       trackedProvisionalNotImplemented: {
         id: 207
         , msg: "tracked provisional type feature is not implemented"
+      },
+      onlyTrackedClassesCanContainTrackedMembers: {
+        id: 208
+        , msg: "only tracked classes can contain tracked members"
       }
     };
     

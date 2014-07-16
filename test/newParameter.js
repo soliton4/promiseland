@@ -71,18 +71,18 @@ var _V1 = (function(){
 "use strict";
 var _V2/*T*/;
 var _V4/*t*/;
-try{;
+;
 _V2/*T*/ = (function(_V3/*par*/){
-try{;
+;
 this["par"] = _V3/*par*/;;
-}catch(e){throw e};;
+;
 });
 _V4/*t*/ = new _V2/*T*/({"id": 4});
 if((_V4/*t*/["par"] && (_V4/*t*/["par"]["id"] == 4))){
-return (function(ret){ return ret; })({"success": true});;
+return {"success": true};;
 };
-return (function(ret){ return ret; })({"success": false});;
-}catch(e){throw e};;
+return {"success": false};;
+;
 })();
 promiseland._registerModule({ hashStr: "ee5b5da42a294a2f1d77d2f4f93f0add", "module": _V1, promising: false });
 return _V1;

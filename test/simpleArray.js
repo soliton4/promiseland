@@ -71,14 +71,14 @@ var _V1 = (function(){
 "use strict";
 var _V2/*a*/;
 var _V3/*b*/;
-try{;
+;
 _V2/*a*/ = [];
 _V3/*b*/ = [_V2/*a*/, 0, ""];
 if(((_V2/*a*/["length"] == 0) && (_V3/*b*/["length"] == 3))){
-return (function(ret){ return ret; })({"success": true});;
+return {"success": true};;
 };
-return (function(ret){ return ret; })({"success": false});;
-}catch(e){throw e};;
+return {"success": false};;
+;
 })();
 promiseland._registerModule({ hashStr: "8d22e85c82a82de38038caa802287378", "module": _V1, promising: false });
 return _V1;

@@ -138,6 +138,8 @@
   createTestNp("typesafetyMembers2", successFun);
   createTestNp("typesafetyMembers3", successFun);
   
+  createTestNp("typesafetyDelayedDefinition", successFun);
+  
   createTestNp("typesafetyFunction", successFun);
   createTestNp("typesafetyFunction2", successFun);
   
@@ -150,6 +152,10 @@
   createTestNp("typesafetyConstructor2", successFun);
   
   createTestNp("typesafetyDestructor", successFun);
+  createTestNp("typesafetyDestructorMember", successFun);
+  createTestNp("typesafetyDestructorOrder", successFun);
+  createTestNp("typesafetyeDestructorCircular", successFun);
+  
   
 
   createTestNp("connect", successFun);
@@ -169,5 +175,5 @@
       };
     };
     console.log("run " + c + " tests. " + s + " successful, " + f + " failed");
-  }, 2000);
+  }, 4000);
 </script>
