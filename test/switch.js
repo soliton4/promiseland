@@ -45,7 +45,7 @@
     
   };
   
-defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
   var __Promise = promiseland.Promise;
   var __modulePromise = new __Promise();
@@ -65,72 +65,45 @@ defineFun([], function(){ var __execute = function(promiseland, extra){ __execut
   
   
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "a6076e949f2f20c5de497d86852c849d" })){ return promiseland._getModule("a6076e949f2f20c5de497d86852c849d"); };
-var _V8/*undefined*/;try{_V8/*undefined*/ = undefined;}catch(e){};
-var _V9/*stringifyStr*/;try{_V9/*stringifyStr*/ = stringifyStr;}catch(e){};
-var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
+if (promiseland._hasModule({ hashStr: "09ebe1b3c68f338fa924f0dd9ebf6d7e" })){ return promiseland._getModule("09ebe1b3c68f338fa924f0dd9ebf6d7e"); };
+var _V7/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
-var _V2/*complete*/;
+var _V2/*a*/;
+var _V3/*c1*/;
+var _V4/*c2*/;
+var _V5/*f1*/;
+var _V6/*f2*/;
+;
+_V2/*a*/ = 1;
+_V3/*c1*/;
+_V4/*c2*/;
+_V5/*f1*/;
+_V6/*f2*/;
+switch (_V2/*a*/){
+case 2:
+_V5/*f1*/ = true;;
+case 1:
+_V3/*c1*/ = true;;
+case 3:
+_V4/*c2*/ = true;;
+break;;
+case 4:
+_V6/*f2*/ = true;;
+}
 ;
 ;
-_V2/*complete*/ = (function(_V3/*original*/){
-var _V4/*path*/;
-var _V5/*resStr*/;
-var _V6/*_run*/;
-var _V11/*res*/;
-;
-_V4/*path*/ = [];
-_V5/*resStr*/ = "";
-_V6/*_run*/ = (function(_V7/*o*/){
-var _V10/*m*/;
-;
-switch (_V7/*o*/){
-case null:
-_V5/*resStr*/ += "null";;
-break;;
-case _V8/*undefined*/:
-_V5/*resStr*/ += "undefined";;
-break;;
-default:
-switch (typeof_V7/*o*/){
-case "number":
-_V5/*resStr*/ += _V7/*o*/;;
-break;;
-case "string":
-_V5/*resStr*/ += _V9/*stringifyStr*/(_V7/*o*/);;
-break;;
-case "function":
-_V5/*resStr*/ += "null";;
-break;;
-case "object":
-_V5/*resStr*/ += "{";;
-for(_V10/*m*/ in _V7/*o*/){_V5/*resStr*/ += _V9/*stringifyStr*/(_V10/*m*/);;
-_V5/*resStr*/ += ":";;
-_V6/*_run*/(_V7/*o*/[_V10/*m*/]);;
+if((_V3/*c1*/ && _V4/*c2*/)){
+if((!_V5/*f1*/ && !_V6/*f2*/)){
+return {"success": true};;
 };
 ;
-_V5/*resStr*/ += "}";;
-break;;
-default:
-throw {"id": 1301,
-"msg": (("type " + typeof_V7/*o*/) + " can not be serialized")};
-}
+};
 ;
-;
-}
-;
-;
-_V6/*_run*/(_V3/*original*/);;
-return _V5/*resStr*/;;
-;
-});
-_V11/*res*/ = _V6/*_run*/(_V3/*original*/);
-;
-});
+return {"success": false};;
 ;
 })();
-promiseland._registerModule({ hashStr: "a6076e949f2f20c5de497d86852c849d", "module": _V1, promising: false });
+promiseland._registerModule({ hashStr: "09ebe1b3c68f338fa924f0dd9ebf6d7e", "module": _V1, promising: false });
 return _V1;
-}; return function(){ return __execute.apply(null, arguments); } });
+});
 })();

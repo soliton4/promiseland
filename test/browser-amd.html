@@ -20,6 +20,13 @@
     };
   };
   
+  var successFunDbg = function(mod, success){
+    debugger;
+    if (mod.success){
+      success();
+    };
+  };
+  
   
   var createTest = function(parModuleName, parFun){
     testObj[parModuleName] = false;
@@ -89,6 +96,9 @@
   createTestNp("conditional", funReturning4);
   createTestNp("conditional2", funReturning4);
   createTestNp("conditional3", funReturning4);
+  
+  createTestNp("switch", successFun);
+  createTest("switchPromising", successFun);
   
   createTestNp("callback", funReturning4);
   createTestNp("callback2", funReturning4);

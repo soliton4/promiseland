@@ -1,0 +1,21 @@
+class type C1 {
+  
+}
+
+
+// regular class
+(C1 p) frame "server" {
+  
+};
+
+<{types:{ D1: C1 }}>(){
+  
+  
+  
+}
+
+<{types:{ D1: C1 }}>{
+  
+  
+  
+}
