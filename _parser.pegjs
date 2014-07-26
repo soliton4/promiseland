@@ -629,10 +629,10 @@ PropertyNameAndValueList
     }
 
 PropertyAssignment
-  = /*typename:IdentifierName? __*/ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+  = key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init"}); // promiseland
     }
-  / typename:IdentifierName __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+  / typename:Typename __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
     }
   / funcDec:FunctionDeclaration { // promiseland
@@ -845,7 +845,7 @@ UnaryExpression
     }
     
 PromiseOperator // promiseland
-  = "✡"
+  = "✡" { return "*"; }
   / "*"
     
 
@@ -1187,7 +1187,7 @@ StatementList
 
 
 VariableStatementCoreSingle // promiseland
-  = typename:Identifier __ declarations:VariableDeclarationList {
+  = typename:Typename __ declarations:VariableDeclarationList {
       if (declarations.length > 1){
         throw new Error('Only one declaration allowed here ');
       };
@@ -1204,7 +1204,7 @@ VariableStatementCoreSingle // promiseland
 
 
 VariableStatementCore // promiseland
-  = typename:Identifier __ declarations:VariableDeclarationList {
+  = typename:Typename __ declarations:VariableDeclarationList {
       var i = 0;
       for (i = 0; i < declarations.length; ++i){
         declarations[i].typename = typename;
@@ -1588,9 +1588,18 @@ FrameKeyword // promiseland
 
 FrameInformation  // promiseland
   = keyword:FrameKeyword __ name:StringLiteral { return posRes({name: name, "type": keyword}); }
+  
+Typename
+  = name:Identifier _ deref:PromiseOperator* {
+    var i;
+    for (i = 0; i < deref.length; ++i){
+      name.name += "*";
+    };
+    return name;
+  }
 
 FunctionDeclarationFunId
-  = returnTypename:Identifier __ id:Identifier 
+  = returnTypename:Typename __ id:Identifier 
     { 
       return {
         returnTypename: returnTypename, 
@@ -1639,14 +1648,14 @@ FunctionDeclaration
     }
     
 FunctionExpressionFunId
-  = returnTypename:Identifier __ id:Identifier 
+  = returnTypename:Typename __ id:Identifier 
     { 
       return {
         returnTypename: returnTypename, 
         id: id
       };
     }
-  / returnTypename:Identifier? 
+  / returnTypename:Typename? 
     { 
       return {
         returnTypename: returnTypename
@@ -1689,7 +1698,7 @@ FunctionExpression
     }
 
 FormalParameterListItem
-  = typename:Identifier __ name:Identifier
+  = typename:Typename __ name:Identifier
     {
       return {
         name: name,

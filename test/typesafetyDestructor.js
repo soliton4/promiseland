@@ -84,7 +84,7 @@ classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members
 var _V7/*v*/;
 var _T_V7/*v*/;
 try{;
-(function(vAr){ var v = vAr[0]; _V7/*v*/ = v; if (_T_V7/*v*/){ _T_V7/*v*/(); }; _T_V7/*v*/ = vAr[1]; return v; })(new _V4/*C1-constructor*/());
+(function(vAr){ if (_T_V7/*v*/){ _T_V7/*v*/(); }; if(vAr){ var v = vAr[0]; _V7/*v*/ = v; _T_V7/*v*/ = vAr[1]; return v; }else{ _V7/*v*/ = undefined; _T_V7/*v*/ = undefined; return; }; })(new _V4/*C1-constructor*/());
 if (_T_V7/*v*/){ _T_V7/*v*/();};}catch(e){if (_T_V7/*v*/){ _T_V7/*v*/();};throw e};;
 })();;
 if((_V5/*i*/ == 1)){

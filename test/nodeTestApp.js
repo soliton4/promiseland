@@ -21,6 +21,7 @@ app.get("/", function(req, res){
 });
 
 app.use("/promiseland", express["static"](__dirname + "/../"));
+app.use("/pl", express["static"](__dirname + "/../"));
 app.use("/requirejs", express["static"]("./requirejs"));
 app.use("/testmodules", express["static"]("./testmodules"));
 

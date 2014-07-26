@@ -6,6 +6,22 @@
     <script src="/requirejs/require.js"></script>
       <script>
         require.config({
+          //baseUrl: "/",
+          paths: {
+            //"promiseland": "pl/promiseland"
+            //, "promiseland/": "pl/"
+            "testmodules": "testmodules"
+          },
+          packages: [
+            {
+              name: "promiseland",
+              main: "promiseland",
+              location: "pl"
+            }
+          ],
+          waitSeconds: 15
+        });
+        /*require.config({
           baseUrl: "/",
           paths: {
               "promiseland": "./promiseland/promiseland"
@@ -13,7 +29,7 @@
             , "testmodules": "./testmodules"
           },
           waitSeconds: 15
-        });
+        });*/
       </script>
     
     <script>

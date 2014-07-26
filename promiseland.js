@@ -94,7 +94,9 @@
     var Tracker;
     
     
+    
     // main promise implementation
+    // ------------------------------------------------------------------------------------------------------------------------------
     var Promise = function(){
       
       var thenAr = [];
@@ -171,6 +173,119 @@
     };
     
     
+    // tracked Promise
+    // for internal use to create tracked promises of tracked classes
+    var TrackedPromise = function(parTrackFun){
+      
+      var self = this;
+      var lifeLine;
+      
+      var destroyFun = function(){
+        if (lifeLine){
+          lifeLine();
+          lifeLine = undefined;
+        }else{
+          self.then(function(){
+            if (lifeLine){
+              lifeLine();
+              lifeLine = undefined;
+            };
+          });
+        };
+      };
+      
+      var t = Tracker(destroyFun);
+      var tracker = t[0];
+      this.rootTrack = t[1];
+      this.memberTrack = t[2];
+      
+      
+      var thenAr = [];
+      var elseAr = [];
+      
+      var thenFun = function(parThenFun, parElseFun){
+        if (parThenFun){
+          thenAr.push(parThenFun);
+        };
+        if (parElseFun){
+          elseAr.push(parElseFun);
+        };
+        //return returnPromise;
+      };
+      
+      this.resolve = function(value){
+        if (value){
+          lifeLine = parTrackFun(value, tracker);
+          value = value[0];
+        };
+        
+        thenFun = function(parThenFun){
+          try{
+            parThenFun(value);
+          }catch(e){
+            // maybe we are ignoring to much here, lets check later
+          };
+        };
+        if (!thenAr) return;
+        var i = 0;
+        var l = thenAr.length;
+        for (i; i < l; ++i){
+          try{
+            thenAr[i](value);
+          }catch(e){
+            // will those errors ocur? if so what do we do with them?
+          }
+        };
+        thenAr = undefined; // why not delete?
+        elseAr = undefined;
+        this.resolve = undefined;
+        this.reject = undefined;
+      };
+      this.reject = function(value){
+        thenFun = function(u, parElseFun){
+          try{
+            parElseFun(value);
+          }catch(e){
+            // maybe we are ignoring to much here, lets check later
+          };
+        };
+        if (!elseAr) return;
+        var i = 0;
+        var l = elseAr.length;
+        for (i; i < l; ++i){
+          try{
+            elseAr[i](value);
+          }catch(e){
+            // will those errors ocur? if so what do we do with them?
+          }
+        };
+        thenAr = undefined; // why not delete?
+        elseAr = undefined;
+        this.resolve = undefined;
+        this.reject = undefined;
+      };
+      
+      this.then = function(par1, par2){
+        thenFun(par1, par2);
+      };
+      /*this.promise = {
+        then: this.then
+      };*/
+      this.promise = this.then;
+      /* so this should be possible
+        var p = Promise();
+        var ps = p.then;
+        ps(thenfun...);
+        //alternative:
+        ps.then(thenfun...); // so the thenFun is a promise itself;
+      */
+      this.then.then = this.then;
+      
+      
+    };
+    
+    
+    
     var Callback = function(){
       var promise = new Promise();
       var callback = function(){
@@ -200,6 +315,7 @@
     var _parserPs;
     
     var modules = {};
+    var moduleData = {};
     
     var setable = {
       profile: true
@@ -287,19 +403,16 @@
       console.log("remote");
       var data = par.data;
       
-      var moduleEntry = modules[data.hashStr];
-      console.log(moduleEntry);
-      var funEntry = moduleEntry.functions[data.nameStr];
-      console.log(funEntry);
+      var moduleData = getModuleData(data.hashStr);
+      
+      
+      var funEntry = moduleData.functions[data.nameStr];
+      //console.log(funEntry);
       if (promiseland.profileHas(funEntry.profile)){
-        console.log("got it");
         return funEntry.fun.apply(undefined, data.args);
       };
       var rejectPs = new Promise();
-      rejectPs.reject({
-        id: 10
-        , msg: "requested function not found"
-      });
+      rejectPs.reject(errorMsg.frameNotAvailable);
       return rejectPs;
     };
     
@@ -408,11 +521,18 @@
         }
     */
     var createRemoteExecRequest = function(par){
+      var args = [];
+      if (par.args && par.args.length){
+        var i = 0;
+        for (i = 0; i < par.args.length; ++i){
+          args.push(par.args[i]);
+        };
+      };
       var ps = par.connection.createRequest({
         "type": "remoteexec",
         hashStr: par.hashStr,
         nameStr: par.nameStr,
-        args: par.args
+        args: args
         
       });
       ps.then(function(res){
@@ -578,6 +698,15 @@
       };
     };
     
+    var getModuleData = function(parHash){
+      if (!moduleData[parHash]){
+        moduleData[parHash] = {
+          functions: {}
+        };
+      };
+      return moduleData[parHash];
+    };
+    
     promiseland = {
       Promise: Promise,
       Callback: Callback,
@@ -620,14 +749,8 @@
       }
       
       , registerRemote: function(profileNameStr, hashStr, nameStr, fun){
-        if (!modules[hashStr]){
-          throw {
-            code: 5,
-            msg: "invalid module"
-          };
-        };
-        var moduleEntry = modules[hashStr];
-        moduleEntry.functions[nameStr] = {
+        var moduleData = getModuleData(hashStr);
+        moduleData.functions[nameStr] = {
           profile: profileNameStr,
           fun: fun
         };
@@ -639,8 +762,8 @@
         };
         modules[par.hashStr] = {
           "promising": par["promising"],
-          "module": par["module"],
-          functions: {}
+          "module": par["module"]
+          //functions: {}
         };
         return true;
       }
@@ -695,20 +818,15 @@
       , remoteExec: function(hashStr, nameStr, args){
         var promise = new Promise();
         var ret = promise.promise;
-        if (!modules[hashStr] || !modules[hashStr].functions[nameStr]){
-          promise.reject({
-            code: 1
-            , msg: "remote function not registred"
-          });
+        var moduleData = getModuleData(hashStr);
+        if (!moduleData.functions[nameStr]){
+          promise.reject(errorMsg.missingRemoteFun);
           return ret;
         };
-        var entry = modules[hashStr].functions[nameStr];
+        var entry = moduleData.functions[nameStr];
         var profile = findProfile(entry.profile);
         if (!profile){
-          promise.reject({
-            code: 2
-            , msg: "profile not found"
-          });
+          promise.reject(errorMsg.frameNotFound);
           return ret;
         };
         
@@ -869,6 +987,7 @@
         return p;
       },
       
+      
       _createTemporaryTrackedClass: function(parType){
         var self = this;
         if (this.isProvisional(parType)){
@@ -910,6 +1029,85 @@
       
       getClassFromTemporaryTracked: function(parType){
         if (this.isTemporaryTrackedClass(parType)){
+          var cDef = getClass(parType);
+          return cDef.type;
+        };
+        return parType;
+      },
+      
+      
+      _createPromiseOfClass: function(parType){
+        var self = this;
+        if (this.isProvisional(parType)){
+          var pr = this._createProvisionalClass();
+          this.definitionPromise(parType).then(function(parDefinedClass){
+            self._resolveProvisional(pr, self._createPromiseOfClass(parDefinedClass));
+          });
+          return pr;
+        };
+        if (this.isVar(parType)){
+          return parType;
+        };
+        
+        var track = false;
+        if (this.isTrackedClass(parType)){
+          track = true;
+        };
+        var cDef = {
+          promiseOf: true,
+          type: parType,
+          isReady: true,
+          readyPromise: new Promise(),
+          track: track
+        };
+        var cf = classHider(cDef);
+        
+        if (track){
+          //cDef.trackerIdx = "tracker";
+          cDef.trackRootIdx = "rootTrack";
+          cDef.trackMemberIdx = "memberTrack";
+          
+          var pcDef = getClass(parType);
+          var memberTrackMemberIdx = pcDef.map.trackMemberIdx
+
+          cDef.constructor = function(){
+            var r = new TrackedPromise(function(parTempValue, parTracker){
+              var v = parTempValue[0]; // the value
+              var l = v[memberTrackMemberIdx](parTracker);
+              parTempValue[1](); // untrack temporary
+              return l; // the lifeLine
+            });
+            return [r, r.rootTrack()];
+          };
+          
+        }else{
+          cDef.constructor = Promise;
+          
+        };
+        
+        cDef.readyPromise.resolve(cf);
+        
+        return cf;
+      },
+      
+      isPromiseOfClass: function(parType){
+        var cDef = getClass(parType);
+        if (cDef.promiseOf){
+          return true;
+        };
+        return false;
+      },
+      
+      getClassFromPromiseOf: function(parType){
+        var self = this;
+        if (this.isProvisional(parType)){
+          var pr = this._createProvisionalClass();
+          this.definitionPromise(parType).then(function(parDefinedClass){
+            self._resolveProvisional(pr, self.getClassFromPromiseOf(parDefinedClass));
+          });
+          return pr;
+        };
+        if (this.isPromiseOfClass(parType)){
           var cDef = getClass(parType);
           return cDef.type;
         };
@@ -1422,7 +1620,7 @@
       
       , getFunctionArgumentType: function(parType, parIndex){
         var cDef = getClass(parType);
-        if (cDef.arguments[parIndex]){
+        if (cDef.arguments && cDef.arguments[parIndex]){
           return cDef.arguments[parIndex];
         }
         return this.getBuiltinType("var");
@@ -1598,15 +1796,15 @@
       }
       
       , getCreateTemporaryClassCode: function(par){
-        if (this.isTemporaryTrackedClass(par["type"])){
+        if (this.isTemporaryTrackedClass(par["valueType"])){
           return assembleCode([MAKRO_VALUE], par);
         };
-        if (!this.isTrackedClass(par["type"])){
+        if (!this.isTrackedClass(par["valueType"])){
           return assembleCode([MAKRO_VALUE], par);
         };
-        var cDef = getClass(par["type"]);
+        var cDef = getClass(par["valueType"]);
         
-        var codeAr = ["(function(v){ return [v, v[" + cDef.map.trackRootIdx + "]()];})(", MAKRO_VALUE, ")"];
+        var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", MAKRO_VALUE, ")"];
         return assembleCode(codeAr, par);
         
       }
@@ -1622,6 +1820,13 @@
         var codeAr = ["(function(v){ v[1](); return v[0]; })(", MAKRO_VALUE, ")"];
         return assembleCode(codeAr, par);
         
+      }
+      
+      , promisingReturnTypeCheck: function(par){
+        if (!this.isPromiseOfClass(par["type"])){
+          return runtimeError(errorMsg.notAPromise, par);
+        };
+        return assembleCode([], par);
       }
       
       
@@ -1642,11 +1847,15 @@
               // tracked temporary
               if (par.assignmentType == "Identifier"){
                 return assembleCode([
-                  "(function(vAr){ var v = vAr[0]; ", // temp value
-                  MAKRO_SELF, " ", operator, " v; ",  // assign to variable
+                  "(function(vAr){ ",
                   "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); }; ",  // call old tracker
-                  "_T", MAKRO_SELF, " = vAr[1]; ",                       // reuse existing tracker to save function calls
-                  "return v; })",                         // reuse existing tracker to save function calls
+                  "if(vAr){ var v = vAr[0]; ", // temp value
+                  MAKRO_SELF, " ", operator, " v; ",  // assign to variable
+                  "_T", MAKRO_SELF, " = vAr[1]; ",            // reuse existing tracker to save function calls
+                  "return v; }else{ ",                        // reuse existing tracker to save function calls
+                  MAKRO_SELF, " ", operator, " undefined; ",  // assign undefined to variable
+                  "_T", MAKRO_SELF, " = undefined; ",         // assign undefined to tracker
+                  "return; }; })",                            // return undefined
                   "(", MAKRO_VALUE, ")"                   // call closure
                 ], par);
               };
@@ -1666,6 +1875,28 @@
           assemblyAr.push("var _T");
           assemblyAr.push(par.name);
           assemblyAr.push(";\n");
+        };
+        return assembleCode(assemblyAr, par);
+      }
+      , getProcessParameterCode: function(par){
+        var cDef = getClass(par["type"]);
+        
+        var assemblyAr = [];
+        if (cDef.track){
+          assemblyAr.push("var _T");
+          assemblyAr.push(par.name);
+          assemblyAr.push(";\n");
+          assemblyAr.push("if(");
+          assemblyAr.push(par.name);
+          assemblyAr.push("){ _T");
+          assemblyAr.push(par.name);
+          assemblyAr.push(" = ");
+          assemblyAr.push(par.name);
+          assemblyAr.push("[1];\n");
+          assemblyAr.push(par.name);
+          assemblyAr.push(" = ");
+          assemblyAr.push(par.name);
+          assemblyAr.push("[0];}\n");
         };
         return assembleCode(assemblyAr, par);
       }
@@ -1967,6 +2198,24 @@
       onlyTrackedClassesCanContainTrackedMembers: {
         id: 208
         , msg: "only tracked classes can contain tracked members"
+      },
+      notAPromise: {
+        id: 209
+        , msg: "type is not a promise"
+      },
+      
+      
+      missingRemoteFun: {
+        id: 801
+        , msg: "remote function not registred"
+      },
+      frameNotAvailable: {
+        id: 802,
+        msg: "requested frame not available"
+      },
+      frameNotFound: {
+        id: 803,
+        msg: "requested frame not found"
       }
     };
     
