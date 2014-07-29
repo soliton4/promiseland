@@ -87,7 +87,7 @@ return {"names": _V3/*namesStr*/,
 "cnt": _V4/*cnt*/};;
 ;
 })();
-promiseland._registerModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de", "module": _V1, promising: false });
 return _V1;
 });
 })();

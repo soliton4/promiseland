@@ -74,7 +74,7 @@ return {"a": "\n\r\u2028\u2029\"'",
 "b": "xxx\n  xxx"};;
 ;
 })();
-promiseland._registerModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422", "module": _V1, promising: false });
 return _V1;
 });
 })();

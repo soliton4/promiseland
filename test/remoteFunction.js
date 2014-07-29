@@ -66,65 +66,77 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b" })){ return promiseland._getModule("52359e7398cbfbfaf29d768d9b7a668b"); };
-var _V9/*doSome*/;try{_V9/*doSome*/ = doSome;}catch(e){};
+var _V10/*doSome*/;try{_V10/*doSome*/ = doSome;}catch(e){};
 var _V3/*context*/;try{_V3/*context*/ = context;}catch(e){};
-var _V20/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V17/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*z*/;
-var _V10/*y*/;
-var _V7/*x*/;
+var _V11/*y*/;
+var _V8/*x*/;
 ;
 _V2/*z*/ = (function(_V3/*context*/){
 var _V4 = new __Promise();
-var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
-var _V6 = function(e){ _V4.reject(e); };
-_V5(function(){;
-_V7/*x*/().then(_V5(function(_V8){if(_V8){
-_V9/*doSome*/();;
+var _V6 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
+var _V7 = function(e){ _V4.reject(e); };
+_V6(function(){;
+_V8/*x*/().then(_V6(function(_V9){if(_V9){
+_V10/*doSome*/();;
 };
 ;
 _V4.resolve(); return;;
-}), _V6);})();
+}), _V7);
+;})();
 return _V4;
 });
-var _V15 = function(){
-var _V11 = new __Promise();
-var _V12 = function(code){ return function(res){ try{code(res);}catch(e){ _V11.reject(e); }; }; };
-var _V13 = function(e){ _V11.reject(e); };
-_V12(function(){;
-_V2/*z*/(_V3/*context*/).then(_V12(function(_V14){_V14;;
-_V11.resolve(); return;;
-}), _V13);})();
-return _V11;
-};
-promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "_V15", _V15);
-_V10/*y*/ = (function(){if (promiseland.profileHas("server")){
-return _V15.apply(this, arguments);
+_V11/*y*/ = ((function(f){
+promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "_V16", f, _V17/*type:var*/);
+if (promiseland.profileHas("server")){
+return f;
 }else{
-return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V15", arguments);
+return function(){
+var _V18/*temp returnpromise*/ = new __Promise();
+
+promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V16", arguments, _V18/*temp returnpromise*/);
+return _V18/*temp returnpromise*/;
+}
 };
-});
-var _V19 = function(){
-var _V16 = new __Promise();
-var _V17 = function(code){ return function(res){ try{code(res);}catch(e){ _V16.reject(e); }; }; };
-var _V18 = function(e){ _V16.reject(e); };
-_V17(function(){;
-_V16.resolve("x"); return;;
-_V16.resolve(); return;;
+})(function(){
+var _V12 = new __Promise();
+var _V13 = function(code){ return function(res){ try{code(res);}catch(e){ _V12.reject(e); }; }; };
+var _V14 = function(e){ _V12.reject(e); };
+_V13(function(){;
+_V2/*z*/(_V3/*context*/).then(_V13(function(_V15){_V15;;
+_V12.resolve(); return;;
+}), _V14);
+;})();
+return _V12;
+}));
+_V8/*x*/ = ((function(f){
+promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "_V22", f, _V17/*type:var*/);
+if (promiseland.profileHas("client")){
+return f;
+}else{
+return function(){
+var _V23/*temp returnpromise*/ = new __Promise();
+
+promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V22", arguments, _V23/*temp returnpromise*/);
+return _V23/*temp returnpromise*/;
+}
+};
+})(function(){
+var _V19 = new __Promise();
+var _V20 = function(code){ return function(res){ try{code(res);}catch(e){ _V19.reject(e); }; }; };
+var _V21 = function(e){ _V19.reject(e); };
+_V20(function(){;
+_V19.resolve("x"); return;;
+_V19.resolve(); return;;
 })();
-return _V16;
-};
-promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "_V19", _V19);
-_V7/*x*/ = (function(){if (promiseland.profileHas("client")){
-return _V19.apply(this, arguments);
-}else{
-return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V19", arguments);
-};
-});
+return _V19;
+}));
 ;
 })();
-promiseland._registerModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b", "module": _V1, promising: false });
 return _V1;
 });
 })();

@@ -67,8 +67,15 @@
           serverProfile.connection = connection;
           serverProfile.emit("connection", connection);
         });
+        socket.on("disconnect", function(){
+          serverProfile.connection.emit("disconnect");
+          serverProfile.connection = undefined;
+        });
         
-        require(["testmodules/clientServer"], function(){});
+        //require(["testmodules/clientServer"], function(){});
+        //require(["testmodules/syncTest"], function(){});
+        require(["testmodules/mouseTrack"], function(){});
+        
       });
     </script>
   </head>

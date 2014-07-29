@@ -93,7 +93,7 @@ _V4/*x*/();;
 return _V2/*result*/;;
 ;
 })();
-promiseland._registerModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f", "module": _V1, promising: false });
 return _V1;
 });
 })();

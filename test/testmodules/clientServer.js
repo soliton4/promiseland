@@ -66,15 +66,15 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "89342948269bd1a24ae0574b30c9497c" })){ return promiseland._getModule("89342948269bd1a24ae0574b30c9497c"); };
-var _V13/*console*/;try{_V13/*console*/ = console;}catch(e){};
-var _V15/*Callback*/;try{_V15/*Callback*/ = Callback;}catch(e){};
-var _V17/*__dirname*/;try{_V17/*__dirname*/ = __dirname;}catch(e){};
-var _V20/*setTimeout*/;try{_V20/*setTimeout*/ = setTimeout;}catch(e){};
-var _V25/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V14/*console*/;try{_V14/*console*/ = console;}catch(e){};
+var _V16/*Callback*/;try{_V16/*Callback*/ = Callback;}catch(e){};
+var _V18/*__dirname*/;try{_V18/*__dirname*/ = __dirname;}catch(e){};
+var _V22/*setTimeout*/;try{_V22/*setTimeout*/ = setTimeout;}catch(e){};
+var _V21/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*fs*/;
-var _V7/*x*/;
+var _V8/*x*/;
 ;
 _V2/*fs*/;
 (function(){
@@ -84,52 +84,54 @@ p.reject({id: 14, msg: "function does not execute in this frame."});
 return p;
 };
 var _V3 = new __Promise();
-var _V4 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
-var _V5 = function(e){ _V3.reject(e); };
-_V4(function(){;
-__requireFun("fs").then(_V4(function(_V6){_V2/*fs*/ = _V6;;
+var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
+var _V6 = function(e){ _V3.reject(e); };
+_V5(function(){;
+__requireFun("fs").then(_V5(function(_V7){_V2/*fs*/ = _V7;;
 _V3.resolve(); return;;
 }));})();
 return _V3;
 })();;
-var _V19 = function(_V8/*par1*/, _V9/*par2*/){
-var _V10 = new __Promise();
-var _V11 = function(code){ return function(res){ try{code(res);}catch(e){ _V10.reject(e); }; }; };
-var _V12 = function(e){ _V10.reject(e); };
-var _V14/*cb*/;
-var _V16/*filenameStr*/;
-_V11(function(){;
-_V13/*console*/["log"]("doing the request");;
-_V14/*cb*/ = new _V15/*Callback*/();
-_V16/*filenameStr*/ = (_V17/*__dirname*/ + "/test.txt");
-_V13/*console*/["log"](_V8/*par1*/);;
-_V13/*console*/["log"](_V9/*par2*/);;
-_V2/*fs*/["readFile"](_V16/*filenameStr*/, {"encoding": "utf8"}, _V14/*cb*/);;
-_V14/*cb*/["promise"].then(_V11(function(_V18){_V10.resolve(_V18[1]); return;;
-_V10.resolve(); return;;
-}), _V12);})();
-return _V10;
-};
-promiseland.registerRemote("server", "89342948269bd1a24ae0574b30c9497c", "_V19", _V19);
-_V7/*x*/ = (function(){if (promiseland.profileHas("server")){
-return _V19.apply(this, arguments);
+_V8/*x*/ = ((function(f){
+promiseland.registerRemote("server", "89342948269bd1a24ae0574b30c9497c", "_V20", f, _V21/*type:var*/);
+if (promiseland.profileHas("server")){
+return f;
 }else{
-return promiseland.remoteExec("89342948269bd1a24ae0574b30c9497c", "_V19", arguments);
+return function(){ return promiseland.remoteExec("89342948269bd1a24ae0574b30c9497c", "_V20", arguments); }
 };
-});
-_V20/*setTimeout*/((function(){
-var _V21 = new __Promise();
-var _V22 = function(code){ return function(res){ try{code(res);}catch(e){ _V21.reject(e); }; }; };
-var _V23 = function(e){ _V21.reject(e); };
-_V22(function(){;
-_V7/*x*/("par1", {"par": "2"}).then(_V22(function(_V24){_V13/*console*/["log"](_V24);;
-_V21.resolve(); return;;
-}), _V23);})();
-return _V21;
+})(function(_V9/*par1*/, _V10/*par2*/){
+var _V11 = new __Promise();
+var _V12 = function(code){ return function(res){ try{code(res);}catch(e){ _V11.reject(e); }; }; };
+var _V13 = function(e){ _V11.reject(e); };
+var _V15/*cb*/;
+var _V17/*filenameStr*/;
+_V12(function(){;
+_V14/*console*/["log"]("doing the request");;
+_V15/*cb*/ = new _V16/*Callback*/();
+_V17/*filenameStr*/ = (_V18/*__dirname*/ + "/test.txt");
+_V14/*console*/["log"](_V9/*par1*/);;
+_V14/*console*/["log"](_V10/*par2*/);;
+_V2/*fs*/["readFile"](_V17/*filenameStr*/, {"encoding": "utf8"}, _V15/*cb*/);;
+_V15/*cb*/["promise"].then(_V12(function(_V19){_V11.resolve(_V19[1]); return;;
+_V11.resolve(); return;;
+}), _V13);
+;})();
+return _V11;
+}));
+_V22/*setTimeout*/((function(){
+var _V23 = new __Promise();
+var _V24 = function(code){ return function(res){ try{code(res);}catch(e){ _V23.reject(e); }; }; };
+var _V25 = function(e){ _V23.reject(e); };
+_V24(function(){;
+_V8/*x*/("par1", {"par": "2"}).then(_V24(function(_V26){_V14/*console*/["log"](_V26);;
+_V23.resolve(); return;;
+}), _V25);
+;})();
+return _V23;
 }), 1000);;
 ;
 })();
-promiseland._registerModule({ hashStr: "89342948269bd1a24ae0574b30c9497c", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "89342948269bd1a24ae0574b30c9497c", "module": _V1, promising: false });
 return _V1;
 });
 })();

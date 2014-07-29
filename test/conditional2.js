@@ -66,48 +66,49 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
   
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "3d967a2fc2c58e3c614e3a48c072b07e" })){ return promiseland._getModule("3d967a2fc2c58e3c614e3a48c072b07e"); };
-var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V13/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;
 ;
 _V2/*somefun*/ = (function(){
 var _V3 = new __Promise();
-var _V4 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
-var _V5 = function(e){ _V3.reject(e); };
-_V4(function(){;
+var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
+var _V6 = function(e){ _V3.reject(e); };
+_V5(function(){;
 _V3.resolve(1); return;;
 _V3.resolve(); return;;
 })();
 return _V3;
 });
 return {"fun": (function(){
-var _V6 = new __Promise();
-var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
-var _V8 = function(e){ _V6.reject(e); };
-var _V9/*a*/;
-_V7(function(){;
-_V9/*a*/ = 1;
-var _V10 = new __Promise();
-if(((_V9/*a*/ + 1) == 2)){
-_V2/*somefun*/().then(_V7(function(_V11){_V9/*a*/ = (_V9/*a*/ + _V11);;
-_V10.resolve();;
-}), _V8);
-}else{
-_V10.resolve();}; _V10.then(function(){;
+var _V7 = new __Promise();
+var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
+var _V9 = function(e){ _V7.reject(e); };
+var _V10/*a*/;
+_V8(function(){;
+_V10/*a*/ = 1;
+var _V11 = new __Promise();
+if(((_V10/*a*/ + 1) == 2)){
+_V2/*somefun*/().then(_V8(function(_V12){_V10/*a*/ = (_V10/*a*/ + _V12);;
+_V11.resolve();;
+}), _V9);
 ;
-if((_V9/*a*/ == 2)){
-_V6.resolve(4); return;;
+}else{
+_V11.resolve();}; _V11.then(function(){;
+;
+if((_V10/*a*/ == 2)){
+_V7.resolve(4); return;;
 };
 ;
-_V6.resolve(0); return;;
-_V6.resolve(); return;;
+_V7.resolve(0); return;;
+_V7.resolve(); return;;
 });})();
-return _V6;
+return _V7;
 })};;
 ;
 })();
-promiseland._registerModule({ hashStr: "3d967a2fc2c58e3c614e3a48c072b07e", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "3d967a2fc2c58e3c614e3a48c072b07e", "module": _V1, promising: false });
 return _V1;
 });
 })();

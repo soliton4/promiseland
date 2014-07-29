@@ -94,7 +94,7 @@ _V6/*f2*/ = true;;
 ;
 ;
 if((_V3/*c1*/ && _V4/*c2*/)){
-if((!_V5/*f1*/ && !_V6/*f2*/)){
+if((! _V5/*f1*/ && ! _V6/*f2*/)){
 return {"success": true};;
 };
 ;
@@ -103,7 +103,7 @@ return {"success": true};;
 return {"success": false};;
 ;
 })();
-promiseland._registerModule({ hashStr: "09ebe1b3c68f338fa924f0dd9ebf6d7e", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "09ebe1b3c68f338fa924f0dd9ebf6d7e", "module": _V1, promising: false });
 return _V1;
 });
 })();

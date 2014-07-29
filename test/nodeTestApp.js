@@ -74,8 +74,13 @@ mainio.on('connection', function (socket) {
   };
   
   clientProfile.addConnection(connection);
+  socket.on("disconnect", function(){
+    connection.emit("disconnect");
+  });
   return;
 
 });
 
-require("./testmodules/clientServer");
+//require("./testmodules/clientServer");
+//require("./testmodules/syncTest");
+require("./testmodules/mouseTrack");

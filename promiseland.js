@@ -135,10 +135,12 @@
       };
       this.reject = function(value){
         thenFun = function(u, parElseFun){
-          try{
-            parElseFun(value);
-          }catch(e){
-            // maybe we are ignoring to much here, lets check later
+          if(parElseFun){
+            try{
+              parElseFun(value);
+            }catch(e){
+              // maybe we are ignoring to much here, lets check later
+            };
           };
         };
         if (!elseAr) return;
@@ -198,14 +200,25 @@
       var tracker = t[0];
       this.rootTrack = t[1];
       this.memberTrack = t[2];
-      
+      var rootTrack = this.rootTrack;
       
       var thenAr = [];
       var elseAr = [];
       
       var thenFun = function(parThenFun, parElseFun){
         if (parThenFun){
-          thenAr.push(parThenFun);
+          thenAr.push([parThenFun, rootTrack()]);
+        };
+        if (parElseFun){
+          elseAr.push(parElseFun);
+        };
+        //return returnPromise;
+      };
+      var thenReuseFun = function(parReuse, parThenFun, parElseFun){
+        if (parThenFun){
+          thenAr.push([parThenFun, parReuse]);
+        }else{
+          parReuse();
         };
         if (parElseFun){
           elseAr.push(parElseFun);
@@ -215,15 +228,29 @@
       
       this.resolve = function(value){
         if (value){
-          lifeLine = parTrackFun(value, tracker);
-          value = value[0];
+          var realValue = value[0]; // its a temporary
+          lifeLine = parTrackFun(value, tracker); // this will destroy the temporary
+          value = realValue; // create a temporary that will destroy the promise first
         };
         
         thenFun = function(parThenFun){
-          try{
-            parThenFun(value);
-          }catch(e){
-            // maybe we are ignoring to much here, lets check later
+          if (parThenFun){
+            try{
+              parThenFun([value, rootTrack()]);
+            }catch(e){
+              // maybe we are ignoring to much here, lets check later
+            };
+          };
+        };
+        thenReuseFun = function(parReuse, parThenFun){
+          if (parThenFun){
+            try{
+              parThenFun([value, parReuse]);
+            }catch(e){
+              // maybe we are ignoring to much here, lets check later
+            };
+          }else{
+            parReuse();
           };
         };
         if (!thenAr) return;
@@ -231,10 +258,11 @@
         var l = thenAr.length;
         for (i; i < l; ++i){
           try{
-            thenAr[i](value);
+            var entryAr = thenAr[i];
+            entryAr[0]([value, entryAr[1]]);
           }catch(e){
             // will those errors ocur? if so what do we do with them?
-          }
+          };
         };
         thenAr = undefined; // why not delete?
         elseAr = undefined;
@@ -243,10 +271,22 @@
       };
       this.reject = function(value){
         thenFun = function(u, parElseFun){
-          try{
-            parElseFun(value);
-          }catch(e){
-            // maybe we are ignoring to much here, lets check later
+          if (parElseFun){
+            try{
+              parElseFun(value);
+            }catch(e){
+              // maybe we are ignoring to much here, lets check later
+            };
+          };
+        };
+        thenReuseFun = function(parReuse, u, parElseFun){
+          parReuse();
+          if (parElseFun){
+            try{
+              parElseFun(value);
+            }catch(e){
+              // maybe we are ignoring to much here, lets check later
+            };
           };
         };
         if (!elseAr) return;
@@ -268,6 +308,9 @@
       this.then = function(par1, par2){
         thenFun(par1, par2);
       };
+      this.thenReuse = function(parReuse, par1, par2){
+        thenReuseFun(parReuse, par1, par2);
+      };
       /*this.promise = {
         then: this.then
       };*/
@@ -280,6 +323,7 @@
         ps.then(thenfun...); // so the thenFun is a promise itself;
       */
       this.then.then = this.then;
+      this.then.thenReuse = this.thenReuse;
       
       
     };
@@ -401,6 +445,7 @@
     
     var remoteExecRequest = function(connection, par){
       console.log("remote");
+      try{
       var data = par.data;
       
       var moduleData = getModuleData(data.hashStr);
@@ -408,9 +453,111 @@
       
       var funEntry = moduleData.functions[data.nameStr];
       //console.log(funEntry);
+      
       if (promiseland.profileHas(funEntry.profile)){
-        return funEntry.fun.apply(undefined, data.args);
+        
+        var funType = funEntry.funType;
+        var resultType = classSystem.getFunctionReturnType(funType);
+        var isVar = true;
+        if (!classSystem.isVar(resultType)){
+          isVar = false;
+        };
+        var resultPs = new Promise();
+        
+        // to be reused for all reject cases
+        var tempRejectFun = function(reason){
+          resultPs.reject(reason);
+        };
+        
+        var funResult = funEntry.fun.apply(undefined, data.args);
+        
+        // var case
+        if (isVar){
+          console.log("isvar true");
+          funResult.then(function(parResult){
+            resultPs.resolve({
+              isVar: true,
+              data: parResult
+            });
+          }, tempRejectFun);
+          return resultPs;
+        };
+        
+        // typed case
+        
+        if (!classSystem.isTemporaryTrackedClass(resultType)){
+          console.log("not temp checked");
+          // result must be a temporary tracked promise
+          resultPs.reject(errorMsg.notASyncableResponse);
+          return;
+        };
+        
+
+        var promiseResult = funResult[0];
+        var promiseResultTrack = funResult[1];
+        
+        var promiseType = classSystem.getClassFromTemporaryTracked(resultType);
+        if (!classSystem.isPromiseOfClass(promiseType)){
+          // result must be a promsie
+          console.log("not promise");
+          resultPs.reject(errorMsg.notASyncableResponse);
+          promiseResultTrack(); // untrack result
+          return;
+        };
+        
+        console.log("waiting for result");
+        console.log(promiseResult);
+        promiseResult.then(function(parResult){
+          console.log("we got a result");
+          
+          // we dont need the promise itself any longer
+          promiseResultTrack(); // untrack promise itself
+          
+          // parResult is by definition a temporary tracked
+          var realResult = parResult[0];
+          var trackResult = parResult[1];
+          
+          if (!realResult){
+            // emptyresult
+            trackResult();
+            resultPs.resolve();
+            return;
+          };
+          
+          // sync object
+          var internalId = classSystem.getInternalId(realResult);
+          if (connection.hasObject(internalId)){
+            resultPs.resolve({ // just send the id - the other frame knows what to do
+              id: connection.getTransferId(internalId)
+            });
+            trackResult(); // untrack
+            return;
+          };
+          
+          console.log("generating syncRequestData");
+          var syncRequestData = classSystem.getSyncRequestData(realResult, connection);
+          console.log(syncRequestData);
+          resultPs.resolve(syncRequestData);
+          trackResult(); // untrack // getSyncRequestData must make its own track entry
+          
+        }, function(reason){
+          console.log("we got a rejection");
+          console.log(reason);
+          resultPs.reject(reason);
+          promiseResultTrack(); // untrack promise itself
+        });
+
+        return resultPs;
       };
+      }catch(e){
+        console.log("error");
+        console.log(e);
+        var rejectPs = new Promise();
+        rejectPs.reject(e);
+        return rejectPs;
+        
+      };
+
       var rejectPs = new Promise();
       rejectPs.reject(errorMsg.frameNotAvailable);
       return rejectPs;
@@ -424,6 +571,8 @@
       var nextId = 1;
       var requests = {};
       
+      var profilenameStr = "" + profile.name();
+      
       var sendData = function(data){
         var id = nextId;
         nextId++;
@@ -433,6 +582,104 @@
         data.id = id;
         connection.send(JSON.stringify(data));
         return id;
+      };
+      
+      var internalObjectMap = {};
+      var transferIdMap = {};
+      var nextTranseferId = 1;
+      
+      connection.hasObject = function(parId){
+        if (!internalObjects[parId]){
+          return false;
+        };
+        if (internalObjectMap[parId]){
+          return true;
+        };
+        return false;
+      };
+      connection.getTransferId = function(parId){
+        return internalObjectMap[parId].transferId;
+      };
+      connection.newTransferId = function(parId, parTrack, transferId){
+        if (internalObjectMap[parId]){
+          if (parTrack){
+            parTrack();
+          };
+          return internalObjectMap[parId].transferId;
+        };
+        var syncData = classSystem.getSyncData(internalObjects[parId]);
+        syncData.connections.push(connection);
+        
+        if (!transferId){
+          transferId = profilenameStr + (nextTranseferId++)
+        };
+        var entry = {
+          transferId: transferId,
+          internalId: parId,
+          track: parTrack
+        };
+        internalObjectMap[parId] = entry;
+        transferIdMap[entry.transferId] = entry;
+        return entry.transferId;
+      };
+      connection.removeSynced = function(parId){
+        if (!internalObjectMap[parId]){
+          return;
+        };
+        var entry = internalObjectMap[parId];
+        var transferId = entry.transferId;
+        internalObjectMap[entry.internalId] = undefined;
+        transferIdMap[entry.transferId] = undefined;
+        if (entry.track){
+          entry.track();
+        };
+        connection.createMsg({
+          type: "unsync",
+          transferId: transferId
+        });
+        // remove connection from syncdata
+        var syncData = classSystem.getSyncData(internalObjectMap[parId]);
+        var i = 0;
+        var newConAr = [];
+        for (i = 0; i < syncData.connections.length; ++i){
+          var c = syncData.connections[i];
+          if (c !== connection){
+            newConAr.push(c);
+          };
+        };
+        syncData.connections = newConAr;
+      };
+      connection.unsync = function(parTransferId){
+        var entry = transferIdMap[parTransferId];
+        internalObjectMap[entry.internalId] = undefined;
+        transferIdMap[entry.transferId] = undefined;
+        if (entry.track){
+          entry.track();
+        };
+      };
+      
+      connection.syncValue = function(par){
+        /*{
+            transferId: connection.getTransferId(syncData.getInternalId()),
+            memberIdx: memberIdx,
+            value: value
+          });*/
+        connection.createMsg({
+          type: "syncValue",
+          transferId: par.transferId,
+          memberIdx: par.memberIdx,
+          value: par.value
+        });
+        
+      };
+      
+      connection.recieveSyncValue = function(par){
+        var entry = transferIdMap[par.transferId];
+        var instance = internalObjects[entry.internalId];
+        if (!instance){
+          return;
+        };
+        instance[par.memberIdx] = par.value;
       };
       
       
@@ -473,6 +720,14 @@
                 msg: "unknownRequest"
               });
             };
+          }else if (par.msg){
+            if (par.data && par.data.type == "unsync"){
+              connection.unsync(par.data.transferId);
+            };
+            if (par.data && par.data.type == "syncValue"){
+              connection.recieveSyncValue(par.data);
+            };
+            
           }else if (par.response !== undefined){
             var ps = requests[par.response];
             if (ps){
@@ -499,6 +754,18 @@
         queue(obj);
       });
       
+      connection.on("disconnect", function(dataStr){
+        var e;
+        for (e in internalObjectMap){
+          var entry = internalObjectMap[e];
+          if (entry.track){
+            entry.track();
+          };
+        };
+        internalObjectMap = {};
+        transferIdMap = {};
+      });
+      
       connection.createRequest = function(data){
         var ps = new Promise();
         var id = sendData({
@@ -507,6 +774,14 @@
         });
         requests[id] = ps;
         return ps.promise;
+      };
+      
+      connection.createMsg = function(data){
+        var id = sendData({
+          msg: true
+          , data: data
+        });
+        return;
       };
       
     };
@@ -521,6 +796,7 @@
         }
     */
     var createRemoteExecRequest = function(par){
+      var connection = par.connection;
       var args = [];
       if (par.args && par.args.length){
         var i = 0;
@@ -528,25 +804,77 @@
           args.push(par.args[i]);
         };
       };
-      var ps = par.connection.createRequest({
+
+      var funType = par.funType;
+
+      var resultType = classSystem.getFunctionReturnType(funType);
+      var isVar = true;
+      if (!classSystem.isVar(resultType)){
+        isVar = false;
+      };
+
+      var ps = connection.createRequest({
         "type": "remoteexec",
         hashStr: par.hashStr,
         nameStr: par.nameStr,
         args: args
-        
       });
+
       ps.then(function(res){
-        par.promise.resolve(res);
+        if (isVar && res.isVar){
+          par.promise.resolve(res.data);
+        };
+        if (isVar || res.isVar){
+          par.promise.reject(errorMsg.typeMissmatch);
+          // needs check for tracking
+        };
+
+        // typed case
+        if (!classSystem.isTemporaryTrackedClass(resultType)){
+          // result must be a temporary tracked promise
+          par.promise.reject(errorMsg.notASyncableResponse);
+          return;
+        };
+        var promiseType = classSystem.getClassFromTemporaryTracked(resultType);
+        if (!classSystem.isPromiseOfClass(promiseType)){
+          // result must be a promsie
+          par.promise.reject(errorMsg.notASyncableResponse);
+          return;
+        };
+        
+        // empty result
+        if (!res){
+          par.promise.resolve();
+          return;
+        };
+        
+        // we should have this obj already
+        if (res.id){
+          connection.getObjectByTransferId(res.id).then(function(parObj){
+            par.promise.resolve(parObj);
+          }, function(reason){
+            par.promise.reject(reason);
+          });
+          return;
+        };
+        
+        // a new obj to track
+        var obj = classSystem.getObjFromSyncData(res, connection);
+        par.promise.resolve(obj);
+        if (obj){
+          obj[1]();
+        };
+
       }, function(res){
         par.promise.reject(res);
       });
     };
-    
-    
+
+
     var findProfile = function(profileNameStr){
       return profiles[profileNameStr];
     };
-    
+
     var _getParser = function(){
       if (_parserPs){
         return _parserPs;
@@ -701,7 +1029,8 @@
     var getModuleData = function(parHash){
       if (!moduleData[parHash]){
         moduleData[parHash] = {
-          functions: {}
+          functions: {},
+          classes: {}
         };
       };
       return moduleData[parHash];
@@ -748,13 +1077,19 @@
         return false;
       }
       
-      , registerRemote: function(profileNameStr, hashStr, nameStr, fun){
+      , registerRemote: function(profileNameStr, hashStr, nameStr, fun, funType){
         var moduleData = getModuleData(hashStr);
-        moduleData.functions[nameStr] = {
+        var entry = {
           profile: profileNameStr,
-          fun: fun
+          fun: fun,
+          funType: funType
         };
+        moduleData.functions[nameStr] = entry;
+        classSystem.definitionPromise(funType).then(function(definedFunType){
+          entry.funType = definedFunType;
+        });
       }
+      
       
       , _registerModule: function(par){
         if (this._hasModule(par.hashStr)){
@@ -815,11 +1150,11 @@
         return p.promise;
       }
       
-      , remoteExec: function(hashStr, nameStr, args){
-        var promise = new Promise();
+      , remoteExec: function(hashStr, nameStr, args, parPromise){
+        var promise = parPromise;
         var ret = promise.promise;
         var moduleData = getModuleData(hashStr);
-        if (!moduleData.functions[nameStr]){
+        if (!moduleData || !moduleData.functions[nameStr]){
           promise.reject(errorMsg.missingRemoteFun);
           return ret;
         };
@@ -844,7 +1179,8 @@
           hashStr: hashStr,
           nameStr: nameStr,
           args: args,
-          promise: promise
+          promise: promise,
+          funType: entry.funType
         });
         
         return promise.promise;
@@ -905,9 +1241,57 @@
         isReady: true
       })
     };
-
-
-
+    
+    var nextInternalId = 1;
+    getNewInternalId = function(){
+      return nextInternalId++;
+    };
+    var internalObjects = {};
+    
+    var syncFun = function(parInstance, memberIdx, mType, value){
+      var syncData = classSystem.getSyncData(parInstance);
+      if (syncData){
+        var i = 0;
+        for (i = 0; i < syncData.connections.length; ++i){
+          //console.log("found connection to sync");
+          var connection = syncData.connections[i];
+          connection.syncValue({
+            transferId: connection.getTransferId(syncData.getInternalId()),
+            memberIdx: memberIdx,
+            value: value
+          });
+          //console.log("done sync msg");
+        };
+      };
+    };
+    
+    var destroySynced = function(parSyncData){
+      if (!parSyncData){
+        return;
+      };
+      var syncData = parSyncData;
+      var connections = [];
+      var i = 0;
+      for (i = 0; i < syncData.connections.length; ++i){
+        connections.push(syncData.connections[i]);
+      };
+      for (i = 0; i < connections.length; ++i){
+        var connection = connections[i];
+        connection.removeSynced(syncData.getInternalId());
+      };
+    };
+    var registerSyncClass = function(hashStr, nameStr, parType){
+      var moduleData = getModuleData(hashStr);
+      moduleData.classes[nameStr] = {
+        "type": parType
+      };
+    };
+    var getSyncedClass = function(hashStr, nameStr){
+      var moduleData = getModuleData(hashStr);
+      if (moduleData && moduleData.classes[nameStr]){
+        return moduleData.classes[nameStr].type;
+      };
+    }
 
 
     var classSystem = {
@@ -1053,22 +1437,29 @@
         if (this.isTrackedClass(parType)){
           track = true;
         };
+        
+        var map = {
+          //members: {},
+          //"extends": []
+        };
+        
         var cDef = {
           promiseOf: true,
           type: parType,
           isReady: true,
           readyPromise: new Promise(),
-          track: track
+          track: track,
+          map: map
         };
         var cf = classHider(cDef);
         
         if (track){
           //cDef.trackerIdx = "tracker";
-          cDef.trackRootIdx = "rootTrack";
-          cDef.trackMemberIdx = "memberTrack";
+          cDef.map.trackRootIdx = "rootTrack";
+          cDef.map.trackMemberIdx = "memberTrack";
           
           var pcDef = getClass(parType);
-          var memberTrackMemberIdx = pcDef.map.trackMemberIdx
+          var memberTrackMemberIdx = pcDef.map.trackMemberIdx;
 
           cDef.constructor = function(){
             var r = new TrackedPromise(function(parTempValue, parTracker){
@@ -1107,9 +1498,12 @@
           });
           return pr;
         };
+        if (this.isTemporaryTrackedClass(parType)){
+          return this.getClassFromPromiseOf(this.getClassFromTemporaryTracked(parType));
+        };
         if (this.isPromiseOfClass(parType)){
           var cDef = getClass(parType);
-          return cDef.type;
+          return this._createTemporaryTrackedClass(cDef.type);
         };
         return parType;
       },
@@ -1201,16 +1595,28 @@
         };
         
         // -------------------------------------------------------------------------
-        // basice unfinished definition
+        // basic unfinished definition
         var cDef = {
           constructor: undefined, // later
           map: map,
           isReady: false,
-          track: classLiteral.track,
+          track: (classLiteral.track || classLiteral.sync) ? true : false,
           sync: classLiteral.sync,
           readyPromise: new Promise()
         };
-        cAr.push(cDef); // cAr[0] is allways the class definition
+        //class hider to pass type arround without changing it
+        var cf = classHider(cDef);
+        
+        cAr.push(cf); // cAr[0] is allways the class
+        
+        
+        var sync = classLiteral.sync ? true : false;
+        var syncAll = false;
+        if (sync){
+          if (classLiteral.sync.all){
+            syncAll = true;
+          };
+        };
         
         
         // -------------------------------------------------------------------------
@@ -1229,6 +1635,29 @@
           trackerIdx = map.trackerIdx;
           trackRootIdx = map.trackRootIdx;
           trackMemberIdx = map.trackMemberIdx;
+        };
+        
+        if (sync){
+          map.syncDataIdx = cAr.length;
+          cAr.push(function(){
+            var self = this;
+            var internalId;
+            var syncData = {
+              getInternalId: function(){
+                if (internalId){
+                  return internalId;
+                };
+                internalId = getNewInternalId();
+                internalObjects[internalId] = self;
+                return internalId;
+              },
+              connections: []
+            };
+            this[map.syncDataIdx] = function(){
+              return syncData;
+            };
+            return syncData;
+          });
         };
         
         
@@ -1280,9 +1709,33 @@
           var mDef = {
             index: cAr.length
           };
+          if (syncAll || m.sync){
+            mDef.sync = true;
+          };
+          mDef.type = m.type;
+          var mType = m.type;
+          
+          var memberIdx = mDef.index;
+          var isTrackedMember = self.isTrackedClass(mDef.type);
+          
+          
+          if (mDef.sync){
+            mDef.hasSetter = true;
+            if (isTrackedMember){
+              mDef.defaultSetter = function(vAr){ syncFun(this, memberIdx, mType, vAr[0]); return vAr; };
+            }else{
+              mDef.defaultSetter = function(v){ syncFun(this, memberIdx, mType, v); return v; };
+            };
+          };
+          
           map.members[m.name] = mDef;
           var def = parDefaults ? parDefaults[m.name] : undefined;
           cAr.push(def);
+          
+          if (mDef.hasSetter){
+            mDef.setterIdx = cAr.length;
+            cAr.push(mDef.defaultSetter);
+          };
           
           if (m.name == "constructor"){
             // this is the constructor
@@ -1296,10 +1749,16 @@
             destroyFun = def;
           };
           
-          mDef.type = m.type;
           mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
-          mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] ", MAKRO_OPERATOR, " " , MAKRO_VALUE];
-          if (self.isTrackedClass(mDef.type)){
+          if (mDef.hasSetter){
+            // call setter before assigning
+            mDef.setCode = ["(function(s, v){ v = s[" + mDef.setterIdx + "](v); s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+            
+          }else{
+            mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] ", MAKRO_OPERATOR, " " , MAKRO_VALUE];
+            
+          };
+          if (isTrackedMember){
             var mCDef = getClass(mDef.type);
             var memberTrackMemberIdx = mCDef.map.trackMemberIdx;
             
@@ -1308,8 +1767,15 @@
             untrackIdxAr.push(mDef.trackIndex);
             
             if (cDef.track){
-              mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
-              mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+              if (mDef.hasSetter){
+                mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)]; // setters are allways called as temporary
+                mDef.setCodeFromTemporary = ["(function(s, vAr){ vAr = s[" + mDef.setterIdx + "](vAr); var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+                
+              }else{
+                mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+                mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+                
+              };
             }else{
               mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)];
               mDef.setCodeFromTemporary = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)];
@@ -1405,8 +1871,6 @@
         
         
         
-        //class hider to pass type arround without changing it
-        var cf = classHider(cDef);
         
         var finalPs = new Promise();
         memberPs.then(function(){
@@ -1419,10 +1883,20 @@
           if (constructorDef){
             cDef.constructorArguments = [];
             var realConstructor = cDef.constructor;
-            cDef.constructor = function(){
-              var instance = realConstructor();
-              constructorFun.apply(instance, arguments);
-              return instance;
+            if (cDef.track){
+              // special case for tracked classes
+              // the real constructer returns a temporary
+              cDef.constructor = function(){
+                var instance = realConstructor();
+                constructorFun.apply(instance[0], arguments);
+                return instance;
+              };
+            }else{
+              cDef.constructor = function(){
+                var instance = realConstructor();
+                constructorFun.apply(instance, arguments);
+                return instance;
+              };
             };
             var conDef = getClass(constructorDef.type);
             cDef.constructorType = self.createFunctionType({
@@ -1485,6 +1959,14 @@
 
             };
           };
+          if (sync){
+            var _sync_destroyFun = destroyFun;
+            destroyFun = function(){
+              var syncData = classSystem.getSyncData(this);
+              _sync_destroyFun.apply(this);
+              destroySynced(syncData);
+            };
+          };
 
           finalPs.resolve();
         });
@@ -1495,7 +1977,86 @@
           cDef.readyPromise.resolve(cf);
         });
         
+        if (sync){
+          if (classLiteral.name){
+            cDef.syncId = {
+              hash: classLiteral.hashStr,
+              name: classLiteral.name
+            };
+            registerSyncClass(classLiteral.hashStr, classLiteral.name, cf);
+          };
+        };
+        
         return cf;
+      }
+      
+      , getInternalId: function(parInstance){
+        var type = parInstance[0];
+        cDef = getClass(type);
+        if (cDef.sync){
+          var syncData = parInstance[cDef.map.syncDataIdx]();
+          return syncData.getInternalId();
+        };
+        return;
+      }
+      
+      , getSyncData: function(parInstance){
+        var type = parInstance[0];
+        cDef = getClass(type);
+        if (cDef.sync){
+          return parInstance[cDef.map.syncDataIdx]();
+        };
+        return;
+      }
+      
+      , getSyncRequestData: function(parInstance, parConnection){
+        var type = parInstance[0];
+        cDef = getClass(type);
+        if (cDef.sync){
+          var syncMembers = {
+            m:[]
+          };
+          var membersMap = cDef.map.members;
+          var memberName;
+          for (memberName in membersMap){
+            //console.log(cDef.map.members);
+            var m = membersMap[memberName];
+            if (typeof parInstance[m.index] != "function"){
+              syncMembers[m.index] = parInstance[m.index];
+              syncMembers.m.push(m.index);
+            };
+          };
+          var track = this.getTrack(parInstance);
+          var syncData = {
+            members: syncMembers,
+            syncId: cDef.syncId,
+            transferId: parConnection.newTransferId(this.getInternalId(parInstance), track)
+          };
+          return syncData;
+        };
+        return;
+      }
+      
+      , getObjFromSyncData: function(syncRequestData, parConnection){
+        var syncId = syncRequestData.syncId;
+        var type = getSyncedClass(syncId.hash, syncId.name);
+        if (!type){
+          return;
+        };
+        var ConFun = this.getTypeConstructor(type);
+        var instance = new ConFun();
+        var realInstance = instance[0];
+        
+        parConnection.newTransferId(this.getInternalId(realInstance), undefined, syncRequestData.transferId);
+        
+        var syncMembers = syncRequestData.members;
+        var m = syncMembers.m;
+        var i = 0;
+        for (i = 0; i < m.length; ++i){
+          realInstance[m[i]] = syncMembers[m[i]];
+        };
+        
+        return instance;
       }
       
       
@@ -1809,6 +2370,15 @@
         
       }
       
+      , getTrack: function(parInstance){
+        if (!parInstance){
+          return;
+        };
+        var type = parInstance[0];
+        cDef = getClass(type);
+        return parInstance[cDef.map.trackRootIdx]();
+      }
+      
       , getDestroyTemporaryClassCode: function(par){
         if (!this.isTemporaryTrackedClass(par.valueType)){
           if (par.noValueRequired){
@@ -1820,6 +2390,21 @@
         var codeAr = ["(function(v){ v[1](); return v[0]; })(", MAKRO_VALUE, ")"];
         return assembleCode(codeAr, par);
         
+      }
+      
+      , dereferencePromisePreCode: function(par){
+        var codeAr = [MAKRO_VALUE, ".then("];
+        if (this.isTemporaryTrackedClass(par["valueType"])){
+          codeAr = ["/*temptracked promise*/(function(vAr){\nvar r = vAr[0].thenReuse(vAr[1], "];
+        };
+        return assembleCode(codeAr, par);
+      }
+      , dereferencePromisePostCode: function(par){
+        var codeAr = [");\n"];
+        if (this.isTemporaryTrackedClass(par["valueType"])){
+          codeAr = [");\nreturn r;\n})(", MAKRO_VALUE, ");/*temptracked promise end*/\n"];
+        };
+        return assembleCode(codeAr, par);
       }
       
       , promisingReturnTypeCheck: function(par){
@@ -1847,16 +2432,16 @@
               // tracked temporary
               if (par.assignmentType == "Identifier"){
                 return assembleCode([
-                  "(function(vAr){ ",
-                  "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); }; ",  // call old tracker
-                  "if(vAr){ var v = vAr[0]; ", // temp value
-                  MAKRO_SELF, " ", operator, " v; ",  // assign to variable
-                  "_T", MAKRO_SELF, " = vAr[1]; ",            // reuse existing tracker to save function calls
-                  "return v; }else{ ",                        // reuse existing tracker to save function calls
+                  "/*temp tracked assign*/(function(vAr){\n",
+                  "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
+                  "if(vAr){\nvar v = vAr[0];\n", // temp value
+                  MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
+                  "_T", MAKRO_SELF, " = vAr[1];\n",            // reuse existing tracker to save function calls
+                  "return v;\n}else{\n",                        // reuse existing tracker to save function calls
                   MAKRO_SELF, " ", operator, " undefined; ",  // assign undefined to variable
-                  "_T", MAKRO_SELF, " = undefined; ",         // assign undefined to tracker
-                  "return; }; })",                            // return undefined
-                  "(", MAKRO_VALUE, ")"                   // call closure
+                  "_T", MAKRO_SELF, " = undefined;\n",         // assign undefined to tracker
+                  "return;\n}; })",                            // return undefined
+                  "(", MAKRO_VALUE, ")/*end temp assign*/\n"                   // call closure
                 ], par);
               };
             };
@@ -1865,6 +2450,45 @@
           return assembleCode([MAKRO_SELF, " ", operator, " ", MAKRO_VALUE], par);
         };
         return runtimeError(errorMsg.missingVariable, par);
+      }
+      
+      , declareReturnPromiseCode: function(par){
+        var retType = par["type"];
+        
+        var track = false;
+        if (this.isTemporaryTrackedClass(retType)){
+          track = true;
+          retType = this.getClassFromTemporaryTracked(retType);
+        };
+        if (this.isTrackedClass(retType)){
+          track = true;
+        };
+        var assemblyAr;
+        if (track){
+          assemblyAr = ["var ", par.name, ";\nvar _T", par.name, ";\n(function(){ var vAr = new ", MAKRO_CONSTRUCTOR, "(); ", par.name, " = vAr[0]; _T", par.name, " = vAr[1]; })();"];
+        }else{
+          assemblyAr = ["var ", par.name, " = new __Promise();\n"];
+        };
+        return assembleCode(assemblyAr, par);
+      }
+      , returnReturnPromiseCode: function(par){
+        var retType = par["type"];
+        
+        var track = false;
+        if (this.isTemporaryTrackedClass(retType)){
+          track = true;
+          retType = this.getClassFromTemporaryTracked(retType);
+        };
+        if (this.isTrackedClass(retType)){
+          track = true;
+        };
+        var assemblyAr;
+        if (track){
+          assemblyAr = ["return [", par.name, ", _T", par.name, "];\n"];
+        }else{
+          assemblyAr = ["return ", par.name, ";\n"];
+        };
+        return assembleCode(assemblyAr, par);
       }
       
       , getDeclareVariableCode: function(par){
@@ -2142,6 +2766,18 @@
             case MAKRO_OPERATOR:
               res.push(par.operator);
               break;
+            case MAKRO_RESOLVEFUN:
+              res.push(par.resolveFun || "undefined");
+              break;
+            case MAKRO_REJECTFUN:
+              res.push(par.rejectFun || "undefined");
+              break;
+            case MAKRO_TYPEVALUE:
+              res.push(par.typeValue);
+              break;
+            case MAKRO_CONSTRUCTOR:
+              res.push(par.constructorName);
+              break;
           };
         };
       };
@@ -2160,6 +2796,10 @@
     var MAKRO_OPERATOR = 6;
     var MAKRO_RIGHT = 7;
     var MAKRO_VALUEPROPERTY = 8;
+    var MAKRO_RESOLVEFUN = 9;
+    var MAKRO_REJECTFUN = 10;
+    var MAKRO_TYPEVALUE = 11;
+    var MAKRO_CONSTRUCTOR = 12;
     
     
     errorMsg = {
@@ -2202,6 +2842,10 @@
       notAPromise: {
         id: 209
         , msg: "type is not a promise"
+      },
+      notASyncableResponse: {
+        id: 210
+        , msg: "not a syncable response"
       },
       
       

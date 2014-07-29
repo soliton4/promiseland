@@ -626,7 +626,9 @@
       this._start = function(){
         if (this.toParse){
           if (this.toParse.type == "Program"){
-            this.result = this.makeCompleteStatement(this.parseProgram(this.toParse));
+            var tempRes = this.makeCompleteStatement(this.parseProgram(this.toParse));
+            tempRes.push(";");
+            this.result = this.makeCompleteStatement(tempRes);
           }else if (checkIsFunction(this.toParse)){
             this.functionRes = this.parseFunction(this.toParse);
             this.result = this.makeCompleteStatement(this.functionRes);
@@ -933,14 +935,14 @@
             if (classSystem.isFunctionType(resolvedType)){
               var i;
               replace.push("(classSystem.createFunctionType({ \"return\": ");
-              replace.push(self.renderType(self.getFunctionReturnType(resolvedType, parParsed), parParsed));
+              replace.push(self.renderType(self.getClassFromTemporaryTracked(self.getFunctionReturnType(resolvedType, parParsed), parParsed), parParsed));
               replace.push(", arguments: [");
               var l = self.getFunctionArgumentCount(resolvedType);
               for (i = 0; i < l; ++i){
                 if (i){
                   replace.push(", ");
                 };
-                replace.push(self.renderType(self.getFunctionArgumentType(resolvedType, i, parParsed), parParsed));
+                replace.push(self.renderType(self.getClassFromTemporaryTracked(self.getFunctionArgumentType(resolvedType, i, parParsed), parParsed), parParsed));
               };
               replace.push("]}))");
               res.push(replace);
@@ -1053,7 +1055,7 @@
         
         this.resultNameStr = this.getUniqueName();
         
-        var functionStatement = this._parseFunction(par, this.programPromiseStr);
+        var functionStatement = this._parseFunction(par, { promiseName: this.programPromiseStr, noUntrack: true });
         
         var name;
         for (name in this.usedVariables){
@@ -1380,7 +1382,10 @@
       };
 
 
-      this._parseFunction = function(par, parGivenPromiseNameStr){
+      this._parseFunction = function(par, parJsn){
+        parJsn = parJsn || {};
+        var parGivenPromiseNameStr = parJsn.promiseName;
+        var noUntrack = parJsn.noUntrack;
         
         // check for hints
         var hasFrameInfo = false;
@@ -1436,6 +1441,8 @@
         
         if (par.returnTypename){
           this._returnType = this.getType(par.returnTypename, par);
+        }else{
+          this._returnType = this.getType("var");
         };
         
         
@@ -1523,9 +1530,6 @@
         if (hasName){
           this.functionName = nameStr; //this.getVariableName(nameStr);
         };
-        //if (hasName && !runRemote){
-        //  funRes.push(" " + this.getVariableName(nameStr));
-        //};
         
         // parameters
         funRes.push("("); // function start
@@ -1550,7 +1554,7 @@
         if (runExclusive){
           funRes.push("if (!promiseland.profileHas(" + stringEncodeStr(par.frame.name.value) + ")){\n");
           if (par.promising){
-            funRes.push("var p = " + newPromiseStr() + ";\n");
+            funRes.push("var p = " + newPromiseStr() + ";\n"); // needs adjustment for tracked promises
             funRes.push("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");
             funRes.push("return p;\n");
           }else{
@@ -1572,7 +1576,14 @@
             
           }else{
             this.returnPromise = this.getUniqueName();
-            funRes.push("var " + this.returnPromise + " = " + newPromiseStr() + ";\n");
+            
+            funRes.push(this.declareReturnPromiseCode({
+              type: this._returnType,
+              name: this.returnPromise,
+              constructorName: this.getConstructorName(this.getTypeName(this._returnType, parParsed)),
+              parsed: parParsed,
+              errorFun: this.getWarningFun(parParsed)
+            }));
             
           };
           
@@ -1627,15 +1638,14 @@
           };
           
           // untrack tracked variables
-          
-          //if (this.isTrackedClass(type)){
-          this.addBeforeReturn(this.getDestroyVariableCode({
-            name: this.getVariableName(varname),
-            "type": type,
-            errorFun: this.getWarningFun(par),
-            parsed: par
-          }), this.isTrackedClassConRes(type));
-          //};
+          if (!noUntrack){
+            this.addBeforeReturn(this.getDestroyVariableCode({
+              name: this.getVariableName(varname),
+              "type": type,
+              errorFun: this.getWarningFun(par),
+              parsed: par
+            }), this.isTrackedClassConRes(type));
+          };
           
           this.usedVariables[varname] = false;
         };
@@ -1644,14 +1654,16 @@
           funRes.push("var " + this.getVariableName("arguments") + " = arguments;\n");
           this.usedVariables["arguments"] = false;
         };
+        
+        // defined types
+        funRes.push(classesRes);
+        
         for(i = 0; i < this.functionsAr.length; ++i){
           funRes.push("var " + this.getVariableName(this.functionsAr[i].name) + " = ");
           funRes.push(this.functionsAr[i].res);
           funRes.push(";\n");
         };
         
-        // defined types
-        funRes.push(classesRes);
         
         
         if (par.promising){
@@ -1667,7 +1679,13 @@
         // promising additions
         if (par.promising){
           funRes.addPost("})();\n");
-          funRes.addPost("return " + this.returnPromise + ";\n");
+          funRes.addPost(this.returnReturnPromiseCode({
+            type: this._returnType,
+            name: this.returnPromise,
+            parsed: parParsed,
+            errorFun: this.getWarningFun(parParsed)
+          }));
+
           funRes.addPost("}"); // function end
         }else{
           funRes.push("}"); // function end
@@ -1714,34 +1732,72 @@
           completeFun = this.makeCompleteStatement(funClosure);
         };
         
+        var thisFunType = this.getFunctionType(par);
+        
         // remote execution check
         var uniqueNameStr;
         if (runRemote){
+          var remoteClosure = this.newResult();
+          
           uniqueNameStr = this.getUniqueName();
-          res.addPre("var " + uniqueNameStr + " = ");
-          res.addPre(completeFun);
-          res.addPre(";\npromiseland.registerRemote(" + stringEncodeStr(par.frame.name.value) + ", \"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", " + uniqueNameStr + ");\n");
-          res.push("function");
-          //if (hasName){
-          //  res.push(" " + this.getVariableName(nameStr));
-          //};
-          res.push("(){"); // function start
-          res.push("if (promiseland.profileHas(" + stringEncodeStr(par.frame.name.value) + ")){\n");
-          res.push("return " + uniqueNameStr + ".apply(this, arguments);\n");
-          res.push("}else{\n");
-          res.push("return promiseland.remoteExec(\"" + this.getModuleHashStr() + "\", \"" + uniqueNameStr + "\", arguments);\n");
-          res.push("};\n");
-          res.push("}"); // end of function
+          
+          remoteClosure.push("(function(f){\n");
+          // register function
+          remoteClosure.push("promiseland.registerRemote(" + stringEncodeStr(par.frame.name.value));
+          remoteClosure.push(", " + stringEncodeStr(this.getModuleHashStr()) + ", " + stringEncodeStr(uniqueNameStr) + ", f, ");
+          remoteClosure.push(this.renderType(thisFunType, parParsed));
+          remoteClosure.push(");\n");
+          
+          remoteClosure.push("if (promiseland.profileHas(" + stringEncodeStr(par.frame.name.value) + ")){\n");
+          remoteClosure.push("return f;\n"); // eather the function stays itself
+          remoteClosure.push("}else{\n");
+          // or we create a remote exec hook
+          remoteClosure.push("return function(){\n");
+          
+          
+          var tempReturnPromise = this.getUniqueName("temp returnpromise");
+          remoteClosure.push(this.declareReturnPromiseCode({
+            type: this._returnType,
+            name: tempReturnPromise,
+            constructorName: this.getConstructorName(this.getTypeName(this._returnType, parParsed)),
+            parsed: parParsed,
+            errorFun: this.getWarningFun(parParsed)
+          }));
+          remoteClosure.push("\npromiseland.remoteExec(" + stringEncodeStr(this.getModuleHashStr()) + ", " + stringEncodeStr(uniqueNameStr) + ", arguments, ");
+          remoteClosure.push(tempReturnPromise);
+          remoteClosure.push(");\n");
+          remoteClosure.push(this.returnReturnPromiseCode({
+            type: this._returnType,
+            name: tempReturnPromise,
+            parsed: parParsed,
+            errorFun: this.getWarningFun(parParsed)
+          }));
+          remoteClosure.push("}\n");
+          
+          remoteClosure.push("};\n");
+          
+          remoteClosure.push("})(");
+          remoteClosure.push(completeFun); // pass the real function as parameter
+          remoteClosure.push(")");
+          
+          res.push(remoteClosure);
+          
         }else{
           res.push(completeFun);
         };
         
-        res.setType(this.getFunctionType(par));
+        res.setType(thisFunType);
         
         this.unstack("isClassObject");
         this.unstack("inheritedAvailable");
         this.unstack("thisType");
-        return res;
+        
+        var finalResult = this.newResult();
+        //finalResult.push("/*functionresultstart*/");
+        finalResult.push(this.makeCompleteStatement(res));
+        //finalResult.push("/*functionresultend*/");
+        finalResult.setType(thisFunType);
+        return finalResult;
       };
       
       /*
@@ -1841,7 +1897,8 @@
             if (par.body.literal){
               if (ci.hasName){
                 var name = identifierName(par.name);
-                this.addType({name: name}, par);
+                var extraRes = this.newResult();
+                this.addType({name: name, extraRes: extraRes}, par);
                 res.push("var ");
                 res.push(this.renderType(name));
                 res.push(" = classSystem._createProvisionalClass();\n");
@@ -1851,6 +1908,7 @@
                 res.push("var " + this.getConstructorName(name) + " = undefined;");
                 
                 res.push(this._typeReadyCode({typename: name}));
+                res.push(extraRes);
                 
               };
             };
@@ -1872,9 +1930,11 @@
         res.push(").then(function(parType){");
         res.push(this.renderType(par.typename));
         res.push(" = parType;");
-        res.push(this.getConstructorName(par.typename) + " = classSystem.getTypeConstructor(");
-        res.push(this.renderType(par.typename));
-        res.push(");");
+        if (!par.noConstructor){
+          res.push(this.getConstructorName(par.typename) + " = classSystem.getTypeConstructor(");
+          res.push(this.renderType(par.typename));
+          res.push(");");
+        };
         res.push("});");
         
         return res;
@@ -1958,7 +2018,7 @@
             this.stack("isClassObject");
             this.isClassObject = true;
             
-            var literal = this.createClassLiteral(par.body.literal, ci);
+            var literal = this.createClassLiteral(par.body.literal, ci, name);
             classRes.push(this.stringifyClassLiteral(literal));
             classRes.push(", ");
             classRes.push(this.createClassDefaults(par.body.literal));
@@ -2083,13 +2143,16 @@
       };
       
       
-      this.createClassLiteral = function(par, ci){
+      this.createClassLiteral = function(par, ci, parName){
         ret = {
           members: [],
           "extends": [],
           hasFreePart: true,
           parsed: par,
-          track: ci.trackClause ? true : false
+          track: ci.trackClause ? true : false,
+          sync: ci.syncClause,
+          name: parName,
+          hashStr: this.getModuleHashStr()
         };
         
         var i = 0;
@@ -2168,6 +2231,12 @@
         if (par.track){
           res.push(", \"track\": true");
         };
+        if (par.sync){
+          res.push(", \"sync\": ");
+          res.push(JSON.stringify(par.sync));
+          res.push(", \"hashStr\": " + stringEncodeStr(par.hashStr));
+          res.push(", \"name\": " + stringEncodeStr(par.name));
+        };
         
         res.push("}");
         
@@ -2216,7 +2285,8 @@
         var type;
         if (par.dynamic){
           type = {
-            isDynamic: true
+            isDynamic: true,
+            extraRes: par.extraRes // not in use yer
           };
         }else{
           type = this.getProvisionalType(parParsed);
@@ -2224,7 +2294,8 @@
         this.types[name] = {
           name: name,
           "type": type,
-          isDynamic: type.isDynamic
+          isDynamic: type.isDynamic,
+          extraRes: par.extraRes // only this one is in use
         };
         
       };
@@ -2275,11 +2346,26 @@
           var typename = name.substr(0, name.length - 1);
           var typeEntry = this._getTypeEntry(typename, parParsed, par);
           if (typeEntry){
+            var extraRes = typeEntry.extraRes;
             this.types[name] = {
               name: name,
               "type": classSystem._createPromiseOfClass(typeEntry.type),
-              isDynamic: false
+              isDynamic: false,
+              extraRes: extraRes
             };
+            
+            extraRes.push("var ");
+            extraRes.push(this.renderType(name));
+            extraRes.push(" = classSystem._createPromiseOfClass(");
+            extraRes.push(this.renderType(typename));
+            extraRes.push(");\nvar ");
+            extraRes.push(this.getVariableName(name) + " = ");
+            extraRes.push(this.renderType(name));
+            extraRes.push(";\n");
+            extraRes.push("var " + this.getConstructorName(name) + " = undefined;");
+            
+            extraRes.push(this._typeReadyCode({typename: name, noConstructor: false}));
+            
             return this.types[name];
           };
         };
@@ -2747,13 +2833,38 @@
         
         var expressionRes = this.parseExpression(parExpression);
         
+        var promiseNameStr = this.getUniqueName();
+        
         res.makePromising();
-        res.addPre(expressionRes);
+        res.setPromiseName(promiseNameStr);
+        
+        var dereferencePre = this.dereferencePromisePreCode({
+          value: expressionRes
+        });
+        
+        var preRes = this.newResult();
+        preRes.push(dereferencePre);
+        preRes.push(this.tryCatchFunctionStr + "(function(");
+        preRes.push(promiseNameStr);
+        preRes.push("){");
+        
+        res.addPre(preRes);
+        
+        /*res.addPre(expressionRes);
         res.addPre(".then(" + this.tryCatchFunctionStr + "(function(");
-        res.setPromiseName(this.getUniqueName());
-        res.addPre(res.getPromiseName());
-        res.addPre("){");
-        res.addPost("}), " + this.catchFunctionStr + ");");
+        res.addPre(promiseNameStr);
+        res.addPre("){");*/
+        
+        var dereferencePost = this.dereferencePromisePostCode({
+          value: expressionRes
+        });
+        
+        var postRes = this.newResult();
+        postRes.push("}), " + this.catchFunctionStr);
+        postRes.push(dereferencePost);
+        postRes.push(";");
+        
+        res.addPost(postRes);
         
         var promiseType = expressionRes.getType();
         
@@ -2765,6 +2876,7 @@
         var res = this.newResult();
         
         res.push(parExpression.operator);
+        res.push(" ");
         res.pushType(this.expectTypeVar(this.parseExpression(parExpression.argument)));
         return res;
       };
@@ -4121,6 +4233,36 @@
         return res;
       };
       
+      this.declareReturnPromiseCode = function(par){
+        var res = this.newResult();
+        
+        res.push(this.callClassSystem("declareReturnPromiseCode", {
+          "type": par.type,
+          name: par.name,
+          constructorName: par.constructorName,
+          errorFun: par.errorFun,
+          parsed: par.parsed
+        }));
+        
+        res.setType(statementType);
+        
+        return res;
+      };
+      this.returnReturnPromiseCode = function(par){
+        var res = this.newResult();
+        
+        res.push(this.callClassSystem("returnReturnPromiseCode", {
+          "type": par.type,
+          name: par.name,
+          errorFun: par.errorFun,
+          parsed: par.parsed
+        }));
+        
+        res.setType(statementType);
+        
+        return res;
+      };
+      
       this.getDeclareVariableCode = function(par){
         var res = this.newResult();
         
@@ -4197,6 +4339,29 @@
         return res;
       };
       
+      this.dereferencePromisePreCode = function(par){
+        var res = this.newResult();
+        res.push(this.callClassSystem("dereferencePromisePreCode", {
+          value: par.value,
+          valueType: this.getResultType(par.value),
+          errorFun: par.errorFun
+        }));
+        
+        res.setType(statementType);
+        return res;
+      };
+      this.dereferencePromisePostCode = function(par){
+        var res = this.newResult();
+        res.push(this.callClassSystem("dereferencePromisePostCode", {
+          value: par.value,
+          valueType: this.getResultType(par.value),
+          errorFun: par.errorFun
+        }));
+        
+        res.setType(statementType);
+        return res;
+      };
+      
       this.promisingReturnTypeCheck = function(par){
         var res = this.newResult();
         res.push(this.callClassSystem("promisingReturnTypeCheck", {
@@ -4207,7 +4372,7 @@
         
         res.setType(statementType);
         return res;
-      };    
+      };
       
       this.getClassFromPromiseOf = function(parType){
         return classSystem.getClassFromPromiseOf(parType);

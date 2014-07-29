@@ -73,7 +73,7 @@ var _V1 = (function(){
 return {};;
 ;
 })();
-promiseland._registerModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "d8cfe155f6465ad0394e452a1407953e", "module": _V1, promising: false });
 return _V1;
 });
 })();

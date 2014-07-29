@@ -77,7 +77,9 @@ var _V8/*cntSupposed*/;
 var _V11/*f1*/;
 var _V12/*a*/;
 var _T_V12/*a*/;
-var _V11/*f1*/ = function(_V10/*p1*/){
+var _V2/*type:C1*/ = classSystem._createProvisionalClass();
+_V3/*C1*/ = _V2/*type:C1*/;
+var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});var _V11/*f1*/ = function(_V10/*p1*/){
 var _T_V10/*p1*/;
 if(_V10/*p1*/){ _T_V10/*p1*/ = _V10/*p1*/[1];
 _V10/*p1*/ = _V10/*p1*/[0];}
@@ -85,9 +87,7 @@ try{;
 _V8/*cntSupposed*/(0);;
 if (_T_V10/*p1*/){ _T_V10/*p1*/();};}catch(e){if (_T_V10/*p1*/){ _T_V10/*p1*/();};throw e};;
 };
-var _V2/*type:C1*/ = classSystem._createProvisionalClass();
-_V3/*C1*/ = _V2/*type:C1*/;
-var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});try{;
+;
 _V5/*failed*/ = false;
 _V6/*cnt*/ = 0;
 classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"destroy","type":_V7/*type:var*/}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
@@ -108,21 +108,43 @@ _V8/*cntSupposed*/(0);;
 _V11/*f1*/;
 ;
 _V8/*cntSupposed*/(0);;
-(function(vAr){ if (_T_V12/*a*/){ _T_V12/*a*/(); }; if(vAr){ var v = vAr[0]; _V12/*a*/ = v; _T_V12/*a*/ = vAr[1]; return v; }else{ _V12/*a*/ = undefined; _T_V12/*a*/ = undefined; return; }; })(new _V4/*C1-constructor*/());
+/*temp tracked assign*/(function(vAr){
+if (_T_V12/*a*/){ _T_V12/*a*/(); };
+if(vAr){
+var v = vAr[0];
+_V12/*a*/ = v;
+_T_V12/*a*/ = vAr[1];
+return v;
+}else{
+_V12/*a*/ = undefined; _T_V12/*a*/ = undefined;
+return;
+}; })(new _V4/*C1-constructor*/())/*end temp assign*/
+;
 _V8/*cntSupposed*/(0);;
 _V11/*f1*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(_V12/*a*/));;
 _V8/*cntSupposed*/(0);;
-(function(vAr){ if (_T_V12/*a*/){ _T_V12/*a*/(); }; if(vAr){ var v = vAr[0]; _V12/*a*/ = v; _T_V12/*a*/ = vAr[1]; return v; }else{ _V12/*a*/ = undefined; _T_V12/*a*/ = undefined; return; }; })(new _V4/*C1-constructor*/());;
+/*temp tracked assign*/(function(vAr){
+if (_T_V12/*a*/){ _T_V12/*a*/(); };
+if(vAr){
+var v = vAr[0];
+_V12/*a*/ = v;
+_T_V12/*a*/ = vAr[1];
+return v;
+}else{
+_V12/*a*/ = undefined; _T_V12/*a*/ = undefined;
+return;
+}; })(new _V4/*C1-constructor*/())/*end temp assign*/
+;;
 _V8/*cntSupposed*/(1);;
 if(_V5/*failed*/){
 _V13/*console*/["log"]("failed");;
-return (function(ret){ if (_T_V12/*a*/){ _T_V12/*a*/();};return ret; })({"success": false});;
+return {"success": false};;
 };
 ;
-return (function(ret){ if (_T_V12/*a*/){ _T_V12/*a*/();};return ret; })({"success": true});;
-if (_T_V12/*a*/){ _T_V12/*a*/();};}catch(e){if (_T_V12/*a*/){ _T_V12/*a*/();};throw e};;
+return {"success": true};;
+;
 })();
-promiseland._registerModule({ hashStr: "1c27915421db6c724a7af79a2c806394", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "1c27915421db6c724a7af79a2c806394", "module": _V1, promising: false });
 return _V1;
 });
 })();

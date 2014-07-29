@@ -119,7 +119,9 @@ _V19/*jsStr*/ = _V28/*res*/["javascript"];;
 };
 ;
 _V20.resolve();
-}), _V23);}), _V23);})();
+}), _V23);
+;}), _V23);
+;})();
 _V21.then(_V3(function(e){_V18/*console*/["log"](_V30/*e*/);;
 _V18/*console*/["log"]("error");;
 _V20.resolve();;
@@ -130,7 +132,8 @@ _V7/*callback*/ = new _V8/*Callback*/();;
 _V5/*fs*/["writeFile"]((_V16/*filename*/["substr"](0, (_V16/*filename*/["length"] - 6)) + ".js"), _V19/*jsStr*/, _V7/*callback*/["callback"]);;
 _V7/*callback*/["promise"].then(_V3(function(_V31){_V31;;
 _V17.resolve();;
-}), _V4);}), _V4)
+}), _V4);
+;}), _V4)
 }else{
 _V17.resolve();}; _V17.then(function(){;
 ;
@@ -155,9 +158,10 @@ _V11.resolve();;
 _V11.resolve();}; _V11.then(function(){;
 ;
 _V1.resolve(); return;;
-});}), _V4);}));})();
+});}), _V4);
+;}));})();
 return _V1;
 })();
-;
+;;
 return _V1});
 })();

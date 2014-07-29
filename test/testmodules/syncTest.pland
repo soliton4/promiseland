@@ -1,0 +1,73 @@
+try{
+
+  var waitFun = function(){
+    var cb = new Callback();
+    setTimeout(cb, 2000);
+    *cb.promise;
+  };
+
+  
+class type sync Cs1 {
+  a: 1,
+  b: 4,
+    destroy: (){
+      console.log("destroying")
+    }
+};
+
+Cs1 a;
+var gotit = false;
+  
+//a = new Cs1();
+//a.a = 2;
+  
+  
+Cs1* x() frame "server"{
+  console.log("doing the new request");
+  return new Cs1();
+};
+
+(() exclusive "server" {
+  gotit = true;
+  
+})();
+
+  if (!gotit){
+    *waitFun();
+    a = *x();
+    console.log("a:" + a.a);
+  };
+  
+
+/*(() exclusive "server" {
+  a = new Cs1();
+  a.a = 3;
+  gotit = true;
+  var next = 1;
+  setInterval((){
+    a.a = next++;
+  }, 1000);
+  
+})();*/
+
+/*Cs1* x() frame "server"{
+  console.log("doing the sync request");
+  return a;
+};
+  
+  
+  *waitFun();
+
+if (!gotit){
+  a = *x();
+  setInterval((){
+    console.log(a.a);
+  }, 1000);
+};*/
+
+}catch(e){
+  console.log("error:");
+  console.log(e);
+}
+
+  

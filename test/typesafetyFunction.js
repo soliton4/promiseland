@@ -93,7 +93,7 @@ try
 return {"success": false};;
 ;
 })();
-promiseland._registerModule({ hashStr: "cb0cacb00014ff9e927d09985ddc4811", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "cb0cacb00014ff9e927d09985ddc4811", "module": _V1, promising: false });
 return _V1;
 });
 })();

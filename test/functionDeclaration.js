@@ -68,7 +68,7 @@ var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "eebfd8846a03586e8029663b626fa333" })){ return promiseland._getModule("eebfd8846a03586e8029663b626fa333"); };
 var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "eebfd8846a03586e8029663b626fa333", "module": _V1, promising: true });
-var _V16/*type:var*/ = __classSystem.getBuiltinType("var");
+var _V17/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
@@ -76,43 +76,44 @@ var _V4 = function(e){ _V1.reject(e); };
 var _V5/*fmain*/;
 var _V5/*fmain*/ = function(){
 var _V7 = new __Promise();
-var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
-var _V9 = function(e){ _V7.reject(e); };
-var _V10/*fa*/;
-var _V11/*res*/;
-var _V12/*fb*/;
-var _V13/*fc*/;
-var _V10/*fa*/ = function(){
+var _V9 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
+var _V10 = function(e){ _V7.reject(e); };
+var _V11/*fa*/;
+var _V12/*res*/;
+var _V13/*fb*/;
+var _V14/*fc*/;
+var _V11/*fa*/ = function(){
 ;
 return 1;;
 ;
 };
-var _V12/*fb*/ = function(){
+var _V13/*fb*/ = function(){
 ;
 return 2;;
 ;
 };
-var _V13/*fc*/ = function(){
+var _V14/*fc*/ = function(){
 ;
 return 3;;
 ;
 };
-_V8(function(){;
-_V10/*fa*/;
+_V9(function(){;
+_V11/*fa*/;
 ;
-_V11/*res*/ = ((_V10/*fa*/() + _V12/*fb*/()) + _V13/*fc*/());
-_V12/*fb*/;
+_V12/*res*/ = ((_V11/*fa*/() + _V13/*fb*/()) + _V14/*fc*/());
+_V13/*fb*/;
 ;
-_V7.resolve(_V11/*res*/); return;;
-var _V14 = new __Promise();
+_V7.resolve(_V12/*res*/); return;;
+var _V15 = new __Promise();
 if(false){
-_V12/*fb*/().then(_V8(function(_V15){_V15;;
-_V14.resolve();;
-}), _V9);
-}else{
-_V14.resolve();}; _V14.then(function(){;
+_V13/*fb*/().then(_V9(function(_V16){_V16;;
+_V15.resolve();;
+}), _V10);
 ;
-_V13/*fc*/;
+}else{
+_V15.resolve();}; _V15.then(function(){;
+;
+_V14/*fc*/;
 ;
 _V7.resolve(); return;;
 });})();
@@ -127,9 +128,10 @@ _V1.resolve({"success": false}); return;;
 _V5/*fmain*/;
 ;
 _V1.resolve(); return;;
-}), _V4);})();
+}), _V4);
+;})();
 return _V1;
 })();
-;
+;;
 return _V1});
 })();

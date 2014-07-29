@@ -84,7 +84,18 @@ classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members
 var _V7/*v*/;
 var _T_V7/*v*/;
 try{;
-(function(vAr){ if (_T_V7/*v*/){ _T_V7/*v*/(); }; if(vAr){ var v = vAr[0]; _V7/*v*/ = v; _T_V7/*v*/ = vAr[1]; return v; }else{ _V7/*v*/ = undefined; _T_V7/*v*/ = undefined; return; }; })(new _V4/*C1-constructor*/());
+/*temp tracked assign*/(function(vAr){
+if (_T_V7/*v*/){ _T_V7/*v*/(); };
+if(vAr){
+var v = vAr[0];
+_V7/*v*/ = v;
+_T_V7/*v*/ = vAr[1];
+return v;
+}else{
+_V7/*v*/ = undefined; _T_V7/*v*/ = undefined;
+return;
+}; })(new _V4/*C1-constructor*/())/*end temp assign*/
+;
 if (_T_V7/*v*/){ _T_V7/*v*/();};}catch(e){if (_T_V7/*v*/){ _T_V7/*v*/();};throw e};;
 })();;
 if((_V5/*i*/ == 1)){
@@ -94,7 +105,7 @@ return {"success": false};;
 return {"success": true};;
 ;
 })();
-promiseland._registerModule({ hashStr: "54c5b667b0d94bacc1162b8a20e2c8f4", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "54c5b667b0d94bacc1162b8a20e2c8f4", "module": _V1, promising: false });
 return _V1;
 });
 })();

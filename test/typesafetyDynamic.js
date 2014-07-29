@@ -118,7 +118,7 @@ try
 {_V9/*a*/();;
 }catch(e){_V29/*catched*/ = true;;
 };
-if(!_V29/*catched*/){
+if(! _V29/*catched*/){
 return {"success": false};;
 };
 ;
@@ -129,7 +129,7 @@ try
 return {"success": true};;
 ;
 })();
-promiseland._registerModule({ hashStr: "e1f0833736acaa653e77399b8fc0fa66", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "e1f0833736acaa653e77399b8fc0fa66", "module": _V1, promising: false });
 return _V1;
 });
 })();

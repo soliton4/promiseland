@@ -84,7 +84,7 @@ return {"success": true};;
 return {"success": false};;
 ;
 })();
-promiseland._registerModule({ hashStr: "ee5b5da42a294a2f1d77d2f4f93f0add", "module": _V1, promising: false });
+;promiseland._registerModule({ hashStr: "ee5b5da42a294a2f1d77d2f4f93f0add", "module": _V1, promising: false });
 return _V1;
 });
 })();
