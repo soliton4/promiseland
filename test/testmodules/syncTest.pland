@@ -9,10 +9,7 @@ try{
   
 class type sync Cs1 {
   a: 1,
-  b: 4,
-    destroy: (){
-      console.log("destroying")
-    }
+  b: 4
 };
 
 Cs1 a;
@@ -27,19 +24,8 @@ Cs1* x() frame "server"{
   return new Cs1();
 };
 
+
 (() exclusive "server" {
-  gotit = true;
-  
-})();
-
-  if (!gotit){
-    *waitFun();
-    a = *x();
-    console.log("a:" + a.a);
-  };
-  
-
-/*(() exclusive "server" {
   a = new Cs1();
   a.a = 3;
   gotit = true;
@@ -48,9 +34,9 @@ Cs1* x() frame "server"{
     a.a = next++;
   }, 1000);
   
-})();*/
+})();
 
-/*Cs1* x() frame "server"{
+Cs1* x() frame "server"{
   console.log("doing the sync request");
   return a;
 };
@@ -63,7 +49,7 @@ if (!gotit){
   setInterval((){
     console.log(a.a);
   }, 1000);
-};*/
+};
 
 }catch(e){
   console.log("error:");

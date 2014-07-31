@@ -82,5 +82,5 @@ mainio.on('connection', function (socket) {
 });
 
 //require("./testmodules/clientServer");
-//require("./testmodules/syncTest");
-require("./testmodules/mouseTrack");
+require("./testmodules/syncTest");
+//require("./testmodules/mouseTrack");
