@@ -47,10 +47,9 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
+var __Promise = promiseland.Promise;
+var classSystem = promiseland.classSystem;
+var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
     if (promiseland.isPromiseLandPromisingModule(m)){
@@ -60,15 +59,10 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
     };
     });
     }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
+    return returnPromise.promise;};
 if (promiseland._hasModule({ hashStr: "cae0507e04a7312601e16db3b4c02736" })){ return promiseland._getModule("cae0507e04a7312601e16db3b4c02736"); };
 var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "cae0507e04a7312601e16db3b4c02736", "module": _V1, promising: true });
-var _V17/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
@@ -92,15 +86,15 @@ _V6.resolve(); return;;
 return _V6;
 })().then(_V3(function(_V11){_V5/*fs*/ = _V11;
 _V12/*getter*/ = ((function(f){
-promiseland.registerRemote("server", "cae0507e04a7312601e16db3b4c02736", "_V16", f, _V17/*type:var*/);
+promiseland.registerRemote("server", "cae0507e04a7312601e16db3b4c02736", "_V16", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-var _V18/*temp returnpromise*/ = new __Promise();
+var _V17/*temp returnpromise*/ = new __Promise();
 
-promiseland.remoteExec("cae0507e04a7312601e16db3b4c02736", "_V16", arguments, _V18/*temp returnpromise*/);
-return _V18/*temp returnpromise*/;
+promiseland.remoteExec("cae0507e04a7312601e16db3b4c02736", "_V16", arguments, _V17/*temp returnpromise*/);
+return _V17/*temp returnpromise*/;
 }
 };
 })(function(){

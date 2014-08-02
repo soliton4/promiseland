@@ -47,30 +47,13 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
+var __Promise = promiseland.Promise;
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "34a2b95271fad1ae02b401a78a5186a5" })){ return promiseland._getModule("34a2b95271fad1ae02b401a78a5186a5"); };
 var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "34a2b95271fad1ae02b401a78a5186a5", "module": _V1, promising: true });
 var _V11/*Callback*/;try{_V11/*Callback*/ = Callback;}catch(e){};
 var _V12/*setTimeout*/;try{_V12/*setTimeout*/ = setTimeout;}catch(e){};
-var _V36/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };

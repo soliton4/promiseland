@@ -41,8 +41,6 @@
     
     var Promise = promiseland.Promise;
     
-    var currentPromise;
-    var promiseClass = "__Promise";
     var errorMsg;
     
     var classSystem = promiseland.classSystem;
@@ -64,7 +62,7 @@
     };
     
     
-    var newPromiseStr = function(){
+    var globalNewPromiseStr = function(){
       return "new __Promise()";
     };
     
@@ -590,6 +588,11 @@
       };
       this.errors = this.common.errors;
       
+      this.newPromiseStr = function(){
+        this.common.usePromise = true;
+        return globalNewPromiseStr();
+      };
+      
       
       /* initializing type identifiers */
       
@@ -904,6 +907,11 @@
           var i;
           for (i in self.types){
             if (self.types[i]["type"] === parType1 || self.types[i]["type"] === parType2){
+              if (self.isVar(self.types[i]["type"])){
+                self.common.useClassSystem = true;
+                return "classSystem.getBuiltinType(\"var\")";
+                
+              };
               var name = i;
               if (!self.common.givenTypeNames[name]){
                 self.common.givenTypeNames[name] = self.getUniqueName() + "/*type:" + name + "*/";
@@ -934,6 +942,7 @@
             // maybe its a function type
             if (classSystem.isFunctionType(resolvedType)){
               var i;
+              self.common.useClassSystem = true;
               replace.push("(classSystem.createFunctionType({ \"return\": ");
               replace.push(self.renderType(self.getClassFromTemporaryTracked(self.getFunctionReturnType(resolvedType, parParsed), parParsed), parParsed));
               replace.push(", arguments: [");
@@ -1060,6 +1069,12 @@
         var name;
         for (name in this.usedVariables){
           if (this.usedVariables[name] === true){
+            if (name == "Promise"){
+              this.common.usePromise = true;
+            };
+            if (name == "Callback"){
+              this.common.useCallback = true;
+            };
             res.push("var " + this.getVariableName(name) + ";");
             res.push("try{");
             res.push(this.getVariableName(name));
@@ -1069,14 +1084,14 @@
           };
         };
         
-        res.push("var ");
-        res.push(this.renderType("var"));
-        res.push(" = __classSystem.getBuiltinType(\"var\");\n");
+        //res.push("var ");
+        //res.push(this.renderType("var"));
+        //res.push(" = classSystem.getBuiltinType(\"var\");\n");
+        //this.common.useClassSystem = true;
         
         res.push("var " + this.resultNameStr + " = (");
         res.push(this.makeCompleteStatement(functionStatement));
         res.push(")();\n");
-        //res.push("return __result;\n");
         
         return res;
       };
@@ -1155,6 +1170,8 @@
         res.push("var /*extratyperender*/ ");
         res.push(this.renderType(name));
         res.push(" = ");
+        
+        this.common.useClassSystem = true;
         
         if (par.property){
           if (par.property == "constructor"){
@@ -1554,7 +1571,7 @@
         if (runExclusive){
           funRes.push("if (!promiseland.profileHas(" + stringEncodeStr(par.frame.name.value) + ")){\n");
           if (par.promising){
-            funRes.push("var p = " + newPromiseStr() + ";\n"); // needs adjustment for tracked promises
+            funRes.push("var p = " + this.newPromiseStr() + ";\n"); // needs adjustment for tracked promises
             funRes.push("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");
             funRes.push("return p;\n");
           }else{
@@ -1902,6 +1919,7 @@
                 res.push("var ");
                 res.push(this.renderType(name));
                 res.push(" = classSystem._createProvisionalClass();\n");
+                this.common.useClassSystem = true;
                 res.push(this.getVariableName(name) + " = ");
                 res.push(this.renderType(name));
                 res.push(";\n");
@@ -1925,6 +1943,7 @@
       this._typeReadyCode = function(par){
 
         var res = this.newResult();
+        this.common.useClassSystem = true;
         res.push("classSystem.readyPromise(");
         res.push(this.renderType(par.typename));
         res.push(").then(function(parType){");
@@ -2008,6 +2027,7 @@
         
         
         if (isTyped){
+          this.common.useClassSystem = true;
           classRes.push("classSystem.createClass(");
           if (par.body.literal){
             
@@ -2134,6 +2154,7 @@
       this._resolveClassCode = function(par){
         var parsed = par.parsed;
         var res = this.newResult();
+        this.common.useClassSystem = true;
         res.push("classSystem._resolveProvisional(", parsed);
         res.push(this.renderType(par.name, parsed), parsed);
         res.push(", ", parsed);
@@ -2356,6 +2377,7 @@
             
             extraRes.push("var ");
             extraRes.push(this.renderType(name));
+            this.common.useClassSystem = true;
             extraRes.push(" = classSystem._createPromiseOfClass(");
             extraRes.push(this.renderType(typename));
             extraRes.push(");\nvar ");
@@ -2425,10 +2447,10 @@
           this.stack("catchFunctionStr");
           
           continuePromise = this.getUniqueName();
-          res.addPre("var " + continuePromise + " = " + newPromiseStr() + ";\n");
+          res.addPre("var " + continuePromise + " = " + this.newPromiseStr() + ";\n");
           
           catchPromise = this.getUniqueName();
-          res.addPre("var " + catchPromise + " = " + newPromiseStr() + ";\n");
+          res.addPre("var " + catchPromise + " = " + this.newPromiseStr() + ";\n");
           
           this.tryCatchFunctionStr = this.getUniqueName() + "/*try catch*/";
           res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".resolve(e); }; }; };\n");
@@ -2893,6 +2915,8 @@
         res.makePromising();
         res.setPromiseName(this.getUniqueName());
         
+        this.common.useRequire = true;
+        
         var tempRes = this.newResult();
         tempRes.push("__requireFun(");
         tempRes.push(this.parseExpression(parExpression));
@@ -3028,7 +3052,7 @@
         this.breakCode = promiseName + ".resolve(false); return " + promiseName + ";\n";
         this.continueCode = promiseName + ".resolve(true); return " + promiseName + ";\n";
         
-        res.push("var " + promiseName + " = " + newPromiseStr() + ";\n");
+        res.push("var " + promiseName + " = " + this.newPromiseStr() + ";\n");
         
         var outerBlock = this.newResult();
         
@@ -3068,7 +3092,7 @@
         var loopFun = this.getUniqueName();
         var loopEndPromise = this.getUniqueName();
         
-        res.push("var " + loopEndPromise + " = " + newPromiseStr() + ";\n");
+        res.push("var " + loopEndPromise + " = " + this.newPromiseStr() + ";\n");
         
         res.push("var " + loopFun + " = function(){");
         
@@ -3339,18 +3363,24 @@
         var continueCode;
         if (promising) {
           continuePromise = this.getUniqueName();
-          res.push("var " + continuePromise + " = " + newPromiseStr() + ";\n");
+          res.push("var " + continuePromise + " = " + this.newPromiseStr() + ";\n");
           continueCode = continuePromise + ".resolve();";
         };
         res.push("if(");
         res.push(this.expectTypeVar(this.parseExpression(par.test)));
         res.push("){\n");
-        if (!par.consequent || par.consequent.type != "BlockStatement"){
+        if (!par.consequent){
           this.error(par, errorMsg.unknownIfStatement);
         };
         
         var statement = this.newResult();
-        var b = par.consequent.body;
+        var b;
+        if (par.consequent.type == "BlockStatement"){
+          b = par.consequent.body;
+        }else{
+          b = [par.consequent];
+        };
+        
         b.brackets = false;
         var extraPar = {};
         if (promising){
@@ -3406,7 +3436,7 @@
           var tempValue = this.getUniqueName();
           res.addPre("var ");
           res.addPre(tempPromise);
-          res.addPre(" = " + newPromiseStr() + ";\n");
+          res.addPre(" = " + this.newPromiseStr() + ";\n");
           res.addPre("if(");
           res.addPre(this.parseExpression(par.test));
           res.addPre("){");
@@ -3477,7 +3507,7 @@
         var continueCode;
         if (promising) {
           continuePromise = this.getUniqueName();
-          res.push("var " + continuePromise + " = " + newPromiseStr() + ";\n");
+          res.push("var " + continuePromise + " = " + this.newPromiseStr() + ";\n");
           continueCode = continuePromise + ".resolve(); return;";
           
           this.stack("breakCode");
@@ -3655,7 +3685,7 @@
           var tempValue = this.getUniqueName();
           res.addPre("var ");
           res.addPre(tempPromise);
-          res.addPre(" = " + newPromiseStr() + ";\n");
+          res.addPre(" = " + this.newPromiseStr() + ";\n");
           res.addPre("var ");
           res.addPre(tempValue);
           res.addPre(" = ");
@@ -3991,6 +4021,7 @@
         promiseland.all(promises).then(function(){
           var p;
           if (dynamic){
+            self.common.useClassSystem = true;
             var res = self.newResult();
             res.push("classSystem.");
             res.push(parFun);
@@ -4039,6 +4070,7 @@
         var self = this;
         if (parType.isDynamic){
           var res = self.newResult();
+          self.common.useClassSystem = true;
           res.push("classSystem.isTrackedClass");
           res.push("(");
           res.push(self.renderType(parType));
@@ -4235,6 +4267,7 @@
       
       this.declareReturnPromiseCode = function(par){
         var res = this.newResult();
+        this.common.usePromise = true;
         
         res.push(this.callClassSystem("declareReturnPromiseCode", {
           "type": par.type,
@@ -4567,6 +4600,13 @@
         return classSystem.getFunctionArgumentCount(parType);
       };
       
+      this.isVar = function(parType){
+        if (typeof parType == "function"){
+          return classSystem.isVar(parType);
+        };
+        return false;
+      };
+      
       this.expInheritedExpression = function(par){
         if (!this.inheritedAvailable){
           this.error(par, errorMsg.inheritedOnlyInMember);
@@ -4730,11 +4770,15 @@
   }else{
     resStr += "defineFun([\"promiseland\"], function(promiseland){ var __require = requireFun;\n";
   };
-  resStr += "\n\
-  var __Promise = promiseland.Promise;\n\
-  var __modulePromise = new __Promise();\n\
-  var classSystem = promiseland.classSystem; \n\
-  var __requireFun = function(parModule){\n\
+  resStr += "\n";
+  if (par.usePromise || par.useRequire){
+    resStr += "var __Promise = promiseland.Promise;\n";
+  };
+  if (par.useClassSystem){
+    resStr += "var classSystem = promiseland.classSystem;\n";
+  };
+  if (par.useRequire){
+    resStr += "var __requireFun = function(parModule){\n\
     var returnPromise = new __Promise();\n\
     try{__require([parModule], function(m){\n\
     if (promiseland.isPromiseLandPromisingModule(m)){\n\
@@ -4744,10 +4788,8 @@
     };\n\
     });\n\
     }catch(e){returnPromise.reject(e);};\n\
-  return returnPromise.promise;};\n\
-  var __classSystem = promiseland.classSystem;\n\
-  \n\
-  \n";
+    return returnPromise.promise;};\n";
+  };
       return resStr;
     };
     
@@ -4774,15 +4816,21 @@
         return "";
       };
       var resStr = "";
-      if (par.makePromiseLandModule){
-        resStr += loaderStr({
-          promiseLandModule: true
-        });
-      }else{
-        resStr += loaderStr({});
+      
+      var loaderParam = {
+        usePromise: par.usePromise,
+        useRequire: par.useRequire,
+        useClassSystem: par.useClassSystem
       };
+      
+      if (par.makePromiseLandModule){
+        loaderParam.promiseLandModule = true;
+      };
+      resStr += loaderStr(loaderParam);
       resStr += promiselandRequireStr();
-      resStr += callbackRequireStr();
+      if (par.useCallback){
+        resStr += callbackRequireStr();
+      };
       
       resStr += "if (promiseland._hasModule({ hashStr: \"" + par.hashStr + "\" })){ return promiseland._getModule(\"" + par.hashStr + "\"); };\n";
       return resStr;
@@ -4836,28 +4884,41 @@
             res.warnings = cp.getWarnings();
             res.errors = cp.getErrors();
             
-            resStr += createHeader({
-              makePromiseLandModule: makePromiseLandModule,
-              hashStr: hashStr
-            });
+            
+            var mainPartStr = "";
             
             if (_pureCode){
               resStr = programStr;
-            }else if (cp.programPromiseStr){
-              // promising module
-              resStr += "var " + cp.programPromiseStr + " = " + newPromiseStr() + ";\n";
-              resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
-              resStr += programStr;
-              resStr += ";\nreturn " + cp.programPromiseStr;
+              
             }else{
-              resStr += programStr;
-              resStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
-              resStr += "return " + cp.resultNameStr + ";\n";
+              if (cp.programPromiseStr){
+                // promising module
+                mainPartStr += "var " + cp.programPromiseStr + " = " + cp.newPromiseStr() + ";\n";
+                mainPartStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.programPromiseStr + ", promising: true });\n";
+                mainPartStr += programStr;
+                mainPartStr += ";\nreturn " + cp.programPromiseStr;
+              }else{
+                mainPartStr += programStr;
+                mainPartStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
+                mainPartStr += "return " + cp.resultNameStr + ";\n";
+              };
+
+              resStr += createHeader({
+                makePromiseLandModule: makePromiseLandModule,
+                hashStr: hashStr,
+                usePromise: cp.common.usePromise,
+                useRequire: cp.common.useRequire,
+                useCallback: cp.common.useCallback,
+                useClassSystem: cp.common.useClassSystem
+              });
+
+              resStr += mainPartStr;
+
+              resStr += createFooter({
+                makePromiseLandModule: makePromiseLandModule
+              });
+              
             };
-            
-            resStr += createFooter({
-              makePromiseLandModule: makePromiseLandModule
-            });
           }else{
             this.error(parsed, errorMsg.unknownType);
           };

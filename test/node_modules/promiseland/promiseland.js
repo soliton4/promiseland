@@ -79,7 +79,7 @@
     
   };
   
-  defineFun(["./Chainable", "./Tracker"], function(ChainableModule, TrackerModule){
+  defineFun(["./Chainable", "./Tracker", "./Promise"], function(ChainableModule, TrackerModule, PromiseModule){
   //defineFun([], function(ChainableModule){
     
     var require = requireFun;
@@ -97,7 +97,7 @@
     
     // main promise implementation
     // ------------------------------------------------------------------------------------------------------------------------------
-    var Promise = function(){
+    var Promise; /* = function(){
       
       var thenAr = [];
       var elseAr = [];
@@ -162,7 +162,7 @@
       };
       /*this.promise = {
         then: this.then
-      };*/
+      };* /
       this.promise = this.then;
       /* so this should be possible
         var p = Promise();
@@ -170,9 +170,9 @@
         ps(thenfun...);
         //alternative:
         ps.then(thenfun...); // so the thenFun is a promise itself;
-      */
+      * /
       this.then.then = this.then;
-    };
+    };*/
     
     
     // tracked Promise
@@ -611,7 +611,7 @@
         syncData.connections.push(connection);
         
         if (!transferId){
-          transferId = profilenameStr + (nextTranseferId++)
+          transferId = profilenameStr + (nextTranseferId++);
         };
         var entry = {
           transferId: transferId,
@@ -1188,6 +1188,12 @@
     };
     
     var internals = {};
+    
+    if (PromiseModule){
+      Promise = PromiseModule(promiseland, internals);
+      
+    };
+
     
     
     
