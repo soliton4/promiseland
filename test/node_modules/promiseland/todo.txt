@@ -1,3 +1,0 @@
-- adept codemirror mode for line breaking strings
-- hp widget auto scroll
-- write test app for code anywhere feature

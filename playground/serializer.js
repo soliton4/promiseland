@@ -47,28 +47,9 @@
   
 defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "a6076e949f2f20c5de497d86852c849d" })){ return promiseland._getModule("a6076e949f2f20c5de497d86852c849d"); };
 var _V8/*undefined*/;try{_V8/*undefined*/ = undefined;}catch(e){};
 var _V9/*stringifyStr*/;try{_V9/*stringifyStr*/ = stringifyStr;}catch(e){};
-var _V12/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*complete*/;
@@ -93,7 +74,7 @@ case _V8/*undefined*/:
 _V5/*resStr*/ += "undefined";;
 break;;
 default:
-switch (typeof_V7/*o*/){
+switch (typeof _V7/*o*/){
 case "number":
 _V5/*resStr*/ += _V7/*o*/;;
 break;;
@@ -114,7 +95,7 @@ _V5/*resStr*/ += "}";;
 break;;
 default:
 throw {"id": 1301,
-"msg": (("type " + typeof_V7/*o*/) + " can not be serialized")};
+"msg": (("type " + typeof _V7/*o*/) + " can not be serialized")};
 }
 ;
 ;
@@ -130,7 +111,6 @@ _V11/*res*/ = _V6/*_run*/(_V3/*original*/);
 });
 ;
 })();
-promiseland._registerModule({ hashStr: "a6076e949f2f20c5de497d86852c849d", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

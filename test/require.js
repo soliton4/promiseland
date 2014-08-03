@@ -47,8 +47,10 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-var __Promise = promiseland.Promise;
-var __requireFun = function(parModule){
+  var __Promise = promiseland.Promise;
+  var __modulePromise = new __Promise();
+  var classSystem = promiseland.classSystem; 
+  var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
     if (promiseland.isPromiseLandPromisingModule(m)){
@@ -58,10 +60,15 @@ var __requireFun = function(parModule){
     };
     });
     }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
+  return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
+  
+  
+var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "120f35771d17e2b072db758ac8954cbf" })){ return promiseland._getModule("120f35771d17e2b072db758ac8954cbf"); };
 var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "120f35771d17e2b072db758ac8954cbf", "module": _V1, promising: true });
+var _V7/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };

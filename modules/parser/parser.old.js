@@ -95,6 +95,9 @@
       if (typeof par == "string"){
         return par;
       };
+      if (par.type == "Literal"){
+        return par.value;
+      };
       return par.name;
     };
     
@@ -2648,6 +2651,9 @@
           case "ConnectExpression":
             return this.connectExpression(value);
             
+          case "ContinueStatement":
+            return this.expContinueStatement(value);
+            
           case "DebuggerStatement":
             return this.expDebuggerStatement(value);
             
@@ -3391,13 +3397,13 @@
         
         if (par.alternate){
           res.push("\n}else{\n");
-          if (par.alternate.type != "BlockStatement"){
-            this.error(par, errorMsg.unknownElseStatement);
-            return "";
-          };
           
           statement = this.newResult();
-          b = par.alternate.body;
+          if (par.alternate.type == "BlockStatement"){
+            b = par.alternate.body;
+          }else{
+            b = [par.alternate];
+          };
           b.brackets = false;
           extraPar = {};
           if (promising){
@@ -3411,6 +3417,7 @@
           statement = this.newResult();
           statement.push(continueCode);
           res.push(this.makeCompleteStatement(statement));
+          
         };
         res.push("}");
         if (promising){
@@ -3648,7 +3655,7 @@
         return res;
       };
       
-      this.expBreakStatement = function(par){
+      this.expBreakStatement = function(parParsed){
         //{type: "BreakStatement", label: null, line: 12, column: 9, offset: 176}
         var res = this.newResult();
         if (this.breakCode){
@@ -3659,6 +3666,18 @@
         res.setType(statementType);
         return res;
       };
+      
+      this.expContinueStatement = function(parParsed){
+        //{type: "ContinueStatement", label: null, line: 12, column: 9, offset: 176}
+        var res = this.newResult();
+        if (this.continueCode){
+          res.push(this.continueCode);
+        }else{
+          res.push("continue;");
+        };
+        res.setType(statementType);
+        return res;
+      }
       
       /* 
         *x || *y -> special case
@@ -4773,6 +4792,7 @@
   resStr += "\n";
   if (par.usePromise || par.useRequire){
     resStr += "var __Promise = promiseland.Promise;\n";
+    resStr += "var Promise = promiseland.Promise;\n";
   };
   if (par.useClassSystem){
     resStr += "var classSystem = promiseland.classSystem;\n";
@@ -4899,7 +4919,9 @@
                 mainPartStr += ";\nreturn " + cp.programPromiseStr;
               }else{
                 mainPartStr += programStr;
-                mainPartStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
+                // no need to register non promising modules
+                // #requireMagic
+                //mainPartStr += "promiseland._registerModule({ hashStr: \"" + hashStr + "\", \"module\": " + cp.resultNameStr + ", promising: false });\n";
                 mainPartStr += "return " + cp.resultNameStr + ";\n";
               };
 

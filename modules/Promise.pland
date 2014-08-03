@@ -82,5 +82,73 @@
 
 promiseland.Promise = Promise;
 
+
+    var all = function(promisesAr){
+      var res = new Promise();
+      var resAr = promisesAr ? promisesAr.slice() : [];
+      
+      var check = function(){
+        if (cnt){
+          return;
+        };
+        res.resolve(resAr);
+      };
+      var cnt = 1;
+      
+      var thenFun = function(parI){
+        return function(r){
+          resAr[parI] = r;
+          --cnt;
+          check();
+        };
+      };
+      
+      var i = 0;
+      var l = resAr.length;
+      for (i; i < l; ++i){
+        ++cnt;
+        resAr[i].then(thenFun(i));
+      };
+      
+      --cnt;
+      
+      check();
+      
+      return res;
+    };
+
+promiseland.all = all;
+
+
+    var Callback = function(){
+      var promise = new Promise();
+      var callback = function(){
+        promise.resolve(arguments);
+      };
+      callback.promise = promise.promise;
+      callback.callback = callback;
+      return callback;
+    };
+
+promiseland.Callback = Callback;
+
+
+      // for future use
+      promiseland.getPromise = function(par){
+        return par;
+      };
+      
+      // to import promisies from outside
+      promiseland.importPromise = function(par){
+        var p = new Promise();
+        par.then(function(res){
+          p.resolve(res);
+        }, function(rea){
+          p.reject(rea);
+        });
+        return p.promise;
+      };
+
+
 return Promise;
 

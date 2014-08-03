@@ -47,27 +47,8 @@
   
 defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "5e5cc3e1ae5887d33ab636a7afdd16cb" })){ return promiseland._getModule("5e5cc3e1ae5887d33ab636a7afdd16cb"); };
 var _V16/*undefined*/;try{_V16/*undefined*/ = undefined;}catch(e){};
-var _V30/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 ;
@@ -158,7 +139,7 @@ _V13/*next*/["newPrev"](_V14/*prev*/);;
 });
 _V20/*len*/ = _V12/*t*/["quickCon"]();
 if(_V6/*first*/){
-if(((_V20/*len*/ && (_V20/*len*/ < _V4/*bestLen*/)) || !_V4/*bestLen*/)){
+if(((_V20/*len*/ && (_V20/*len*/ < _V4/*bestLen*/)) || ! _V4/*bestLen*/)){
 _V4/*bestLen*/ = _V20/*len*/;;
 _V6/*first*/["newPrev"](_V10/*entry*/);;
 _V13/*next*/ = _V6/*first*/;;
@@ -202,7 +183,7 @@ _V22/*checkFun*/();;
 _V22/*checkFun*/ = (function(){
 var _V24/*f*/;
 ;
-if(!_V23/*getBest*/()){
+if(! _V23/*getBest*/()){
 _V24/*f*/ = _V2/*destroyFun*/;
 _V2/*destroyFun*/ = (function(){
 ;
@@ -233,7 +214,7 @@ _V3/*curToken*/ = {};;
 if(_V6/*first*/){
 _V25/*b*/ = _V6/*first*/["getCon"](_V3/*curToken*/);
 if(_V25/*b*/){
-if(!_V18/*token*/){
+if(! _V18/*token*/){
 _V4/*bestLen*/ = _V25/*b*/;;
 };
 ;
@@ -245,7 +226,7 @@ _V27/*tempBestLen*/ = 0;
 _V28/*tempBest*/;
 while(_V26/*iterator*/){
 {_V25/*b*/ = _V26/*iterator*/["getCon"](_V3/*curToken*/);
-if(((_V25/*b*/ && (_V25/*b*/ < _V27/*tempBestLen*/)) || !_V27/*tempBestLen*/)){
+if(((_V25/*b*/ && (_V25/*b*/ < _V27/*tempBestLen*/)) || ! _V27/*tempBestLen*/)){
 _V27/*tempBestLen*/ = _V25/*b*/;;
 _V28/*tempBest*/ = _V26/*iterator*/;;
 };
@@ -254,7 +235,7 @@ _V26/*iterator*/ = _V26/*iterator*/["getNext"]();;
 }};
 ;
 if(_V27/*tempBestLen*/){
-if(!_V18/*token*/){
+if(! _V18/*token*/){
 _V9/*bringFront*/(_V28/*tempBest*/);;
 _V4/*bestLen*/ = _V27/*tempBestLen*/;;
 };
@@ -297,7 +278,7 @@ return;;
 };
 ;
 _V21/*done*/ = true;;
-if(!--_V8/*rootCnt*/){
+if(! --_V8/*rootCnt*/){
 _V22/*checkFun*/({});;
 };
 ;
@@ -313,7 +294,6 @@ return _V11/*con*/(_V12/*t*/);;
 });;
 ;
 })();
-promiseland._registerModule({ hashStr: "5e5cc3e1ae5887d33ab636a7afdd16cb", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

@@ -47,11 +47,28 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-var __Promise = promiseland.Promise;
+  var __Promise = promiseland.Promise;
+  var __modulePromise = new __Promise();
+  var classSystem = promiseland.classSystem; 
+  var __requireFun = function(parModule){
+    var returnPromise = new __Promise();
+    try{__require([parModule], function(m){
+    if (promiseland.isPromiseLandPromisingModule(m)){
+      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+    }else{
+      returnPromise.resolve(m);
+    };
+    });
+    }catch(e){returnPromise.reject(e);};
+  return returnPromise.promise;};
+  var __classSystem = promiseland.classSystem;
+  
+  
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "9c6570a898dcb766ee6ffe5c83918b6e" })){ return promiseland._getModule("9c6570a898dcb766ee6ffe5c83918b6e"); };
 var _V9/*Callback*/;try{_V9/*Callback*/ = Callback;}catch(e){};
 var _V10/*setTimeout*/;try{_V10/*setTimeout*/ = setTimeout;}catch(e){};
+var _V27/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*somefun*/;

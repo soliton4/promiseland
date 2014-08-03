@@ -1,180 +1,28 @@
-// promiseLand
-//
-// Copyright Matthias Behrens 2014
-//
-//
-// promiseLand is a very promising Language
-//
-//
-// licence lgpl
+<{__promiseLandModule: true}>;
+
+/* 
+  class system
+  everything type safety related
+  highly interconnects with the other modules
+*/
+
+// import from other modules
+var getModuleData;
+((){
+  getModuleData = (*extra.moduleSystemPs).getModuleData;
+})();
+
+var Tracker;
+((){
+  Tracker = (*extra.TrackerPs).Tracker;
+})();
+var Chainable;
+((){
+  Chainable = (*extra.ChainablePs).Chainable;
+})();
 
 
-(function(){
-  var defineFun;
-  var requireFun;
-  
-  if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    console.log("commonjs");
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
-      };
-      callback.apply(callback, args);
-    };
-    defineFun = function(requireAr, callback){
-      requireFun(requireAr, function(){
-        module.exports = callback.apply(callback, arguments);
-      });
-    };
-    
-  }else if (typeof define == "function" && define.amd){ // AMD
-    console.log("amd");
-    var _define = define;
-    requireFun = require;
-    
-    defineFun = function(par1, par2){
-      if (par1 instanceof Array){
-        par1.unshift("require");
-      }else{
-        par2 = par1;
-        par1 = ["require"];
-      };
-      _define(par1, function(){
-        requireFun = arguments[0];
-        var args = [];
-        for (var i = 1; i < arguments.length; ++i){
-          args.push(arguments[i]);
-        };
-        return par2.apply(null, args);
-      });
-    };
-    requireFun = require;
-    
-  }else{ // Plain browser env
-    console.log("plain browser mode");
-    requireFun = function(modulesAr, callback){
-      if (modulesAr && modulesAr.length){
-        throw {
-          msg: "no module loader available"
-        };
-      };
-      callback.apply(callback, []);
-    };
-    defineFun = function(requireAr, callback){
-      requireFun(requireAr, function(){
-        var originalPromiseLand = this["promiseland"];
-        this["promiseland"] = callback.apply(callback, arguments);
-        if (originalPromiseLand){
-          for (var i in originalPromiseLand){
-            if (this["promiseland"][i] === undefined){
-              this["promiseland"][i] = originalPromiseLand[i];
-            };
-          };
-        };
-      });
-    };
-    
-  };
-  
-  defineFun(["./Chainable", "./Tracker", "./Promise"], function(ChainableModule, TrackerModule, PromiseModule){
-  //defineFun([], function(ChainableModule){
-    
-    var require = requireFun;
-    var promiseland;
-    
-    var errorMsg;
-    
-    
-    // extra modules
-    
-    var Chainable;
-    var Tracker;
-    
-    
-    
-    // main promise implementation
-    // ------------------------------------------------------------------------------------------------------------------------------
-    var Promise; /* = function(){
-      
-      var thenAr = [];
-      var elseAr = [];
-      
-      var thenFun = function(parThenFun, parElseFun){
-        if (parThenFun){
-          thenAr.push(parThenFun);
-        };
-        if (parElseFun){
-          elseAr.push(parElseFun);
-        };
-        //return returnPromise;
-      };
-      
-      this.resolve = function(value){
-        thenFun = function(parThenFun){
-          try{
-            parThenFun(value);
-          }catch(e){
-            // maybe we are ignoring to much here, lets check later
-          };
-        };
-        if (!thenAr) return;
-        var i = 0;
-        var l = thenAr.length;
-        for (i; i < l; ++i){
-          try{
-            thenAr[i](value);
-          }catch(e){
-            // will those errors ocur? if so what do we do with them?
-          }
-        };
-        thenAr = undefined; // why not delete?
-        elseAr = undefined;
-      };
-      this.reject = function(value){
-        thenFun = function(u, parElseFun){
-          if(parElseFun){
-            try{
-              parElseFun(value);
-            }catch(e){
-              // maybe we are ignoring to much here, lets check later
-            };
-          };
-        };
-        if (!elseAr) return;
-        var i = 0;
-        var l = elseAr.length;
-        for (i; i < l; ++i){
-          try{
-            elseAr[i](value);
-          }catch(e){
-            // will those errors ocur? if so what do we do with them?
-          }
-        };
-        thenAr = undefined; // why not delete?
-        elseAr = undefined;
-      };
-      
-      this.then = function(par1, par2){
-        thenFun(par1, par2);
-      };
-      /*this.promise = {
-        then: this.then
-      };* /
-      this.promise = this.then;
-      /* so this should be possible
-        var p = Promise();
-        var ps = p.then;
-        ps(thenfun...);
-        //alternative:
-        ps.then(thenfun...); // so the thenFun is a promise itself;
-      * /
-      this.then.then = this.then;
-    };*/
-    
-    
+
     // tracked Promise
     // for internal use to create tracked promises of tracked classes
     var TrackedPromise = function(parTrackFun){
@@ -329,879 +177,6 @@
     };
     
     
-    
-    var Callback = function(){
-      var promise = new Promise();
-      var callback = function(){
-        promise.resolve(arguments);
-      };
-      callback.promise = promise.promise;
-      callback.callback = callback;
-      return callback;
-    };
-    
-    
-    
-    
-    
-    //Promise = Promise;
-    
-    
-    /*var functionPromise = function(promise){
-      
-      var f = function(thenFun, elseFun){
-        promise.then(thenFun, elseFun);
-      };
-      f.then = promise.then;
-      return f;
-    };*/
-    
-    var _parserPs;
-    
-    var modules = {};
-    var moduleData = {};
-    
-    var setable = {
-      profile: true
-    };
-    
-    var config = {
-      
-    };
-    
-    var profiles = {};
-    
-    var _emitFun = function(parEventStr, parData){
-        if (this._on[parEventStr]){
-          var i = 0;
-          var l = this._on[parEventStr].length;
-          for (i; i < l; ++i){
-            try{
-              this._on[parEventStr][i](parData);
-            }catch(e){};
-          };
-        };
-      };
-    var _onFun = function(parEventStr, parFun){
-        if (this._on[parEventStr]){
-          this._on[parEventStr].push(parFun);
-        };
-      };
-    
-    // base classes
-    var Profile = function(){
-      this._on = {
-        "connection": []
-      };
-    };
-    Profile.prototype = {
-      // return the name of the profile
-      name: function(){
-        
-      },
-      
-      emit: _emitFun,
-      
-      // return Connection object
-      find: function(parId /*optional*/){
-        
-      },
-      
-      // return array of provided Profiles
-      /*providesProfiles: function(){
-        
-      },*/
-      
-      /* events:
-        "connection":   a new connection was initiated - function(parConnection){}
-      */
-      on: _onFun
-    };
-    
-    var Connection = function(){
-      this._on = {
-        "data": [],
-        "disconnect": []
-      };
-    };
-    Connection.prototype = {
-      /* send string to counterpart object on the other frame */
-      send: function(parStr){
-        
-      },
-      
-      emit: _emitFun,
-      
-      /* events:
-        "data":        data arrives - function(parDataStr){}
-        "disconnect":  connection got permanently disconnected
-      */
-      on: _onFun
-    };
-    
-    var sendRespond = function(par, data){
-      
-    };
-    
-    var remoteExecRequest = function(connection, par){
-      console.log("remote");
-      try{
-      var data = par.data;
-      
-      var moduleData = getModuleData(data.hashStr);
-      
-      
-      var funEntry = moduleData.functions[data.nameStr];
-      //console.log(funEntry);
-      
-      if (promiseland.profileHas(funEntry.profile)){
-        
-        var funType = funEntry.funType;
-        var resultType = classSystem.getFunctionReturnType(funType);
-        var isVar = true;
-        if (!classSystem.isVar(resultType)){
-          isVar = false;
-        };
-        var resultPs = new Promise();
-        
-        // to be reused for all reject cases
-        var tempRejectFun = function(reason){
-          resultPs.reject(reason);
-        };
-        
-        var funResult = funEntry.fun.apply(undefined, data.args);
-        
-        // var case
-        if (isVar){
-          console.log("isvar true");
-          funResult.then(function(parResult){
-            resultPs.resolve({
-              isVar: true,
-              data: parResult
-            });
-          }, tempRejectFun);
-          return resultPs;
-        };
-        
-        // typed case
-        
-        if (!classSystem.isTemporaryTrackedClass(resultType)){
-          console.log("not temp checked");
-          // result must be a temporary tracked promise
-          resultPs.reject(errorMsg.notASyncableResponse);
-          return;
-        };
-        
-
-        var promiseResult = funResult[0];
-        var promiseResultTrack = funResult[1];
-        
-        var promiseType = classSystem.getClassFromTemporaryTracked(resultType);
-        if (!classSystem.isPromiseOfClass(promiseType)){
-          // result must be a promsie
-          console.log("not promise");
-          resultPs.reject(errorMsg.notASyncableResponse);
-          promiseResultTrack(); // untrack result
-          return;
-        };
-        
-        console.log("waiting for result");
-        console.log(promiseResult);
-        promiseResult.then(function(parResult){
-          console.log("we got a result");
-          
-          // we dont need the promise itself any longer
-          promiseResultTrack(); // untrack promise itself
-          
-          // parResult is by definition a temporary tracked
-          var realResult = parResult[0];
-          var trackResult = parResult[1];
-          
-          if (!realResult){
-            // emptyresult
-            trackResult();
-            resultPs.resolve();
-            return;
-          };
-          
-          // sync object
-          var internalId = classSystem.getInternalId(realResult);
-          if (connection.hasObject(internalId)){
-            resultPs.resolve({ // just send the id - the other frame knows what to do
-              id: connection.getTransferId(internalId)
-            });
-            trackResult(); // untrack
-            return;
-          };
-          
-          console.log("generating syncRequestData");
-          var syncRequestData = classSystem.getSyncRequestData(realResult, connection);
-          console.log(syncRequestData);
-          resultPs.resolve(syncRequestData);
-          trackResult(); // untrack // getSyncRequestData must make its own track entry
-          
-        }, function(reason){
-          console.log("we got a rejection");
-          console.log(reason);
-          resultPs.reject(reason);
-          promiseResultTrack(); // untrack promise itself
-        });
-
-        return resultPs;
-      };
-      }catch(e){
-        console.log("error");
-        console.log(e);
-        var rejectPs = new Promise();
-        rejectPs.reject(e);
-        return rejectPs;
-        
-      };
-
-      var rejectPs = new Promise();
-      rejectPs.reject(errorMsg.frameNotAvailable);
-      return rejectPs;
-    };
-    
-    var maxId = 10000000;
-    
-    var prepConnection = function(connection, profile){
-      var buffer = {};
-      var expectid = 1;
-      var nextId = 1;
-      var requests = {};
-      
-      var profilenameStr = "" + profile.name();
-      
-      var sendData = function(data){
-        var id = nextId;
-        nextId++;
-        if (nextId > maxId){
-          nextId = 1;
-        };
-        data.id = id;
-        connection.send(JSON.stringify(data));
-        return id;
-      };
-      
-      var internalObjectMap = {};
-      var transferIdMap = {};
-      var nextTranseferId = 1;
-      
-      connection.hasObject = function(parId){
-        if (!internalObjects[parId]){
-          return false;
-        };
-        if (internalObjectMap[parId]){
-          return true;
-        };
-        return false;
-      };
-      connection.getTransferId = function(parId){
-        return internalObjectMap[parId].transferId;
-      };
-      connection.newTransferId = function(parId, parTrack, transferId){
-        if (internalObjectMap[parId]){
-          if (parTrack){
-            parTrack();
-          };
-          return internalObjectMap[parId].transferId;
-        };
-        var syncData = classSystem.getSyncData(internalObjects[parId]);
-        syncData.connections.push(connection);
-        
-        if (!transferId){
-          transferId = profilenameStr + (nextTranseferId++);
-        };
-        var entry = {
-          transferId: transferId,
-          internalId: parId,
-          track: parTrack
-        };
-        internalObjectMap[parId] = entry;
-        transferIdMap[entry.transferId] = entry;
-        return entry.transferId;
-      };
-      connection.removeSynced = function(parId){
-        if (!internalObjectMap[parId]){
-          return;
-        };
-        var entry = internalObjectMap[parId];
-        var transferId = entry.transferId;
-        internalObjectMap[entry.internalId] = undefined;
-        transferIdMap[entry.transferId] = undefined;
-        if (entry.track){
-          entry.track();
-        };
-        connection.createMsg({
-          type: "unsync",
-          transferId: transferId
-        });
-        // remove connection from syncdata
-        var syncData = classSystem.getSyncData(internalObjectMap[parId]);
-        var i = 0;
-        var newConAr = [];
-        for (i = 0; i < syncData.connections.length; ++i){
-          var c = syncData.connections[i];
-          if (c !== connection){
-            newConAr.push(c);
-          };
-        };
-        syncData.connections = newConAr;
-      };
-      connection.unsync = function(parTransferId){
-        var entry = transferIdMap[parTransferId];
-        internalObjectMap[entry.internalId] = undefined;
-        transferIdMap[entry.transferId] = undefined;
-        if (entry.track){
-          entry.track();
-        };
-      };
-      
-      connection.syncValue = function(par){
-        /*{
-            transferId: connection.getTransferId(syncData.getInternalId()),
-            memberIdx: memberIdx,
-            value: value
-          });*/
-        connection.createMsg({
-          type: "syncValue",
-          transferId: par.transferId,
-          memberIdx: par.memberIdx,
-          value: par.value
-        });
-        
-      };
-      
-      connection.recieveSyncValue = function(par){
-        var entry = transferIdMap[par.transferId];
-        var instance = internalObjects[entry.internalId];
-        if (!instance){
-          return;
-        };
-        instance[par.memberIdx] = par.value;
-      };
-      
-      
-      var rejectFun = function(parId){
-        return function(parReason){
-          sendData({
-            response: parId
-            , reject: true
-            , data: parReason
-          });
-        };
-      };
-      var resolveFun = function(parId){
-        return function(parResult){
-          sendData({
-            response: parId
-            , resolve: true
-            , data: parResult
-          });
-        };
-      };
-      var respondError = function(parId, parError){
-        return (rejectFun(parId))(parError);
-      };
-      
-      var queue = function(par){
-        if (par.id == expectid){
-          ++expectid;
-          if (expectid > maxId){
-            expectid = 1;
-          };
-          if (par.request){
-            if (par.data && par.data.type == "remoteexec"){
-              var p = remoteExecRequest(connection, par);
-              p.then(resolveFun(par.id), rejectFun(par.id));
-            }else{
-              respondError(par.id, {
-                msg: "unknownRequest"
-              });
-            };
-          }else if (par.msg){
-            if (par.data && par.data.type == "unsync"){
-              connection.unsync(par.data.transferId);
-            };
-            if (par.data && par.data.type == "syncValue"){
-              connection.recieveSyncValue(par.data);
-            };
-            
-          }else if (par.response !== undefined){
-            var ps = requests[par.response];
-            if (ps){
-              delete requests[par.response];
-              if (par.resolve){
-                ps.resolve(par.data);
-              }else{
-                ps.reject(par.data);
-              };
-            };
-          };
-        }else{
-          buffer[par.id] = par;
-        };
-        var b = buffer[expectid];
-        if (b){
-          delete buffer[expectid];
-          queue(b);
-        };
-      };
-      
-      connection.on("data", function(dataStr){
-        var obj = JSON.parse(dataStr);
-        queue(obj);
-      });
-      
-      connection.on("disconnect", function(dataStr){
-        var e;
-        for (e in internalObjectMap){
-          var entry = internalObjectMap[e];
-          if (entry.track){
-            entry.track();
-          };
-        };
-        internalObjectMap = {};
-        transferIdMap = {};
-      });
-      
-      connection.createRequest = function(data){
-        var ps = new Promise();
-        var id = sendData({
-          request: true
-          , data: data
-        });
-        requests[id] = ps;
-        return ps.promise;
-      };
-      
-      connection.createMsg = function(data){
-        var id = sendData({
-          msg: true
-          , data: data
-        });
-        return;
-      };
-      
-    };
-    
-    /*
-      par: {
-          conection: connection,
-          hashStr: hashStr,
-          nameStr: nameStr,
-          args: args,
-          promise: promise
-        }
-    */
-    var createRemoteExecRequest = function(par){
-      var connection = par.connection;
-      var args = [];
-      if (par.args && par.args.length){
-        var i = 0;
-        for (i = 0; i < par.args.length; ++i){
-          args.push(par.args[i]);
-        };
-      };
-
-      var funType = par.funType;
-
-      var resultType = classSystem.getFunctionReturnType(funType);
-      var isVar = true;
-      if (!classSystem.isVar(resultType)){
-        isVar = false;
-      };
-
-      var ps = connection.createRequest({
-        "type": "remoteexec",
-        hashStr: par.hashStr,
-        nameStr: par.nameStr,
-        args: args
-      });
-
-      ps.then(function(res){
-        if (isVar && res.isVar){
-          par.promise.resolve(res.data);
-        };
-        if (isVar || res.isVar){
-          par.promise.reject(errorMsg.typeMissmatch);
-          // needs check for tracking
-        };
-
-        // typed case
-        if (!classSystem.isTemporaryTrackedClass(resultType)){
-          // result must be a temporary tracked promise
-          par.promise.reject(errorMsg.notASyncableResponse);
-          return;
-        };
-        var promiseType = classSystem.getClassFromTemporaryTracked(resultType);
-        if (!classSystem.isPromiseOfClass(promiseType)){
-          // result must be a promsie
-          par.promise.reject(errorMsg.notASyncableResponse);
-          return;
-        };
-        
-        // empty result
-        if (!res){
-          par.promise.resolve();
-          return;
-        };
-        
-        // we should have this obj already
-        if (res.id){
-          connection.getObjectByTransferId(res.id).then(function(parObj){
-            par.promise.resolve(parObj);
-          }, function(reason){
-            par.promise.reject(reason);
-          });
-          return;
-        };
-        
-        // a new obj to track
-        var obj = classSystem.getObjFromSyncData(res, connection);
-        par.promise.resolve(obj);
-        if (obj){
-          obj[1]();
-        };
-
-      }, function(res){
-        par.promise.reject(res);
-      });
-    };
-
-
-    var findProfile = function(profileNameStr){
-      return profiles[profileNameStr];
-    };
-
-    var _getParser = function(){
-      if (_parserPs){
-        return _parserPs;
-      };
-      var p = new Promise();
-      _parserPs = p.promise;
-      try{
-        require(["./parser"], function(parser){
-          p.resolve(parser);
-        });
-      }catch(e){
-        p.reject(e);
-      };
-      return _parserPs;
-    };
-    
-    var mixinPrototype = function(parProto, parMixin, inheritedObject, gotit){
-      if (!parMixin || !parMixin.prototype){
-        return;
-      };
-      if (!gotit){
-        gotit = {};
-      };
-      var i;
-      var proto = parMixin.prototype;
-      for (i in proto){
-        if (i === "prototype" || gotit[i]){
-          continue;
-        };
-        parProto[i] = proto[i];
-        inheritedObject[i] = parProto[i];
-        gotit[i] = true;
-      };
-      if (parMixin.prototype){
-        mixinPrototype(parProto, parMixin.prototype, inheritedObject, gotit);
-      };
-      
-    };
-    
-    var getProperty = function(par, parProperty, parDefault){
-      if (par.hasOwnProperty(parProperty)){
-        return par[parProperty];
-      };
-      return parDefault;
-    };
-    
-    var createClass = function(par, parExtends, inheritedObject){
-      var constructorFun = getProperty(par, "constructor", function(){});
-      var proto = {};
-      var i;
-      var l;
-      
-      if (parExtends){
-        var realConstructorFun = constructorFun;
-        
-        if (parExtends instanceof Array){
-          l = parExtends.length;
-          var extendConstructors = [];
-          for (i = 0; i < l; ++i){
-            mixinPrototype(proto, parExtends[i], inheritedObject);
-            if (typeof parExtends[i] === "function"){
-              extendConstructors.push(parExtends[i]);
-            };
-          };
-          var cl = extendConstructors.length;
-          if (cl){
-            constructorFun = function(){
-              var i;
-              for (i = 0; i < cl; ++i){
-                extendConstructors[i].apply(this, arguments);
-              };
-              return realConstructorFun.apply(this, arguments);
-            };
-          };
-        }else{
-          mixinPrototype(proto, parExtends, inheritedObject);
-          if (typeof parExtends === "function"){
-            constructorFun = function(){
-              parExtends.apply(this, arguments);
-              return realConstructorFun.apply(this, arguments);
-            };
-          };
-        };
-        
-      };
-      
-      for (i in par){
-        proto[i] = par[i];
-      };
-      constructorFun.prototype = proto;
-      return constructorFun;
-    };
-    
-    
-    var all = function(promisesAr){
-      var res = new Promise();
-      resAr = promisesAr ? promisesAr.slice() : [];
-      
-      var check = function(){
-        if (cnt){
-          return;
-        };
-        res.resolve(resAr);
-      };
-      var cnt = 1;
-      
-      var thenFun = function(parI){
-        return function(r){
-          resAr[parI] = r;
-          --cnt;
-          check();
-        };
-      };
-      
-      var i = 0;
-      var l = resAr.length;
-      for (i; i < l; ++i){
-        ++cnt;
-        resAr[i].then(thenFun(i));
-      };
-      
-      --cnt;
-      
-      check();
-      
-      return res;
-    };
-    
-    
-    var ParserClass = function(par){
-      this.parse = function(parStr){
-        var p = new Promise();
-        _getParser().then(function(parser){
-          try{
-            //console.log(parser.parse);
-          parser.parse(parStr).then(function(res){
-            p.resolve(res);
-          });
-          }catch(e){
-            //console.log("reject parse");
-            //console.log(e);
-            if (!e.msg){
-              e.msg = e.message;
-            };
-            p.reject(e);
-          };
-        });
-        return p.promise;
-      };
-    };
-    
-    var getModuleData = function(parHash){
-      if (!moduleData[parHash]){
-        moduleData[parHash] = {
-          functions: {},
-          classes: {}
-        };
-      };
-      return moduleData[parHash];
-    };
-    
-    promiseland = {
-      Promise: Promise,
-      Callback: Callback,
-      Parser: ParserClass,
-      all: all,
-      
-      ProfileBaseClass: Profile,
-      ConnectionBaseClass: Connection,
-      
-      createClass: function(par, parExtends, inheritedObject){
-        return createClass(par, parExtends, inheritedObject);
-      },
-      
-      set: function(parWhat, parValue){
-        if (!setable[parWhat]){
-          return;
-        };
-        config[parWhat] = parValue;
-      }
-      , addProfile: function(parProfile){
-        if (!parProfile){
-          return;
-        };
-        if (profiles[parProfile.name()]){
-          throw {
-            code: 4,
-            msg: "profile exists"
-          };
-        };
-        profiles[parProfile.name()] = parProfile;
-        parProfile.on("connection", function(connection){
-          prepConnection(connection, parProfile);
-        });
-      }
-      , profileHas: function(profileNameStr){
-        if (config.profile === profileNameStr){
-          return true;
-        };
-        return false;
-      }
-      
-      , registerRemote: function(profileNameStr, hashStr, nameStr, fun, funType){
-        var moduleData = getModuleData(hashStr);
-        var entry = {
-          profile: profileNameStr,
-          fun: fun,
-          funType: funType
-        };
-        moduleData.functions[nameStr] = entry;
-        classSystem.definitionPromise(funType).then(function(definedFunType){
-          entry.funType = definedFunType;
-        });
-      }
-      
-      
-      , _registerModule: function(par){
-        if (this._hasModule(par.hashStr)){
-          return false;
-        };
-        modules[par.hashStr] = {
-          "promising": par["promising"],
-          "module": par["module"]
-          //functions: {}
-        };
-        return true;
-      }
-      
-      , _getModule: function(parHashStr){
-        return modules[parHashStr]["module"];
-      }
-      
-      , _hasModule: function(parHashStr){
-        if (modules[parHashStr]){
-          return true;
-        };
-        return false;
-      }
-      
-      , isPromiseLandModule: function(parM){
-        var i;
-        for (i in modules){
-          if (modules[i] && modules[i]["module"] === parM){
-            return true;
-          };
-        };
-        return false;
-      }
-      
-      , isPromiseLandPromisingModule: function(parM){
-        var i;
-        for (i in modules){
-          if (modules[i] && modules[i]["module"] === parM){
-            return modules[i].promising;
-          };
-        };
-        return false;
-      }
-      
-      // for future use
-      , getPromise: function(par){
-        return par;
-      }
-      
-      // to import promisies from outside
-      , importPromise: function(par){
-        var p = new Promise();
-        par.then(function(res){
-          p.resolve(res);
-        }, function(rea){
-          p.reject(rea);
-        });
-        return p.promise;
-      }
-      
-      , remoteExec: function(hashStr, nameStr, args, parPromise){
-        var promise = parPromise;
-        var ret = promise.promise;
-        var moduleData = getModuleData(hashStr);
-        if (!moduleData || !moduleData.functions[nameStr]){
-          promise.reject(errorMsg.missingRemoteFun);
-          return ret;
-        };
-        var entry = moduleData.functions[nameStr];
-        var profile = findProfile(entry.profile);
-        if (!profile){
-          promise.reject(errorMsg.frameNotFound);
-          return ret;
-        };
-        
-        var connection = profile.find();
-        if (!connection){
-          promise.reject({
-            code: 3
-            , msg: "no connection available"
-          });
-          return ret;
-        };
-        
-        createRemoteExecRequest({
-          connection: connection,
-          hashStr: hashStr,
-          nameStr: nameStr,
-          args: args,
-          promise: promise,
-          funType: entry.funType
-        });
-        
-        return promise.promise;
-      }
-    };
-    
-    var internals = {};
-    
-    if (PromiseModule){
-      Promise = PromiseModule(promiseland, internals);
-      
-    };
-
-    
-    
-    
-    
-    /* --------------------------------------------------------------------------------------------
-        Class System
-    */
-    
     var _ClassToken;
     
     /*
@@ -1249,7 +224,7 @@
     };
     
     var nextInternalId = 1;
-    getNewInternalId = function(){
+    var getNewInternalId = function(){
       return nextInternalId++;
     };
     var internalObjects = {};
@@ -1297,7 +272,7 @@
       if (moduleData && moduleData.classes[nameStr]){
         return moduleData.classes[nameStr].type;
       };
-    }
+    };
 
 
     var classSystem = {
@@ -1571,7 +546,7 @@
         };
         
         if (classLiteral.members){
-          i = 0;
+          var i = 0;
           for (i; i < classLiteral.members.length; ++i){
             addMember(classLiteral.members[i]);
           };
@@ -1798,7 +773,7 @@
             
             var i;
             if (classLiteral.members){
-              i = 0;
+              var i = 0;
               for (i; i < classLiteral.members.length; ++i){
                 addMember(classLiteral.members[i]);
               };
@@ -1880,6 +855,7 @@
         
         var finalPs = new Promise();
         memberPs.then(function(){
+          var i;
 
           //helperArray
           for (i = 0; i < cAr.length; ++i){
@@ -1998,7 +974,7 @@
       
       , getInternalId: function(parInstance){
         var type = parInstance[0];
-        cDef = getClass(type);
+        var cDef = getClass(type);
         if (cDef.sync){
           var syncData = parInstance[cDef.map.syncDataIdx]();
           return syncData.getInternalId();
@@ -2008,7 +984,7 @@
       
       , getSyncData: function(parInstance){
         var type = parInstance[0];
-        cDef = getClass(type);
+        var cDef = getClass(type);
         if (cDef.sync){
           return parInstance[cDef.map.syncDataIdx]();
         };
@@ -2017,7 +993,7 @@
       
       , getSyncRequestData: function(parInstance, parConnection){
         var type = parInstance[0];
-        cDef = getClass(type);
+        var cDef = getClass(type);
         if (cDef.sync){
           var syncMembers = {
             m:[]
@@ -2107,7 +1083,7 @@
           };
         };
         
-        isReady = true;
+        var isReady = true;
         
         if (self.isProvisional(cDef.return)){
           isReady = false;
@@ -2289,7 +1265,7 @@
           if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
             return runtimeError(errorMsg.typeMissmatch, par);
           };
-          return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "] = ", MAKRO_VALUE], par);
+          return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE], par);
         };
         var map = cDef.map;
         
@@ -2381,7 +1357,7 @@
           return;
         };
         var type = parInstance[0];
-        cDef = getClass(type);
+        var cDef = getClass(type);
         return parInstance[cDef.map.trackRootIdx]();
       }
       
@@ -2808,7 +1784,7 @@
     var MAKRO_CONSTRUCTOR = 12;
     
     
-    errorMsg = {
+    var errorMsg = {
       accessNotAllowd: {
         id: 200
         , msg: "access to member not allowed"
@@ -2855,37 +1831,15 @@
       },
       
       
-      missingRemoteFun: {
-        id: 801
-        , msg: "remote function not registred"
-      },
-      frameNotAvailable: {
-        id: 802,
-        msg: "requested frame not available"
-      },
-      frameNotFound: {
-        id: 803,
-        msg: "requested frame not found"
-      }
     };
     
     
     promiseland.classSystem = classSystem;
-    
-    
-    // extra modules
-    
-    if (ChainableModule){
-      Chainable = ChainableModule(promiseland, internals);
-      
-    };
-    
-    if (TrackerModule){
-      Tracker = TrackerModule(promiseland, internals);
-      
-    };
-    
-    return promiseland;
-    
-  });
-})();
+
+extra.classSystemPs.resolve({
+  classSystem: classSystem,
+  internalObjects: internalObjects
+});
+
+
+return classSystem;
