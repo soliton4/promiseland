@@ -47,26 +47,9 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
+var __Promise = promiseland.Promise;
+var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "cfd61e183b4bf6d2ea80744ad61d0e79" })){ return promiseland._getModule("cfd61e183b4bf6d2ea80744ad61d0e79"); };
-var _V6/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 ;
@@ -82,7 +65,6 @@ return _V2;
 })};;
 ;
 })();
-;promiseland._registerModule({ hashStr: "cfd61e183b4bf6d2ea80744ad61d0e79", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 });
 })();

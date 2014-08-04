@@ -1,0 +1,205 @@
+    var _stringEncodeStr = function(par){
+      var s = par.replace(new RegExp("\\\\", "g"), "\\\\");
+      s = s.replace(new RegExp("\\n", "g"), "\\n");
+      s = s.replace(new RegExp("\\r", "g"), "\\r");
+      s = s.replace(new RegExp("\\\"", "g"), "\\\"");
+      s = s.replace(new RegExp("\\u2028", "g"), "\\u2028");
+      s = s.replace(new RegExp("\\u2029", "g"), "\\u2029");
+      return s;
+    };
+    var stringEncodeStr = function(par){
+      return "\"" + _stringEncodeStr(par) + "\"";
+    };
+
+
+    /* error function */
+    var errorFun = function(par, err){
+      if (!par || !par.line){
+        throw errorMsg.internalParserInfoMissing;
+      };
+      err.line = par.line;
+      err.column = par.column;
+      throw err;
+    };
+
+
+    var errorMsg = {
+      typeExists: {
+        id: 100
+        , msg: "type already exists"
+      },
+      needsClassBodyLiteral: {
+        id: 101
+        , msg: "class types need to be defined with a literal body"
+      },
+      usedUntyped: {
+        id: 102,
+        msg: "variable already in use without type"
+      },
+      variableRedefinition: {
+        id: 103,
+        msg: "ilegal variable redefinition"
+      }, 
+      expectedVar: {
+        id: 104,
+        msg: "type missmatch: expected var"
+      },
+      typeUndeclared: {
+        id: 105,
+        msg: "type undeclared"
+      },
+      notABlockStatment: {
+        id: 106,
+        msg: "not a block statement"
+      },
+      missingDeclarations: {
+        id: 107,
+        msg: "missing Declarations"
+      },
+      functionFrameInDynamicCode: {
+        id: 108,
+        msg: "function frame is not allowed in dynamic code"
+      },
+      unknownIfStatement: {
+        id: 109,
+        msg: "unknown if statement "
+      },
+      unknownElseStatement: {
+        id: 109,
+        msg: "unknown else statement "
+      },
+      unknownPropertyAssignmentType: {
+        id: 110,
+        msg: "unknown property assignment"
+      },
+      severalProgramElements:{
+        id: 111,
+        msg: "several Program Elements"
+      },
+      variableHasNoType: {
+        id: 112,
+        msg: "variable has no type"
+      },
+      expectedCallable: {
+        id: 113,
+        msg: "expected callable expression"
+      },
+      typeLookupFailed: {
+        id: 114,
+        msg: "type lookup failed"
+      },
+      dynamicTypeCantBeDefined: {
+        id: 115,
+        msg: "dynamic type can not be defined"
+      },
+      typeRedefinition: {
+        id: 116,
+        msg: "type redefinition"
+      },
+      unresolvedType: {
+        id: 117,
+        msg: "unresolved Type"
+      },
+      inheritedOnlyInMember: {
+        id: 118,
+        msg: "inherited is only available within member functions"
+      },
+      
+      expectedMemberExpression: {
+        id: 119,
+        msg: "expected member expression"
+      },
+      noComputedMembersAllowed: {
+        id: 120,
+        msg: "no computed member allowed here"
+      },
+      unknownConnect:{
+        id: 121,
+        msg: "unknown connect"
+      },
+      returnNotAllowedHere:{
+        id: 122,
+        msg: "return not allowed here"
+      },
+      unknownCase: {
+        id: 123,
+        msg: "unknown case"
+      },
+      
+      templateSyntaxError: {
+        id: 400,
+        msg: "template syntax error"
+      },
+      
+      
+
+      internalMissingResultType: {
+        id: 1000,
+        msg: "internal: result type missing"
+      }, 
+      differentTypesInVariableDeclaration: {
+        id: 1001,
+        msg: "internal: different type in variable declaration"
+      },
+      notImplemented: {
+        id: 1002,
+        msg: "internal: not implemented"
+      },
+      internalUnknownLiteralType: {
+        id: 1003,
+        msg: "internal: unknown literal type"
+      },
+      internalMissingType: {
+        id: 1004,
+        msg: "internal: missing type"
+      },
+      unknownType: {
+        id: 1005,
+        msg: "internal: unknown script element type"
+      },
+      multipleTypeProviding: {
+        id: 1006
+        , msg: "internal: multiple types provided"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalMissingTypeProperty: {
+        id: 1007
+        , msg: "internal: missing type property"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalCantAddToStringResult: {
+        id: 1008
+        , msg: "internal: can not add to string result"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalWrongUseOfReference: {
+        id: 1009
+        , msg: "internal: wrong use of Reference"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalNegativeStringEncode: {
+        id: 1010
+        , msg: "internal: negative string encode"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalTypeHasNoName: {
+        id: 1011
+        , msg: "internal: type has no name"
+        , additional: "pls provide this error in a github issue"
+      },
+      internalParserInfoMissing: {
+        id: 1012
+        , msg: "internal: missing parser info"
+        , additional: "pls provide this error in a github issue"
+        
+      }
+      
+    };
+
+
+return {
+  errorFun: errorFun,
+  errorMsg: errorMsg,
+  _stringEncodeStr: _stringEncodeStr,
+  stringEncodeStr: stringEncodeStr
+};

@@ -2,6 +2,11 @@
 var md5 = require "./md5";
 var _parser = require "./_parser";
 
+var basics = require "./basics";
+var errorFun = basics.errorFun;
+var errorMsg = basics.errorMsg;
+var _stringEncodeStr = basics._stringEncodeStr;
+var stringEncodeStr = basics.stringEncodeStr;
     
     /* debugging flags
     */
@@ -9,8 +14,6 @@ var _parser = require "./_parser";
     var _pureCode = false;
     
     var Promise = promiseland.Promise;
-    
-    var errorMsg;
     
     var classSystem = promiseland.classSystem;
     
@@ -20,33 +23,11 @@ var _parser = require "./_parser";
     };
     var varType = classSystem.getBuiltinType("var");
     
-    /* error function */
-    var errorFun = function(par, err){
-      if (!par || !par.line){
-        throw errorMsg.internalParserInfoMissing;
-      };
-      err.line = par.line;
-      err.column = par.column;
-      throw err;
-    };
-    
     
     var globalNewPromiseStr = function(){
       return "new __Promise()";
     };
     
-    var _stringEncodeStr = function(par){
-      var s = par.replace(new RegExp("\\\\", "g"), "\\\\");
-      s = s.replace(new RegExp("\\n", "g"), "\\n");
-      s = s.replace(new RegExp("\\r", "g"), "\\r");
-      s = s.replace(new RegExp("\\\"", "g"), "\\\"");
-      s = s.replace(new RegExp("\\u2028", "g"), "\\u2028");
-      s = s.replace(new RegExp("\\u2029", "g"), "\\u2029");
-      return s;
-    };
-    var stringEncodeStr = function(par){
-      return "\"" + _stringEncodeStr(par) + "\"";
-    };
     
     var mixin = function(){
       var t = arguments[0];
@@ -199,340 +180,7 @@ var _parser = require "./_parser";
 
     */
     
-    var _Result = function(par){
-      
-      if (par.codeStr){
-        this.codeStr = par.codeStr;
-      }else{
-        this.codeAr = [];
-      };
-      
-      this._cp = par.cp;
-      
-    };
-    _Result.prototype = {
-      
-      pushType: function(par){
-        this.push(par);
-        this.setType(par.getType());
-      },
-      
-      _prepCode: function(parCode, parReference, par){
-        if (typeof parCode == "string"){
-          parCode = this.newResult({
-            codeStr: parCode,
-            reference: parReference
-          });
-        };
-        var res;
-        if (par && par.stringEncode){
-          res = this.newResult();
-          res._stringEncode = true;
-          res.push(parCode);
-          parCode = res;
-        };
-        if (par && par.dynamic){
-          res = this.newResult();
-          res._dynamic = true;
-          res.push("\" + ");
-          res.push(parCode);
-          res.push(" + \"");
-          parCode = res;
-          
-        };
-        return parCode;
-      },
-      
-      push: function(parCode, parReference, par){
-        
-        if (!this.reference){
-          this.reference = parReference;
-        };
-        
-        if (!parCode){
-          return;
-        };
-        if (parReference && typeof parReference == "boolean"){
-          errorFun(undefined, errorMsg.internalWrongUseOfReference);
-        };
-        parCode = this._prepCode(parCode, parReference, par);
-        
-        if (!this.codeAr){
-          this.error(parReference || this.reference, errorMsg.internalCantAddToStringResult);
-        };
-        
-        this.codeAr.push(parCode); // simple
-        
-        if (parCode.promising){
-          this.makePromising();
-        };
-        
-      }
-      , _iterPar: function(par){
-        if (!par){
-          par = {
-            stringEncode: 0
-          };
-        };
-        par = {
-          stringEncode: par.stringEncode || 0
-        };
-        if (this._stringEncode){
-          par.stringEncode += 1;
-        };
-        if (this._dynamic){
-          par.stringEncode -= 1;
-        };
-        return par;
-      }
-      
-      , setPromise: function(ps){
-        var self = this;
-        this.promise = ps;
-        ps.then(function(res){
-          self.replace(res);
-        });
-      }
-      , resolve: function(res){
-        this.promise.resolve(res);
-      }
-      
-      , replace: function(res){
-        if (typeof res == "string"){
-          res = this.newResult({
-            codeStr: res
-          });
-        };
-        
-        this.replacement = res;
-      }
-      
-      , getParsed: function(){
-        if (this.reference){
-          return this.reference;
-        };
-        var p;
-        if (this.preCode){
-          p = this.preCode.getParsed();
-        };
-        if (p){ return p; };
-        
-        if (this.codeAr){
-          var i = 0;
-          for (i = 0; i < this.codeAr.length; ++i){
-            p = this.codeAr[i].getParsed();
-            if (p){ return p; };
-          };
-        };
-        
-        if (this.postCode){
-          p = this.postCode.getParsed();
-        };
-        return p;
-        
-      }
-      , setParsed: function(parReference){
-        if (parReference){
-          this.reference = parReference;
-        };
-      }
-      
-      , _getPreCodeStr: function(par){
-        par = this._iterPar(par);
-        
-        var resStr = "";
-        var i;
-        /*
-            pre.pre
-            pre.code
-            code.pre
-            post.pre
-        */
-        if (this.preCode){
-          resStr += this.preCode.getPreCodeStr(par);
-          resStr += this.preCode.getCodeStr(par);
-        };
-        if (this.codeAr){
-          for (i = 0; i < this.codeAr.length; ++i){
-            resStr += this.codeAr[i].getPreCodeStr(par);
-          };
-        };
-        if (this.postCode){
-          resStr += this.postCode.getPreCodeStr(par);
-        };
-        return resStr;
-      }
-      , getPreCodeStr: function(par){
-        if (this.replacement){
-          return this.replacement.getPreCodeStr(par);
-        };
-        if (this.isStatement || this.isComplete){
-          return "";
-          
-        }else{
-          return this._getPreCodeStr(par);
-        };
-      }
-      
-      , getCodeStr: function(par){
-        if (this.replacement){
-          return this.replacement.getCodeStr(par);
-        };
-        par = this._iterPar(par);
-        var resStr = "";
-        var i;
-        if (this.isStatement || this.isComplete){
-          resStr += this._getPreCodeStr(par);
-        };
-        
-        if (this.codeAr){
-          for (i = 0; i < this.codeAr.length; ++i){
-            resStr += this.codeAr[i].getCodeStr(par);
-          };
-        }else if (this.codeStr){
-          var tempCodeStr = this.codeStr;
-          if (par.stringEncode < 0){
-            errorFun(undefined, errorMsg.internalNegativeStringEncode);
-          };
-          for (i = 0; i < par.stringEncode; ++i){
-            tempCodeStr = _stringEncodeStr(tempCodeStr);
-          };
-          resStr += tempCodeStr;
-        };
-        
-        if (this.promiseName){
-          resStr += this.promiseName.getCodeStr(par);
-        };
-        
-        if (this.isComplete){
-          resStr += this._getPostCodeStr(par);
-        };
-        
-        return resStr;
-      }
-      
-      , _getPostCodeStr: function(par){
-        par = this._iterPar(par);
-        var resStr = "";
-        var i;
-        /*
-          post.code
-          post.post
-          code.post
-          pre.post
-        */
-        if (this.postCode){
-          resStr += this.postCode.getCodeStr(par);
-          resStr += this.postCode.getPostCodeStr(par);
-        };
-        if (this.codeAr){
-          for (i = this.codeAr.length; i; --i){
-            resStr += this.codeAr[i - 1].getPostCodeStr(par);
-          };
-        };
-        if (this.preCode){
-          resStr += this.preCode.getPostCodeStr(par);
-        };
-        return resStr;
-      }
-      , getPostCodeStr: function(par){
-        if (this.replacement){
-          return this.replacement.getPostCodeStr(par);
-        };
-        if (this.isComplete){
-          return "";
-
-        }else{
-          return this._getPostCodeStr(par);
-        };
-      }
-      
-      , makePromising: function(){
-        if (this.promising){
-          return;
-        };
-        this.promising = true;
-      }
-      
-      , setPromiseName: function(parCode, parReference){
-        this.makePromising();
-        this.promiseName = this.newResult({
-          codeStr: parCode,
-          reference: parReference
-        });;
-        this.hasPromiseName = true;
-      }
-      , getPromiseName: function(){
-        if (this.promising && this.hasPromiseName){
-          return this.promiseName;
-        };
-      }
-      , isPromising: function(){
-        return this.promising;
-      }
-      
-      
-      , addPre: function(parCode, parReference, par){
-        if (!parCode){
-          return;
-        };
-        parCode = this._prepCode(parCode, parReference, par);
-        if (parCode.promising){
-          this.makePromising();
-        };
-        
-        if (!this.preCode){
-          this.preCode = this.newResult();
-        };
-        
-        this.preCode.push(parCode, parReference, par);
-        
-      }
-      , addPost: function(parCode, parReference, par){
-        if (!parCode){
-          return;
-        };
-        parCode = this._prepCode(parCode, parReference, par);
-        if (parCode.promising){
-          this.makePromising();
-        };
-        
-        if (!this.postCode){
-          this.postCode = this.newResult();
-        };
-        
-        this.postCode.push(parCode, parReference, par);
-      }
-      
-      , setStatement: function(){
-        this.isStatement = true;
-      }
-      , setComplete: function(){
-        this.isComplete = true;
-      },
-      
-      newResult: function(par){
-        return new _Result({
-          cp: this._cp,
-          codeStr: par ? par.codeStr : undefined
-        });
-      },
-      
-      getType: function(par){
-        return this.providesType;
-      },
-      
-      setType: function(par){
-        if (this.providesType){
-          errorFun({}, errorMsg.multipleTypeProviding);
-        };
-        if (typeof par == "string"){
-          this.providesType = this._cp.getType(par, this.reference);
-          return;
-        };
-        this.providesType = par;
-      }
-    };
+    var _Result = require "./Result";
     
     
     /* internal parser object */
@@ -656,6 +304,7 @@ var _parser = require "./_parser";
               });
             });
           };
+          
         }else{
           this.localVariables[name] = {
             typename: par.typename,
@@ -666,6 +315,7 @@ var _parser = require "./_parser";
             this.localVariables[name].type = this.getProvisionalType(parParsed);
             this.localVariables[name].needsResolving = true;
           };
+          
         };
         
         if (par.parameter){
@@ -676,6 +326,50 @@ var _parser = require "./_parser";
         };
         this.variables[name] = this.localVariables[name];
       };
+      
+      
+      this.addLocalVariableTemporary = function(par, parParsed){
+        var self = this;
+        var name = identifierName(par.name);
+        
+        var originalEntry;
+        if (this.variables.hasOwnProperty(name)){
+          originalEntry = this.variables[name];
+        };
+        
+        var entry = {
+          typename: par.typename,
+          type: par.type,
+          name: name
+        };
+        if (!par.typename && !par.type){
+          entry.type = this.getProvisionalType(parParsed);
+          entry.needsResolving = true;
+        };
+        
+        if (par.parameter){
+          entry.parameter = par.parameter;
+        };
+        if (par.isFunction){
+          entry.function = par.function;
+        };
+        entry.temporary = true;
+        
+        this.variables[name] = entry;
+        
+        var resPs = new Promise();
+        ((){
+          *resPs;
+          if (originalEntry){
+            this.variables[name] = originalEntry;
+          }else{
+            delete this.variables[name];
+          };
+        })();
+        
+        return resPs;
+      };
+        
       
       this.resolveFunctionType = function(par, parsed){
         
@@ -726,14 +420,19 @@ var _parser = require "./_parser";
         
       };
       
+      
       /* keeping track of declarations */
-      
-      
       this.usedVariables = {
       };
       
       this._addUsedVariable = function(par){
-        this.usedVariables[identifierName(par)] = true;
+        var name = identifierName(par);
+        if (this.variables.hasOwnProperty(name)){
+          if (this.variables[name].temporary){
+            return;
+          };
+        };
+        this.usedVariables[name] = true;
       };
       
       this._getUsedVairables = function(){
@@ -743,7 +442,7 @@ var _parser = require "./_parser";
       
       
       this.functionsAr = [];
-      this.addFunction = function(res, name, par){
+      this.addFunction = (res, name, par){
         this.resolveFunctionType({name: identifierName(name), type: res.getType()}, par);
         this.functionsAr.push({res: res, name: name});
       };
@@ -973,7 +672,6 @@ var _parser = require "./_parser";
           , _locals: {
             inheritedSystem: this.inheritedSystem,
             isClassObject: this.isClassObject
-            //parentVariablesPromise: this.variablesPromise
           }
         };
         if (extras){
@@ -2455,8 +2153,14 @@ var _parser = require "./_parser";
           res.push("catch(");
         };
         
+        var temporaryPs;
         if (par.handler.param){
-          res.push(identifierName(par.handler.param));
+          res.push(this.getVariableName(identifierName(par.handler.param)));
+          temporaryPs = this.addLocalVariableTemporary({
+            name: identifierName(par.handler.param), 
+            typename: "var", 
+            parameter: true
+          }, par.handler);
         };
         res.push(")");
         
@@ -2483,6 +2187,11 @@ var _parser = require "./_parser";
           b.brackers = true;
           res.push(this.makeCompleteStatement(this.blockCreator(b)));
         };
+        
+        if (temporaryPs){
+          temporaryPs.resolve();
+        };
+        
         res.setType(statementType);
         return res;
       };
@@ -4927,178 +4636,6 @@ var _parser = require "./_parser";
     };
     
     
-    errorMsg = {
-      typeExists: {
-        id: 100
-        , msg: "type already exists"
-      },
-      needsClassBodyLiteral: {
-        id: 101
-        , msg: "class types need to be defined with a literal body"
-      },
-      usedUntyped: {
-        id: 102,
-        msg: "variable already in use without type"
-      },
-      variableRedefinition: {
-        id: 103,
-        msg: "ilegal variable redefinition"
-      }, 
-      expectedVar: {
-        id: 104,
-        msg: "type missmatch: expected var"
-      },
-      typeUndeclared: {
-        id: 105,
-        msg: "type undeclared"
-      },
-      notABlockStatment: {
-        id: 106,
-        msg: "not a block statement"
-      },
-      missingDeclarations: {
-        id: 107,
-        msg: "missing Declarations"
-      },
-      functionFrameInDynamicCode: {
-        id: 108,
-        msg: "function frame is not allowed in dynamic code"
-      },
-      unknownIfStatement: {
-        id: 109,
-        msg: "unknown if statement "
-      },
-      unknownElseStatement: {
-        id: 109,
-        msg: "unknown else statement "
-      },
-      unknownPropertyAssignmentType: {
-        id: 110,
-        msg: "unknown property assignment"
-      },
-      severalProgramElements:{
-        id: 111,
-        msg: "several Program Elements"
-      },
-      variableHasNoType: {
-        id: 112,
-        msg: "variable has no type"
-      },
-      expectedCallable: {
-        id: 113,
-        msg: "expected callable expression"
-      },
-      typeLookupFailed: {
-        id: 114,
-        msg: "type lookup failed"
-      },
-      dynamicTypeCantBeDefined: {
-        id: 115,
-        msg: "dynamic type can not be defined"
-      },
-      typeRedefinition: {
-        id: 116,
-        msg: "type redefinition"
-      },
-      unresolvedType: {
-        id: 117,
-        msg: "unresolved Type"
-      },
-      inheritedOnlyInMember: {
-        id: 118,
-        msg: "inherited is only available within member functions"
-      },
-      
-      expectedMemberExpression: {
-        id: 119,
-        msg: "expected member expression"
-      },
-      noComputedMembersAllowed: {
-        id: 120,
-        msg: "no computed member allowed here"
-      },
-      unknownConnect:{
-        id: 121,
-        msg: "unknown connect"
-      },
-      returnNotAllowedHere:{
-        id: 122,
-        msg: "return not allowed here"
-      },
-      unknownCase: {
-        id: 123,
-        msg: "unknown case"
-      },
-      
-      templateSyntaxError: {
-        id: 400,
-        msg: "template syntax error"
-      },
-      
-      
-
-      internalMissingResultType: {
-        id: 1000,
-        msg: "internal: result type missing"
-      }, 
-      differentTypesInVariableDeclaration: {
-        id: 1001,
-        msg: "internal: different type in variable declaration"
-      },
-      notImplemented: {
-        id: 1002,
-        msg: "internal: not implemented"
-      },
-      internalUnknownLiteralType: {
-        id: 1003,
-        msg: "internal: unknown literal type"
-      },
-      internalMissingType: {
-        id: 1004,
-        msg: "internal: missing type"
-      },
-      unknownType: {
-        id: 1005,
-        msg: "internal: unknown script element type"
-      },
-      multipleTypeProviding: {
-        id: 1006
-        , msg: "internal: multiple types provided"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalMissingTypeProperty: {
-        id: 1007
-        , msg: "internal: missing type property"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalCantAddToStringResult: {
-        id: 1008
-        , msg: "internal: can not add to string result"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalWrongUseOfReference: {
-        id: 1009
-        , msg: "internal: wrong use of Reference"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalNegativeStringEncode: {
-        id: 1010
-        , msg: "internal: negative string encode"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalTypeHasNoName: {
-        id: 1011
-        , msg: "internal: type has no name"
-        , additional: "pls provide this error in a github issue"
-      },
-      internalParserInfoMissing: {
-        id: 1012
-        , msg: "internal: missing parser info"
-        , additional: "pls provide this error in a github issue"
-        
-      }
-      
-    };
     
     return parser;
     

@@ -1,0 +1,7 @@
+
+var a = 1;
+try{
+  throw {};
+}catch(e){
+  a = 2;
+};

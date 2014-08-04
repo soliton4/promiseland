@@ -22,7 +22,6 @@ var Chainable;
 })();
 
 
-
     // tracked Promise
     // for internal use to create tracked promises of tracked classes
     var TrackedPromise = function(parTrackFun){

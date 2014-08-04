@@ -47,10 +47,9 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
+var __Promise = promiseland.Promise;
+var Promise = promiseland.Promise;
+var __requireFun = function(parModule){
     var returnPromise = new __Promise();
     try{__require([parModule], function(m){
     if (promiseland.isPromiseLandPromisingModule(m)){
@@ -60,10 +59,7 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
     };
     });
     }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
+    return returnPromise.promise;};
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "8fb84b0996402b986a0c4e7a88dc67ce" })){ return promiseland._getModule("8fb84b0996402b986a0c4e7a88dc67ce"); };
 var _V1 = new __Promise();
@@ -71,8 +67,6 @@ promiseland._registerModule({ hashStr: "8fb84b0996402b986a0c4e7a88dc67ce", "modu
 var _V8/*Callback*/;try{_V8/*Callback*/ = Callback;}catch(e){};
 var _V18/*console*/;try{_V18/*console*/ = console;}catch(e){};
 var _V27/*promiseland*/;try{_V27/*promiseland*/ = promiseland;}catch(e){};
-var _V30/*e*/;try{_V30/*e*/ = e;}catch(e){};
-var _V33/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
@@ -122,7 +116,7 @@ _V20.resolve();
 }), _V23);
 ;}), _V23);
 ;})();
-_V21.then(_V3(function(e){_V18/*console*/["log"](_V30/*e*/);;
+_V21.then(_V3(function(_V30/*e*/){_V18/*console*/["log"](_V30/*e*/);;
 _V18/*console*/["log"]("error");;
 _V20.resolve();;
 }));

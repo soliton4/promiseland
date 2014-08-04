@@ -47,31 +47,17 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "ab5c44392ce9b1c0b80c13161fb244c0" })){ return promiseland._getModule("ab5c44392ce9b1c0b80c13161fb244c0"); };
+if (promiseland._hasModule({ hashStr: "bc3e684481464559ea099be0e9c9f86c" })){ return promiseland._getModule("bc3e684481464559ea099be0e9c9f86c"); };
 var _V1 = (function(){
 "use strict";
-var _V2/*C1*/;
-var _V4/*c*/;
+var _V2/*a*/;
 ;
-_V2/*C1*/ = (function(){var _V3/*inherited*/ = {};
-var res = promiseland.createClass({"constructor": (function(){
-;
-this["a"] = 1;;
-;
-}),
-"b": 1,
-"doSomething": (function(){
-;
-return (this["a"] + this["b"]);;
-;
-})}, [], _V3/*inherited*/);
-return res; })();
-_V4/*c*/ = new _V2/*C1*/();
-if((((_V4/*c*/["a"] == 1) && (_V4/*c*/["b"] == 1)) && (_V4/*c*/["doSomething"]() == 2))){
-return {"success": true};;
+_V2/*a*/ = 1;
+try
+{throw {};
+}catch(_V3/*e*/){_V2/*a*/ = 2;;
 };
 ;
-return {"success": false};;
 ;
 })();
 ;return _V1;

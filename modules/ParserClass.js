@@ -61,7 +61,6 @@ var __requireFun = function(parModule){
     }catch(e){returnPromise.reject(e);};
     return returnPromise.promise;};
 if (promiseland._hasModule({ hashStr: "5a77e69e7bd7e39b4101f1603b840d3d" })){ return promiseland._getModule("5a77e69e7bd7e39b4101f1603b840d3d"); };
-var _V23/*e*/;try{_V23/*e*/ = e;}catch(e){};
 var _V24/*promiseland*/;try{_V24/*promiseland*/ = promiseland;}catch(e){};
 var _V1 = (function(){
 "use strict";
@@ -112,7 +111,7 @@ _V17.resolve();
 }), _V20);
 ;}), _V20);
 ;})();
-_V18.then(_V15(function(e){if(! _V23/*e*/["msg"]){
+_V18.then(_V15(function(_V23/*e*/){if(! _V23/*e*/["msg"]){
 _V23/*e*/["msg"] = _V23/*e*/["message"];;
 };
 ;

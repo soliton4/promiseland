@@ -14,7 +14,7 @@
   var requireFun;
 
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    console.log("commonjs");
+    console.log("commonjs x");
     requireFun = function(modulesAr, callback){
       var i = 0;
       var l = modulesAr.length;

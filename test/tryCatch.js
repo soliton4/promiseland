@@ -47,27 +47,8 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f" })){ return promiseland._getModule("6b462038a9171eb6ac94e6b855660e0f"); };
 var _V5/*dostuff*/;try{_V5/*dostuff*/ = dostuff;}catch(e){};
-var _V6/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*result*/;
@@ -84,7 +65,7 @@ _V4/*x*/ = (function(){
 ;
 try
 {_V5/*dostuff*/();;
-}catch(e){_V3/*dootherStuff*/();;
+}catch(_V6/*e*/){_V3/*dootherStuff*/();;
 };
 ;
 ;
@@ -93,7 +74,6 @@ _V4/*x*/();;
 return _V2/*result*/;;
 ;
 })();
-;promiseland._registerModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 });
 })();

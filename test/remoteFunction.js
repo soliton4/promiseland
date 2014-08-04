@@ -47,28 +47,12 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
+var __Promise = promiseland.Promise;
+var Promise = promiseland.Promise;
+var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b" })){ return promiseland._getModule("52359e7398cbfbfaf29d768d9b7a668b"); };
 var _V10/*doSome*/;try{_V10/*doSome*/ = doSome;}catch(e){};
 var _V3/*context*/;try{_V3/*context*/ = context;}catch(e){};
-var _V17/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*z*/;
@@ -90,15 +74,15 @@ _V4.resolve(); return;;
 return _V4;
 });
 _V11/*y*/ = ((function(f){
-promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "_V16", f, _V17/*type:var*/);
+promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "_V16", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-var _V18/*temp returnpromise*/ = new __Promise();
+var _V17/*temp returnpromise*/ = new __Promise();
 
-promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V16", arguments, _V18/*temp returnpromise*/);
-return _V18/*temp returnpromise*/;
+promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V16", arguments, _V17/*temp returnpromise*/);
+return _V17/*temp returnpromise*/;
 }
 };
 })(function(){
@@ -113,30 +97,29 @@ _V12.resolve(); return;;
 return _V12;
 }));
 _V8/*x*/ = ((function(f){
-promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "_V22", f, _V17/*type:var*/);
+promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "_V21", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("client")){
 return f;
 }else{
 return function(){
-var _V23/*temp returnpromise*/ = new __Promise();
+var _V22/*temp returnpromise*/ = new __Promise();
 
-promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V22", arguments, _V23/*temp returnpromise*/);
-return _V23/*temp returnpromise*/;
+promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "_V21", arguments, _V22/*temp returnpromise*/);
+return _V22/*temp returnpromise*/;
 }
 };
 })(function(){
-var _V19 = new __Promise();
-var _V20 = function(code){ return function(res){ try{code(res);}catch(e){ _V19.reject(e); }; }; };
-var _V21 = function(e){ _V19.reject(e); };
-_V20(function(){;
-_V19.resolve("x"); return;;
-_V19.resolve(); return;;
+var _V18 = new __Promise();
+var _V19 = function(code){ return function(res){ try{code(res);}catch(e){ _V18.reject(e); }; }; };
+var _V20 = function(e){ _V18.reject(e); };
+_V19(function(){;
+_V18.resolve("x"); return;;
+_V18.resolve(); return;;
 })();
-return _V19;
+return _V18;
 }));
 ;
 })();
-;promiseland._registerModule({ hashStr: "52359e7398cbfbfaf29d768d9b7a668b", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 });
 })();
