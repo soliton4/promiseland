@@ -2,7 +2,7 @@ var express = require("express");
 var http = require("http");
 var fs = require("fs");
 var socketIo = require("socket.io");
-var promiseland = require("promiseland");
+//var promiseland = require("promiseland");
 
 var app = express();
 
@@ -10,7 +10,7 @@ var server = http.createServer(app);
 
 app.get("/", function(req, res){
   res.setHeader('Content-Type', "text/html");
-  fs.readFile("./nodeTestApp.html", function(err, data){
+  fs.readFile("./testClient.html", function(err, data){
     if (err){
       res.end(err);
       return;
@@ -24,9 +24,10 @@ app.use("/promiseland", express["static"](__dirname + "/../"));
 app.use("/pl", express["static"](__dirname + "/../"));
 app.use("/requirejs", express["static"]("./requirejs"));
 app.use("/testmodules", express["static"]("./testmodules"));
+app.use("/test", express["static"](__dirname));
 
 
-server.listen(3004);
+server.listen(3008);
 
 promiseland.set("profile", "server");
 
@@ -81,6 +82,45 @@ mainio.on('connection', function (socket) {
 
 });
 
-require("./testmodules/clientServer");
-require("./testmodules/syncTest");
+//require("./testmodules/clientServer");
+//require("./testmodules/syncTest");
 //require("./testmodules/mouseTrack");
+
+var tests = {};
+var collector = require "./testCollector";
+
+
+var cp = require "./createProcess";
+
+var chromeChild = cp("google-chrome", ["http://localhost:3008/?type=chrome"]).child;
+
+var chromePs = collector.getResultPromise("chrome");
+
+tests.chrome = *chromePs;
+collector.finish("chrome");
+
+
+var firefoxChild = cp("firefox", ["http://localhost:3008/?type=firefox"]).child;
+
+var firefoxPs = collector.getResultPromise("firefox");
+
+tests.firefox = *firefoxPs;
+collector.finish("firefox");
+
+//console.log(tests);
+
+try{
+  firefoxChild.kill();
+}catch(e){}
+
+server.close();
+
+try{
+  process.send(tests);
+}catch(e){
+  console.log("send error");
+  console.log(e);
+};
+
+process.exit(0);
+

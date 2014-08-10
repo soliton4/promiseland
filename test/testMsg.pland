@@ -1,0 +1,4 @@
+console.log("test msg started");
+
+process.send("xxx");
+
