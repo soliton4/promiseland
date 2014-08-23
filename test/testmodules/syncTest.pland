@@ -19,17 +19,13 @@ var gotit = false;
 //a.a = 2;
   
   
-Cs1* x() frame "server"{
-  console.log("doing the new request");
-  return new Cs1();
-};
 
 
 (() exclusive "server" {
   a = new Cs1();
   a.a = 3;
   gotit = true;
-  var next = 1;
+  var next = 10;
   setInterval((){
     a.a = next++;
   }, 1000);
@@ -42,10 +38,12 @@ Cs1* x() frame "server"{
 };
   
   
-  *waitFun();
+*waitFun();
 
 if (!gotit){
+  console.log("step1");
   a = *x();
+  console.log("step2");
   setInterval((){
     console.log(a.a);
   }, 1000);

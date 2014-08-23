@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -51,17 +56,17 @@ var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var classSystem = promiseland.classSystem;
 var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
-var Callback = promiseland.Callback;
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "120e06c54cdf04aabe8fa91a75678f0e" })){ return promiseland._getModule("120e06c54cdf04aabe8fa91a75678f0e"); };
 var _V8/*console*/;try{_V8/*console*/ = console;}catch(e){};
 var _V13/*__dirname*/;try{_V13/*__dirname*/ = __dirname;}catch(e){};
@@ -84,7 +89,8 @@ var _V6 = function(e){ _V3.reject(e); };
 _V5(function(){;
 __requireFun("../createProcess").then(_V5(function(_V7){_V2/*cp*/ = _V7;;
 _V3.resolve(); return;;
-}));})();
+}), _V6);
+;})();
 return _V3;
 })();;
 _V8/*console*/["log"]("loaded");;
@@ -94,10 +100,7 @@ if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-var _V28/*temp returnpromise*/ = new __Promise();
-
-promiseland.remoteExec("120e06c54cdf04aabe8fa91a75678f0e", "_V27", arguments, _V28/*temp returnpromise*/);
-return _V28/*temp returnpromise*/;
+return promiseland.remoteExec("120e06c54cdf04aabe8fa91a75678f0e", "_V27", arguments);
 }
 };
 })(function(){

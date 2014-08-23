@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };

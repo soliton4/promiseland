@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -50,17 +55,17 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
-if (promiseland._hasModule({ hashStr: "3b193beaa24e6b401d02cf426adaf3ca" })){ return promiseland._getModule("3b193beaa24e6b401d02cf426adaf3ca"); };
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    if (promiseland._hasModule({ hashStr: "78c60bf6b6a41d521d38cd3a10de603f" })){ return promiseland._getModule("78c60bf6b6a41d521d38cd3a10de603f"); };
 var _V2/*promiseland*/;try{_V2/*promiseland*/ = promiseland;}catch(e){};
 var _V9/*io*/;try{_V9/*io*/ = io;}catch(e){};
 var _V12/*undefined*/;try{_V12/*undefined*/ = undefined;}catch(e){};
@@ -151,19 +156,23 @@ var _V20 = new __Promise();
 var _V22 = function(code){ return function(res){ try{code(res);}catch(e){ _V20.reject(e); }; }; };
 var _V23 = function(e){ _V20.reject(e); };
 var _V25/*testObj*/;
-var _V27/*collector*/;
-var _V29/*type*/;
+var _V28/*collector*/;
+var _V30/*type*/;
 _V22(function(){;
 _V24/*console*/["log"]("running tests");;
 __requireFun("test/simpleTests").then(_V22(function(_V26){_V25/*testObj*/ = _V26;
-__requireFun("./testCollector").then(_V22(function(_V28){_V27/*collector*/ = _V28;
-_V29/*type*/ = (_V19/*querySt*/("type") || "unknown");
-_V27/*collector*/["postResult"](_V29/*type*/, _V25/*testObj*/);;
-_V27/*collector*/["waitForFinish"](_V29/*type*/).then(_V22(function(_V30){_V30;;
+__requireFun("test/frameTests").then(_V22(function(_V27){_V27;;
+__requireFun("./testCollector").then(_V22(function(_V29){_V28/*collector*/ = _V29;
+_V30/*type*/ = (_V19/*querySt*/("type") || "unknown");
+_V28/*collector*/["postResult"](_V30/*type*/, _V25/*testObj*/);;
+_V28/*collector*/["waitForFinish"](_V30/*type*/).then(_V22(function(_V31){_V31;;
 _V15/*window*/["close"]();;
 _V20.resolve(); return;;
 }), _V23);
-;}));}));})();
+;}), _V23);
+;}), _V23);
+;}), _V23);
+;})();
 return _V20;
 });
 ;

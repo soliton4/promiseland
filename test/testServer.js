@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -50,23 +55,23 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
-if (promiseland._hasModule({ hashStr: "25ad6a7bb017cb5f71367432bd3e7f85" })){ return promiseland._getModule("25ad6a7bb017cb5f71367432bd3e7f85"); };
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    if (promiseland._hasModule({ hashStr: "3c6e59ad1883177416a116152a7a45b3" })){ return promiseland._getModule("3c6e59ad1883177416a116152a7a45b3"); };
 var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "25ad6a7bb017cb5f71367432bd3e7f85", "module": _V1, promising: true });
+promiseland._registerModule({ hashStr: "3c6e59ad1883177416a116152a7a45b3", "module": _V1, promising: true });
 var _V20/*__dirname*/;try{_V20/*__dirname*/ = __dirname;}catch(e){};
 var _V21/*promiseland*/;try{_V21/*promiseland*/ = promiseland;}catch(e){};
 var _V30/*console*/;try{_V30/*console*/ = console;}catch(e){};
-var _V43/*process*/;try{_V43/*process*/ = process;}catch(e){};
+var _V46/*process*/;try{_V46/*process*/ = process;}catch(e){};
 var _V2 = (function(){
 "use strict";
 var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
@@ -80,13 +85,11 @@ var _V14/*server*/;
 var _V22/*ClientProfile*/;
 var _V27/*clientProfile*/;
 var _V28/*mainio*/;
-var _V31/*tests*/;
-var _V32/*collector*/;
-var _V34/*cp*/;
-var _V36/*chromeChild*/;
-var _V37/*chromePs*/;
-var _V39/*firefoxChild*/;
-var _V40/*firefoxPs*/;
+var _V32/*tests*/;
+var _V33/*collector*/;
+var _V35/*cp*/;
+var _V37/*chromeChild*/;
+var _V38/*chromePs*/;
 _V3(function(){;
 __requireFun("express").then(_V3(function(_V6){_V5/*express*/ = _V6;
 __requireFun("http").then(_V3(function(_V8){_V7/*http*/ = _V8;
@@ -115,7 +118,8 @@ _V13/*app*/["use"]("/promiseland", _V5/*express*/["static"]((_V20/*__dirname*/ +
 _V13/*app*/["use"]("/pl", _V5/*express*/["static"]((_V20/*__dirname*/ + "/../")));;
 _V13/*app*/["use"]("/requirejs", _V5/*express*/["static"]("./requirejs"));;
 _V13/*app*/["use"]("/testmodules", _V5/*express*/["static"]("./testmodules"));;
-_V13/*app*/["use"]("/test", _V5/*express*/["static"](_V20/*__dirname*/));;
+_V13/*app*/["use"]("/test", _V5/*express*/["static"]("./test"));;
+_V13/*app*/["use"]("/testapp", _V5/*express*/["static"](_V20/*__dirname*/));;
 _V14/*server*/["listen"](3008);;
 _V21/*promiseland*/["set"]("profile", "server");;
 _V22/*ClientProfile*/ = (function(){
@@ -173,32 +177,44 @@ _V25/*connection*/["emit"]("disconnect");;
 return;;
 ;
 }));;
-_V31/*tests*/ = {};
-__requireFun("./testCollector").then(_V3(function(_V33){_V32/*collector*/ = _V33;
-__requireFun("./createProcess").then(_V3(function(_V35){_V34/*cp*/ = _V35;
-_V36/*chromeChild*/ = _V34/*cp*/("google-chrome", ["http://localhost:3008/?type=chrome"])["child"];
-_V37/*chromePs*/ = _V32/*collector*/["getResultPromise"]("chrome");
-_V37/*chromePs*/.then(_V3(function(_V38){_V31/*tests*/["chrome"] = _V38;;
-_V32/*collector*/["finish"]("chrome");;
-_V39/*firefoxChild*/ = _V34/*cp*/("firefox", ["http://localhost:3008/?type=firefox"])["child"];
-_V40/*firefoxPs*/ = _V32/*collector*/["getResultPromise"]("firefox");
-_V40/*firefoxPs*/.then(_V3(function(_V41){_V31/*tests*/["firefox"] = _V41;;
-_V32/*collector*/["finish"]("firefox");;
-try
-{_V39/*firefoxChild*/["kill"]();;
-}catch(_V42/*e*/){};
+__requireFun("./test/frameTests").then(_V3(function(_V31){_V31;;
+_V32/*tests*/ = {};
+__requireFun("./testCollector").then(_V3(function(_V34){_V33/*collector*/ = _V34;
+__requireFun("./createProcess").then(_V3(function(_V36){_V35/*cp*/ = _V36;
+_V37/*chromeChild*/ = _V35/*cp*/("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"])["child"];
+_V38/*chromePs*/ = _V33/*collector*/["getResultPromise"]("chrome");
+_V38/*chromePs*/.then(_V3(function(_V39){_V32/*tests*/["chrome"] = _V39;;
+_V33/*collector*/["finish"]("chrome");;
 _V14/*server*/["close"]();;
+var _V40 = new __Promise();
+var _V41 = new __Promise();
+var _V42/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V41.resolve(e); }; }; };
+var _V43 = function(e){ _V41.resolve(e); };
+_V42/*try catch*/(function(){__requireFun("./test/simpleTests").then(_V42/*try catch*/(function(_V44){_V32/*tests*/["node"] = _V44;;
+_V40.resolve();
+}), _V43);
+;})();
+_V41.then(_V3(function(_V45/*e*/){_V30/*console*/["log"](_V45/*e*/);;
+_V40.resolve();;
+}));
+_V40.then(_V3(function(){;
+;
 try
-{_V43/*process*/["send"](_V31/*tests*/);;
-}catch(_V42/*e*/){_V30/*console*/["log"]("send error");;
-_V30/*console*/["log"](_V42/*e*/);;
+{_V46/*process*/["send"](_V32/*tests*/);;
+}catch(_V45/*e*/){_V30/*console*/["log"](_V32/*tests*/);;
 };
 ;
-_V43/*process*/["exit"](0);;
+_V46/*process*/["exit"](0);;
 _V1.resolve(); return;;
-}), _V4);
+}), _V4)}), _V4);
 ;}), _V4);
-;}));}));}));}));}));}));})();
+;}), _V4);
+;}), _V4);
+;}), _V4);
+;}), _V4);
+;}), _V4);
+;}), _V4);
+;})();
 return _V1;
 })();
 ;;

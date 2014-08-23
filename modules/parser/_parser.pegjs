@@ -1542,8 +1542,11 @@ ClassTypedClaus
   = "type" __ { return posRes({ "type": "type" }); }
 
 ClassSyncClaus
-  = "sync" __ "all" __ { return posRes({ "type": "sync", "all": 1 }); }
+  = "sync" __ "all"  __ { return posRes({ "type": "sync", "all": 1 }); }
   / "sync" __ "some" __ { return posRes({ "type": "sync", "all": 0 }); }
+  / "sync" __ "serve" __ "all"  __ { return posRes({ "type": "sync", "all": 1, "serve": 1 }); }
+  / "sync" __ "serve" __ "some" __ { return posRes({ "type": "sync", "all": 0, "serve": 1 }); } // really have to redo this ...
+  / "sync" __ "serve" __ { return posRes({ "type": "sync", "all": 1, "serve": 1 }); }
   / "sync" __ { return posRes({ "type": "sync", "all": 1 }); }
 
 ClassTrackClaus

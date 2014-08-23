@@ -1,7 +1,9 @@
 
+
+
 var a = 1;
 try{
-  throw {};
+  a = require "x";
 }catch(e){
   a = 2;
 };

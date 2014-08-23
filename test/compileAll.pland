@@ -3,25 +3,26 @@
 var fs = require "fs";
 
 
+var compileDir = (parDir){
+
 var callback = new Callback();
 
-fs.readdir(".", callback);
+fs.readdir(parDir, callback);
 
 var files = (*callback.promise)[1];
-
 
 
 if (files){
   for (var i = 0; i < files.length; ++i){
     callback = new Callback();
     var filename = files[i];
-    
+    var completeFilename = parDir + "/" + filename;
     
     if (filename.substr( filename.length - 6 ) == ".pland"){
-      console.log("processing:" + filename);
+      console.log("processing:" + completeFilename);
       var jsStr = "";
       try{
-        fs.readFile(filename, {
+        fs.readFile(completeFilename, {
               encoding: "utf8"
             }, callback.callback);
         var codeStr = (*callback.promise)[1];
@@ -43,8 +44,20 @@ if (files){
       };
       
       callback = new Callback();
-      fs.writeFile(filename.substr(0, filename.length - 6 ) + ".js", jsStr, callback.callback);
+      fs.writeFile(completeFilename.substr(0, completeFilename.length - 6 ) + ".js", jsStr, callback.callback);
       *callback.promise;
+      
+    }else{
+      callback = new Callback();
+      fs.stat(completeFilename, callback);
+      var stats = (*callback.promise)[1];
+      if (filename != "node_modules" && stats && stats.isDirectory()){
+        *compileDir(completeFilename);
+      };
     };
   };
 };
+  
+};
+
+compileDir(process.cwd());

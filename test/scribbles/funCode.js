@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -47,39 +52,19 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-  var __Promise = promiseland.Promise;
-  var __modulePromise = new __Promise();
-  var classSystem = promiseland.classSystem; 
-  var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-  return returnPromise.promise;};
-  var __classSystem = promiseland.classSystem;
-  
-  
-var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "650dd5eeb2dfc19355783db917815d33" })){ return promiseland._getModule("650dd5eeb2dfc19355783db917815d33"); };
-var _V4/*type:var*/ = __classSystem.getBuiltinType("var");
 var _V1 = (function(){
 "use strict";
 var _V2/*a*/;
-try{;
+;
 _V2/*a*/ = (function(){
 var _V3/*b*/;
-try{;
+;
 _V3/*b*/ = 1;
-}catch(e){throw e};;
+;
 });
-}catch(e){throw e};;
+;
 })();
-promiseland._registerModule({ hashStr: "650dd5eeb2dfc19355783db917815d33", "module": _V1, promising: false });
-return _V1;
+;return _V1;
 });
 })();

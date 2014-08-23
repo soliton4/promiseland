@@ -1442,23 +1442,23 @@ var stringEncodeStr = basics.stringEncodeStr;
           remoteClosure.push("return function(){\n");
           
           
-          var tempReturnPromise = this.getUniqueName("temp returnpromise");
-          remoteClosure.push(this.declareReturnPromiseCode({
+          //var tempReturnPromise = this.getUniqueName("temp returnpromise");
+          /*remoteClosure.push(this.declareReturnPromiseCode({
             type: this._returnType,
             name: tempReturnPromise,
             constructorName: this.getConstructorName(this.getTypeName(this._returnType, parParsed)),
             parsed: parParsed,
             errorFun: this.getWarningFun(parParsed)
-          }));
-          remoteClosure.push("\npromiseland.remoteExec(" + stringEncodeStr(this.getModuleHashStr()) + ", " + stringEncodeStr(uniqueNameStr) + ", arguments, ");
-          remoteClosure.push(tempReturnPromise);
-          remoteClosure.push(");\n");
-          remoteClosure.push(this.returnReturnPromiseCode({
+          }));*/
+          //remoteClosure.push("\n");
+          //remoteClosure.push(tempReturnPromise);
+          remoteClosure.push("return promiseland.remoteExec(" + stringEncodeStr(this.getModuleHashStr()) + ", " + stringEncodeStr(uniqueNameStr) + ", arguments);\n");
+          /*remoteClosure.push(this.returnReturnPromiseCode({
             type: this._returnType,
             name: tempReturnPromise,
             parsed: parParsed,
             errorFun: this.getWarningFun(parParsed)
-          }));
+          }));*/
           remoteClosure.push("}\n");
           
           remoteClosure.push("};\n");
@@ -2559,10 +2559,6 @@ var stringEncodeStr = basics.stringEncodeStr;
         
         res.addPre(preRes);
         
-        /*res.addPre(expressionRes);
-        res.addPre(".then(" + this.tryCatchFunctionStr + "(function(");
-        res.addPre(promiseNameStr);
-        res.addPre("){");*/
         
         var dereferencePost = this.dereferencePromisePostCode({
           value: expressionRes
@@ -2599,23 +2595,44 @@ var stringEncodeStr = basics.stringEncodeStr;
       */
       this.expRequireExpression = function(parExpression){
         var res = this.newResult();
-        res.makePromising();
-        res.setPromiseName(this.getUniqueName());
         
         this.common.useRequire = true;
         
-        var tempRes = this.newResult();
-        tempRes.push("__requireFun(");
-        tempRes.push(this.parseExpression(parExpression));
-        tempRes.push(").then(");
+        var expressionRes = this.newResult();
+        expressionRes.push("__requireFun(");
+        expressionRes.push(this.parseExpression(parExpression));
+        expressionRes.push(")");
+        expressionRes.setType("var");
         
-        res.addPre(this.makeCompleteStatement(tempRes));
+        var promiseNameStr = this.getUniqueName();
         
-        res.addPre(this.tryCatchFunctionStr + "(function(");
-        res.addPre(res.getPromiseName());
-        res.addPre("){");
+        res.makePromising();
+        res.setPromiseName(promiseNameStr);
         
-        res.addPost("}));"); // trycatch) then)
+        var dereferencePre = this.dereferencePromisePreCode({
+          value: expressionRes
+        });
+        
+        var preRes = this.newResult();
+        preRes.push(dereferencePre);
+        preRes.push(this.tryCatchFunctionStr + "(function(");
+        preRes.push(promiseNameStr);
+        preRes.push("){");
+        
+        res.addPre(preRes);
+        
+        
+        var dereferencePost = this.dereferencePromisePostCode({
+          value: expressionRes
+        });
+        
+        var postRes = this.newResult();
+        postRes.push("}), " + this.catchFunctionStr);
+        postRes.push(dereferencePost);
+        postRes.push(";");
+        
+        res.addPost(postRes);
+        
         res.setType("var");
         return res;
       };
@@ -4418,20 +4435,25 @@ var stringEncodeStr = basics.stringEncodeStr;
     
     var loaderStr = function(par){
       var resStr = "";
-      resStr += "(function(){\n\
-  var defineFun;\n\
-  var requireFun;\n\
-  \n\
-  if (typeof exports == \"object\" && typeof module == \"object\"){ // CommonJS\n\
-    requireFun = function(modulesAr, callback){\n\
-      var i = 0;\n\
-      var l = modulesAr.length;\n\
-      var args = [];\n\
-      for (i; i < l; ++i){\n\
-        args.push(require(modulesAr[i]));\n\
-      };\n\
-      callback.apply(callback, args);\n\
-    };\n\
+      resStr += "(function(){
+  var defineFun;
+  var requireFun;
+  
+  if (typeof exports == \"object\" && typeof module == \"object\"){ // CommonJS
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
+      };
+      callback.apply(callback, args);
+    };
     defineFun = function(requireAr, callback){\n\
       requireFun(requireAr, function(){\n\
         module.exports = callback.apply(callback, arguments);\n\
@@ -4479,17 +4501,18 @@ var stringEncodeStr = basics.stringEncodeStr;
     resStr += "var classSystem = promiseland.classSystem;\n";
   };
   if (par.useRequire){
-    resStr += "var __requireFun = function(parModule){\n\
-    var returnPromise = new __Promise();\n\
-    try{__require([parModule], function(m){\n\
-    if (promiseland.isPromiseLandPromisingModule(m)){\n\
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});\n\
-    }else{\n\
-      returnPromise.resolve(m);\n\
-    };\n\
-    });\n\
-    }catch(e){returnPromise.reject(e);};\n\
-    return returnPromise.promise;};\n";
+    resStr += "var __requireFun = function(parModule){
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    ";
   };
       return resStr;
     };

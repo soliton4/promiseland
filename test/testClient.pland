@@ -53,6 +53,10 @@ function querySt(Key) {
 var runTests = (){
   console.log("running tests");
   var testObj = require "test/simpleTests";
+  
+  require "test/frameTests";
+  
+  
   var collector = require "./testCollector";
   var type = querySt("type") || "unknown";
   collector.postResult(type, testObj);

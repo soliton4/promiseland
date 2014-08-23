@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -47,19 +52,46 @@
   
 defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "bc3e684481464559ea099be0e9c9f86c" })){ return promiseland._getModule("bc3e684481464559ea099be0e9c9f86c"); };
-var _V1 = (function(){
+var __Promise = promiseland.Promise;
+var Promise = promiseland.Promise;
+var __requireFun = function(parModule){
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    if (promiseland._hasModule({ hashStr: "afb7b777ad31c516ddf2a0916e531c33" })){ return promiseland._getModule("afb7b777ad31c516ddf2a0916e531c33"); };
+var _V1 = new __Promise();
+promiseland._registerModule({ hashStr: "afb7b777ad31c516ddf2a0916e531c33", "module": _V1, promising: true });
+var _V2 = (function(){
 "use strict";
-var _V2/*a*/;
+var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
+var _V4 = function(e){ _V1.reject(e); };
+var _V5/*a*/;
+_V3(function(){;
+_V5/*a*/ = 1;
+var _V6 = new __Promise();
+var _V7 = new __Promise();
+var _V8/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V7.resolve(e); }; }; };
+var _V9 = function(e){ _V7.resolve(e); };
+_V8/*try catch*/(function(){__requireFun("x").then(_V8/*try catch*/(function(_V10){_V5/*a*/ = _V10;;
+_V6.resolve();
+}), _V9);
+;})();
+_V7.then(_V3(function(_V11/*e*/){_V5/*a*/ = 2;;
+_V6.resolve();;
+}));
+_V6.then(_V3(function(){;
 ;
-_V2/*a*/ = 1;
-try
-{throw {};
-}catch(_V3/*e*/){_V2/*a*/ = 2;;
-};
-;
-;
+_V1.resolve(); return;;
+}), _V4)})();
+return _V1;
 })();
-;return _V1;
-});
+;;
+return _V1});
 })();

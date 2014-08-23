@@ -24,7 +24,8 @@ app.use("/promiseland", express["static"](__dirname + "/../"));
 app.use("/pl", express["static"](__dirname + "/../"));
 app.use("/requirejs", express["static"]("./requirejs"));
 app.use("/testmodules", express["static"]("./testmodules"));
-app.use("/test", express["static"](__dirname));
+app.use("/test", express["static"]("./test"));
+app.use("/testapp", express["static"](__dirname));
 
 
 server.listen(3008);
@@ -86,40 +87,53 @@ mainio.on('connection', function (socket) {
 //require("./testmodules/syncTest");
 //require("./testmodules/mouseTrack");
 
+// prerequire
+
+
+require "./test/frameTests";
+
+
 var tests = {};
 var collector = require "./testCollector";
 
 
 var cp = require "./createProcess";
 
-var chromeChild = cp("google-chrome", ["http://localhost:3008/?type=chrome"]).child;
+var chromeChild = cp("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"]).child;
 
 var chromePs = collector.getResultPromise("chrome");
 
 tests.chrome = *chromePs;
 collector.finish("chrome");
 
-
-var firefoxChild = cp("firefox", ["http://localhost:3008/?type=firefox"]).child;
+//firefox is acting very very weird
+/*var firefoxChild = cp("firefox", ["http://localhost:3008/?type=firefox"]).child;
 
 var firefoxPs = collector.getResultPromise("firefox");
 
 tests.firefox = *firefoxPs;
 collector.finish("firefox");
 
-//console.log(tests);
 
 try{
   firefoxChild.kill();
 }catch(e){}
+*/
 
 server.close();
+
+
+
+try{
+  tests.node = require "./test/simpleTests";
+}catch(e){
+  console.log(e);
+};
 
 try{
   process.send(tests);
 }catch(e){
-  console.log("send error");
-  console.log(e);
+  console.log(tests);
 };
 
 process.exit(0);

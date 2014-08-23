@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -50,17 +55,17 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
-var Callback = promiseland.Callback;
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "7bcee4e8f400a6b3c39266689c1fbb58" })){ return promiseland._getModule("7bcee4e8f400a6b3c39266689c1fbb58"); };
 var _V1 = new __Promise();
 promiseland._registerModule({ hashStr: "7bcee4e8f400a6b3c39266689c1fbb58", "module": _V1, promising: true });
@@ -139,7 +144,8 @@ return {"child": _V12/*child*/,
 ;
 })); return;;
 _V1.resolve(); return;;
-}));})();
+}), _V4);
+;})();
 return _V1;
 })();
 ;;
