@@ -49,23 +49,23 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "8d22e85c82a82de38038caa802287378" })){ return promiseland._getModule("8d22e85c82a82de38038caa802287378"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V2/*a*/;
-var _V3/*b*/;
+var PL$2/*a*/;
+var PL$3/*b*/;
 ;
-_V2/*a*/ = [];
-_V3/*b*/ = [_V2/*a*/, 0, ""];
-if(((_V2/*a*/["length"] == 0) && (_V3/*b*/["length"] == 3))){
+PL$2/*a*/ = [];
+PL$3/*b*/ = [PL$2/*a*/, 0, ""];
+if(((PL$2/*a*/["length"] == 0) && (PL$3/*b*/["length"] == 3))){
 return {"success": true};;
 };
 return {"success": false};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,32 +66,32 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "afb7b777ad31c516ddf2a0916e531c33" })){ return promiseland._getModule("afb7b777ad31c516ddf2a0916e531c33"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "afb7b777ad31c516ddf2a0916e531c33", "module": _V1, promising: true });
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "afb7b777ad31c516ddf2a0916e531c33", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*a*/;
-_V3(function(){;
-_V5/*a*/ = 1;
-var _V6 = new __Promise();
-var _V7 = new __Promise();
-var _V8/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V7.resolve(e); }; }; };
-var _V9 = function(e){ _V7.resolve(e); };
-_V8/*try catch*/(function(){__requireFun("x").then(_V8/*try catch*/(function(_V10){_V5/*a*/ = _V10;;
-_V6.resolve();
-}), _V9);
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*a*/;
+PL$3(function(){;
+PL$5/*a*/ = 1;
+var PL$6 = new __Promise();
+var PL$7 = new __Promise();
+var PL$8/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.resolve(e); }; }; };
+var PL$9 = function(e){ PL$7.resolve(e); };
+PL$8/*try catch*/(function(){__requireFun("x").then(PL$8/*try catch*/(function(PL$10){PL$5/*a*/ = PL$10;;
+PL$6.resolve();
+}), PL$9);
 ;})();
-_V7.then(_V3(function(_V11/*e*/){_V5/*a*/ = 2;;
-_V6.resolve();;
+PL$7.then(PL$3(function(PL$11/*e*/){PL$5/*a*/ = 2;;
+PL$6.resolve();;
 }));
-_V6.then(_V3(function(){;
+PL$6.then(PL$3(function(){;
 ;
-_V1.resolve(); return;;
-}), _V4)})();
-return _V1;
+PL$1.resolve(); return;;
+}), PL$4)})();
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

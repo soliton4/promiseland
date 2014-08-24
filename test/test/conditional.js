@@ -49,45 +49,45 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "5a8727f5d27e395d615f6beceb415ee1" })){ return promiseland._getModule("5a8727f5d27e395d615f6beceb415ee1"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V2/*somefun*/;
+var PL$2/*somefun*/;
 ;
-_V2/*somefun*/ = (function(_V3/*par*/){
-var _V4 = new __Promise();
-var _V6 = function(code){ return function(res){ try{code(res);}catch(e){ _V4.reject(e); }; }; };
-var _V7 = function(e){ _V4.reject(e); };
-_V6(function(){;
-_V4.resolve((_V3/*par*/ + 1)); return;;
-_V4.resolve(); return;;
+PL$2/*somefun*/ = (function(PL$3/*par*/){
+var PL$4 = new __Promise();
+var PL$6 = function(code){ return function(res){ try{code(res);}catch(e){ PL$4.reject(e); }; }; };
+var PL$7 = function(e){ PL$4.reject(e); };
+PL$6(function(){;
+PL$4.resolve((PL$3/*par*/ + 1)); return;;
+PL$4.resolve(); return;;
 })();
-return _V4;
+return PL$4;
 });
 return {"fun": (function(){
-var _V8 = new __Promise();
-var _V9 = function(code){ return function(res){ try{code(res);}catch(e){ _V8.reject(e); }; }; };
-var _V10 = function(e){ _V8.reject(e); };
-var _V11/*a*/;
-_V9(function(){;
-_V11/*a*/ = 1;
-_V2/*somefun*/(_V11/*a*/).then(_V9(function(_V12){if((_V12 == 2)){
-_V8.resolve(4); return;;
+var PL$8 = new __Promise();
+var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$8.reject(e); }; }; };
+var PL$10 = function(e){ PL$8.reject(e); };
+var PL$11/*a*/;
+PL$9(function(){;
+PL$11/*a*/ = 1;
+PL$2/*somefun*/(PL$11/*a*/).then(PL$9(function(PL$12){if((PL$12 == 2)){
+PL$8.resolve(4); return;;
 };
 ;
-_V8.resolve(0); return;;
-_V8.resolve(); return;;
-}), _V10);
+PL$8.resolve(0); return;;
+PL$8.resolve(); return;;
+}), PL$10);
 ;})();
-return _V8;
+return PL$8;
 })};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

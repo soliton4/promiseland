@@ -49,63 +49,63 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "dc01d7039f5b3fa03ccb1991f4aef666" })){ return promiseland._getModule("dc01d7039f5b3fa03ccb1991f4aef666"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "dc01d7039f5b3fa03ccb1991f4aef666", "module": _V1, promising: true });
-var _V11/*Callback*/;try{_V11/*Callback*/ = Callback;}catch(e){};
-var _V12/*setTimeout*/;try{_V12/*setTimeout*/ = setTimeout;}catch(e){};
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "dc01d7039f5b3fa03ccb1991f4aef666", "module": PL$1, promising: true });
+var PL$11/*Callback*/;try{PL$11/*Callback*/ = Callback;}catch(e){};
+var PL$12/*setTimeout*/;try{PL$12/*setTimeout*/ = setTimeout;}catch(e){};
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*p*/;
-var _V14/*res*/;
-var _V15/*x*/;
-_V3(function(){;
-_V5/*p*/ = (function(){
-var _V6 = new __Promise();
-var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
-var _V9 = function(e){ _V6.reject(e); };
-var _V10/*c*/;
-_V8(function(){;
-_V10/*c*/ = new _V11/*Callback*/();
-_V12/*setTimeout*/(_V10/*c*/, 100);;
-_V10/*c*/["promise"].then(_V8(function(_V13){_V13;;
-_V6.resolve(); return;;
-_V6.resolve(); return;;
-}), _V9);
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*p*/;
+var PL$14/*res*/;
+var PL$15/*x*/;
+PL$3(function(){;
+PL$5/*p*/ = (function(){
+var PL$6 = new __Promise();
+var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
+var PL$9 = function(e){ PL$6.reject(e); };
+var PL$10/*c*/;
+PL$8(function(){;
+PL$10/*c*/ = new PL$11/*Callback*/();
+PL$12/*setTimeout*/(PL$10/*c*/, 100);;
+PL$10/*c*/["promise"].then(PL$8(function(PL$13){PL$13;;
+PL$6.resolve(); return;;
+PL$6.resolve(); return;;
+}), PL$9);
 ;})();
-return _V6;
+return PL$6;
 });
-_V14/*res*/ = {};
-_V15/*x*/ = (function(_V16/*para*/, _V17/*parb*/){
-var _V18 = new __Promise();
-var _V19 = function(code){ return function(res){ try{code(res);}catch(e){ _V18.reject(e); }; }; };
-var _V20 = function(e){ _V18.reject(e); };
-var _V22/*arguments*/ = arguments;
-_V19(function(){;
-_V14/*res*/["a"] = _V16/*para*/;;
-_V5/*p*/().then(_V19(function(_V21){_V21;;
-_V14/*res*/["b"] = _V17/*parb*/;;
-_V14/*res*/["c"] = _V22/*arguments*/[2];;
-_V18.resolve(); return;;
-}), _V20);
+PL$14/*res*/ = {};
+PL$15/*x*/ = (function(PL$16/*para*/, PL$17/*parb*/){
+var PL$18 = new __Promise();
+var PL$19 = function(code){ return function(res){ try{code(res);}catch(e){ PL$18.reject(e); }; }; };
+var PL$20 = function(e){ PL$18.reject(e); };
+var PL$22/*arguments*/ = arguments;
+PL$19(function(){;
+PL$14/*res*/["a"] = PL$16/*para*/;;
+PL$5/*p*/().then(PL$19(function(PL$21){PL$21;;
+PL$14/*res*/["b"] = PL$17/*parb*/;;
+PL$14/*res*/["c"] = PL$22/*arguments*/[2];;
+PL$18.resolve(); return;;
+}), PL$20);
 ;})();
-return _V18;
+return PL$18;
 });
-_V15/*x*/(1, 1, 2).then(_V3(function(_V23){_V23;;
-_V1.resolve(((_V14/*res*/["a"] + _V14/*res*/["b"]) + _V14/*res*/["c"])); return;;
-_V1.resolve(); return;;
-}), _V4);
+PL$15/*x*/(1, 1, 2).then(PL$3(function(PL$23){PL$23;;
+PL$1.resolve(((PL$14/*res*/["a"] + PL$14/*res*/["b"]) + PL$14/*res*/["c"])); return;;
+PL$1.resolve(); return;;
+}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

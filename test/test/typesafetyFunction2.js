@@ -49,39 +49,39 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "0c11ca25206ec42f77a70d97f2323884" })){ return promiseland._getModule("0c11ca25206ec42f77a70d97f2323884"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V3/*C1*/;
-var _V5/*b*/;
-var _V7/*fun1*/;
-var _V2/*type:C1*/ = classSystem._createProvisionalClass();
-_V3/*C1*/ = _V2/*type:C1*/;
-var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});var _V7/*fun1*/ = function(){
-var _V6/*c*/;
+var PL$3/*C1*/;
+var PL$5/*b*/;
+var PL$7/*fun1*/;
+var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
+PL$3/*C1*/ = PL$2/*type:C1*/;
+var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});var PL$7/*fun1*/ = function(){
+var PL$6/*c*/;
 ;
-_V6/*c*/ = new _V4/*C1-constructor*/();
-_V6/*c*/[3] = 2;;
-return _V6/*c*/;;
+PL$6/*c*/ = new PL$4/*C1-constructor*/();
+PL$6/*c*/[3] = 2;;
+return PL$6/*c*/;;
 ;
 };
 ;
-classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1}));_V3/*C1*/;;
-_V5/*b*/ = new _V4/*C1-constructor*/();
-_V7/*fun1*/;
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1}));PL$3/*C1*/;;
+PL$5/*b*/ = new PL$4/*C1-constructor*/();
+PL$7/*fun1*/;
 ;
-_V5/*b*/ = _V7/*fun1*/();;
-if((_V5/*b*/[3] == 2)){
+PL$5/*b*/ = PL$7/*fun1*/();;
+if((PL$5/*b*/[3] == 2)){
 return {"success": true};;
 };
 ;
 return {"success": false};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

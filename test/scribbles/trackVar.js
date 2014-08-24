@@ -49,21 +49,21 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "475bc97f98d7befc1d8e94a5038e91d9" })){ return promiseland._getModule("475bc97f98d7befc1d8e94a5038e91d9"); };
-var _V3/*trackRet*/;try{_V3/*trackRet*/ = trackRet;}catch(e){};
-var _V4/*track2Ret*/;try{_V4/*track2Ret*/ = track2Ret;}catch(e){};
-var _V1 = (function(){
+var PL$3/*trackRet*/;try{PL$3/*trackRet*/ = trackRet;}catch(e){};
+var PL$4/*track2Ret*/;try{PL$4/*track2Ret*/ = track2Ret;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*a*/;
+var PL$2/*a*/;
 ;
-_V2/*a*/;
-_V2/*a*/ = _V3/*trackRet*/();;
-_V2/*a*/ = (_V3/*trackRet*/() || _V4/*track2Ret*/());;
+PL$2/*a*/;
+PL$2/*a*/ = PL$3/*trackRet*/();;
+PL$2/*a*/ = (PL$3/*trackRet*/() || PL$4/*track2Ret*/());;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

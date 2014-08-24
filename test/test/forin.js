@@ -49,30 +49,30 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de" })){ return promiseland._getModule("eb2da6464c8ef09a7c4e9bb772e7d8de"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V2/*a*/;
-var _V3/*namesStr*/;
-var _V4/*cnt*/;
-var _V5/*i*/;
+var PL$2/*a*/;
+var PL$3/*namesStr*/;
+var PL$4/*cnt*/;
+var PL$5/*i*/;
 ;
-_V2/*a*/ = {"a": 1,
+PL$2/*a*/ = {"a": 1,
 "b": 2,
 "c": 3};
-_V3/*namesStr*/ = "";
-_V4/*cnt*/ = 0;
-for(_V5/*i*/ in _V2/*a*/){_V3/*namesStr*/ += _V5/*i*/;;
-_V4/*cnt*/ += _V2/*a*/[_V5/*i*/];;
+PL$3/*namesStr*/ = "";
+PL$4/*cnt*/ = 0;
+for(PL$5/*i*/ in PL$2/*a*/){PL$3/*namesStr*/ += PL$5/*i*/;;
+PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];;
 };
 ;
-return {"names": _V3/*namesStr*/,
-"cnt": _V4/*cnt*/};;
+return {"names": PL$3/*namesStr*/,
+"cnt": PL$4/*cnt*/};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

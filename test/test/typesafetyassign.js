@@ -49,41 +49,41 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "1521f2775b4173c536ae637258c8a819" })){ return promiseland._getModule("1521f2775b4173c536ae637258c8a819"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V3/*Type1*/;
-var _V6/*Type2*/;
-var _V8/*a*/;
-var _V9/*b*/;
-var _V11/*c*/;
-var _V12/*d*/;
-var _V2/*type:Type1*/ = classSystem._createProvisionalClass();
-_V3/*Type1*/ = _V2/*type:Type1*/;
-var _V4/*Type1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:Type1*/).then(function(parType){_V2/*type:Type1*/ = parType;_V4/*Type1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:Type1*/);});var _V5/*type:Type2*/ = classSystem._createProvisionalClass();
-_V6/*Type2*/ = _V5/*type:Type2*/;
-var _V7/*Type2-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Type2*/).then(function(parType){_V5/*type:Type2*/ = parType;_V7/*Type2-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Type2*/);});;
-classSystem._resolveProvisional(_V2/*type:Type1*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));_V3/*Type1*/;;
-classSystem._resolveProvisional(_V5/*type:Type2*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));_V6/*Type2*/;;
+var PL$3/*Type1*/;
+var PL$6/*Type2*/;
+var PL$8/*a*/;
+var PL$9/*b*/;
+var PL$11/*c*/;
+var PL$12/*d*/;
+var PL$2/*type:Type1*/ = classSystem._createProvisionalClass();
+PL$3/*Type1*/ = PL$2/*type:Type1*/;
+var PL$4/*Type1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Type1*/).then(function(parType){PL$2/*type:Type1*/ = parType;PL$4/*Type1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Type1*/);});var PL$5/*type:Type2*/ = classSystem._createProvisionalClass();
+PL$6/*Type2*/ = PL$5/*type:Type2*/;
+var PL$7/*Type2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){PL$5/*type:Type2*/ = parType;PL$7/*Type2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Type2*/);});;
+classSystem._resolveProvisional(PL$2/*type:Type1*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));PL$3/*Type1*/;;
+classSystem._resolveProvisional(PL$5/*type:Type2*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));PL$6/*Type2*/;;
 try
-{_V8/*a*/;
-_V9/*b*/;
-_V8/*a*/ = _V9/*b*/;;
-}catch(_V10/*e*/){return {"success": false};;
+{PL$8/*a*/;
+PL$9/*b*/;
+PL$8/*a*/ = PL$9/*b*/;;
+}catch(PL$10/*e*/){return {"success": false};;
 };
 try
-{_V11/*c*/;
-_V12/*d*/;
+{PL$11/*c*/;
+PL$12/*d*/;
 (function(){ throw { id:201, msg: "type missmatch" } })();;
-}catch(_V10/*e*/){return {"success": true};;
+}catch(PL$10/*e*/){return {"success": true};;
 };
 return {"success": false};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -65,265 +65,267 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "e6b2e8500d6db37ea1bd86a3074a93f4" })){ return promiseland._getModule("e6b2e8500d6db37ea1bd86a3074a93f4"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "e6b2e8500d6db37ea1bd86a3074a93f4", "module": _V1, promising: true });
-var _V24/*console*/;try{_V24/*console*/ = console;}catch(e){};
-var _V2 = (function(){
+    if (promiseland._hasModule({ hashStr: "b06c2200ef7e899fe42f2fad549e56e7" })){ return promiseland._getModule("b06c2200ef7e899fe42f2fad549e56e7"); };
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "b06c2200ef7e899fe42f2fad549e56e7", "module": PL$1, promising: true });
+var PL$24/*console*/;try{PL$24/*console*/ = console;}catch(e){};
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*testObj*/;
-var _V7/*successFun*/;
-var _V10/*successFunDbg*/;
-var _V11/*createTest*/;
-var _V25/*funReturning4*/;
-var _V27/*funReturning4debug*/;
-var _V28/*returning4*/;
-var _V49/*modRes4*/;
-var _V78/*c*/;
-var _V79/*s*/;
-var _V80/*f*/;
-var _V81/*m*/;
-_V3(function(){;
-__requireFun("./testObj").then(_V3(function(_V6){_V5/*testObj*/ = _V6;
-_V7/*successFun*/ = (function(_V8/*mod*/, _V9/*success*/){
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*testObj*/;
+var PL$7/*successFun*/;
+var PL$10/*successFunDbg*/;
+var PL$11/*createTest*/;
+var PL$25/*funReturning4*/;
+var PL$27/*funReturning4debug*/;
+var PL$28/*returning4*/;
+var PL$49/*modRes4*/;
+var PL$79/*c*/;
+var PL$80/*s*/;
+var PL$81/*f*/;
+var PL$82/*m*/;
+PL$3(function(){;
+__requireFun("./testObj").then(PL$3(function(PL$6){PL$5/*testObj*/ = PL$6;
+PL$7/*successFun*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
-if((_V8/*mod*/ && _V8/*mod*/["success"])){
-_V9/*success*/();;
+if((PL$8/*mod*/ && PL$8/*mod*/["success"])){
+PL$9/*success*/();;
 };
 ;
 ;
 });
-_V10/*successFunDbg*/ = (function(_V8/*mod*/, _V9/*success*/){
+PL$10/*successFunDbg*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
 debugger;
-if((_V8/*mod*/ && _V8/*mod*/["success"])){
-_V9/*success*/();;
+if((PL$8/*mod*/ && PL$8/*mod*/["success"])){
+PL$9/*success*/();;
 };
 ;
 ;
 });
-_V11/*createTest*/ = (function(_V12/*parModuleName*/, _V13/*parFun*/){
-var _V14 = new __Promise();
-var _V16 = function(code){ return function(res){ try{code(res);}catch(e){ _V14.reject(e); }; }; };
-var _V17 = function(e){ _V14.reject(e); };
-var _V7/*successFun*/;
-var _V8/*mod*/;
-_V16(function(){;
-if(! _V13/*parFun*/){
-_V13/*parFun*/ = _V7/*successFun*/;;
+PL$11/*createTest*/ = (function(PL$12/*parModuleName*/, PL$13/*parFun*/){
+var PL$14 = new __Promise();
+var PL$16 = function(code){ return function(res){ try{code(res);}catch(e){ PL$14.reject(e); }; }; };
+var PL$17 = function(e){ PL$14.reject(e); };
+var PL$7/*successFun*/;
+var PL$8/*mod*/;
+PL$16(function(){;
+if(! PL$13/*parFun*/){
+PL$13/*parFun*/ = PL$7/*successFun*/;;
 };
 ;
-_V5/*testObj*/[_V12/*parModuleName*/] = false;;
-_V7/*successFun*/ = (function(){
+PL$5/*testObj*/[PL$12/*parModuleName*/] = false;;
+PL$7/*successFun*/ = (function(){
 ;
-_V5/*testObj*/[_V12/*parModuleName*/] = true;;
+PL$5/*testObj*/[PL$12/*parModuleName*/] = true;;
 ;
 });
-var _V18 = new __Promise();
-var _V19 = new __Promise();
-var _V20/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V19.resolve(e); }; }; };
-var _V21 = function(e){ _V19.resolve(e); };
-_V20/*try catch*/(function(){__requireFun(("./" + _V12/*parModuleName*/)).then(_V20/*try catch*/(function(_V22){_V8/*mod*/ = _V22;
-_V13/*parFun*/(_V8/*mod*/, _V7/*successFun*/);;
-_V18.resolve();
-}), _V21);
+var PL$18 = new __Promise();
+var PL$19 = new __Promise();
+var PL$20/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.resolve(e); }; }; };
+var PL$21 = function(e){ PL$19.resolve(e); };
+PL$20/*try catch*/(function(){__requireFun(("./" + PL$12/*parModuleName*/)).then(PL$20/*try catch*/(function(PL$22){PL$8/*mod*/ = PL$22;
+PL$13/*parFun*/(PL$8/*mod*/, PL$7/*successFun*/);;
+PL$18.resolve();
+}), PL$21);
 ;})();
-_V19.then(_V16(function(_V23/*e*/){_V24/*console*/["log"]("something went wrong");;
-_V18.resolve();;
+PL$19.then(PL$16(function(PL$23/*e*/){PL$24/*console*/["log"]("something went wrong");;
+PL$18.resolve();;
 }));
-_V18.then(_V16(function(){;
+PL$18.then(PL$16(function(){;
 ;
-_V14.resolve(); return;;
-}), _V17)})();
-return _V14;
+PL$14.resolve(); return;;
+}), PL$17)})();
+return PL$14;
 });
-_V25/*funReturning4*/ = (function(_V8/*mod*/, _V9/*success*/){
+PL$25/*funReturning4*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
 try
-{_V8/*mod*/["fun"]()["then"]((function(_V26/*value*/){
+{PL$8/*mod*/["fun"]()["then"]((function(PL$26/*value*/){
 ;
-if((_V26/*value*/ == 4)){
-_V9/*success*/();;
+if((PL$26/*value*/ == 4)){
+PL$9/*success*/();;
 };
 ;
 ;
 }));;
-}catch(_V23/*e*/){};
+}catch(PL$23/*e*/){};
 ;
 ;
 });
-_V27/*funReturning4debug*/ = (function(_V8/*mod*/, _V9/*success*/){
+PL$27/*funReturning4debug*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
 debugger;
 try
-{_V8/*mod*/["fun"]()["then"]((function(_V26/*value*/){
+{PL$8/*mod*/["fun"]()["then"]((function(PL$26/*value*/){
 ;
-if((_V26/*value*/ == 4)){
-_V9/*success*/();;
+if((PL$26/*value*/ == 4)){
+PL$9/*success*/();;
 };
 ;
 ;
 }));;
-}catch(_V23/*e*/){};
+}catch(PL$23/*e*/){};
 ;
 ;
 });
-_V28/*returning4*/ = (function(_V8/*mod*/, _V9/*success*/){
+PL$28/*returning4*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
-if((_V8/*mod*/ == 4)){
-_V9/*success*/();;
-};
-;
-;
-});
-_V11/*createTest*/("basicmodule", (function(_V8/*mod*/, _V9/*success*/){
-;
-if((typeof _V8/*mod*/ == "object")){
-_V9/*success*/();;
-};
-;
-;
-})).then(_V3(function(_V29){_V29;;
-_V11/*createTest*/("creatingpromise", _V25/*funReturning4*/).then(_V3(function(_V30){_V30;;
-_V11/*createTest*/("creatingpromise2", _V25/*funReturning4*/).then(_V3(function(_V31){_V31;;
-_V11/*createTest*/("creatingpromise3", _V25/*funReturning4*/).then(_V3(function(_V32){_V32;;
-_V11/*createTest*/("simpleArray", _V7/*successFun*/).then(_V3(function(_V33){_V33;;
-_V11/*createTest*/("newParameter", _V7/*successFun*/).then(_V3(function(_V34){_V34;;
-_V11/*createTest*/("class", _V7/*successFun*/).then(_V3(function(_V35){_V35;;
-_V11/*createTest*/("classInheritence", _V7/*successFun*/).then(_V3(function(_V36){_V36;;
-_V11/*createTest*/("conditional", _V25/*funReturning4*/).then(_V3(function(_V37){_V37;;
-_V11/*createTest*/("conditional2", _V25/*funReturning4*/).then(_V3(function(_V38){_V38;;
-_V11/*createTest*/("conditional3", _V25/*funReturning4*/).then(_V3(function(_V39){_V39;;
-_V11/*createTest*/("switch", _V7/*successFun*/).then(_V3(function(_V40){_V40;;
-_V11/*createTest*/("switchPromising", _V7/*successFun*/).then(_V3(function(_V41){_V41;;
-_V11/*createTest*/("callback", _V25/*funReturning4*/).then(_V3(function(_V42){_V42;;
-_V11/*createTest*/("callback2", _V25/*funReturning4*/).then(_V3(function(_V43){_V43;;
-_V11/*createTest*/("forloop", _V25/*funReturning4*/).then(_V3(function(_V44){_V44;;
-_V11/*createTest*/("forloop2", _V25/*funReturning4*/).then(_V3(function(_V45){_V45;;
-_V11/*createTest*/("whileloop", _V25/*funReturning4*/).then(_V3(function(_V46){_V46;;
-_V11/*createTest*/("whileloop2", _V25/*funReturning4*/).then(_V3(function(_V47){_V47;;
-_V11/*createTest*/("functionDeclaration", _V7/*successFun*/).then(_V3(function(_V48){_V48;;
-_V49/*modRes4*/ = (function(_V8/*mod*/, _V9/*success*/){
-;
-if((_V8/*mod*/["res"] == 4)){
-_V9/*success*/();;
+if((PL$8/*mod*/ == 4)){
+PL$9/*success*/();;
 };
 ;
 ;
 });
-_V11/*createTest*/("tryCatch", _V49/*modRes4*/).then(_V3(function(_V50){_V50;;
-_V11/*createTest*/("tryCatch2", _V49/*modRes4*/).then(_V3(function(_V51){_V51;;
-_V11/*createTest*/("require", _V7/*successFun*/).then(_V3(function(_V52){_V52;;
-_V11/*createTest*/("string", (function(_V8/*mod*/, _V9/*success*/){
+PL$11/*createTest*/("basicmodule", (function(PL$8/*mod*/, PL$9/*success*/){
 ;
-if(((_V8/*mod*/["a"] == "\n\r\u2028\u2029\"'") && (_V8/*mod*/["b"] == "xxx\n  xxx"))){
-_V9/*success*/();;
+if((typeof PL$8/*mod*/ == "object")){
+PL$9/*success*/();;
 };
 ;
 ;
-})).then(_V3(function(_V53){_V53;;
-_V11/*createTest*/("simpleModule", (function(_V8/*mod*/, _V9/*success*/){
+})).then(PL$3(function(PL$29){PL$29;;
+PL$11/*createTest*/("creatingpromise", PL$25/*funReturning4*/).then(PL$3(function(PL$30){PL$30;;
+PL$11/*createTest*/("creatingpromise2", PL$25/*funReturning4*/).then(PL$3(function(PL$31){PL$31;;
+PL$11/*createTest*/("creatingpromise3", PL$25/*funReturning4*/).then(PL$3(function(PL$32){PL$32;;
+PL$11/*createTest*/("simpleArray", PL$7/*successFun*/).then(PL$3(function(PL$33){PL$33;;
+PL$11/*createTest*/("newParameter", PL$7/*successFun*/).then(PL$3(function(PL$34){PL$34;;
+PL$11/*createTest*/("class", PL$7/*successFun*/).then(PL$3(function(PL$35){PL$35;;
+PL$11/*createTest*/("classInheritence", PL$7/*successFun*/).then(PL$3(function(PL$36){PL$36;;
+PL$11/*createTest*/("conditional", PL$25/*funReturning4*/).then(PL$3(function(PL$37){PL$37;;
+PL$11/*createTest*/("conditional2", PL$25/*funReturning4*/).then(PL$3(function(PL$38){PL$38;;
+PL$11/*createTest*/("conditional3", PL$25/*funReturning4*/).then(PL$3(function(PL$39){PL$39;;
+PL$11/*createTest*/("switch", PL$7/*successFun*/).then(PL$3(function(PL$40){PL$40;;
+PL$11/*createTest*/("switchPromising", PL$7/*successFun*/).then(PL$3(function(PL$41){PL$41;;
+PL$11/*createTest*/("callback", PL$25/*funReturning4*/).then(PL$3(function(PL$42){PL$42;;
+PL$11/*createTest*/("callback2", PL$25/*funReturning4*/).then(PL$3(function(PL$43){PL$43;;
+PL$11/*createTest*/("forloop", PL$25/*funReturning4*/).then(PL$3(function(PL$44){PL$44;;
+PL$11/*createTest*/("forloop2", PL$25/*funReturning4*/).then(PL$3(function(PL$45){PL$45;;
+PL$11/*createTest*/("whileloop", PL$25/*funReturning4*/).then(PL$3(function(PL$46){PL$46;;
+PL$11/*createTest*/("whileloop2", PL$25/*funReturning4*/).then(PL$3(function(PL$47){PL$47;;
+PL$11/*createTest*/("functionDeclaration", PL$7/*successFun*/).then(PL$3(function(PL$48){PL$48;;
+PL$49/*modRes4*/ = (function(PL$8/*mod*/, PL$9/*success*/){
 ;
-if((_V8/*mod*/ && (_V8/*mod*/["member"] === 4))){
-_V9/*success*/();;
+if((PL$8/*mod*/["res"] == 4)){
+PL$9/*success*/();;
 };
 ;
 ;
-})).then(_V3(function(_V54){_V54;;
-_V11/*createTest*/("nonReturningFunction", _V49/*modRes4*/).then(_V3(function(_V55){_V55;;
-_V11/*createTest*/("arguments", _V28/*returning4*/).then(_V3(function(_V56){_V56;;
-_V11/*createTest*/("requireException", _V7/*successFun*/).then(_V3(function(_V57){_V57;;
-_V11/*createTest*/("typesafetyassign", _V7/*successFun*/).then(_V3(function(_V58){_V58;;
-_V11/*createTest*/("typesafetyMembers", _V7/*successFun*/).then(_V3(function(_V59){_V59;;
-_V11/*createTest*/("typesafetyMembers2", _V7/*successFun*/).then(_V3(function(_V60){_V60;;
-_V11/*createTest*/("typesafetyMembers3", _V7/*successFun*/).then(_V3(function(_V61){_V61;;
-_V11/*createTest*/("typesafetyDelayedDefinition", _V7/*successFun*/).then(_V3(function(_V62){_V62;;
-_V11/*createTest*/("typesafetyFunction", _V7/*successFun*/).then(_V3(function(_V63){_V63;;
-_V11/*createTest*/("typesafetyFunction2", _V7/*successFun*/).then(_V3(function(_V64){_V64;;
-_V11/*createTest*/("typesafetyDynamic", _V7/*successFun*/).then(_V3(function(_V65){_V65;;
-_V11/*createTest*/("typesafetyMemberFunction", _V7/*successFun*/).then(_V3(function(_V66){_V66;;
-_V11/*createTest*/("typesafetyMemberFunction2", _V7/*successFun*/).then(_V3(function(_V67){_V67;;
-_V11/*createTest*/("typesafetyConstructor", _V7/*successFun*/).then(_V3(function(_V68){_V68;;
-_V11/*createTest*/("typesafetyConstructor2", _V7/*successFun*/).then(_V3(function(_V69){_V69;;
-_V11/*createTest*/("typesafetyDestructor", _V7/*successFun*/).then(_V3(function(_V70){_V70;;
-_V11/*createTest*/("typesafetyDestructorMember", _V7/*successFun*/).then(_V3(function(_V71){_V71;;
-_V11/*createTest*/("typesafetyDestructorOrder", _V7/*successFun*/).then(_V3(function(_V72){_V72;;
-_V11/*createTest*/("typesafetyeDestructorCircular", _V7/*successFun*/).then(_V3(function(_V73){_V73;;
-_V11/*createTest*/("typesafetyDestructorParameter", _V7/*successFun*/).then(_V3(function(_V74){_V74;;
-_V11/*createTest*/("typesafetyDestructorReturn", _V7/*successFun*/).then(_V3(function(_V75){_V75;;
-_V11/*createTest*/("typesafetyPromising", _V7/*successFun*/).then(_V3(function(_V76){_V76;;
-_V11/*createTest*/("connect", _V7/*successFun*/).then(_V3(function(_V77){_V77;;
-_V78/*c*/ = 0;
-_V79/*s*/ = 0;
-_V80/*f*/ = 0;
-for(_V81/*m*/ in _V5/*testObj*/){_V78/*c*/++;;
-if(_V5/*testObj*/[_V81/*m*/]){
-_V79/*s*/++;;
+});
+PL$11/*createTest*/("tryCatch", PL$49/*modRes4*/).then(PL$3(function(PL$50){PL$50;;
+PL$11/*createTest*/("tryCatch2", PL$49/*modRes4*/).then(PL$3(function(PL$51){PL$51;;
+PL$11/*createTest*/("require", PL$7/*successFun*/).then(PL$3(function(PL$52){PL$52;;
+PL$11/*createTest*/("string", (function(PL$8/*mod*/, PL$9/*success*/){
+;
+if(((PL$8/*mod*/["a"] == "\n\r\u2028\u2029\"'") && (PL$8/*mod*/["b"] == "xxx\n  xxx"))){
+PL$9/*success*/();;
+};
+;
+;
+})).then(PL$3(function(PL$53){PL$53;;
+PL$11/*createTest*/("simpleModule", (function(PL$8/*mod*/, PL$9/*success*/){
+;
+if((PL$8/*mod*/ && (PL$8/*mod*/["member"] === 4))){
+PL$9/*success*/();;
+};
+;
+;
+})).then(PL$3(function(PL$54){PL$54;;
+PL$11/*createTest*/("nonReturningFunction", PL$49/*modRes4*/).then(PL$3(function(PL$55){PL$55;;
+PL$11/*createTest*/("arguments", PL$28/*returning4*/).then(PL$3(function(PL$56){PL$56;;
+PL$11/*createTest*/("requireException", PL$7/*successFun*/).then(PL$3(function(PL$57){PL$57;;
+PL$11/*createTest*/("typesafetyassign", PL$7/*successFun*/).then(PL$3(function(PL$58){PL$58;;
+PL$11/*createTest*/("typesafetyMembers", PL$7/*successFun*/).then(PL$3(function(PL$59){PL$59;;
+PL$11/*createTest*/("typesafetyMembers2", PL$7/*successFun*/).then(PL$3(function(PL$60){PL$60;;
+PL$11/*createTest*/("typesafetyMembers3", PL$7/*successFun*/).then(PL$3(function(PL$61){PL$61;;
+PL$11/*createTest*/("typesafetyDelayedDefinition", PL$7/*successFun*/).then(PL$3(function(PL$62){PL$62;;
+PL$11/*createTest*/("typesafetyFunction", PL$7/*successFun*/).then(PL$3(function(PL$63){PL$63;;
+PL$11/*createTest*/("typesafetyFunction2", PL$7/*successFun*/).then(PL$3(function(PL$64){PL$64;;
+PL$11/*createTest*/("typesafetyDynamic", PL$7/*successFun*/).then(PL$3(function(PL$65){PL$65;;
+PL$11/*createTest*/("typesafetyMemberFunction", PL$7/*successFun*/).then(PL$3(function(PL$66){PL$66;;
+PL$11/*createTest*/("typesafetyMemberFunction2", PL$7/*successFun*/).then(PL$3(function(PL$67){PL$67;;
+PL$11/*createTest*/("typesafetyConstructor", PL$7/*successFun*/).then(PL$3(function(PL$68){PL$68;;
+PL$11/*createTest*/("typesafetyConstructor2", PL$7/*successFun*/).then(PL$3(function(PL$69){PL$69;;
+PL$11/*createTest*/("typesafetyDestructor", PL$7/*successFun*/).then(PL$3(function(PL$70){PL$70;;
+PL$11/*createTest*/("typesafetyDestructorMember", PL$7/*successFun*/).then(PL$3(function(PL$71){PL$71;;
+PL$11/*createTest*/("typesafetyDestructorOrder", PL$7/*successFun*/).then(PL$3(function(PL$72){PL$72;;
+PL$11/*createTest*/("typesafetyeDestructorCircular", PL$7/*successFun*/).then(PL$3(function(PL$73){PL$73;;
+PL$11/*createTest*/("typesafetyDestructorParameter", PL$7/*successFun*/).then(PL$3(function(PL$74){PL$74;;
+PL$11/*createTest*/("typesafetyDestructorReturn", PL$7/*successFun*/).then(PL$3(function(PL$75){PL$75;;
+PL$11/*createTest*/("typesafetyPromising", PL$7/*successFun*/).then(PL$3(function(PL$76){PL$76;;
+PL$11/*createTest*/("connect", PL$7/*successFun*/).then(PL$3(function(PL$77){PL$77;;
+PL$11/*createTest*/("extraRequire", PL$7/*successFun*/).then(PL$3(function(PL$78){PL$78;;
+PL$79/*c*/ = 0;
+PL$80/*s*/ = 0;
+PL$81/*f*/ = 0;
+for(PL$82/*m*/ in PL$5/*testObj*/){PL$79/*c*/++;;
+if(PL$5/*testObj*/[PL$82/*m*/]){
+PL$80/*s*/++;;
 
 }else{
-_V24/*console*/["log"]((_V81/*m*/ + " failed!"));;
-_V80/*f*/++;;
+PL$24/*console*/["log"]((PL$82/*m*/ + " failed!"));;
+PL$81/*f*/++;;
 };
 ;
 };
 ;
-_V24/*console*/["log"]((((((("run " + _V78/*c*/) + " tests. ") + _V79/*s*/) + " successful, ") + _V80/*f*/) + " failed"));;
-_V1.resolve(_V5/*testObj*/); return;;
-_V1.resolve(); return;;
-}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
+PL$24/*console*/["log"]((((((("run " + PL$79/*c*/) + " tests. ") + PL$80/*s*/) + " successful, ") + PL$81/*f*/) + " failed"));;
+PL$1.resolve(PL$5/*testObj*/); return;;
+PL$1.resolve(); return;;
+}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

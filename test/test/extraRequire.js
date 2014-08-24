@@ -49,26 +49,19 @@
     alert("not working out!");
     
   };
-  defineFun(["promiseland"], function(promiseland){
+  defineFun(["promiseland", "./extraRequireModule"], function(promiseland, PL$2/*extraModule*/){
 var __require = requireFun;
 
-var __Promise = promiseland.Promise;
-var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "9c6c5e67126d5c754f325b454426d93a" })){ return promiseland._getModule("9c6c5e67126d5c754f325b454426d93a"); };
+if (promiseland._hasModule({ hashStr: "c3524211fbff8d0dc294d515bc7b1eaf" })){ return promiseland._getModule("c3524211fbff8d0dc294d515bc7b1eaf"); };
 var PL$1 = (function(){
 "use strict";
-var PL$2/*a*/;
 ;
-PL$2/*a*/ = (function(){
-var PL$3 = new __Promise();
-var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
-var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){;
-PL$3.resolve("x"); return;;
-PL$3.resolve(); return;;
-})();
-return PL$3;
-});
+;
+if((PL$2/*extraModule*/["value"] == 4)){
+return {"success": true};;
+};
+;
+return {"success": false};;
 ;
 })();
 ;return PL$1;

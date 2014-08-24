@@ -864,20 +864,13 @@ var getInstanceTransportData = (parType, parData, parContent){
       return getTypeTransportData(parType, parContent);
     };
     
-    console.log("step 1");
     
     var t = parContent.getTransport();
-    console.log("step 1.1");
 
     var internalId = instance.getInternalId();
-    console.log("step 1.2");
     var remoteId = t.getInstanceRemoteId(instance.instance);
     
-    console.log("step 2");
-    
     var request = parContent.newRequest();
-    
-    console.log("step 3");
 
     if (remoteId !== undefined){
       request.setData({
@@ -895,8 +888,6 @@ var getInstanceTransportData = (parType, parData, parContent){
     };
     request.send();
     
-    console.log("step 4");
-
     ((){
       // keeps the instance from destruction till its certain the other side has recieved it
       try{

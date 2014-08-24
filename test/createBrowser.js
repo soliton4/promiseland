@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,25 +66,25 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "013de52397ffcdd71dde2cccd7f9e0d4" })){ return promiseland._getModule("013de52397ffcdd71dde2cccd7f9e0d4"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "013de52397ffcdd71dde2cccd7f9e0d4", "module": _V1, promising: true });
-var _V7/*res*/;try{_V7/*res*/ = res;}catch(e){};
-var _V8/*console*/;try{_V8/*console*/ = console;}catch(e){};
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "013de52397ffcdd71dde2cccd7f9e0d4", "module": PL$1, promising: true });
+var PL$7/*res*/;try{PL$7/*res*/ = res;}catch(e){};
+var PL$8/*console*/;try{PL$8/*console*/ = console;}catch(e){};
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*cp*/;
-_V3(function(){;
-__requireFun("./createProcess").then(_V3(function(_V6){_V5/*cp*/ = _V6;
-_V7/*res*/ = _V5/*cp*/("google-chrome", ["http://localhost:3008/"]);;
-_V7/*res*/.then(_V3(function(_V9){_V8/*console*/["log"](_V9);;
-_V1.resolve(); return;;
-}), _V4);
-;}), _V4);
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*cp*/;
+PL$3(function(){;
+__requireFun("./createProcess").then(PL$3(function(PL$6){PL$5/*cp*/ = PL$6;
+PL$7/*res*/ = PL$5/*cp*/("google-chrome", ["http://localhost:3008/"]);;
+PL$7/*res*/.then(PL$3(function(PL$9){PL$8/*console*/["log"](PL$9);;
+PL$1.resolve(); return;;
+}), PL$4);
+;}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

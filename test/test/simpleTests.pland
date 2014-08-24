@@ -159,6 +159,9 @@
 
   *createTest("connect", successFun);
 
+  *createTest("extraRequire", successFun);
+  //*createTest("extraRequire", successFun);
+
   
     var c = 0;
     var s = 0;

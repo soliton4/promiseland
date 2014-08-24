@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,31 +66,31 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "e0b306b308e0915bbef291e45757b5f3" })){ return promiseland._getModule("e0b306b308e0915bbef291e45757b5f3"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "e0b306b308e0915bbef291e45757b5f3", "module": _V1, promising: true });
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "e0b306b308e0915bbef291e45757b5f3", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-_V3(function(){;
-var _V5 = new __Promise();
-var _V6 = new __Promise();
-var _V7/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V6.resolve(e); }; }; };
-var _V8 = function(e){ _V6.resolve(e); };
-_V7/*try catch*/(function(){__requireFun("somethingThatsNotPresent").then(_V7/*try catch*/(function(_V9){_V9;;
-_V5.resolve();
-}), _V8);
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+PL$3(function(){;
+var PL$5 = new __Promise();
+var PL$6 = new __Promise();
+var PL$7/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.resolve(e); }; }; };
+var PL$8 = function(e){ PL$6.resolve(e); };
+PL$7/*try catch*/(function(){__requireFun("somethingThatsNotPresent").then(PL$7/*try catch*/(function(PL$9){PL$9;;
+PL$5.resolve();
+}), PL$8);
 ;})();
-_V6.then(_V3(function(_V10/*e*/){_V1.resolve({"success": true}); return;;
-_V5.resolve();;
+PL$6.then(PL$3(function(PL$10/*e*/){PL$1.resolve({"success": true}); return;;
+PL$5.resolve();;
 }));
-_V5.then(_V3(function(){;
+PL$5.then(PL$3(function(){;
 ;
-_V1.resolve({"success": false}); return;;
-_V1.resolve(); return;;
-}), _V4)})();
-return _V1;
+PL$1.resolve({"success": false}); return;;
+PL$1.resolve(); return;;
+}), PL$4)})();
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

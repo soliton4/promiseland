@@ -49,88 +49,88 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "1c27915421db6c724a7af79a2c806394" })){ return promiseland._getModule("1c27915421db6c724a7af79a2c806394"); };
-var _V12/*console*/;try{_V12/*console*/ = console;}catch(e){};
-var _V1 = (function(){
+var PL$12/*console*/;try{PL$12/*console*/ = console;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V5/*failed*/;
-var _V6/*cnt*/;
-var _V3/*C1*/;
-var _V7/*cntSupposed*/;
-var _V10/*f1*/;
-var _V11/*a*/;
-var _T_V11/*a*/;
-var _V2/*type:C1*/ = classSystem._createProvisionalClass();
-_V3/*C1*/ = _V2/*type:C1*/;
-var _V4/*C1-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:C1*/).then(function(parType){_V2/*type:C1*/ = parType;_V4/*C1-constructor*/ = classSystem.getTypeConstructor(_V2/*type:C1*/);});var _V10/*f1*/ = function(_V9/*p1*/){
-var _T_V9/*p1*/;
-if(_V9/*p1*/){ _T_V9/*p1*/ = _V9/*p1*/[1];
-_V9/*p1*/ = _V9/*p1*/[0];}
+var PL$5/*failed*/;
+var PL$6/*cnt*/;
+var PL$3/*C1*/;
+var PL$7/*cntSupposed*/;
+var PL$10/*f1*/;
+var PL$11/*a*/;
+var _TPL$11/*a*/;
+var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
+PL$3/*C1*/ = PL$2/*type:C1*/;
+var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});var PL$10/*f1*/ = function(PL$9/*p1*/){
+var _TPL$9/*p1*/;
+if(PL$9/*p1*/){ _TPL$9/*p1*/ = PL$9/*p1*/[1];
+PL$9/*p1*/ = PL$9/*p1*/[0];}
 try{;
-_V7/*cntSupposed*/(0);;
-if (_T_V9/*p1*/){ _T_V9/*p1*/();};}catch(e){if (_T_V9/*p1*/){ _T_V9/*p1*/();};throw e};;
+PL$7/*cntSupposed*/(0);;
+if (_TPL$9/*p1*/){ _TPL$9/*p1*/();};}catch(e){if (_TPL$9/*p1*/){ _TPL$9/*p1*/();};throw e};;
 };
 ;
-_V5/*failed*/ = false;
-_V6/*cnt*/ = 0;
-classSystem._resolveProvisional(_V2/*type:C1*/, classSystem.createClass({members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
+PL$5/*failed*/ = false;
+PL$6/*cnt*/ = 0;
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
 ;
-_V6/*cnt*/++;;
+PL$6/*cnt*/++;;
 ;
-})}));_V3/*C1*/;;
-_V7/*cntSupposed*/ = (function(_V8/*s*/){
+})}));PL$3/*C1*/;;
+PL$7/*cntSupposed*/ = (function(PL$8/*s*/){
 ;
-if((_V6/*cnt*/ == _V8/*s*/)){
+if((PL$6/*cnt*/ == PL$8/*s*/)){
 return;;
 };
 ;
-_V5/*failed*/ = true;;
+PL$5/*failed*/ = true;;
 ;
 });
-_V7/*cntSupposed*/(0);;
-_V10/*f1*/;
+PL$7/*cntSupposed*/(0);;
+PL$10/*f1*/;
 ;
-_V7/*cntSupposed*/(0);;
+PL$7/*cntSupposed*/(0);;
 /*temp tracked assign*/(function(vAr){
-if (_T_V11/*a*/){ _T_V11/*a*/(); };
+if (_TPL$11/*a*/){ _TPL$11/*a*/(); };
 if(vAr){
 var v = vAr[0];
-_V11/*a*/ = v;
-_T_V11/*a*/ = vAr[1];
+PL$11/*a*/ = v;
+_TPL$11/*a*/ = vAr[1];
 return v;
 }else{
-_V11/*a*/ = undefined; _T_V11/*a*/ = undefined;
+PL$11/*a*/ = undefined; _TPL$11/*a*/ = undefined;
 return;
-}; })(new _V4/*C1-constructor*/())/*end temp assign*/
+}; })(new PL$4/*C1-constructor*/())/*end temp assign*/
 ;
-_V7/*cntSupposed*/(0);;
-_V10/*f1*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(_V11/*a*/));;
-_V7/*cntSupposed*/(0);;
+PL$7/*cntSupposed*/(0);;
+PL$10/*f1*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$11/*a*/));;
+PL$7/*cntSupposed*/(0);;
 /*temp tracked assign*/(function(vAr){
-if (_T_V11/*a*/){ _T_V11/*a*/(); };
+if (_TPL$11/*a*/){ _TPL$11/*a*/(); };
 if(vAr){
 var v = vAr[0];
-_V11/*a*/ = v;
-_T_V11/*a*/ = vAr[1];
+PL$11/*a*/ = v;
+_TPL$11/*a*/ = vAr[1];
 return v;
 }else{
-_V11/*a*/ = undefined; _T_V11/*a*/ = undefined;
+PL$11/*a*/ = undefined; _TPL$11/*a*/ = undefined;
 return;
-}; })(new _V4/*C1-constructor*/())/*end temp assign*/
+}; })(new PL$4/*C1-constructor*/())/*end temp assign*/
 ;;
-_V7/*cntSupposed*/(1);;
-if(_V5/*failed*/){
-_V12/*console*/["log"]("failed");;
+PL$7/*cntSupposed*/(1);;
+if(PL$5/*failed*/){
+PL$12/*console*/["log"]("failed");;
 return {"success": false};;
 };
 ;
 return {"success": true};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

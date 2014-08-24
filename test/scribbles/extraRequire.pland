@@ -1,7 +1,7 @@
 <{
   x: 1,
   require: {
-    
+    mod1: "some/path"
   }
 }>;
   

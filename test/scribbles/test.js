@@ -49,19 +49,19 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "6b435967d4e24cae0aaf40c9722f44ee" })){ return promiseland._getModule("6b435967d4e24cae0aaf40c9722f44ee"); };
-var _V2/*fs*/;try{_V2/*fs*/ = fs;}catch(e){};
-var _V3/*filename*/;try{_V3/*filename*/ = filename;}catch(e){};
-var _V4/*callback*/;try{_V4/*callback*/ = callback;}catch(e){};
-var _V1 = (function(){
+var PL$2/*fs*/;try{PL$2/*fs*/ = fs;}catch(e){};
+var PL$3/*filename*/;try{PL$3/*filename*/ = filename;}catch(e){};
+var PL$4/*callback*/;try{PL$4/*callback*/ = callback;}catch(e){};
+var PL$1 = (function(){
 "use strict";
 ;
-_V2/*fs*/["readFile"](_V3/*filename*/, {"encoding": "utf8"}, _V4/*callback*/["callback"]);;
+PL$2/*fs*/["readFile"](PL$3/*filename*/, {"encoding": "utf8"}, PL$4/*callback*/["callback"]);;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

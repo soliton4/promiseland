@@ -49,32 +49,32 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "d4ed6ebe11e279453b7f908db653becd" })){ return promiseland._getModule("d4ed6ebe11e279453b7f908db653becd"); };
-var _V10/*console*/;try{_V10/*console*/ = console;}catch(e){};
-var _V1 = (function(){
+var PL$10/*console*/;try{PL$10/*console*/ = console;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V3/*Ca*/;
-var _V6/*Cb*/;
-var _V8/*a*/;
-var _V9/*b*/;
-var _V2/*type:Ca*/ = classSystem._createProvisionalClass();
-_V3/*Ca*/ = _V2/*type:Ca*/;
-var _V4/*Ca-constructor*/ = undefined;classSystem.readyPromise(_V2/*type:Ca*/).then(function(parType){_V2/*type:Ca*/ = parType;_V4/*Ca-constructor*/ = classSystem.getTypeConstructor(_V2/*type:Ca*/);});var _V5/*type:Cb*/ = classSystem._createProvisionalClass();
-_V6/*Cb*/ = _V5/*type:Cb*/;
-var _V7/*Cb-constructor*/ = undefined;classSystem.readyPromise(_V5/*type:Cb*/).then(function(parType){_V5/*type:Cb*/ = parType;_V7/*Cb-constructor*/ = classSystem.getTypeConstructor(_V5/*type:Cb*/);});;
-classSystem._resolveProvisional(_V2/*type:Ca*/, classSystem.createClass({members: [{"name":"m","type":_V5/*type:Cb*/},{"name":"s","type":_V2/*type:Ca*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 1}));_V3/*Ca*/;;
-classSystem._resolveProvisional(_V5/*type:Cb*/, classSystem.createClass({members: [{"name":"m","type":_V2/*type:Ca*/},{"name":"s","type":_V5/*type:Cb*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 2}));_V6/*Cb*/;;
-_V8/*a*/ = new _V4/*Ca-constructor*/();
-_V9/*b*/ = new _V7/*Cb-constructor*/();
-_V9/*b*/[3] = _V8/*a*/;;
-_V10/*console*/["log"](_V8/*a*/[5]);;
-_V10/*console*/["log"](_V9/*b*/[5]);;
+var PL$3/*Ca*/;
+var PL$6/*Cb*/;
+var PL$8/*a*/;
+var PL$9/*b*/;
+var PL$2/*type:Ca*/ = classSystem._createProvisionalClass();
+PL$3/*Ca*/ = PL$2/*type:Ca*/;
+var PL$4/*Ca-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Ca*/).then(function(parType){PL$2/*type:Ca*/ = parType;PL$4/*Ca-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Ca*/);});var PL$5/*type:Cb*/ = classSystem._createProvisionalClass();
+PL$6/*Cb*/ = PL$5/*type:Cb*/;
+var PL$7/*Cb-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Cb*/).then(function(parType){PL$5/*type:Cb*/ = parType;PL$7/*Cb-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Cb*/);});;
+classSystem._resolveProvisional(PL$2/*type:Ca*/, classSystem.createClass({members: [{"name":"m","type":PL$5/*type:Cb*/},{"name":"s","type":PL$2/*type:Ca*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 1}));PL$3/*Ca*/;;
+classSystem._resolveProvisional(PL$5/*type:Cb*/, classSystem.createClass({members: [{"name":"m","type":PL$2/*type:Ca*/},{"name":"s","type":PL$5/*type:Cb*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 2}));PL$6/*Cb*/;;
+PL$8/*a*/ = new PL$4/*Ca-constructor*/();
+PL$9/*b*/ = new PL$7/*Cb-constructor*/();
+PL$9/*b*/[3] = PL$8/*a*/;;
+PL$10/*console*/["log"](PL$8/*a*/[5]);;
+PL$10/*console*/["log"](PL$9/*b*/[5]);;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

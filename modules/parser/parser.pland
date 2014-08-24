@@ -7,39 +7,87 @@ var errorFun = basics.errorFun;
 var errorMsg = basics.errorMsg;
 var _stringEncodeStr = basics._stringEncodeStr;
 var stringEncodeStr = basics.stringEncodeStr;
-    
-    /* debugging flags
-    */
-    
-    var _pureCode = false;
-    
-    var Promise = promiseland.Promise;
-    
-    var classSystem = promiseland.classSystem;
-    
-    var statementType = {
-      builtin: true
-      , statement: true
+
+/* debugging flags
+*/
+
+var _pureCode = false;
+
+var Promise = promiseland.Promise;
+
+var classSystem = promiseland.classSystem;
+
+var statementType = {
+  builtin: true
+  , statement: true
+};
+var varType = classSystem.getBuiltinType("var");
+
+
+var globalNewPromiseStr = function(){
+  return "new __Promise()";
+};
+
+
+class Map {
+  constructor: (){
+    this.map = {};
+  },
+  set: (key, value){
+    this.map[key] = value
+  },
+  get: (key){
+    if (Object.prototype.hasOwnProperty.call(this.map, key)){
+      return this.map[key];
     };
-    var varType = classSystem.getBuiltinType("var");
-    
-    
-    var globalNewPromiseStr = function(){
-      return "new __Promise()";
+  },
+  getArray: (){
+    var res = [];
+    var n;
+    for (n in this.map){
+      res.push({
+        key: n,
+        value: this.map[n]
+      });
     };
+    return res;
+  }
+};
+
+class VariableNames {
+  constructor: (par){
+    this.givenNames = par.givenNames || new Map();
+    this.getUniqueName = par.getUniqueName;
+  },
+  
+  get: (name){
     
-    
-    var mixin = function(){
-      var t = arguments[0];
-      var i = 0;
-      for (i = 1; i < arguments.length; ++i){
-        var m = arguments[i];
-        for (var p in m){
-          t[p] = m[p];
-        };
-      };
-      return t;
+    var n = identifierName(name);
+
+    if (n === "undefined"){
+      return n;
     };
+
+    if (!this.givenNames.get(n)){
+      this.givenNames.set(n, this.getUniqueName() + "/*" + n + "*/");
+    };
+    return this.givenNames.get(n);
+
+  },
+};
+
+
+var mixin = function(){
+  var t = arguments[0];
+  var i = 0;
+  for (i = 1; i < arguments.length; ++i){
+    var m = arguments[i];
+    for (var p in m){
+      t[p] = m[p];
+    };
+  };
+  return t;
+};
     
     var identifierName = function(par){
       if (typeof par == "string"){
@@ -186,6 +234,7 @@ var stringEncodeStr = basics.stringEncodeStr;
     /* internal parser object */
     
     var CodeParser = function(par){
+      var self = this;
       this.toParse = par.toParse;
       this.dynamicCode = par.dynamicCode;
       this.hashStr = par.hashStr;
@@ -201,11 +250,20 @@ var stringEncodeStr = basics.stringEncodeStr;
         this.common = par.common;
       }else{
         this.common = {
-          givenNames: {},
           givenTypeNames: {},
-          errors: []
+          errors: [],
+          uniquebasis: par.uniquebasis || {
+            index: 1
+          },
+          parsingConfig: par.parsingConfig
         };
+        this.common.variableNames = new VariableNames({
+          getUniqueName: (name){
+            return self.getUniqueName(name);
+          }
+        });
       };
+      
       this.errors = this.common.errors;
       
       this.newPromiseStr = function(){
@@ -427,6 +485,10 @@ var stringEncodeStr = basics.stringEncodeStr;
       
       this._addUsedVariable = function(par){
         var name = identifierName(par);
+        if (name === "undefined"){
+          return;
+        };
+        
         if (this.variables.hasOwnProperty(name)){
           if (this.variables[name].temporary){
             return;
@@ -448,15 +510,6 @@ var stringEncodeStr = basics.stringEncodeStr;
       };
       
       
-      
-      
-      if (par.uniquebasis){
-        this.uniquebasis = par.uniquebasis;
-      }else{
-        this.uniquebasis = {
-          index: 1
-        };
-      };
       
       
       
@@ -542,7 +595,7 @@ var stringEncodeStr = basics.stringEncodeStr;
       
       
       this.getUniqueName = function(name){
-        var retStr = "_V" + this.uniquebasis.index++;
+        var retStr = "PL$" + this.common.uniquebasis.index++;
         if (name){
           retStr += "/*" + name + "*/";
         };
@@ -558,14 +611,7 @@ var stringEncodeStr = basics.stringEncodeStr;
       };
       
       this.getVariableName = function(name){
-        
-        var n = identifierName(name);
-        
-        if (!this.common.givenNames[n]){
-          this.common.givenNames[n] = this.getUniqueName() + "/*" + n + "*/";
-        };
-        return this.common.givenNames[n];
-        
+        return this.common.variableNames.get(name);
       };
       
       this.renderType = function(parType, parParsed){
@@ -664,7 +710,6 @@ var stringEncodeStr = basics.stringEncodeStr;
       this.newInstance = function(element, extras){
         var param = {
           toParse: element
-          , uniquebasis: this.uniquebasis
           , common: this.common
           , hashStr: this.hashStr
           , types: this.types
@@ -728,6 +773,17 @@ var stringEncodeStr = basics.stringEncodeStr;
         extraRes.push("\"use strict\";\n");
         addExtraToPar(par, "addFront", extraRes);
         
+        
+        var extraModules = new Map();
+        var parsingConfig = this.common.parsingConfig;
+
+        if (parsingConfig){
+          var reqireProperty = this.getTemplateProperty(parsingConfig, "require", "ObjectExpression");
+          extraModules = this.getTemplateRequireProperty(reqireProperty);
+        };
+        this.common.extraModules = extraModules;
+        
+        
         if (checkPromising(par)){
           this.programPromiseStr = this.getUniqueName();
         };
@@ -744,6 +800,9 @@ var stringEncodeStr = basics.stringEncodeStr;
             };
             if (name == "Callback"){
               this.common.useCallback = true;
+            };
+            if (extraModules.get(name)){
+              continue;
             };
             res.push("var " + this.getVariableName(name) + ";");
             res.push("try{");
@@ -800,6 +859,23 @@ var stringEncodeStr = basics.stringEncodeStr;
           };
         };
       };
+      
+      this.getTemplateRequireProperty = function(parTemplate){
+        var i = 0;
+        var res = new Map();
+        for (i; i < parTemplate.properties.length; ++i){
+          var p = parTemplate.properties[i];
+          if (p.kind == "init"){
+            var key = identifierName(p.key);
+            if (p.value.type != "Literal"){
+              this.error(p.value, errorMsg.templateSyntaxError);
+            };
+            res.set(key, p.value.value);
+          };
+        };
+        return res;
+      };
+        
       
       this.createExtraDynamicType = function(parType, par, parParsed){
         var name;
@@ -4433,9 +4509,10 @@ var stringEncodeStr = basics.stringEncodeStr;
     };
     
     
-    var loaderStr = function(par){
-      var resStr = "";
-      resStr += "(function(){
+var loaderStr = function(par){
+  var resStr = "";
+  var i;
+  resStr += "(function(){
   var defineFun;
   var requireFun;
   
@@ -4454,20 +4531,20 @@ var stringEncodeStr = basics.stringEncodeStr;
       };
       callback.apply(callback, args);
     };
-    defineFun = function(requireAr, callback){\n\
-      requireFun(requireAr, function(){\n\
-        module.exports = callback.apply(callback, arguments);\n\
-      });\n\
-    };\n\
-    \n\
-  }else if (typeof define == \"function\" && define.amd){ // AMD\n\
-    var _define = define;\n\
-    requireFun = require;\n\
-    \n\
-    defineFun = function(par1, par2){\n\
-      if (par1 instanceof Array){\n\
-        par1.unshift(\"require\");\n\
-      }else{\n\
+    defineFun = function(requireAr, callback){
+      requireFun(requireAr, function(){
+        module.exports = callback.apply(callback, arguments);
+      });
+    };
+    
+  }else if (typeof define == \"function\" && define.amd){ // AMD
+    var _define = define;
+    requireFun = require;
+    
+    defineFun = function(par1, par2){
+      if (par1 instanceof Array){
+        par1.unshift(\"require\");
+      }else{
         par2 = par1;\n\
         par1 = [\"require\"];\n\
       };\n\
@@ -4485,12 +4562,45 @@ var stringEncodeStr = basics.stringEncodeStr;
   }else{ // Plain browser env\n\
     alert(\"not working out!\");\n\
     \n\
-  };\n\
-  \n";
-  if (par.promiseLandModule){    
-    resStr += "defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;\n";
+  };
+  ";
+  var modules = [];
+  if (!par.promiseLandModule){    
+    modules.push({
+      varName: "promiseland",
+      moduleName: "promiseland"
+    });
+  };
+  var extraModules = par.extraModules;
+  if (extraModules){
+    var extraModulesAr = extraModules.getArray();
+    for (i = 0; i < extraModulesAr.length; ++i){
+      modules.push({
+        varName: par.variableNames.get(extraModulesAr[i].key),
+        moduleName: extraModulesAr[i].value
+      });
+    };
+  };
+
+  resStr += "defineFun([";
+  for (i = 0; i < modules.length; ++i){
+    if (i){
+      resStr += ", ";
+    };
+    resStr += stringEncodeStr(modules[i].moduleName);
+  };
+  resStr += "], function(";
+  for (i = 0; i < modules.length; ++i){
+    if (i){
+      resStr += ", ";
+    };
+    resStr += modules[i].varName;
+  };
+  resStr += "){\n";
+  if (par.promiseLandModule){
+    resStr += "var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;\n";
   }else{
-    resStr += "defineFun([\"promiseland\"], function(promiseland){ var __require = requireFun;\n";
+    resStr += "var __require = requireFun;\n";
   };
   resStr += "\n";
   if (par.usePromise || par.useRequire){
@@ -4541,14 +4651,13 @@ var stringEncodeStr = basics.stringEncodeStr;
       };
       var resStr = "";
       
-      var extraModules = [];
-      
-      
       
       var loaderParam = {
         usePromise: par.usePromise,
         useRequire: par.useRequire,
-        useClassSystem: par.useClassSystem
+        useClassSystem: par.useClassSystem,
+        extraModules: par.extraModules,
+        variableNames: par.variableNames
       };
       
       if (par.makePromiseLandModule){
@@ -4597,12 +4706,19 @@ var stringEncodeStr = basics.stringEncodeStr;
         if (parsed.length === undefined){
           if (parsed.type == "Program"){
             var parsingConfig = parsed.config;
-            cp = new CodeParser({toParse: parsed, hashStr: hashStr});
+            
+            cp = new CodeParser({
+              toParse: parsed, 
+              hashStr: hashStr,
+              parsingConfig: parsingConfig
+            });
+            
             var makePromiseLandModule = false;
-            var extraModules = {};
+            var extraModules = cp.common.extraModules;
+            var variableNames = cp.common.variableNames;
+            
             if (parsingConfig){
               makePromiseLandModule = cp.getTemplateProperty(parsingConfig, "__promiseLandModule", "Literal");
-              extraModules = cp.getTemplateProperty(parsingConfig, "require", "ObjectExpression");
               if (makePromiseLandModule && makePromiseLandModule.value === true){
                 makePromiseLandModule = true;
               }else{
@@ -4638,6 +4754,7 @@ var stringEncodeStr = basics.stringEncodeStr;
               resStr += createHeader({
                 makePromiseLandModule: makePromiseLandModule,
                 extraModules: extraModules,
+                variableNames: variableNames,
                 hashStr: hashStr,
                 usePromise: cp.common.usePromise,
                 useRequire: cp.common.useRequire,

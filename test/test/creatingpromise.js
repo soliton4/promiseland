@@ -49,46 +49,46 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "7e2ff512946bcef40a808431919fd11a" })){ return promiseland._getModule("7e2ff512946bcef40a808431919fd11a"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
-var _V2/*b*/;
+var PL$2/*b*/;
 ;
-_V2/*b*/ = (function(){
-var _V3 = new __Promise();
-var _V5 = function(code){ return function(res){ try{code(res);}catch(e){ _V3.reject(e); }; }; };
-var _V6 = function(e){ _V3.reject(e); };
-_V5(function(){;
-_V3.resolve(); return;;
+PL$2/*b*/ = (function(){
+var PL$3 = new __Promise();
+var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
+var PL$6 = function(e){ PL$3.reject(e); };
+PL$5(function(){;
+PL$3.resolve(); return;;
 })();
-return _V3;
+return PL$3;
 });
 return {"fun": (function(){
-var _V7 = new __Promise();
-var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V7.reject(e); }; }; };
-var _V9 = function(e){ _V7.reject(e); };
-_V8(function(){;
-var _V10 = new __Promise();
+var PL$7 = new __Promise();
+var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
+var PL$9 = function(e){ PL$7.reject(e); };
+PL$8(function(){;
+var PL$10 = new __Promise();
 if((1 < 0)){
-_V2/*b*/.then(_V8(function(_V11){_V11;;
-_V10.resolve();;
-}), _V9);
+PL$2/*b*/.then(PL$8(function(PL$11){PL$11;;
+PL$10.resolve();;
+}), PL$9);
 ;
 }else{
-_V10.resolve();}; _V10.then(function(){;
+PL$10.resolve();}; PL$10.then(function(){;
 ;
-_V7.resolve(4); return;;
-_V7.resolve(); return;;
+PL$7.resolve(4); return;;
+PL$7.resolve(); return;;
 });})();
-return _V7;
+return PL$7;
 })};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

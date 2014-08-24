@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,30 +66,29 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "0e592225f9adb7e74dd217702589e9e7" })){ return promiseland._getModule("0e592225f9adb7e74dd217702589e9e7"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "0e592225f9adb7e74dd217702589e9e7", "module": _V1, promising: true });
-var _V5/*promiseland*/;try{_V5/*promiseland*/ = promiseland;}catch(e){};
-var _V12/*io*/;try{_V12/*io*/ = io;}catch(e){};
-var _V14/*undefined*/;try{_V14/*undefined*/ = undefined;}catch(e){};
-var _V31/*document*/;try{_V31/*document*/ = document;}catch(e){};
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "0e592225f9adb7e74dd217702589e9e7", "module": PL$1, promising: true });
+var PL$5/*promiseland*/;try{PL$5/*promiseland*/ = promiseland;}catch(e){};
+var PL$12/*io*/;try{PL$12/*io*/ = io;}catch(e){};
+var PL$30/*document*/;try{PL$30/*document*/ = document;}catch(e){};
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V6/*ServerProfile*/;
-var _V7/*ServerConnection*/;
-var _V11/*serverProfile*/;
-var _V8/*socket*/;
-var _V15/*Button*/;
-var _V17/*TableContainer*/;
-var _V19/*Text*/;
-var _V21/*main*/;
-var _V23/*tc*/;
-var _V24/*runTests*/;
-var _V41/*b*/;
-_V3(function(){;
-_V5/*promiseland*/["set"]("profile", "client");;
-_V6/*ServerProfile*/ = (function(){
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$6/*ServerProfile*/;
+var PL$7/*ServerConnection*/;
+var PL$11/*serverProfile*/;
+var PL$8/*socket*/;
+var PL$14/*Button*/;
+var PL$16/*TableContainer*/;
+var PL$18/*Text*/;
+var PL$20/*main*/;
+var PL$22/*tc*/;
+var PL$23/*runTests*/;
+var PL$40/*b*/;
+PL$3(function(){;
+PL$5/*promiseland*/["set"]("profile", "client");;
+PL$6/*ServerProfile*/ = (function(){
 ;
 this["name"] = (function(){
 ;
@@ -103,118 +102,118 @@ return this["connection"];;
 });;
 ;
 });
-_V6/*ServerProfile*/["prototype"] = new _V5/*promiseland*/["ProfileBaseClass"]();;
-_V7/*ServerConnection*/ = (function(_V8/*socket*/){
-var _V9/*self*/;
+PL$6/*ServerProfile*/["prototype"] = new PL$5/*promiseland*/["ProfileBaseClass"]();;
+PL$7/*ServerConnection*/ = (function(PL$8/*socket*/){
+var PL$9/*self*/;
 ;
-this["socket"] = _V8/*socket*/;;
-_V9/*self*/ = this;
-_V8/*socket*/["on"]("pl", (function(_V10/*data*/){
+this["socket"] = PL$8/*socket*/;;
+PL$9/*self*/ = this;
+PL$8/*socket*/["on"]("pl", (function(PL$10/*data*/){
 ;
-_V9/*self*/["emit"]("data", _V10/*data*/);;
+PL$9/*self*/["emit"]("data", PL$10/*data*/);;
 ;
 }));;
-this["send"] = (function(_V10/*data*/){
+this["send"] = (function(PL$10/*data*/){
 ;
-_V8/*socket*/["emit"]("pl", _V10/*data*/);;
+PL$8/*socket*/["emit"]("pl", PL$10/*data*/);;
 ;
 });;
 ;
 });
-_V7/*ServerConnection*/["prototype"] = new _V5/*promiseland*/["ConnectionBaseClass"]();;
-_V11/*serverProfile*/ = new _V6/*ServerProfile*/();
-_V5/*promiseland*/["addProfile"](_V11/*serverProfile*/);;
-_V8/*socket*/ = _V12/*io*/["connect"]();
-_V8/*socket*/["on"]("connect", (function(){
-var _V13/*connection*/;
+PL$7/*ServerConnection*/["prototype"] = new PL$5/*promiseland*/["ConnectionBaseClass"]();;
+PL$11/*serverProfile*/ = new PL$6/*ServerProfile*/();
+PL$5/*promiseland*/["addProfile"](PL$11/*serverProfile*/);;
+PL$8/*socket*/ = PL$12/*io*/["connect"]();
+PL$8/*socket*/["on"]("connect", (function(){
+var PL$13/*connection*/;
 ;
-_V13/*connection*/ = new _V7/*ServerConnection*/(_V8/*socket*/);
-_V11/*serverProfile*/["connection"] = _V13/*connection*/;;
-_V11/*serverProfile*/["emit"]("connection", _V13/*connection*/);;
-;
-}));;
-_V8/*socket*/["on"]("disconnect", (function(){
-;
-_V11/*serverProfile*/["connection"]["emit"]("disconnect");;
-_V11/*serverProfile*/["connection"] = _V14/*undefined*/;;
+PL$13/*connection*/ = new PL$7/*ServerConnection*/(PL$8/*socket*/);
+PL$11/*serverProfile*/["connection"] = PL$13/*connection*/;;
+PL$11/*serverProfile*/["emit"]("connection", PL$13/*connection*/);;
 ;
 }));;
-__requireFun("dijit/form/Button").then(_V3(function(_V16){_V15/*Button*/ = _V16;
-__requireFun("dojox/layout/TableContainer").then(_V3(function(_V18){_V17/*TableContainer*/ = _V18;
-__requireFun("./Text").then(_V3(function(_V20){_V19/*Text*/ = _V20;
-__requireFun("testConsole/main").then(_V3(function(_V22){_V21/*main*/ = _V22;
-_V23/*tc*/;
-_V24/*runTests*/ = (function(){
-var _V25 = new __Promise();
-var _V27 = function(code){ return function(res){ try{code(res);}catch(e){ _V25.reject(e); }; }; };
-var _V28 = function(e){ _V25.reject(e); };
-var _V29/*results*/;
-var _V32/*f*/;
-var _V33/*t*/;
-var _V34/*testRes*/;
-var _V35/*cnt*/;
-var _V36/*successCnt*/;
-var _V37/*testName*/;
-var _V38/*errorStr*/;
-var _V39/*textStr*/;
-var _V40/*w*/;
-_V27(function(){;
-_V21/*main*/["runTests"]().then(_V27(function(_V30){_V29/*results*/ = _V30;
-if(_V23/*tc*/){
-_V23/*tc*/["destroy"]();;
+PL$8/*socket*/["on"]("disconnect", (function(){
+;
+PL$11/*serverProfile*/["connection"]["emit"]("disconnect");;
+PL$11/*serverProfile*/["connection"] = undefined;;
+;
+}));;
+__requireFun("dijit/form/Button").then(PL$3(function(PL$15){PL$14/*Button*/ = PL$15;
+__requireFun("dojox/layout/TableContainer").then(PL$3(function(PL$17){PL$16/*TableContainer*/ = PL$17;
+__requireFun("./Text").then(PL$3(function(PL$19){PL$18/*Text*/ = PL$19;
+__requireFun("testConsole/main").then(PL$3(function(PL$21){PL$20/*main*/ = PL$21;
+PL$22/*tc*/;
+PL$23/*runTests*/ = (function(){
+var PL$24 = new __Promise();
+var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$24.reject(e); }; }; };
+var PL$27 = function(e){ PL$24.reject(e); };
+var PL$28/*results*/;
+var PL$31/*f*/;
+var PL$32/*t*/;
+var PL$33/*testRes*/;
+var PL$34/*cnt*/;
+var PL$35/*successCnt*/;
+var PL$36/*testName*/;
+var PL$37/*errorStr*/;
+var PL$38/*textStr*/;
+var PL$39/*w*/;
+PL$26(function(){;
+PL$20/*main*/["runTests"]().then(PL$26(function(PL$29){PL$28/*results*/ = PL$29;
+if(PL$22/*tc*/){
+PL$22/*tc*/["destroy"]();;
 };
 ;
-_V23/*tc*/ = new _V17/*TableContainer*/({});;
-_V23/*tc*/["placeAt"](_V31/*document*/["body"]);;
-if(_V29/*results*/["failed"]){
-_V32/*f*/ = new _V19/*Text*/({"label": "failed",
+PL$22/*tc*/ = new PL$16/*TableContainer*/({});;
+PL$22/*tc*/["placeAt"](PL$30/*document*/["body"]);;
+if(PL$28/*results*/["failed"]){
+PL$31/*f*/ = new PL$18/*Text*/({"label": "failed",
 "text": "-"});
-_V23/*tc*/["addChild"](_V32/*f*/);;
+PL$22/*tc*/["addChild"](PL$31/*f*/);;
 
 }else{
-_V33/*t*/;
-for(_V33/*t*/ in _V29/*results*/){_V34/*testRes*/ = _V29/*results*/[_V33/*t*/];
-_V35/*cnt*/ = 0;
-_V36/*successCnt*/ = 0;
-_V37/*testName*/;
-_V38/*errorStr*/ = "";
-for(_V37/*testName*/ in _V34/*testRes*/){++_V35/*cnt*/;;
-if(_V34/*testRes*/[_V37/*testName*/]){
-++_V36/*successCnt*/;;
+PL$32/*t*/;
+for(PL$32/*t*/ in PL$28/*results*/){PL$33/*testRes*/ = PL$28/*results*/[PL$32/*t*/];
+PL$34/*cnt*/ = 0;
+PL$35/*successCnt*/ = 0;
+PL$36/*testName*/;
+PL$37/*errorStr*/ = "";
+for(PL$36/*testName*/ in PL$33/*testRes*/){++PL$34/*cnt*/;;
+if(PL$33/*testRes*/[PL$36/*testName*/]){
+++PL$35/*successCnt*/;;
 
 }else{
-_V38/*errorStr*/ += (_V37/*testName*/ + " failed; \n");;
+PL$37/*errorStr*/ += (PL$36/*testName*/ + " failed; \n");;
 };
 ;
 };
 ;
-_V39/*textStr*/ = (("run " + _V35/*cnt*/) + " tests. \n");
-_V39/*textStr*/ += ((_V35/*cnt*/ - _V36/*successCnt*/) + " failed. \n");;
-_V39/*textStr*/ += _V38/*errorStr*/;;
-_V40/*w*/ = new _V19/*Text*/({"label": _V33/*t*/,
-"text": _V39/*textStr*/});
-_V23/*tc*/["addChild"](_V40/*w*/);;
+PL$38/*textStr*/ = (("run " + PL$34/*cnt*/) + " tests. \n");
+PL$38/*textStr*/ += ((PL$34/*cnt*/ - PL$35/*successCnt*/) + " failed. \n");;
+PL$38/*textStr*/ += PL$37/*errorStr*/;;
+PL$39/*w*/ = new PL$18/*Text*/({"label": PL$32/*t*/,
+"text": PL$38/*textStr*/});
+PL$22/*tc*/["addChild"](PL$39/*w*/);;
 };
 ;
 };
 ;
-_V23/*tc*/["startup"]();;
-_V25.resolve(); return;;
-}), _V28);
+PL$22/*tc*/["startup"]();;
+PL$24.resolve(); return;;
+}), PL$27);
 ;})();
-return _V25;
+return PL$24;
 });
-_V41/*b*/ = new _V15/*Button*/({"label": "test",
-"onClick": _V24/*runTests*/});
-_V41/*b*/["placeAt"](_V31/*document*/["body"]);;
-_V1.resolve(); return;;
-}), _V4);
-;}), _V4);
-;}), _V4);
-;}), _V4);
+PL$40/*b*/ = new PL$14/*Button*/({"label": "test",
+"onClick": PL$23/*runTests*/});
+PL$40/*b*/["placeAt"](PL$30/*document*/["body"]);;
+PL$1.resolve(); return;;
+}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

@@ -49,45 +49,45 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "bd9d6daff691126a54d403e075368a5e" })){ return promiseland._getModule("bd9d6daff691126a54d403e075368a5e"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "bd9d6daff691126a54d403e075368a5e", "module": _V1, promising: true });
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "bd9d6daff691126a54d403e075368a5e", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*x*/;
-_V3(function(){;
-_V5/*x*/ = (function(){
-var _V6 = new __Promise();
-var _V8 = function(code){ return function(res){ try{code(res);}catch(e){ _V6.reject(e); }; }; };
-var _V9 = function(e){ _V6.reject(e); };
-_V8(function(){;
-_V6.resolve({"fun": (function(){
-var _V10 = new __Promise();
-var _V11 = function(code){ return function(res){ try{code(res);}catch(e){ _V10.reject(e); }; }; };
-var _V12 = function(e){ _V10.reject(e); };
-_V11(function(){;
-_V10.resolve(4); return;;
-_V10.resolve(); return;;
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*x*/;
+PL$3(function(){;
+PL$5/*x*/ = (function(){
+var PL$6 = new __Promise();
+var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
+var PL$9 = function(e){ PL$6.reject(e); };
+PL$8(function(){;
+PL$6.resolve({"fun": (function(){
+var PL$10 = new __Promise();
+var PL$11 = function(code){ return function(res){ try{code(res);}catch(e){ PL$10.reject(e); }; }; };
+var PL$12 = function(e){ PL$10.reject(e); };
+PL$11(function(){;
+PL$10.resolve(4); return;;
+PL$10.resolve(); return;;
 })();
-return _V10;
+return PL$10;
 })}); return;;
-_V6.resolve(); return;;
+PL$6.resolve(); return;;
 })();
-return _V6;
+return PL$6;
 });
-_V5/*x*/().then(_V3(function(_V13){_V1.resolve(_V13); return;;
-_V1.resolve(); return;;
-}), _V4);
+PL$5/*x*/().then(PL$3(function(PL$13){PL$1.resolve(PL$13); return;;
+PL$1.resolve(); return;;
+}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

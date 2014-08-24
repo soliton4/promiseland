@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,24 +66,24 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "120f35771d17e2b072db758ac8954cbf" })){ return promiseland._getModule("120f35771d17e2b072db758ac8954cbf"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "120f35771d17e2b072db758ac8954cbf", "module": _V1, promising: true });
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "120f35771d17e2b072db758ac8954cbf", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V5/*y*/;
-_V3(function(){;
-__requireFun("./requiredModule").then(_V3(function(_V6){_V5/*y*/ = _V6;
-if((_V5/*y*/["id"] == 4)){
-_V1.resolve({"success": true}); return;;
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*y*/;
+PL$3(function(){;
+__requireFun("./requiredModule").then(PL$3(function(PL$6){PL$5/*y*/ = PL$6;
+if((PL$5/*y*/["id"] == 4)){
+PL$1.resolve({"success": true}); return;;
 };
-_V1.resolve({"success": false}); return;;
-_V1.resolve(); return;;
-}), _V4);
+PL$1.resolve({"success": false}); return;;
+PL$1.resolve(); return;;
+}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();

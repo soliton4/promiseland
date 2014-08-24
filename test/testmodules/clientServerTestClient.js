@@ -49,8 +49,8 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
@@ -66,19 +66,18 @@ var __requireFun = function(parModule){
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
     if (promiseland._hasModule({ hashStr: "063b02b45bab7047f0c7ef55fd001621" })){ return promiseland._getModule("063b02b45bab7047f0c7ef55fd001621"); };
-var _V2/*promiseland*/;try{_V2/*promiseland*/ = promiseland;}catch(e){};
-var _V9/*io*/;try{_V9/*io*/ = io;}catch(e){};
-var _V12/*undefined*/;try{_V12/*undefined*/ = undefined;}catch(e){};
-var _V1 = (function(){
+var PL$2/*promiseland*/;try{PL$2/*promiseland*/ = promiseland;}catch(e){};
+var PL$9/*io*/;try{PL$9/*io*/ = io;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V3/*ServerProfile*/;
-var _V4/*ServerConnection*/;
-var _V8/*serverProfile*/;
-var _V5/*socket*/;
-var _V11/*runTests*/;
+var PL$3/*ServerProfile*/;
+var PL$4/*ServerConnection*/;
+var PL$8/*serverProfile*/;
+var PL$5/*socket*/;
+var PL$11/*runTests*/;
 ;
-_V2/*promiseland*/["set"]("profile", "client");;
-_V3/*ServerProfile*/ = (function(){
+PL$2/*promiseland*/["set"]("profile", "client");;
+PL$3/*ServerProfile*/ = (function(){
 ;
 this["name"] = (function(){
 ;
@@ -92,56 +91,56 @@ return this["connection"];;
 });;
 ;
 });
-_V3/*ServerProfile*/["prototype"] = new _V2/*promiseland*/["ProfileBaseClass"]();;
-_V4/*ServerConnection*/ = (function(_V5/*socket*/){
-var _V6/*self*/;
+PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();;
+PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
+var PL$6/*self*/;
 ;
-this["socket"] = _V5/*socket*/;;
-_V6/*self*/ = this;
-_V5/*socket*/["on"]("pl", (function(_V7/*data*/){
+this["socket"] = PL$5/*socket*/;;
+PL$6/*self*/ = this;
+PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
 ;
-_V6/*self*/["emit"]("data", _V7/*data*/);;
+PL$6/*self*/["emit"]("data", PL$7/*data*/);;
 ;
 }));;
-this["send"] = (function(_V7/*data*/){
+this["send"] = (function(PL$7/*data*/){
 ;
-_V5/*socket*/["emit"]("pl", _V7/*data*/);;
+PL$5/*socket*/["emit"]("pl", PL$7/*data*/);;
 ;
 });;
 ;
 });
-_V4/*ServerConnection*/["prototype"] = new _V2/*promiseland*/["ConnectionBaseClass"]();;
-_V8/*serverProfile*/ = new _V3/*ServerProfile*/();
-_V2/*promiseland*/["addProfile"](_V8/*serverProfile*/);;
-_V5/*socket*/ = _V9/*io*/["connect"]();
-_V5/*socket*/["on"]("connect", (function(){
-var _V10/*connection*/;
+PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();;
+PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
+PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);;
+PL$5/*socket*/ = PL$9/*io*/["connect"]();
+PL$5/*socket*/["on"]("connect", (function(){
+var PL$10/*connection*/;
 ;
-_V10/*connection*/ = new _V4/*ServerConnection*/(_V5/*socket*/);
-_V8/*serverProfile*/["connection"] = _V10/*connection*/;;
-_V8/*serverProfile*/["emit"]("connection", _V10/*connection*/);;
-_V11/*runTests*/();;
-;
-}));;
-_V5/*socket*/["on"]("disconnect", (function(){
-;
-_V8/*serverProfile*/["connection"]["emit"]("disconnect");;
-_V8/*serverProfile*/["connection"] = _V12/*undefined*/;;
+PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
+PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;;
+PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);;
+PL$11/*runTests*/();;
 ;
 }));;
-_V11/*runTests*/ = (function(){
-var _V13 = new __Promise();
-var _V15 = function(code){ return function(res){ try{code(res);}catch(e){ _V13.reject(e); }; }; };
-var _V16 = function(e){ _V13.reject(e); };
-_V15(function(){;
-__requireFun("testmodules/syncMember").then(_V15(function(_V17){_V17;;
-_V13.resolve(); return;;
-}), _V16);
+PL$5/*socket*/["on"]("disconnect", (function(){
+;
+PL$8/*serverProfile*/["connection"]["emit"]("disconnect");;
+PL$8/*serverProfile*/["connection"] = undefined;;
+;
+}));;
+PL$11/*runTests*/ = (function(){
+var PL$12 = new __Promise();
+var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
+var PL$15 = function(e){ PL$12.reject(e); };
+PL$14(function(){;
+__requireFun("testmodules/syncMember").then(PL$14(function(PL$16){PL$16;;
+PL$12.resolve(); return;;
+}), PL$15);
 ;})();
-return _V13;
+return PL$12;
 });
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

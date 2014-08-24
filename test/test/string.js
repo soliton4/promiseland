@@ -49,17 +49,17 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "d0d05d8b6f945e95ec00d89fe45c6422" })){ return promiseland._getModule("d0d05d8b6f945e95ec00d89fe45c6422"); };
-var _V1 = (function(){
+var PL$1 = (function(){
 "use strict";
 ;
 return {"a": "\n\r\u2028\u2029\"'",
 "b": "xxx\n  xxx"};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

@@ -49,48 +49,48 @@
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "773ce5585497692b2163faac5abad48a" })){ return promiseland._getModule("773ce5585497692b2163faac5abad48a"); };
-var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "773ce5585497692b2163faac5abad48a", "module": _V1, promising: true });
-var _V2 = (function(){
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "773ce5585497692b2163faac5abad48a", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var _V3 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
-var _V4 = function(e){ _V1.reject(e); };
-var _V10/*test*/;
-var _V10/*test*/ = (function(f){
-promiseland.registerRemote("server", "773ce5585497692b2163faac5abad48a", "_V9", f, classSystem.getBuiltinType("var"));
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$10/*test*/;
+var PL$10/*test*/ = (function(f){
+promiseland.registerRemote("server", "773ce5585497692b2163faac5abad48a", "PL$9", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("773ce5585497692b2163faac5abad48a", "_V9", arguments);
+return promiseland.remoteExec("773ce5585497692b2163faac5abad48a", "PL$9", arguments);
 }
 };
 })(function(){
-var _V5 = new __Promise();
-var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V5.reject(e); }; }; };
-var _V8 = function(e){ _V5.reject(e); };
-_V7(function(){;
-_V5.resolve(); return;;
+var PL$5 = new __Promise();
+var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
+var PL$8 = function(e){ PL$5.reject(e); };
+PL$7(function(){;
+PL$5.resolve(); return;;
 })();
-return _V5;
+return PL$5;
 });
-_V3(function(){;
-_V10/*test*/;
+PL$3(function(){;
+PL$10/*test*/;
 ;
-_V10/*test*/().then(_V3(function(_V11){_V11;;
-_V1.resolve({"success": true}); return;;
-_V1.resolve(); return;;
-}), _V4);
+PL$10/*test*/().then(PL$3(function(PL$11){PL$11;;
+PL$1.resolve({"success": true}); return;;
+PL$1.resolve(); return;;
+}), PL$4);
 ;})();
-return _V1;
+return PL$1;
 })();
 ;;
-return _V1});
+return PL$1});
 })();
