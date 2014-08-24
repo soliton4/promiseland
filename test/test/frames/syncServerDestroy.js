@@ -55,9 +55,9 @@ defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var classSystem = promiseland.classSystem;
-if (promiseland._hasModule({ hashStr: "88ab169394dfc81c173bc80720d669e2" })){ return promiseland._getModule("88ab169394dfc81c173bc80720d669e2"); };
+if (promiseland._hasModule({ hashStr: "367388894588dfac0390ede580e7148f" })){ return promiseland._getModule("367388894588dfac0390ede580e7148f"); };
 var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "88ab169394dfc81c173bc80720d669e2", "module": _V1, promising: true });
+promiseland._registerModule({ hashStr: "367388894588dfac0390ede580e7148f", "module": _V1, promising: true });
 var _V2 = (function(){
 "use strict";
 var _V6 = function(code){ return function(res){ try{code(res);}catch(e){ _V1.reject(e); }; }; };
@@ -75,12 +75,12 @@ _V4/*C1*/ = _V3/*type:C1*/;
 var _V5/*C1-constructor*/ = undefined;classSystem.readyPromise(_V3/*type:C1*/).then(function(parType){_V3/*type:C1*/ = parType;_V5/*C1-constructor*/ = classSystem.getTypeConstructor(_V3/*type:C1*/);});var _V10/*type:C1**/ = classSystem._createPromiseOfClass(_V3/*type:C1*/);
 var _V11/*C1**/ = _V10/*type:C1**/;
 var _V12/*C1*-constructor*/ = undefined;classSystem.readyPromise(_V10/*type:C1**/).then(function(parType){_V10/*type:C1**/ = parType;_V12/*C1*-constructor*/ = classSystem.getTypeConstructor(_V10/*type:C1**/);});var _V19/*x*/ = (function(f){
-promiseland.registerRemote("server", "88ab169394dfc81c173bc80720d669e2", "_V18", f, (classSystem.createFunctionType({ "return": _V10/*type:C1**/, arguments: [classSystem.getBuiltinType("var")]})));
+promiseland.registerRemote("server", "367388894588dfac0390ede580e7148f", "_V18", f, (classSystem.createFunctionType({ "return": _V10/*type:C1**/, arguments: [classSystem.getBuiltinType("var")]})));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("88ab169394dfc81c173bc80720d669e2", "_V18", arguments);
+return promiseland.remoteExec("367388894588dfac0390ede580e7148f", "_V18", arguments);
 }
 };
 })((function(t){return t;})(function(_V13/*par1*/){
@@ -111,12 +111,12 @@ if (_T_V17/*temp*/){ _T_V17/*temp*/();};_V14.resolve(); return;;
 return [_V14, _T_V14];
 }));
 var _V25/*check*/ = (function(f){
-promiseland.registerRemote("server", "88ab169394dfc81c173bc80720d669e2", "_V24", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("server", "367388894588dfac0390ede580e7148f", "_V24", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("88ab169394dfc81c173bc80720d669e2", "_V24", arguments);
+return promiseland.remoteExec("367388894588dfac0390ede580e7148f", "_V24", arguments);
 }
 };
 })(function(){
@@ -131,7 +131,7 @@ return _V20;
 });
 _V6(function(){;
 _V8/*destroyed*/ = false;
-classSystem._resolveProvisional(_V3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":3,"column":12,"offset":35}, "hashStr": "88ab169394dfc81c173bc80720d669e2", "name": "C1"}, {"a": 1, "destroy": (function(){
+classSystem._resolveProvisional(_V3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":3,"column":12,"offset":35}, "hashStr": "367388894588dfac0390ede580e7148f", "name": "C1"}, {"a": 1, "destroy": (function(){
 ;
 _V8/*destroyed*/ = true;;
 ;
@@ -198,7 +198,6 @@ if(! _V8/*destroyed*/){
 _V1.resolve({"success": false}); return;;
 };
 ;
-_V1.resolve({"success": true}); return;;
 _V25/*check*/().then(_V6(function(_V36){if(_V36){
 _V1.resolve({"success": true}); return;;
 };

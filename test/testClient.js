@@ -65,7 +65,7 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "78c60bf6b6a41d521d38cd3a10de603f" })){ return promiseland._getModule("78c60bf6b6a41d521d38cd3a10de603f"); };
+    if (promiseland._hasModule({ hashStr: "1378438d98057a9df1d8cc99242e8cfb" })){ return promiseland._getModule("1378438d98057a9df1d8cc99242e8cfb"); };
 var _V2/*promiseland*/;try{_V2/*promiseland*/ = promiseland;}catch(e){};
 var _V9/*io*/;try{_V9/*io*/ = io;}catch(e){};
 var _V12/*undefined*/;try{_V12/*undefined*/ = undefined;}catch(e){};
@@ -163,6 +163,7 @@ _V24/*console*/["log"]("running tests");;
 __requireFun("test/simpleTests").then(_V22(function(_V26){_V25/*testObj*/ = _V26;
 __requireFun("test/frameTests").then(_V22(function(_V27){_V27;;
 __requireFun("./testCollector").then(_V22(function(_V29){_V28/*collector*/ = _V29;
+debugger;
 _V30/*type*/ = (_V19/*querySt*/("type") || "unknown");
 _V28/*collector*/["postResult"](_V30/*type*/, _V25/*testObj*/);;
 _V28/*collector*/["waitForFinish"](_V30/*type*/).then(_V22(function(_V31){_V31;;

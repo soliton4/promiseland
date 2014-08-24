@@ -47,7 +47,6 @@ if (tempres != 2){
 if (!destroyed){
   return { success: false };
 };
-return { success: true };
 
 if (*check()){
   return { success: true };

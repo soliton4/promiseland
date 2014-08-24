@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "65830c50d4ece324a7a54db6bcad0376" })){ return promiseland._getModule("65830c50d4ece324a7a54db6bcad0376"); };
+    if (promiseland._hasModule({ hashStr: "96a27333479e69e74dc412038648e264" })){ return promiseland._getModule("96a27333479e69e74dc412038648e264"); };
 var _V1 = new __Promise();
-promiseland._registerModule({ hashStr: "65830c50d4ece324a7a54db6bcad0376", "module": _V1, promising: true });
+promiseland._registerModule({ hashStr: "96a27333479e69e74dc412038648e264", "module": _V1, promising: true });
 var _V17/*promiseland*/;try{_V17/*promiseland*/ = promiseland;}catch(e){};
 var _V46/*undefined*/;try{_V46/*undefined*/ = undefined;}catch(e){};
 var _V158/*JSON*/;try{_V158/*JSON*/ = JSON;}catch(e){};
@@ -104,8 +104,8 @@ var _V273/*promiselandRequireStr*/;
 var _V274/*callbackRequireStr*/;
 var _V275/*loaderEndStr*/;
 var _V276/*createHeader*/;
-var _V278/*createFooter*/;
-var _V279/*parser*/;
+var _V279/*createFooter*/;
+var _V280/*parser*/;
 _V3(function(){;
 __requireFun("./md5").then(_V3(function(_V6){_V5/*md5*/ = _V6;
 __requireFun("./_parser").then(_V3(function(_V8){_V7/*_parser*/ = _V8;
@@ -4456,21 +4456,23 @@ return "});\n})();";;
 });
 _V276/*createHeader*/ = (function(_V29/*par*/){
 var _V272/*resStr*/;
-var _V277/*loaderParam*/;
+var _V277/*extraModules*/;
+var _V278/*loaderParam*/;
 ;
 if(_V15/*_pureCode*/){
 return "";;
 };
 ;
 _V272/*resStr*/ = "";
-_V277/*loaderParam*/ = {"usePromise": _V29/*par*/["usePromise"],
+_V277/*extraModules*/ = [];
+_V278/*loaderParam*/ = {"usePromise": _V29/*par*/["usePromise"],
 "useRequire": _V29/*par*/["useRequire"],
 "useClassSystem": _V29/*par*/["useClassSystem"]};
 if(_V29/*par*/["makePromiseLandModule"]){
-_V277/*loaderParam*/["promiseLandModule"] = true;;
+_V278/*loaderParam*/["promiseLandModule"] = true;;
 };
 ;
-_V272/*resStr*/ += _V271/*loaderStr*/(_V277/*loaderParam*/);;
+_V272/*resStr*/ += _V271/*loaderStr*/(_V278/*loaderParam*/);;
 _V272/*resStr*/ += _V273/*promiselandRequireStr*/();;
 if(_V29/*par*/["useCallback"]){
 _V272/*resStr*/ += _V274/*callbackRequireStr*/();;
@@ -4480,7 +4482,7 @@ _V272/*resStr*/ += (((("if (promiseland._hasModule({ hashStr: \"" + _V29/*par*/[
 return _V272/*resStr*/;;
 ;
 });
-_V278/*createFooter*/ = (function(_V29/*par*/){
+_V279/*createFooter*/ = (function(_V29/*par*/){
 var _V272/*resStr*/;
 ;
 if(_V15/*_pureCode*/){
@@ -4498,72 +4500,76 @@ _V272/*resStr*/ += _V275/*loaderEndStr*/({});;
 return _V272/*resStr*/;;
 ;
 });
-_V279/*parser*/ = {"parse": (function(_V280/*promiselandCodeStr*/){
+_V280/*parser*/ = {"parse": (function(_V281/*promiselandCodeStr*/){
 var _V27/*p*/;
-var _V279/*parser*/;
-var _V281/*hashStr*/;
+var _V280/*parser*/;
+var _V282/*hashStr*/;
 var _V65/*parsed*/;
 var _V272/*resStr*/;
 var _V175/*cp*/;
 var _V43/*res*/;
-var _V282/*parsingConfig*/;
-var _V283/*makePromiseLandModule*/;
-var _V284/*result*/;
-var _V285/*programStr*/;
-var _V286/*mainPartStr*/;
+var _V283/*parsingConfig*/;
+var _V284/*makePromiseLandModule*/;
+var _V277/*extraModules*/;
+var _V285/*result*/;
+var _V286/*programStr*/;
+var _V287/*mainPartStr*/;
 ;
 _V27/*p*/ = new _V17/*promiseland*/["Promise"]();
-_V279/*parser*/ = _V7/*_parser*/;
-_V281/*hashStr*/ = _V5/*md5*/(_V280/*promiselandCodeStr*/);
-_V65/*parsed*/ = _V279/*parser*/["parse"](_V280/*promiselandCodeStr*/);
+_V280/*parser*/ = _V7/*_parser*/;
+_V282/*hashStr*/ = _V5/*md5*/(_V281/*promiselandCodeStr*/);
+_V65/*parsed*/ = _V280/*parser*/["parse"](_V281/*promiselandCodeStr*/);
 _V272/*resStr*/ = "";
 _V175/*cp*/;
 _V43/*res*/ = {};
 if((_V65/*parsed*/["length"] === _V46/*undefined*/)){
 if((_V65/*parsed*/["type"] == "Program")){
-_V282/*parsingConfig*/ = _V65/*parsed*/["config"];
+_V283/*parsingConfig*/ = _V65/*parsed*/["config"];
 _V175/*cp*/ = new _V39/*CodeParser*/({"toParse": _V65/*parsed*/,
-"hashStr": _V281/*hashStr*/});;
-_V283/*makePromiseLandModule*/ = false;
-if(_V282/*parsingConfig*/){
-_V283/*makePromiseLandModule*/ = _V175/*cp*/["getTemplateProperty"](_V282/*parsingConfig*/, "__promiseLandModule", "Literal");;
-if((_V283/*makePromiseLandModule*/ && (_V283/*makePromiseLandModule*/["value"] === true))){
-_V283/*makePromiseLandModule*/ = true;;
+"hashStr": _V282/*hashStr*/});;
+_V284/*makePromiseLandModule*/ = false;
+_V277/*extraModules*/ = {};
+if(_V283/*parsingConfig*/){
+_V284/*makePromiseLandModule*/ = _V175/*cp*/["getTemplateProperty"](_V283/*parsingConfig*/, "__promiseLandModule", "Literal");;
+_V277/*extraModules*/ = _V175/*cp*/["getTemplateProperty"](_V283/*parsingConfig*/, "require", "ObjectExpression");;
+if((_V284/*makePromiseLandModule*/ && (_V284/*makePromiseLandModule*/["value"] === true))){
+_V284/*makePromiseLandModule*/ = true;;
 
 }else{
-_V283/*makePromiseLandModule*/ = false;;
+_V284/*makePromiseLandModule*/ = false;;
 };
 ;
 };
 ;
-_V284/*result*/ = _V175/*cp*/["getResult"]();
-_V285/*programStr*/ = ((_V284/*result*/["getPreCodeStr"]() + _V284/*result*/["getCodeStr"]()) + _V284/*result*/["getPostCodeStr"]());
+_V285/*result*/ = _V175/*cp*/["getResult"]();
+_V286/*programStr*/ = ((_V285/*result*/["getPreCodeStr"]() + _V285/*result*/["getCodeStr"]()) + _V285/*result*/["getPostCodeStr"]());
 _V43/*res*/["warnings"] = _V175/*cp*/["getWarnings"]();;
 _V43/*res*/["errors"] = _V175/*cp*/["getErrors"]();;
-_V286/*mainPartStr*/ = "";
+_V287/*mainPartStr*/ = "";
 if(_V15/*_pureCode*/){
-_V272/*resStr*/ = _V285/*programStr*/;;
+_V272/*resStr*/ = _V286/*programStr*/;;
 
 }else{
 if(_V175/*cp*/["programPromiseStr"]){
-_V286/*mainPartStr*/ += (((("var " + _V175/*cp*/["programPromiseStr"]) + " = ") + _V175/*cp*/["newPromiseStr"]()) + ";\n");;
-_V286/*mainPartStr*/ += (((("promiseland._registerModule({ hashStr: \"" + _V281/*hashStr*/) + "\", \"module\": ") + _V175/*cp*/["programPromiseStr"]) + ", promising: true });\n");;
-_V286/*mainPartStr*/ += _V285/*programStr*/;;
-_V286/*mainPartStr*/ += (";\nreturn " + _V175/*cp*/["programPromiseStr"]);;
+_V287/*mainPartStr*/ += (((("var " + _V175/*cp*/["programPromiseStr"]) + " = ") + _V175/*cp*/["newPromiseStr"]()) + ";\n");;
+_V287/*mainPartStr*/ += (((("promiseland._registerModule({ hashStr: \"" + _V282/*hashStr*/) + "\", \"module\": ") + _V175/*cp*/["programPromiseStr"]) + ", promising: true });\n");;
+_V287/*mainPartStr*/ += _V286/*programStr*/;;
+_V287/*mainPartStr*/ += (";\nreturn " + _V175/*cp*/["programPromiseStr"]);;
 
 }else{
-_V286/*mainPartStr*/ += _V285/*programStr*/;;
-_V286/*mainPartStr*/ += (("return " + _V175/*cp*/["resultNameStr"]) + ";\n");;
+_V287/*mainPartStr*/ += _V286/*programStr*/;;
+_V287/*mainPartStr*/ += (("return " + _V175/*cp*/["resultNameStr"]) + ";\n");;
 };
 ;
-_V272/*resStr*/ += _V276/*createHeader*/({"makePromiseLandModule": _V283/*makePromiseLandModule*/,
-"hashStr": _V281/*hashStr*/,
+_V272/*resStr*/ += _V276/*createHeader*/({"makePromiseLandModule": _V284/*makePromiseLandModule*/,
+"extraModules": _V277/*extraModules*/,
+"hashStr": _V282/*hashStr*/,
 "usePromise": _V175/*cp*/["common"]["usePromise"],
 "useRequire": _V175/*cp*/["common"]["useRequire"],
 "useCallback": _V175/*cp*/["common"]["useCallback"],
 "useClassSystem": _V175/*cp*/["common"]["useClassSystem"]});;
-_V272/*resStr*/ += _V286/*mainPartStr*/;;
-_V272/*resStr*/ += _V278/*createFooter*/({"makePromiseLandModule": _V283/*makePromiseLandModule*/});;
+_V272/*resStr*/ += _V287/*mainPartStr*/;;
+_V272/*resStr*/ += _V279/*createFooter*/({"makePromiseLandModule": _V284/*makePromiseLandModule*/});;
 };
 ;
 
@@ -4584,7 +4590,7 @@ _V27/*p*/["resolve"](_V43/*res*/);;
 return _V27/*p*/["promise"];;
 ;
 })};
-_V1.resolve(_V279/*parser*/); return;;
+_V1.resolve(_V280/*parser*/); return;;
 _V1.resolve(); return;;
 }), _V4);
 ;}), _V4);

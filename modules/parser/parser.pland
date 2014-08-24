@@ -4541,6 +4541,10 @@ var stringEncodeStr = basics.stringEncodeStr;
       };
       var resStr = "";
       
+      var extraModules = [];
+      
+      
+      
       var loaderParam = {
         usePromise: par.usePromise,
         useRequire: par.useRequire,
@@ -4595,8 +4599,10 @@ var stringEncodeStr = basics.stringEncodeStr;
             var parsingConfig = parsed.config;
             cp = new CodeParser({toParse: parsed, hashStr: hashStr});
             var makePromiseLandModule = false;
+            var extraModules = {};
             if (parsingConfig){
               makePromiseLandModule = cp.getTemplateProperty(parsingConfig, "__promiseLandModule", "Literal");
+              extraModules = cp.getTemplateProperty(parsingConfig, "require", "ObjectExpression");
               if (makePromiseLandModule && makePromiseLandModule.value === true){
                 makePromiseLandModule = true;
               }else{
@@ -4631,6 +4637,7 @@ var stringEncodeStr = basics.stringEncodeStr;
 
               resStr += createHeader({
                 makePromiseLandModule: makePromiseLandModule,
+                extraModules: extraModules,
                 hashStr: hashStr,
                 usePromise: cp.common.usePromise,
                 useRequire: cp.common.useRequire,

@@ -1,5 +1,6 @@
 <{__promiseLandModule: true}>;
 
+
 /* 
   class system
   everything type safety related
@@ -21,65 +22,136 @@ var Chainable;
   Chainable = (*extra.ChainablePs).Chainable;
 })();
 
+/*
+
+  definitions:
+  
+  classtype / type / class
+    a type that is subject of typechecks
+    
+  instance
+    a created instance of a certain type
+  
+  tracked type
+    all variables / members containing the instance are being kept tracked of.
+    this is accomplished by a second variable containing a life line
+    
+  life line
+    a function that represents a instance right to exist.
+    life lines are capped by executing it.
+    if all life lines are gone, the instance is being destroyed
+    the destrut function of that instance is being called
+  
+  temporary tracked
+    a temporary varibale that is not represented as actual variable or member
+    it is used to deal with temporary function results or parameter passage
+    it is implemented as array of the instance and a life line 
+      [instance, lifeline]
+    
+  promiseOf
+    a typed promise that is resolving in a instance of a specified type
+    promises of trackable objects resolve to a temporary and have a extendec api
+    they can also be temporary themselves
+    
+  DynInstance
+    a non typed class that is being used to deal with instances internaly
+    its not intended for use outside of the promiseland modules
+
+*/
+
+
+
+
 
 /*
-  internal instance representation
+  internal representation of a instance
+  it always contains a non temporary and a life line
+  the life line is a empty function if its not a tracked type to make things easier
+  its possible to get a representation of a desired type by calling 
+    getInstanceAsType
+  it will raise a typeMissmatch if the instance can not be converted to the desired type
+  
+  you must call .track() when you dont use it anymore !!!
 */
-class Instance {
+class DynInstance {
   constructor: (parType, parInstance){
+    this.extraTracks = [];
     if (!parType){
       parType = classSystem.getTypeFromInstance(parInstance);
-      /*if (classSystem.isTrackedClass(parType)){
-        parInstance = [parInstance, classSystem.getTrack(parInstance)];
-      };*/
     };
-    
-    this.type = parType; // the type this is passing as
-    this.instance = parInstance;
-    this.realInstance = this.instance;
-    this.realType = parType;
-    
+    this.track = (){};
     if (classSystem.isVar(parType)){
+      this.instance = parInstance;
+      this.type = parType;
       return;
     };
-    if (classSystem.isTemporaryTrackedClass(parType)){
-      this.realType = classSystem.getClassFromTemporaryTracked(parType);
+    
+    var passedType = classSystem.getTypeFromInstance(parInstance);
+    if (classSystem.isTemporaryTrackedClass(passedType)){
+      this.instance = parInstance[0];
+      this.track = parInstance[1];
+      this._isTrack = true;
+      this.type = classSystem.getClassFromTemporaryTracked(passedType);
+      
+    }else if (classSystem.isTrackedClass(passedType)){
+      this.instance = parInstance;
+      this.track = classSystem.getTrack(parInstance);;
+      this._isTrack = true;
+      this.type = passedType;
+      
+    }else{
+      this.instance = parInstance;
+      this.track = (){};
+      this.type = passedType;
+      
     };
     
-    if (classSystem.isTrackedClass(this.realType)){
-      this.realInstance = this.instance[0];
-      this.track = this.instance[1];
-      this._isTrack = true;
-    }else{
-      this.track = (){}; // empty function
-    };
-    this.realType = classSystem.getTypeFromInstance(this.realInstance); // the real type of the instance
   },
   
   getInternalId: (){
-    return classSystem.getInternalId(this.realInstance);
+    return classSystem.getInternalId(this.instance);
   },
   
   getTrack: (){
     if (this._isTrack){
-      return classSystem.getTrack(this.realInstance);
+      return classSystem.getTrack(this.instance);
     };
     return (){};
   },
   
   isServe: (){
-    return classSystem.isServe(this.realType);
+    return classSystem.isServe(this.type);
   },
   
-  takeOver: (){
-    if (this.takenOver){
-      throw errorMsg.takeOverDuplicate;
+  getInstanceAsType: (parType){
+    if (!classSystem.canSet(parType, this.type)){
+      throw errorMsg.typeMissmatch;
     };
-    this.takenOver = true;
-    this.track = (){};
+    if (classSystem.isTemporaryTrackedClass(parType)){
+      var track = this.getTrack();
+      this.extraTracks.push(track);
+      return [this.instance, track];
+    };
     return this.instance;
+  },
+  
+  // this helps us to avoid some spagetti code in error handling
+  // when an argument array is partially built up and a error ocurs
+  // we can call this function to have a clear clean up
+  clearExtraTracks: (){
+    var i = 0;
+    for (i = 0; i < this.extraTracks.length; ++i){
+      try{
+        this.extraTracks[i]();
+      }catch(e){};
+    };
   }
+  
+  
 };
+
+
+
 
 
 
@@ -319,6 +391,9 @@ var destroySynced = function(parSyncData){
   for (i = 0; i < transports.length; ++i){
     var t = transports[i];
     t.removeInstance(syncData.getInternalId());
+  };
+  if (syncData.internalId){
+    delete internalObjects[syncData.internalId];
   };
 };
 var registerSyncClass = function(hashStr, nameStr, parType){
@@ -720,6 +795,7 @@ var classSystem = {
             };
             internalId = getNewInternalId();
             internalObjects[internalId] = self;
+            syncData.internalId = internalId;
             return internalId;
           },
           transports: []
@@ -1070,7 +1146,7 @@ var classSystem = {
     if (parInstance.length === 2){
       // most likely a temporary
       // this is a hack and must be replaced
-      return parInstance[0][0];
+      return this._createTemporaryTrackedClass(parInstance[0][0]);
     };
     throw errorMsg.unknownInstanceType;
   }
@@ -1100,11 +1176,11 @@ var classSystem = {
 
   },
   
-  addTransport: (parInstance, parTransport){
-    var syncData = this.getSyncData(parInstance.realInstance);
+  addTransport: (parDynInstance, parTransport){
+    var syncData = this.getSyncData(parDynInstance.instance);
     syncData.transports.push(parTransport);
     if (syncData.transports.length > 1 && !syncData.track){
-      syncData.track = parInstance.getTrack();
+      syncData.track = parDynInstance.getTrack();
     };
   },
   removeTransport: (parInternalId, parTransport){
@@ -1128,12 +1204,12 @@ var classSystem = {
   },
 
   
-  getInstanceSyncData: (parInstance, parGetDataFun, parGetTypeFun){
-    if (!parInstance){
+  getInstanceSyncData: (parDynInstance, parGetDataFun, parGetTypeFun){
+    if (!parDynInstance){
       return;
     };
-    var type = parInstance.realType;
-    var instance = parInstance.realInstance;
+    var type = parDynInstance.type;
+    var instance = parDynInstance.instance;
     
     var cDef = getClass(type);
     if (!cDef.sync){
@@ -1158,27 +1234,26 @@ var classSystem = {
   getInstanceFromSyncData: (parData){
     var type = parData[0];
     
-    var getTracker = (parInstance){
-      var cDef = getClass(parInstance.realType);
+    var getTracker = (parDynInstance){
+      var cDef = getClass(parDynInstance.type);
       var trackerIdx = cDef.map.trackerIdx;
-      return parInstance.realInstance[trackerIdx];
+      return parDynInstance.instance[trackerIdx];
     };
     
-    var setMember = (parType, parInstance, parMemberDefinition, parValueInstance){
-      if (!classSystem.canSet(parMemberDefinition.type, parValueInstance.realType)){
-        throw errorMsg.typeMissmatch;
-      };
-      var realInstance = parInstance.realInstance;
-      realInstance[parMemberDefinition.index] = parValueInstance.realInstance;
+    var setMember = (parType, parDynInstance, parMemberDefinition, parValueDynInstance){
+      var realInstance = parDynInstance.instance;
+      
+      realInstance[parMemberDefinition.index] = parValueDynInstance.getInstanceAsType(parMemberDefinition.type);
+      
       if (classSystem.isTrackedClass(parMemberDefinition.type)){
-        var tracker = getTracker(parInstance);
-        cDef = getClass(parValueInstance.realType);
+        var tracker = getTracker(parDynInstance);
+        cDef = getClass(parValueDynInstance.type);
         var trackMemberIdx = cDef.map.trackMemberIdx;
         
         if (realInstance[parMemberDefinition.trackIndex]){
           realInstance[parMemberDefinition.trackIndex]();
         };
-        realInstance[parMemberDefinition.trackIndex] = parValueInstance.realInstance[trackMemberIdx](tracker);
+        realInstance[parMemberDefinition.trackIndex] = parValueDynInstance.instance[trackMemberIdx](tracker);
       };
     };
     
@@ -1188,7 +1263,7 @@ var classSystem = {
     };
     var isTracked = this.isTrackedClass(type);
     
-    var instance = new Instance(type, this.getTypeConstructor(type)());
+    var instance = new DynInstance(type, this.getTypeConstructor(type)());
     try{
 
       var syncMembers = cDef.syncMembers;
@@ -1599,6 +1674,24 @@ var classSystem = {
               "(", MAKRO_VALUE, ")/*end temp assign*/\n"                   // call closure
             ], par);
           };
+        };
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      if (this.isTrackedClass(par["type"])){
+        if (par.assignmentType == "Identifier"){
+          return assembleCode([
+            "/*tracked assign*/(function(v){\n",
+            "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
+            MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
+            "if (v){\n",  
+            "_T", MAKRO_SELF, " = v[" + vcDef.map.trackRootIdx + "]();\n",            // reuse existing tracker to save function calls
+            "}else{\n",  
+            "_T", MAKRO_SELF, " = undefined;\n",            // reuse existing tracker to save function calls
+            "};\n",  
+            "return v;\n",                        // reuse existing tracker to save function calls
+            "})",                            // return undefined
+            "(", MAKRO_VALUE, ")/*end assign*/\n"                   // call closure
+          ], par);
         };
         return runtimeError(errorMsg.typeMissmatch, par);
       };
@@ -2020,7 +2113,7 @@ extra.classSystemPs.resolve({
   classSystem: classSystem,
   internalObjects: internalObjects,
   getClassBySyncId: getClassBySyncId,
-  Instance: Instance
+  DynInstance: DynInstance
 });
 
 

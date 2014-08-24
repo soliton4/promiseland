@@ -18,6 +18,7 @@
   
   
   var createTest = function(parModuleName, parFun){
+    console.log("running " + parModuleName);
     if (!parFun){
       parFun = successFun;
     };
@@ -37,6 +38,7 @@
   
   
   *createTest("clientServer");
+  *createTest("emptyReturn");
   *createTest("frameParameter");
   *createTest("exclusive");
   *createTest("syncReturn");
@@ -44,7 +46,9 @@
   *createTest("syncServerDestroy2");
   *createTest("syncServe");
   *createTest("syncServe2");
-  //*createTest("syncServe");
+  *createTest("syncParameter");
+  *createTest("syncMember");
+  //*createTest("syncMember");
 
 
 

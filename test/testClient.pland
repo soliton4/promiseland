@@ -56,8 +56,8 @@ var runTests = (){
   
   require "test/frameTests";
   
-  
   var collector = require "./testCollector";
+  debugger;
   var type = querySt("type") || "unknown";
   collector.postResult(type, testObj);
   

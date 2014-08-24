@@ -11,12 +11,12 @@
 var classSystem;
 var internalObjects;
 var getClassBySyncId;
-var Instance;
+var DynInstance;
 ((){
   classSystem = (*extra.classSystemPs).classSystem;
   internalObjects = (*extra.classSystemPs).internalObjects;
   getClassBySyncId = (*extra.classSystemPs).getClassBySyncId;
-  Instance = (*extra.classSystemPs).Instance;
+  DynInstance = (*extra.classSystemPs).DynInstance;
 })();
 
 var config = extra.config;
@@ -504,11 +504,11 @@ class Transport {
     return this.instances[internalId];
   },
   
-  addInstance: (parInstance, parRemoteId, parTrack){
-    var internalId = parInstance.getInternalId();
+  addInstance: (parDynInstance, parRemoteId, parTrack){
+    var internalId = parDynInstance.getInternalId();
     var remoteId = this.instances[internalId];
     if (remoteId === undefined){
-      classSystem.addTransport(parInstance, this);
+      classSystem.addTransport(parDynInstance, this);
       this.instances[internalId] = parRemoteId;
     };
     if (parTrack){
@@ -520,10 +520,9 @@ class Transport {
     };
   },
   
-  removeInstance: (parInternalId){
-    console.log("- remove instance")
+  removeInstance: (parInternalId, dontSend){
     var remoteId = this.instances[parInternalId];
-    if (remoteId !== undefined){
+    if (remoteId !== undefined && !dontSend){
       // send unsync request / msg
       var m = this.newMessage();
       m.setData({
@@ -535,7 +534,6 @@ class Transport {
     delete this.instances[parInternalId];
     classSystem.removeTransport(parInternalId, this);
     if (this.instanceTracks[parInternalId]){
-      console.log("- remove instance track")
       var track = this.instanceTracks[parInternalId];
       delete this.instanceTracks[parInternalId];
       track();
@@ -702,13 +700,13 @@ class Transport {
     };
 
 handlers.remove = (parContent, parPackage){
-  console.log("calling remove");
+  //console.log("calling remove");
   try{
     var data = parContent.getData();
     
     var t = parContent.getTransport();
     
-    t.removeInstance(data.remoteId);
+    t.removeInstance(data.remoteId, true);
     
   }catch(e){
     console.log("sync error");
@@ -749,6 +747,28 @@ handlers.sync = (parContent, parPackage){
 handlers.remoteexec = (parContent, parPackage){
   var track = (){};
   var err;
+  var args = [];
+  var realArgs = [];
+  var cleanUpArgs = (){
+    var i;
+    for (i = 0; i < args.length; ++i){
+      try{
+        args[i].track();
+      }catch(e){};
+    };
+  };
+  var clearExtraTracks = (){
+    var i;
+    for (i = 0; i < args.length; ++i){
+      try{
+        args[i].clearExtraTracks();
+      }catch(e){};
+    };
+  };
+  
+  var i;
+  var answer = parContent.createAnswer();
+  
   try{
     var data = parContent.getData();
 
@@ -765,13 +785,23 @@ handlers.remoteexec = (parContent, parPackage){
         isVar = false;
       };
       
-      var funResult = funEntry.fun.apply(undefined, data.args);
-      if (resultTypes.isTemporary){
-        track = funResult[1];
-        funResult = funResult[0];
+      
+      for (i = 0 ; i < data.args.length; ++i){
+        var instance = *getInstanceFromTransportData(data.args[i], parContent);
+        args.push(instance);
       };
       
-      var answer = parContent.createAnswer();
+      for (i = 0 ; i < args.length; ++i){
+        realArgs.push(args[i].getInstanceAsType(classSystem.getFunctionArgumentType(funType, i)));
+      };
+      cleanUpArgs();
+      
+      var funResult = funEntry.fun.apply(undefined, realArgs);
+      
+      if (resultTypes.isTemporary){
+        track = funResult[1];
+        funResult = funResult[0]; // the result promise itself is part of a temporary
+      };
       
       // var case
       try{
@@ -781,8 +811,10 @@ handlers.remoteexec = (parContent, parPackage){
         console.log(e);
         answer.setData({err: e});
       };
-      track();
+      console.log("send answer:");
+      console.log(answer.getData());
       answer.send();
+      track();
       return;
     };
     
@@ -790,14 +822,17 @@ handlers.remoteexec = (parContent, parPackage){
     err = e;
     console.log("remoteexec error");
     console.log(e);
-    track();
+    cleanUpArgs();
+    clearExtraTracks();
   };
   
-  var answer = parContent.createAnswer();
-  console.log("answer error 2");
-  console.log(e);
-  answer.setData({err: e || errorMsg.canNotExecute});
+  answer.setData({err: err || errorMsg.canNotExecute});
   answer.send();
+  console.log("error answer send")
+  
+  track();
+  cleanUpArgs();
+  console.log("remote exec fail end");
   
   return;
       
@@ -820,7 +855,7 @@ var getInstanceTransportData = (parType, parData, parContent){
   if (classSystem.isVar(parType)){
     return [parData];
   };
-  var instance = new Instance(parType, parData);
+  var instance = new DynInstance(parType, parData);
   try{
     var getInstanceFun = (parType, _parData){
       return getInstanceTransportData(parType, _parData, parContent)
@@ -829,13 +864,20 @@ var getInstanceTransportData = (parType, parData, parContent){
       return getTypeTransportData(parType, parContent);
     };
     
-
+    console.log("step 1");
+    
     var t = parContent.getTransport();
+    console.log("step 1.1");
 
     var internalId = instance.getInternalId();
-    var remoteId = t.getInstanceRemoteId(instance.realInstance);
-
+    console.log("step 1.2");
+    var remoteId = t.getInstanceRemoteId(instance.instance);
+    
+    console.log("step 2");
+    
     var request = parContent.newRequest();
+    
+    console.log("step 3");
 
     if (remoteId !== undefined){
       request.setData({
@@ -852,6 +894,8 @@ var getInstanceTransportData = (parType, parData, parContent){
 
     };
     request.send();
+    
+    console.log("step 4");
 
     ((){
       // keeps the instance from destruction till its certain the other side has recieved it
@@ -860,12 +904,11 @@ var getInstanceTransportData = (parType, parData, parContent){
         var answerData = answer.getData();
         if (answerData.id !== undefined){
           t.addInstance(instance, answerData.id, instance.isServe() ? instance.getTrack() : undefined);
-          //t.addInstance(instance, answerData.id, undefined);
         };
       }catch(e){
 
       };
-      console.log("------calling track ------");
+      
       instance.track();
     })();
     var ret = request.getId();
@@ -873,8 +916,13 @@ var getInstanceTransportData = (parType, parData, parContent){
   }catch(e){
     console.log("getInstanceTransportData error");
     console.log(e);
-    instance.track();
-    throw e;
+    if (instance){
+      instance.track();
+    };
+    throw {
+      position: "getInstanceTransportData",
+      error: e
+    };
   };
   
   return ret;
@@ -884,8 +932,9 @@ var getInstanceTransportData = (parType, parData, parContent){
     
 var getInstanceFromTransportData = (parData, parContent){
   
-  if (parData === undefined){
-    return undefined;
+  //if (parData === undefined){ // not possible because of JSON null / undefined treatment
+  if (parData === undefined || parData === null){
+    return new DynInstance(classSystem.getBuiltinType("var"), undefined);;
   };
   var remoteType;
   var remoteVar = false;
@@ -893,7 +942,7 @@ var getInstanceFromTransportData = (parData, parContent){
   
   // var
   if (parData.length === 1){
-    return new Instance(classSystem.getBuiltinType("var"), parData[0]);
+    return new DynInstance(classSystem.getBuiltinType("var"), parData[0]);
   };
   
   var req = parContent.getRequest(parData);
@@ -924,12 +973,14 @@ var getInstanceFromSyncData = (parData, parContent){
       tempAr.push(*getInstanceFromTransportData(parData[i], parContent));
     };
     
-    return classSystem.getInstanceFromSyncData(tempAr);
+    var ret = classSystem.getInstanceFromSyncData(tempAr);
     
   }catch(e){
     clearTempAr();
     throw e;
   };
+  clearTempAr();
+  return ret;
   
 };
     
@@ -980,7 +1031,7 @@ handlers.instance = (parContent, parPackage){
     var realInstance = internalObjects[internalId];
     
     if (realInstance){
-      instance = new Instance(undefined, realInstance);
+      instance = new DynInstance(undefined, realInstance);
       answer.setData({});
       answer.send();
       parContent.localPs.resolve(instance);
@@ -1131,21 +1182,22 @@ var getEffectiveFunctionResultType = (parFunType){
     */
 var createRemoteExecRequest = function(par){
   try{
-
+    //debugger;
     var connection = par.connection;
+    var funType = par.funType;
+    var resultTypes = getEffectiveFunctionResultType(funType);
+    
+    var request = connection.createRequest();
+    
     var args = [];
     if (par.args && par.args.length){
       var i = 0;
       for (i = 0; i < par.args.length; ++i){
-        args.push(par.args[i]);
+        args.push(getInstanceTransportData(classSystem.getFunctionArgumentType(funType, i), par.args[i], request));
       };
     };
 
-    var funType = par.funType;
 
-    var resultTypes = getEffectiveFunctionResultType(funType);
-
-    var request = connection.createRequest();
     request.setData({
       "type": "remoteexec",
       hashStr: par.hashStr,
@@ -1164,10 +1216,7 @@ var createRemoteExecRequest = function(par){
     };
     
     var instance = *getInstanceFromTransportData(data.data, answer);
-    if (!classSystem.canSet(resultTypes.promiseResolveType, instance.realType)){
-      throw errorMsg.typeMissmatch;
-    };
-    return instance.takeOver();
+    var ret = instance.getInstanceAsType(resultTypes.promiseResolveType);
     
   }catch(e){
     if (instance){
@@ -1177,6 +1226,10 @@ var createRemoteExecRequest = function(par){
     console.log(e);
     throw e;
   };
+  if (instance){
+    instance.track();
+  };
+  return ret;
 };
 
 
