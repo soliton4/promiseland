@@ -779,7 +779,9 @@ var mixin = function(){
 
         if (parsingConfig){
           var reqireProperty = this.getTemplateProperty(parsingConfig, "require", "ObjectExpression");
-          extraModules = this.getTemplateRequireProperty(reqireProperty);
+          if (reqireProperty){
+            extraModules = this.getTemplateRequireProperty(reqireProperty);
+          };
         };
         this.common.extraModules = extraModules;
         

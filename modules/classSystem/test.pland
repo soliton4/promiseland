@@ -1,0 +1,6 @@
+<{
+  __promiseLandModule: true
+}>;
+
+  
+return { success: true };

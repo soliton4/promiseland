@@ -1,5 +1,11 @@
-<{__promiseLandModule: true}>;
+<{
+  __promiseLandModule: true,
+  require: {
+    testModule: "./classSystem/test"
+  }
+}>;
 
+  testModule = extra.getModule(testModule);
 
 /* 
   class system

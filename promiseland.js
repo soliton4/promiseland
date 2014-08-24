@@ -154,7 +154,10 @@
 
     // for promiseland internal modules to share objects
     var internals = {
-      config: config
+      config: config,
+      getModule: function(parModule){
+        return parModule(promiseland, internals);
+      }
     };
 
     // initialize addtional modules
