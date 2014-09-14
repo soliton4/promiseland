@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "eb47be501c7c70e03737e6c93c539e5d" })){ return promiseland._getModule("eb47be501c7c70e03737e6c93c539e5d"); };
+    if (promiseland._hasModule({ hashStr: "b7c344699fcf102e9f85d6bca5e70730" })){ return promiseland._getModule("b7c344699fcf102e9f85d6bca5e70730"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "eb47be501c7c70e03737e6c93c539e5d", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "b7c344699fcf102e9f85d6bca5e70730", "module": PL$1, promising: true });
 var PL$18/*console*/;try{PL$18/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -144,9 +144,15 @@ PL$11/*createTest*/("syncServe").then(PL$3(function(PL$33){PL$33;;
 PL$11/*createTest*/("syncServe2").then(PL$3(function(PL$34){PL$34;;
 PL$11/*createTest*/("syncParameter").then(PL$3(function(PL$35){PL$35;;
 PL$11/*createTest*/("syncMember").then(PL$3(function(PL$36){PL$36;;
+PL$11/*createTest*/("syncMemberNonTrivial").then(PL$3(function(PL$37){PL$37;;
+PL$11/*createTest*/("syncEvents").then(PL$3(function(PL$38){PL$38;;
+PL$11/*createTest*/("syncEvents2").then(PL$3(function(PL$39){PL$39;;
 PL$1.resolve(PL$5/*testObj*/); return;;
 PL$1.resolve(); return;;
 }), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

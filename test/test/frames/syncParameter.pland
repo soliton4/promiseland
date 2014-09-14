@@ -46,6 +46,7 @@ if (*getLocalB() !== 2){
   return { success: false };
 };
 
+
 C1 temp = new C1();
 if (isClient){
   temp.b = 4;

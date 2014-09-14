@@ -45,7 +45,8 @@ var runTests = (){
   //require "testmodules/clientServer";
   //require "testmodules/syncTest";
   //require "testmodules/destroyTest";
-  require "testmodules/syncMember";
+  //require "testmodules/syncMember";
+  require "testmodules/syncEvents";
   
   
 };

@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "f53b004a9eebe10af7d4d82778ce3fdb" })){ return promiseland._getModule("f53b004a9eebe10af7d4d82778ce3fdb"); };
+    if (promiseland._hasModule({ hashStr: "2f39ad220774aa94ba866fbd530eca20" })){ return promiseland._getModule("2f39ad220774aa94ba866fbd530eca20"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "f53b004a9eebe10af7d4d82778ce3fdb", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "2f39ad220774aa94ba866fbd530eca20", "module": PL$1, promising: true });
 var PL$17/*promiseland*/;try{PL$17/*promiseland*/ = promiseland;}catch(e){};
 var PL$25/*Object*/;try{PL$25/*Object*/ = Object;}catch(e){};
 var PL$167/*JSON*/;try{PL$167/*JSON*/ = JSON;}catch(e){};
@@ -1518,7 +1518,7 @@ if(! PL$124/*noUntrack*/){
 this["addBeforeReturn"](this["getDestroyVariableCode"]({"name": this["getVariableName"](PL$142/*varname*/),
 "type": PL$73/*type*/,
 "errorFun": this["getWarningFun"](PL$30/*par*/),
-"parsed": PL$30/*par*/}), this["isTrackedClassConRes"](PL$73/*type*/));;
+"parsed": PL$30/*par*/}), this["isTrackedClassConRes"](PL$73/*type*/, PL$30/*par*/));;
 };
 ;
 this["usedVariables"][PL$142/*varname*/] = false;;
@@ -3881,7 +3881,7 @@ for(PL$39/*p*/ in PL$30/*par*/){if((! PL$30/*par*/[PL$39/*p*/] || PL$255/*ignore
 }else{
 if(PL$254/*typeProps*/[PL$39/*p*/]){
 PL$261/*addProperty*/(PL$39/*p*/);;
-PL$26/*res*/["push"](PL$50/*self*/["renderType"](PL$30/*par*/[PL$39/*p*/]));;
+PL$26/*res*/["push"](PL$50/*self*/["renderType"](PL$30/*par*/[PL$39/*p*/], PL$72/*parsed*/));;
 
 }else{
 PL$261/*addProperty*/(PL$39/*p*/);;
@@ -3907,7 +3907,7 @@ PL$257/*errRes*/["resolve"](PL$17/*promiseland*/["classSystem"][PL$115/*parFun*/
 return PL$257/*errRes*/;;
 ;
 });;
-this["isTrackedClassConRes"] = (function(PL$75/*parType*/){
+this["isTrackedClassConRes"] = (function(PL$75/*parType*/, PL$58/*parParsed*/){
 var PL$50/*self*/;
 var PL$26/*res*/;
 ;
@@ -3917,7 +3917,7 @@ PL$26/*res*/ = PL$50/*self*/["newResult"]();
 PL$50/*self*/["common"]["useClassSystem"] = true;;
 PL$26/*res*/["push"]("classSystem.isTrackedClass");;
 PL$26/*res*/["push"]("(");;
-PL$26/*res*/["push"](PL$50/*self*/["renderType"](PL$75/*parType*/));;
+PL$26/*res*/["push"](PL$50/*self*/["renderType"](PL$75/*parType*/, PL$58/*parParsed*/));;
 PL$26/*res*/["push"](")");;
 return PL$26/*res*/;;
 };

@@ -48,7 +48,10 @@
   *createTest("syncServe2");
   *createTest("syncParameter");
   *createTest("syncMember");
-  //*createTest("syncMember");
+  *createTest("syncMemberNonTrivial");
+  *createTest("syncEvents");
+  *createTest("syncEvents2");
+  //*createTest("syncEvents2");
 
 
 

@@ -65,7 +65,7 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "063b02b45bab7047f0c7ef55fd001621" })){ return promiseland._getModule("063b02b45bab7047f0c7ef55fd001621"); };
+    if (promiseland._hasModule({ hashStr: "a5ff237cc57334244d005436251d0cc8" })){ return promiseland._getModule("a5ff237cc57334244d005436251d0cc8"); };
 var PL$2/*promiseland*/;try{PL$2/*promiseland*/ = promiseland;}catch(e){};
 var PL$9/*io*/;try{PL$9/*io*/ = io;}catch(e){};
 var PL$1 = (function(){
@@ -133,7 +133,7 @@ var PL$12 = new __Promise();
 var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
 var PL$15 = function(e){ PL$12.reject(e); };
 PL$14(function(){;
-__requireFun("testmodules/syncMember").then(PL$14(function(PL$16){PL$16;;
+__requireFun("testmodules/syncEvents").then(PL$14(function(PL$16){PL$16;;
 PL$12.resolve(); return;;
 }), PL$15);
 ;})();

@@ -8,7 +8,7 @@ class type T2 {
   b: 4
 }
 
-var a = <{ types: { Tx: T1, Ty: T2} }> function(){
+var a = <{ types: { Tx: T1, Ty: T2} }> (){
   Tx x = new Tx();
   Ty y = new Ty();
   x = y;

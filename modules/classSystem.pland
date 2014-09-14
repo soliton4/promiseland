@@ -1,11 +1,24 @@
 <{
   __promiseLandModule: true,
   require: {
-    testModule: "./classSystem/test"
+    DynInstance: "./classSystem/DynInstance",
+    TrackedPromise: "./classSystem/TrackedPromise",
+    provisional: "./classSystem/provisional",
+    temporary: "./classSystem/temporary",
+    promiseOf: "./classSystem/promiseOf",
+    sync: "./classSystem/sync",
+    codeGeneration: "./classSystem/codeGeneration",
   }
 }>;
 
-  testModule = extra.getModule(testModule);
+var errorMsg = extra.errorMsg;
+DynInstance = extra.getModule(DynInstance);
+TrackedPromise = extra.getModule(TrackedPromise);
+provisional = extra.getModule(provisional);
+temporary = extra.getModule(temporary);
+promiseOf = extra.getModule(promiseOf);
+sync = extra.getModule(sync);
+codeGeneration = extra.getModule(codeGeneration);
 
 /* 
   class system
@@ -66,277 +79,22 @@ var Chainable;
 */
 
 
+var MAKRO_SELF = 0;
+var MAKRO_PROPERTY = 1;
+var MAKRO_PROPERTYSTRING = 2;
+var MAKRO_PROPERTYVALUE = 3;
+var MAKRO_VALUE = 4;
+var MAKRO_LEFT = 5;
+var MAKRO_OPERATOR = 6;
+var MAKRO_RIGHT = 7;
+var MAKRO_VALUEPROPERTY = 8;
+var MAKRO_RESOLVEFUN = 9;
+var MAKRO_REJECTFUN = 10;
+var MAKRO_TYPEVALUE = 11;
+var MAKRO_CONSTRUCTOR = 12;
 
 
-
-/*
-  internal representation of a instance
-  it always contains a non temporary and a life line
-  the life line is a empty function if its not a tracked type to make things easier
-  its possible to get a representation of a desired type by calling 
-    getInstanceAsType
-  it will raise a typeMissmatch if the instance can not be converted to the desired type
-  
-  you must call .track() when you dont use it anymore !!!
-*/
-class DynInstance {
-  constructor: (parType, parInstance){
-    this.extraTracks = [];
-    if (!parType){
-      parType = classSystem.getTypeFromInstance(parInstance);
-    };
-    this.track = (){};
-    if (classSystem.isVar(parType)){
-      this.instance = parInstance;
-      this.type = parType;
-      return;
-    };
-    
-    var passedType = classSystem.getTypeFromInstance(parInstance);
-    if (classSystem.isTemporaryTrackedClass(passedType)){
-      this.instance = parInstance[0];
-      this.track = parInstance[1];
-      this._isTrack = true;
-      this.type = classSystem.getClassFromTemporaryTracked(passedType);
-      
-    }else if (classSystem.isTrackedClass(passedType)){
-      this.instance = parInstance;
-      this.track = classSystem.getTrack(parInstance);;
-      this._isTrack = true;
-      this.type = passedType;
-      
-    }else{
-      this.instance = parInstance;
-      this.track = (){};
-      this.type = passedType;
-      
-    };
-    
-  },
-  
-  getInternalId: (){
-    return classSystem.getInternalId(this.instance);
-  },
-  
-  getTrack: (){
-    if (this._isTrack){
-      return classSystem.getTrack(this.instance);
-    };
-    return (){};
-  },
-  
-  isServe: (){
-    return classSystem.isServe(this.type);
-  },
-  
-  getInstanceAsType: (parType){
-    if (!classSystem.canSet(parType, this.type)){
-      throw errorMsg.typeMissmatch;
-    };
-    if (classSystem.isTemporaryTrackedClass(parType)){
-      var track = this.getTrack();
-      this.extraTracks.push(track);
-      return [this.instance, track];
-    };
-    return this.instance;
-  },
-  
-  // this helps us to avoid some spagetti code in error handling
-  // when an argument array is partially built up and a error ocurs
-  // we can call this function to have a clear clean up
-  clearExtraTracks: (){
-    var i = 0;
-    for (i = 0; i < this.extraTracks.length; ++i){
-      try{
-        this.extraTracks[i]();
-      }catch(e){};
-    };
-  }
-  
-  
-};
-
-
-
-
-
-
-// tracked Promise
-// for internal use to create tracked promises of tracked classes
-var TrackedPromise = function(parTrackFun){
-
-  var self = this;
-  var lifeLine;
-
-  var destroyFun = function(){
-    if (lifeLine){
-      lifeLine();
-      lifeLine = undefined;
-    }else{
-      self.then(function(){
-        if (lifeLine){
-          lifeLine();
-          lifeLine = undefined;
-        };
-      });
-    };
-  };
-
-  var t = Tracker(destroyFun);
-  var tracker = t[0];
-  this.rootTrack = t[1];
-  this.memberTrack = t[2];
-  var rootTrack = this.rootTrack;
-
-  var thenAr = [];
-  var elseAr = [];
-
-  var thenFun = function(parThenFun, parElseFun){
-    if (parThenFun){
-      thenAr.push([parThenFun, rootTrack()]);
-    };
-    if (parElseFun){
-      elseAr.push(parElseFun);
-    };
-    //return returnPromise;
-  };
-  var thenReuseFun = function(parReuse, parThenFun, parElseFun){
-    if (parThenFun){
-      thenAr.push([parThenFun, parReuse]);
-    }else{
-      parReuse();
-    };
-    if (parElseFun){
-      elseAr.push(parElseFun);
-    };
-    //return returnPromise;
-  };
-
-  this.resolve = function(value){
-    if (value){
-      var realValue = value[0]; // its a temporary
-      lifeLine = parTrackFun(value, tracker); // this will destroy the temporary
-      value = realValue; // create a temporary that will destroy the promise first
-    };
-
-    thenFun = function(parThenFun){
-      if (parThenFun){
-        try{
-          parThenFun([value, rootTrack()]);
-        }catch(e){
-          // maybe we are ignoring to much here, lets check later
-        };
-      };
-    };
-    thenReuseFun = function(parReuse, parThenFun){
-      if (parThenFun){
-        try{
-          parThenFun([value, parReuse]);
-        }catch(e){
-          // maybe we are ignoring to much here, lets check later
-        };
-      }else{
-        parReuse();
-      };
-    };
-    if (!thenAr) return;
-    var i = 0;
-    var l = thenAr.length;
-    for (i; i < l; ++i){
-      try{
-        var entryAr = thenAr[i];
-        entryAr[0]([value, entryAr[1]]);
-      }catch(e){
-        // will those errors ocur? if so what do we do with them?
-      };
-    };
-    thenAr = undefined; // why not delete?
-    elseAr = undefined;
-    this.resolve = undefined;
-    this.reject = undefined;
-  };
-  this.reject = function(value){
-    thenFun = function(u, parElseFun){
-      if (parElseFun){
-        try{
-          parElseFun(value);
-        }catch(e){
-          // maybe we are ignoring to much here, lets check later
-        };
-      };
-    };
-    thenReuseFun = function(parReuse, u, parElseFun){
-      parReuse();
-      if (parElseFun){
-        try{
-          parElseFun(value);
-        }catch(e){
-          // maybe we are ignoring to much here, lets check later
-        };
-      };
-    };
-    if (!elseAr) return;
-    var i = 0;
-    var l = elseAr.length;
-    for (i; i < l; ++i){
-      try{
-        elseAr[i](value);
-      }catch(e){
-        // will those errors ocur? if so what do we do with them?
-      }
-    };
-    thenAr = undefined; // why not delete?
-    elseAr = undefined;
-    this.resolve = undefined;
-    this.reject = undefined;
-  };
-
-  this.then = function(par1, par2){
-    thenFun(par1, par2);
-  };
-  this.thenReuse = function(parReuse, par1, par2){
-    thenReuseFun(parReuse, par1, par2);
-  };
-  /*this.promise = {
-        then: this.then
-      };*/
-  this.promise = this.then;
-  /* so this should be possible
-        var p = Promise();
-        var ps = p.then;
-        ps(thenfun...);
-        //alternative:
-        ps.then(thenfun...); // so the thenFun is a promise itself;
-      */
-  this.then.then = this.then;
-  this.then.thenReuse = this.thenReuse;
-
-
-};
-    
-    
-var _ClassToken;
-
-/*
-      the classLiteral is used to ensure consistency between
-      compiletime type safety and runtime type safety
-
-      it contains class objects for members that are replaced with their names in sourcecode.
-
-      structure:
-      {
-        members:[
-          {
-            name: "nameliteral",
-            type: typeObject
-          },
-          ...
-        ],
-        extends: [typeObject, ...],
-        hasFreePart: true / false
-      }
-
-*/
+// unhide class types    
 
 var _actClass;
 var getClass = function(cf){
@@ -350,6 +108,10 @@ var classHider = function(toHide){
     _actClass = toHide;
   };
 };
+
+
+// buildins
+
 var builtinTypes = {
   "var": classHider({
     isVar: true,
@@ -361,297 +123,13 @@ var builtinTypes = {
   })
 };
 
-var nextInternalId = 1;
-var getNewInternalId = function(){
-  return nextInternalId++;
-};
-var internalObjects = {};
-
-var syncFun = function(parInstance, memberIdx, mType, value){
-  var syncData = classSystem.getSyncData(parInstance);
-  if (syncData){
-    var i = 0;
-    for (i = 0; i < syncData.transports.length; ++i){
-      //console.log("found connection to sync");
-      var transport = syncData.transports[i];
-      var m = transport.newMessage();
-      m.setData({
-        type: "sync",
-        remoteId: transport.getInstanceRemoteId(parInstance),
-        memberIdx: memberIdx,
-        value: value
-      });
-      m.send();
-      //console.log("done sync msg");
-    };
-  };
-};
-
-var destroySynced = function(parSyncData){
-  if (!parSyncData){
-    return;
-  };
-  var syncData = parSyncData;
-  var transports = syncData.transports.slice();
-  var i;
-  for (i = 0; i < transports.length; ++i){
-    var t = transports[i];
-    t.removeInstance(syncData.getInternalId());
-  };
-  if (syncData.internalId){
-    delete internalObjects[syncData.internalId];
-  };
-};
-var registerSyncClass = function(hashStr, nameStr, parType){
-  var moduleData = getModuleData(hashStr);
-  moduleData.classes[nameStr] = {
-    "type": parType
-  };
-};
-var getClassBySyncId = function(parSyncId){
-  var moduleData = getModuleData(parSyncId.hash);
-  if (moduleData && moduleData.classes[parSyncId.name]){
-    return moduleData.classes[parSyncId.name].type;
-  };
-};
-
 
 /* 
   main classystem variable
   ---------------------------------------------------------------------------------------------------------
 */
 
-
 var classSystem = {
-  /*
-        a placeholder for a class that will be constructed in the future
-        can be used wildly generic for multiple purposes
-        the class object itself is different from the final class object
-        you can access the final class object via definitionPromise or readyPromise
-  */
-  _createProvisionalClass: function(){
-    var cDef = {
-      provisional: true,
-      promise: new Promise(),
-      type: undefined
-    };
-    cDef.promise.then(function(type){
-      cDef.type = type;
-    });
-    var cf = classHider(cDef);
-    return cf;
-  },
-
-  _resolveProvisional: function(parType, parResult){
-    var self = this;
-    var typeDef = getClass(parType);
-    var resultDef = getClass(parResult);
-
-    if (resultDef.provisional){
-      resultDef.promise.then(function(result){
-        self.resolveProvisional(parType, result);
-      });
-    }else{
-      typeDef.promise.resolve(parResult);
-    };
-  },
-      
-  isProvisional: function(parType){
-    var typeDef = getClass(parType);
-    if (typeDef.provisional){
-      return true;
-    };
-    return false;
-  },
-
-  /*
-        returns the actual class object (hidefunction)
-        the basic attributes of the class are available (such as track / sync / frame etc )
-        however members are not available yet, the class can not be used to generate code for its members, nor can it be constructed
-        isReady indicates weather or not a class is ready to be used
-      */
-  definitionPromise: function(parType){
-    var typeDef = getClass(parType);
-    if (typeDef.provisional){
-      return typeDef.promise;
-    };
-    var p = new Promise();
-    p.resolve(parType);
-    return p;
-  },
-  /*
-        the final class everything is ready to use. it could be that some of the member types are not ready yet,
-        however this has no influence on the class itself. you can use it within the classsystem without limits
-      */
-  readyPromise: function(_parType){
-    var p = new Promise();
-    this.definitionPromise(_parType).then(function(parType){
-      var typeDef = getClass(parType);
-      if (typeDef.isReady){
-        p.resolve(parType);
-        return;
-      };
-      typeDef.readyPromise.then(function(parType){
-        p.resolve(parType);
-      });
-      return;
-    });
-    return p;
-  },
-
-
-  _createTemporaryTrackedClass: function(parType){
-    var self = this;
-    if (this.isProvisional(parType)){
-      var pr = this._createProvisionalClass();
-      this.definitionPromise(parType).then(function(parDefinedClass){
-        self._resolveProvisional(pr, self._createTemporaryTrackedClass(parDefinedClass));
-      });
-      return pr;
-    };
-    if (this.isTemporaryTrackedClass(parType)){
-      return parType;
-    };
-    if (!this.isTrackedClass(parType)){
-      return parType;
-    };
-    var cDef = {
-      temporaryTracked: true,
-      type: parType,
-      isReady: false,
-      readyPromise: new Promise()
-    };
-    var cf = classHider(cDef);
-
-    self.readyPromise(parType).then(function(){
-      cDef.ready = true;
-      cDef.readyPromise.resolve(cf);
-    });
-
-    return cf;
-  },
-
-  isSyncedClass: (parType){
-    var cDef = getClass(parType);
-    if (cDef.sync){
-      return true;
-    };
-    return false;
-  },
-
-  isTemporaryTrackedClass: function(parType){
-    var cDef = getClass(parType);
-    if (cDef.temporaryTracked){
-      return true;
-    };
-    return false;
-  },
-  
-  isServe: (parType){
-    var cDef = getClass(parType);
-    if (cDef.syncServe){
-      return true;
-    };
-    return false;
-  },
-
-  getClassFromTemporaryTracked: function(parType){
-    if (this.isTemporaryTrackedClass(parType)){
-      var cDef = getClass(parType);
-      return cDef.type;
-    };
-    return parType;
-  },
-
-
-  _createPromiseOfClass: function(parType){
-    var self = this;
-    if (this.isProvisional(parType)){
-      var pr = this._createProvisionalClass();
-      this.definitionPromise(parType).then(function(parDefinedClass){
-        self._resolveProvisional(pr, self._createPromiseOfClass(parDefinedClass));
-      });
-      return pr;
-    };
-    if (this.isVar(parType)){
-      return parType;
-    };
-
-    var track = false;
-    if (this.isTrackedClass(parType)){
-      track = true;
-    };
-
-    var map = {
-      //members: {},
-      //"extends": []
-    };
-
-    var cDef = {
-      promiseOf: true,
-      type: parType,
-      isReady: true,
-      readyPromise: new Promise(),
-      track: track,
-      map: map
-    };
-    var cf = classHider(cDef);
-
-    if (track){
-      //cDef.trackerIdx = "tracker";
-      cDef.map.trackRootIdx = "rootTrack";
-      cDef.map.trackMemberIdx = "memberTrack";
-
-      var pcDef = getClass(parType);
-      var memberTrackMemberIdx = pcDef.map.trackMemberIdx;
-
-      cDef.constructor = function(){
-        var r = new TrackedPromise(function(parTempValue, parTracker){
-          var v = parTempValue[0]; // the value
-          var l = v[memberTrackMemberIdx](parTracker);
-          parTempValue[1](); // untrack temporary
-          return l; // the lifeLine
-        });
-        return [r, r.rootTrack()];
-      };
-
-    }else{
-      cDef.constructor = Promise;
-
-    };
-
-    cDef.readyPromise.resolve(cf);
-
-    return cf;
-  },
-
-  isPromiseOfClass: function(parType){
-    var cDef = getClass(parType);
-    if (cDef.promiseOf){
-      return true;
-    };
-    return false;
-  },
-
-  getClassFromPromiseOf: function(parType){
-    var self = this;
-    if (this.isProvisional(parType)){
-      var pr = this._createProvisionalClass();
-      this.definitionPromise(parType).then(function(parDefinedClass){
-        self._resolveProvisional(pr, self.getClassFromPromiseOf(parDefinedClass));
-      });
-      return pr;
-    };
-    if (this.isTemporaryTrackedClass(parType)){
-      return this.getClassFromPromiseOf(this.getClassFromTemporaryTracked(parType));
-    };
-    if (this.isPromiseOfClass(parType)){
-      var cDef = getClass(parType);
-      return this._createTemporaryTrackedClass(cDef.type);
-    };
-    return parType;
-  },
-
 
   isSameType: function(type1, type2){
     if (type1 === type2){
@@ -680,6 +158,26 @@ var classSystem = {
   },
 
 
+/*
+      the classLiteral is used to ensure consistency between
+      compiletime type safety and runtime type safety
+
+      it contains class objects for members that are replaced with their names in sourcecode.
+
+      structure:
+      {
+        members:[
+          {
+            name: "nameliteral",
+            type: typeObject
+          },
+          ...
+        ],
+        extends: [typeObject, ...],
+        hasFreePart: true / false
+      }
+
+*/
   // wrap arround _createClass
   createClass: function(classLiteral, parDefaults){
     var self = this;
@@ -735,6 +233,7 @@ var classSystem = {
 
     var map = {
       members: {},
+      membersByIndex: {},
       "extends": []
     };
 
@@ -820,8 +319,8 @@ var classSystem = {
       var freepart = {};
       map.freePart = cAr.length;
       cAr.push(freepart);
-      map.getMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "]"];
-      map.setMemberCode = [MAKRO_SELF, "[" + map.freePart + "][", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE];
+      map.getMemberCode = presets.getMemberCode(map.freePart);
+      map.setMemberCode = presets.setMemberCode(map.freePart);
     };
 
 
@@ -867,6 +366,8 @@ var classSystem = {
       };
       mDef.type = m.type;
       var mType = m.type;
+      
+      var isFunction = self.isFunctionType(mDef.type);
 
       var memberIdx = mDef.index;
       var isTrackedMember = self.isTrackedClass(mDef.type);
@@ -883,7 +384,17 @@ var classSystem = {
       };
 
       map.members[m.name] = mDef;
+      map.membersByIndex[mDef.index] = mDef;
       var def = parDefaults ? parDefaults[m.name] : undefined;
+      if (isFunction && mDef.sync){
+        if (!(m.name == "constructor" || m.name == "destroy")){
+          var originalFun = def;
+          def = (){
+            syncFunctionFun(this, memberIdx, mType, arguments);
+            return originalFun.apply(this, arguments);
+          };
+        };
+      };
       cAr.push(def);
 
       if (mDef.hasSetter){
@@ -915,17 +426,19 @@ var classSystem = {
       if (isTrackedMember){
         var mCDef = getClass(mDef.type);
         var memberTrackMemberIdx = mCDef.map.trackMemberIdx;
+        var memberTrackRootIdx = mCDef.map.trackRootIdx;
 
         mDef.trackIndex = cAr.length;
         cAr.push(undefined);
         untrackIdxAr.push(mDef.trackIndex);
-
+        
         if (cDef.track){
           if (mDef.hasSetter){
-            mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)]; // setters are allways called as temporary
+            mDef.setCode              = ["(function(s, v){ var vAr = [v, v[" + memberTrackRootIdx + "]()]; vAr = s[" + mDef.setterIdx + "](vAr); s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
             mDef.setCodeFromTemporary = ["(function(s, vAr){ vAr = s[" + mDef.setterIdx + "](vAr); var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
 
           }else{
+            //mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)]; // setters are allways called as temporary
             mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
             mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
 
@@ -937,7 +450,7 @@ var classSystem = {
       };
       mDef.connectFunCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, ")"];
       mDef.connectSlotCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, "[", MAKRO_VALUEPROPERTY, "], ", MAKRO_VALUE, ")"];
-
+      
     };
 
     var createMembersPs = function(){
@@ -1143,9 +656,9 @@ var classSystem = {
     };
 
     return cf;
-  }
+  },
 
-  , getTypeFromInstance: (parInstance){
+  getTypeFromInstance: (parInstance){
     if (typeof parInstance[0] === "function"){
       return parInstance[0];
     };
@@ -1155,149 +668,9 @@ var classSystem = {
       return this._createTemporaryTrackedClass(parInstance[0][0]);
     };
     throw errorMsg.unknownInstanceType;
-  }
-  
-  , getInternalId: function(parInstance){
-    var type = parInstance[0];
-    var cDef = getClass(type);
-    if (cDef.sync){
-      var syncData = parInstance[cDef.map.syncDataIdx]();
-      return syncData.getInternalId();
-    };
-    return;
-  }
-
-  , getSyncData: function(parInstance){
-    var type = parInstance[0];
-    var cDef = getClass(type);
-    if (cDef.sync){
-      return parInstance[cDef.map.syncDataIdx]();
-    };
-    return;
-  }
-
-  , getSyncId: (parType){
-    var cDef = getClass(parType);
-    return cDef.syncId;
-
   },
   
-  addTransport: (parDynInstance, parTransport){
-    var syncData = this.getSyncData(parDynInstance.instance);
-    syncData.transports.push(parTransport);
-    if (syncData.transports.length > 1 && !syncData.track){
-      syncData.track = parDynInstance.getTrack();
-    };
-  },
-  removeTransport: (parInternalId, parTransport){
-    var realInstance = internalObjects[parInternalId];
-    if (!realInstance){
-      return;
-    };
-    var syncData = this.getSyncData(realInstance);
-    var transports = syncData.transports;
-    
-    var index = transports.indexOf(parTransport);
-    if (index > -1) {
-      transports.splice(index, 1);
-    };
-    
-    if (syncData.transports.length < 2 && syncData.track){
-      var track = syncData.track;
-      syncData.track = undefined;
-      track();
-    };
-  },
-
   
-  getInstanceSyncData: (parDynInstance, parGetDataFun, parGetTypeFun){
-    if (!parDynInstance){
-      return;
-    };
-    var type = parDynInstance.type;
-    var instance = parDynInstance.instance;
-    
-    var cDef = getClass(type);
-    if (!cDef.sync){
-      throw errorMsg.notSyncable
-    };
-    var res = [parGetTypeFun(type)];
-    
-    var syncMembers = cDef.syncMembers;
-    var i = 0;
-    var l = syncMembers.length;
-    for (i; i < l; ++i){
-      var t = syncMembers[i].type;
-      var d = instance[syncMembers[i].index];
-      if (!this.isFunctionType(t)){
-        res.push(parGetDataFun(t, d));
-      };
-    };
-    return res;
-  },
-  
-  // assumes all members are allready present
-  getInstanceFromSyncData: (parData){
-    var type = parData[0];
-    
-    var getTracker = (parDynInstance){
-      var cDef = getClass(parDynInstance.type);
-      var trackerIdx = cDef.map.trackerIdx;
-      return parDynInstance.instance[trackerIdx];
-    };
-    
-    var setMember = (parType, parDynInstance, parMemberDefinition, parValueDynInstance){
-      var realInstance = parDynInstance.instance;
-      
-      realInstance[parMemberDefinition.index] = parValueDynInstance.getInstanceAsType(parMemberDefinition.type);
-      
-      if (classSystem.isTrackedClass(parMemberDefinition.type)){
-        var tracker = getTracker(parDynInstance);
-        cDef = getClass(parValueDynInstance.type);
-        var trackMemberIdx = cDef.map.trackMemberIdx;
-        
-        if (realInstance[parMemberDefinition.trackIndex]){
-          realInstance[parMemberDefinition.trackIndex]();
-        };
-        realInstance[parMemberDefinition.trackIndex] = parValueDynInstance.instance[trackMemberIdx](tracker);
-      };
-    };
-    
-    var cDef = getClass(type);
-    if (!cDef.sync){
-      throw errorMsg.notSyncable
-    };
-    var isTracked = this.isTrackedClass(type);
-    
-    var instance = new DynInstance(type, this.getTypeConstructor(type)());
-    try{
-
-      var syncMembers = cDef.syncMembers;
-      var i = 0;
-      var l = syncMembers.length;
-      var nextData = 1;
-      for (i; i < l; ++i){
-        var t = syncMembers[i].type;
-        if (this.isFunctionType(t)){
-          continue;
-        };
-        setMember(type, instance, syncMembers[i], parData[nextData]);
-        ++nextData;
-      };
-      
-    }catch(e){
-      instance.track();
-      throw e;
-    };
-    return instance;
-  },
-  
-  setMemberByIdx: (realInstance, memberIdx, value){
-    realInstance[memberIdx] = value;
-  },
-  
-      
-      
   isFunctionType: (parType){
     var cDef = getClass(parType);
     if (cDef.isFunction){
@@ -1312,10 +685,10 @@ var classSystem = {
       return true;
     };
     return false;
-  }
+  },
       
 
-  , createFunctionType: function(par){
+  createFunctionType: function(par){
     var self = this;
     var cDef = {
       isFunction: true,
@@ -1387,42 +760,42 @@ var classSystem = {
 
 
     return cf;
-  }
+  },
 
-  , isVar: function(parType){
+  isVar: function(parType){
     var cDef = getClass(parType);
     if (cDef.isVar){
       return true;
     };
     return false;
-  }
+  },
 
-  , getFunctionReturnType: function(parType){
+  getFunctionReturnType: function(parType){
     var cDef = getClass(parType);
     if (cDef.isVar){
       return this.getBuiltinType("var");
     };
     return cDef["return"];
-  }
-  , getFunctionArgumentCount: function(parType){
+  },
+  getFunctionArgumentCount: function(parType){
     var cDef = getClass(parType);
     if (cDef.arguments){
       return cDef.arguments.length;
     };
     return 0;
 
-  }
+  },
 
-  , getFunctionArgumentType: function(parType, parIndex){
+  getFunctionArgumentType: function(parType, parIndex){
     var cDef = getClass(parType);
     if (cDef.arguments && cDef.arguments[parIndex]){
       return cDef.arguments[parIndex];
     }
       return this.getBuiltinType("var");
 
-  }
+  },
 
-  , getConstructorArgumentType: function(parType, parIndex){
+  getConstructorArgumentType: function(parType, parIndex){
     var cDef = getClass(parType);
     var t;
     if (cDef.constructorArguments){
@@ -1433,38 +806,19 @@ var classSystem = {
     };
     return this.getBuiltinType("var");
 
-  }
+  },
 
-  , getTypeConstructor: function(parType){
+  getTypeConstructor: function(parType){
     var cDef = getClass(parType);
     return cDef.constructor;
-  }
+  },
 
-  , getBuiltinType: function(parName){
+  getBuiltinType: function(parName){
     return builtinTypes[parName];
-  }
+  },
 
-  , getGetPropertyCode: function(par){
 
-    var cDef = getClass(par["type"]);
-    if (cDef.isVar){
-      return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "]"], par);
-    };
-
-    var map = cDef.map;
-
-    if (par.property){
-      if (map.members[par.property]){
-        return assembleCode(map.members[par.property].getCode, par);
-      };
-    };
-    if (map.getMemberCode){
-      return assembleCode(map.getMemberCode, par);
-    };
-    return runtimeError(errorMsg.accessNotAllowd, par);
-  }
-
-  , getPropertyAlias: function(par){
+  getPropertyAlias: function(par){
     var cDef = getClass(par["type"]);
     if (cDef.isVar){
       return par.property;
@@ -1477,9 +831,9 @@ var classSystem = {
     };
     return par.property;
 
-  }
+  },
 
-  , getPropertyType: function(par){
+  getPropertyType: function(par){
     var cDef = getClass(par["type"]);
     if (cDef.isVar){
       return this.getBuiltinType("var");
@@ -1495,9 +849,9 @@ var classSystem = {
     };
 
     return this.getBuiltinType("var");
-  }
+  },
 
-  , getConstructorType: function(par){
+  getConstructorType: function(par){
     var cDef = getClass(par["type"]);
     if (cDef.isVar){
       return this.getBuiltinType("var");
@@ -1509,355 +863,21 @@ var classSystem = {
 
     throw errorMsg.noConstructorAvailable;
 
-  }
-
-  , getSetPropertyCode: function(par){
-    var cDef = getClass(par["type"]);
-    if (cDef.isVar){
-      if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
-        return runtimeError(errorMsg.typeMissmatch, par);
-      };
-      return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE], par);
-    };
-    var map = cDef.map;
-
-    if (map && par.property){
-      if (map.members[par.property]){
-        var propertyType = this.getPropertyType({
-          "type": par["type"],
-          property: par.property
-        });
-        if (!this.canSet(propertyType, par.valueType)){
-          if ( this.canSet(propertyType, this.getClassFromTemporaryTracked(par.valueType)) ){
-            // tracked temporary
-            return assembleCode(map.members[par.property].setCodeFromTemporary, par);
-          };
-
-          return runtimeError(errorMsg.typeMissmatch, par);
-        };
-        return assembleCode(map.members[par.property].setCode, par);
-      };
-    };
-    if (map && map.setMemberCode){
-      if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
-        return runtimeError(errorMsg.typeMissmatch, par);
-      };
-      return assembleCode(map.setMemberCode, par);
-    };
-    return runtimeError(errorMsg.accessNotAllowd, par);
-  }
-
-  , getConnectCode: function(par){
-    var cDef = getClass(par["type"]);
-    var map = cDef.map;
+  },
 
 
-    if (par.valueProperty){
-      var valuePropertyType = this.getPropertyType({
-        "type": par.valueType,
-        property: par.valueProperty
-      });
-
-      if (!this.canConnect(par["type"], par.property, valuePropertyType)){
-        return runtimeError(errorMsg.connectNotPossible, par);
-      };
-      par.valueProperty = "" + this.getPropertyAlias({"type": par.valueType, property: par.valueProperty});
-      return assembleCode(map.members[par.property].connectSlotCode, par);
-    }else{
-      if (!this.canConnect(par["type"], par.property, par.valueType)){
-        return runtimeError(errorMsg.connectNotPossible, par);
-      };
-      return assembleCode(map.members[par.property].connectFunCode, par);
-    };
-    return runtimeError(errorMsg.connectNotPossible, par);
-  }
-
-
-  , getPassAsTypeCode: function(par){
-    var cDef = getClass(par["type"]);
-    var vcDef = getClass(par["valueType"]);
-
-    if (par.value){
-      if (!this.canSet(par["type"], par.valueType)){
-        return runtimeError(errorMsg.typeMissmatch, par);
-      };
-      if (this.isTemporaryTrackedClass(par["type"])){
-        return this.getCreateTemporaryClassCode(par);
-      };
-      return assembleCode([MAKRO_VALUE], par);
-    };
-    return runtimeError(errorMsg.missingVariable, par);
-
-  }
-
-  , getCreateTemporaryClassCode: function(par){
-    if (this.isTemporaryTrackedClass(par["valueType"])){
-      return assembleCode([MAKRO_VALUE], par);
-    };
-    if (!this.isTrackedClass(par["valueType"])){
-      return assembleCode([MAKRO_VALUE], par);
-    };
-    var cDef = getClass(par["valueType"]);
-
-    var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", MAKRO_VALUE, ")"];
-    return assembleCode(codeAr, par);
-
-  }
   
   
   // return a live
-  , getTrack: function(parInstance){
+  getTrack: function(parInstance){
     if (!parInstance){
       return;
     };
     var type = parInstance[0];
     var cDef = getClass(type);
     return parInstance[cDef.map.trackRootIdx]();
-  }
-
-  , getDestroyTemporaryClassCode: function(par){
-    if (!this.isTemporaryTrackedClass(par.valueType)){
-      if (par.noValueRequired){
-        return assembleCode([], par);
-      };
-      return assembleCode([MAKRO_VALUE], par);
-    };
-
-    var codeAr = ["(function(v){ v[1](); return v[0]; })(", MAKRO_VALUE, ")"];
-    return assembleCode(codeAr, par);
-
-  }
-
-  , dereferencePromisePreCode: function(par){
-    var codeAr = [MAKRO_VALUE, ".then("];
-    if (this.isTemporaryTrackedClass(par["valueType"])){
-      codeAr = ["/*temptracked promise*/(function(vAr){\nvar r = vAr[0].thenReuse(vAr[1], "];
-    };
-    return assembleCode(codeAr, par);
-  }
-  , dereferencePromisePostCode: function(par){
-    var codeAr = [");\n"];
-    if (this.isTemporaryTrackedClass(par["valueType"])){
-      codeAr = [");\nreturn r;\n})(", MAKRO_VALUE, ");/*temptracked promise end*/\n"];
-    };
-    return assembleCode(codeAr, par);
-  }
-
-  , promisingReturnTypeCheck: function(par){
-    if (!this.isPromiseOfClass(par["type"])){
-      return runtimeError(errorMsg.notAPromise, par);
-    };
-    return assembleCode([], par);
-  }
-
-
-  , getSetVariableCode: function(par){
-    var cDef = getClass(par["type"]);
-    var vcDef = getClass(par["valueType"]);
-
-    if (par.instance){
-      var operator = par.operator || "=";
-      if (operator != "="){
-        if (!(cDef.isVar && vcDef.isVar)){
-          return runtimeError(errorMsg.operatorMissmatch, par);
-        };
-      };
-
-      if (!this.canSet(par["type"], par.valueType)){
-        if ( this.canSet(par["type"], this.getClassFromTemporaryTracked(par.valueType)) ){
-          // tracked temporary
-          if (par.assignmentType == "Identifier"){
-            return assembleCode([
-              "/*temp tracked assign*/(function(vAr){\n",
-              "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
-              "if(vAr){\nvar v = vAr[0];\n", // temp value
-              MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
-              "_T", MAKRO_SELF, " = vAr[1];\n",            // reuse existing tracker to save function calls
-              "return v;\n}else{\n",                        // reuse existing tracker to save function calls
-              MAKRO_SELF, " ", operator, " undefined; ",  // assign undefined to variable
-              "_T", MAKRO_SELF, " = undefined;\n",         // assign undefined to tracker
-              "return;\n}; })",                            // return undefined
-              "(", MAKRO_VALUE, ")/*end temp assign*/\n"                   // call closure
-            ], par);
-          };
-        };
-        return runtimeError(errorMsg.typeMissmatch, par);
-      };
-      if (this.isTrackedClass(par["type"])){
-        if (par.assignmentType == "Identifier"){
-          return assembleCode([
-            "/*tracked assign*/(function(v){\n",
-            "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
-            MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
-            "if (v){\n",  
-            "_T", MAKRO_SELF, " = v[" + vcDef.map.trackRootIdx + "]();\n",            // reuse existing tracker to save function calls
-            "}else{\n",  
-            "_T", MAKRO_SELF, " = undefined;\n",            // reuse existing tracker to save function calls
-            "};\n",  
-            "return v;\n",                        // reuse existing tracker to save function calls
-            "})",                            // return undefined
-            "(", MAKRO_VALUE, ")/*end assign*/\n"                   // call closure
-          ], par);
-        };
-        return runtimeError(errorMsg.typeMissmatch, par);
-      };
-      return assembleCode([MAKRO_SELF, " ", operator, " ", MAKRO_VALUE], par);
-    };
-    return runtimeError(errorMsg.missingVariable, par);
-  }
-
-  , declareReturnPromiseCode: function(par){
-    var retType = par["type"];
-
-    var track = false;
-    if (this.isTemporaryTrackedClass(retType)){
-      track = true;
-      retType = this.getClassFromTemporaryTracked(retType);
-    };
-    if (this.isTrackedClass(retType)){
-      track = true;
-    };
-    var assemblyAr;
-    if (track){
-      assemblyAr = ["var ", par.name, ";\nvar _T", par.name, ";\n(function(){ var vAr = new ", MAKRO_CONSTRUCTOR, "(); ", par.name, " = vAr[0]; _T", par.name, " = vAr[1]; })();"];
-    }else{
-      assemblyAr = ["var ", par.name, " = new __Promise();\n"];
-    };
-    return assembleCode(assemblyAr, par);
-  }
-  , returnReturnPromiseCode: function(par){
-    var retType = par["type"];
-
-    var track = false;
-    if (this.isTemporaryTrackedClass(retType)){
-      track = true;
-      retType = this.getClassFromTemporaryTracked(retType);
-    };
-    if (this.isTrackedClass(retType)){
-      track = true;
-    };
-    var assemblyAr;
-    if (track){
-      assemblyAr = ["return [", par.name, ", _T", par.name, "];\n"];
-    }else{
-      assemblyAr = ["return ", par.name, ";\n"];
-    };
-    return assembleCode(assemblyAr, par);
-  }
-
-  , getDeclareVariableCode: function(par){
-    var cDef = getClass(par["type"]);
-
-    var assemblyAr = ["var ", par.name, ";\n"];
-    if (cDef.track){
-      assemblyAr.push("var _T");
-      assemblyAr.push(par.name);
-      assemblyAr.push(";\n");
-    };
-    return assembleCode(assemblyAr, par);
-  }
-  , getProcessParameterCode: function(par){
-    var cDef = getClass(par["type"]);
-
-    var assemblyAr = [];
-    if (cDef.track){
-      assemblyAr.push("var _T");
-      assemblyAr.push(par.name);
-      assemblyAr.push(";\n");
-      assemblyAr.push("if(");
-      assemblyAr.push(par.name);
-      assemblyAr.push("){ _T");
-      assemblyAr.push(par.name);
-      assemblyAr.push(" = ");
-      assemblyAr.push(par.name);
-      assemblyAr.push("[1];\n");
-      assemblyAr.push(par.name);
-      assemblyAr.push(" = ");
-      assemblyAr.push(par.name);
-      assemblyAr.push("[0];}\n");
-    };
-    return assembleCode(assemblyAr, par);
-  }
-
-  , getDestroyVariableCode: function(par){
-    var cDef = getClass(par["type"]);
-
-    var assemblyAr = [];
-    if (cDef.track){
-      assemblyAr.push("if (_T");
-      assemblyAr.push(par.name);
-      assemblyAr.push("){ _T");
-      assemblyAr.push(par.name);
-      assemblyAr.push("();};");
-    };
-    return assembleCode(assemblyAr, par);
-  }
-
-
-  , getCallCode: function(par){
-    var cDef = getClass(par["type"]);
-    var i;
-    var l;
-    var args;
-    var assembly;
-    if (cDef.isVar){
-      args = par["arguments"];
-      l = args.length;
-      assembly = [MAKRO_SELF, "("];
-      for (i = 0; i < l; ++i){
-        if (i > 0){
-          assembly.push(", ");
-        };
-        assembly.push({
-          _internFun: "getPassAsTypeCode",
-          "type": this.getBuiltinType("var"),
-          "value": args[i].value,
-          "valueType": args[i]["type"]
-        });
-      };
-      assembly.push(")");
-      return assembleCode(assembly, par);
-    };
-    if (!cDef.isFunction){
-      return runtimeError(errorMsg.expectedCallable, par);
-    };
-
-    args = par["arguments"];
-    l = args.length;
-    assembly = [MAKRO_SELF, "("];
-    for (i = 0; i < l; ++i){
-      if (i > 0){
-        assembly.push(", ");
-      };
-      assembly.push({
-        _internFun: "getPassAsTypeCode",
-        "type": cDef.arguments[i] || this.getBuiltinType("var"),
-        "value": args[i].value,
-        "valueType": args[i]["type"]
-      });
-    };
-    assembly.push(")");
-    return assembleCode(assembly, par);
-  }
-
-  , getBinaryExpressionCode: function(par){
-    var lcDef = getClass(par["leftType"]);
-    var rcDef = getClass(par["rightType"]);
-
-    if (lcDef.isVar && rcDef.isVar){
-      return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
-    };
-
-    switch (par.operator){
-      case "==":
-      case "===":
-      case "!=":
-      case "!==":
-      return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
-    };
-
-    return runtimeError(errorMsg.operatorMissmatch, par);
   },
+
   
   canSet: function(parTargetType, parSourceType){
     if (parTargetType === undefined && parSourceType === undefined){
@@ -1907,7 +927,7 @@ var classSystem = {
       return false;
   },
 
-    canConnect: function(parType, parProperty, parFunType){
+  canConnect: function(parType, parProperty, parFunType){
       var cDef = getClass(parType);
       var map = cDef.map;
 
@@ -1942,12 +962,49 @@ var classSystem = {
 
 };
 
-var runtimeError = function(par, par2){
-  if (par2 && par2.errorFun){
-    par2.errorFun(par);
+
+var getEffectiveFunctionResultType = (parFunType){
+  var res = {
+    promiseResolveType: classSystem.getBuiltinType("var"),
+    isTemporary: false,
+    originalResultType: classSystem.getFunctionReturnType(parFunType),
+    resolvePromise: (parPromise, parValue){
+      parPromise.resolve(parValue);
+    },
+    rejectPromise: (parPromise, parValue){
+      parPromise.reject(parValue);
+    }
   };
-  return "(function(){ throw { id:" + par.id + ", msg: " + stringEncodeStr(par.msg) + " } })()";
+  var resultType = res.originalResultType;
+  
+  res.newPromise = (){
+    return new Promise();
+  };
+  
+  if (classSystem.isTemporaryTrackedClass(resultType)){
+    res.isTemporary = true;
+    var unTrackedType = classSystem.getClassFromTemporaryTracked(resultType);
+    
+    if (classSystem.isPromiseOfClass(unTrackedType)){
+      var promiseConstructor = classSystem.getTypeConstructor(unTrackedType);
+      res.newPromise = (){
+        return promiseConstructor();
+      };
+      res.resolvePromise = (parPromise, parValue){
+        parPromise[0].resolve(parValue);
+      };
+      res.rejectPromise = (parPromise, parValue){
+        parPromise[0].reject(parValue);
+      };
+      
+      var promiseResolveType = classSystem.getClassFromPromiseOf(unTrackedType);
+      res.promiseResolveType = promiseResolveType;
+    };
+  };
+  
+  return res;
 };
+
 
 
 var _stringEncodeStr = function(par){
@@ -1964,154 +1021,32 @@ var stringEncodeStr = function(par){
 };
 
     
-    var assembleCode = function(ar, par){
-      var res = par.result;
-      var resStr = "";
-      if (!res){
-        res = {
-          push: function(parStr){
-            resStr += parStr;
-          }
-        };
-      };
-      var i = 0;
-      var r = "";
-      for (i = 0; i < ar.length; ++i){
-        if (typeof ar[i] == "string"){
-          res.push(ar[i]);
-        }else if(ar[i]._internFun){
-          var tempPar = ar[i];
-          tempPar.result = par.result;
-          tempPar.errorFun = par.errorFun;
-          var tempRes = classSystem[ar[i]._internFun](tempPar);
-          if (!par.result){
-            res.push(tempRes);
-          };
-        }else{
-          switch(ar[i]){
-            case MAKRO_SELF:
-              res.push(par.instance);
-              break;
-            case MAKRO_PROPERTY:
-              res.push(par.property);
-              break;
-            case MAKRO_PROPERTYSTRING:
-              res.push(stringEncodeStr(par.property));
-              break;
-            case MAKRO_PROPERTYVALUE:
-              if (par.propertyValue){
-                res.push(par.propertyValue);
-              }else{
-                res.push(stringEncodeStr(par.property));
-              };
-              break;
-            case MAKRO_VALUE:
-              res.push(par.value);
-              break;
-            case MAKRO_VALUEPROPERTY:
-              res.push(par.valueProperty);
-              break;
-            case MAKRO_LEFT:
-              res.push(par.left);
-              break;
-            case MAKRO_RIGHT:
-              res.push(par.right);
-              break;
-            case MAKRO_OPERATOR:
-              res.push(par.operator);
-              break;
-            case MAKRO_RESOLVEFUN:
-              res.push(par.resolveFun || "undefined");
-              break;
-            case MAKRO_REJECTFUN:
-              res.push(par.rejectFun || "undefined");
-              break;
-            case MAKRO_TYPEVALUE:
-              res.push(par.typeValue);
-              break;
-            case MAKRO_CONSTRUCTOR:
-              res.push(par.constructorName);
-              break;
-          };
-        };
-      };
-      if (par.result){
-        return res;
-      };
-      return resStr;
-    };
-    
-        var MAKRO_SELF = 0;
-        var MAKRO_PROPERTY = 1;
-        var MAKRO_PROPERTYSTRING = 2;
-        var MAKRO_PROPERTYVALUE = 3;
-        var MAKRO_VALUE = 4;
-        var MAKRO_LEFT = 5;
-        var MAKRO_OPERATOR = 6;
-        var MAKRO_RIGHT = 7;
-        var MAKRO_VALUEPROPERTY = 8;
-        var MAKRO_RESOLVEFUN = 9;
-        var MAKRO_REJECTFUN = 10;
-        var MAKRO_TYPEVALUE = 11;
-        var MAKRO_CONSTRUCTOR = 12;
-    
-    
-var errorMsg = {
-  accessNotAllowd: {
-    id: 200
-    , msg: "access to member not allowed"
-  },
-  typeMissmatch: {
-    id: 201
-    , msg: "type missmatch"
-  },
-  missingVariable: {
-    id: 202
-    , msg: "variable missing"
-  },
-  operatorMissmatch: {
-    id: 203
-    , msg: "operator missmatch"
-  },
-  expectedCallable: {
-    id: 204
-    , msg: "expected callable expression"
-  },
-  noConstructorAvailable: {
-    id: 205
-    , msg: "no Constructor available"
-  },
-  connectNotPossible: {
-    id: 206
-    , msg: "connect not possible"
-  },
-  trackedProvisionalNotImplemented: {
-    id: 207
-    , msg: "tracked provisional type feature is not implemented"
-  },
-  onlyTrackedClassesCanContainTrackedMembers: {
-    id: 208
-    , msg: "only tracked classes can contain tracked members"
-  },
-  notAPromise: {
-    id: 209
-    , msg: "type is not a promise"
-  },
-  notASyncableResponse: {
-    id: 210
-    , msg: "not a syncable response"
-  },
-  notSyncable: {
-    id: 211
-    , msg: "not syncable"
-  },
-  unknownInstanceType: {
-    id: 212
-    , msg: "unknown instance type"
-  }
 
+var internals = {
+  classHider: classHider,
+  getClass: getClass,
+  TrackedPromise: TrackedPromise,
+  DynInstance: DynInstance,
+  stringEncodeStr: stringEncodeStr,
+  getEffectiveFunctionResultType: getEffectiveFunctionResultType
 };
-    
+  
+provisional(classSystem, internals);
+temporary(classSystem, internals);
+promiseOf(classSystem, internals);
+        
+sync(classSystem, internals);
+var registerSyncClass = internals.registerSyncClass;
+var destroySynced = internals.destroySynced;
+var getClassBySyncId = internals.getClassBySyncId;
+var syncFun = internals.syncFun;
+var syncFunctionFun = internals.syncFunctionFun;
+var internalObjects = internals.internalObjects;
+var getNewInternalId = internals.getNewInternalId;
+
+codeGeneration(classSystem, internals);
+var runtimeError = internals.runtimeError;
+var presets = internals.presets;
     
 promiseland.classSystem = classSystem;
 
@@ -2119,7 +1054,8 @@ extra.classSystemPs.resolve({
   classSystem: classSystem,
   internalObjects: internalObjects,
   getClassBySyncId: getClassBySyncId,
-  DynInstance: DynInstance
+  DynInstance: DynInstance,
+  getEffectiveFunctionResultType: getEffectiveFunctionResultType
 });
 
 

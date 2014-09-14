@@ -87,7 +87,9 @@ mainio.on('connection', function (socket) {
 //require("./testmodules/syncTest");
 //require("./testmodules/mouseTrack");
 //require("./testmodules/destroyTest");
-require("./testmodules/syncMember");
+//require("./testmodules/syncMember");
+  require("./testmodules/syncEvents");
+
 
 // prerequire
 

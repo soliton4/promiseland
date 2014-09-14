@@ -12,15 +12,18 @@ var classSystem;
 var internalObjects;
 var getClassBySyncId;
 var DynInstance;
+var getEffectiveFunctionResultType;
 ((){
   classSystem = (*extra.classSystemPs).classSystem;
   internalObjects = (*extra.classSystemPs).internalObjects;
   getClassBySyncId = (*extra.classSystemPs).getClassBySyncId;
   DynInstance = (*extra.classSystemPs).DynInstance;
+  getEffectiveFunctionResultType = (*extra.classSystemPs).getEffectiveFunctionResultType;
 })();
 
 var config = extra.config;
 
+var errorMsg = extra.errorMsg;
 
 
 var moduleData = {};
@@ -546,124 +549,6 @@ class Transport {
 
 
     var prepConnection = function(connection, profile){
-      var buffer = {};
-      var expectid = 1;
-      var nextId = 1;
-      var requests = {};
-
-      var profilenameStr = "" + profile.name();
-
-      var sendData = function(data){
-        var id = nextId;
-        nextId++;
-        if (nextId > maxId){
-          nextId = 1;
-        };
-        data.id = id;
-        connection.send(JSON.stringify(data));
-        return id;
-      };
-
-      var internalObjectMap = {};
-      var transferIdMap = {};
-      var nextTranseferId = 1;
-
-      connection.hasObject = function(parId){
-        if (!internalObjects[parId]){
-          return false;
-        };
-        if (internalObjectMap[parId]){
-          return true;
-        };
-        return false;
-      };
-      connection.getTransferId = function(parId){
-        return internalObjectMap[parId].transferId;
-      };
-      connection.newTransferId = function(parId, parTrack, transferId){
-        if (internalObjectMap[parId]){
-          if (parTrack){
-            parTrack();
-          };
-          return internalObjectMap[parId].transferId;
-        };
-        var syncData = classSystem.getSyncData(internalObjects[parId]);
-        syncData.connections.push(connection);
-
-        if (!transferId){
-          transferId = profilenameStr + (nextTranseferId++);
-        };
-        var entry = {
-          transferId: transferId,
-          internalId: parId,
-          track: parTrack
-        };
-        internalObjectMap[parId] = entry;
-        transferIdMap[entry.transferId] = entry;
-        return entry.transferId;
-      };
-
-      connection.removeSynced = function(parId){
-        if (!internalObjectMap[parId]){
-          return;
-        };
-        var entry = internalObjectMap[parId];
-        var transferId = entry.transferId;
-        internalObjectMap[entry.internalId] = undefined;
-        transferIdMap[entry.transferId] = undefined;
-        connection.createMsg({
-          type: "unsync",
-          transferId: transferId
-        });
-        // remove connection from syncdata
-        var syncData = classSystem.getSyncData(internalObjects[entry.internalId]);
-        if (entry.track){
-          entry.track();
-        };
-        var i = 0;
-        var newConAr = [];
-        for (i = 0; i < syncData.connections.length; ++i){
-          var c = syncData.connections[i];
-          if (c !== connection){
-            newConAr.push(c);
-          };
-        };
-        syncData.connections = newConAr;
-      };
-      connection.unsync = function(parTransferId){
-        var entry = transferIdMap[parTransferId];
-        internalObjectMap[entry.internalId] = undefined;
-        transferIdMap[entry.transferId] = undefined;
-        if (entry.track){
-          entry.track();
-        };
-      };
-
-      connection.syncValue = function(par){
-        /*{
-              transferId: connection.getTransferId(syncData.getInternalId()),
-              memberIdx: memberIdx,
-              value: value
-            });*/
-        connection.createMsg({
-          type: "syncValue",
-          transferId: par.transferId,
-          memberIdx: par.memberIdx,
-          value: par.value
-        });
-
-      };
-
-      connection.recieveSyncValue = function(par){
-        var entry = transferIdMap[par.transferId];
-        var instance = internalObjects[entry.internalId];
-        if (!instance){
-          return;
-        };
-        instance[par.memberIdx] = par.value;
-      };
-
-
       
       var transport = new Transport();
       transport.sendString = (s){
@@ -676,15 +561,6 @@ class Transport {
       });
 
       connection.on("disconnect", function(dataStr){
-        var e;
-        for (e in internalObjectMap){
-          var entry = internalObjectMap[e];
-          if (entry.track){
-            entry.track();
-          };
-        };
-        internalObjectMap = {};
-        transferIdMap = {};
       });
 
       connection.createRequest = function(data){
@@ -715,33 +591,6 @@ handlers.remove = (parContent, parPackage){
       
 };
 
-    
-/*m.setData({
-  type: "sync",
-  remoteId: transport.getInstanceRemoteId(parInstance),
-  memberIdx: memberIdx,
-  value: value
-});*/
-    
-handlers.sync = (parContent, parPackage){
-  try{
-    var data = parContent.getData();
-    
-    var t = parContent.getTransport();
-    
-    var realInstance = internalObjects[data.remoteId];
-    if (!realInstance){
-      return;
-    };
-    
-    classSystem.setMemberByIdx(realInstance, data.memberIdx, data.value);
-    
-  }catch(e){
-    console.log("sync error");
-    console.log(e);
-  };
-      
-};
 
     
 handlers.remoteexec = (parContent, parPackage){
@@ -1119,48 +968,6 @@ handlers.addType = (parContent, parPackage){
 };
     
     
-var getEffectiveFunctionResultType = (parFunType){
-  var res = {
-    promiseResolveType: classSystem.getBuiltinType("var"),
-    isTemporary: false,
-    originalResultType: classSystem.getFunctionReturnType(parFunType),
-    resolvePromise: (parPromise, parValue){
-      parPromise.resolve(parValue);
-    },
-    rejectPromise: (parPromise, parValue){
-      parPromise.reject(parValue);
-    }
-  };
-  var resultType = res.originalResultType;
-  
-  res.newPromise = (){
-    return new Promise();
-  };
-  
-  if (classSystem.isTemporaryTrackedClass(resultType)){
-    res.isTemporary = true;
-    var unTrackedType = classSystem.getClassFromTemporaryTracked(resultType);
-    
-    if (classSystem.isPromiseOfClass(unTrackedType)){
-      var promiseConstructor = classSystem.getTypeConstructor(unTrackedType);
-      res.newPromise = (){
-        return promiseConstructor();
-      };
-      res.resolvePromise = (parPromise, parValue){
-        parPromise[0].resolve(parValue);
-      };
-      res.rejectPromise = (parPromise, parValue){
-        parPromise[0].reject(parValue);
-      };
-      
-      var promiseResolveType = classSystem.getClassFromPromiseOf(unTrackedType);
-      res.promiseResolveType = promiseResolveType;
-    };
-  };
-  
-  return res;
-};
-    
     
     /*
       par: {
@@ -1224,20 +1031,20 @@ var createRemoteExecRequest = function(par){
 };
 
 
-    var findProfile = function(profileNameStr){
-      return profiles[profileNameStr];
-    };
+var findProfile = function(profileNameStr){
+  return profiles[profileNameStr];
+};
 
-    var getModuleData = function(parHash){
-      if (!moduleData[parHash]){
-        moduleData[parHash] = {
-          functions: {},
-          classes: {}
-        };
-      };
-      return moduleData[parHash];
+var getModuleData = function(parHash){
+  if (!moduleData[parHash]){
+    moduleData[parHash] = {
+      functions: {},
+      classes: {}
     };
-    
+  };
+  return moduleData[parHash];
+};
+   
 
     
     
@@ -1248,40 +1055,40 @@ promiseland.ConnectionBaseClass = Connection;
 
 
 promiseland.addProfile = function(parProfile){
-        if (!parProfile){
-          return;
-        };
-        if (profiles[parProfile.name()]){
-          throw {
-            code: 4,
-            msg: "profile exists"
-          };
-        };
-        profiles[parProfile.name()] = parProfile;
-        parProfile.on("connection", function(connection){
-          prepConnection(connection, parProfile);
-        });
-      };
+  if (!parProfile){
+    return;
+  };
+  if (profiles[parProfile.name()]){
+    throw {
+      code: 4,
+      msg: "profile exists"
+    };
+  };
+  profiles[parProfile.name()] = parProfile;
+  parProfile.on("connection", function(connection){
+    prepConnection(connection, parProfile);
+  });
+};
 promiseland.profileHas = function(profileNameStr){
-        if (config.profile === profileNameStr){
-          return true;
-        };
-        return false;
-      };
+  if (config.profile === profileNameStr){
+    return true;
+  };
+  return false;
+};
 
 
 promiseland.registerRemote = function(profileNameStr, hashStr, nameStr, fun, funType){
-        var moduleData = getModuleData(hashStr);
-        var entry = {
-          profile: profileNameStr,
-          fun: fun,
-          funType: funType
-        };
-        moduleData.functions[nameStr] = entry;
-        classSystem.definitionPromise(funType).then(function(definedFunType){
-          entry.funType = definedFunType;
-        });
-      };
+  var moduleData = getModuleData(hashStr);
+  var entry = {
+    profile: profileNameStr,
+    fun: fun,
+    funType: funType
+  };
+  moduleData.functions[nameStr] = entry;
+  classSystem.definitionPromise(funType).then(function(definedFunType){
+    entry.funType = definedFunType;
+  });
+};
 
 promiseland.remoteExec = function(hashStr, nameStr, args){
   
@@ -1334,53 +1141,14 @@ promiseland.remoteExec = function(hashStr, nameStr, args){
 extra.moduleSystemPs.resolve({
   getModuleData: getModuleData
 });
-
-
-    var errorMsg = {
-      
-      missingRemoteFun: {
-        id: 801
-        , msg: "remote function not registred"
-      },
-      frameNotAvailable: {
-        id: 802,
-        msg: "requested frame not available"
-      },
-      frameNotFound: {
-        id: 803,
-        msg: "requested frame not found"
-      },
-      noSyncableData: {
-        id: 804,
-        msg: "no syncable Data"
-      },
-      invalidRemoteType: {
-        id: 805,
-        msg: "invalid remote type"
-      },
-      remoteTypeNotAvailable: {
-        id: 806,
-        msg: "remote type not available"
-      },
-      canNotExecute: {
-        id: 807,
-        msg: "can not execute",
-        additional: "this might have one of several reasons"
-      },
-      typeMissmatch: {
-        id: 808,
-        msg: "type missmatch"
-      },
-      takeOverDuplicate: {
-        id: 809,
-        msg: "internal: take over duplicate"
-      },
-      missingImplementation: {
-        id: 810,
-        msg: "internal: missing implementation"
-      }
-    };
-
+    
+extra.framesPs.resolve({
+  // functions to pack data into requests
+  getInstanceFromTransportData: getInstanceFromTransportData,
+  getInstanceTransportData: getInstanceTransportData,
+  // add custom handlers here
+  handlers: handlers
+});
 
 
 return;

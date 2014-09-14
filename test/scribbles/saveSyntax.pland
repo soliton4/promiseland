@@ -1,0 +1,34 @@
+(parType, accessorType){
+  
+  var f = <{ 
+    types: { 
+      Type: parType, 
+      AccessorType: accessorType
+    },
+    makros: {
+      
+    }
+  }>(){
+    
+    AccessorType accessor = new AccessorType();
+    var members = accessor.saveableMembers;
+    var l = members.length;
+    
+    accessor.setSaveFun((Type obj){
+      var i;
+      for (i = 0; i < l; ++i){
+        doTheSave(members[i], accessor.get(obj, members[i]));
+      };
+      finishSave();
+    });
+    
+    accessor.setLoadFun((Type obj, id){
+      *initLoad(id);
+      var i;
+      for (i = 0; i < l; ++i){
+        accessor.set(obj, members[i], *doTheLoad(members[i]));
+      };
+    });
+    
+  };
+};

@@ -1,31 +1,26 @@
 <{__promiseLandModule: true}>;
 
-
-
 var dummy = {
-  newNext: function(){},
-  newPrev: function(){},
-  fun: function(){}
+  newNext: (){},
+  newPrev: (){},
+  fun: (){}
 };
 
-
-return function(base, property){
-  
+return (base, property){
   
   var orig = base[property];
   var last;
-
 
   var setFun = (parFun){
     base[property] = parFun;
   };
 
-  var first = (function(){
+  var first = ((){
     return {
-      newNext: function(n){
+      newNext: (n){
         if (n){
           var nextFun = n.fun;
-          setFun(function(){
+          setFun((){
             orig.apply(base, arguments);
             nextFun.apply(null, arguments);
           });
@@ -34,20 +29,20 @@ return function(base, property){
           last = first;
         };
       },
-      newPrev: function(){}
+      newPrev: (){}
     };
   })();
 
   last = first;
 
 
-  return function (conFun, newBase){
+  return (conFun, newBase){
     var next = dummy;
     var nextFun = next.fun;
     var prev = last;
 
     var s = {
-      newNext: function(n){
+      newNext: (n){
         if (n){
           next = n;
         }else{
@@ -56,7 +51,7 @@ return function(base, property){
         };
         nextFun = next.fun;
       },
-      newPrev: function(p){
+      newPrev: (p){
         prev = p;
       },
       fun: newBase ? (){
@@ -70,7 +65,7 @@ return function(base, property){
     last.newNext(s);
     last = s;
 
-    return  function(){
+    return (){
       prev.newNext(next);
       next.newPrev(prev);
       prev = dummy;

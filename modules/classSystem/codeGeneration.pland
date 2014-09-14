@@ -1,0 +1,494 @@
+<{  __promiseLandModule: true }>;
+  
+var errorMsg = extra.errorMsg;
+
+
+return (classSystem, internals){
+  var cs = classSystem;
+  var classHider = internals.classHider;
+  var getClass = internals.getClass;
+  var TrackedPromise = internals.TrackedPromise;
+  var DynInstance = internals.DynInstance;
+  var stringEncodeStr = internals.stringEncodeStr;
+  
+  var runtimeError = function(par, par2){
+    if (par2 && par2.errorFun){
+      par2.errorFun(par);
+    };
+    return "(function(){ throw { id:" + par.id + ", msg: " + stringEncodeStr(par.msg) + " } })()";
+  };
+  internals.runtimeError = runtimeError;
+  
+  cs.getGetPropertyCode = (par){
+
+    var cDef = getClass(par["type"]);
+    if (cDef.isVar){
+      return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "]"], par);
+    };
+
+    var map = cDef.map;
+
+    if (par.property){
+      if (map.members[par.property]){
+        return assembleCode(map.members[par.property].getCode, par);
+      };
+    };
+    if (map.getMemberCode){
+      return assembleCode(map.getMemberCode, par);
+    };
+    return runtimeError(errorMsg.accessNotAllowd, par);
+  };
+  
+  cs.getSetPropertyCode = (par){
+    var cDef = getClass(par["type"]);
+    if (cDef.isVar){
+      if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE], par);
+    };
+    var map = cDef.map;
+
+    if (map && par.property){
+      if (map.members[par.property]){
+        var propertyType = this.getPropertyType({
+          "type": par["type"],
+          property: par.property
+        });
+        if (!this.canSet(propertyType, par.valueType)){
+          if ( this.canSet(propertyType, this.getClassFromTemporaryTracked(par.valueType)) ){
+            // tracked temporary
+            return assembleCode(map.members[par.property].setCodeFromTemporary, par);
+          };
+
+          return runtimeError(errorMsg.typeMissmatch, par);
+        };
+        return assembleCode(map.members[par.property].setCode, par);
+      };
+    };
+    if (map && map.setMemberCode){
+      if (!this.canSet(this.getBuiltinType("var"), par.valueType)){
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      return assembleCode(map.setMemberCode, par);
+    };
+    return runtimeError(errorMsg.accessNotAllowd, par);
+  };
+  
+  
+  cs.getConnectCode = function(par){
+    var cDef = getClass(par["type"]);
+    var map = cDef.map;
+
+
+    if (par.valueProperty){
+      // connect to a member function
+      var valuePropertyType = this.getPropertyType({
+        "type": par.valueType,
+        property: par.valueProperty
+      });
+
+      if (!this.canConnect(par["type"], par.property, valuePropertyType)){
+        return runtimeError(errorMsg.connectNotPossible, par);
+      };
+      par.valueProperty = "" + this.getPropertyAlias({"type": par.valueType, property: par.valueProperty});
+      return assembleCode(map.members[par.property].connectSlotCode, par);
+      
+    }else{
+      if (!this.canConnect(par["type"], par.property, par.valueType)){
+        return runtimeError(errorMsg.connectNotPossible, par);
+      };
+      return assembleCode(map.members[par.property].connectFunCode, par);
+      
+    };
+    return runtimeError(errorMsg.connectNotPossible, par);
+  };
+
+
+  cs.getPassAsTypeCode = function(par){
+    var cDef = getClass(par["type"]);
+    var vcDef = getClass(par["valueType"]);
+
+    if (par.value){
+      if (!this.canSet(par["type"], par.valueType)){
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      if (this.isTemporaryTrackedClass(par["type"])){
+        return this.getCreateTemporaryClassCode(par);
+      };
+      return assembleCode([MAKRO_VALUE], par);
+    };
+    return runtimeError(errorMsg.missingVariable, par);
+
+  };
+
+  cs.getCreateTemporaryClassCode = function(par){
+    if (this.isTemporaryTrackedClass(par["valueType"])){
+      return assembleCode([MAKRO_VALUE], par);
+    };
+    if (!this.isTrackedClass(par["valueType"])){
+      return assembleCode([MAKRO_VALUE], par);
+    };
+    var cDef = getClass(par["valueType"]);
+
+    var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", MAKRO_VALUE, ")"];
+    return assembleCode(codeAr, par);
+
+  };
+  
+  
+  
+  cs.getDestroyTemporaryClassCode = function(par){
+    if (!this.isTemporaryTrackedClass(par.valueType)){
+      if (par.noValueRequired){
+        return assembleCode([], par);
+      };
+      return assembleCode([MAKRO_VALUE], par);
+    };
+
+    var codeAr = ["(function(v){ v[1](); return v[0]; })(", MAKRO_VALUE, ")"];
+    return assembleCode(codeAr, par);
+
+  };
+
+  cs.dereferencePromisePreCode = function(par){
+    var codeAr = [MAKRO_VALUE, ".then("];
+    if (this.isTemporaryTrackedClass(par["valueType"])){
+      codeAr = ["/*temptracked promise*/(function(vAr){\nvar r = vAr[0].thenReuse(vAr[1], "];
+    };
+    return assembleCode(codeAr, par);
+  };
+  
+  cs.dereferencePromisePostCode = function(par){
+    var codeAr = [");\n"];
+    if (this.isTemporaryTrackedClass(par["valueType"])){
+      codeAr = [");\nreturn r;\n})(", MAKRO_VALUE, ");/*temptracked promise end*/\n"];
+    };
+    return assembleCode(codeAr, par);
+  };
+
+  cs.promisingReturnTypeCheck = function(par){
+    if (!this.isPromiseOfClass(par["type"])){
+      return runtimeError(errorMsg.notAPromise, par);
+    };
+    return assembleCode([], par);
+  };
+
+
+  cs.getSetVariableCode = function(par){
+    var cDef = getClass(par["type"]);
+    var vcDef = getClass(par["valueType"]);
+
+    if (par.instance){
+      var operator = par.operator || "=";
+      if (operator != "="){
+        if (!(cDef.isVar && vcDef.isVar)){
+          return runtimeError(errorMsg.operatorMissmatch, par);
+        };
+      };
+
+      if (!this.canSet(par["type"], par.valueType)){
+        if ( this.canSet(par["type"], this.getClassFromTemporaryTracked(par.valueType)) ){
+          // tracked temporary
+          if (par.assignmentType == "Identifier"){
+            return assembleCode([
+              "/*temp tracked assign*/(function(vAr){\n",
+              "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
+              "if(vAr){\nvar v = vAr[0];\n", // temp value
+              MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
+              "_T", MAKRO_SELF, " = vAr[1];\n",            // reuse existing tracker to save function calls
+              "return v;\n}else{\n",                        // reuse existing tracker to save function calls
+              MAKRO_SELF, " ", operator, " undefined; ",  // assign undefined to variable
+              "_T", MAKRO_SELF, " = undefined;\n",         // assign undefined to tracker
+              "return;\n}; })",                            // return undefined
+              "(", MAKRO_VALUE, ")/*end temp assign*/\n"                   // call closure
+            ], par);
+          };
+        };
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      if (this.isTrackedClass(par["type"])){
+        if (par.assignmentType == "Identifier"){
+          return assembleCode([
+            "/*tracked assign*/(function(v){\n",
+            "if (_T", MAKRO_SELF, "){ _T", MAKRO_SELF, "(); };\n",  // call old tracker
+            MAKRO_SELF, " ", operator, " v;\n",  // assign to variable
+            "if (v){\n",  
+            "_T", MAKRO_SELF, " = v[" + vcDef.map.trackRootIdx + "]();\n",            // reuse existing tracker to save function calls
+            "}else{\n",  
+            "_T", MAKRO_SELF, " = undefined;\n",            // reuse existing tracker to save function calls
+            "};\n",  
+            "return v;\n",                        // reuse existing tracker to save function calls
+            "})",                            // return undefined
+            "(", MAKRO_VALUE, ")/*end assign*/\n"                   // call closure
+          ], par);
+        };
+        return runtimeError(errorMsg.typeMissmatch, par);
+      };
+      return assembleCode([MAKRO_SELF, " ", operator, " ", MAKRO_VALUE], par);
+    };
+    return runtimeError(errorMsg.missingVariable, par);
+  };
+
+  cs.declareReturnPromiseCode = function(par){
+    var retType = par["type"];
+
+    var track = false;
+    if (this.isTemporaryTrackedClass(retType)){
+      track = true;
+      retType = this.getClassFromTemporaryTracked(retType);
+    };
+    if (this.isTrackedClass(retType)){
+      track = true;
+    };
+    var assemblyAr;
+    if (track){
+      assemblyAr = ["var ", par.name, ";\nvar _T", par.name, ";\n(function(){ var vAr = new ", MAKRO_CONSTRUCTOR, "(); ", par.name, " = vAr[0]; _T", par.name, " = vAr[1]; })();"];
+    }else{
+      assemblyAr = ["var ", par.name, " = new __Promise();\n"];
+    };
+    return assembleCode(assemblyAr, par);
+  };
+  
+  cs.returnReturnPromiseCode = function(par){
+    var retType = par["type"];
+
+    var track = false;
+    if (this.isTemporaryTrackedClass(retType)){
+      track = true;
+      retType = this.getClassFromTemporaryTracked(retType);
+    };
+    if (this.isTrackedClass(retType)){
+      track = true;
+    };
+    var assemblyAr;
+    if (track){
+      assemblyAr = ["return [", par.name, ", _T", par.name, "];\n"];
+    }else{
+      assemblyAr = ["return ", par.name, ";\n"];
+    };
+    return assembleCode(assemblyAr, par);
+  };
+
+  cs.getDeclareVariableCode = function(par){
+    var cDef = getClass(par["type"]);
+
+    var assemblyAr = ["var ", par.name, ";\n"];
+    if (cDef.track){
+      assemblyAr.push("var _T");
+      assemblyAr.push(par.name);
+      assemblyAr.push(";\n");
+    };
+    return assembleCode(assemblyAr, par);
+  };
+  
+  cs.getProcessParameterCode = function(par){
+    var cDef = getClass(par["type"]);
+
+    var assemblyAr = [];
+    if (cDef.track){
+      assemblyAr.push("var _T");
+      assemblyAr.push(par.name);
+      assemblyAr.push(";\n");
+      assemblyAr.push("if(");
+      assemblyAr.push(par.name);
+      assemblyAr.push("){ _T");
+      assemblyAr.push(par.name);
+      assemblyAr.push(" = ");
+      assemblyAr.push(par.name);
+      assemblyAr.push("[1];\n");
+      assemblyAr.push(par.name);
+      assemblyAr.push(" = ");
+      assemblyAr.push(par.name);
+      assemblyAr.push("[0];}\n");
+    };
+    return assembleCode(assemblyAr, par);
+  };
+
+  cs.getDestroyVariableCode = function(par){
+    var cDef = getClass(par["type"]);
+
+    var assemblyAr = [];
+    if (cDef.track){
+      assemblyAr.push("if (_T");
+      assemblyAr.push(par.name);
+      assemblyAr.push("){ _T");
+      assemblyAr.push(par.name);
+      assemblyAr.push("();};");
+    };
+    return assembleCode(assemblyAr, par);
+  };
+
+
+  cs.getCallCode = function(par){
+    var cDef = getClass(par["type"]);
+    var i;
+    var l;
+    var args;
+    var assembly;
+    if (cDef.isVar){
+      args = par["arguments"];
+      l = args.length;
+      assembly = [MAKRO_SELF, "("];
+      for (i = 0; i < l; ++i){
+        if (i > 0){
+          assembly.push(", ");
+        };
+        assembly.push({
+          _internFun: "getPassAsTypeCode",
+          "type": this.getBuiltinType("var"),
+          "value": args[i].value,
+          "valueType": args[i]["type"]
+        });
+      };
+      assembly.push(")");
+      return assembleCode(assembly, par);
+    };
+    if (!cDef.isFunction){
+      return runtimeError(errorMsg.expectedCallable, par);
+    };
+
+    args = par["arguments"];
+    l = args.length;
+    assembly = [MAKRO_SELF, "("];
+    for (i = 0; i < l; ++i){
+      if (i > 0){
+        assembly.push(", ");
+      };
+      assembly.push({
+        _internFun: "getPassAsTypeCode",
+        "type": cDef.arguments[i] || this.getBuiltinType("var"),
+        "value": args[i].value,
+        "valueType": args[i]["type"]
+      });
+    };
+    assembly.push(")");
+    return assembleCode(assembly, par);
+  };
+
+  cs.getBinaryExpressionCode = function(par){
+    var lcDef = getClass(par["leftType"]);
+    var rcDef = getClass(par["rightType"]);
+
+    if (lcDef.isVar && rcDef.isVar){
+      return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
+    };
+
+    switch (par.operator){
+      case "==":
+      case "===":
+      case "!=":
+      case "!==":
+      return assembleCode(["(", MAKRO_LEFT, " ", MAKRO_OPERATOR, " ", MAKRO_RIGHT, ")"], par);
+    };
+
+    return runtimeError(errorMsg.operatorMissmatch, par);
+  };
+  
+  
+  
+  var MAKRO_SELF = 0;
+  var MAKRO_PROPERTY = 1;
+  var MAKRO_PROPERTYSTRING = 2;
+  var MAKRO_PROPERTYVALUE = 3;
+  var MAKRO_VALUE = 4;
+  var MAKRO_LEFT = 5;
+  var MAKRO_OPERATOR = 6;
+  var MAKRO_RIGHT = 7;
+  var MAKRO_VALUEPROPERTY = 8;
+  var MAKRO_RESOLVEFUN = 9;
+  var MAKRO_REJECTFUN = 10;
+  var MAKRO_TYPEVALUE = 11;
+  var MAKRO_CONSTRUCTOR = 12;
+  
+  
+  var presets = {
+    getMemberCode: (freePart){
+      return [MAKRO_SELF, "[" + freePart + "][", MAKRO_PROPERTYVALUE, "]"];
+    },
+    setMemberCode: (freePart){
+      return [MAKRO_SELF, "[" + freePart + "][", MAKRO_PROPERTYVALUE, "] ", MAKRO_OPERATOR, " ", MAKRO_VALUE];
+    }
+  };
+  internals.presets = presets;
+  
+  
+  var assembleCode = function(ar, par){
+    var res = par.result;
+    var resStr = "";
+    if (!res){
+      res = {
+        push: function(parStr){
+          resStr += parStr;
+        }
+      };
+    };
+    var i = 0;
+    var r = "";
+    for (i = 0; i < ar.length; ++i){
+      if (typeof ar[i] == "string"){
+        res.push(ar[i]);
+      }else if(ar[i]._internFun){
+        var tempPar = ar[i];
+        tempPar.result = par.result;
+        tempPar.errorFun = par.errorFun;
+        var tempRes = classSystem[ar[i]._internFun](tempPar);
+        if (!par.result){
+          res.push(tempRes);
+        };
+      }else{
+        switch(ar[i]){
+          case MAKRO_SELF:
+          res.push(par.instance);
+          break;
+          case MAKRO_PROPERTY:
+          res.push(par.property);
+          break;
+          case MAKRO_PROPERTYSTRING:
+          res.push(stringEncodeStr(par.property));
+          break;
+          case MAKRO_PROPERTYVALUE:
+          if (par.propertyValue){
+            res.push(par.propertyValue);
+          }else{
+            res.push(stringEncodeStr(par.property));
+          };
+          break;
+          case MAKRO_VALUE:
+          res.push(par.value);
+          break;
+          case MAKRO_VALUEPROPERTY:
+          res.push(par.valueProperty);
+          break;
+          case MAKRO_LEFT:
+          res.push(par.left);
+          break;
+          case MAKRO_RIGHT:
+          res.push(par.right);
+          break;
+          case MAKRO_OPERATOR:
+          res.push(par.operator);
+          break;
+          case MAKRO_RESOLVEFUN:
+          res.push(par.resolveFun || "undefined");
+          break;
+          case MAKRO_REJECTFUN:
+          res.push(par.rejectFun || "undefined");
+          break;
+          case MAKRO_TYPEVALUE:
+          res.push(par.typeValue);
+          break;
+          case MAKRO_CONSTRUCTOR:
+          res.push(par.constructorName);
+          break;
+        };
+      };
+    };
+    if (par.result){
+      return res;
+    };
+    return resStr;
+  };
+  
+  
+};

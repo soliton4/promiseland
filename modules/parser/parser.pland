@@ -1409,7 +1409,7 @@ var mixin = function(){
               "type": type,
               errorFun: this.getWarningFun(par),
               parsed: par
-            }), this.isTrackedClassConRes(type));
+            }), this.isTrackedClassConRes(type, par));
           };
           
           this.usedVariables[varname] = false;
@@ -3836,7 +3836,7 @@ var mixin = function(){
               if (!par[p] || ignoreProps[p]){
               }else if (typeProps[p]){
                 addProperty(p);
-                res.push(self.renderType(par[p]));
+                res.push(self.renderType(par[p], parsed));
               }else{
                 addProperty(p);
                 res.push(self.makeCompleteStatementDynamic(par[p]));
@@ -3861,14 +3861,17 @@ var mixin = function(){
         return errRes;
       };
 
-      this.isTrackedClassConRes = function(parType){
+      this.isTrackedClassConRes = function(parType, parParsed){
         var self = this;
         if (parType.isDynamic){
+          // yes this might look odd
+          // but its true, we return a boolean when its compiletime defined, otherwise
+          // we return a result that results in a boolean.
           var res = self.newResult();
           self.common.useClassSystem = true;
           res.push("classSystem.isTrackedClass");
           res.push("(");
-          res.push(self.renderType(parType));
+          res.push(self.renderType(parType, parParsed));
           res.push(")");
 
           return res;

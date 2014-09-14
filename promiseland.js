@@ -87,8 +87,9 @@
     "./modules/moduleSystem",
     "./modules/classSystem",
     "./modules/frames",
-    "./modules/ParserClass"
-  ], function(createClassModule, PromiseModule, ChainableModule, TrackerModule, moduleSystemModule, classSystemModule, framesModule, ParserClassModule){
+    "./modules/ParserClass",
+    "./modules/errorMsg"
+  ], function(createClassModule, PromiseModule, ChainableModule, TrackerModule, moduleSystemModule, classSystemModule, framesModule, ParserClassModule, errorMsgModule){
 
     var require = requireFun;
 
@@ -159,12 +160,16 @@
         return parModule(promiseland, internals);
       }
     };
+    
+    internals.errorMsg = internals.getModule(errorMsgModule);
+    
+    var errorMsg = internals.errorMsg
 
     // initialize addtional modules
 
     if (createClassModule){
       createClass = createClassModule(promiseland, internals);
-
+      
     };
 
     if (PromiseModule){
@@ -173,6 +178,7 @@
       internals.classSystemPs = new Promise();
       internals.TrackerPs = new Promise();
       internals.ChainablePs = new Promise();
+      internals.framesPs = new Promise();
     };
 
     if (moduleSystemModule){
@@ -204,11 +210,6 @@
     if (ParserClassModule){
       ParserClassModule(promiseland, internals);
     }
-
-
-    var errorMsg = {
-
-    };
 
 
     return promiseland;
