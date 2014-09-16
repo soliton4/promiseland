@@ -149,6 +149,12 @@
       , isPromiseLandPromisingModule: function(parM){
         return false;
       }
+      
+      // for frameworks
+      // enables the server to deliver promiseland directly from the node_modules directory
+      , getPromiselandPathName: function(){
+        return __dirname;
+      }
 
     };
 
