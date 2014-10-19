@@ -346,22 +346,6 @@ return (classSystem, internals){
     
   };
   
-  cs.setMemberByDef = (parDynInstance, parMemberDefinition, parValueDynInstance){
-      var realInstance = parDynInstance.instance;
-      
-      realInstance[parMemberDefinition.index] = parValueDynInstance.getInstanceAsType(parMemberDefinition.type);
-      
-      if (classSystem.isTrackedClass(parMemberDefinition.type)){
-        var tracker = this.getTrackerFromDynInstance(parDynInstance);
-        var cDef = getClass(parValueDynInstance.type);
-        var trackMemberIdx = cDef.map.trackMemberIdx;
-        
-        if (realInstance[parMemberDefinition.trackIndex]){
-          realInstance[parMemberDefinition.trackIndex]();
-        };
-        realInstance[parMemberDefinition.trackIndex] = parValueDynInstance.instance[trackMemberIdx](tracker);
-      };
-  };
   
   cs.getTrackerFromDynInstance = (parDynInstance){
     var cDef = getClass(parDynInstance.type);

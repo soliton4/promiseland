@@ -54,7 +54,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "ac51a0a9844586c360f3a19c05269e88" })){ return promiseland._getModule("ac51a0a9844586c360f3a19c05269e88"); };
+if (promiseland._hasModule({ hashStr: "3d194d4e772656ad61c60c13e094cbc6" })){ return promiseland._getModule("3d194d4e772656ad61c60c13e094cbc6"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$38/*console*/;try{PL$38/*console*/ = console;}catch(e){};
 var PL$1 = (function(){
@@ -547,67 +547,46 @@ PL$104/*mDef*/ = PL$88/*cDef*/["map"]["membersByIndex"][PL$102/*parIndex*/];
 return PL$104/*mDef*/["type"];;
 ;
 });;
-PL$50/*cs*/["setMemberByDef"] = (function(PL$90/*parDynInstance*/, PL$105/*parMemberDefinition*/, PL$103/*parValueDynInstance*/){
-var PL$32/*realInstance*/;
-var PL$106/*tracker*/;
-var PL$88/*cDef*/;
-var PL$107/*trackMemberIdx*/;
-;
-PL$32/*realInstance*/ = PL$90/*parDynInstance*/["instance"];
-PL$32/*realInstance*/[PL$105/*parMemberDefinition*/["index"]] = PL$103/*parValueDynInstance*/["getInstanceAsType"](PL$105/*parMemberDefinition*/["type"]);;
-if(PL$15/*classSystem*/["isTrackedClass"](PL$105/*parMemberDefinition*/["type"])){
-PL$106/*tracker*/ = this["getTrackerFromDynInstance"](PL$90/*parDynInstance*/);
-PL$88/*cDef*/ = PL$62/*getClass*/(PL$103/*parValueDynInstance*/["type"]);
-PL$107/*trackMemberIdx*/ = PL$88/*cDef*/["map"]["trackMemberIdx"];
-if(PL$32/*realInstance*/[PL$105/*parMemberDefinition*/["trackIndex"]]){
-PL$32/*realInstance*/[PL$105/*parMemberDefinition*/["trackIndex"]]();;
-};
-;
-PL$32/*realInstance*/[PL$105/*parMemberDefinition*/["trackIndex"]] = PL$103/*parValueDynInstance*/["instance"][PL$107/*trackMemberIdx*/](PL$106/*tracker*/);;
-};
-;
-;
-});;
 PL$50/*cs*/["getTrackerFromDynInstance"] = (function(PL$90/*parDynInstance*/){
 var PL$88/*cDef*/;
-var PL$108/*trackerIdx*/;
+var PL$105/*trackerIdx*/;
 ;
 PL$88/*cDef*/ = PL$62/*getClass*/(PL$90/*parDynInstance*/["type"]);
-PL$108/*trackerIdx*/ = PL$88/*cDef*/["map"]["trackerIdx"];
-return PL$90/*parDynInstance*/["instance"][PL$108/*trackerIdx*/];;
+PL$105/*trackerIdx*/ = PL$88/*cDef*/["map"]["trackerIdx"];
+return PL$90/*parDynInstance*/["instance"][PL$105/*trackerIdx*/];;
 ;
 });;
-PL$50/*cs*/["getInstanceFromSyncData"] = (function(PL$109/*parData*/){
+PL$50/*cs*/["getInstanceFromSyncData"] = (function(PL$106/*parData*/){
 var PL$89/*type*/;
 var PL$88/*cDef*/;
-var PL$110/*isTracked*/;
+var PL$107/*isTracked*/;
 var PL$98/*instance*/;
 var PL$100/*syncMembers*/;
 var PL$44/*i*/;
 var PL$94/*l*/;
-var PL$111/*nextData*/;
+var PL$108/*nextData*/;
 var PL$31/*t*/;
 ;
-PL$89/*type*/ = PL$109/*parData*/[0];
+PL$89/*type*/ = PL$106/*parData*/[0];
 PL$88/*cDef*/ = PL$62/*getClass*/(PL$89/*type*/);
 if(! PL$88/*cDef*/["sync"]){
 throw PL$2/*errorMsg*/["notSyncable"];
 };
 ;
-PL$110/*isTracked*/ = this["isTrackedClass"](PL$89/*type*/);
+PL$107/*isTracked*/ = this["isTrackedClass"](PL$89/*type*/);
 PL$98/*instance*/ = new PL$34/*DynInstance*/(PL$89/*type*/, this["getTypeConstructor"](PL$89/*type*/)());
 try
 {PL$100/*syncMembers*/ = PL$88/*cDef*/["syncMembers"];
 PL$44/*i*/ = 0;
 PL$94/*l*/ = PL$100/*syncMembers*/["length"];
-PL$111/*nextData*/ = 1;
+PL$108/*nextData*/ = 1;
 for(PL$44/*i*/;(PL$44/*i*/ < PL$94/*l*/);++PL$44/*i*/){{PL$31/*t*/ = PL$100/*syncMembers*/[PL$44/*i*/]["type"];
 if(this["isFunctionType"](PL$31/*t*/)){
 continue;;
 };
 ;
-this["setMemberByDef"](PL$98/*instance*/, PL$100/*syncMembers*/[PL$44/*i*/], PL$109/*parData*/[PL$111/*nextData*/]);;
-++PL$111/*nextData*/;;
+this["setMemberByDef"](PL$98/*instance*/, PL$100/*syncMembers*/[PL$44/*i*/], PL$106/*parData*/[PL$108/*nextData*/]);;
+++PL$108/*nextData*/;;
 }};
 ;
 }catch(PL$37/*e*/){PL$98/*instance*/["track"]();;

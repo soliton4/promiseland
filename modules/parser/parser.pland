@@ -29,7 +29,7 @@ var globalNewPromiseStr = function(){
 };
 
 
-class Map {
+/*class Map {
   constructor: (){
     this.map = {};
   },
@@ -52,7 +52,8 @@ class Map {
     };
     return res;
   }
-};
+};*/
+var Map = promiseland.Map;
 
 class VariableNames {
   constructor: (par){
@@ -1629,6 +1630,12 @@ var mixin = function(){
             case "track":
               r.trackClause = keywords[i];
               break;
+            case "unique":
+              r.uniqueClause = keywords[i];
+              break;
+            case "savable":
+              r.savableClause = keywords[i];
+              break;
             };
           };
         };
@@ -1920,6 +1927,8 @@ var mixin = function(){
           parsed: par,
           track: ci.trackClause ? true : false,
           sync: ci.syncClause,
+          unique: ci.uniqueClause,
+          savable: ci.savableClause,
           name: parName,
           hashStr: this.getModuleHashStr()
         };
@@ -2005,6 +2014,12 @@ var mixin = function(){
           res.push(JSON.stringify(par.sync));
           res.push(", \"hashStr\": " + stringEncodeStr(par.hashStr));
           res.push(", \"name\": " + stringEncodeStr(par.name));
+        };
+        if (par.unique){
+          res.push(", \"unique\": true");
+        };
+        if (par.savable){
+          res.push(", \"savable\": true");
         };
         
         res.push("}");

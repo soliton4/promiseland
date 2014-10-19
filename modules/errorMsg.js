@@ -52,7 +52,7 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "97772a242cf0576f5002e7bbd02675f3" })){ return promiseland._getModule("97772a242cf0576f5002e7bbd02675f3"); };
+if (promiseland._hasModule({ hashStr: "5fe985bf988e3526f769b7a8aa05b0a5" })){ return promiseland._getModule("5fe985bf988e3526f769b7a8aa05b0a5"); };
 var PL$1 = (function(){
 "use strict";
 ;
@@ -83,6 +83,10 @@ return {"accessNotAllowd": {"id": 200,
 "msg": "not syncable"},
 "unknownInstanceType": {"id": 212,
 "msg": "unknown instance type"},
+"idNotAllowedInUnique": {"id": 213,
+"msg": "definition of id is not allowed in unique classes"},
+"onlyUniqueCanBeStringified": {"id": 214,
+"msg": "only unique classes can be stringified"},
 "missingRemoteFun": {"id": 801,
 "msg": "remote function not registred"},
 "frameNotAvailable": {"id": 802,

@@ -2,23 +2,27 @@
   __promiseLandModule: true,
   require: {
     DynInstance: "./classSystem/DynInstance",
+    Wrapper: "./classSystem/Wrapper",
     TrackedPromise: "./classSystem/TrackedPromise",
     provisional: "./classSystem/provisional",
     temporary: "./classSystem/temporary",
     promiseOf: "./classSystem/promiseOf",
     sync: "./classSystem/sync",
     codeGeneration: "./classSystem/codeGeneration",
+    Map: "./Map",
   }
 }>;
 
 var errorMsg = extra.errorMsg;
 DynInstance = extra.getModule(DynInstance);
+Wrapper = extra.getModule(Wrapper);
 TrackedPromise = extra.getModule(TrackedPromise);
 provisional = extra.getModule(provisional);
 temporary = extra.getModule(temporary);
 promiseOf = extra.getModule(promiseOf);
 sync = extra.getModule(sync);
 codeGeneration = extra.getModule(codeGeneration);
+Map = extra.getModule(Map);
 
 /* 
   class system
@@ -40,6 +44,17 @@ var Chainable;
 ((){
   Chainable = (*extra.ChainablePs).Chainable;
 })();
+
+var stringify = (par){
+  return JSON.stringify(par);
+};
+
+var stringifyInstance = (parInstance, parType){
+  if (!classSystem.isUniqueClass(parType)){
+    throw errorMsg.onlyUniqueCanBeStringified;
+  };
+  
+};
 
 /*
 
@@ -121,6 +136,63 @@ var builtinTypes = {
     isStatement: true,
     isReady: true
   })
+};
+
+/*
+  private parts of the classSystem
+*/
+var privateClassSystem = {
+  getMemberByName: (parType, parInstance, parMemberName){
+    var cDef = getClass(parType);
+    var mDef = cDef.map.members[parMemberName];
+    if (mDef){
+      return parInstance[mDef.index];
+    };
+    if (cDef.map.freePart !== undefined){
+      return parInstance[cDef.map.freePart][parMemberName];
+    };
+    return;
+  },
+  
+  
+  getTrackerFromInstance: (parType, parInstance){
+    var cDef = getClass(parType);
+    return parInstance[cDef.map.trackerIdx];
+  },
+  
+  
+  setMemberByDefFromInstance: (parType, parInstance, parMemberDefinition, parValueInstance){
+    var realInstance = privateClassSystem.getRealInstance(parType, parInstance);
+    
+    realInstance[parMemberDefinition.index] = parValueInstance;
+    
+    if (classSystem.isTrackedClass(parMemberDefinition.type)){
+      var tracker = classSystem.getTrackerFromInstance(parType, realInstance);
+      var cDef = getClass(parMemberDefinition.type);
+      var trackMemberIdx = cDef.map.trackMemberIdx;
+
+      if (realInstance[parMemberDefinition.trackIndex]){
+        realInstance[parMemberDefinition.trackIndex]();
+      };
+      realInstance[parMemberDefinition.trackIndex] = parValueInstance[trackMemberIdx](tracker);
+    };
+  },
+    
+  // generic function to get the actual instance
+  // this applies to temporaries and what ever cracy class type modifiers we come up in the future
+  getRealInstance: (parType, parInstance){
+    if (classSystem.isTemporaryTrackedClass(parType)){
+      return parInstance[0];
+    };
+    return parInstance;
+  },
+  
+  // generic function to make sure temproraries are no longer tracked
+  untrack: (parType, parInstance){
+    if (parInstance && classSystem.isTemporaryTrackedClass(parType)){
+      parInstance[1]();
+    };
+  }
 };
 
 
@@ -245,6 +317,8 @@ var classSystem = {
       isReady: false,
       track: (classLiteral.track || classLiteral.sync) ? true : false,
       sync: classLiteral.sync,
+      unique: classLiteral.unique,
+      savable: classLiteral.savable,
       readyPromise: new Promise(),
       syncMembers: []
     };
@@ -256,7 +330,11 @@ var classSystem = {
         cDef.syncServe = true;
       };
     };
-
+    // savable implies unique
+    if (cDef.savable){
+      cDef.unique = true;
+    };
+    
     cAr.push(cf); // cAr[0] is allways the class
 
 
@@ -288,6 +366,8 @@ var classSystem = {
       trackMemberIdx = map.trackMemberIdx;
     };
 
+    // -------------------------------------------------------------------------
+    // sync
     if (sync){
       map.syncDataIdx = cAr.length;
       cAr.push(function(){
@@ -357,7 +437,7 @@ var classSystem = {
     var destroyFun;
     var untrackIdxAr = [];
 
-    var addMember = function(m){
+    var addMember = (m){
       var mDef = {
         index: cAr.length
       };
@@ -371,8 +451,15 @@ var classSystem = {
 
       var memberIdx = mDef.index;
       var isTrackedMember = self.isTrackedClass(mDef.type);
-
-
+      
+      if (cDef.unique){
+        if (m.name == "id"){
+          cDef.idIndex = memberIdx;
+          cDef.idDef = mDef;
+        };
+      };
+      
+      
       if (mDef.sync){
         mDef.hasSetter = true;
         if (isTrackedMember){
@@ -456,8 +543,50 @@ var classSystem = {
     var createMembersPs = function(){
       var donePs = new Promise();
       self._membersDefined(classLiteral).then(function(){
-
+        
         var i;
+        // get constructor type
+        var passedConstructorType;
+        if (classLiteral.members){
+          for (i = 0; i < classLiteral.members.length; ++i){
+            var m = classLiteral.members[i]
+            if (m.name == "constructor"){
+              passedConstructorType = m.type;
+              break;
+            };
+          };
+        };
+        if (passedConstructorType){
+
+          var conDef = getClass(passedConstructorType);
+          cDef.constructorType = self.createFunctionType({
+            "return": cf,
+            arguments: conDef.arguments
+          });
+
+        }else{
+          cDef.constructorType = self.createFunctionType({
+            "return": cf
+          });
+        };
+
+        if (cDef.unique){
+          // make id the first member
+          // id must not be defined
+          debugger;
+          classLiteral.members = classLiteral.members || [];
+          
+          cDef.idType = self.getFunctionArgumentType(cDef.constructorType, 0);
+          
+          classLiteral.members.unshift({
+            name: "id",
+            "type": cDef.idType,
+            "defaultValue": undefined
+          });
+          
+        };
+        
+        
         if (classLiteral.members){
           var i = 0;
           for (i; i < classLiteral.members.length; ++i){
@@ -469,7 +598,7 @@ var classSystem = {
       });
       return donePs;
     };
-    var memberPs = new createMembersPs();
+    var memberPs = createMembersPs();
 
 
     var i;
@@ -547,9 +676,33 @@ var classSystem = {
       for (i = 0; i < cAr.length; ++i){
         helpAr.push(undefined);
       };
-
+      
+      // -----------------------------------------------
+      // unique constructor
+      
+      if (cDef.unique){
+        debugger;
+        var uniqueRealConstructor = cDef.constructor;
+        var uniqueMap = new Map();
+        var hasVarId = self.isVar(cDef.idType);
+        var idType = cDef.idType;
+        var idDef = cDef.idDef;
+        
+        cDef.constructor = (parId){
+          debugger;
+          // creating the instance
+          var instance = uniqueRealConstructor.apply(null, arguments);
+          //setting id
+          privateClassSystem.setMemberByDefFromInstance(cf, instance, idDef, parId);
+          // no need to untrack parId;
+          // it will be done within the constructor;
+          return instance;
+        };
+        
+      };
+      
+      cDef.constructorArguments = [];
       if (constructorDef){
-        cDef.constructorArguments = [];
         var realConstructor = cDef.constructor;
         if (cDef.track){
           // special case for tracked classes
@@ -576,7 +729,38 @@ var classSystem = {
         cDef.constructorType = self.createFunctionType({
           "return": cf
         });
-
+      };
+      
+      // -----------------------------------------------
+      // unique constructor
+      
+      if (cDef.unique){
+        debugger;
+        var uniqueRealConstructor2 = cDef.constructor;
+        var uniqueMap = new Map();
+        var hasVarId = self.isVar(cDef.idType);
+        var idType = cDef.idType;
+        var idDef = cDef.idDef;
+        
+        cDef.constructor = (parId){
+          debugger;
+          if (hasVarId){
+            var key = stringify(parId);
+          }else{
+            var key = stringifyInstance(idType, parId);
+          };
+          var instance = uniqueMap.get(key);
+          if (instance){
+            if (parId){
+              privateClassSystem.untrack(idType, parId);
+            };
+            return instance;
+          };
+          instance = uniqueRealConstructor2.apply(null, arguments);
+          uniqueMap.set(key, instance);
+          return instance;
+        };
+        
       };
 
 
@@ -635,6 +819,9 @@ var classSystem = {
           _sync_destroyFun.apply(this);
         };
       };
+      if (cDef.unique){
+        
+      };
 
       finalPs.resolve();
     });
@@ -682,6 +869,14 @@ var classSystem = {
   isTrackedClass: (parType){
     var cDef = getClass(parType);
     if (cDef.track){
+      return true;
+    };
+    return false;
+  },
+  
+  isUniqueClass: (parType){
+    var cDef = getClass(parType);
+    if (cDef.unique){
       return true;
     };
     return false;
@@ -866,6 +1061,22 @@ var classSystem = {
   },
 
 
+  setMemberByDef: (parDynInstance, parMemberDefinition, parValueDynInstance){
+    var realInstance = parDynInstance.instance;
+
+    realInstance[parMemberDefinition.index] = parValueDynInstance.getInstanceAsType(parMemberDefinition.type);
+
+    if (this.isTrackedClass(parMemberDefinition.type)){
+      var tracker = this.getTrackerFromDynInstance(parDynInstance);
+      var cDef = getClass(parValueDynInstance.type);
+      var trackMemberIdx = cDef.map.trackMemberIdx;
+
+      if (realInstance[parMemberDefinition.trackIndex]){
+        realInstance[parMemberDefinition.trackIndex]();
+      };
+      realInstance[parMemberDefinition.trackIndex] = parValueDynInstance.instance[trackMemberIdx](tracker);
+    };
+  },
   
   
   // return a live

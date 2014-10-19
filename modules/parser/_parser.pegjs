@@ -1552,11 +1552,19 @@ ClassSyncClaus
 ClassTrackClaus
   = "track" { return posRes({ "type": "track" }); }
 
+ClassUniqueClaus
+  = "unique" { return posRes({ "type": "unique" }); }
+
+ClassSavableClaus
+  = "savable" { return posRes({ "type": "savable" }); }
+
 
 ClassKeyword
   = ClassTypedClaus
   / ClassSyncClaus
   / ClassTrackClaus
+  / ClassUniqueClaus
+  / ClassSavableClaus
 
 ClassKeywords
   = arr:ClassKeyword+ {

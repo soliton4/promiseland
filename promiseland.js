@@ -169,7 +169,7 @@
     
     internals.errorMsg = internals.getModule(errorMsgModule);
     
-    var errorMsg = internals.errorMsg
+    var errorMsg = internals.errorMsg;
 
     // initialize addtional modules
 

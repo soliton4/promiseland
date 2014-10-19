@@ -120,34 +120,51 @@ promiseland.Promise = Promise;
 promiseland.all = all;
 
 
-    var Callback = function(){
-      var promise = new Promise();
-      var callback = function(){
-        promise.resolve(arguments);
-      };
-      callback.promise = promise.promise;
-      callback.callback = callback;
-      return callback;
-    };
+var Callback = function(){
+  var promise = new Promise();
+  var callback = function(){
+    promise.resolve(arguments);
+  };
+  callback.promise = promise.promise;
+  callback.callback = callback;
+  return callback;
+};
 
 promiseland.Callback = Callback;
 
 
-      // for future use
-      promiseland.getPromise = function(par){
-        return par;
-      };
-      
-      // to import promisies from outside
-      promiseland.importPromise = function(par){
-        var p = new Promise();
-        par.then(function(res){
-          p.resolve(res);
-        }, function(rea){
-          p.reject(rea);
-        });
-        return p.promise;
-      };
+var CallbackErrorFirst = function(){
+  var promise = new Promise();
+  var callback = function(err, res){
+    if (err){
+      promise.reject(err);
+      return;
+    };
+    promise.resolve(res);
+  };
+  callback.promise = promise.promise;
+  callback.callback = callback;
+  return callback;
+};
+
+promiseland.CallbackErrorFirst = CallbackErrorFirst;
+
+
+// for future use
+promiseland.getPromise = function(par){
+  return par;
+};
+
+// to import promisies from outside
+promiseland.importPromise = function(par){
+  var p = new Promise();
+  par.then(function(res){
+    p.resolve(res);
+  }, function(rea){
+    p.reject(rea);
+  });
+  return p.promise;
+};
 
 
 return Promise;

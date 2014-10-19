@@ -53,6 +53,15 @@ return {
     id: 212
     , msg: "unknown instance type"
   },
+  idNotAllowedInUnique: {
+    id: 213
+    , msg: "definition of id is not allowed in unique classes"
+  },
+  
+  onlyUniqueCanBeStringified: {
+    id: 214
+    , msg: "only unique classes can be stringified"
+  },
 
       
       missingRemoteFun: {

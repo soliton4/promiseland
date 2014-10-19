@@ -160,7 +160,8 @@
   *createTest("connect", successFun);
 
   *createTest("extraRequire", successFun);
-  //*createTest("extraRequire", successFun);
+  *createTest("typeUnique", successFun);
+  //*createTest("typeUnique", successFun);
 
   
     var c = 0;
