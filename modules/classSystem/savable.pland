@@ -1,0 +1,112 @@
+<{  __promiseLandModule: true }>;
+  
+var errorMsg = extra.errorMsg;
+
+var getModuleData;
+((){
+  getModuleData = (*extra.moduleSystemPs).getModuleData;
+})();
+
+var frames;
+var getInstanceFromTransportData;
+var getInstanceTransportData;
+var getEffectiveFunctionResultType;
+
+
+return (classSystem, internals){
+  
+  var privateClassSystem = internals.privateClassSystem;
+  
+  ((){
+    frames = *extra.framesPs;
+
+  })();
+
+  
+  var cs = classSystem;
+  var pcs = privateClassSystem;
+  
+  var getClass = internals.getClass;
+  var DynInstance = internals.DynInstance;
+  
+  // savable
+  
+  var saveHandlerPs = new Promise();
+  
+  pcs.isSavableType = (parType){
+    if (cs.isVar(parType)){
+      return true;
+    };
+    var cDef = getClass(parType);
+    if (cDef.savable){
+      return true;
+    };
+    return false;
+  };
+
+  pcs.registerSavableClass = (parType){
+    var handler = *saveHandlerPs;
+    var cDef = getClass(parType);
+    
+    var propertiesAr = [];
+    var properties = {};
+    var map = cDef.map;
+    var i = 0;
+    for (i = 0; i < map.membersAr.length; ++i){
+      if (!pcs.isSavableType(mDef.type)){
+        continue;
+      };
+      var mDef = map.membersAr[i];
+      var p = {
+        name: mDef.name,
+        type: mDef.type,
+        isVar: classSystem.isVar(mDef.type)
+      };
+      propertiesAr.push(p);
+      properties[mDef.name] = p;
+    };
+    
+    try{
+      if (handler.registerClass){
+        cDef.saveHandler = handler.registerClass({
+          idType: cDef.idType,
+          properties: properties,
+          propertiesAr: propertiesAr
+        });
+      };
+    }catch(e){};
+  };
+  
+  pcs.saveInstance = (parType, parInstance){
+    var cDef = getClass(parType);
+    var h = *cDef.saveHandler;
+    
+    var propertiesAr = [];
+    var properties = {};
+    var map = cDef.map;
+    var i = 0;
+    for (i = 0; i < map.membersAr.length; ++i){
+      if (!pcs.isSavableType(mDef.type)){
+        continue;
+      };
+      var mDef = map.membersAr[i];
+      var p = {
+        name: mDef.name,
+        type: mDef.type,
+        isVar: classSystem.isVar(mDef.type),
+        value: classSystem.isVar(mDef.type) ? parInstance[mDef.index] : pcs.stringifyInstance(mDef.type, parInstance[mDef.index])
+      };
+      propertiesAr.push(p);
+      properties[mDef.name] = p;
+    };
+    h.save({
+      properties: properties,
+      propertiesAr: propertiesAr
+    });
+  };
+  
+  cs.setSaveHandler = (parSaveHandler){
+    saveHandlerPs.resolve(parSaveHandler);
+  };
+  
+};

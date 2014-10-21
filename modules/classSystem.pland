@@ -8,6 +8,7 @@
     temporary: "./classSystem/temporary",
     promiseOf: "./classSystem/promiseOf",
     sync: "./classSystem/sync",
+    savable: "./classSystem/savable",
     codeGeneration: "./classSystem/codeGeneration",
     Map: "./Map",
   }
@@ -21,6 +22,7 @@ provisional = extra.getModule(provisional);
 temporary = extra.getModule(temporary);
 promiseOf = extra.getModule(promiseOf);
 sync = extra.getModule(sync);
+savable = extra.getModule(savable);
 codeGeneration = extra.getModule(codeGeneration);
 Map = extra.getModule(Map);
 
@@ -49,7 +51,7 @@ var stringify = (par){
   return JSON.stringify(par);
 };
 
-var stringifyInstance = (parInstance, parType){
+var stringifyInstance = (parType, parInstance){
   if (!classSystem.isUniqueClass(parType)){
     throw errorMsg.onlyUniqueCanBeStringified;
   };
@@ -142,6 +144,10 @@ var builtinTypes = {
   private parts of the classSystem
 */
 var privateClassSystem = {
+  
+  stringifyInstance: stringifyInstance,
+  stringify: stringify,
+  
   getMemberByName: (parType, parInstance, parMemberName){
     var cDef = getClass(parType);
     var mDef = cDef.map.members[parMemberName];
@@ -306,6 +312,7 @@ var classSystem = {
     var map = {
       members: {},
       membersByIndex: {},
+      membersAr: [],
       "extends": []
     };
 
@@ -439,7 +446,8 @@ var classSystem = {
 
     var addMember = (m){
       var mDef = {
-        index: cAr.length
+        index: cAr.length,
+        name: m.name
       };
       if (syncAll || m.sync){
         mDef.sync = true;
@@ -472,6 +480,7 @@ var classSystem = {
 
       map.members[m.name] = mDef;
       map.membersByIndex[mDef.index] = mDef;
+      map.membersAr.push(mDef);
       var def = parDefaults ? parDefaults[m.name] : undefined;
       if (isFunction && mDef.sync){
         if (!(m.name == "constructor" || m.name == "destroy")){
@@ -573,7 +582,6 @@ var classSystem = {
         if (cDef.unique){
           // make id the first member
           // id must not be defined
-          debugger;
           classLiteral.members = classLiteral.members || [];
           
           cDef.idType = self.getFunctionArgumentType(cDef.constructorType, 0);
@@ -735,7 +743,6 @@ var classSystem = {
       // unique constructor
       
       if (cDef.unique){
-        debugger;
         var uniqueRealConstructor2 = cDef.constructor;
         var uniqueMap = new Map();
         var hasVarId = self.isVar(cDef.idType);
@@ -743,7 +750,6 @@ var classSystem = {
         var idDef = cDef.idDef;
         
         cDef.constructor = (parId){
-          debugger;
           if (hasVarId){
             var key = stringify(parId);
           }else{
@@ -829,6 +835,9 @@ var classSystem = {
 
     finalPs.then(function(){
       cDef.isReady = true;
+      if (cDef.savable){
+        privateClassSystem.registerSavableClass(cf);
+      };
       cDef.readyPromise.resolve(cf);
     });
 
@@ -1239,7 +1248,8 @@ var internals = {
   TrackedPromise: TrackedPromise,
   DynInstance: DynInstance,
   stringEncodeStr: stringEncodeStr,
-  getEffectiveFunctionResultType: getEffectiveFunctionResultType
+  getEffectiveFunctionResultType: getEffectiveFunctionResultType,
+  privateClassSystem: privateClassSystem
 };
   
 provisional(classSystem, internals);
@@ -1263,6 +1273,7 @@ promiseland.classSystem = classSystem;
 
 extra.classSystemPs.resolve({
   classSystem: classSystem,
+  privateClassSystem: privateClassSystem,
   internalObjects: internalObjects,
   getClassBySyncId: getClassBySyncId,
   DynInstance: DynInstance,
