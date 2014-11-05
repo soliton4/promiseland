@@ -14,9 +14,7 @@ var getInstanceFromTransportData;
 var getInstanceTransportData;
 var getEffectiveFunctionResultType;
 
-
 return (classSystem, internals){
-  
   
   ((){
     frames = *extra.framesPs;

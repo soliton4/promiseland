@@ -140,6 +140,8 @@ var builtinTypes = {
   })
 };
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /*
   private parts of the classSystem
 */
@@ -165,7 +167,6 @@ var privateClassSystem = {
     var cDef = getClass(parType);
     return parInstance[cDef.map.trackerIdx];
   },
-  
   
   setMemberByDefFromInstance: (parType, parInstance, parMemberDefinition, parValueInstance){
     var realInstance = privateClassSystem.getRealInstance(parType, parInstance);
@@ -198,8 +199,14 @@ var privateClassSystem = {
     if (parInstance && classSystem.isTemporaryTrackedClass(parType)){
       parInstance[1]();
     };
+  },
+  
+  hasOwnProperty: (obj, property){
+    return hasOwnProperty.apply(obj, [property]);
   }
 };
+
+var pcs = privateClassSystem;
 
 
 /* 
@@ -482,6 +489,7 @@ var classSystem = {
       map.membersByIndex[mDef.index] = mDef;
       map.membersAr.push(mDef);
       var def = parDefaults ? parDefaults[m.name] : undefined;
+      mDef.defaultValue = def;
       if (isFunction && mDef.sync){
         if (!(m.name == "constructor" || m.name == "destroy")){
           var originalFun = def;
@@ -548,7 +556,7 @@ var classSystem = {
       mDef.connectSlotCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, "[", MAKRO_VALUEPROPERTY, "], ", MAKRO_VALUE, ")"];
       
     };
-
+    
     var createMembersPs = function(){
       var donePs = new Promise();
       self._membersDefined(classLiteral).then(function(){
@@ -578,19 +586,44 @@ var classSystem = {
             "return": cf
           });
         };
+        cDef.constructorTypeIntern = cDef.constructorType;
 
         if (cDef.unique){
           // make id the first member
           // id must not be defined
           classLiteral.members = classLiteral.members || [];
           
-          cDef.idType = self.getFunctionArgumentType(cDef.constructorType, 0);
+          cDef.idType = self.getFunctionArgumentType(cDef.constructorTypeIntern, 0);
+          
           
           classLiteral.members.unshift({
             name: "id",
-            "type": cDef.idType,
-            "defaultValue": undefined
+            "type": cDef.idType
+            //"defaultValue": undefined
           });
+          
+          if (cDef.savable){
+            classLiteral.members.unshift({
+              name: "save",
+              "type": classSystem.getBuiltinType("var")
+            });
+            parDefaults.save = (){
+              *pcs.saveInstance(cf, this);
+            };
+            classLiteral.members.unshift({
+              name: "load",
+              "type": classSystem.getBuiltinType("var")
+            });
+            parDefaults.load = (){
+              *pcs.loadInstance(cf, this);
+            };
+            var conDef = getClass(cDef.constructorTypeIntern);
+            cDef.constructorReturnType = self._createPromiseOfClass(conDef.return);
+            cDef.constructorType = self.createFunctionType({
+              "return": cDef.constructorReturnType,
+              arguments: conDef.arguments
+            });
+          };
           
         };
         
@@ -611,222 +644,347 @@ var classSystem = {
 
     var i;
 
-
-
-    // ------------------------------------------------------------------
-    // constructor creation
-
-    if (classLiteral.hasFreePart){
-      var proto = {};
-      if (parDefaults){
-        for (i in parDefaults){
-          if (!map.members[i]){
-            proto[i] = parDefaults[i];
-          };
-        };
-      };
-      var freeFun = function(){};
-      freeFun.prototype = proto;
-      var f = map.freePart;
-
-      if (cDef.track){
-        cDef.constructor = function(){
-          var r = cAr.slice();
-          r[f] = new freeFun();
-          var t = Tracker(function(){
-            destroyFun.apply(r);
-          });
-          r[trackerIdx] = t[0];
-          r[trackRootIdx] = t[1];
-          r[trackMemberIdx] = t[2];
-          return [r, r[trackRootIdx]()];
-        };
-
-      }else{
-        cDef.constructor = function(){
-          var r = cAr.slice();
-          r[f] = new freeFun();
-          return r;
-        };
-
-      };
-
-    }else{
-      if (cDef.track){
-        cDef.constructor = function(){
-          var r = cAr.slice();
-          var t = Tracker(function(){
-            destroyFun.apply(r);
-          });
-          r[trackerIdx] = t[0];
-          r[trackRootIdx] = t[1];
-          r[trackMemberIdx] = t[2];
-          return [r, r[trackRootIdx]()];
-        };
-
-      }else{
-        cDef.constructor = function(){
-          var r = cAr.slice();
-          return r;
-        };
-
-      };
-    };
-
-
-
-
     var finalPs = new Promise();
     memberPs.then(function(){
       var i;
+      
+      
+      // ------------------------------------------------------------------
+      // constructor creation
+
+      var simpleConstructor = true;
+      if ( cDef.track
+        || cDef.unique
+      ){
+        simpleConstructor = false;
+      };
 
       //helperArray
       for (i = 0; i < cAr.length; ++i){
         helpAr.push(undefined);
       };
+      cDef.constructorArguments = [];
       
-      // -----------------------------------------------
-      // unique constructor
-      
-      if (cDef.unique){
-        debugger;
-        var uniqueRealConstructor = cDef.constructor;
-        var uniqueMap = new Map();
-        var hasVarId = self.isVar(cDef.idType);
-        var idType = cDef.idType;
-        var idDef = cDef.idDef;
-        
-        cDef.constructor = (parId){
-          debugger;
-          // creating the instance
-          var instance = uniqueRealConstructor.apply(null, arguments);
-          //setting id
-          privateClassSystem.setMemberByDefFromInstance(cf, instance, idDef, parId);
-          // no need to untrack parId;
-          // it will be done within the constructor;
-          return instance;
+      if (simpleConstructor){
+        if (classLiteral.hasFreePart){
+          var proto = {};
+          if (parDefaults){
+            for (i in parDefaults){
+              if (!map.members[i]){
+                proto[i] = parDefaults[i];
+              };
+            };
+          };
+          var freeFun = function(){};
+          freeFun.prototype = proto;
+          var f = map.freePart;
+
+          cDef.constructor = function(){
+            var r = cAr.slice();
+            r[f] = new freeFun();
+            return r;
+          };
+
+        }else{
+          cDef.constructor = function(){
+            return cAr.slice();
+          };
         };
         
-      };
-      
-      cDef.constructorArguments = [];
-      if (constructorDef){
-        var realConstructor = cDef.constructor;
-        if (cDef.track){
-          // special case for tracked classes
-          // the real constructer returns a temporary
-          cDef.constructor = function(){
-            var instance = realConstructor();
-            constructorFun.apply(instance[0], arguments);
-            return instance;
-          };
-        }else{
+        if (constructorDef){
+          var realConstructor = cDef.constructor;
           cDef.constructor = function(){
             var instance = realConstructor();
             constructorFun.apply(instance, arguments);
             return instance;
           };
         };
-        var conDef = getClass(constructorDef.type);
-        cDef.constructorType = self.createFunctionType({
-          "return": cf,
-          arguments: conDef.arguments
-        });
-
-      }else{
-        cDef.constructorType = self.createFunctionType({
-          "return": cf
-        });
-      };
-      
-      // -----------------------------------------------
-      // unique constructor
-      
-      if (cDef.unique){
-        var uniqueRealConstructor2 = cDef.constructor;
-        var uniqueMap = new Map();
-        var hasVarId = self.isVar(cDef.idType);
-        var idType = cDef.idType;
-        var idDef = cDef.idDef;
         
-        cDef.constructor = (parId){
-          if (hasVarId){
-            var key = stringify(parId);
-          }else{
-            var key = stringifyInstance(idType, parId);
-          };
-          var instance = uniqueMap.get(key);
-          if (instance){
-            if (parId){
-              privateClassSystem.untrack(idType, parId);
-            };
-            return instance;
-          };
-          instance = uniqueRealConstructor2.apply(null, arguments);
-          uniqueMap.set(key, instance);
-          return instance;
+      }else{
+        
+        var constructorStr = "";
+        //var importStr = "";
+        var importObj = {};
+        
+        var importVar = (v, name){
+          importObj[name] = v;
+          //importStr += "var " + name + " = importObj." + name + ";";
         };
         
-      };
-
-
-      if (cDef.track){
-        var _destroyFun;
-        if (untrackIdxAr.length){
-          // has tracked members
-          if (destroyDef){
-            _destroyFun = destroyFun;
-            destroyFun = function(){
-              var i;
-              for (i = 0; i < untrackIdxAr.length; ++i){
-                var curIdx = untrackIdxAr[i];
-                var tFun = this[curIdx];
-                this[curIdx] = undefined;
-                if (tFun){
-                  tFun();
-                };
+        importVar(cAr, "cAr");
+        constructorStr += "var r = cAr.slice();";
+        
+        if (classLiteral.hasFreePart){
+          var proto = {};
+          if (parDefaults){
+            for (i in parDefaults){
+              if (!map.members[i]){
+                proto[i] = parDefaults[i];
               };
-              _destroyFun.apply(this);
-              this.splice(0,this.length);
             };
+          };
+          var freeFun = function(){};
+          freeFun.prototype = proto;
+          var freeIndex = map.freePart;
+          
+          importVar(freeFun, "freeFun");
+          importVar(freeIndex, "freeIndex");
+          
+          constructorStr += "r[freeIndex] = new freeFun();";
+
+          if (cDef.track){
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              r[f] = new freeFun();
+              var t = Tracker(function(){
+                destroyFun.apply(r);
+              });
+              r[trackerIdx] = t[0];
+              r[trackRootIdx] = t[1];
+              r[trackMemberIdx] = t[2];
+              return [r, r[trackRootIdx]()];
+            };
+
           }else{
-            destroyFun = function(){
-              var i;
-              for (i = 0; i < untrackIdxAr.length; ++i){
-                var tFun = this[untrackIdxAr[i]];
-                if (tFun){
-                  tFun();
-                };
-              };
-              this.splice(0,this.length);
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              r[f] = new freeFun();
+              return r;
             };
+
           };
 
         }else{
-          if (destroyDef){
-            _destroyFun = destroyFun;
-            destroyFun = function(){
-              _destroyFun.apply(this);
-              this.splice(0,this.length);
+          if (cDef.track){
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              var t = Tracker(function(){
+                destroyFun.apply(r);
+              });
+              r[trackerIdx] = t[0];
+              r[trackRootIdx] = t[1];
+              r[trackMemberIdx] = t[2];
+              return [r, r[trackRootIdx]()];
+            };
+
+          }else{
+            cDef.constructor = function(){
+              var r = cAr.slice();
+              return r;
+            };
+
+          };
+        };
+        constructorStr += "var realInstance = r;";
+        
+
+        if (cDef.track){
+          importVar(Tracker, "Tracker");
+          importVar((){
+            destroyFun.apply(this, arguments);
+          }, "destroyFun");
+          importVar(trackerIdx, "trackerIdx");
+          importVar(trackRootIdx, "trackRootIdx");
+          importVar(trackMemberIdx, "trackMemberIdx");
+          
+          constructorStr += "var t = Tracker(function(){
+            debugger;
+              destroyFun.apply(realInstance);
+            });";
+          constructorStr += "realInstance[trackerIdx] = t[0];";
+          constructorStr += "realInstance[trackRootIdx] = t[1];";
+          constructorStr += "realInstance[trackMemberIdx] = t[2];";
+          constructorStr += "r = [realInstance, realInstance[trackRootIdx]()];";
+        };
+          
+        constructorStr += "return r;";
+        
+      var constructorObj = {};
+      importVar(constructorObj, "constructorObj");
+      var wrapStr = "constructorObj.fun = function(){" + constructorStr + "};";
+      promiseland.javascriptEval(wrapStr, importObj);
+      
+      cDef.constructor = constructorObj.fun;
+
+
+
+
+        // -----------------------------------------------
+        // unique constructor
+
+        if (cDef.unique){
+          var uniqueRealConstructor = cDef.constructor;
+          var uniqueMap = new Map();
+          var hasVarId = self.isVar(cDef.idType);
+          var idType = cDef.idType;
+          var idDef = cDef.idDef;
+
+          cDef.constructor = (parId){
+            // creating the instance
+            var instance = uniqueRealConstructor.apply(null, arguments);
+            //setting id
+            privateClassSystem.setMemberByDefFromInstance(cf, instance, idDef, parId);
+            // no need to untrack parId;
+            // it will be done within the constructor;
+            return instance;
+          };
+
+        };
+
+        if (constructorDef){
+          var realConstructor = cDef.constructor;
+          if (cDef.track){
+            // special case for tracked classes
+            // the real constructer returns a temporary
+            cDef.constructor = function(){
+              var instance = realConstructor();
+              constructorFun.apply(instance[0], arguments);
+              return instance;
             };
           }else{
-            destroyFun = function(){
-              this.splice(0,this.length);
+            cDef.constructor = function(){
+              var instance = realConstructor();
+              constructorFun.apply(instance, arguments);
+              return instance;
+            };
+          };
+        };
+
+        // -----------------------------------------------
+        // unique constructor
+
+        if (cDef.unique){
+          var uniqueRealConstructor2 = cDef.constructor;
+          var uniqueMap = new Map();
+          var hasVarId = self.isVar(cDef.idType);
+          var idType = cDef.idType;
+          var idDef = cDef.idDef;
+
+
+
+          if (cDef.savable){
+            // special constructer that actually returns a promise
+            cDef.constructor = (parId){
+              if (hasVarId){
+                var key = stringify(parId);
+              }else{
+                var key = stringifyInstance(idType, parId);
+              };
+              var res = new (cs.getTypeConstructor(cDef.constructorReturnType));
+
+              var instance = uniqueMap.get(key);
+              if (instance){
+                if (parId){
+                  privateClassSystem.untrack(idType, parId);
+                };
+                if (cDef.track){
+                  pcs.resolvePromise(cDef.constructorReturnType, res, [instance, instance[trackRootIdx]()]);
+                }else{
+                  pcs.resolvePromise(cDef.constructorReturnType, res, instance);
+                };
+                return res;
+              };
+              instance = uniqueRealConstructor2.apply(null, arguments);
+              var realInstance = instance;
+              if (cDef.track){
+                realInstance = instance[0];
+              };
+              uniqueMap.set(key, realInstance);
+              (){
+                *pcs.loadInstance(cf, realInstance);
+                pcs.resolvePromise(cDef.constructorReturnType, res, instance);
+              }();
+              return res;
+            };
+          }else{
+            // standard unique constructor
+            cDef.constructor = (parId){
+              if (hasVarId){
+                var key = stringify(parId);
+              }else{
+                var key = stringifyInstance(idType, parId);
+              };
+              var instance = uniqueMap.get(key);
+              if (instance){
+                if (parId){
+                  privateClassSystem.untrack(idType, parId);
+                };
+                if (cDef.track){
+                  return [instance, instance[trackRootIdx]()];
+                };
+                return instance;
+              };
+              instance = uniqueRealConstructor2.apply(null, arguments);
+              if (cDef.track){
+                uniqueMap.set(key, instance[0]);
+              }else{
+                uniqueMap.set(key, instance);
+              };
+              return instance;
             };
           };
 
         };
-      };
-      if (sync){
-        var _sync_destroyFun = destroyFun;
-        destroyFun = function(){
-          var syncData = classSystem.getSyncData(this);
-          destroySynced(syncData);
-          _sync_destroyFun.apply(this);
+
+
+        if (cDef.track){
+          var _destroyFun;
+          if (untrackIdxAr.length){
+            // has tracked members
+            if (destroyDef){
+              _destroyFun = destroyFun;
+              destroyFun = function(){
+                var i;
+                for (i = 0; i < untrackIdxAr.length; ++i){
+                  var curIdx = untrackIdxAr[i];
+                  var tFun = this[curIdx];
+                  this[curIdx] = undefined;
+                  if (tFun){
+                    tFun();
+                  };
+                };
+                _destroyFun.apply(this);
+                this.splice(0,this.length);
+              };
+            }else{
+              destroyFun = function(){
+                var i;
+                for (i = 0; i < untrackIdxAr.length; ++i){
+                  var tFun = this[untrackIdxAr[i]];
+                  if (tFun){
+                    tFun();
+                  };
+                };
+                this.splice(0,this.length);
+              };
+            };
+
+          }else{
+            if (destroyDef){
+              _destroyFun = destroyFun;
+              destroyFun = function(){
+                _destroyFun.apply(this);
+                this.splice(0,this.length);
+              };
+            }else{
+              destroyFun = function(){
+                this.splice(0,this.length);
+              };
+            };
+
+          };
         };
-      };
-      if (cDef.unique){
-        
+        if (sync){
+          var _sync_destroyFun = destroyFun;
+          destroyFun = function(){
+            var syncData = classSystem.getSyncData(this);
+            destroySynced(syncData);
+            _sync_destroyFun.apply(this);
+          };
+        };
+        if (cDef.unique){
+
+        };
       };
 
       finalPs.resolve();
@@ -1182,6 +1340,8 @@ var classSystem = {
 
 };
 
+var cs = classSystem;
+
 
 var getEffectiveFunctionResultType = (parFunType){
   var res = {
@@ -1264,6 +1424,8 @@ var syncFun = internals.syncFun;
 var syncFunctionFun = internals.syncFunctionFun;
 var internalObjects = internals.internalObjects;
 var getNewInternalId = internals.getNewInternalId;
+
+savable(classSystem, internals);
 
 codeGeneration(classSystem, internals);
 var runtimeError = internals.runtimeError;

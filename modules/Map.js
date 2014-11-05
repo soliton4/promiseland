@@ -52,15 +52,15 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "6554881ecfb0f294aba4e029d5595170" })){ return promiseland._getModule("6554881ecfb0f294aba4e029d5595170"); };
+if (promiseland._hasModule({ hashStr: "36af7afc6dc259cc67306b54c7728b9e" })){ return promiseland._getModule("36af7afc6dc259cc67306b54c7728b9e"); };
 var PL$5/*Object*/;try{PL$5/*Object*/ = Object;}catch(e){};
-var PL$9/*promiseland*/;try{PL$9/*promiseland*/ = promiseland;}catch(e){};
+var PL$12/*promiseland*/;try{PL$12/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$8/*Map*/;
+var PL$11/*Map*/;
 ;
 ;
-PL$8/*Map*/ = (function(){var PL$2/*inherited*/ = {};
+PL$11/*Map*/ = (function(){var PL$2/*inherited*/ = {};
 var res = promiseland.createClass({"constructor": (function(){
 ;
 this["map"] = {};;
@@ -79,6 +79,20 @@ return this["map"][PL$3/*key*/];;
 ;
 ;
 }),
+"has": (function(PL$3/*key*/){
+;
+if(PL$5/*Object*/["prototype"]["hasOwnProperty"]["call"](this["map"], PL$3/*key*/)){
+return true;;
+};
+;
+return false;;
+;
+}),
+"delete": (function(PL$3/*key*/){
+;
+delete this["map"][PL$3/*key*/];;
+;
+}),
 "getArray": (function(){
 var PL$6/*res*/;
 var PL$7/*n*/;
@@ -91,10 +105,26 @@ for(PL$7/*n*/ in this["map"]){PL$6/*res*/["push"]({"key": PL$7/*n*/,
 ;
 return PL$6/*res*/;;
 ;
+}),
+"mixin": (function(PL$8/*other*/){
+var PL$9/*a*/;
+var PL$10/*i*/;
+;
+if(! PL$8/*other*/){
+return this;;
+};
+;
+PL$9/*a*/ = PL$8/*other*/["getArray"]();
+PL$10/*i*/;
+for(PL$10/*i*/ = 0;(PL$10/*i*/ < PL$9/*a*/["length"]);++PL$10/*i*/){{this["set"](PL$9/*a*/[PL$10/*i*/]["key"], PL$9/*a*/[PL$10/*i*/]["value"]);;
+}};
+;
+return this;;
+;
 })}, [], PL$2/*inherited*/);
-return res; })();PL$8/*Map*/;;
-PL$9/*promiseland*/["Map"] = PL$8/*Map*/;;
-return PL$8/*Map*/;;
+return res; })();PL$11/*Map*/;;
+PL$12/*promiseland*/["Map"] = PL$11/*Map*/;;
+return PL$11/*Map*/;;
 ;
 })();
 ;return PL$1;

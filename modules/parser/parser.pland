@@ -29,30 +29,6 @@ var globalNewPromiseStr = function(){
 };
 
 
-/*class Map {
-  constructor: (){
-    this.map = {};
-  },
-  set: (key, value){
-    this.map[key] = value
-  },
-  get: (key){
-    if (Object.prototype.hasOwnProperty.call(this.map, key)){
-      return this.map[key];
-    };
-  },
-  getArray: (){
-    var res = [];
-    var n;
-    for (n in this.map){
-      res.push({
-        key: n,
-        value: this.map[n]
-      });
-    };
-    return res;
-  }
-};*/
 var Map = promiseland.Map;
 
 class VariableNames {
@@ -275,14 +251,14 @@ var mixin = function(){
       
       /* initializing type identifiers */
       
-      this.types = mixin({}, par.types);
-      if (!this.types["var"]){
-        this.types["var"] = {
+      this.types = (new Map).mixin(par.types);
+      if (!this.types.get("var")){
+        this.types.set("var", {
           name: "var",
           "type": classSystem.getBuiltinType("var")
-        };
+        });
       }
-      this.variables = mixin({}, par.variables);
+      this.variables = (new Map()).mixin(par.variables);
       
       /* flags */
       
@@ -344,17 +320,17 @@ var mixin = function(){
         return par1 === par2;
       };
       
-      this.localVariables = {};
+      this.localVariables = new Map;
       
       this.addLocalVariable = function(par, parParsed){
         var self = this;
         var name = identifierName(par.name);
-        if (this.localVariables.hasOwnProperty(name)){
+        if (this.localVariables.has(name)){
           if (!par.type && !par.typename){
             // ok
           }else{
             var newType = par.type || this.getType(par.typename, parParsed);
-            var existing = this._getVariableType(this.localVariables[name]);
+            var existing = this._getVariableType(this.localVariables.get(name));
             classSystem.definitionPromise(newType).then(function(type1){
               classSystem.definitionPromise(existing).then(function(type2){
                 if (!classSystem.isSameType(type1, type2)){
@@ -365,25 +341,25 @@ var mixin = function(){
           };
           
         }else{
-          this.localVariables[name] = {
+          this.localVariables.set(name, {
             typename: par.typename,
             type: par.type,
             name: name
-          };
+          });
           if (!par.typename && !par.type){
-            this.localVariables[name].type = this.getProvisionalType(parParsed);
-            this.localVariables[name].needsResolving = true;
+            this.localVariables.get(name).type = this.getProvisionalType(parParsed);
+            this.localVariables.get(name).needsResolving = true;
           };
           
         };
         
         if (par.parameter){
-          this.localVariables[name].parameter = par.parameter;
+          this.localVariables.get(name).parameter = par.parameter;
         };
         if (par.isFunction){
-          this.localVariables[name].function = par.function;
+          this.localVariables.get(name).function = par.function;
         };
-        this.variables[name] = this.localVariables[name];
+        this.variables.set(name, this.localVariables.get(name));
       };
       
       
@@ -392,8 +368,8 @@ var mixin = function(){
         var name = identifierName(par.name);
         
         var originalEntry;
-        if (this.variables.hasOwnProperty(name)){
-          originalEntry = this.variables[name];
+        if (this.variables.has(name)){
+          originalEntry = this.variables.get(name);
         };
         
         var entry = {
@@ -414,15 +390,15 @@ var mixin = function(){
         };
         entry.temporary = true;
         
-        this.variables[name] = entry;
+        this.variables.set(name, entry);
         
         var resPs = new Promise();
         ((){
           *resPs;
           if (originalEntry){
-            this.variables[name] = originalEntry;
+            this.variables.set(name, originalEntry);
           }else{
-            delete this.variables[name];
+            this.variables.delete(name);
           };
         })();
         
@@ -433,7 +409,7 @@ var mixin = function(){
       this.resolveFunctionType = function(par, parsed){
         
         var name = identifierName(par.name);
-        var entry = this.localVariables[name];
+        var entry = this.localVariables.get(name);
         if (entry.needsResolving){
           entry.needsResolving = false;
           var t = entry.type;
@@ -471,8 +447,8 @@ var mixin = function(){
         var name = identifierName(parName);
         this._addUsedVariable(name);
         
-        if (this.variables.hasOwnProperty(name)){
-          var entry = this.variables[name];
+        if (this.variables.has(name)){
+          var entry = this.variables.get(name);
           return (this._getVariableType(entry));
         };
         return this.getType("var");
@@ -490,8 +466,8 @@ var mixin = function(){
           return;
         };
         
-        if (this.variables.hasOwnProperty(name)){
-          if (this.variables[name].temporary){
+        if (this.variables.has(name)){
+          if (this.variables.get(name).temporary){
             return;
           };
         };
@@ -623,14 +599,15 @@ var mixin = function(){
         
         var renderTypeName = function(parType1, parType2){
           var i;
-          for (i in self.types){
-            if (self.types[i]["type"] === parType1 || self.types[i]["type"] === parType2){
-              if (self.isVar(self.types[i]["type"])){
+          var typesAr = self.types.getArray();
+          for (i = 0; i < typesAr.length; ++i){
+            if (typesAr[i].value["type"] === parType1 || typesAr[i].value["type"] === parType2){
+              if (self.isVar(typesAr[i].value["type"])){
                 self.common.useClassSystem = true;
                 return "classSystem.getBuiltinType(\"var\")";
                 
               };
-              var name = i;
+              var name = typesAr[i].key;
               if (!self.common.givenTypeNames[name]){
                 self.common.givenTypeNames[name] = self.getUniqueName() + "/*type:" + name + "*/";
               };
@@ -900,12 +877,12 @@ var mixin = function(){
           parType.extraTypes = [];
         };
         if (!parType.extraTypeMap){
-          parType.extraTypeMap = {};
+          parType.extraTypeMap = new Map();
         };
         
         
-        if (parType.extraTypeMap.hasOwnProperty(name)){
-          return parType.extraTypeMap[name];
+        if (parType.extraTypeMap.has(name)){
+          return parType.extraTypeMap.get(name);
         };
         
         var entry = {
@@ -946,7 +923,7 @@ var mixin = function(){
         
         var newType = this.getType(name, parParsed);
         entry.type = newType;
-        parType.extraTypeMap[name] = newType;
+        parType.extraTypeMap.set(name, newType);
         return newType;
         
       };
@@ -1379,12 +1356,12 @@ var mixin = function(){
         extraPar.postCode.push(this.additionalCodeEndRes);
         var block = this.blockCreator(b, extraPar);
         
-        
-        for (i in this.localVariables){
-          var varname = i;
+        var localVariablesAr = this.localVariables.getArray();
+        for (i = 0 ; i < localVariablesAr.length; ++i){
+          var varname = localVariablesAr[i].key;
           var type = this.getVariableType(varname);
           
-          if (this.localVariables[i].parameter){
+          if (localVariablesAr[i].value.parameter){
             // special case for parameters
             // they are usually not declared, but tracked parameters need processing
             funRes.push(this.getProcessParameterCode({
@@ -2062,7 +2039,7 @@ var mixin = function(){
       
       this.addType = function(par, parParsed){
         var name = identifierName(par.name);
-        if (this.types.hasOwnProperty[name]){
+        if (this.types.has[name]){
           this.error(parParsed, errorMsg.typeExists);
         };
         
@@ -2075,20 +2052,23 @@ var mixin = function(){
         }else{
           type = this.getProvisionalType(parParsed);
         };
-        this.types[name] = {
+        this.types.set(name, {
           name: name,
           "type": type,
           isDynamic: type.isDynamic,
           extraRes: par.extraRes // only this one is in use
-        };
+        });
         
       };
       
       this.getTypeName = function(parType, parParsed){
         var name;
-        for (name in this.types){
-          if (this.types[name].type === parType){
-            return this.types[name].name;
+        var typesAr = this.types.getArray();
+        var i;
+        for (i = 0; i < typesAr.length; ++i){
+          name = typesAr[i].key;
+          if (this.types.get(name).type === parType){
+            return this.types.get(name).name;
           };
         };
         this.error(parParsed, errorMsg.internalTypeHasNoName);
@@ -2121,8 +2101,8 @@ var mixin = function(){
         if (par && par.dontThrow){
           throwError = false;
         };
-        if (this.types.hasOwnProperty(name)){
-          return this.types[name];
+        if (this.types.has(name)){
+          return this.types.get(name);
         };
         
         if (name[name.length - 1] == "*"){
@@ -2131,12 +2111,12 @@ var mixin = function(){
           var typeEntry = this._getTypeEntry(typename, parParsed, par);
           if (typeEntry){
             var extraRes = typeEntry.extraRes;
-            this.types[name] = {
+            this.types.set(name, {
               name: name,
               "type": classSystem._createPromiseOfClass(typeEntry.type),
               isDynamic: false,
               extraRes: extraRes
-            };
+            });
             
             extraRes.push("var ");
             extraRes.push(this.renderType(name));
@@ -2151,7 +2131,7 @@ var mixin = function(){
             
             extraRes.push(this._typeReadyCode({typename: name, noConstructor: false}));
             
-            return this.types[name];
+            return this.types.get(name);
           };
         };
         
@@ -2180,8 +2160,8 @@ var mixin = function(){
       
       this.getConstructorName = function(parName){
         var name = identifierName(parName);
-        if (this.types.hasOwnProperty(name)){
-          var t = this.types[name];
+        if (this.types.has(name)){
+          var t = this.types.get(name);
           if (!t.constructorName){
             t.constructorName = this.getUniqueName(name + "-constructor");
             if (!t.isDynamic){

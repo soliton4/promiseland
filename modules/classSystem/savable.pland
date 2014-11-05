@@ -12,7 +12,6 @@ var getInstanceFromTransportData;
 var getInstanceTransportData;
 var getEffectiveFunctionResultType;
 
-
 return (classSystem, internals){
   
   var privateClassSystem = internals.privateClassSystem;
@@ -53,14 +52,15 @@ return (classSystem, internals){
     var map = cDef.map;
     var i = 0;
     for (i = 0; i < map.membersAr.length; ++i){
+      var mDef = map.membersAr[i];
       if (!pcs.isSavableType(mDef.type)){
         continue;
       };
-      var mDef = map.membersAr[i];
       var p = {
         name: mDef.name,
         type: mDef.type,
-        isVar: classSystem.isVar(mDef.type)
+        isVar: classSystem.isVar(mDef.type),
+        defaultValue: classSystem.isVar(mDef.type) ? mDef.defaultValue : pcs.stringifyInstance(mDef.type, mDef.defaultValue)
       };
       propertiesAr.push(p);
       properties[mDef.name] = p;
@@ -86,10 +86,10 @@ return (classSystem, internals){
     var map = cDef.map;
     var i = 0;
     for (i = 0; i < map.membersAr.length; ++i){
+      var mDef = map.membersAr[i];
       if (!pcs.isSavableType(mDef.type)){
         continue;
       };
-      var mDef = map.membersAr[i];
       var p = {
         name: mDef.name,
         type: mDef.type,
@@ -99,10 +99,58 @@ return (classSystem, internals){
       propertiesAr.push(p);
       properties[mDef.name] = p;
     };
-    h.save({
+    return *h.save({
       properties: properties,
       propertiesAr: propertiesAr
     });
+  };
+  
+  pcs.loadAndCreateInstance = (parType, parKey){
+    
+  };
+  
+  pcs.loadInstance = (parType, parInstance){
+    var cDef = getClass(parType);
+    var h = *cDef.saveHandler;
+    
+    var propertiesAr = [];
+    var properties = {};
+    var map = cDef.map;
+    var i = 0;
+    for (i = 0; i < map.membersAr.length; ++i){
+      var mDef = map.membersAr[i];
+      if (!pcs.isSavableType(mDef.type)){
+        continue;
+      };
+      var p = {
+        name: mDef.name,
+        type: mDef.type,
+        isVar: classSystem.isVar(mDef.type)
+      };
+      propertiesAr.push(p);
+      properties[mDef.name] = p;
+    };
+    var loadVar = *h.load({
+      properties: properties,
+      propertiesAr: propertiesAr
+    });
+    
+    //load each individual member
+    for (i = 0; i < map.membersAr.length; ++i){
+      var mDef = map.membersAr[i];
+      if (!pcs.isSavableType(mDef.type)){
+        continue;
+      };
+      //parInstance
+      if (pcs.hasOwnProperty(loadVar, mDef.name)){
+        if (classSystem.isVar(mDef.type)){
+          pcs.setMemberByDefFromInstance(parType, parInstance, mDef, loadVar[mDef.name]);
+        }else{
+          
+        };
+      };
+    };
+    
   };
   
   cs.setSaveHandler = (parSaveHandler){

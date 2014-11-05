@@ -1,0 +1,6 @@
+var o = {
+  x: 1
+};
+
+console.log(promiseland.javascriptEval("x", o));
+

@@ -114,6 +114,28 @@
     var config = {
 
     };
+    
+    
+    // eval
+    // this is here because its pure javascript
+    
+    var specialEval = function(jsStr, __parObj){
+      if (!__parObj){
+        return eval(jsStr);
+      };
+      
+      var s = "";
+      var n;
+      for (n in __parObj){
+        s += "var " + n + " = __parObj." + n + ";"
+      };
+      
+      //s = "(function(){" + s;
+      s += jsStr;
+      //s += "})();";
+      
+      return eval(s);
+    };
 
 
     // module object
@@ -130,11 +152,13 @@
           return;
         };
         config[parWhat] = parValue;
-      }
+      },
+      
+      javascriptEval: specialEval,
 
       // stub
       // will be overridden by moduleSystem.pland
-      , _getModule: function(parHashStr){
+      _getModule: function(parHashStr){
         return; 
       }
 

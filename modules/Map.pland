@@ -12,6 +12,15 @@ class Map {
       return this.map[key];
     };
   },
+  has: (key){
+    if (Object.prototype.hasOwnProperty.call(this.map, key)){
+      return true;
+    };
+    return false;
+  },
+  delete: (key){
+    delete this.map[key];
+  },
   getArray: (){
     var res = [];
     var n;
@@ -22,6 +31,17 @@ class Map {
       });
     };
     return res;
+  },
+  mixin: (other){
+    if (!other){
+      return this;
+    };
+    var a = other.getArray();
+    var i;
+    for (i = 0; i < a.length; ++i){
+      this.set(a[i].key, a[i].value);
+    };
+    return this;
   }
 };
 

@@ -1,0 +1,19 @@
+try{
+
+class SaveHandler {
+  registerClass: (par){
+    console.log(par);
+    return new Promise();
+  }
+};
+
+promiseland.classSystem.setSaveHandler(new SaveHandler());
+
+class type savable2 {
+  x: 1,
+  y: 2
+};
+  
+}catch(e){
+  console.log(e);
+}
