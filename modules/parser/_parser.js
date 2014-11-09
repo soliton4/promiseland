@@ -16182,7 +16182,7 @@ return (function() {
     }
 
     function peg$parseClassTrackClaus() {
-      var s0, s1;
+      var s0, s1, s2;
 
       var key    = peg$currPos * 225 + 205,
           cached = peg$cache[key];
@@ -16201,10 +16201,19 @@ return (function() {
         if (peg$silentFails === 0) { peg$fail(peg$c437); }
       }
       if (s1 !== peg$FAILED) {
-        peg$reportedPos = s0;
-        s1 = peg$c438();
+        s2 = peg$parse__();
+        if (s2 !== peg$FAILED) {
+          peg$reportedPos = s0;
+          s1 = peg$c438();
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$c0;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$c0;
       }
-      s0 = s1;
 
       peg$cache[key] = { nextPos: peg$currPos, result: s0 };
 
@@ -16212,7 +16221,7 @@ return (function() {
     }
 
     function peg$parseClassUniqueClaus() {
-      var s0, s1;
+      var s0, s1, s2;
 
       var key    = peg$currPos * 225 + 206,
           cached = peg$cache[key];
@@ -16231,10 +16240,19 @@ return (function() {
         if (peg$silentFails === 0) { peg$fail(peg$c440); }
       }
       if (s1 !== peg$FAILED) {
-        peg$reportedPos = s0;
-        s1 = peg$c441();
+        s2 = peg$parse__();
+        if (s2 !== peg$FAILED) {
+          peg$reportedPos = s0;
+          s1 = peg$c441();
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$c0;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$c0;
       }
-      s0 = s1;
 
       peg$cache[key] = { nextPos: peg$currPos, result: s0 };
 
@@ -16242,7 +16260,7 @@ return (function() {
     }
 
     function peg$parseClassSavableClaus() {
-      var s0, s1;
+      var s0, s1, s2;
 
       var key    = peg$currPos * 225 + 207,
           cached = peg$cache[key];
@@ -16261,10 +16279,19 @@ return (function() {
         if (peg$silentFails === 0) { peg$fail(peg$c443); }
       }
       if (s1 !== peg$FAILED) {
-        peg$reportedPos = s0;
-        s1 = peg$c444();
+        s2 = peg$parse__();
+        if (s2 !== peg$FAILED) {
+          peg$reportedPos = s0;
+          s1 = peg$c444();
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$c0;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$c0;
       }
-      s0 = s1;
 
       peg$cache[key] = { nextPos: peg$currPos, result: s0 };
 

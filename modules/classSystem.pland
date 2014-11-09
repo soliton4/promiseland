@@ -653,10 +653,14 @@ var classSystem = {
       // constructor creation
 
       var simpleConstructor = true;
+      var hasDestructor = false;
       if ( cDef.track
         || cDef.unique
       ){
         simpleConstructor = false;
+      };
+      if (cDef.track || sync){
+        hasDestructor = true;
       };
 
       //helperArray
@@ -703,20 +707,16 @@ var classSystem = {
       }else{
         
         var constructorStr = "";
-        //var importStr = "";
         var importObj = {};
         
         var importVar = (v, name){
           importObj[name] = v;
-          //importStr += "var " + name + " = importObj." + name + ";";
         };
         
         constructorStr += "var r;";
         
-        
+        // unique constructor part 1
         if (cDef.unique){
-          //importVar(stringify, "stringify");
-          
           var uniqueMap = new Map();
           var hasVarId = self.isVar(cDef.idType);
           var idType = cDef.idType;
@@ -734,17 +734,18 @@ var classSystem = {
           importVar(uniqueMap, "uniqueMap");
           importVar(privateClassSystem, "privateClassSystem");
           constructorStr += "r = uniqueMap.get(key);";
-          constructorStr += "if (r){
-                if (arguments[0]){
-                  privateClassSystem.untrack(idType, arguments[0]);
-                };";
+          constructorStr += "if (r){";
+          constructorStr += "if (arguments[0]){";
+          constructorStr += "privateClassSystem.untrack(idType, arguments[0]);";
+          constructorStr += "};";
           constructorStr += "}else{";
         };
-        
-        
+
+
         importVar(cAr, "cAr");
         constructorStr += "r = cAr.slice();";
-        
+
+        // constructor free part creation
         if (classLiteral.hasFreePart){
           var proto = {};
           if (parDefaults){
@@ -757,31 +758,35 @@ var classSystem = {
           var freeFun = function(){};
           freeFun.prototype = proto;
           var freeIndex = map.freePart;
-          
+
           importVar(freeFun, "freeFun");
           importVar(freeIndex, "freeIndex");
-          
+
           constructorStr += "r[freeIndex] = new freeFun();";
 
         };
-        
+
+        // call custorm constructor
         if (constructorDef){
           importVar(constructorFun, "constructorFun");
           constructorStr += "constructorFun.apply(r, arguments);";
         };
-        
+
+        // unique constructor part 2
         if (cDef.unique){
           importVar(cf, "cf");
           importVar(idDef, "idDef");
           constructorStr += "privateClassSystem.setMemberByDefFromInstance(cf, r, idDef, arguments[0]);";
           constructorStr += "uniqueMap.set(key, r);";
+          constructorStr += "r.map = uniqueMap;";
+          constructorStr += "r.key = key;";
           constructorStr += "};";
         };
         
         
         constructorStr += "var realInstance = r;";
         
-
+        // track constructor part
         if (cDef.track){
           importVar(Tracker, "Tracker");
           importVar((){
@@ -791,23 +796,23 @@ var classSystem = {
           importVar(trackRootIdx, "trackRootIdx");
           importVar(trackMemberIdx, "trackMemberIdx");
 
-          constructorStr += "var t = Tracker(function(){
-            destroyFun.apply(realInstance);
-          });";
+          constructorStr += "var t = Tracker(function(){";
+          constructorStr += "destroyFun.apply(realInstance);";
+          constructorStr += "});";
           constructorStr += "realInstance[trackerIdx] = t[0];";
           constructorStr += "realInstance[trackRootIdx] = t[1];";
           constructorStr += "realInstance[trackMemberIdx] = t[2];";
           constructorStr += "r = [realInstance, realInstance[trackRootIdx]()];";
         };
 
-      constructorStr += "return r;";
+        constructorStr += "return r;";
 
-      var constructorObj = {};
-      importVar(constructorObj, "constructorObj");
-      var wrapStr = "constructorObj.fun = function(){" + constructorStr + "};";
-      promiseland.javascriptEval(wrapStr, importObj);
-      
-      cDef.constructor = constructorObj.fun;
+        var constructorObj = {};
+        importVar(constructorObj, "constructorObj");
+        var wrapStr = "constructorObj.fun = function(){" + constructorStr + "};";
+        promiseland.javascriptEval(wrapStr, importObj);
+
+        cDef.constructor = constructorObj.fun;
 
 
 
@@ -860,63 +865,67 @@ var classSystem = {
           };
 
         };*/
+        
+      };
 
+
+      if (hasDestructor){
+        
+        var destructorStr = "";
+        var destructorImportObj = {};
+        
+        var destructorImportVar = (v, name){
+          destructorImportObj[name] = v;
+        };
+        
+        if (sync){
+          destructorImportVar(destroySynced, "destroySynced");
+          destructorImportVar(classSystem, "classSystem");
+          
+          destructorStr += "var syncData = classSystem.getSyncData(this);";
+          destructorStr += "destroySynced(syncData);";
+        };
 
         if (cDef.track){
           var _destroyFun;
           if (untrackIdxAr.length){
             // has tracked members
-            if (destroyDef){
-              _destroyFun = destroyFun;
-              destroyFun = function(){
-                var i;
-                for (i = 0; i < untrackIdxAr.length; ++i){
-                  var curIdx = untrackIdxAr[i];
-                  var tFun = this[curIdx];
-                  this[curIdx] = undefined;
-                  if (tFun){
-                    tFun();
-                  };
-                };
-                _destroyFun.apply(this);
-                this.splice(0,this.length);
-              };
-            }else{
-              destroyFun = function(){
-                var i;
-                for (i = 0; i < untrackIdxAr.length; ++i){
-                  var tFun = this[untrackIdxAr[i]];
-                  if (tFun){
-                    tFun();
-                  };
-                };
-                this.splice(0,this.length);
-              };
-            };
-
-          }else{
-            if (destroyDef){
-              _destroyFun = destroyFun;
-              destroyFun = function(){
-                _destroyFun.apply(this);
-                this.splice(0,this.length);
-              };
-            }else{
-              destroyFun = function(){
-                this.splice(0,this.length);
-              };
-            };
-
+            
+            destructorImportVar(untrackIdxAr, "untrackIdxAr");
+            destructorStr += "var i;";
+            destructorStr += "for (i = 0; i < untrackIdxAr.length; ++i){";
+            destructorStr += "var curIdx = untrackIdxAr[i];";
+            destructorStr += "var tFun = this[curIdx];";
+            destructorStr += "this[curIdx] = undefined;";
+            destructorStr += "if (tFun){";
+            destructorStr += "tFun();";
+            destructorStr += "};";
+            destructorStr += "};";
+          };
+          if (cDef.unique){
+            destructorStr += "this.map.delete(this.key);";
           };
         };
-        if (sync){
+        if (destroyDef){
+          destructorImportVar(destroyFun, "_destroyFun");
+          destructorStr += "_destroyFun.apply(this);";
+        };
+        destructorStr += "this.splice(0,this.length);";
+        /*if (sync){
           var _sync_destroyFun = destroyFun;
           destroyFun = function(){
             var syncData = classSystem.getSyncData(this);
             destroySynced(syncData);
             _sync_destroyFun.apply(this);
           };
-        };
+        };*/
+        var destructorObj = {};
+        destructorImportVar(destructorObj, "destructorObj");
+        var wrapStr = "destructorObj.fun = function(){" + destructorStr + "};";
+        promiseland.javascriptEval(wrapStr, destructorImportObj);
+
+        destroyFun = destructorObj.fun;
+        
       };
 
       finalPs.resolve();

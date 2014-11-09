@@ -1550,13 +1550,13 @@ ClassSyncClaus
   / "sync" __ { return posRes({ "type": "sync", "all": 1 }); }
 
 ClassTrackClaus
-  = "track" { return posRes({ "type": "track" }); }
+  = "track" __ { return posRes({ "type": "track" }); }
 
 ClassUniqueClaus
-  = "unique" { return posRes({ "type": "unique" }); }
+  = "unique" __ { return posRes({ "type": "unique" }); }
 
 ClassSavableClaus
-  = "savable" { return posRes({ "type": "savable" }); }
+  = "savable" __ { return posRes({ "type": "savable" }); }
 
 
 ClassKeyword

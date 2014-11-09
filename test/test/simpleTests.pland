@@ -161,7 +161,8 @@
 
   *createTest("extraRequire", successFun);
   *createTest("typeUnique", successFun);
-  //*createTest("typeUnique", successFun);
+  *createTest("typeUnique2", successFun);
+  //*createTest("typeUnique2", successFun);
 
   
     var c = 0;
