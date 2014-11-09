@@ -194,6 +194,13 @@ var privateClassSystem = {
     return parInstance;
   },
   
+  getNonTemporaryType: (parType){
+    if (classSystem.isTemporaryTrackedClass(parType)){
+      return classSystem.getClassFromTemporaryTracked(parType);
+    };
+    return parType;
+  },
+  
   // generic function to make sure temproraries are no longer tracked
   untrack: (parType, parInstance){
     if (parInstance && classSystem.isTemporaryTrackedClass(parType)){
@@ -206,7 +213,11 @@ var privateClassSystem = {
   },
   
   resolvePromise: (parType, parPromise, parInstance){
-    parPromise.resolve(parInstance);
+    this.getRealInstance(parType, parPromise).resolve(parInstance);
+    return parPromise;
+  },
+  rejectPromise: (parType, parPromise, parInstance){
+    this.getRealInstance(parType, parPromise).reject(parInstance);
     return parPromise;
   }
 };
@@ -629,11 +640,12 @@ var classSystem = {
               *pcs.loadInstance(cf, this);
             };
             var conDef = getClass(cDef.constructorTypeIntern);
-            cDef.constructorReturnType = self._createPromiseOfClass(conDef.return);
+            cDef.constructorReturnType = self._createPromiseOfClass( pcs.getNonTemporaryType(conDef.return) );
             cDef.constructorType = self.createFunctionType({
               "return": cDef.constructorReturnType,
               arguments: conDef.arguments
             });
+            cDef.constructorReturnType = cs.getFunctionReturnType(cDef.constructorType);
           };
           
         };
@@ -737,7 +749,8 @@ var classSystem = {
           if (cDef.savable){
             importVar(cs, "cs");
             importVar(cDef, "cDef");
-            constructorStr += "var resPs = new (cs.getTypeConstructor(cDef.constructorReturnType));";
+            importVar(cs.getTypeConstructor(pcs.getNonTemporaryType(cDef.constructorReturnType)), "returnPromiseConstructor");
+            constructorStr += "var resPs = new returnPromiseConstructor;";
           };
           
           // standard unique constructor
@@ -833,7 +846,7 @@ var classSystem = {
           constructorStr += "if (doLoad){";
           constructorStr += "pcs.loadInstance(cf, realInstance).then(function(){";
           constructorStr += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
-          constructorStr += "}, function(e){ resPs.reject(e); });";
+          constructorStr += "}, function(e){ pcs.rejectPromise(cDef.constructorReturnType, resPs, e); });";
           constructorStr += "}else{";
 
           constructorStr += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
@@ -988,7 +1001,17 @@ var classSystem = {
 
     return cf;
   },
+  
+  getConstructorReturnType: (parType){
+    var cDef = getClass(parType);
+    if (cDef.constructorReturnType){
+      return cDef.constructorReturnType;
+    };
+    
+    return cs.getFunctionReturnType(cDef.constructorType);
 
+  },
+  
   getTypeFromInstance: (parInstance){
     if (typeof parInstance[0] === "function"){
       return parInstance[0];

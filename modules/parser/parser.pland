@@ -396,9 +396,9 @@ var mixin = function(){
         ((){
           *resPs;
           if (originalEntry){
-            this.variables.set(name, originalEntry);
+            self.variables.set(name, originalEntry);
           }else{
-            this.variables.delete(name);
+            self.variables.delete(name);
           };
         })();
         
@@ -868,6 +868,9 @@ var mixin = function(){
         }else if (par.temporaryTrackedResolved){
           name = this.getTypeName(parType, parParsed) + "::temporaryTrackedResolved";
           
+        }else if (par.constructorReturn){
+          name = this.getTypeName(parType, parParsed) + "::constructorReturn";
+          
         }else{
           this.error(errorMsg.internalMissingTypeProperty);
         };
@@ -916,6 +919,11 @@ var mixin = function(){
           
         }else if (par.temporaryTrackedResolved){
           res.push("classSystem.getClassFromTemporaryTracked(");
+          res.push(this.renderType(parType));
+          res.push(");\n");
+          
+        }else if (par.constructorReturn){
+          res.push("classSystem.getConstructorReturnType(");
           res.push(this.renderType(parType));
           res.push(");\n");
           
@@ -2723,7 +2731,8 @@ var mixin = function(){
             res.push(this.getConstructorName(par.callee));
             res.push("(");
             typed = true;
-            res.setType(this.createTemporaryTrackedClass(type));
+            //res.setType(this.createTemporaryTrackedClass(type));
+            res.setType(this.getConstructorReturnType(type));
           };
         };
         if (!typed){
@@ -3950,6 +3959,14 @@ var mixin = function(){
           }, parParsed);
         };
         return classSystem._createTemporaryTrackedClass(parType);
+      };
+      this.getConstructorReturnType = function(parType, parParsed){
+        if (parType.isDynamic){
+          return this.createExtraDynamicType(parType, {
+            constructorReturn: true
+          }, parParsed);
+        };
+        return classSystem.getConstructorReturnType(parType);
       };
       
       

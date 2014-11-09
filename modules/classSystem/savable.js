@@ -54,7 +54,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "b74a5a3e476df3d0ef47381c8b112cdc" })){ return promiseland._getModule("b74a5a3e476df3d0ef47381c8b112cdc"); };
+if (promiseland._hasModule({ hashStr: "8f1412255cd29dd0dfddde35914d7b6a" })){ return promiseland._getModule("8f1412255cd29dd0dfddde35914d7b6a"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$26/*Promise*/;try{PL$26/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
@@ -253,7 +253,7 @@ PL$48.resolve(); return;;
 };
 ;
 for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$36/*map*/["membersAr"]["length"]);++PL$37/*i*/){{PL$38/*mDef*/ = PL$36/*map*/["membersAr"][PL$37/*i*/];
-if(! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"])){
+if((! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"]) || PL$38/*mDef*/["noSave"])){
 continue;;
 };
 ;

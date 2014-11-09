@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "bb6a8f83e75569c669e3186bd9ba2ec0" })){ return promiseland._getModule("bb6a8f83e75569c669e3186bd9ba2ec0"); };
+    if (promiseland._hasModule({ hashStr: "1b591c385f98d83ca3fdf80147e348e6" })){ return promiseland._getModule("1b591c385f98d83ca3fdf80147e348e6"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "bb6a8f83e75569c669e3186bd9ba2ec0", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "1b591c385f98d83ca3fdf80147e348e6", "module": PL$1, promising: true });
 var PL$24/*console*/;try{PL$24/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -81,10 +81,10 @@ var PL$25/*funReturning4*/;
 var PL$27/*funReturning4debug*/;
 var PL$28/*returning4*/;
 var PL$49/*modRes4*/;
-var PL$82/*c*/;
-var PL$83/*s*/;
-var PL$84/*f*/;
-var PL$85/*m*/;
+var PL$83/*c*/;
+var PL$84/*s*/;
+var PL$85/*f*/;
+var PL$86/*m*/;
 PL$3(function(){;
 __requireFun("./testObj").then(PL$3(function(PL$6){PL$5/*testObj*/ = PL$6;
 PL$7/*successFun*/ = (function(PL$8/*mod*/, PL$9/*success*/){
@@ -259,24 +259,26 @@ PL$11/*createTest*/("extraRequire", PL$7/*successFun*/).then(PL$3(function(PL$78
 PL$11/*createTest*/("typeUnique", PL$7/*successFun*/).then(PL$3(function(PL$79){PL$79;;
 PL$11/*createTest*/("typeUnique2", PL$7/*successFun*/).then(PL$3(function(PL$80){PL$80;;
 PL$11/*createTest*/("savable", PL$7/*successFun*/).then(PL$3(function(PL$81){PL$81;;
-PL$82/*c*/ = 0;
-PL$83/*s*/ = 0;
-PL$84/*f*/ = 0;
-for(PL$85/*m*/ in PL$5/*testObj*/){PL$82/*c*/++;;
-if(PL$5/*testObj*/[PL$85/*m*/]){
-PL$83/*s*/++;;
+PL$11/*createTest*/("savable2", PL$7/*successFun*/).then(PL$3(function(PL$82){PL$82;;
+PL$83/*c*/ = 0;
+PL$84/*s*/ = 0;
+PL$85/*f*/ = 0;
+for(PL$86/*m*/ in PL$5/*testObj*/){PL$83/*c*/++;;
+if(PL$5/*testObj*/[PL$86/*m*/]){
+PL$84/*s*/++;;
 
 }else{
-PL$24/*console*/["log"]((PL$85/*m*/ + " failed!"));;
-PL$84/*f*/++;;
+PL$24/*console*/["log"]((PL$86/*m*/ + " failed!"));;
+PL$85/*f*/++;;
 };
 ;
 };
 ;
-PL$24/*console*/["log"]((((((("run " + PL$82/*c*/) + " tests. ") + PL$83/*s*/) + " successful, ") + PL$84/*f*/) + " failed"));;
+PL$24/*console*/["log"]((((((("run " + PL$83/*c*/) + " tests. ") + PL$84/*s*/) + " successful, ") + PL$85/*f*/) + " failed"));;
 PL$1.resolve(PL$5/*testObj*/); return;;
 PL$1.resolve(); return;;
 }), PL$4);
+;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

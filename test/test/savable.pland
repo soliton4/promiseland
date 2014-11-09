@@ -6,19 +6,40 @@ class SaveHandler {
   registerClass: (par)*{
     if (collect){
       collector.register = par;
+      return {
+        save: (par)*{
+          if (collect){
+            collector.save = par;
+          };
+        },
+        load: (par)*{
+          if (collect){
+            collector.load = par;
+          };
+        }
+      };
     };
+    var map = new promiseland.Map();
     return {
       save: (par)*{
-        if (collect){
-          collector.save = par;
+        var i = 0;
+        var o = {};
+        for (i = 0; i < par.propertiesAr.length; ++i){
+          if (par.propertiesAr[i].name == "id"){
+            continue;
+          };
+          o[par.propertiesAr[i].name] = par.propertiesAr[i].value;
         };
+        map.set(par.properties.id.value, o);
       },
       load: (par)*{
-        if (collect){
-          collector.load = par;
-        };
+        return map.get(par.properties.id.value);
+      },
+      delete: (par)*{
+        return map.delete(par.properties.id.value);
       }
     };
+    
   }
 };
 

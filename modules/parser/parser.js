@@ -65,13 +65,13 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "ade71e2d85d89b4b8c969aba215265a3" })){ return promiseland._getModule("ade71e2d85d89b4b8c969aba215265a3"); };
+    if (promiseland._hasModule({ hashStr: "cb1202e4f631fa7a8eb7dca59edb9b4a" })){ return promiseland._getModule("cb1202e4f631fa7a8eb7dca59edb9b4a"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "ade71e2d85d89b4b8c969aba215265a3", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "cb1202e4f631fa7a8eb7dca59edb9b4a", "module": PL$1, promising: true });
 var PL$17/*promiseland*/;try{PL$17/*promiseland*/ = promiseland;}catch(e){};
-var PL$166/*JSON*/;try{PL$166/*JSON*/ = JSON;}catch(e){};
-var PL$179/*Array*/;try{PL$179/*Array*/ = Array;}catch(e){};
-var PL$180/*console*/;try{PL$180/*console*/ = console;}catch(e){};
+var PL$165/*JSON*/;try{PL$165/*JSON*/ = JSON;}catch(e){};
+var PL$178/*Array*/;try{PL$178/*Array*/ = Array;}catch(e){};
+var PL$179/*console*/;try{PL$179/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
@@ -100,13 +100,13 @@ var PL$38/*addExtraToPar*/;
 var PL$41/*getExtraFromPar*/;
 var PL$42/*_Result*/;
 var PL$44/*CodeParser*/;
-var PL$279/*loaderStr*/;
-var PL$283/*promiselandRequireStr*/;
-var PL$284/*callbackRequireStr*/;
-var PL$285/*loaderEndStr*/;
-var PL$286/*createHeader*/;
-var PL$288/*createFooter*/;
-var PL$289/*parser*/;
+var PL$278/*loaderStr*/;
+var PL$282/*promiselandRequireStr*/;
+var PL$283/*callbackRequireStr*/;
+var PL$284/*loaderEndStr*/;
+var PL$285/*createHeader*/;
+var PL$287/*createFooter*/;
+var PL$288/*parser*/;
 PL$3(function(){;
 __requireFun("./md5").then(PL$3(function(PL$6){PL$5/*md5*/ = PL$6;
 __requireFun("./_parser").then(PL$3(function(PL$8){PL$7/*_parser*/ = PL$8;
@@ -257,7 +257,7 @@ __requireFun("./Result").then(PL$3(function(PL$43){PL$42/*_Result*/ = PL$43;
 PL$44/*CodeParser*/ = (function(PL$24/*par*/){
 var PL$45/*self*/;
 var PL$32/*i*/;
-var PL$244/*InheritedSystem*/;
+var PL$243/*InheritedSystem*/;
 ;
 PL$45/*self*/ = this;
 this["toParse"] = PL$24/*par*/["toParse"];;
@@ -452,14 +452,13 @@ PL$61/*resPs*/ = new PL$16/*Promise*/();
 var PL$62 = new __Promise();
 var PL$64 = function(code){ return function(res){ try{code(res);}catch(e){ PL$62.reject(e); }; }; };
 var PL$65 = function(e){ PL$62.reject(e); };
-var PL$67/*this*/ = this;
 PL$64(function(){;
 PL$61/*resPs*/.then(PL$64(function(PL$66){PL$66;;
 if(PL$59/*originalEntry*/){
-PL$67/*this*/["variables"]["set"](PL$25/*name*/, PL$59/*originalEntry*/);;
+PL$45/*self*/["variables"]["set"](PL$25/*name*/, PL$59/*originalEntry*/);;
 
 }else{
-PL$67/*this*/["variables"]["delete"](PL$25/*name*/);;
+PL$45/*self*/["variables"]["delete"](PL$25/*name*/);;
 };
 ;
 PL$62.resolve(); return;;
@@ -470,7 +469,7 @@ return PL$62;
 return PL$61/*resPs*/;;
 ;
 });;
-this["resolveFunctionType"] = (function(PL$24/*par*/, PL$68/*parsed*/){
+this["resolveFunctionType"] = (function(PL$24/*par*/, PL$67/*parsed*/){
 var PL$25/*name*/;
 var PL$60/*entry*/;
 var PL$30/*t*/;
@@ -485,48 +484,48 @@ this["resolveProvisional"](PL$30/*t*/, PL$24/*par*/["type"]);;
 
 }else{
 this["addLocalVariable"]({"name": PL$24/*par*/["name"],
-"type": PL$24/*par*/["type"]}, PL$68/*parsed*/);;
+"type": PL$24/*par*/["type"]}, PL$67/*parsed*/);;
 };
 ;
 ;
 });;
 this["getProvisionalType"] = (function(PL$54/*parParsed*/){
-var PL$69/*type*/;
-var PL$70/*ps*/;
+var PL$68/*type*/;
+var PL$69/*ps*/;
 ;
 if(! PL$54/*parParsed*/){
 PL$11/*errorFun*/({}, PL$12/*errorMsg*/["internalParserInfoMissing"]);;
 };
 ;
-PL$69/*type*/ = PL$18/*classSystem*/["_createProvisionalClass"]();
-PL$70/*ps*/ = this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["unresolvedType"]);
-PL$18/*classSystem*/["definitionPromise"](PL$69/*type*/)["then"]((function(){
+PL$68/*type*/ = PL$18/*classSystem*/["_createProvisionalClass"]();
+PL$69/*ps*/ = this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["unresolvedType"]);
+PL$18/*classSystem*/["definitionPromise"](PL$68/*type*/)["then"]((function(){
 ;
-PL$70/*ps*/["resolve"]();;
+PL$69/*ps*/["resolve"]();;
 ;
 }));;
-return PL$69/*type*/;;
+return PL$68/*type*/;;
 ;
 });;
-this["resolveProvisional"] = (function(PL$71/*parType*/, PL$72/*parResult*/){
+this["resolveProvisional"] = (function(PL$70/*parType*/, PL$71/*parResult*/){
 ;
-return PL$18/*classSystem*/["_resolveProvisional"](PL$71/*parType*/, PL$72/*parResult*/);;
+return PL$18/*classSystem*/["_resolveProvisional"](PL$70/*parType*/, PL$71/*parResult*/);;
 ;
 });;
-this["_getVariableType"] = (function(PL$73/*parEntry*/){
+this["_getVariableType"] = (function(PL$72/*parEntry*/){
 ;
-if(PL$73/*parEntry*/["type"]){
-return PL$73/*parEntry*/["type"];;
+if(PL$72/*parEntry*/["type"]){
+return PL$72/*parEntry*/["type"];;
 };
 ;
-return this["getType"](PL$73/*parEntry*/["typename"]);;
+return this["getType"](PL$72/*parEntry*/["typename"]);;
 ;
 });;
-this["getVariableType"] = (function(PL$74/*parName*/, PL$24/*par*/){
+this["getVariableType"] = (function(PL$73/*parName*/, PL$24/*par*/){
 var PL$25/*name*/;
 var PL$60/*entry*/;
 ;
-PL$25/*name*/ = PL$27/*identifierName*/(PL$74/*parName*/);
+PL$25/*name*/ = PL$27/*identifierName*/(PL$73/*parName*/);
 this["_addUsedVariable"](PL$25/*name*/);;
 if(this["variables"]["has"](PL$25/*name*/)){
 PL$60/*entry*/ = this["variables"]["get"](PL$25/*name*/);
@@ -569,22 +568,22 @@ this["functionsAr"]["push"]({"res": PL$49/*res*/,
 "name": PL$25/*name*/});;
 ;
 });;
-this["_getErrors"] = (function(PL$75/*parWarning*/){
-var PL$76/*a*/;
+this["_getErrors"] = (function(PL$74/*parWarning*/){
+var PL$75/*a*/;
 var PL$32/*i*/;
 ;
-PL$76/*a*/ = [];
+PL$75/*a*/ = [];
 PL$32/*i*/ = 0;
 for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["errors"]["length"]);++PL$32/*i*/){{if(this["errors"][PL$32/*i*/]["valid"]){
-if((PL$75/*parWarning*/ ? this["errors"][PL$32/*i*/]["warning"] : ! this["errors"][PL$32/*i*/]["warning"])){
-PL$76/*a*/["push"](this["errors"][PL$32/*i*/]);;
+if((PL$74/*parWarning*/ ? this["errors"][PL$32/*i*/]["warning"] : ! this["errors"][PL$32/*i*/]["warning"])){
+PL$75/*a*/["push"](this["errors"][PL$32/*i*/]);;
 };
 ;
 };
 ;
 }};
 ;
-return PL$76/*a*/;;
+return PL$75/*a*/;;
 ;
 });;
 this["getWarnings"] = (function(){
@@ -601,65 +600,65 @@ this["getWarningFun"] = (function(PL$24/*par*/){
 var PL$45/*self*/;
 ;
 PL$45/*self*/ = this;
-return (function(PL$77/*err*/){
+return (function(PL$76/*err*/){
 ;
-PL$45/*self*/["warning"](PL$24/*par*/, PL$77/*err*/);;
-;
-});;
+PL$45/*self*/["warning"](PL$24/*par*/, PL$76/*err*/);;
 ;
 });;
-this["warning"] = (function(PL$24/*par*/, PL$77/*err*/){
+;
+});;
+this["warning"] = (function(PL$24/*par*/, PL$76/*err*/){
 ;
 if(! PL$24/*par*/["line"]){
 PL$11/*errorFun*/({}, PL$12/*errorMsg*/["internalParserInfoMissing"]);;
 };
 ;
-this["addWarning"](PL$24/*par*/, PL$77/*err*/);;
+this["addWarning"](PL$24/*par*/, PL$76/*err*/);;
 ;
 });;
-this["error"] = (function(PL$24/*par*/, PL$77/*err*/){
+this["error"] = (function(PL$24/*par*/, PL$76/*err*/){
 ;
-this["_addError"](PL$24/*par*/, PL$77/*err*/);;
-PL$11/*errorFun*/(PL$24/*par*/, PL$77/*err*/);;
-;
-});;
-this["addError"] = (function(PL$24/*par*/, PL$77/*err*/){
-;
-return this["_addError"](PL$24/*par*/, PL$77/*err*/);;
+this["_addError"](PL$24/*par*/, PL$76/*err*/);;
+PL$11/*errorFun*/(PL$24/*par*/, PL$76/*err*/);;
 ;
 });;
-this["addWarning"] = (function(PL$24/*par*/, PL$77/*err*/){
+this["addError"] = (function(PL$24/*par*/, PL$76/*err*/){
 ;
-return this["_addError"](PL$24/*par*/, PL$77/*err*/, true);;
+return this["_addError"](PL$24/*par*/, PL$76/*err*/);;
 ;
 });;
-this["_addError"] = (function(PL$24/*par*/, PL$77/*err*/, PL$78/*warning*/){
+this["addWarning"] = (function(PL$24/*par*/, PL$76/*err*/){
+;
+return this["_addError"](PL$24/*par*/, PL$76/*err*/, true);;
+;
+});;
+this["_addError"] = (function(PL$24/*par*/, PL$76/*err*/, PL$77/*warning*/){
 var PL$60/*entry*/;
-var PL$70/*ps*/;
+var PL$69/*ps*/;
 ;
 PL$60/*entry*/ = {"par": PL$24/*par*/,
 "line": PL$24/*par*/["line"],
 "column": PL$24/*par*/["column"],
-"msg": ((PL$77/*err*/["id"] + ": ") + PL$77/*err*/["msg"]),
+"msg": ((PL$76/*err*/["id"] + ": ") + PL$76/*err*/["msg"]),
 "valid": true,
-"warning": PL$78/*warning*/};
+"warning": PL$77/*warning*/};
 this["errors"]["push"](PL$60/*entry*/);;
-PL$70/*ps*/ = new PL$16/*Promise*/();
-PL$70/*ps*/["then"]((function(){
+PL$69/*ps*/ = new PL$16/*Promise*/();
+PL$69/*ps*/["then"]((function(){
 ;
 PL$60/*entry*/["valid"] = false;;
 ;
 }));;
-return PL$70/*ps*/;;
+return PL$69/*ps*/;;
 ;
 });;
 this["runtimeError"] = (function(PL$24/*par*/, PL$53/*par2*/){
-var PL$70/*ps*/;
+var PL$69/*ps*/;
 var PL$49/*res*/;
 ;
-PL$70/*ps*/ = this["addWarning"](PL$24/*par*/, PL$53/*par2*/);
+PL$69/*ps*/ = this["addWarning"](PL$24/*par*/, PL$53/*par2*/);
 PL$49/*res*/ = this["runtimeErrorNoWarning"](PL$53/*par2*/);
-PL$49/*res*/["setPromise"](PL$70/*ps*/);;
+PL$49/*res*/["setPromise"](PL$69/*ps*/);;
 return PL$49/*res*/;;
 ;
 });;
@@ -672,24 +671,24 @@ return PL$49/*res*/;;
 ;
 });;
 this["getUniqueName"] = (function(PL$25/*name*/){
-var PL$79/*retStr*/;
+var PL$78/*retStr*/;
 ;
-PL$79/*retStr*/ = ("PL$" + this["common"]["uniquebasis"]["index"]++);
+PL$78/*retStr*/ = ("PL$" + this["common"]["uniquebasis"]["index"]++);
 if(PL$25/*name*/){
-PL$79/*retStr*/ += (("/*" + PL$25/*name*/) + "*/");;
+PL$78/*retStr*/ += (("/*" + PL$25/*name*/) + "*/");;
 };
 ;
-return PL$79/*retStr*/;;
+return PL$78/*retStr*/;;
 ;
 });;
 this["getUniqueTypeMacro"] = (function(PL$25/*name*/){
-var PL$80/*uniqueStr*/;
+var PL$79/*uniqueStr*/;
 var PL$49/*res*/;
 ;
-PL$80/*uniqueStr*/ = this["getUniqueName"]();
-PL$49/*res*/ = (((("/*\n'''\"\"\" " + PL$80/*uniqueStr*/) + " ") + (PL$25/*name*/ || "")) + " start */");
+PL$79/*uniqueStr*/ = this["getUniqueName"]();
+PL$49/*res*/ = (((("/*\n'''\"\"\" " + PL$79/*uniqueStr*/) + " ") + (PL$25/*name*/ || "")) + " start */");
 PL$49/*res*/ += this["runtimeErrorNoWarning"](PL$12/*errorMsg*/["failedToDetermineType"]);;
-PL$49/*res*/ += (((("/* " + PL$80/*uniqueStr*/) + " ") + (PL$25/*name*/ || "")) + " end */");;
+PL$49/*res*/ += (((("/* " + PL$79/*uniqueStr*/) + " ") + (PL$25/*name*/ || "")) + " end */");;
 return PL$49/*res*/;;
 ;
 });;
@@ -698,32 +697,32 @@ this["getVariableName"] = (function(PL$25/*name*/){
 return this["common"]["variableNames"]["get"](PL$25/*name*/);;
 ;
 });;
-this["renderType"] = (function(PL$71/*parType*/, PL$54/*parParsed*/){
+this["renderType"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 var PL$49/*res*/;
 var PL$45/*self*/;
-var PL$81/*typeExpression*/;
-var PL$82/*renderTypeName*/;
-var PL$86/*errPs*/;
+var PL$80/*typeExpression*/;
+var PL$81/*renderTypeName*/;
+var PL$85/*errPs*/;
 var PL$25/*name*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$49/*res*/["setType"]("var");;
 PL$45/*self*/ = this;
-PL$81/*typeExpression*/;
-PL$82/*renderTypeName*/ = (function(PL$83/*parType1*/, PL$84/*parType2*/){
+PL$80/*typeExpression*/;
+PL$81/*renderTypeName*/ = (function(PL$82/*parType1*/, PL$83/*parType2*/){
 var PL$32/*i*/;
-var PL$85/*typesAr*/;
+var PL$84/*typesAr*/;
 var PL$25/*name*/;
 ;
 PL$32/*i*/;
-PL$85/*typesAr*/ = PL$45/*self*/["types"]["getArray"]();
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$85/*typesAr*/["length"]);++PL$32/*i*/){{if(((PL$85/*typesAr*/[PL$32/*i*/]["value"]["type"] === PL$83/*parType1*/) || (PL$85/*typesAr*/[PL$32/*i*/]["value"]["type"] === PL$84/*parType2*/))){
-if(PL$45/*self*/["isVar"](PL$85/*typesAr*/[PL$32/*i*/]["value"]["type"])){
+PL$84/*typesAr*/ = PL$45/*self*/["types"]["getArray"]();
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$84/*typesAr*/["length"]);++PL$32/*i*/){{if(((PL$84/*typesAr*/[PL$32/*i*/]["value"]["type"] === PL$82/*parType1*/) || (PL$84/*typesAr*/[PL$32/*i*/]["value"]["type"] === PL$83/*parType2*/))){
+if(PL$45/*self*/["isVar"](PL$84/*typesAr*/[PL$32/*i*/]["value"]["type"])){
 PL$45/*self*/["common"]["useClassSystem"] = true;;
 return "classSystem.getBuiltinType(\"var\")";;
 };
 ;
-PL$25/*name*/ = PL$85/*typesAr*/[PL$32/*i*/]["key"];
+PL$25/*name*/ = PL$84/*typesAr*/[PL$32/*i*/]["key"];
 if(! PL$45/*self*/["common"]["givenTypeNames"][PL$25/*name*/]){
 PL$45/*self*/["common"]["givenTypeNames"][PL$25/*name*/] = (((PL$45/*self*/["getUniqueName"]() + "/*type:") + PL$25/*name*/) + "*/");;
 };
@@ -735,40 +734,40 @@ return PL$45/*self*/["common"]["givenTypeNames"][PL$25/*name*/];;
 ;
 ;
 });
-if((typeof PL$71/*parType*/ == "function")){
-PL$86/*errPs*/ = this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["internalMissingType"]);
-PL$18/*classSystem*/["readyPromise"](PL$71/*parType*/)["then"]((function(PL$87/*resolvedType*/){
-var PL$88/*replace*/;
-var PL$81/*typeExpression*/;
+if((typeof PL$70/*parType*/ == "function")){
+PL$85/*errPs*/ = this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["internalMissingType"]);
+PL$18/*classSystem*/["readyPromise"](PL$70/*parType*/)["then"]((function(PL$86/*resolvedType*/){
+var PL$87/*replace*/;
+var PL$80/*typeExpression*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
+var PL$88/*l*/;
 ;
-PL$88/*replace*/ = PL$45/*self*/["newResult"]();
-PL$81/*typeExpression*/ = PL$82/*renderTypeName*/(PL$71/*parType*/, PL$87/*resolvedType*/);
-if(PL$81/*typeExpression*/){
-PL$88/*replace*/["push"](PL$81/*typeExpression*/);;
-PL$49/*res*/["push"](PL$88/*replace*/);;
-PL$86/*errPs*/["resolve"]();;
+PL$87/*replace*/ = PL$45/*self*/["newResult"]();
+PL$80/*typeExpression*/ = PL$81/*renderTypeName*/(PL$70/*parType*/, PL$86/*resolvedType*/);
+if(PL$80/*typeExpression*/){
+PL$87/*replace*/["push"](PL$80/*typeExpression*/);;
+PL$49/*res*/["push"](PL$87/*replace*/);;
+PL$85/*errPs*/["resolve"]();;
 return;;
 };
 ;
-if(PL$18/*classSystem*/["isFunctionType"](PL$87/*resolvedType*/)){
+if(PL$18/*classSystem*/["isFunctionType"](PL$86/*resolvedType*/)){
 PL$32/*i*/;
 PL$45/*self*/["common"]["useClassSystem"] = true;;
-PL$88/*replace*/["push"]("(classSystem.createFunctionType({ \"return\": ");;
-PL$88/*replace*/["push"](PL$45/*self*/["renderType"](PL$45/*self*/["getClassFromTemporaryTracked"](PL$45/*self*/["getFunctionReturnType"](PL$87/*resolvedType*/, PL$54/*parParsed*/), PL$54/*parParsed*/), PL$54/*parParsed*/));;
-PL$88/*replace*/["push"](", arguments: [");;
-PL$89/*l*/ = PL$45/*self*/["getFunctionArgumentCount"](PL$87/*resolvedType*/);
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
-PL$88/*replace*/["push"](", ");;
+PL$87/*replace*/["push"]("(classSystem.createFunctionType({ \"return\": ");;
+PL$87/*replace*/["push"](PL$45/*self*/["renderType"](PL$45/*self*/["getClassFromTemporaryTracked"](PL$45/*self*/["getFunctionReturnType"](PL$86/*resolvedType*/, PL$54/*parParsed*/), PL$54/*parParsed*/), PL$54/*parParsed*/));;
+PL$87/*replace*/["push"](", arguments: [");;
+PL$88/*l*/ = PL$45/*self*/["getFunctionArgumentCount"](PL$86/*resolvedType*/);
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$87/*replace*/["push"](", ");;
 };
 ;
-PL$88/*replace*/["push"](PL$45/*self*/["renderType"](PL$45/*self*/["getClassFromTemporaryTracked"](PL$45/*self*/["getFunctionArgumentType"](PL$87/*resolvedType*/, PL$32/*i*/, PL$54/*parParsed*/), PL$54/*parParsed*/), PL$54/*parParsed*/));;
+PL$87/*replace*/["push"](PL$45/*self*/["renderType"](PL$45/*self*/["getClassFromTemporaryTracked"](PL$45/*self*/["getFunctionArgumentType"](PL$86/*resolvedType*/, PL$32/*i*/, PL$54/*parParsed*/), PL$54/*parParsed*/), PL$54/*parParsed*/));;
 }};
 ;
-PL$88/*replace*/["push"]("]}))");;
-PL$49/*res*/["push"](PL$88/*replace*/);;
-PL$86/*errPs*/["resolve"]();;
+PL$87/*replace*/["push"]("]}))");;
+PL$49/*res*/["push"](PL$87/*replace*/);;
+PL$85/*errPs*/["resolve"]();;
 return;;
 };
 ;
@@ -777,10 +776,10 @@ return;;
 return PL$49/*res*/;;
 
 }else{
-if(PL$71/*parType*/["isDynamic"]){
-PL$81/*typeExpression*/ = PL$82/*renderTypeName*/(PL$71/*parType*/, PL$71/*parType*/);;
-if(PL$81/*typeExpression*/){
-PL$49/*res*/["push"](PL$81/*typeExpression*/);;
+if(PL$70/*parType*/["isDynamic"]){
+PL$80/*typeExpression*/ = PL$81/*renderTypeName*/(PL$70/*parType*/, PL$70/*parType*/);;
+if(PL$80/*typeExpression*/){
+PL$49/*res*/["push"](PL$80/*typeExpression*/);;
 
 }else{
 PL$49/*res*/["push"](this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["internalMissingType"]));;
@@ -788,11 +787,11 @@ PL$49/*res*/["push"](this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["int
 ;
 
 }else{
-PL$25/*name*/ = PL$27/*identifierName*/(PL$71/*parType*/);
-PL$71/*parType*/ = this["getType"](PL$25/*name*/, PL$54/*parParsed*/);;
-PL$81/*typeExpression*/ = PL$82/*renderTypeName*/(PL$71/*parType*/, PL$71/*parType*/);;
-if(PL$81/*typeExpression*/){
-PL$49/*res*/["push"](PL$81/*typeExpression*/);;
+PL$25/*name*/ = PL$27/*identifierName*/(PL$70/*parType*/);
+PL$70/*parType*/ = this["getType"](PL$25/*name*/, PL$54/*parParsed*/);;
+PL$80/*typeExpression*/ = PL$81/*renderTypeName*/(PL$70/*parType*/, PL$70/*parType*/);;
+if(PL$80/*typeExpression*/){
+PL$49/*res*/["push"](PL$80/*typeExpression*/);;
 
 }else{
 PL$49/*res*/["push"](this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["internalMissingType"]));;
@@ -804,27 +803,27 @@ PL$49/*res*/["push"](this["addError"](PL$54/*parParsed*/, PL$12/*errorMsg*/["int
 return PL$49/*res*/;;
 ;
 });;
-this["newInstance"] = (function(PL$90/*element*/, PL$91/*extras*/){
-var PL$92/*param*/;
+this["newInstance"] = (function(PL$89/*element*/, PL$90/*extras*/){
+var PL$91/*param*/;
 var PL$32/*i*/;
-var PL$93/*instance*/;
+var PL$92/*instance*/;
 ;
-PL$92/*param*/ = {"toParse": PL$90/*element*/,
+PL$91/*param*/ = {"toParse": PL$89/*element*/,
 "common": this["common"],
 "hashStr": this["hashStr"],
 "types": this["types"],
 "variables": this["variables"],
 "_locals": {"inheritedSystem": this["inheritedSystem"],
 "isClassObject": this["isClassObject"]}};
-if(PL$91/*extras*/){
+if(PL$90/*extras*/){
 PL$32/*i*/;
-for(PL$32/*i*/ in PL$91/*extras*/){PL$92/*param*/[PL$32/*i*/] = PL$91/*extras*/[PL$32/*i*/];;
+for(PL$32/*i*/ in PL$90/*extras*/){PL$91/*param*/[PL$32/*i*/] = PL$90/*extras*/[PL$32/*i*/];;
 };
 ;
 };
 ;
-PL$93/*instance*/ = new PL$44/*CodeParser*/(PL$92/*param*/);
-return PL$93/*instance*/;;
+PL$92/*instance*/ = new PL$44/*CodeParser*/(PL$91/*param*/);
+return PL$92/*instance*/;;
 ;
 });;
 this["getFunctionRes"] = (function(){
@@ -856,35 +855,35 @@ return PL$50/*r*/;;
 });;
 this["parseProgram"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$94/*extraRes*/;
-var PL$95/*extraModules*/;
-var PL$96/*parsingConfig*/;
-var PL$97/*reqireProperty*/;
-var PL$98/*functionStatement*/;
+var PL$93/*extraRes*/;
+var PL$94/*extraModules*/;
+var PL$95/*parsingConfig*/;
+var PL$96/*reqireProperty*/;
+var PL$97/*functionStatement*/;
 var PL$25/*name*/;
 ;
 PL$36/*findPromises*/(PL$24/*par*/);;
 PL$49/*res*/ = this["newResult"]();
-PL$94/*extraRes*/ = this["newResult"]();
-PL$94/*extraRes*/["push"]("\"use strict\";\n");;
-PL$38/*addExtraToPar*/(PL$24/*par*/, "addFront", PL$94/*extraRes*/);;
-PL$95/*extraModules*/ = new PL$22/*Map*/();
-PL$96/*parsingConfig*/ = this["common"]["parsingConfig"];
-if(PL$96/*parsingConfig*/){
-PL$97/*reqireProperty*/ = this["getTemplateProperty"](PL$96/*parsingConfig*/, "require", "ObjectExpression");
-if(PL$97/*reqireProperty*/){
-PL$95/*extraModules*/ = this["getTemplateRequireProperty"](PL$97/*reqireProperty*/);;
+PL$93/*extraRes*/ = this["newResult"]();
+PL$93/*extraRes*/["push"]("\"use strict\";\n");;
+PL$38/*addExtraToPar*/(PL$24/*par*/, "addFront", PL$93/*extraRes*/);;
+PL$94/*extraModules*/ = new PL$22/*Map*/();
+PL$95/*parsingConfig*/ = this["common"]["parsingConfig"];
+if(PL$95/*parsingConfig*/){
+PL$96/*reqireProperty*/ = this["getTemplateProperty"](PL$95/*parsingConfig*/, "require", "ObjectExpression");
+if(PL$96/*reqireProperty*/){
+PL$94/*extraModules*/ = this["getTemplateRequireProperty"](PL$96/*reqireProperty*/);;
 };
 ;
 };
 ;
-this["common"]["extraModules"] = PL$95/*extraModules*/;;
+this["common"]["extraModules"] = PL$94/*extraModules*/;;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
 this["programPromiseStr"] = this["getUniqueName"]();;
 };
 ;
 this["resultNameStr"] = this["getUniqueName"]();;
-PL$98/*functionStatement*/ = this["_parseFunction"](PL$24/*par*/, {"promiseName": this["programPromiseStr"],
+PL$97/*functionStatement*/ = this["_parseFunction"](PL$24/*par*/, {"promiseName": this["programPromiseStr"],
 "noUntrack": true});
 PL$25/*name*/;
 for(PL$25/*name*/ in this["usedVariables"]){if((this["usedVariables"][PL$25/*name*/] === true)){
@@ -896,7 +895,7 @@ if((PL$25/*name*/ == "Callback")){
 this["common"]["useCallback"] = true;;
 };
 ;
-if(PL$95/*extraModules*/["get"](PL$25/*name*/)){
+if(PL$94/*extraModules*/["get"](PL$25/*name*/)){
 continue;;
 };
 ;
@@ -911,7 +910,7 @@ PL$49/*res*/["push"](";}catch(e){};\n");;
 };
 ;
 PL$49/*res*/["push"]((("var " + this["resultNameStr"]) + " = ("));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$98/*functionStatement*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$97/*functionStatement*/));;
 PL$49/*res*/["push"](")();\n");;
 return PL$49/*res*/;;
 ;
@@ -926,15 +925,15 @@ this["unstack"]("isFunction");;
 return PL$49/*res*/;;
 ;
 });;
-this["getTemplateProperty"] = (function(PL$99/*parTemplate*/, PL$100/*parProperty*/, PL$101/*mandatoryType*/){
+this["getTemplateProperty"] = (function(PL$98/*parTemplate*/, PL$99/*parProperty*/, PL$100/*mandatoryType*/){
 var PL$32/*i*/;
 var PL$34/*p*/;
 ;
 PL$32/*i*/ = 0;
-for(PL$32/*i*/;(PL$32/*i*/ < PL$99/*parTemplate*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$99/*parTemplate*/["properties"][PL$32/*i*/];
-if(((PL$34/*p*/["kind"] == "init") && (PL$27/*identifierName*/(PL$34/*p*/["key"]) == PL$100/*parProperty*/))){
-if(PL$101/*mandatoryType*/){
-if((PL$34/*p*/["value"]["type"] != PL$101/*mandatoryType*/)){
+for(PL$32/*i*/;(PL$32/*i*/ < PL$98/*parTemplate*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$98/*parTemplate*/["properties"][PL$32/*i*/];
+if(((PL$34/*p*/["kind"] == "init") && (PL$27/*identifierName*/(PL$34/*p*/["key"]) == PL$99/*parProperty*/))){
+if(PL$100/*mandatoryType*/){
+if((PL$34/*p*/["value"]["type"] != PL$100/*mandatoryType*/)){
 this["error"](PL$34/*p*/["value"], PL$12/*errorMsg*/["templateSyntaxError"]);;
 };
 ;
@@ -947,22 +946,22 @@ return PL$34/*p*/["value"];;
 ;
 ;
 });;
-this["getTemplateRequireProperty"] = (function(PL$99/*parTemplate*/){
+this["getTemplateRequireProperty"] = (function(PL$98/*parTemplate*/){
 var PL$32/*i*/;
 var PL$49/*res*/;
 var PL$34/*p*/;
-var PL$102/*key*/;
+var PL$101/*key*/;
 ;
 PL$32/*i*/ = 0;
 PL$49/*res*/ = new PL$22/*Map*/();
-for(PL$32/*i*/;(PL$32/*i*/ < PL$99/*parTemplate*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$99/*parTemplate*/["properties"][PL$32/*i*/];
+for(PL$32/*i*/;(PL$32/*i*/ < PL$98/*parTemplate*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$98/*parTemplate*/["properties"][PL$32/*i*/];
 if((PL$34/*p*/["kind"] == "init")){
-PL$102/*key*/ = PL$27/*identifierName*/(PL$34/*p*/["key"]);
+PL$101/*key*/ = PL$27/*identifierName*/(PL$34/*p*/["key"]);
 if((PL$34/*p*/["value"]["type"] != "Literal")){
 this["error"](PL$34/*p*/["value"], PL$12/*errorMsg*/["templateSyntaxError"]);;
 };
 ;
-PL$49/*res*/["set"](PL$102/*key*/, PL$34/*p*/["value"]["value"]);;
+PL$49/*res*/["set"](PL$101/*key*/, PL$34/*p*/["value"]["value"]);;
 };
 ;
 }};
@@ -970,7 +969,7 @@ PL$49/*res*/["set"](PL$102/*key*/, PL$34/*p*/["value"]["value"]);;
 return PL$49/*res*/;;
 ;
 });;
-this["createExtraDynamicType"] = (function(PL$71/*parType*/, PL$24/*par*/, PL$54/*parParsed*/){
+this["createExtraDynamicType"] = (function(PL$70/*parType*/, PL$24/*par*/, PL$54/*parParsed*/){
 var PL$25/*name*/;
 var PL$60/*entry*/;
 var PL$49/*res*/;
@@ -978,36 +977,41 @@ var PL$55/*newType*/;
 ;
 PL$25/*name*/;
 if(PL$24/*par*/["property"]){
-PL$25/*name*/ = ((this["getTypeName"](PL$71/*parType*/, PL$54/*parParsed*/) + "::property::") + PL$24/*par*/["property"]);;
+PL$25/*name*/ = ((this["getTypeName"](PL$70/*parType*/, PL$54/*parParsed*/) + "::property::") + PL$24/*par*/["property"]);;
 
 }else{
 if(PL$24/*par*/["temporaryTracked"]){
-PL$25/*name*/ = (this["getTypeName"](PL$71/*parType*/, PL$54/*parParsed*/) + "::temporaryTracked");;
+PL$25/*name*/ = (this["getTypeName"](PL$70/*parType*/, PL$54/*parParsed*/) + "::temporaryTracked");;
 
 }else{
 if(PL$24/*par*/["temporaryTrackedResolved"]){
-PL$25/*name*/ = (this["getTypeName"](PL$71/*parType*/, PL$54/*parParsed*/) + "::temporaryTrackedResolved");;
+PL$25/*name*/ = (this["getTypeName"](PL$70/*parType*/, PL$54/*parParsed*/) + "::temporaryTrackedResolved");;
+
+}else{
+if(PL$24/*par*/["constructorReturn"]){
+PL$25/*name*/ = (this["getTypeName"](PL$70/*parType*/, PL$54/*parParsed*/) + "::constructorReturn");;
 
 }else{
 this["error"](PL$12/*errorMsg*/["internalMissingTypeProperty"]);;
 };
 };
 };
-;
-if(! PL$71/*parType*/["extraTypes"]){
-PL$71/*parType*/["extraTypes"] = [];;
 };
 ;
-if(! PL$71/*parType*/["extraTypeMap"]){
-PL$71/*parType*/["extraTypeMap"] = new PL$22/*Map*/();;
+if(! PL$70/*parType*/["extraTypes"]){
+PL$70/*parType*/["extraTypes"] = [];;
 };
 ;
-if(PL$71/*parType*/["extraTypeMap"]["has"](PL$25/*name*/)){
-return PL$71/*parType*/["extraTypeMap"]["get"](PL$25/*name*/);;
+if(! PL$70/*parType*/["extraTypeMap"]){
+PL$70/*parType*/["extraTypeMap"] = new PL$22/*Map*/();;
+};
+;
+if(PL$70/*parType*/["extraTypeMap"]["has"](PL$25/*name*/)){
+return PL$70/*parType*/["extraTypeMap"]["get"](PL$25/*name*/);;
 };
 ;
 PL$60/*entry*/ = {"res": this["newResult"]()};
-PL$71/*parType*/["extraTypes"]["push"](PL$60/*entry*/);;
+PL$70/*parType*/["extraTypes"]["push"](PL$60/*entry*/);;
 PL$49/*res*/ = PL$60/*entry*/["res"];
 this["addType"]({"name": PL$25/*name*/,
 "dynamic": true}, PL$54/*parParsed*/);;
@@ -1023,82 +1027,89 @@ PL$49/*res*/["push"]("classSystem.getConstructorType({\"type\":");;
 PL$49/*res*/["push"]("classSystem.getPropertyType({\"type\":");;
 };
 ;
-PL$49/*res*/["push"](this["renderType"](PL$71/*parType*/));;
+PL$49/*res*/["push"](this["renderType"](PL$70/*parType*/));;
 PL$49/*res*/["push"]((", property: " + PL$14/*stringEncodeStr*/(PL$24/*par*/["property"])));;
 PL$49/*res*/["push"]("});\n");;
 
 }else{
 if(PL$24/*par*/["temporaryTracked"]){
 PL$49/*res*/["push"]("classSystem._createTemporaryTrackedClass(");;
-PL$49/*res*/["push"](this["renderType"](PL$71/*parType*/));;
+PL$49/*res*/["push"](this["renderType"](PL$70/*parType*/));;
 PL$49/*res*/["push"](");\n");;
 
 }else{
 if(PL$24/*par*/["temporaryTrackedResolved"]){
 PL$49/*res*/["push"]("classSystem.getClassFromTemporaryTracked(");;
-PL$49/*res*/["push"](this["renderType"](PL$71/*parType*/));;
+PL$49/*res*/["push"](this["renderType"](PL$70/*parType*/));;
 PL$49/*res*/["push"](");\n");;
+
+}else{
+if(PL$24/*par*/["constructorReturn"]){
+PL$49/*res*/["push"]("classSystem.getConstructorReturnType(");;
+PL$49/*res*/["push"](this["renderType"](PL$70/*parType*/));;
+PL$49/*res*/["push"](");\n");;
+};
 };
 };
 };
 ;
 PL$55/*newType*/ = this["getType"](PL$25/*name*/, PL$54/*parParsed*/);
 PL$60/*entry*/["type"] = PL$55/*newType*/;;
-PL$71/*parType*/["extraTypeMap"]["set"](PL$25/*name*/, PL$55/*newType*/);;
+PL$70/*parType*/["extraTypeMap"]["set"](PL$25/*name*/, PL$55/*newType*/);;
 return PL$55/*newType*/;;
 ;
 });;
 this["getFunctionType"] = (function(PL$24/*par*/){
-var PL$103/*isTyped*/;
-var PL$104/*functionTypeParam*/;
-var PL$89/*l*/;
-var PL$105/*tempTypename*/;
+var PL$102/*isTyped*/;
+var PL$103/*functionTypeParam*/;
+var PL$88/*l*/;
+var PL$104/*tempTypename*/;
 ;
-PL$103/*isTyped*/ = false;
-PL$104/*functionTypeParam*/ = {"return": this["getType"]("var"),
+PL$102/*isTyped*/ = false;
+PL$103/*functionTypeParam*/ = {"return": this["getType"]("var"),
 "arguments": []};
 if(PL$24/*par*/["returnTypename"]){
-PL$103/*isTyped*/ = true;;
-PL$104/*functionTypeParam*/["return"] = this["getType"](PL$24/*par*/["returnTypename"]);;
+PL$102/*isTyped*/ = true;;
+PL$103/*functionTypeParam*/["return"] = this["getType"](PL$24/*par*/["returnTypename"]);;
 };
 ;
 if((PL$24/*par*/["params"] && PL$24/*par*/["params"]["length"])){
 PL$32/*i*/ = 0;;
-PL$89/*l*/ = PL$24/*par*/["params"]["length"];
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$105/*tempTypename*/ = PL$27/*identifierName*/((PL$24/*par*/["params"][PL$32/*i*/]["typename"] || "var"));
-PL$104/*functionTypeParam*/["arguments"]["push"](this["getType"](PL$105/*tempTypename*/, PL$24/*par*/));;
-if((PL$105/*tempTypename*/ != "var")){
-PL$103/*isTyped*/ = true;;
+PL$88/*l*/ = PL$24/*par*/["params"]["length"];
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$104/*tempTypename*/ = PL$27/*identifierName*/((PL$24/*par*/["params"][PL$32/*i*/]["typename"] || "var"));
+PL$103/*functionTypeParam*/["arguments"]["push"](this["getType"](PL$104/*tempTypename*/, PL$24/*par*/));;
+if((PL$104/*tempTypename*/ != "var")){
+PL$102/*isTyped*/ = true;;
 };
 ;
 }};
 ;
 };
 ;
-if(PL$103/*isTyped*/){
-return this["createFunctionType"](PL$104/*functionTypeParam*/);;
+if(PL$102/*isTyped*/){
+return this["createFunctionType"](PL$103/*functionTypeParam*/);;
 };
 ;
 return this["getType"]("var");;
 ;
 });;
 this["createFunctionType"] = (function(PL$24/*par*/){
-var PL$106/*isDynamic*/;
+var PL$105/*isDynamic*/;
 var PL$32/*i*/;
 ;
-PL$106/*isDynamic*/ = false;
+PL$105/*isDynamic*/ = false;
 if(PL$24/*par*/["return"]["isDynamic"]){
-PL$106/*isDynamic*/ = true;;
+PL$105/*isDynamic*/ = true;;
 };
 ;
 PL$32/*i*/ = 0;
 for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["arguments"]["length"]);++PL$32/*i*/){{if(PL$24/*par*/["arguments"][PL$32/*i*/]["isDynamic"]){
-PL$106/*isDynamic*/ = true;;
+PL$105/*isDynamic*/ = true;;
 };
 ;
 }};
 ;
-if(PL$106/*isDynamic*/){
+if(PL$105/*isDynamic*/){
 debugger;
 
 }else{
@@ -1107,61 +1118,61 @@ return PL$18/*classSystem*/["createFunctionType"](PL$24/*par*/);;
 ;
 ;
 });;
-this["addBeforeReturn"] = (function(PL$107/*parRes*/, PL$108/*parCondition*/){
-var PL$109/*condition*/;
-var PL$110/*conditional*/;
-var PL$111/*frontRes*/;
-var PL$112/*endRes*/;
+this["addBeforeReturn"] = (function(PL$106/*parRes*/, PL$107/*parCondition*/){
+var PL$108/*condition*/;
+var PL$109/*conditional*/;
+var PL$110/*frontRes*/;
+var PL$111/*endRes*/;
 ;
-PL$109/*condition*/ = PL$108/*parCondition*/;
-if((PL$108/*parCondition*/ === undefined)){
-PL$109/*condition*/ = true;;
+PL$108/*condition*/ = PL$107/*parCondition*/;
+if((PL$107/*parCondition*/ === undefined)){
+PL$108/*condition*/ = true;;
 };
 ;
-PL$110/*conditional*/ = this["createConditionalCode"](PL$107/*parRes*/);
-PL$110/*conditional*/["addCondition"](PL$109/*condition*/);;
-this["runBeforeReturnRes"]["push"](PL$110/*conditional*/["res"]);;
+PL$109/*conditional*/ = this["createConditionalCode"](PL$106/*parRes*/);
+PL$109/*conditional*/["addCondition"](PL$108/*condition*/);;
+this["runBeforeReturnRes"]["push"](PL$109/*conditional*/["res"]);;
 if(! this["beforeReturnExists"]){
 this["beforeReturnExists"] = true;;
-PL$111/*frontRes*/ = this["newResult"]();
-PL$112/*endRes*/ = this["newResult"]();
-this["beforeReturnFrontConditional"] = this["createConditionalCode"](PL$111/*frontRes*/);;
-this["beforeReturnEndConditional"] = this["createConditionalCode"](PL$112/*endRes*/);;
+PL$110/*frontRes*/ = this["newResult"]();
+PL$111/*endRes*/ = this["newResult"]();
+this["beforeReturnFrontConditional"] = this["createConditionalCode"](PL$110/*frontRes*/);;
+this["beforeReturnEndConditional"] = this["createConditionalCode"](PL$111/*endRes*/);;
 this["beforeReturnExistsPs"]["resolve"](this["runBeforeReturnRes"]);;
 if(! this["promising"]){
-PL$111/*frontRes*/["push"]("try{");;
+PL$110/*frontRes*/["push"]("try{");;
 this["additionalCodeFrontRes"]["push"](this["beforeReturnFrontConditional"]["res"]);;
-PL$112/*endRes*/["push"]("}catch(e){");;
-PL$112/*endRes*/["push"](this["runBeforeReturnRes"]);;
-PL$112/*endRes*/["push"]("throw e};");;
+PL$111/*endRes*/["push"]("}catch(e){");;
+PL$111/*endRes*/["push"](this["runBeforeReturnRes"]);;
+PL$111/*endRes*/["push"]("throw e};");;
 this["additionalCodeEndRes"]["push"](this["beforeReturnEndConditional"]["res"]);;
 };
 ;
 };
 ;
-this["beforeReturnFrontConditional"]["addCondition"](PL$109/*condition*/);;
-this["beforeReturnEndConditional"]["addCondition"](PL$109/*condition*/);;
-this["addBeforeReturnCondition"](PL$109/*condition*/);;
+this["beforeReturnFrontConditional"]["addCondition"](PL$108/*condition*/);;
+this["beforeReturnEndConditional"]["addCondition"](PL$108/*condition*/);;
+this["addBeforeReturnCondition"](PL$108/*condition*/);;
 ;
 });;
 this["beforeReturnConditions"] = [];;
-this["addBeforeReturnCondition"] = (function(PL$108/*parCondition*/){
+this["addBeforeReturnCondition"] = (function(PL$107/*parCondition*/){
 var PL$32/*i*/;
 ;
-this["beforeReturnConditions"]["push"](PL$108/*parCondition*/);;
+this["beforeReturnConditions"]["push"](PL$107/*parCondition*/);;
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["beforeReturnConditionFuns"]["length"]);++PL$32/*i*/){{this["beforeReturnConditionFuns"][PL$32/*i*/](PL$108/*parCondition*/);;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["beforeReturnConditionFuns"]["length"]);++PL$32/*i*/){{this["beforeReturnConditionFuns"][PL$32/*i*/](PL$107/*parCondition*/);;
 }};
 ;
 ;
 });;
 this["beforeReturnConditionFuns"] = [];;
-this["addBeforeReturnConditionFun"] = (function(PL$113/*parFun*/){
+this["addBeforeReturnConditionFun"] = (function(PL$112/*parFun*/){
 var PL$32/*i*/;
 ;
-this["beforeReturnConditionFuns"]["push"](PL$113/*parFun*/);;
+this["beforeReturnConditionFuns"]["push"](PL$112/*parFun*/);;
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["beforeReturnConditions"]["length"]);++PL$32/*i*/){{PL$113/*parFun*/(this["beforeReturnConditions"][PL$32/*i*/]);;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["beforeReturnConditions"]["length"]);++PL$32/*i*/){{PL$112/*parFun*/(this["beforeReturnConditions"][PL$32/*i*/]);;
 }};
 ;
 ;
@@ -1169,12 +1180,12 @@ for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["beforeReturnConditions"]["length"]);++PL$
 this["getReturnCode"] = (function(PL$24/*par*/){
 var PL$45/*self*/;
 var PL$49/*res*/;
-var PL$114/*falseRes*/;
-var PL$115/*beforeReturnCode*/;
-var PL$116/*newRes*/;
-var PL$117/*valueRes*/;
-var PL$118/*trueRes*/;
-var PL$110/*conditional*/;
+var PL$113/*falseRes*/;
+var PL$114/*beforeReturnCode*/;
+var PL$115/*newRes*/;
+var PL$116/*valueRes*/;
+var PL$117/*trueRes*/;
+var PL$109/*conditional*/;
 ;
 PL$45/*self*/ = this;
 PL$49/*res*/ = this["newResult"]();
@@ -1202,111 +1213,111 @@ PL$49/*res*/["push"](";");;
 ;
 };
 ;
-PL$114/*falseRes*/ = PL$49/*res*/;
-PL$115/*beforeReturnCode*/ = this["runBeforeReturnRes"];
-PL$116/*newRes*/ = PL$45/*self*/["newResult"]();
-PL$117/*valueRes*/ = PL$45/*self*/["newResult"]();
+PL$113/*falseRes*/ = PL$49/*res*/;
+PL$114/*beforeReturnCode*/ = this["runBeforeReturnRes"];
+PL$115/*newRes*/ = PL$45/*self*/["newResult"]();
+PL$116/*valueRes*/ = PL$45/*self*/["newResult"]();
 if(PL$24/*par*/["value"]){
-PL$117/*valueRes*/["push"]("(function(ret){ ");;
-PL$117/*valueRes*/["push"](PL$115/*beforeReturnCode*/);;
-PL$117/*valueRes*/["push"]("return ret; })(");;
-PL$117/*valueRes*/["push"](PL$24/*par*/["value"]);;
-PL$117/*valueRes*/["push"](")");;
+PL$116/*valueRes*/["push"]("(function(ret){ ");;
+PL$116/*valueRes*/["push"](PL$114/*beforeReturnCode*/);;
+PL$116/*valueRes*/["push"]("return ret; })(");;
+PL$116/*valueRes*/["push"](PL$24/*par*/["value"]);;
+PL$116/*valueRes*/["push"](")");;
 };
 ;
 if(PL$45/*self*/["promising"]){
 if(PL$24/*par*/["value"]){
-PL$116/*newRes*/["push"]((PL$45/*self*/["returnPromise"] + ".resolve("));;
-PL$116/*newRes*/["push"](PL$117/*valueRes*/);;
-PL$116/*newRes*/["push"]("); return;");;
+PL$115/*newRes*/["push"]((PL$45/*self*/["returnPromise"] + ".resolve("));;
+PL$115/*newRes*/["push"](PL$116/*valueRes*/);;
+PL$115/*newRes*/["push"]("); return;");;
 
 }else{
-PL$116/*newRes*/["push"](PL$115/*beforeReturnCode*/);;
-PL$116/*newRes*/["push"]((PL$45/*self*/["returnPromise"] + ".resolve("));;
-PL$116/*newRes*/["push"]("); return;");;
+PL$115/*newRes*/["push"](PL$114/*beforeReturnCode*/);;
+PL$115/*newRes*/["push"]((PL$45/*self*/["returnPromise"] + ".resolve("));;
+PL$115/*newRes*/["push"]("); return;");;
 };
 ;
 
 }else{
 if(PL$24/*par*/["value"]){
-PL$116/*newRes*/["push"]("return ");;
-PL$116/*newRes*/["push"](PL$117/*valueRes*/);;
-PL$116/*newRes*/["push"](";");;
+PL$115/*newRes*/["push"]("return ");;
+PL$115/*newRes*/["push"](PL$116/*valueRes*/);;
+PL$115/*newRes*/["push"](";");;
 
 }else{
-PL$116/*newRes*/["push"](PL$115/*beforeReturnCode*/);;
+PL$115/*newRes*/["push"](PL$114/*beforeReturnCode*/);;
 if(PL$24/*par*/["return"]){
-PL$116/*newRes*/["push"]("return;");;
+PL$115/*newRes*/["push"]("return;");;
 };
 ;
 };
 ;
 };
 ;
-PL$118/*trueRes*/ = PL$116/*newRes*/;
-PL$110/*conditional*/ = this["createConditionalCode"](PL$118/*trueRes*/, PL$114/*falseRes*/);
-this["addBeforeReturnConditionFun"]((function(PL$119/*con*/){
+PL$117/*trueRes*/ = PL$115/*newRes*/;
+PL$109/*conditional*/ = this["createConditionalCode"](PL$117/*trueRes*/, PL$113/*falseRes*/);
+this["addBeforeReturnConditionFun"]((function(PL$118/*con*/){
 ;
-PL$110/*conditional*/["addCondition"](PL$119/*con*/);;
+PL$109/*conditional*/["addCondition"](PL$118/*con*/);;
 ;
 }));;
-return PL$110/*conditional*/["res"];;
+return PL$109/*conditional*/["res"];;
 ;
 });;
-this["_parseFunction"] = (function(PL$24/*par*/, PL$120/*parJsn*/){
-var PL$121/*parGivenPromiseNameStr*/;
-var PL$122/*noUntrack*/;
-var PL$123/*hasFrameInfo*/;
-var PL$124/*runRemote*/;
-var PL$125/*runExclusive*/;
+this["_parseFunction"] = (function(PL$24/*par*/, PL$119/*parJsn*/){
+var PL$120/*parGivenPromiseNameStr*/;
+var PL$121/*noUntrack*/;
+var PL$122/*hasFrameInfo*/;
+var PL$123/*runRemote*/;
+var PL$124/*runExclusive*/;
 var PL$32/*i*/;
-var PL$126/*typename*/;
+var PL$125/*typename*/;
 var PL$54/*parParsed*/;
-var PL$127/*funClosure*/;
+var PL$126/*funClosure*/;
 var PL$45/*self*/;
-var PL$128/*hasName*/;
-var PL$129/*nameStr*/;
-var PL$130/*templateTypesAr*/;
-var PL$131/*templateTypes*/;
-var PL$132/*typeVarInit*/;
+var PL$127/*hasName*/;
+var PL$128/*nameStr*/;
+var PL$129/*templateTypesAr*/;
+var PL$130/*templateTypes*/;
+var PL$131/*typeVarInit*/;
 var PL$34/*p*/;
-var PL$133/*extraTypesRes*/;
+var PL$132/*extraTypesRes*/;
 var PL$49/*res*/;
-var PL$134/*funRes*/;
-var PL$89/*l*/;
-var PL$135/*classesRes*/;
-var PL$136/*addFront*/;
-var PL$137/*b*/;
-var PL$138/*extraPar*/;
-var PL$139/*block*/;
-var PL$140/*localVariablesAr*/;
-var PL$141/*varname*/;
-var PL$69/*type*/;
-var PL$142/*completeFun*/;
-var PL$143/*returnTypePromiseCheck*/;
-var PL$144/*handleExtras*/;
-var PL$145/*dt*/;
-var PL$146/*thisFunType*/;
-var PL$147/*uniqueNameStr*/;
-var PL$148/*remoteClosure*/;
-var PL$149/*finalResult*/;
+var PL$133/*funRes*/;
+var PL$88/*l*/;
+var PL$134/*classesRes*/;
+var PL$135/*addFront*/;
+var PL$136/*b*/;
+var PL$137/*extraPar*/;
+var PL$138/*block*/;
+var PL$139/*localVariablesAr*/;
+var PL$140/*varname*/;
+var PL$68/*type*/;
+var PL$141/*completeFun*/;
+var PL$142/*returnTypePromiseCheck*/;
+var PL$143/*handleExtras*/;
+var PL$144/*dt*/;
+var PL$145/*thisFunType*/;
+var PL$146/*uniqueNameStr*/;
+var PL$147/*remoteClosure*/;
+var PL$148/*finalResult*/;
 ;
-PL$120/*parJsn*/ = (PL$120/*parJsn*/ || {});;
-PL$121/*parGivenPromiseNameStr*/ = PL$120/*parJsn*/["promiseName"];
-PL$122/*noUntrack*/ = PL$120/*parJsn*/["noUntrack"];
-PL$123/*hasFrameInfo*/ = false;
-PL$124/*runRemote*/ = false;
-PL$125/*runExclusive*/ = false;
+PL$119/*parJsn*/ = (PL$119/*parJsn*/ || {});;
+PL$120/*parGivenPromiseNameStr*/ = PL$119/*parJsn*/["promiseName"];
+PL$121/*noUntrack*/ = PL$119/*parJsn*/["noUntrack"];
+PL$122/*hasFrameInfo*/ = false;
+PL$123/*runRemote*/ = false;
+PL$124/*runExclusive*/ = false;
 PL$32/*i*/ = 0;
-PL$126/*typename*/;
+PL$125/*typename*/;
 PL$54/*parParsed*/ = PL$24/*par*/;
-PL$127/*funClosure*/;
+PL$126/*funClosure*/;
 PL$45/*self*/ = this;
-PL$128/*hasName*/ = false;
-PL$129/*nameStr*/;
+PL$127/*hasName*/ = false;
+PL$128/*nameStr*/;
 if(PL$24/*par*/["id"]){
-PL$129/*nameStr*/ = PL$27/*identifierName*/(PL$24/*par*/["id"]);;
-PL$128/*hasName*/ = true;;
+PL$128/*nameStr*/ = PL$27/*identifierName*/(PL$24/*par*/["id"]);;
+PL$127/*hasName*/ = true;;
 };
 ;
 this["stack"]("inheritedAvailable");;
@@ -1334,9 +1345,9 @@ this["_returnType"] = this["getType"]("var");;
 };
 ;
 if((PL$24/*par*/["frame"] && PL$24/*par*/["frame"]["name"])){
-PL$123/*hasFrameInfo*/ = true;;
+PL$122/*hasFrameInfo*/ = true;;
 if((PL$24/*par*/["frame"]["type"] == "frame")){
-PL$124/*runRemote*/ = true;;
+PL$123/*runRemote*/ = true;;
 PL$24/*par*/["promising"] = true;;
 if(this["dynamicCode"]){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["functionFrameInDynamicCode"]);;
@@ -1345,68 +1356,68 @@ this["error"](PL$24/*par*/, PL$12/*errorMsg*/["functionFrameInDynamicCode"]);;
 
 }else{
 if((PL$24/*par*/["frame"]["type"] == "exclusive")){
-PL$125/*runExclusive*/ = true;;
+PL$124/*runExclusive*/ = true;;
 };
 };
 ;
 };
 ;
-PL$130/*templateTypesAr*/ = [];
+PL$129/*templateTypesAr*/ = [];
 if((PL$24/*par*/["template"] && PL$24/*par*/["template"]["properties"]["length"])){
-PL$131/*templateTypes*/ = this["getTemplateProperty"](PL$24/*par*/["template"], "types", "ObjectExpression");
-if(PL$131/*templateTypes*/){
-PL$132/*typeVarInit*/ = this["newResult"]();
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$131/*templateTypes*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$131/*templateTypes*/["properties"][PL$32/*i*/];
-PL$126/*typename*/ = PL$27/*identifierName*/(PL$34/*p*/["key"]);;
-this["addType"]({"name": PL$126/*typename*/,
+PL$130/*templateTypes*/ = this["getTemplateProperty"](PL$24/*par*/["template"], "types", "ObjectExpression");
+if(PL$130/*templateTypes*/){
+PL$131/*typeVarInit*/ = this["newResult"]();
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$130/*templateTypes*/["properties"]["length"]);++PL$32/*i*/){{PL$34/*p*/ = PL$130/*templateTypes*/["properties"][PL$32/*i*/];
+PL$125/*typename*/ = PL$27/*identifierName*/(PL$34/*p*/["key"]);;
+this["addType"]({"name": PL$125/*typename*/,
 "dynamic": true}, PL$34/*p*/["value"]);;
-if(! PL$127/*funClosure*/){
-PL$127/*funClosure*/ = this["newResult"]();;
-PL$127/*funClosure*/["push"]("(function(){");;
+if(! PL$126/*funClosure*/){
+PL$126/*funClosure*/ = this["newResult"]();;
+PL$126/*funClosure*/["push"]("(function(){");;
 };
 ;
-PL$132/*typeVarInit*/["push"]("var ");;
-PL$132/*typeVarInit*/["push"](this["renderType"](PL$126/*typename*/));;
-PL$132/*typeVarInit*/["push"](" = ");;
-PL$132/*typeVarInit*/["push"](this["expectTypeVar"](this["parseExpression"](PL$34/*p*/["value"])));;
-PL$132/*typeVarInit*/["push"](";\n");;
-PL$132/*typeVarInit*/["push"]((("var " + this["getVariableName"](PL$126/*typename*/)) + " = "));;
-PL$132/*typeVarInit*/["push"](this["renderType"](PL$126/*typename*/));;
-PL$132/*typeVarInit*/["push"]("\n;");;
-PL$132/*typeVarInit*/["push"]((("var " + this["getConstructorName"](PL$126/*typename*/)) + " = undefined;\n"));;
-PL$132/*typeVarInit*/["push"](this["_typeReadyCode"]({"typename": PL$126/*typename*/}));;
-PL$130/*templateTypesAr*/["push"](PL$126/*typename*/);;
+PL$131/*typeVarInit*/["push"]("var ");;
+PL$131/*typeVarInit*/["push"](this["renderType"](PL$125/*typename*/));;
+PL$131/*typeVarInit*/["push"](" = ");;
+PL$131/*typeVarInit*/["push"](this["expectTypeVar"](this["parseExpression"](PL$34/*p*/["value"])));;
+PL$131/*typeVarInit*/["push"](";\n");;
+PL$131/*typeVarInit*/["push"]((("var " + this["getVariableName"](PL$125/*typename*/)) + " = "));;
+PL$131/*typeVarInit*/["push"](this["renderType"](PL$125/*typename*/));;
+PL$131/*typeVarInit*/["push"]("\n;");;
+PL$131/*typeVarInit*/["push"]((("var " + this["getConstructorName"](PL$125/*typename*/)) + " = undefined;\n"));;
+PL$131/*typeVarInit*/["push"](this["_typeReadyCode"]({"typename": PL$125/*typename*/}));;
+PL$129/*templateTypesAr*/["push"](PL$125/*typename*/);;
 }};
 ;
-PL$127/*funClosure*/["push"](PL$132/*typeVarInit*/);;
+PL$126/*funClosure*/["push"](PL$131/*typeVarInit*/);;
 };
 ;
 };
 ;
-PL$133/*extraTypesRes*/ = this["newResult"]();
-if(PL$127/*funClosure*/){
-PL$127/*funClosure*/["push"]("var communicator = {fun: undefined};\n");;
-PL$127/*funClosure*/["push"](PL$133/*extraTypesRes*/);;
-PL$127/*funClosure*/["push"]("eval(\"communicator.fun = ");;
+PL$132/*extraTypesRes*/ = this["newResult"]();
+if(PL$126/*funClosure*/){
+PL$126/*funClosure*/["push"]("var communicator = {fun: undefined};\n");;
+PL$126/*funClosure*/["push"](PL$132/*extraTypesRes*/);;
+PL$126/*funClosure*/["push"]("eval(\"communicator.fun = ");;
 };
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$134/*funRes*/ = this["newResult"]();
+PL$133/*funRes*/ = this["newResult"]();
 PL$32/*i*/ = 0;;
-PL$134/*funRes*/["push"]("function");;
-if(PL$128/*hasName*/){
-this["functionName"] = PL$129/*nameStr*/;;
+PL$133/*funRes*/["push"]("function");;
+if(PL$127/*hasName*/){
+this["functionName"] = PL$128/*nameStr*/;;
 };
 ;
-PL$134/*funRes*/["push"]("(");;
+PL$133/*funRes*/["push"]("(");;
 if((PL$24/*par*/["params"] && PL$24/*par*/["params"]["length"])){
 PL$32/*i*/ = 0;;
-PL$89/*l*/ = PL$24/*par*/["params"]["length"];
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
-PL$134/*funRes*/["push"](", ");;
+PL$88/*l*/ = PL$24/*par*/["params"]["length"];
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$133/*funRes*/["push"](", ");;
 };
 ;
-PL$134/*funRes*/["push"](this["getVariableName"](PL$27/*identifierName*/(PL$24/*par*/["params"][PL$32/*i*/]["name"])));;
+PL$133/*funRes*/["push"](this["getVariableName"](PL$27/*identifierName*/(PL$24/*par*/["params"][PL$32/*i*/]["name"])));;
 this["addLocalVariable"]({"name": PL$24/*par*/["params"][PL$32/*i*/]["name"],
 "typename": (PL$24/*par*/["params"][PL$32/*i*/]["typename"] || "var"),
 "parameter": true}, PL$24/*par*/["params"][PL$32/*i*/]);;
@@ -1414,35 +1425,35 @@ this["addLocalVariable"]({"name": PL$24/*par*/["params"][PL$32/*i*/]["name"],
 ;
 };
 ;
-PL$134/*funRes*/["push"]("){\n");;
-PL$135/*classesRes*/ = this["findClasses"](PL$24/*par*/["body"]);
+PL$133/*funRes*/["push"]("){\n");;
+PL$134/*classesRes*/ = this["findClasses"](PL$24/*par*/["body"]);
 this["findVariables"](PL$24/*par*/["body"]);;
-if(PL$125/*runExclusive*/){
-PL$134/*funRes*/["push"]((("if (!promiseland.profileHas(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])) + ")){\n"));;
+if(PL$124/*runExclusive*/){
+PL$133/*funRes*/["push"]((("if (!promiseland.profileHas(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])) + ")){\n"));;
 if(PL$24/*par*/["promising"]){
-PL$134/*funRes*/["push"]((("var p = " + this["newPromiseStr"]()) + ";\n"));;
-PL$134/*funRes*/["push"]("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");;
-PL$134/*funRes*/["push"]("return p;\n");;
+PL$133/*funRes*/["push"]((("var p = " + this["newPromiseStr"]()) + ";\n"));;
+PL$133/*funRes*/["push"]("p.reject({id: 14, msg: \"function does not execute in this frame.\"});\n");;
+PL$133/*funRes*/["push"]("return p;\n");;
 
 }else{
-PL$134/*funRes*/["push"]("return;\n");;
+PL$133/*funRes*/["push"]("return;\n");;
 };
 ;
-PL$134/*funRes*/["push"]("};\n");;
+PL$133/*funRes*/["push"]("};\n");;
 };
 ;
-PL$136/*addFront*/ = PL$41/*getExtraFromPar*/(PL$24/*par*/, "addFront");
-if(PL$136/*addFront*/){
-PL$134/*funRes*/["push"](PL$136/*addFront*/);;
+PL$135/*addFront*/ = PL$41/*getExtraFromPar*/(PL$24/*par*/, "addFront");
+if(PL$135/*addFront*/){
+PL$133/*funRes*/["push"](PL$135/*addFront*/);;
 };
 ;
 if(PL$24/*par*/["promising"]){
-if(PL$121/*parGivenPromiseNameStr*/){
-this["returnPromise"] = PL$121/*parGivenPromiseNameStr*/;;
+if(PL$120/*parGivenPromiseNameStr*/){
+this["returnPromise"] = PL$120/*parGivenPromiseNameStr*/;;
 
 }else{
 this["returnPromise"] = this["getUniqueName"]();;
-PL$134/*funRes*/["push"](this["declareReturnPromiseCode"]({"type": this["_returnType"],
+PL$133/*funRes*/["push"](this["declareReturnPromiseCode"]({"type": this["_returnType"],
 "name": this["returnPromise"],
 "constructorName": this["getConstructorName"](this["getTypeName"](this["_returnType"], PL$54/*parParsed*/)),
 "parsed": PL$54/*parParsed*/,
@@ -1450,153 +1461,153 @@ PL$134/*funRes*/["push"](this["declareReturnPromiseCode"]({"type": this["_return
 };
 ;
 this["tryCatchFunctionStr"] = this["getUniqueName"]();;
-PL$134/*funRes*/["push"]((("var " + this["tryCatchFunctionStr"]) + " = function(code){ return function(res){ try{code(res);}catch(e){ "));;
-PL$134/*funRes*/["push"](this["runBeforeReturnRes"]);;
-PL$134/*funRes*/["push"]((this["returnPromise"] + ".reject(e); }; }; };\n"));;
+PL$133/*funRes*/["push"]((("var " + this["tryCatchFunctionStr"]) + " = function(code){ return function(res){ try{code(res);}catch(e){ "));;
+PL$133/*funRes*/["push"](this["runBeforeReturnRes"]);;
+PL$133/*funRes*/["push"]((this["returnPromise"] + ".reject(e); }; }; };\n"));;
 this["catchFunctionStr"] = this["getUniqueName"]();;
-PL$134/*funRes*/["push"]((("var " + this["catchFunctionStr"]) + " = function(e){ "));;
-PL$134/*funRes*/["push"](this["runBeforeReturnRes"]);;
-PL$134/*funRes*/["push"]((this["returnPromise"] + ".reject(e); };\n"));;
+PL$133/*funRes*/["push"]((("var " + this["catchFunctionStr"]) + " = function(e){ "));;
+PL$133/*funRes*/["push"](this["runBeforeReturnRes"]);;
+PL$133/*funRes*/["push"]((this["returnPromise"] + ".reject(e); };\n"));;
 this["promising"] = true;;
 PL$49/*res*/["makePromising"]();;
 };
 ;
-PL$137/*b*/ = PL$24/*par*/["body"];
-PL$138/*extraPar*/ = {};
-PL$137/*b*/["brackets"] = false;;
-PL$138/*extraPar*/["preCode"] = this["additionalCodeFrontRes"];;
-PL$138/*extraPar*/["postCode"] = this["newResult"]();;
-PL$138/*extraPar*/["postCode"]["push"](this["getReturnCode"]({}));;
-PL$138/*extraPar*/["postCode"]["push"](this["additionalCodeEndRes"]);;
-PL$139/*block*/ = this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/);
-PL$140/*localVariablesAr*/ = this["localVariables"]["getArray"]();
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$140/*localVariablesAr*/["length"]);++PL$32/*i*/){{PL$141/*varname*/ = PL$140/*localVariablesAr*/[PL$32/*i*/]["key"];
-PL$69/*type*/ = this["getVariableType"](PL$141/*varname*/);
-if(PL$140/*localVariablesAr*/[PL$32/*i*/]["value"]["parameter"]){
-PL$134/*funRes*/["push"](this["getProcessParameterCode"]({"name": this["getVariableName"](PL$141/*varname*/),
-"type": PL$69/*type*/,
+PL$136/*b*/ = PL$24/*par*/["body"];
+PL$137/*extraPar*/ = {};
+PL$136/*b*/["brackets"] = false;;
+PL$137/*extraPar*/["preCode"] = this["additionalCodeFrontRes"];;
+PL$137/*extraPar*/["postCode"] = this["newResult"]();;
+PL$137/*extraPar*/["postCode"]["push"](this["getReturnCode"]({}));;
+PL$137/*extraPar*/["postCode"]["push"](this["additionalCodeEndRes"]);;
+PL$138/*block*/ = this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/);
+PL$139/*localVariablesAr*/ = this["localVariables"]["getArray"]();
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$139/*localVariablesAr*/["length"]);++PL$32/*i*/){{PL$140/*varname*/ = PL$139/*localVariablesAr*/[PL$32/*i*/]["key"];
+PL$68/*type*/ = this["getVariableType"](PL$140/*varname*/);
+if(PL$139/*localVariablesAr*/[PL$32/*i*/]["value"]["parameter"]){
+PL$133/*funRes*/["push"](this["getProcessParameterCode"]({"name": this["getVariableName"](PL$140/*varname*/),
+"type": PL$68/*type*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/),
 "parsed": PL$24/*par*/}));;
 
 }else{
-PL$134/*funRes*/["push"](this["getDeclareVariableCode"]({"name": this["getVariableName"](PL$141/*varname*/),
-"type": PL$69/*type*/,
+PL$133/*funRes*/["push"](this["getDeclareVariableCode"]({"name": this["getVariableName"](PL$140/*varname*/),
+"type": PL$68/*type*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/),
 "parsed": PL$24/*par*/}));;
 };
 ;
-if(! PL$122/*noUntrack*/){
-this["addBeforeReturn"](this["getDestroyVariableCode"]({"name": this["getVariableName"](PL$141/*varname*/),
-"type": PL$69/*type*/,
+if(! PL$121/*noUntrack*/){
+this["addBeforeReturn"](this["getDestroyVariableCode"]({"name": this["getVariableName"](PL$140/*varname*/),
+"type": PL$68/*type*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/),
-"parsed": PL$24/*par*/}), this["isTrackedClassConRes"](PL$69/*type*/, PL$24/*par*/));;
+"parsed": PL$24/*par*/}), this["isTrackedClassConRes"](PL$68/*type*/, PL$24/*par*/));;
 };
 ;
-this["usedVariables"][PL$141/*varname*/] = false;;
+this["usedVariables"][PL$140/*varname*/] = false;;
 }};
 ;
 if(this["usedVariables"]["arguments"]){
-PL$134/*funRes*/["push"]((("var " + this["getVariableName"]("arguments")) + " = arguments;\n"));;
+PL$133/*funRes*/["push"]((("var " + this["getVariableName"]("arguments")) + " = arguments;\n"));;
 this["usedVariables"]["arguments"] = false;;
 };
 ;
-PL$134/*funRes*/["push"](PL$135/*classesRes*/);;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["functionsAr"]["length"]);++PL$32/*i*/){{PL$134/*funRes*/["push"]((("var " + this["getVariableName"](this["functionsAr"][PL$32/*i*/]["name"])) + " = "));;
-PL$134/*funRes*/["push"](this["functionsAr"][PL$32/*i*/]["res"]);;
-PL$134/*funRes*/["push"](";\n");;
+PL$133/*funRes*/["push"](PL$134/*classesRes*/);;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < this["functionsAr"]["length"]);++PL$32/*i*/){{PL$133/*funRes*/["push"]((("var " + this["getVariableName"](this["functionsAr"][PL$32/*i*/]["name"])) + " = "));;
+PL$133/*funRes*/["push"](this["functionsAr"][PL$32/*i*/]["res"]);;
+PL$133/*funRes*/["push"](";\n");;
 }};
 ;
 if(PL$24/*par*/["promising"]){
 if(this["usingThis"]){
-PL$134/*funRes*/["push"]((("var " + this["thisExpression"]) + " = this;\n"));;
+PL$133/*funRes*/["push"]((("var " + this["thisExpression"]) + " = this;\n"));;
 };
 ;
-PL$134/*funRes*/["push"]((this["tryCatchFunctionStr"] + "(function(){"));;
+PL$133/*funRes*/["push"]((this["tryCatchFunctionStr"] + "(function(){"));;
 };
 ;
-PL$134/*funRes*/["push"](PL$139/*block*/);;
+PL$133/*funRes*/["push"](PL$138/*block*/);;
 if(PL$24/*par*/["promising"]){
-PL$134/*funRes*/["addPost"]("})();\n");;
-PL$134/*funRes*/["addPost"](this["returnReturnPromiseCode"]({"type": this["_returnType"],
+PL$133/*funRes*/["addPost"]("})();\n");;
+PL$133/*funRes*/["addPost"](this["returnReturnPromiseCode"]({"type": this["_returnType"],
 "name": this["returnPromise"],
 "parsed": PL$54/*parParsed*/,
 "errorFun": this["getWarningFun"](PL$54/*parParsed*/)}));;
-PL$134/*funRes*/["addPost"]("}");;
+PL$133/*funRes*/["addPost"]("}");;
 
 }else{
-PL$134/*funRes*/["push"]("}");;
+PL$133/*funRes*/["push"]("}");;
 };
 ;
-PL$142/*completeFun*/ = this["makeCompleteStatement"](PL$134/*funRes*/);
+PL$141/*completeFun*/ = this["makeCompleteStatement"](PL$133/*funRes*/);
 if((this["promising"] && PL$24/*par*/["returnTypename"])){
-PL$143/*returnTypePromiseCheck*/ = this["newResult"]();
-PL$143/*returnTypePromiseCheck*/["push"]("(function(t){");;
-PL$143/*returnTypePromiseCheck*/["push"](this["promisingReturnTypeCheck"]({"type": this["_returnType"],
+PL$142/*returnTypePromiseCheck*/ = this["newResult"]();
+PL$142/*returnTypePromiseCheck*/["push"]("(function(t){");;
+PL$142/*returnTypePromiseCheck*/["push"](this["promisingReturnTypeCheck"]({"type": this["_returnType"],
 "errorFun": this["getWarningFun"](PL$54/*parParsed*/),
 "parsed": PL$54/*parParsed*/}));;
-PL$143/*returnTypePromiseCheck*/["push"]("return t;})(");;
-PL$143/*returnTypePromiseCheck*/["push"](PL$142/*completeFun*/);;
-PL$143/*returnTypePromiseCheck*/["push"](")");;
-PL$142/*completeFun*/ = PL$143/*returnTypePromiseCheck*/;;
+PL$142/*returnTypePromiseCheck*/["push"]("return t;})(");;
+PL$142/*returnTypePromiseCheck*/["push"](PL$141/*completeFun*/);;
+PL$142/*returnTypePromiseCheck*/["push"](")");;
+PL$141/*completeFun*/ = PL$142/*returnTypePromiseCheck*/;;
 };
 ;
-if(PL$127/*funClosure*/){
-PL$144/*handleExtras*/ = (function(PL$145/*dt*/){
+if(PL$126/*funClosure*/){
+PL$143/*handleExtras*/ = (function(PL$144/*dt*/){
 var PL$32/*i*/;
 ;
-if(PL$145/*dt*/["extraTypes"]){
+if(PL$144/*dt*/["extraTypes"]){
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$145/*dt*/["extraTypes"]["length"]);++PL$32/*i*/){{PL$133/*extraTypesRes*/["push"](PL$145/*dt*/["extraTypes"][PL$32/*i*/]["res"]);;
-PL$144/*handleExtras*/(PL$145/*dt*/["extraTypes"][PL$32/*i*/]["type"]);;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$144/*dt*/["extraTypes"]["length"]);++PL$32/*i*/){{PL$132/*extraTypesRes*/["push"](PL$144/*dt*/["extraTypes"][PL$32/*i*/]["res"]);;
+PL$143/*handleExtras*/(PL$144/*dt*/["extraTypes"][PL$32/*i*/]["type"]);;
 }};
 ;
 };
 ;
 ;
 });
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$130/*templateTypesAr*/["length"]);++PL$32/*i*/){{PL$145/*dt*/ = this["getType"](PL$130/*templateTypesAr*/[PL$32/*i*/], PL$24/*par*/);
-PL$144/*handleExtras*/(PL$145/*dt*/);;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$129/*templateTypesAr*/["length"]);++PL$32/*i*/){{PL$144/*dt*/ = this["getType"](PL$129/*templateTypesAr*/[PL$32/*i*/], PL$24/*par*/);
+PL$143/*handleExtras*/(PL$144/*dt*/);;
 }};
 ;
-PL$127/*funClosure*/["push"](PL$142/*completeFun*/, PL$24/*par*/, {"stringEncode": true});;
-PL$127/*funClosure*/["push"](";\"); return communicator.fun; })()");;
-PL$142/*completeFun*/ = this["makeCompleteStatement"](PL$127/*funClosure*/);;
+PL$126/*funClosure*/["push"](PL$141/*completeFun*/, PL$24/*par*/, {"stringEncode": true});;
+PL$126/*funClosure*/["push"](";\"); return communicator.fun; })()");;
+PL$141/*completeFun*/ = this["makeCompleteStatement"](PL$126/*funClosure*/);;
 };
 ;
-PL$146/*thisFunType*/ = this["getFunctionType"](PL$24/*par*/);
-PL$147/*uniqueNameStr*/;
-if(PL$124/*runRemote*/){
-PL$148/*remoteClosure*/ = this["newResult"]();
-PL$147/*uniqueNameStr*/ = this["getUniqueName"]();;
-PL$148/*remoteClosure*/["push"]("(function(f){\n");;
-PL$148/*remoteClosure*/["push"](("promiseland.registerRemote(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])));;
-PL$148/*remoteClosure*/["push"](((((", " + PL$14/*stringEncodeStr*/(this["getModuleHashStr"]())) + ", ") + PL$14/*stringEncodeStr*/(PL$147/*uniqueNameStr*/)) + ", f, "));;
-PL$148/*remoteClosure*/["push"](this["renderType"](PL$146/*thisFunType*/, PL$54/*parParsed*/));;
-PL$148/*remoteClosure*/["push"](");\n");;
-PL$148/*remoteClosure*/["push"]((("if (promiseland.profileHas(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])) + ")){\n"));;
-PL$148/*remoteClosure*/["push"]("return f;\n");;
-PL$148/*remoteClosure*/["push"]("}else{\n");;
-PL$148/*remoteClosure*/["push"]("return function(){\n");;
-PL$148/*remoteClosure*/["push"]((((("return promiseland.remoteExec(" + PL$14/*stringEncodeStr*/(this["getModuleHashStr"]())) + ", ") + PL$14/*stringEncodeStr*/(PL$147/*uniqueNameStr*/)) + ", arguments);\n"));;
-PL$148/*remoteClosure*/["push"]("}\n");;
-PL$148/*remoteClosure*/["push"]("};\n");;
-PL$148/*remoteClosure*/["push"]("})(");;
-PL$148/*remoteClosure*/["push"](PL$142/*completeFun*/);;
-PL$148/*remoteClosure*/["push"](")");;
-PL$49/*res*/["push"](PL$148/*remoteClosure*/);;
+PL$145/*thisFunType*/ = this["getFunctionType"](PL$24/*par*/);
+PL$146/*uniqueNameStr*/;
+if(PL$123/*runRemote*/){
+PL$147/*remoteClosure*/ = this["newResult"]();
+PL$146/*uniqueNameStr*/ = this["getUniqueName"]();;
+PL$147/*remoteClosure*/["push"]("(function(f){\n");;
+PL$147/*remoteClosure*/["push"](("promiseland.registerRemote(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])));;
+PL$147/*remoteClosure*/["push"](((((", " + PL$14/*stringEncodeStr*/(this["getModuleHashStr"]())) + ", ") + PL$14/*stringEncodeStr*/(PL$146/*uniqueNameStr*/)) + ", f, "));;
+PL$147/*remoteClosure*/["push"](this["renderType"](PL$145/*thisFunType*/, PL$54/*parParsed*/));;
+PL$147/*remoteClosure*/["push"](");\n");;
+PL$147/*remoteClosure*/["push"]((("if (promiseland.profileHas(" + PL$14/*stringEncodeStr*/(PL$24/*par*/["frame"]["name"]["value"])) + ")){\n"));;
+PL$147/*remoteClosure*/["push"]("return f;\n");;
+PL$147/*remoteClosure*/["push"]("}else{\n");;
+PL$147/*remoteClosure*/["push"]("return function(){\n");;
+PL$147/*remoteClosure*/["push"]((((("return promiseland.remoteExec(" + PL$14/*stringEncodeStr*/(this["getModuleHashStr"]())) + ", ") + PL$14/*stringEncodeStr*/(PL$146/*uniqueNameStr*/)) + ", arguments);\n"));;
+PL$147/*remoteClosure*/["push"]("}\n");;
+PL$147/*remoteClosure*/["push"]("};\n");;
+PL$147/*remoteClosure*/["push"]("})(");;
+PL$147/*remoteClosure*/["push"](PL$141/*completeFun*/);;
+PL$147/*remoteClosure*/["push"](")");;
+PL$49/*res*/["push"](PL$147/*remoteClosure*/);;
 
 }else{
-PL$49/*res*/["push"](PL$142/*completeFun*/);;
+PL$49/*res*/["push"](PL$141/*completeFun*/);;
 };
 ;
-PL$49/*res*/["setType"](PL$146/*thisFunType*/);;
+PL$49/*res*/["setType"](PL$145/*thisFunType*/);;
 this["unstack"]("isClassObject");;
 this["unstack"]("inheritedAvailable");;
 this["unstack"]("thisType");;
-PL$149/*finalResult*/ = this["newResult"]();
-PL$149/*finalResult*/["push"](this["makeCompleteStatement"](PL$49/*res*/));;
-PL$149/*finalResult*/["setType"](PL$146/*thisFunType*/);;
-return PL$149/*finalResult*/;;
+PL$148/*finalResult*/ = this["newResult"]();
+PL$148/*finalResult*/["push"](this["makeCompleteStatement"](PL$49/*res*/));;
+PL$148/*finalResult*/["setType"](PL$145/*thisFunType*/);;
+return PL$148/*finalResult*/;;
 ;
 });;
 this["expThisExpression"] = (function(PL$24/*par*/){
@@ -1632,7 +1643,7 @@ return PL$49/*res*/;;
 this["identifyClass"] = (function(PL$24/*par*/){
 var PL$50/*r*/;
 var PL$25/*name*/;
-var PL$150/*keywords*/;
+var PL$149/*keywords*/;
 var PL$32/*i*/;
 ;
 PL$50/*r*/ = {};
@@ -1641,27 +1652,27 @@ if(PL$24/*par*/["name"]){
 PL$25/*name*/ = PL$27/*identifierName*/(PL$24/*par*/["name"]);;
 };
 PL$50/*r*/["hasName"] = (PL$25/*name*/ && PL$25/*name*/["length"]);;
-PL$150/*keywords*/ = PL$24/*par*/["keywords"];
-if((PL$150/*keywords*/ && PL$150/*keywords*/["length"])){
+PL$149/*keywords*/ = PL$24/*par*/["keywords"];
+if((PL$149/*keywords*/ && PL$149/*keywords*/["length"])){
 PL$32/*i*/;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$150/*keywords*/["length"]);++PL$32/*i*/){{switch (PL$150/*keywords*/[PL$32/*i*/]["type"]){
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$149/*keywords*/["length"]);++PL$32/*i*/){{switch (PL$149/*keywords*/[PL$32/*i*/]["type"]){
 case "type":
 PL$50/*r*/["isTyped"] = true;;
 break;;
 case "extends":
-PL$50/*r*/["extendsClause"] = PL$150/*keywords*/[PL$32/*i*/];;
+PL$50/*r*/["extendsClause"] = PL$149/*keywords*/[PL$32/*i*/];;
 break;;
 case "sync":
-PL$50/*r*/["syncClause"] = PL$150/*keywords*/[PL$32/*i*/];;
+PL$50/*r*/["syncClause"] = PL$149/*keywords*/[PL$32/*i*/];;
 break;;
 case "track":
-PL$50/*r*/["trackClause"] = PL$150/*keywords*/[PL$32/*i*/];;
+PL$50/*r*/["trackClause"] = PL$149/*keywords*/[PL$32/*i*/];;
 break;;
 case "unique":
-PL$50/*r*/["uniqueClause"] = PL$150/*keywords*/[PL$32/*i*/];;
+PL$50/*r*/["uniqueClause"] = PL$149/*keywords*/[PL$32/*i*/];;
 break;;
 case "savable":
-PL$50/*r*/["savableClause"] = PL$150/*keywords*/[PL$32/*i*/];;
+PL$50/*r*/["savableClause"] = PL$149/*keywords*/[PL$32/*i*/];;
 break;;
 }
 ;
@@ -1674,9 +1685,9 @@ return PL$50/*r*/;;
 ;
 });;
 this["findClasses"] = (function(PL$24/*par*/, PL$49/*res*/){
-var PL$151/*ci*/;
+var PL$150/*ci*/;
 var PL$25/*name*/;
-var PL$94/*extraRes*/;
+var PL$93/*extraRes*/;
 var PL$32/*i*/;
 ;
 if(! PL$49/*res*/){
@@ -1692,14 +1703,14 @@ return PL$49/*res*/;;
 };
 ;
 if((PL$24/*par*/["type"] == "Class")){
-PL$151/*ci*/ = this["identifyClass"](PL$24/*par*/);
-if(PL$151/*ci*/["isTyped"]){
+PL$150/*ci*/ = this["identifyClass"](PL$24/*par*/);
+if(PL$150/*ci*/["isTyped"]){
 if(PL$24/*par*/["body"]["literal"]){
-if(PL$151/*ci*/["hasName"]){
+if(PL$150/*ci*/["hasName"]){
 PL$25/*name*/ = PL$27/*identifierName*/(PL$24/*par*/["name"]);
-PL$94/*extraRes*/ = this["newResult"]();
+PL$93/*extraRes*/ = this["newResult"]();
 this["addType"]({"name": PL$25/*name*/,
-"extraRes": PL$94/*extraRes*/}, PL$24/*par*/);;
+"extraRes": PL$93/*extraRes*/}, PL$24/*par*/);;
 PL$49/*res*/["push"]("var ");;
 PL$49/*res*/["push"](this["renderType"](PL$25/*name*/));;
 PL$49/*res*/["push"](" = classSystem._createProvisionalClass();\n");;
@@ -1709,7 +1720,7 @@ PL$49/*res*/["push"](this["renderType"](PL$25/*name*/));;
 PL$49/*res*/["push"](";\n");;
 PL$49/*res*/["push"]((("var " + this["getConstructorName"](PL$25/*name*/)) + " = undefined;"));;
 PL$49/*res*/["push"](this["_typeReadyCode"]({"typename": PL$25/*name*/}));;
-PL$49/*res*/["push"](PL$94/*extraRes*/);;
+PL$49/*res*/["push"](PL$93/*extraRes*/);;
 };
 ;
 };
@@ -1748,7 +1759,7 @@ return PL$49/*res*/;;
 });;
 this["findVariables"] = (function(PL$24/*par*/){
 var PL$45/*self*/;
-var PL$151/*ci*/;
+var PL$150/*ci*/;
 var PL$32/*i*/;
 ;
 PL$45/*self*/ = this;
@@ -1762,8 +1773,8 @@ this["addLocalVariable"]({"name": PL$27/*identifierName*/(PL$24/*par*/["id"]),
 
 }else{
 if((PL$24/*par*/["type"] == "Class")){
-PL$151/*ci*/ = PL$45/*self*/["identifyClass"](PL$24/*par*/);
-if(PL$151/*ci*/["hasName"]){
+PL$150/*ci*/ = PL$45/*self*/["identifyClass"](PL$24/*par*/);
+if(PL$150/*ci*/["hasName"]){
 this["addLocalVariable"]({"name": PL$27/*identifierName*/(PL$24/*par*/["name"]),
 "typename": "var"}, PL$24/*par*/);;
 };
@@ -1794,83 +1805,83 @@ this["findVariables"](PL$24/*par*/[PL$32/*i*/]);;
 });;
 this["expClassStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$152/*classRes*/;
-var PL$151/*ci*/;
-var PL$128/*hasName*/;
+var PL$151/*classRes*/;
+var PL$150/*ci*/;
+var PL$127/*hasName*/;
 var PL$25/*name*/;
-var PL$103/*isTyped*/;
-var PL$153/*extendsClause*/;
-var PL$154/*syncClause*/;
-var PL$155/*trackClause*/;
-var PL$156/*resultType*/;
-var PL$157/*literal*/;
-var PL$69/*type*/;
-var PL$158/*inheritedObjName*/;
-var PL$159/*lit*/;
-var PL$89/*l*/;
-var PL$160/*prop*/;
+var PL$102/*isTyped*/;
+var PL$152/*extendsClause*/;
+var PL$153/*syncClause*/;
+var PL$154/*trackClause*/;
+var PL$155/*resultType*/;
+var PL$156/*literal*/;
+var PL$68/*type*/;
+var PL$157/*inheritedObjName*/;
+var PL$158/*lit*/;
+var PL$88/*l*/;
+var PL$159/*prop*/;
 var PL$48/*tempRes*/;
-var PL$161/*baseClasses*/;
+var PL$160/*baseClasses*/;
 var PL$32/*i*/;
-var PL$162/*used*/;
-var PL$163/*u*/;
+var PL$161/*used*/;
+var PL$162/*u*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$152/*classRes*/ = this["newResult"]();
-PL$151/*ci*/ = this["identifyClass"](PL$24/*par*/);
-PL$128/*hasName*/ = PL$151/*ci*/["hasName"];
+PL$151/*classRes*/ = this["newResult"]();
+PL$150/*ci*/ = this["identifyClass"](PL$24/*par*/);
+PL$127/*hasName*/ = PL$150/*ci*/["hasName"];
 PL$25/*name*/;
-if(PL$128/*hasName*/){
+if(PL$127/*hasName*/){
 PL$25/*name*/ = PL$27/*identifierName*/(PL$24/*par*/["name"]);;
 };
 ;
-PL$103/*isTyped*/ = PL$151/*ci*/["isTyped"];
-PL$153/*extendsClause*/ = PL$24/*par*/["extendsClause"];
-PL$154/*syncClause*/ = PL$151/*ci*/["syncClause"];
-PL$155/*trackClause*/ = PL$151/*ci*/["trackClause"];
-PL$156/*resultType*/ = this["getType"]("var");
+PL$102/*isTyped*/ = PL$150/*ci*/["isTyped"];
+PL$152/*extendsClause*/ = PL$24/*par*/["extendsClause"];
+PL$153/*syncClause*/ = PL$150/*ci*/["syncClause"];
+PL$154/*trackClause*/ = PL$150/*ci*/["trackClause"];
+PL$155/*resultType*/ = this["getType"]("var");
 this["stack"]("inheritedSystem");;
 this["inheritedSystem"] = this["newInherited"]();;
-if(PL$103/*isTyped*/){
+if(PL$102/*isTyped*/){
 this["common"]["useClassSystem"] = true;;
-PL$152/*classRes*/["push"]("classSystem.createClass(");;
+PL$151/*classRes*/["push"]("classSystem.createClass(");;
 if(PL$24/*par*/["body"]["literal"]){
-if(PL$128/*hasName*/){
+if(PL$127/*hasName*/){
 this["inheritedSystem"]["type"] = this["getType"](PL$25/*name*/, PL$24/*par*/);;
 };
 ;
 this["stack"]("isClassObject");;
 this["isClassObject"] = true;;
-PL$157/*literal*/ = this["createClassLiteral"](PL$24/*par*/["body"]["literal"], PL$151/*ci*/, PL$25/*name*/);
-PL$152/*classRes*/["push"](this["stringifyClassLiteral"](PL$157/*literal*/));;
-PL$152/*classRes*/["push"](", ");;
-PL$152/*classRes*/["push"](this["createClassDefaults"](PL$24/*par*/["body"]["literal"]));;
+PL$156/*literal*/ = this["createClassLiteral"](PL$24/*par*/["body"]["literal"], PL$150/*ci*/, PL$25/*name*/);
+PL$151/*classRes*/["push"](this["stringifyClassLiteral"](PL$156/*literal*/));;
+PL$151/*classRes*/["push"](", ");;
+PL$151/*classRes*/["push"](this["createClassDefaults"](PL$24/*par*/["body"]["literal"]));;
 this["unstack"]("isClassObject");;
-if(PL$128/*hasName*/){
-PL$69/*type*/ = this["createType"]({"name": PL$25/*name*/,
-"literal": PL$157/*literal*/,
+if(PL$127/*hasName*/){
+PL$68/*type*/ = this["createType"]({"name": PL$25/*name*/,
+"literal": PL$156/*literal*/,
 "par": PL$24/*par*/});
 };
 ;
 
 }else{
-PL$152/*classRes*/["push"]("{}, ");;
-PL$152/*classRes*/["push"](this["parseExpression"](PL$24/*par*/["body"]["expression"]));;
+PL$151/*classRes*/["push"]("{}, ");;
+PL$151/*classRes*/["push"](this["parseExpression"](PL$24/*par*/["body"]["expression"]));;
 };
 ;
-PL$152/*classRes*/["push"](")");;
+PL$151/*classRes*/["push"](")");;
 
 }else{
-PL$158/*inheritedObjName*/ = this["getUniqueName"]("inherited");
-PL$152/*classRes*/["push"]("(function(){");;
+PL$157/*inheritedObjName*/ = this["getUniqueName"]("inherited");
+PL$151/*classRes*/["push"]("(function(){");;
 if(PL$24/*par*/["body"]["literal"]){
 this["stack"]("preventreturn");;
 this["preventreturn"] = true;;
-PL$159/*lit*/ = PL$24/*par*/["body"]["literal"];
-PL$89/*l*/ = ((PL$159/*lit*/["properties"] && PL$159/*lit*/["properties"]["length"]) || 0);
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$160/*prop*/ = PL$159/*lit*/["properties"][PL$32/*i*/];
-if((PL$160/*prop*/["kind"] == "block")){
-PL$152/*classRes*/["push"](this["parseExpression"](PL$160/*prop*/));;
+PL$158/*lit*/ = PL$24/*par*/["body"]["literal"];
+PL$88/*l*/ = ((PL$158/*lit*/["properties"] && PL$158/*lit*/["properties"]["length"]) || 0);
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$159/*prop*/ = PL$158/*lit*/["properties"][PL$32/*i*/];
+if((PL$159/*prop*/["kind"] == "block")){
+PL$151/*classRes*/["push"](this["parseExpression"](PL$159/*prop*/));;
 };
 ;
 }};
@@ -1878,7 +1889,7 @@ PL$152/*classRes*/["push"](this["parseExpression"](PL$160/*prop*/));;
 this["unstack"]("preventreturn");;
 };
 ;
-PL$152/*classRes*/["push"]((("var " + PL$158/*inheritedObjName*/) + " = {};\n"));;
+PL$151/*classRes*/["push"]((("var " + PL$157/*inheritedObjName*/) + " = {};\n"));;
 PL$48/*tempRes*/ = this["newResult"]();
 PL$48/*tempRes*/["push"]("var res = promiseland.createClass(");;
 if(PL$24/*par*/["body"]["literal"]){
@@ -1889,143 +1900,143 @@ PL$48/*tempRes*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*pa
 };
 ;
 PL$48/*tempRes*/["push"](", [");;
-PL$161/*baseClasses*/ = ((PL$153/*extendsClause*/ && PL$153/*extendsClause*/["baseClasses"]) || []);
+PL$160/*baseClasses*/ = ((PL$152/*extendsClause*/ && PL$152/*extendsClause*/["baseClasses"]) || []);
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$161/*baseClasses*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$160/*baseClasses*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
 PL$48/*tempRes*/["push"](", ");;
 };
 ;
-PL$48/*tempRes*/["push"](this["expectTypeVar"](this["parseExpression"](PL$161/*baseClasses*/[PL$32/*i*/])));;
+PL$48/*tempRes*/["push"](this["expectTypeVar"](this["parseExpression"](PL$160/*baseClasses*/[PL$32/*i*/])));;
 }};
 ;
 PL$48/*tempRes*/["push"]("], ");;
-PL$48/*tempRes*/["push"](PL$158/*inheritedObjName*/);;
+PL$48/*tempRes*/["push"](PL$157/*inheritedObjName*/);;
 PL$48/*tempRes*/["push"](");");;
-PL$152/*classRes*/["push"](PL$48/*tempRes*/);;
-PL$152/*classRes*/["push"]("\n");;
-PL$162/*used*/ = this["inheritedSystem"]["used"];
-PL$163/*u*/;
-for(PL$163/*u*/ in PL$162/*used*/){PL$152/*classRes*/["push"]((((((("var " + PL$162/*used*/[PL$163/*u*/]) + " = ") + PL$158/*inheritedObjName*/) + "[") + PL$14/*stringEncodeStr*/(PL$163/*u*/)) + "];\n"));;
+PL$151/*classRes*/["push"](PL$48/*tempRes*/);;
+PL$151/*classRes*/["push"]("\n");;
+PL$161/*used*/ = this["inheritedSystem"]["used"];
+PL$162/*u*/;
+for(PL$162/*u*/ in PL$161/*used*/){PL$151/*classRes*/["push"]((((((("var " + PL$161/*used*/[PL$162/*u*/]) + " = ") + PL$157/*inheritedObjName*/) + "[") + PL$14/*stringEncodeStr*/(PL$162/*u*/)) + "];\n"));;
 };
 ;
-PL$152/*classRes*/["push"]("return res; })()");;
+PL$151/*classRes*/["push"]("return res; })()");;
 };
 ;
-if(PL$128/*hasName*/){
-if(PL$103/*isTyped*/){
+if(PL$127/*hasName*/){
+if(PL$102/*isTyped*/){
 PL$49/*res*/["addPre"](this["_resolveClassCode"]({"name": PL$24/*par*/["name"],
-"classRes": PL$152/*classRes*/,
+"classRes": PL$151/*classRes*/,
 "parsed": PL$24/*par*/}));;
 
 }else{
 PL$49/*res*/["addPre"]((this["getVariableName"](PL$24/*par*/["name"]) + " = "));;
-PL$49/*res*/["addPre"](PL$152/*classRes*/);;
+PL$49/*res*/["addPre"](PL$151/*classRes*/);;
 PL$49/*res*/["addPre"](";");;
 };
 ;
 PL$49/*res*/["push"](this["getVariableName"](PL$24/*par*/["name"]));;
 
 }else{
-PL$49/*res*/["push"](PL$152/*classRes*/);;
+PL$49/*res*/["push"](PL$151/*classRes*/);;
 };
 ;
-PL$49/*res*/["setType"](PL$156/*resultType*/);;
+PL$49/*res*/["setType"](PL$155/*resultType*/);;
 this["unstack"]("inheritedSystem");;
 return PL$49/*res*/;;
 ;
 });;
 this["_resolveClassCode"] = (function(PL$24/*par*/){
-var PL$68/*parsed*/;
+var PL$67/*parsed*/;
 var PL$49/*res*/;
 ;
-PL$68/*parsed*/ = PL$24/*par*/["parsed"];
+PL$67/*parsed*/ = PL$24/*par*/["parsed"];
 PL$49/*res*/ = this["newResult"]();
 this["common"]["useClassSystem"] = true;;
-PL$49/*res*/["push"]("classSystem._resolveProvisional(", PL$68/*parsed*/);;
-PL$49/*res*/["push"](this["renderType"](PL$24/*par*/["name"], PL$68/*parsed*/), PL$68/*parsed*/);;
-PL$49/*res*/["push"](", ", PL$68/*parsed*/);;
-PL$49/*res*/["push"](PL$24/*par*/["classRes"], PL$68/*parsed*/);;
-PL$49/*res*/["push"](");", PL$68/*parsed*/);;
+PL$49/*res*/["push"]("classSystem._resolveProvisional(", PL$67/*parsed*/);;
+PL$49/*res*/["push"](this["renderType"](PL$24/*par*/["name"], PL$67/*parsed*/), PL$67/*parsed*/);;
+PL$49/*res*/["push"](", ", PL$67/*parsed*/);;
+PL$49/*res*/["push"](PL$24/*par*/["classRes"], PL$67/*parsed*/);;
+PL$49/*res*/["push"](");", PL$67/*parsed*/);;
 return PL$49/*res*/;;
 ;
 });;
-this["createClassLiteral"] = (function(PL$24/*par*/, PL$151/*ci*/, PL$74/*parName*/){
-var PL$164/*ret*/;
+this["createClassLiteral"] = (function(PL$24/*par*/, PL$150/*ci*/, PL$73/*parName*/){
+var PL$163/*ret*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$160/*prop*/;
-var PL$165/*defaultValue*/;
-var PL$69/*type*/;
+var PL$88/*l*/;
+var PL$159/*prop*/;
+var PL$164/*defaultValue*/;
+var PL$68/*type*/;
 var PL$25/*name*/;
 ;
-PL$164/*ret*/ = {"members": [],
+PL$163/*ret*/ = {"members": [],
 "extends": [],
 "hasFreePart": true,
 "parsed": PL$24/*par*/,
-"track": (PL$151/*ci*/["trackClause"] ? true : false),
-"sync": PL$151/*ci*/["syncClause"],
-"unique": PL$151/*ci*/["uniqueClause"],
-"savable": PL$151/*ci*/["savableClause"],
-"name": PL$74/*parName*/,
+"track": (PL$150/*ci*/["trackClause"] ? true : false),
+"sync": PL$150/*ci*/["syncClause"],
+"unique": PL$150/*ci*/["uniqueClause"],
+"savable": PL$150/*ci*/["savableClause"],
+"name": PL$73/*parName*/,
 "hashStr": this["getModuleHashStr"]()};
 PL$32/*i*/ = 0;
-PL$89/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$160/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
-PL$165/*defaultValue*/;
-PL$69/*type*/;
-if((PL$160/*prop*/["kind"] == "init")){
-PL$69/*type*/ = (PL$160/*prop*/["typename"] ? this["getType"](PL$160/*prop*/["typename"], PL$24/*par*/) : undefined);;
-if(PL$160/*prop*/["value"]){
-if(PL$69/*type*/){
-PL$165/*defaultValue*/ = this["parseAsType"](PL$69/*type*/, PL$160/*prop*/["value"]);;
+PL$88/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$159/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
+PL$164/*defaultValue*/;
+PL$68/*type*/;
+if((PL$159/*prop*/["kind"] == "init")){
+PL$68/*type*/ = (PL$159/*prop*/["typename"] ? this["getType"](PL$159/*prop*/["typename"], PL$24/*par*/) : undefined);;
+if(PL$159/*prop*/["value"]){
+if(PL$68/*type*/){
+PL$164/*defaultValue*/ = this["parseAsType"](PL$68/*type*/, PL$159/*prop*/["value"]);;
 
 }else{
-PL$165/*defaultValue*/ = this["parseExpression"](PL$160/*prop*/["value"]);;
-PL$69/*type*/ = PL$165/*defaultValue*/["getType"]();;
+PL$164/*defaultValue*/ = this["parseExpression"](PL$159/*prop*/["value"]);;
+PL$68/*type*/ = PL$164/*defaultValue*/["getType"]();;
 };
 ;
 };
 ;
-if(! PL$69/*type*/){
-PL$69/*type*/ = this["getType"]("var");;
+if(! PL$68/*type*/){
+PL$68/*type*/ = this["getType"]("var");;
 };
 ;
-PL$164/*ret*/["members"]["push"]({"name": PL$27/*identifierName*/(PL$160/*prop*/["key"]),
-"type": PL$69/*type*/,
-"defaultValue": PL$165/*defaultValue*/});;
+PL$163/*ret*/["members"]["push"]({"name": PL$27/*identifierName*/(PL$159/*prop*/["key"]),
+"type": PL$68/*type*/,
+"defaultValue": PL$164/*defaultValue*/});;
 
 }else{
-if((PL$160/*prop*/["kind"] == "function")){
-PL$25/*name*/ = PL$27/*identifierName*/(PL$160/*prop*/["id"]);
-PL$160/*prop*/["id"] = undefined;;
-PL$165/*defaultValue*/ = this["parseExpression"](PL$160/*prop*/["value"]);;
-PL$69/*type*/ = PL$165/*defaultValue*/["getType"]();;
-PL$164/*ret*/["members"]["push"]({"name": PL$25/*name*/,
-"type": PL$69/*type*/,
-"defaultValue": PL$165/*defaultValue*/});;
+if((PL$159/*prop*/["kind"] == "function")){
+PL$25/*name*/ = PL$27/*identifierName*/(PL$159/*prop*/["id"]);
+PL$159/*prop*/["id"] = undefined;;
+PL$164/*defaultValue*/ = this["parseExpression"](PL$159/*prop*/["value"]);;
+PL$68/*type*/ = PL$164/*defaultValue*/["getType"]();;
+PL$163/*ret*/["members"]["push"]({"name": PL$25/*name*/,
+"type": PL$68/*type*/,
+"defaultValue": PL$164/*defaultValue*/});;
 
 }else{
-this["error"](PL$160/*prop*/, PL$12/*errorMsg*/["unknownPropertyAssignmentType"]);;
+this["error"](PL$159/*prop*/, PL$12/*errorMsg*/["unknownPropertyAssignmentType"]);;
 };
 };
 ;
 }};
 ;
-return PL$164/*ret*/;;
+return PL$163/*ret*/;;
 ;
 });;
 this["stringifyClassLiteral"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
+var PL$88/*l*/;
 var PL$33/*m*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$49/*res*/["push"]("{");;
 PL$49/*res*/["push"]("members: [");;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = PL$24/*par*/["members"]["length"];
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$33/*m*/ = PL$24/*par*/["members"][PL$32/*i*/];
+PL$88/*l*/ = PL$24/*par*/["members"]["length"];
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$33/*m*/ = PL$24/*par*/["members"][PL$32/*i*/];
 if(PL$32/*i*/){
 PL$49/*res*/["push"](",");;
 };
@@ -2046,7 +2057,7 @@ PL$49/*res*/["push"](", \"track\": true");;
 ;
 if(PL$24/*par*/["sync"]){
 PL$49/*res*/["push"](", \"sync\": ");;
-PL$49/*res*/["push"](PL$166/*JSON*/["stringify"](PL$24/*par*/["sync"]));;
+PL$49/*res*/["push"](PL$165/*JSON*/["stringify"](PL$24/*par*/["sync"]));;
 PL$49/*res*/["push"]((", \"hashStr\": " + PL$14/*stringEncodeStr*/(PL$24/*par*/["hashStr"])));;
 PL$49/*res*/["push"]((", \"name\": " + PL$14/*stringEncodeStr*/(PL$24/*par*/["name"])));;
 };
@@ -2066,30 +2077,30 @@ return PL$49/*res*/;;
 this["createClassDefaults"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$167/*comma*/;
-var PL$160/*prop*/;
+var PL$88/*l*/;
+var PL$166/*comma*/;
+var PL$159/*prop*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$49/*res*/["push"]("{");;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
-PL$167/*comma*/;
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$160/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
-if((PL$160/*prop*/["kind"] == "init")){
-if(PL$167/*comma*/){
+PL$88/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
+PL$166/*comma*/;
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$159/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
+if((PL$159/*prop*/["kind"] == "init")){
+if(PL$166/*comma*/){
 PL$49/*res*/["push"](", ");;
 };
 ;
-PL$49/*res*/["push"]((PL$14/*stringEncodeStr*/(PL$27/*identifierName*/(PL$160/*prop*/["key"])) + ": "));;
-if(PL$160/*prop*/["value"]){
-PL$49/*res*/["push"](this["parseExpression"](PL$160/*prop*/["value"]));;
+PL$49/*res*/["push"]((PL$14/*stringEncodeStr*/(PL$27/*identifierName*/(PL$159/*prop*/["key"])) + ": "));;
+if(PL$159/*prop*/["value"]){
+PL$49/*res*/["push"](this["parseExpression"](PL$159/*prop*/["value"]));;
 
 }else{
 PL$49/*res*/["push"]("undefined");;
 };
 ;
-PL$167/*comma*/ = true;;
+PL$166/*comma*/ = true;;
 };
 ;
 }};
@@ -2100,38 +2111,38 @@ return PL$49/*res*/;;
 });;
 this["addType"] = (function(PL$24/*par*/, PL$54/*parParsed*/){
 var PL$25/*name*/;
-var PL$69/*type*/;
+var PL$68/*type*/;
 ;
 PL$25/*name*/ = PL$27/*identifierName*/(PL$24/*par*/["name"]);
 if(this["types"]["has"][PL$25/*name*/]){
 this["error"](PL$54/*parParsed*/, PL$12/*errorMsg*/["typeExists"]);;
 };
 ;
-PL$69/*type*/;
+PL$68/*type*/;
 if(PL$24/*par*/["dynamic"]){
-PL$69/*type*/ = {"isDynamic": true,
+PL$68/*type*/ = {"isDynamic": true,
 "extraRes": PL$24/*par*/["extraRes"]};;
 
 }else{
-PL$69/*type*/ = this["getProvisionalType"](PL$54/*parParsed*/);;
+PL$68/*type*/ = this["getProvisionalType"](PL$54/*parParsed*/);;
 };
 ;
 this["types"]["set"](PL$25/*name*/, {"name": PL$25/*name*/,
-"type": PL$69/*type*/,
-"isDynamic": PL$69/*type*/["isDynamic"],
+"type": PL$68/*type*/,
+"isDynamic": PL$68/*type*/["isDynamic"],
 "extraRes": PL$24/*par*/["extraRes"]});;
 ;
 });;
-this["getTypeName"] = (function(PL$71/*parType*/, PL$54/*parParsed*/){
+this["getTypeName"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 var PL$25/*name*/;
-var PL$85/*typesAr*/;
+var PL$84/*typesAr*/;
 var PL$32/*i*/;
 ;
 PL$25/*name*/;
-PL$85/*typesAr*/ = this["types"]["getArray"]();
+PL$84/*typesAr*/ = this["types"]["getArray"]();
 PL$32/*i*/;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$85/*typesAr*/["length"]);++PL$32/*i*/){{PL$25/*name*/ = PL$85/*typesAr*/[PL$32/*i*/]["key"];;
-if((this["types"]["get"](PL$25/*name*/)["type"] === PL$71/*parType*/)){
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$84/*typesAr*/["length"]);++PL$32/*i*/){{PL$25/*name*/ = PL$84/*typesAr*/[PL$32/*i*/]["key"];;
+if((this["types"]["get"](PL$25/*name*/)["type"] === PL$70/*parType*/)){
 return this["types"]["get"](PL$25/*name*/)["name"];;
 };
 ;
@@ -2143,8 +2154,8 @@ this["error"](PL$54/*parParsed*/, PL$12/*errorMsg*/["internalTypeHasNoName"]);;
 this["createType"] = (function(PL$24/*par*/){
 var PL$25/*name*/;
 var PL$60/*entry*/;
-var PL$69/*type*/;
-var PL$168/*provisional*/;
+var PL$68/*type*/;
+var PL$167/*provisional*/;
 ;
 PL$25/*name*/ = PL$27/*identifierName*/(PL$24/*par*/["name"]);
 PL$60/*entry*/ = this["_getTypeEntry"](PL$24/*par*/["name"]);
@@ -2156,28 +2167,28 @@ if(PL$60/*entry*/["isDefined"]){
 this["error"](PL$24/*par*/["par"], PL$12/*errorMsg*/["typeRedefinition"]);;
 };
 ;
-PL$69/*type*/ = PL$18/*classSystem*/["createClass"](PL$24/*par*/["literal"], {});
-PL$168/*provisional*/ = PL$60/*entry*/["type"];
-PL$60/*entry*/["type"] = PL$69/*type*/;;
+PL$68/*type*/ = PL$18/*classSystem*/["createClass"](PL$24/*par*/["literal"], {});
+PL$167/*provisional*/ = PL$60/*entry*/["type"];
+PL$60/*entry*/["type"] = PL$68/*type*/;;
 try
-{this["resolveProvisional"](PL$168/*provisional*/, PL$69/*type*/);;
-}catch(PL$169/*e*/){this["error"](PL$24/*par*/["par"], PL$12/*errorMsg*/["typeRedefinition"]);;
+{this["resolveProvisional"](PL$167/*provisional*/, PL$68/*type*/);;
+}catch(PL$168/*e*/){this["error"](PL$24/*par*/["par"], PL$12/*errorMsg*/["typeRedefinition"]);;
 };
 ;
 PL$60/*entry*/["isDefined"] = true;;
 ;
 });;
-this["_getTypeEntry"] = (function(PL$74/*parName*/, PL$54/*parParsed*/, PL$24/*par*/){
+this["_getTypeEntry"] = (function(PL$73/*parName*/, PL$54/*parParsed*/, PL$24/*par*/){
 var PL$25/*name*/;
-var PL$170/*throwError*/;
-var PL$126/*typename*/;
-var PL$171/*typeEntry*/;
-var PL$94/*extraRes*/;
+var PL$169/*throwError*/;
+var PL$125/*typename*/;
+var PL$170/*typeEntry*/;
+var PL$93/*extraRes*/;
 ;
-PL$25/*name*/ = PL$27/*identifierName*/(PL$74/*parName*/);
-PL$170/*throwError*/ = true;
+PL$25/*name*/ = PL$27/*identifierName*/(PL$73/*parName*/);
+PL$169/*throwError*/ = true;
 if((PL$24/*par*/ && PL$24/*par*/["dontThrow"])){
-PL$170/*throwError*/ = false;;
+PL$169/*throwError*/ = false;;
 };
 ;
 if(this["types"]["has"](PL$25/*name*/)){
@@ -2185,42 +2196,42 @@ return this["types"]["get"](PL$25/*name*/);;
 };
 ;
 if((PL$25/*name*/[(PL$25/*name*/["length"] - 1)] == "*")){
-PL$126/*typename*/ = PL$25/*name*/["substr"](0, (PL$25/*name*/["length"] - 1));
-PL$171/*typeEntry*/ = this["_getTypeEntry"](PL$126/*typename*/, PL$54/*parParsed*/, PL$24/*par*/);
-if(PL$171/*typeEntry*/){
-PL$94/*extraRes*/ = PL$171/*typeEntry*/["extraRes"];
+PL$125/*typename*/ = PL$25/*name*/["substr"](0, (PL$25/*name*/["length"] - 1));
+PL$170/*typeEntry*/ = this["_getTypeEntry"](PL$125/*typename*/, PL$54/*parParsed*/, PL$24/*par*/);
+if(PL$170/*typeEntry*/){
+PL$93/*extraRes*/ = PL$170/*typeEntry*/["extraRes"];
 this["types"]["set"](PL$25/*name*/, {"name": PL$25/*name*/,
-"type": PL$18/*classSystem*/["_createPromiseOfClass"](PL$171/*typeEntry*/["type"]),
+"type": PL$18/*classSystem*/["_createPromiseOfClass"](PL$170/*typeEntry*/["type"]),
 "isDynamic": false,
-"extraRes": PL$94/*extraRes*/});;
-PL$94/*extraRes*/["push"]("var ");;
-PL$94/*extraRes*/["push"](this["renderType"](PL$25/*name*/));;
+"extraRes": PL$93/*extraRes*/});;
+PL$93/*extraRes*/["push"]("var ");;
+PL$93/*extraRes*/["push"](this["renderType"](PL$25/*name*/));;
 this["common"]["useClassSystem"] = true;;
-PL$94/*extraRes*/["push"](" = classSystem._createPromiseOfClass(");;
-PL$94/*extraRes*/["push"](this["renderType"](PL$126/*typename*/));;
-PL$94/*extraRes*/["push"](");\nvar ");;
-PL$94/*extraRes*/["push"]((this["getVariableName"](PL$25/*name*/) + " = "));;
-PL$94/*extraRes*/["push"](this["renderType"](PL$25/*name*/));;
-PL$94/*extraRes*/["push"](";\n");;
-PL$94/*extraRes*/["push"]((("var " + this["getConstructorName"](PL$25/*name*/)) + " = undefined;"));;
-PL$94/*extraRes*/["push"](this["_typeReadyCode"]({"typename": PL$25/*name*/,
+PL$93/*extraRes*/["push"](" = classSystem._createPromiseOfClass(");;
+PL$93/*extraRes*/["push"](this["renderType"](PL$125/*typename*/));;
+PL$93/*extraRes*/["push"](");\nvar ");;
+PL$93/*extraRes*/["push"]((this["getVariableName"](PL$25/*name*/) + " = "));;
+PL$93/*extraRes*/["push"](this["renderType"](PL$25/*name*/));;
+PL$93/*extraRes*/["push"](";\n");;
+PL$93/*extraRes*/["push"]((("var " + this["getConstructorName"](PL$25/*name*/)) + " = undefined;"));;
+PL$93/*extraRes*/["push"](this["_typeReadyCode"]({"typename": PL$25/*name*/,
 "noConstructor": false}));;
 return this["types"]["get"](PL$25/*name*/);;
 };
 ;
 };
 ;
-if(! PL$170/*throwError*/){
+if(! PL$169/*throwError*/){
 return;;
 };
 ;
 this["error"](PL$54/*parParsed*/, PL$12/*errorMsg*/["typeUndeclared"], {"name": PL$25/*name*/});;
 ;
 });;
-this["getType"] = (function(PL$74/*parName*/, PL$54/*parParsed*/, PL$24/*par*/){
+this["getType"] = (function(PL$73/*parName*/, PL$54/*parParsed*/, PL$24/*par*/){
 var PL$60/*entry*/;
 ;
-PL$60/*entry*/ = this["_getTypeEntry"](PL$74/*parName*/, PL$54/*parParsed*/, PL$24/*par*/);
+PL$60/*entry*/ = this["_getTypeEntry"](PL$73/*parName*/, PL$54/*parParsed*/, PL$24/*par*/);
 if(PL$60/*entry*/){
 return PL$60/*entry*/["type"];;
 };
@@ -2237,11 +2248,11 @@ return this["getType"]("var");;
 ;
 });;
 this["localClassConstructors"] = {};;
-this["getConstructorName"] = (function(PL$74/*parName*/){
+this["getConstructorName"] = (function(PL$73/*parName*/){
 var PL$25/*name*/;
 var PL$30/*t*/;
 ;
-PL$25/*name*/ = PL$27/*identifierName*/(PL$74/*parName*/);
+PL$25/*name*/ = PL$27/*identifierName*/(PL$73/*parName*/);
 if(this["types"]["has"](PL$25/*name*/)){
 PL$30/*t*/ = this["types"]["get"](PL$25/*name*/);
 if(! PL$30/*t*/["constructorName"]){
@@ -2255,88 +2266,88 @@ this["localClassConstructors"][PL$25/*name*/] = PL$30/*t*/["constructorName"];;
 return PL$30/*t*/["constructorName"];;
 };
 ;
-this["error"](PL$74/*parName*/, PL$12/*errorMsg*/["typeUndeclared"], {"name": PL$25/*name*/});;
+this["error"](PL$73/*parName*/, PL$12/*errorMsg*/["typeUndeclared"], {"name": PL$25/*name*/});;
 ;
 });;
 this["expTryStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$172/*catchPromise*/;
-var PL$173/*continuePromise*/;
-var PL$137/*b*/;
-var PL$138/*extraPar*/;
-var PL$174/*temporaryPs*/;
+var PL$171/*catchPromise*/;
+var PL$172/*continuePromise*/;
+var PL$136/*b*/;
+var PL$137/*extraPar*/;
+var PL$173/*temporaryPs*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$172/*catchPromise*/;
-PL$173/*continuePromise*/;
+PL$171/*catchPromise*/;
+PL$172/*continuePromise*/;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
 this["stack"]("tryCatchFunctionStr");;
 this["stack"]("catchFunctionStr");;
-PL$173/*continuePromise*/ = this["getUniqueName"]();;
-PL$49/*res*/["addPre"]((((("var " + PL$173/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
-PL$172/*catchPromise*/ = this["getUniqueName"]();;
-PL$49/*res*/["addPre"]((((("var " + PL$172/*catchPromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$172/*continuePromise*/ = this["getUniqueName"]();;
+PL$49/*res*/["addPre"]((((("var " + PL$172/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$171/*catchPromise*/ = this["getUniqueName"]();;
+PL$49/*res*/["addPre"]((((("var " + PL$171/*catchPromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
 this["tryCatchFunctionStr"] = (this["getUniqueName"]() + "/*try catch*/");;
-PL$49/*res*/["addPre"]((((("var " + this["tryCatchFunctionStr"]) + " = function(code){ return function(res){ try{code(res);}catch(e){ ") + PL$172/*catchPromise*/) + ".resolve(e); }; }; };\n"));;
+PL$49/*res*/["addPre"]((((("var " + this["tryCatchFunctionStr"]) + " = function(code){ return function(res){ try{code(res);}catch(e){ ") + PL$171/*catchPromise*/) + ".resolve(e); }; }; };\n"));;
 this["catchFunctionStr"] = this["getUniqueName"]();;
-PL$49/*res*/["addPre"]((((("var " + this["catchFunctionStr"]) + " = function(e){ ") + PL$172/*catchPromise*/) + ".resolve(e); };\n"));;
+PL$49/*res*/["addPre"]((((("var " + this["catchFunctionStr"]) + " = function(e){ ") + PL$171/*catchPromise*/) + ".resolve(e); };\n"));;
 PL$49/*res*/["push"]((this["tryCatchFunctionStr"] + "(function()"));;
 
 }else{
 PL$49/*res*/["push"]("try\n");;
 };
 ;
-PL$137/*b*/ = PL$24/*par*/["block"];
-PL$138/*extraPar*/ = {};
-PL$137/*b*/["brackets"] = true;;
+PL$136/*b*/ = PL$24/*par*/["block"];
+PL$137/*extraPar*/ = {};
+PL$136/*b*/["brackets"] = true;;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
-PL$138/*extraPar*/["postCode"] = this["newResult"]((PL$173/*continuePromise*/ + ".resolve()"));;
+PL$137/*extraPar*/["postCode"] = this["newResult"]((PL$172/*continuePromise*/ + ".resolve()"));;
 };
 ;
-PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/)));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/)));;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
 this["unstack"]("tryCatchFunctionStr");;
 this["unstack"]("catchFunctionStr");;
 PL$49/*res*/["push"](")();\n");;
-PL$49/*res*/["push"]((((PL$172/*catchPromise*/ + ".then(") + this["tryCatchFunctionStr"]) + "(function("));;
+PL$49/*res*/["push"]((((PL$171/*catchPromise*/ + ".then(") + this["tryCatchFunctionStr"]) + "(function("));;
 
 }else{
 PL$49/*res*/["push"]("catch(");;
 };
 ;
-PL$174/*temporaryPs*/;
+PL$173/*temporaryPs*/;
 if(PL$24/*par*/["handler"]["param"]){
 PL$49/*res*/["push"](this["getVariableName"](PL$27/*identifierName*/(PL$24/*par*/["handler"]["param"])));;
-PL$174/*temporaryPs*/ = this["addLocalVariableTemporary"]({"name": PL$27/*identifierName*/(PL$24/*par*/["handler"]["param"]),
+PL$173/*temporaryPs*/ = this["addLocalVariableTemporary"]({"name": PL$27/*identifierName*/(PL$24/*par*/["handler"]["param"]),
 "typename": "var",
 "parameter": true}, PL$24/*par*/["handler"]);;
 };
 ;
 PL$49/*res*/["push"](")");;
-PL$137/*b*/ = PL$24/*par*/["handler"]["body"];;
-PL$138/*extraPar*/ = {};;
-PL$137/*b*/["brackets"] = true;;
+PL$136/*b*/ = PL$24/*par*/["handler"]["body"];;
+PL$137/*extraPar*/ = {};;
+PL$136/*b*/["brackets"] = true;;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
-PL$138/*extraPar*/["postCode"] = this["newResult"]((PL$173/*continuePromise*/ + ".resolve();"));;
+PL$137/*extraPar*/["postCode"] = this["newResult"]((PL$172/*continuePromise*/ + ".resolve();"));;
 };
 ;
-PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/)));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/)));;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
 PL$49/*res*/["push"]("));\n");;
-PL$49/*res*/["push"](PL$173/*continuePromise*/);;
+PL$49/*res*/["push"](PL$172/*continuePromise*/);;
 PL$49/*res*/["push"](((".then(" + this["tryCatchFunctionStr"]) + "(function(){"));;
 PL$49/*res*/["addPost"]((("}), " + this["catchFunctionStr"]) + ")"));;
 };
 ;
 if(PL$24/*par*/["finally"]){
 PL$49/*res*/["push"]("finally");;
-PL$137/*b*/ = PL$24/*par*/["finally"];;
-PL$137/*b*/["brackers"] = true;;
-PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$137/*b*/)));;
+PL$136/*b*/ = PL$24/*par*/["finally"];;
+PL$136/*b*/["brackers"] = true;;
+PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$136/*b*/)));;
 };
 ;
-if(PL$174/*temporaryPs*/){
-PL$174/*temporaryPs*/["resolve"]();;
+if(PL$173/*temporaryPs*/){
+PL$173/*temporaryPs*/["resolve"]();;
 };
 ;
 PL$49/*res*/["setType"](PL$19/*statementType*/);;
@@ -2349,13 +2360,13 @@ return (this["hashStr"] || "unknownhash");;
 ;
 });;
 this["makeStatement"] = (function(PL$24/*par*/){
-var PL$175/*statementRes*/;
+var PL$174/*statementRes*/;
 ;
-PL$175/*statementRes*/ = this["newResult"]();
-PL$175/*statementRes*/["setStatement"]();;
-PL$175/*statementRes*/["push"](PL$24/*par*/);;
-PL$175/*statementRes*/["push"](";\n");;
-return PL$175/*statementRes*/;;
+PL$174/*statementRes*/ = this["newResult"]();
+PL$174/*statementRes*/["setStatement"]();;
+PL$174/*statementRes*/["push"](PL$24/*par*/);;
+PL$174/*statementRes*/["push"](";\n");;
+return PL$174/*statementRes*/;;
 ;
 });;
 this["expBlockStatement"] = (function(PL$24/*par*/){
@@ -2367,15 +2378,15 @@ PL$49/*res*/["pushType"](this["blockCreator"](PL$24/*par*/));;
 return PL$49/*res*/;;
 ;
 });;
-this["blockCreator"] = (function(PL$24/*par*/, PL$176/*parExtra*/){
+this["blockCreator"] = (function(PL$24/*par*/, PL$175/*parExtra*/){
 var PL$49/*res*/;
-var PL$177/*blockRes*/;
-var PL$178/*sAr*/;
+var PL$176/*blockRes*/;
+var PL$177/*sAr*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
+var PL$88/*l*/;
 ;
-if(! PL$176/*parExtra*/){
-PL$176/*parExtra*/ = {};;
+if(! PL$175/*parExtra*/){
+PL$175/*parExtra*/ = {};;
 };
 ;
 PL$49/*res*/ = this["newResult"]();
@@ -2384,36 +2395,36 @@ if(PL$24/*par*/["brackets"]){
 PL$49/*res*/["push"]("{");;
 };
 ;
-PL$177/*blockRes*/ = this["newResult"]();
-PL$178/*sAr*/ = [];
-if((PL$24/*par*/ instanceof PL$179/*Array*/)){
-PL$178/*sAr*/ = PL$24/*par*/;;
+PL$176/*blockRes*/ = this["newResult"]();
+PL$177/*sAr*/ = [];
+if((PL$24/*par*/ instanceof PL$178/*Array*/)){
+PL$177/*sAr*/ = PL$24/*par*/;;
 
 }else{
 if((PL$24/*par*/["type"] == "BlockStatement")){
-PL$178/*sAr*/ = PL$24/*par*/["body"];;
+PL$177/*sAr*/ = PL$24/*par*/["body"];;
 
 }else{
-PL$180/*console*/["log"]("here <------------------------");;
-PL$178/*sAr*/["push"](this["parseExpression"](PL$24/*par*/));;
+PL$179/*console*/["log"]("here <------------------------");;
+PL$177/*sAr*/["push"](this["parseExpression"](PL$24/*par*/));;
 };
 ;
 };
 ;
-if(PL$176/*parExtra*/["preCode"]){
-PL$177/*blockRes*/["push"](this["makeStatement"](PL$176/*parExtra*/["preCode"]));;
+if(PL$175/*parExtra*/["preCode"]){
+PL$176/*blockRes*/["push"](this["makeStatement"](PL$175/*parExtra*/["preCode"]));;
 };
 ;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = PL$178/*sAr*/["length"];
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$177/*blockRes*/["push"](this["makeStatement"](this["parseExpression"](PL$178/*sAr*/[PL$32/*i*/])));;
+PL$88/*l*/ = PL$177/*sAr*/["length"];
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$176/*blockRes*/["push"](this["makeStatement"](this["parseExpression"](PL$177/*sAr*/[PL$32/*i*/])));;
 }};
 ;
-if(PL$176/*parExtra*/["postCode"]){
-PL$177/*blockRes*/["push"](this["makeStatement"](PL$176/*parExtra*/["postCode"]));;
+if(PL$175/*parExtra*/["postCode"]){
+PL$176/*blockRes*/["push"](this["makeStatement"](PL$175/*parExtra*/["postCode"]));;
 };
 ;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$177/*blockRes*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$176/*blockRes*/));;
 if(PL$24/*par*/["brackets"]){
 PL$49/*res*/["push"]("}");;
 };
@@ -2433,95 +2444,95 @@ PL$49/*res*/["setParsed"](PL$24/*par*/);;
 return PL$49/*res*/;;
 ;
 });;
-this["_parseExpression"] = (function(PL$181/*value*/){
+this["_parseExpression"] = (function(PL$180/*value*/){
 var PL$49/*res*/;
 ;
 PL$49/*res*/;
-switch (PL$181/*value*/["type"]){
+switch (PL$180/*value*/["type"]){
 case "ArrayExpression":
-return this["expArrayExpression"](PL$181/*value*/);;
+return this["expArrayExpression"](PL$180/*value*/);;
 case "AssignmentExpression":
-return this["expAssignmentExpression"](PL$181/*value*/);;
+return this["expAssignmentExpression"](PL$180/*value*/);;
 case "BinaryExpression":
-return this["expBinaryExpression"](PL$181/*value*/);;
+return this["expBinaryExpression"](PL$180/*value*/);;
 case "BlockStatement":
-return this["expBlockStatement"](PL$181/*value*/);;
+return this["expBlockStatement"](PL$180/*value*/);;
 case "BreakStatement":
-return this["expBreakStatement"](PL$181/*value*/);;
+return this["expBreakStatement"](PL$180/*value*/);;
 case "CallExpression":
-return this["expCallExpression"](PL$181/*value*/);;
+return this["expCallExpression"](PL$180/*value*/);;
 case "Class":
-return this["expClassStatement"](PL$181/*value*/);;
+return this["expClassStatement"](PL$180/*value*/);;
 case "ClassObjectExpression":
-return this["expClassObjectExpression"](PL$181/*value*/);;
+return this["expClassObjectExpression"](PL$180/*value*/);;
 case "ConditionalExpression":
-return this["conditionalExpression"](PL$181/*value*/);;
+return this["conditionalExpression"](PL$180/*value*/);;
 case "ConnectExpression":
-return this["connectExpression"](PL$181/*value*/);;
+return this["connectExpression"](PL$180/*value*/);;
 case "ContinueStatement":
-return this["expContinueStatement"](PL$181/*value*/);;
+return this["expContinueStatement"](PL$180/*value*/);;
 case "DebuggerStatement":
-return this["expDebuggerStatement"](PL$181/*value*/);;
+return this["expDebuggerStatement"](PL$180/*value*/);;
 case "EmptyStatement":
 PL$49/*res*/ = this["newResult"]();;
 PL$49/*res*/["setType"]("var");;
 return PL$49/*res*/;;
 case "ExpressionStatement":
-return this["expExpressionStatement"](PL$181/*value*/);;
+return this["expExpressionStatement"](PL$180/*value*/);;
 case "ForInStatement":
-return this["expForInStatement"](PL$181/*value*/);;
+return this["expForInStatement"](PL$180/*value*/);;
 case "ForStatement":
-return this["expForStatement"](PL$181/*value*/);;
+return this["expForStatement"](PL$180/*value*/);;
 case "FunctionExpression":
-return this["expFunctionExpression"](PL$181/*value*/);;
+return this["expFunctionExpression"](PL$180/*value*/);;
 case "FunctionDeclaration":
-return this["expFunctionDeclaration"](PL$181/*value*/);;
+return this["expFunctionDeclaration"](PL$180/*value*/);;
 case "MemberFunction":
-return this["expMemberFunction"](PL$181/*value*/);;
+return this["expMemberFunction"](PL$180/*value*/);;
 case "Identifier":
-return this["expIdentifier"](PL$181/*value*/);;
+return this["expIdentifier"](PL$180/*value*/);;
 case "IfStatement":
-return this["expIfStatement"](PL$181/*value*/);;
+return this["expIfStatement"](PL$180/*value*/);;
 case "InheritedExpression":
-return this["expInheritedExpression"](PL$181/*value*/);;
+return this["expInheritedExpression"](PL$180/*value*/);;
 case "Literal":
-return this["expLiteral"](PL$181/*value*/);;
+return this["expLiteral"](PL$180/*value*/);;
 case "MemberExpression":
-return this["expMemberExpression"](PL$181/*value*/);;
+return this["expMemberExpression"](PL$180/*value*/);;
 case "NewExpression":
-return this["expNewExpression"](PL$181/*value*/);;
+return this["expNewExpression"](PL$180/*value*/);;
 case "ObjectExpression":
-return this["expObjectExpression"](PL$181/*value*/);;
+return this["expObjectExpression"](PL$180/*value*/);;
 case "ReturnStatement":
-return this["expReturnStatement"](PL$181/*value*/);;
+return this["expReturnStatement"](PL$180/*value*/);;
 case "SwitchStatement":
-return this["expSwitchStatement"](PL$181/*value*/);;
+return this["expSwitchStatement"](PL$180/*value*/);;
 case "ThisExpression":
-return this["expThisExpression"](PL$181/*value*/);;
+return this["expThisExpression"](PL$180/*value*/);;
 case "ThrowStatement":
-return this["expThrowStatement"](PL$181/*value*/);;
+return this["expThrowStatement"](PL$180/*value*/);;
 case "TryStatement":
-return this["expTryStatement"](PL$181/*value*/);;
+return this["expTryStatement"](PL$180/*value*/);;
 case "UnaryExpression":
-if((PL$181/*value*/["operator"] == "*")){
-return this["expPromiseExpression"](PL$181/*value*/["argument"]);;
+if((PL$180/*value*/["operator"] == "*")){
+return this["expPromiseExpression"](PL$180/*value*/["argument"]);;
 };
 ;
-if((PL$181/*value*/["operator"] == "require")){
-return this["expRequireExpression"](PL$181/*value*/["argument"]);;
+if((PL$180/*value*/["operator"] == "require")){
+return this["expRequireExpression"](PL$180/*value*/["argument"]);;
 };
 ;
-return this["expUnaryExpression"](PL$181/*value*/);;
+return this["expUnaryExpression"](PL$180/*value*/);;
 case "UpdateExpression":
-return this["expUpdateExpression"](PL$181/*value*/);;
+return this["expUpdateExpression"](PL$180/*value*/);;
 case "VariableStatement":
-return this["expVariableStatement"](PL$181/*value*/);;
+return this["expVariableStatement"](PL$180/*value*/);;
 case "VariableDeclaration":
-return this["expVariableDeclaration"](PL$181/*value*/);;
+return this["expVariableDeclaration"](PL$180/*value*/);;
 case "WhileStatement":
-return this["whileStatement"](PL$181/*value*/);;
+return this["whileStatement"](PL$180/*value*/);;
 default:
-this["error"](PL$181/*value*/, PL$12/*errorMsg*/["unknownType"]);;
+this["error"](PL$180/*value*/, PL$12/*errorMsg*/["unknownType"]);;
 }
 ;
 ;
@@ -2545,55 +2556,55 @@ PL$49/*res*/["setType"](PL$19/*statementType*/);;
 return PL$49/*res*/;;
 ;
 });;
-this["expFunctionExpression"] = (function(PL$181/*value*/, PL$182/*declaration*/){
-var PL$183/*cp*/;
-var PL$184/*funName*/;
-var PL$134/*funRes*/;
-var PL$185/*uv*/;
+this["expFunctionExpression"] = (function(PL$180/*value*/, PL$181/*declaration*/){
+var PL$182/*cp*/;
+var PL$183/*funName*/;
+var PL$133/*funRes*/;
+var PL$184/*uv*/;
 var PL$25/*name*/;
 var PL$49/*res*/;
 ;
-PL$183/*cp*/ = this["newInstance"](PL$181/*value*/, {"dynamicCode": (this["dynamicCode"] || this["isFunction"])});
-PL$184/*funName*/ = PL$183/*cp*/["getFunctionName"]();
-PL$134/*funRes*/ = PL$183/*cp*/["getFunctionRes"]();
-PL$185/*uv*/ = PL$183/*cp*/["_getUsedVairables"]();
+PL$182/*cp*/ = this["newInstance"](PL$180/*value*/, {"dynamicCode": (this["dynamicCode"] || this["isFunction"])});
+PL$183/*funName*/ = PL$182/*cp*/["getFunctionName"]();
+PL$133/*funRes*/ = PL$182/*cp*/["getFunctionRes"]();
+PL$184/*uv*/ = PL$182/*cp*/["_getUsedVairables"]();
 PL$25/*name*/;
-for(PL$25/*name*/ in PL$185/*uv*/){if((PL$185/*uv*/[PL$25/*name*/] === true)){
+for(PL$25/*name*/ in PL$184/*uv*/){if((PL$184/*uv*/[PL$25/*name*/] === true)){
 this["_addUsedVariable"](PL$25/*name*/);;
 };
 ;
 };
 ;
 PL$49/*res*/;
-if((PL$184/*funName*/ && PL$134/*funRes*/)){
-this["addFunction"](PL$134/*funRes*/, PL$184/*funName*/);;
-PL$49/*res*/ = this["newResult"](this["getVariableName"](PL$184/*funName*/));;
-PL$49/*res*/["setType"](PL$134/*funRes*/["getType"]());;
+if((PL$183/*funName*/ && PL$133/*funRes*/)){
+this["addFunction"](PL$133/*funRes*/, PL$183/*funName*/);;
+PL$49/*res*/ = this["newResult"](this["getVariableName"](PL$183/*funName*/));;
+PL$49/*res*/["setType"](PL$133/*funRes*/["getType"]());;
 return PL$49/*res*/;;
 };
 ;
 PL$49/*res*/ = this["newResult"]();;
-if(! PL$182/*declaration*/){
+if(! PL$181/*declaration*/){
 PL$49/*res*/["push"]("(");;
 };
 ;
-PL$49/*res*/["pushType"]((PL$134/*funRes*/ || PL$183/*cp*/["getResult"]()));;
-if(! PL$182/*declaration*/){
+PL$49/*res*/["pushType"]((PL$133/*funRes*/ || PL$182/*cp*/["getResult"]()));;
+if(! PL$181/*declaration*/){
 PL$49/*res*/["push"](")");;
 };
 ;
 return PL$49/*res*/;;
 ;
 });;
-this["expFunctionDeclaration"] = (function(PL$181/*value*/){
+this["expFunctionDeclaration"] = (function(PL$180/*value*/){
 ;
-return this["expFunctionExpression"](PL$181/*value*/, true);;
+return this["expFunctionExpression"](PL$180/*value*/, true);;
 ;
 });;
-this["expMemberFunction"] = (function(PL$181/*value*/){
+this["expMemberFunction"] = (function(PL$180/*value*/){
 ;
-PL$181/*value*/["id"] = undefined;;
-return this["expFunctionExpression"](PL$181/*value*/);;
+PL$180/*value*/["id"] = undefined;;
+return this["expFunctionExpression"](PL$180/*value*/);;
 ;
 });;
 this["expUpdateExpression"] = (function(PL$24/*par*/){
@@ -2657,139 +2668,139 @@ PL$49/*res*/["setType"](this["getType"]("var"));;
 return PL$49/*res*/;;
 ;
 });;
-this["expPromiseExpression"] = (function(PL$186/*parExpression*/){
+this["expPromiseExpression"] = (function(PL$185/*parExpression*/){
 var PL$49/*res*/;
-var PL$187/*expressionRes*/;
-var PL$188/*promiseNameStr*/;
-var PL$189/*dereferencePre*/;
-var PL$190/*preRes*/;
-var PL$191/*dereferencePost*/;
-var PL$192/*postRes*/;
-var PL$193/*promiseType*/;
+var PL$186/*expressionRes*/;
+var PL$187/*promiseNameStr*/;
+var PL$188/*dereferencePre*/;
+var PL$189/*preRes*/;
+var PL$190/*dereferencePost*/;
+var PL$191/*postRes*/;
+var PL$192/*promiseType*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$187/*expressionRes*/ = this["parseExpression"](PL$186/*parExpression*/);
-PL$188/*promiseNameStr*/ = this["getUniqueName"]();
+PL$186/*expressionRes*/ = this["parseExpression"](PL$185/*parExpression*/);
+PL$187/*promiseNameStr*/ = this["getUniqueName"]();
 PL$49/*res*/["makePromising"]();;
-PL$49/*res*/["setPromiseName"](PL$188/*promiseNameStr*/);;
-PL$189/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$187/*expressionRes*/});
-PL$190/*preRes*/ = this["newResult"]();
-PL$190/*preRes*/["push"](PL$189/*dereferencePre*/);;
-PL$190/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));;
-PL$190/*preRes*/["push"](PL$188/*promiseNameStr*/);;
-PL$190/*preRes*/["push"]("){");;
-PL$49/*res*/["addPre"](PL$190/*preRes*/);;
-PL$191/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$187/*expressionRes*/});
-PL$192/*postRes*/ = this["newResult"]();
-PL$192/*postRes*/["push"](("}), " + this["catchFunctionStr"]));;
-PL$192/*postRes*/["push"](PL$191/*dereferencePost*/);;
-PL$192/*postRes*/["push"](";");;
-PL$49/*res*/["addPost"](PL$192/*postRes*/);;
-PL$193/*promiseType*/ = PL$187/*expressionRes*/["getType"]();
-PL$49/*res*/["setType"](this["getClassFromPromiseOf"](PL$193/*promiseType*/));;
+PL$49/*res*/["setPromiseName"](PL$187/*promiseNameStr*/);;
+PL$188/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$186/*expressionRes*/});
+PL$189/*preRes*/ = this["newResult"]();
+PL$189/*preRes*/["push"](PL$188/*dereferencePre*/);;
+PL$189/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));;
+PL$189/*preRes*/["push"](PL$187/*promiseNameStr*/);;
+PL$189/*preRes*/["push"]("){");;
+PL$49/*res*/["addPre"](PL$189/*preRes*/);;
+PL$190/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$186/*expressionRes*/});
+PL$191/*postRes*/ = this["newResult"]();
+PL$191/*postRes*/["push"](("}), " + this["catchFunctionStr"]));;
+PL$191/*postRes*/["push"](PL$190/*dereferencePost*/);;
+PL$191/*postRes*/["push"](";");;
+PL$49/*res*/["addPost"](PL$191/*postRes*/);;
+PL$192/*promiseType*/ = PL$186/*expressionRes*/["getType"]();
+PL$49/*res*/["setType"](this["getClassFromPromiseOf"](PL$192/*promiseType*/));;
 return PL$49/*res*/;;
 ;
 });;
-this["expUnaryExpression"] = (function(PL$186/*parExpression*/){
+this["expUnaryExpression"] = (function(PL$185/*parExpression*/){
 var PL$49/*res*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$49/*res*/["push"](PL$186/*parExpression*/["operator"]);;
+PL$49/*res*/["push"](PL$185/*parExpression*/["operator"]);;
 PL$49/*res*/["push"](" ");;
-PL$49/*res*/["pushType"](this["expectTypeVar"](this["parseExpression"](PL$186/*parExpression*/["argument"])));;
+PL$49/*res*/["pushType"](this["expectTypeVar"](this["parseExpression"](PL$185/*parExpression*/["argument"])));;
 return PL$49/*res*/;;
 ;
 });;
-this["expRequireExpression"] = (function(PL$186/*parExpression*/){
+this["expRequireExpression"] = (function(PL$185/*parExpression*/){
 var PL$49/*res*/;
-var PL$187/*expressionRes*/;
-var PL$188/*promiseNameStr*/;
-var PL$189/*dereferencePre*/;
-var PL$190/*preRes*/;
-var PL$191/*dereferencePost*/;
-var PL$192/*postRes*/;
+var PL$186/*expressionRes*/;
+var PL$187/*promiseNameStr*/;
+var PL$188/*dereferencePre*/;
+var PL$189/*preRes*/;
+var PL$190/*dereferencePost*/;
+var PL$191/*postRes*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 this["common"]["useRequire"] = true;;
-PL$187/*expressionRes*/ = this["newResult"]();
-PL$187/*expressionRes*/["push"]("__requireFun(");;
-PL$187/*expressionRes*/["push"](this["parseExpression"](PL$186/*parExpression*/));;
-PL$187/*expressionRes*/["push"](")");;
-PL$187/*expressionRes*/["setType"]("var");;
-PL$188/*promiseNameStr*/ = this["getUniqueName"]();
+PL$186/*expressionRes*/ = this["newResult"]();
+PL$186/*expressionRes*/["push"]("__requireFun(");;
+PL$186/*expressionRes*/["push"](this["parseExpression"](PL$185/*parExpression*/));;
+PL$186/*expressionRes*/["push"](")");;
+PL$186/*expressionRes*/["setType"]("var");;
+PL$187/*promiseNameStr*/ = this["getUniqueName"]();
 PL$49/*res*/["makePromising"]();;
-PL$49/*res*/["setPromiseName"](PL$188/*promiseNameStr*/);;
-PL$189/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$187/*expressionRes*/});
-PL$190/*preRes*/ = this["newResult"]();
-PL$190/*preRes*/["push"](PL$189/*dereferencePre*/);;
-PL$190/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));;
-PL$190/*preRes*/["push"](PL$188/*promiseNameStr*/);;
-PL$190/*preRes*/["push"]("){");;
-PL$49/*res*/["addPre"](PL$190/*preRes*/);;
-PL$191/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$187/*expressionRes*/});
-PL$192/*postRes*/ = this["newResult"]();
-PL$192/*postRes*/["push"](("}), " + this["catchFunctionStr"]));;
-PL$192/*postRes*/["push"](PL$191/*dereferencePost*/);;
-PL$192/*postRes*/["push"](";");;
-PL$49/*res*/["addPost"](PL$192/*postRes*/);;
+PL$49/*res*/["setPromiseName"](PL$187/*promiseNameStr*/);;
+PL$188/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$186/*expressionRes*/});
+PL$189/*preRes*/ = this["newResult"]();
+PL$189/*preRes*/["push"](PL$188/*dereferencePre*/);;
+PL$189/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));;
+PL$189/*preRes*/["push"](PL$187/*promiseNameStr*/);;
+PL$189/*preRes*/["push"]("){");;
+PL$49/*res*/["addPre"](PL$189/*preRes*/);;
+PL$190/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$186/*expressionRes*/});
+PL$191/*postRes*/ = this["newResult"]();
+PL$191/*postRes*/["push"](("}), " + this["catchFunctionStr"]));;
+PL$191/*postRes*/["push"](PL$190/*dereferencePost*/);;
+PL$191/*postRes*/["push"](";");;
+PL$49/*res*/["addPost"](PL$191/*postRes*/);;
 PL$49/*res*/["setType"]("var");;
 return PL$49/*res*/;;
 ;
 });;
 this["expNewExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$194/*typed*/;
-var PL$69/*type*/;
+var PL$193/*typed*/;
+var PL$68/*type*/;
 var PL$32/*i*/;
-var PL$195/*constructorType*/;
-var PL$196/*expression*/;
+var PL$194/*constructorType*/;
+var PL$195/*expression*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$194/*typed*/ = false;
-PL$69/*type*/ = "var";
+PL$193/*typed*/ = false;
+PL$68/*type*/ = "var";
 if((PL$24/*par*/["callee"] && (PL$24/*par*/["callee"]["type"] == "Identifier"))){
-PL$69/*type*/ = this["getType"](PL$27/*identifierName*/(PL$24/*par*/["callee"]), PL$24/*par*/, {"dontThrow": true});;
-if(PL$69/*type*/){
+PL$68/*type*/ = this["getType"](PL$27/*identifierName*/(PL$24/*par*/["callee"]), PL$24/*par*/, {"dontThrow": true});;
+if(PL$68/*type*/){
 PL$49/*res*/["push"]("new ");;
 PL$49/*res*/["push"](this["getConstructorName"](PL$24/*par*/["callee"]));;
 PL$49/*res*/["push"]("(");;
-PL$194/*typed*/ = true;;
-PL$49/*res*/["setType"](this["createTemporaryTrackedClass"](PL$69/*type*/));;
+PL$193/*typed*/ = true;;
+PL$49/*res*/["setType"](this["getConstructorReturnType"](PL$68/*type*/));;
 };
 ;
 };
 ;
-if(! PL$194/*typed*/){
+if(! PL$193/*typed*/){
 PL$49/*res*/["push"]("new ");;
 PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["callee"])));;
 PL$49/*res*/["push"]("(");;
 };
 ;
 PL$32/*i*/ = 0;
-PL$195/*constructorType*/;
-if(PL$194/*typed*/){
-PL$195/*constructorType*/ = this["getConstructorType"]({"type": PL$69/*type*/}, PL$24/*par*/);;
+PL$194/*constructorType*/;
+if(PL$193/*typed*/){
+PL$194/*constructorType*/ = this["getConstructorType"]({"type": PL$68/*type*/}, PL$24/*par*/);;
 };
 ;
 for(PL$32/*i*/;(PL$32/*i*/ < PL$24/*par*/["arguments"]["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
 PL$49/*res*/["push"](", ");;
 };
 ;
-PL$196/*expression*/ = this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]);
-if(PL$194/*typed*/){
-PL$49/*res*/["push"](this["getPassAsTypeCode"]({"value": PL$196/*expression*/,
-"valueType": PL$196/*expression*/["getType"](),
-"type": this["getFunctionArgumentType"](PL$195/*constructorType*/, PL$32/*i*/, PL$24/*par*/),
+PL$195/*expression*/ = this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]);
+if(PL$193/*typed*/){
+PL$49/*res*/["push"](this["getPassAsTypeCode"]({"value": PL$195/*expression*/,
+"valueType": PL$195/*expression*/["getType"](),
+"type": this["getFunctionArgumentType"](PL$194/*constructorType*/, PL$32/*i*/, PL$24/*par*/),
 "errorFun": this["getWarningFun"](PL$24/*par*/)}));;
 
 }else{
-PL$49/*res*/["push"](this["expectTypeVar"](PL$196/*expression*/));;
+PL$49/*res*/["push"](this["expectTypeVar"](PL$195/*expression*/));;
 };
 ;
 }};
 ;
 PL$49/*res*/["push"](")");;
-if(! PL$194/*typed*/){
+if(! PL$193/*typed*/){
 PL$49/*res*/["setType"]("var");;
 };
 ;
@@ -2798,11 +2809,11 @@ return PL$49/*res*/;;
 });;
 this["connectExpression"] = (function(PL$54/*parParsed*/){
 var PL$49/*res*/;
-var PL$197/*signalObject*/;
-var PL$198/*signalProperty*/;
-var PL$199/*slotObject*/;
-var PL$200/*slotProperty*/;
-var PL$201/*fun*/;
+var PL$196/*signalObject*/;
+var PL$197/*signalProperty*/;
+var PL$198/*slotObject*/;
+var PL$199/*slotProperty*/;
+var PL$200/*fun*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 if((PL$54/*parParsed*/["signal"]["type"] != "MemberExpression")){
@@ -2813,8 +2824,8 @@ if(PL$54/*parParsed*/["signal"]["computed"]){
 this["error"](PL$54/*parParsed*/["signal"], PL$12/*errorMsg*/["noComputedMembersAllowed"]);;
 };
 ;
-PL$197/*signalObject*/ = this["parseExpression"](PL$54/*parParsed*/["signal"]["object"]);
-PL$198/*signalProperty*/ = PL$27/*identifierName*/(PL$54/*parParsed*/["signal"]["property"]);
+PL$196/*signalObject*/ = this["parseExpression"](PL$54/*parParsed*/["signal"]["object"]);
+PL$197/*signalProperty*/ = PL$27/*identifierName*/(PL$54/*parParsed*/["signal"]["property"]);
 if(PL$54/*parParsed*/["slot"]){
 if((PL$54/*parParsed*/["slot"]["type"] != "MemberExpression")){
 this["error"](PL$54/*parParsed*/["slot"], PL$12/*errorMsg*/["expectedMemberExpression"]);;
@@ -2824,20 +2835,20 @@ if(PL$54/*parParsed*/["slot"]["computed"]){
 this["error"](PL$54/*parParsed*/["slot"], PL$12/*errorMsg*/["noComputedMembersAllowed"]);;
 };
 ;
-PL$199/*slotObject*/ = this["parseExpression"](PL$54/*parParsed*/["slot"]["object"]);
-PL$200/*slotProperty*/ = PL$27/*identifierName*/(PL$54/*parParsed*/["slot"]["property"]);
-PL$49/*res*/["push"](this["connectSlotCode"]({"signalObject": PL$197/*signalObject*/,
-"signalProperty": PL$198/*signalProperty*/,
-"slotObject": PL$199/*slotObject*/,
-"slotProperty": PL$200/*slotProperty*/,
+PL$198/*slotObject*/ = this["parseExpression"](PL$54/*parParsed*/["slot"]["object"]);
+PL$199/*slotProperty*/ = PL$27/*identifierName*/(PL$54/*parParsed*/["slot"]["property"]);
+PL$49/*res*/["push"](this["connectSlotCode"]({"signalObject": PL$196/*signalObject*/,
+"signalProperty": PL$197/*signalProperty*/,
+"slotObject": PL$198/*slotObject*/,
+"slotProperty": PL$199/*slotProperty*/,
 "errorFun": this["getWarningFun"](PL$54/*parParsed*/)}));;
 
 }else{
 if(PL$54/*parParsed*/["fun"]){
-PL$201/*fun*/ = this["parseExpression"](PL$54/*parParsed*/["fun"]);
-PL$49/*res*/["push"](this["connectFunCode"]({"signalObject": PL$197/*signalObject*/,
-"signalProperty": PL$198/*signalProperty*/,
-"fun": PL$201/*fun*/,
+PL$200/*fun*/ = this["parseExpression"](PL$54/*parParsed*/["fun"]);
+PL$49/*res*/["push"](this["connectFunCode"]({"signalObject": PL$196/*signalObject*/,
+"signalProperty": PL$197/*signalProperty*/,
+"fun": PL$200/*fun*/,
 "errorFun": this["getWarningFun"](PL$54/*parParsed*/)}));;
 
 }else{
@@ -2851,38 +2862,38 @@ return PL$49/*res*/;;
 });;
 this["breakOrContinuePromise"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$202/*promiseName*/;
-var PL$203/*outerBlock*/;
-var PL$137/*b*/;
-var PL$139/*block*/;
+var PL$201/*promiseName*/;
+var PL$202/*outerBlock*/;
+var PL$136/*b*/;
+var PL$138/*block*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$49/*res*/["makePromising"]();;
-PL$202/*promiseName*/ = (PL$24/*par*/["promiseName"] || this["getUniqueName"]());
-PL$49/*res*/["setPromiseName"](PL$202/*promiseName*/);;
+PL$201/*promiseName*/ = (PL$24/*par*/["promiseName"] || this["getUniqueName"]());
+PL$49/*res*/["setPromiseName"](PL$201/*promiseName*/);;
 this["stack"]("breakCode");;
 this["stack"]("continueCode");;
-this["breakCode"] = (((PL$202/*promiseName*/ + ".resolve(false); return ") + PL$202/*promiseName*/) + ";\n");;
-this["continueCode"] = (((PL$202/*promiseName*/ + ".resolve(true); return ") + PL$202/*promiseName*/) + ";\n");;
-PL$49/*res*/["push"]((((("var " + PL$202/*promiseName*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
-PL$203/*outerBlock*/ = this["newResult"]();
+this["breakCode"] = (((PL$201/*promiseName*/ + ".resolve(false); return ") + PL$201/*promiseName*/) + ";\n");;
+this["continueCode"] = (((PL$201/*promiseName*/ + ".resolve(true); return ") + PL$201/*promiseName*/) + ";\n");;
+PL$49/*res*/["push"]((((("var " + PL$201/*promiseName*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$202/*outerBlock*/ = this["newResult"]();
 if(PL$24/*par*/["preCondition"]){
-PL$203/*outerBlock*/["push"]("if(");;
-PL$203/*outerBlock*/["push"](PL$24/*par*/["preCondition"]);;
-PL$203/*outerBlock*/["push"]("){");;
+PL$202/*outerBlock*/["push"]("if(");;
+PL$202/*outerBlock*/["push"](PL$24/*par*/["preCondition"]);;
+PL$202/*outerBlock*/["push"]("){");;
 };
 ;
-PL$137/*b*/ = PL$24/*par*/["block"];
-PL$137/*b*/["brackets"] = false;;
-PL$139/*block*/ = this["blockCreator"](PL$137/*b*/, {"postCode": this["newResult"](this["continueCode"])});
-PL$203/*outerBlock*/["push"](this["makeCompleteStatement"](PL$139/*block*/));;
+PL$136/*b*/ = PL$24/*par*/["block"];
+PL$136/*b*/["brackets"] = false;;
+PL$138/*block*/ = this["blockCreator"](PL$136/*b*/, {"postCode": this["newResult"](this["continueCode"])});
+PL$202/*outerBlock*/["push"](this["makeCompleteStatement"](PL$138/*block*/));;
 if(PL$24/*par*/["preCondition"]){
-PL$203/*outerBlock*/["push"]("}else{");;
-PL$203/*outerBlock*/["push"](this["breakCode"]);;
-PL$203/*outerBlock*/["push"]("};\n");;
+PL$202/*outerBlock*/["push"]("}else{");;
+PL$202/*outerBlock*/["push"](this["breakCode"]);;
+PL$202/*outerBlock*/["push"]("};\n");;
 };
 ;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$203/*outerBlock*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$202/*outerBlock*/));;
 this["unstack"]("breakCode");;
 this["unstack"]("continueCode");;
 return PL$49/*res*/;;
@@ -2890,44 +2901,44 @@ return PL$49/*res*/;;
 });;
 this["generateLoop"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$204/*loopFun*/;
-var PL$205/*loopEndPromise*/;
-var PL$206/*loopCode*/;
-var PL$207/*doFun*/;
-var PL$208/*doFunStatement*/;
+var PL$203/*loopFun*/;
+var PL$204/*loopEndPromise*/;
+var PL$205/*loopCode*/;
+var PL$206/*doFun*/;
+var PL$207/*doFunStatement*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$204/*loopFun*/ = this["getUniqueName"]();
-PL$205/*loopEndPromise*/ = this["getUniqueName"]();
-PL$49/*res*/["push"]((((("var " + PL$205/*loopEndPromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
-PL$49/*res*/["push"]((("var " + PL$204/*loopFun*/) + " = function(){"));;
-PL$206/*loopCode*/ = this["breakOrContinuePromise"]({"block": PL$24/*par*/["block"],
+PL$203/*loopFun*/ = this["getUniqueName"]();
+PL$204/*loopEndPromise*/ = this["getUniqueName"]();
+PL$49/*res*/["push"]((((("var " + PL$204/*loopEndPromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$49/*res*/["push"]((("var " + PL$203/*loopFun*/) + " = function(){"));;
+PL$205/*loopCode*/ = this["breakOrContinuePromise"]({"block": PL$24/*par*/["block"],
 "preCondition": PL$24/*par*/["preCondition"],
 "postCode": PL$24/*par*/["postCode"]});
-PL$49/*res*/["push"](this["makeStatement"](this["makeCompleteStatement"](PL$206/*loopCode*/)));;
+PL$49/*res*/["push"](this["makeStatement"](this["makeCompleteStatement"](PL$205/*loopCode*/)));;
 PL$49/*res*/["push"]("return ");;
-PL$49/*res*/["push"](PL$206/*loopCode*/["getPromiseName"]());;
+PL$49/*res*/["push"](PL$205/*loopCode*/["getPromiseName"]());;
 PL$49/*res*/["push"](";\n");;
 PL$49/*res*/["push"]("};\n");;
-PL$207/*doFun*/ = this["getUniqueName"]();
-PL$49/*res*/["push"]((("var " + PL$207/*doFun*/) + " = function(){"));;
-PL$49/*res*/["push"](PL$204/*loopFun*/);;
+PL$206/*doFun*/ = this["getUniqueName"]();
+PL$49/*res*/["push"]((("var " + PL$206/*doFun*/) + " = function(){"));;
+PL$49/*res*/["push"](PL$203/*loopFun*/);;
 PL$49/*res*/["push"]("().then(function(contLoop){\n");;
 PL$49/*res*/["push"]("if (contLoop){");;
-PL$208/*doFunStatement*/ = this["newResult"]();
+PL$207/*doFunStatement*/ = this["newResult"]();
 if(PL$24/*par*/["postCode"]){
-PL$208/*doFunStatement*/["push"](this["makeStatement"](PL$24/*par*/["postCode"]));;
+PL$207/*doFunStatement*/["push"](this["makeStatement"](PL$24/*par*/["postCode"]));;
 };
 ;
-PL$208/*doFunStatement*/["push"]((PL$207/*doFun*/ + "();"));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*doFunStatement*/));;
+PL$207/*doFunStatement*/["push"]((PL$206/*doFun*/ + "();"));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$207/*doFunStatement*/));;
 PL$49/*res*/["push"]("}else{");;
-PL$49/*res*/["push"]((PL$205/*loopEndPromise*/ + ".resolve();"));;
+PL$49/*res*/["push"]((PL$204/*loopEndPromise*/ + ".resolve();"));;
 PL$49/*res*/["push"]("};\n");;
 PL$49/*res*/["push"]("});\n");;
 PL$49/*res*/["push"]("};\n");;
-PL$49/*res*/["push"]((PL$207/*doFun*/ + "();\n"));;
-PL$49/*res*/["push"](PL$205/*loopEndPromise*/);;
+PL$49/*res*/["push"]((PL$206/*doFun*/ + "();\n"));;
+PL$49/*res*/["push"](PL$204/*loopEndPromise*/);;
 PL$49/*res*/["push"](".then(function(){");;
 PL$49/*res*/["addPost"]("});");;
 return PL$49/*res*/;;
@@ -2935,19 +2946,19 @@ return PL$49/*res*/;;
 });;
 this["expForStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$209/*statement*/;
-var PL$210/*promising*/;
+var PL$208/*statement*/;
+var PL$209/*promising*/;
 ;
 this["stack"]("dynamicCode");;
 this["dynamicCode"] = true;;
 PL$49/*res*/ = this["newResult"]();
-PL$209/*statement*/;
-PL$210/*promising*/ = false;
+PL$208/*statement*/;
+PL$209/*promising*/ = false;
 if(((PL$37/*checkPromising*/(PL$24/*par*/["test"]) || PL$37/*checkPromising*/(PL$24/*par*/["update"])) || PL$37/*checkPromising*/(PL$24/*par*/["body"]))){
-PL$210/*promising*/ = true;;
+PL$209/*promising*/ = true;;
 };
 ;
-if(PL$210/*promising*/){
+if(PL$209/*promising*/){
 PL$49/*res*/["push"](this["makeStatement"](this["parseExpression"](PL$24/*par*/["init"])));;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
@@ -2970,9 +2981,9 @@ this["stack"]("continueCode");;
 this["continueCode"] = "continue;";;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
-PL$209/*statement*/ = this["newResult"]();;
-PL$209/*statement*/["push"](this["expBlockStatement"](PL$24/*par*/["body"]));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/ = this["newResult"]();;
+PL$208/*statement*/["push"](this["expBlockStatement"](PL$24/*par*/["body"]));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 this["unstack"]("algorithmicCode");;
 this["unstack"]("breakCode");;
 this["unstack"]("continueCode");;
@@ -2986,58 +2997,58 @@ return PL$49/*res*/;;
 });;
 this["expForInStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$209/*statement*/;
-var PL$210/*promising*/;
-var PL$211/*iteratorRes*/;
-var PL$212/*iteratorAccess*/;
-var PL$213/*arrayName*/;
-var PL$214/*iName*/;
-var PL$215/*conditionRes*/;
-var PL$216/*postCodeRes*/;
-var PL$137/*b*/;
+var PL$208/*statement*/;
+var PL$209/*promising*/;
+var PL$210/*iteratorRes*/;
+var PL$211/*iteratorAccess*/;
+var PL$212/*arrayName*/;
+var PL$213/*iName*/;
+var PL$214/*conditionRes*/;
+var PL$215/*postCodeRes*/;
+var PL$136/*b*/;
 ;
 this["stack"]("dynamicCode");;
 this["dynamicCode"] = true;;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
 PL$49/*res*/ = this["newResult"]();
-PL$209/*statement*/;
-PL$210/*promising*/ = false;
+PL$208/*statement*/;
+PL$209/*promising*/ = false;
 if(PL$37/*checkPromising*/(PL$24/*par*/["body"])){
-PL$210/*promising*/ = true;;
+PL$209/*promising*/ = true;;
 };
 ;
-if(PL$210/*promising*/){
-PL$211/*iteratorRes*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["left"]));
-PL$212/*iteratorAccess*/ = PL$211/*iteratorRes*/;
-if(PL$211/*iteratorRes*/["promising"]){
-PL$212/*iteratorAccess*/ = PL$211/*iteratorRes*/["getPromiseName"]();;
+if(PL$209/*promising*/){
+PL$210/*iteratorRes*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["left"]));
+PL$211/*iteratorAccess*/ = PL$210/*iteratorRes*/;
+if(PL$210/*iteratorRes*/["promising"]){
+PL$211/*iteratorAccess*/ = PL$210/*iteratorRes*/["getPromiseName"]();;
 };
 ;
-PL$213/*arrayName*/ = this["getUniqueName"]();
-PL$49/*res*/["addPre"]((("var " + PL$213/*arrayName*/) + " = [];"));;
+PL$212/*arrayName*/ = this["getUniqueName"]();
+PL$49/*res*/["addPre"]((("var " + PL$212/*arrayName*/) + " = [];"));;
 PL$49/*res*/["push"]("for(");;
-PL$49/*res*/["push"](PL$211/*iteratorRes*/);;
+PL$49/*res*/["push"](PL$210/*iteratorRes*/);;
 PL$49/*res*/["push"](" in ");;
 PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["right"])));;
 PL$49/*res*/["push"]("){");;
-PL$49/*res*/["push"]((PL$213/*arrayName*/ + ".push("));;
-PL$49/*res*/["push"](PL$212/*iteratorAccess*/);;
+PL$49/*res*/["push"]((PL$212/*arrayName*/ + ".push("));;
+PL$49/*res*/["push"](PL$211/*iteratorAccess*/);;
 PL$49/*res*/["push"](");");;
 PL$49/*res*/["push"]("};");;
-PL$49/*res*/["push"](PL$211/*iteratorRes*/);;
-PL$49/*res*/["push"](((" = " + PL$213/*arrayName*/) + "[0];"));;
-PL$214/*iName*/ = this["getUniqueName"]();
-PL$49/*res*/["push"]((("var " + PL$214/*iName*/) + " = 0;"));;
-PL$215/*conditionRes*/ = this["newResult"]();
-PL$215/*conditionRes*/["push"]((((PL$214/*iName*/ + " < ") + PL$213/*arrayName*/) + ".length"));;
-PL$216/*postCodeRes*/ = this["newResult"]();
-PL$216/*postCodeRes*/["push"]((PL$214/*iName*/ + "++;"));;
-PL$216/*postCodeRes*/["push"](PL$211/*iteratorRes*/);;
-PL$216/*postCodeRes*/["push"](((((" = " + PL$213/*arrayName*/) + "[") + PL$214/*iName*/) + "];"));;
+PL$49/*res*/["push"](PL$210/*iteratorRes*/);;
+PL$49/*res*/["push"](((" = " + PL$212/*arrayName*/) + "[0];"));;
+PL$213/*iName*/ = this["getUniqueName"]();
+PL$49/*res*/["push"]((("var " + PL$213/*iName*/) + " = 0;"));;
+PL$214/*conditionRes*/ = this["newResult"]();
+PL$214/*conditionRes*/["push"]((((PL$213/*iName*/ + " < ") + PL$212/*arrayName*/) + ".length"));;
+PL$215/*postCodeRes*/ = this["newResult"]();
+PL$215/*postCodeRes*/["push"]((PL$213/*iName*/ + "++;"));;
+PL$215/*postCodeRes*/["push"](PL$210/*iteratorRes*/);;
+PL$215/*postCodeRes*/["push"](((((" = " + PL$212/*arrayName*/) + "[") + PL$213/*iName*/) + "];"));;
 PL$49/*res*/["push"](this["generateLoop"]({"block": PL$24/*par*/["body"],
-"preCondition": PL$215/*conditionRes*/,
-"postCode": PL$216/*postCodeRes*/}));;
+"preCondition": PL$214/*conditionRes*/,
+"postCode": PL$215/*postCodeRes*/}));;
 PL$49/*res*/["push"]("}");;
 
 }else{
@@ -3050,11 +3061,11 @@ this["stack"]("breakCode");;
 this["breakCode"] = "break;";;
 this["stack"]("continueCode");;
 this["continueCode"] = "continue;";;
-PL$209/*statement*/ = this["newResult"]();;
-PL$137/*b*/ = PL$24/*par*/["body"];
-PL$137/*b*/["brackets"] = true;;
-PL$209/*statement*/["push"](this["blockCreator"](PL$137/*b*/));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/ = this["newResult"]();;
+PL$136/*b*/ = PL$24/*par*/["body"];
+PL$136/*b*/["brackets"] = true;;
+PL$208/*statement*/["push"](this["blockCreator"](PL$136/*b*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 this["unstack"]("breakCode");;
 this["unstack"]("continueCode");;
 };
@@ -3067,23 +3078,23 @@ return PL$49/*res*/;;
 });;
 this["whileStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$217/*statements*/;
-var PL$109/*condition*/;
+var PL$216/*statements*/;
+var PL$108/*condition*/;
 ;
 this["stack"]("dynamicCode");;
 this["dynamicCode"] = true;;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
 PL$49/*res*/ = this["newResult"]();
-PL$217/*statements*/;
-PL$109/*condition*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["test"]));
-if((PL$37/*checkPromising*/(PL$109/*condition*/) || PL$37/*checkPromising*/(PL$24/*par*/["body"]))){
+PL$216/*statements*/;
+PL$108/*condition*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["test"]));
+if((PL$37/*checkPromising*/(PL$108/*condition*/) || PL$37/*checkPromising*/(PL$24/*par*/["body"]))){
 PL$49/*res*/["push"](this["generateLoop"]({"block": PL$24/*par*/["body"],
-"preCondition": PL$109/*condition*/}));;
+"preCondition": PL$108/*condition*/}));;
 
 }else{
 PL$49/*res*/["push"]("while(");;
-PL$49/*res*/["push"](PL$109/*condition*/);;
+PL$49/*res*/["push"](PL$108/*condition*/);;
 PL$49/*res*/["push"]("){\n");;
 this["stack"]("breakCode");;
 this["breakCode"] = "break;";;
@@ -3103,33 +3114,33 @@ return PL$49/*res*/;;
 });;
 this["expIfStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$210/*promising*/;
-var PL$173/*continuePromise*/;
-var PL$218/*continueCode*/;
-var PL$209/*statement*/;
-var PL$137/*b*/;
-var PL$138/*extraPar*/;
+var PL$209/*promising*/;
+var PL$172/*continuePromise*/;
+var PL$217/*continueCode*/;
+var PL$208/*statement*/;
+var PL$136/*b*/;
+var PL$137/*extraPar*/;
 ;
 this["stack"]("conditionalCode");;
 this["conditionalCode"] = true;;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
 PL$49/*res*/ = this["newResult"]();
-PL$210/*promising*/ = false;
+PL$209/*promising*/ = false;
 if((PL$24/*par*/["consequent"] && PL$37/*checkPromising*/(PL$24/*par*/["consequent"]))){
-PL$210/*promising*/ = true;;
+PL$209/*promising*/ = true;;
 };
 ;
 if((PL$24/*par*/["alternate"] && PL$37/*checkPromising*/(PL$24/*par*/["alternate"]))){
-PL$210/*promising*/ = true;;
+PL$209/*promising*/ = true;;
 };
 ;
-PL$173/*continuePromise*/;
-PL$218/*continueCode*/;
-if(PL$210/*promising*/){
-PL$173/*continuePromise*/ = this["getUniqueName"]();;
-PL$49/*res*/["push"]((((("var " + PL$173/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
-PL$218/*continueCode*/ = (PL$173/*continuePromise*/ + ".resolve();");;
+PL$172/*continuePromise*/;
+PL$217/*continueCode*/;
+if(PL$209/*promising*/){
+PL$172/*continuePromise*/ = this["getUniqueName"]();;
+PL$49/*res*/["push"]((((("var " + PL$172/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$217/*continueCode*/ = (PL$172/*continuePromise*/ + ".resolve();");;
 };
 ;
 PL$49/*res*/["push"]("if(");;
@@ -3139,54 +3150,54 @@ if(! PL$24/*par*/["consequent"]){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["unknownIfStatement"]);;
 };
 ;
-PL$209/*statement*/ = this["newResult"]();
-PL$137/*b*/;
+PL$208/*statement*/ = this["newResult"]();
+PL$136/*b*/;
 if((PL$24/*par*/["consequent"]["type"] == "BlockStatement")){
-PL$137/*b*/ = PL$24/*par*/["consequent"]["body"];;
+PL$136/*b*/ = PL$24/*par*/["consequent"]["body"];;
 
 }else{
-PL$137/*b*/ = [PL$24/*par*/["consequent"]];;
+PL$136/*b*/ = [PL$24/*par*/["consequent"]];;
 };
 ;
-PL$137/*b*/["brackets"] = false;;
-PL$138/*extraPar*/ = {};
-if(PL$210/*promising*/){
-PL$138/*extraPar*/["postCode"] = this["newResult"](PL$218/*continueCode*/);;
+PL$136/*b*/["brackets"] = false;;
+PL$137/*extraPar*/ = {};
+if(PL$209/*promising*/){
+PL$137/*extraPar*/["postCode"] = this["newResult"](PL$217/*continueCode*/);;
 };
 ;
-PL$209/*statement*/["push"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/["push"](this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 if(PL$24/*par*/["alternate"]){
 PL$49/*res*/["push"]("\n}else{\n");;
-PL$209/*statement*/ = this["newResult"]();;
+PL$208/*statement*/ = this["newResult"]();;
 if((PL$24/*par*/["alternate"]["type"] == "BlockStatement")){
-PL$137/*b*/ = PL$24/*par*/["alternate"]["body"];;
+PL$136/*b*/ = PL$24/*par*/["alternate"]["body"];;
 
 }else{
-PL$137/*b*/ = [PL$24/*par*/["alternate"]];;
+PL$136/*b*/ = [PL$24/*par*/["alternate"]];;
 };
 ;
-PL$137/*b*/["brackets"] = false;;
-PL$138/*extraPar*/ = {};;
-if(PL$210/*promising*/){
-PL$138/*extraPar*/["postCode"] = this["newResult"](PL$218/*continueCode*/);;
+PL$136/*b*/["brackets"] = false;;
+PL$137/*extraPar*/ = {};;
+if(PL$209/*promising*/){
+PL$137/*extraPar*/["postCode"] = this["newResult"](PL$217/*continueCode*/);;
 };
 ;
-PL$209/*statement*/["push"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/["push"](this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 
 }else{
-if(PL$210/*promising*/){
+if(PL$209/*promising*/){
 PL$49/*res*/["push"]("\n}else{\n");;
-PL$209/*statement*/ = this["newResult"]();;
-PL$209/*statement*/["push"](PL$218/*continueCode*/);;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/ = this["newResult"]();;
+PL$208/*statement*/["push"](PL$217/*continueCode*/);;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 };
 };
 ;
 PL$49/*res*/["push"]("}");;
-if(PL$210/*promising*/){
-PL$49/*res*/["push"]((("; " + PL$173/*continuePromise*/) + ".then(function(){"));;
+if(PL$209/*promising*/){
+PL$49/*res*/["push"]((("; " + PL$172/*continuePromise*/) + ".then(function(){"));;
 PL$49/*res*/["addPost"]("});");;
 };
 ;
@@ -3198,39 +3209,39 @@ return PL$49/*res*/;;
 });;
 this["conditionalExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$219/*tempPromise*/;
-var PL$220/*tempValue*/;
-var PL$221/*trueExtraCode*/;
-var PL$222/*falseExtraCode*/;
+var PL$218/*tempPromise*/;
+var PL$219/*tempValue*/;
+var PL$220/*trueExtraCode*/;
+var PL$221/*falseExtraCode*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 if((PL$24/*par*/["consequent"]["promising"] || PL$24/*par*/["alternate"]["promising"])){
 PL$49/*res*/["makePromising"]();;
-PL$219/*tempPromise*/ = this["getUniqueName"]();
-PL$220/*tempValue*/ = this["getUniqueName"]();
+PL$218/*tempPromise*/ = this["getUniqueName"]();
+PL$219/*tempValue*/ = this["getUniqueName"]();
 PL$49/*res*/["addPre"]("var ");;
-PL$49/*res*/["addPre"](PL$219/*tempPromise*/);;
+PL$49/*res*/["addPre"](PL$218/*tempPromise*/);;
 PL$49/*res*/["addPre"](((" = " + this["newPromiseStr"]()) + ";\n"));;
 PL$49/*res*/["addPre"]("if(");;
 PL$49/*res*/["addPre"](this["parseExpression"](PL$24/*par*/["test"]));;
 PL$49/*res*/["addPre"]("){");;
 this["stack"]("conditionalCode");;
 this["conditionalCode"] = true;;
-PL$221/*trueExtraCode*/ = this["newResult"]();
-PL$221/*trueExtraCode*/["push"](PL$219/*tempPromise*/);;
-PL$221/*trueExtraCode*/["push"](".resolve(");;
-PL$221/*trueExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["consequent"]));;
-PL$221/*trueExtraCode*/["push"](");\n");;
-PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$221/*trueExtraCode*/));;
+PL$220/*trueExtraCode*/ = this["newResult"]();
+PL$220/*trueExtraCode*/["push"](PL$218/*tempPromise*/);;
+PL$220/*trueExtraCode*/["push"](".resolve(");;
+PL$220/*trueExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["consequent"]));;
+PL$220/*trueExtraCode*/["push"](");\n");;
+PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$220/*trueExtraCode*/));;
 PL$49/*res*/["addPre"]("}else{");;
-PL$222/*falseExtraCode*/ = this["newResult"]();
-PL$222/*falseExtraCode*/["push"](PL$219/*tempPromise*/);;
-PL$222/*falseExtraCode*/["push"](".resolve(");;
-PL$222/*falseExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["alternate"]));;
-PL$222/*falseExtraCode*/["push"](");\n");;
-PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$222/*falseExtraCode*/));;
+PL$221/*falseExtraCode*/ = this["newResult"]();
+PL$221/*falseExtraCode*/["push"](PL$218/*tempPromise*/);;
+PL$221/*falseExtraCode*/["push"](".resolve(");;
+PL$221/*falseExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["alternate"]));;
+PL$221/*falseExtraCode*/["push"](");\n");;
+PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$221/*falseExtraCode*/));;
 PL$49/*res*/["addPre"]("};\n");;
-PL$49/*res*/["addPre"](PL$219/*tempPromise*/);;
+PL$49/*res*/["addPre"](PL$218/*tempPromise*/);;
 PL$49/*res*/["addPre"](".then(");;
 PL$49/*res*/["setPromiseName"](this["getUniqueName"]());;
 PL$49/*res*/["addPre"](PL$49/*res*/["getPromiseName"]());;
@@ -3257,27 +3268,27 @@ return PL$49/*res*/;;
 });;
 this["expSwitchStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$210/*promising*/;
-var PL$173/*continuePromise*/;
-var PL$218/*continueCode*/;
-var PL$223/*discriminant*/;
-var PL$224/*cases*/;
-var PL$209/*statement*/;
-var PL$225/*hasDefault*/;
-var PL$226/*defaultCase*/;
-var PL$227/*isDefault*/;
-var PL$228/*defaultCheck*/;
-var PL$229/*firstCheck*/;
-var PL$230/*hasFirstCheck*/;
-var PL$231/*currentCase*/;
-var PL$232/*caseFun*/;
-var PL$233/*checkFun*/;
-var PL$234/*nextCheckCode*/;
-var PL$235/*j*/;
-var PL$236/*nextCaseCode*/;
-var PL$237/*checkCode*/;
-var PL$137/*b*/;
-var PL$138/*extraPar*/;
+var PL$209/*promising*/;
+var PL$172/*continuePromise*/;
+var PL$217/*continueCode*/;
+var PL$222/*discriminant*/;
+var PL$223/*cases*/;
+var PL$208/*statement*/;
+var PL$224/*hasDefault*/;
+var PL$225/*defaultCase*/;
+var PL$226/*isDefault*/;
+var PL$227/*defaultCheck*/;
+var PL$228/*firstCheck*/;
+var PL$229/*hasFirstCheck*/;
+var PL$230/*currentCase*/;
+var PL$231/*caseFun*/;
+var PL$232/*checkFun*/;
+var PL$233/*nextCheckCode*/;
+var PL$234/*j*/;
+var PL$235/*nextCaseCode*/;
+var PL$236/*checkCode*/;
+var PL$136/*b*/;
+var PL$137/*extraPar*/;
 var PL$32/*i*/;
 ;
 this["stack"]("conditionalCode");;
@@ -3285,97 +3296,97 @@ this["conditionalCode"] = true;;
 this["stack"]("algorithmicCode");;
 this["algorithmicCode"] = true;;
 PL$49/*res*/ = this["newResult"]();
-PL$210/*promising*/ = false;
+PL$209/*promising*/ = false;
 if((PL$24/*par*/["cases"] && PL$37/*checkPromising*/(PL$24/*par*/["cases"]))){
-PL$210/*promising*/ = true;;
+PL$209/*promising*/ = true;;
 };
 ;
-PL$173/*continuePromise*/;
-PL$218/*continueCode*/;
-if(PL$210/*promising*/){
-PL$173/*continuePromise*/ = this["getUniqueName"]();;
-PL$49/*res*/["push"]((((("var " + PL$173/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
-PL$218/*continueCode*/ = (PL$173/*continuePromise*/ + ".resolve(); return;");;
+PL$172/*continuePromise*/;
+PL$217/*continueCode*/;
+if(PL$209/*promising*/){
+PL$172/*continuePromise*/ = this["getUniqueName"]();;
+PL$49/*res*/["push"]((((("var " + PL$172/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));;
+PL$217/*continueCode*/ = (PL$172/*continuePromise*/ + ".resolve(); return;");;
 this["stack"]("breakCode");;
-this["breakCode"] = PL$218/*continueCode*/;;
-PL$223/*discriminant*/ = this["getUniqueName"]("discriminant");
-PL$49/*res*/["push"]((("var " + PL$223/*discriminant*/) + " = "));;
+this["breakCode"] = PL$217/*continueCode*/;;
+PL$222/*discriminant*/ = this["getUniqueName"]("discriminant");
+PL$49/*res*/["push"]((("var " + PL$222/*discriminant*/) + " = "));;
 PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));;
 PL$49/*res*/["push"](";\n");;
-PL$224/*cases*/ = [];
-PL$209/*statement*/;
-PL$225/*hasDefault*/ = false;
-PL$226/*defaultCase*/;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$32/*i*/){{PL$227/*isDefault*/ = false;
+PL$223/*cases*/ = [];
+PL$208/*statement*/;
+PL$224/*hasDefault*/ = false;
+PL$225/*defaultCase*/;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$32/*i*/){{PL$226/*isDefault*/ = false;
 if(! PL$24/*par*/["cases"][PL$32/*i*/]["test"]){
-PL$227/*isDefault*/ = true;;
-if(! PL$225/*hasDefault*/){
-PL$225/*hasDefault*/ = true;;
-PL$226/*defaultCase*/ = PL$24/*par*/["cases"][PL$32/*i*/];;
+PL$226/*isDefault*/ = true;;
+if(! PL$224/*hasDefault*/){
+PL$224/*hasDefault*/ = true;;
+PL$225/*defaultCase*/ = PL$24/*par*/["cases"][PL$32/*i*/];;
 };
 ;
 };
 ;
-PL$224/*cases*/["push"]({"theCase": PL$24/*par*/["cases"][PL$32/*i*/],
+PL$223/*cases*/["push"]({"theCase": PL$24/*par*/["cases"][PL$32/*i*/],
 "caseFun": this["getUniqueName"](),
 "checkFun": this["getUniqueName"](),
-"isDefault": PL$227/*isDefault*/});;
+"isDefault": PL$226/*isDefault*/});;
 }};
 ;
-PL$228/*defaultCheck*/ = PL$218/*continueCode*/;
-if(PL$225/*hasDefault*/){
-PL$228/*defaultCheck*/ = (PL$226/*defaultCase*/["checkFun"] + "();");;
+PL$227/*defaultCheck*/ = PL$217/*continueCode*/;
+if(PL$224/*hasDefault*/){
+PL$227/*defaultCheck*/ = (PL$225/*defaultCase*/["checkFun"] + "();");;
 };
 ;
-PL$229/*firstCheck*/ = PL$218/*continueCode*/;
-PL$230/*hasFirstCheck*/ = false;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$224/*cases*/["length"]);++PL$32/*i*/){{PL$231/*currentCase*/ = PL$224/*cases*/[PL$32/*i*/]["theCase"];
-PL$232/*caseFun*/ = PL$224/*cases*/[PL$32/*i*/]["caseFun"];
-PL$233/*checkFun*/ = PL$224/*cases*/[PL$32/*i*/]["checkFun"];
-if(! PL$230/*hasFirstCheck*/){
-PL$230/*hasFirstCheck*/ = true;;
-PL$229/*firstCheck*/ = (PL$233/*checkFun*/ + "()");;
+PL$228/*firstCheck*/ = PL$217/*continueCode*/;
+PL$229/*hasFirstCheck*/ = false;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$223/*cases*/["length"]);++PL$32/*i*/){{PL$230/*currentCase*/ = PL$223/*cases*/[PL$32/*i*/]["theCase"];
+PL$231/*caseFun*/ = PL$223/*cases*/[PL$32/*i*/]["caseFun"];
+PL$232/*checkFun*/ = PL$223/*cases*/[PL$32/*i*/]["checkFun"];
+if(! PL$229/*hasFirstCheck*/){
+PL$229/*hasFirstCheck*/ = true;;
+PL$228/*firstCheck*/ = (PL$232/*checkFun*/ + "()");;
 };
 ;
-PL$234/*nextCheckCode*/ = PL$228/*defaultCheck*/;
-for(PL$235/*j*/ = (PL$32/*i*/ + 1);(PL$235/*j*/ < PL$224/*cases*/["length"]);++PL$235/*j*/){{if(! PL$224/*cases*/[PL$235/*j*/]["isDefault"]){
-PL$234/*nextCheckCode*/ = (PL$224/*cases*/[PL$235/*j*/]["checkFun"] + "()");;
+PL$233/*nextCheckCode*/ = PL$227/*defaultCheck*/;
+for(PL$234/*j*/ = (PL$32/*i*/ + 1);(PL$234/*j*/ < PL$223/*cases*/["length"]);++PL$234/*j*/){{if(! PL$223/*cases*/[PL$234/*j*/]["isDefault"]){
+PL$233/*nextCheckCode*/ = (PL$223/*cases*/[PL$234/*j*/]["checkFun"] + "()");;
 break;;
 };
 ;
 }};
 ;
-PL$236/*nextCaseCode*/ = PL$218/*continueCode*/;
-if(PL$224/*cases*/[(PL$32/*i*/ + 1)]){
-PL$236/*nextCaseCode*/ = (PL$224/*cases*/[(PL$32/*i*/ + 1)]["caseFun"] + "(); return;");;
+PL$235/*nextCaseCode*/ = PL$217/*continueCode*/;
+if(PL$223/*cases*/[(PL$32/*i*/ + 1)]){
+PL$235/*nextCaseCode*/ = (PL$223/*cases*/[(PL$32/*i*/ + 1)]["caseFun"] + "(); return;");;
 };
 ;
-PL$49/*res*/["push"]((("var " + PL$233/*checkFun*/) + " = function(){"));;
-PL$237/*checkCode*/ = this["newResult"]();
-PL$237/*checkCode*/["push"]((("if(" + PL$223/*discriminant*/) + " === "));;
-PL$237/*checkCode*/["push"](this["expectTypeVar"](this["parseExpression"](PL$231/*currentCase*/["test"])));;
-PL$237/*checkCode*/["push"]("){");;
-PL$237/*checkCode*/["push"](PL$232/*caseFun*/);;
-PL$237/*checkCode*/["push"]("(); return; };\n");;
-PL$237/*checkCode*/["push"](PL$234/*nextCheckCode*/);;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$237/*checkCode*/));;
+PL$49/*res*/["push"]((("var " + PL$232/*checkFun*/) + " = function(){"));;
+PL$236/*checkCode*/ = this["newResult"]();
+PL$236/*checkCode*/["push"]((("if(" + PL$222/*discriminant*/) + " === "));;
+PL$236/*checkCode*/["push"](this["expectTypeVar"](this["parseExpression"](PL$230/*currentCase*/["test"])));;
+PL$236/*checkCode*/["push"]("){");;
+PL$236/*checkCode*/["push"](PL$231/*caseFun*/);;
+PL$236/*checkCode*/["push"]("(); return; };\n");;
+PL$236/*checkCode*/["push"](PL$233/*nextCheckCode*/);;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$236/*checkCode*/));;
 PL$49/*res*/["push"]("};\n");;
-PL$49/*res*/["push"]((("var " + PL$232/*caseFun*/) + " = function(){"));;
-PL$209/*statement*/ = this["newResult"]();;
-PL$137/*b*/ = PL$231/*currentCase*/["consequent"];
-PL$138/*extraPar*/ = {};
-if(PL$210/*promising*/){
-PL$138/*extraPar*/["postCode"] = this["newResult"]();;
-PL$138/*extraPar*/["postCode"]["push"](PL$236/*nextCaseCode*/);;
+PL$49/*res*/["push"]((("var " + PL$231/*caseFun*/) + " = function(){"));;
+PL$208/*statement*/ = this["newResult"]();;
+PL$136/*b*/ = PL$230/*currentCase*/["consequent"];
+PL$137/*extraPar*/ = {};
+if(PL$209/*promising*/){
+PL$137/*extraPar*/["postCode"] = this["newResult"]();;
+PL$137/*extraPar*/["postCode"]["push"](PL$235/*nextCaseCode*/);;
 };
 ;
-PL$209/*statement*/["push"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/));;
-PL$49/*res*/["push"](this["makeCompleteStatement"](PL$209/*statement*/));;
+PL$208/*statement*/["push"](this["blockCreator"](PL$136/*b*/, PL$137/*extraPar*/));;
+PL$49/*res*/["push"](this["makeCompleteStatement"](PL$208/*statement*/));;
 PL$49/*res*/["push"]("};\n");;
 }};
 ;
-PL$49/*res*/["push"](PL$229/*firstCheck*/);;
-PL$49/*res*/["push"]((("; " + PL$173/*continuePromise*/) + ".then(function(){"));;
+PL$49/*res*/["push"](PL$228/*firstCheck*/);;
+PL$49/*res*/["push"]((("; " + PL$172/*continuePromise*/) + ".then(function(){"));;
 PL$49/*res*/["addPost"]("});");;
 this["unstack"]("breakCode");;
 
@@ -3386,14 +3397,14 @@ PL$49/*res*/["push"]("switch (");;
 PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));;
 PL$49/*res*/["push"]("){\n");;
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$32/*i*/){{PL$231/*currentCase*/ = PL$24/*par*/["cases"][PL$32/*i*/];
-if((PL$231/*currentCase*/["type"] != "SwitchCase")){
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$32/*i*/){{PL$230/*currentCase*/ = PL$24/*par*/["cases"][PL$32/*i*/];
+if((PL$230/*currentCase*/["type"] != "SwitchCase")){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["unknownCase"]);;
 };
 ;
-if(PL$231/*currentCase*/["test"]){
+if(PL$230/*currentCase*/["test"]){
 PL$49/*res*/["push"]("case ");;
-PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$231/*currentCase*/["test"])));;
+PL$49/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$230/*currentCase*/["test"])));;
 PL$49/*res*/["push"](":\n");;
 
 }else{
@@ -3401,7 +3412,7 @@ PL$49/*res*/["push"]("default");;
 PL$49/*res*/["push"](":\n");;
 };
 ;
-PL$49/*res*/["push"](this["blockCreator"](PL$231/*currentCase*/["consequent"]));;
+PL$49/*res*/["push"](this["blockCreator"](PL$230/*currentCase*/["consequent"]));;
 }};
 ;
 PL$49/*res*/["push"]("}\n");;
@@ -3446,51 +3457,51 @@ return PL$49/*res*/;;
 });;
 this["expBinaryExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$238/*left*/;
-var PL$239/*right*/;
-var PL$240/*ltype*/;
-var PL$241/*rtype*/;
-var PL$219/*tempPromise*/;
-var PL$220/*tempValue*/;
-var PL$242/*rightExtraCode*/;
+var PL$237/*left*/;
+var PL$238/*right*/;
+var PL$239/*ltype*/;
+var PL$240/*rtype*/;
+var PL$218/*tempPromise*/;
+var PL$219/*tempValue*/;
+var PL$241/*rightExtraCode*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$238/*left*/ = this["parseExpression"](PL$24/*par*/["left"]);
-PL$239/*right*/ = this["parseExpression"](PL$24/*par*/["right"]);
+PL$237/*left*/ = this["parseExpression"](PL$24/*par*/["left"]);
+PL$238/*right*/ = this["parseExpression"](PL$24/*par*/["right"]);
 PL$49/*res*/["setType"]("var");;
 if(((PL$24/*par*/["operator"] == "||") && PL$24/*par*/["right"]["promising"])){
-PL$240/*ltype*/ = PL$238/*left*/["getType"]();
-PL$241/*rtype*/ = PL$239/*right*/["getType"]();
-if(((PL$240/*ltype*/ !== this["getType"]("var")) || (PL$241/*rtype*/ !== this["getType"]("var")))){
+PL$239/*ltype*/ = PL$237/*left*/["getType"]();
+PL$240/*rtype*/ = PL$238/*right*/["getType"]();
+if(((PL$239/*ltype*/ !== this["getType"]("var")) || (PL$240/*rtype*/ !== this["getType"]("var")))){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["notImplemented"]);;
 };
 ;
 PL$49/*res*/["makePromising"]();;
-PL$219/*tempPromise*/ = this["getUniqueName"]();
-PL$220/*tempValue*/ = this["getUniqueName"]();
+PL$218/*tempPromise*/ = this["getUniqueName"]();
+PL$219/*tempValue*/ = this["getUniqueName"]();
 PL$49/*res*/["addPre"]("var ");;
-PL$49/*res*/["addPre"](PL$219/*tempPromise*/);;
+PL$49/*res*/["addPre"](PL$218/*tempPromise*/);;
 PL$49/*res*/["addPre"](((" = " + this["newPromiseStr"]()) + ";\n"));;
 PL$49/*res*/["addPre"]("var ");;
-PL$49/*res*/["addPre"](PL$220/*tempValue*/);;
+PL$49/*res*/["addPre"](PL$219/*tempValue*/);;
 PL$49/*res*/["addPre"](" = ");;
-PL$49/*res*/["addPre"](PL$238/*left*/);;
+PL$49/*res*/["addPre"](PL$237/*left*/);;
 PL$49/*res*/["addPre"](";\n");;
 PL$49/*res*/["addPre"]("if (");;
-PL$49/*res*/["addPre"](PL$220/*tempValue*/);;
+PL$49/*res*/["addPre"](PL$219/*tempValue*/);;
 PL$49/*res*/["addPre"]("){ ");;
-PL$49/*res*/["addPre"](PL$219/*tempPromise*/);;
+PL$49/*res*/["addPre"](PL$218/*tempPromise*/);;
 PL$49/*res*/["addPre"](".resolve(");;
-PL$49/*res*/["addPre"](PL$220/*tempValue*/);;
+PL$49/*res*/["addPre"](PL$219/*tempValue*/);;
 PL$49/*res*/["addPre"](") }else{ ");;
-PL$242/*rightExtraCode*/ = this["newResult"]();
-PL$242/*rightExtraCode*/["push"](PL$219/*tempPromise*/);;
-PL$242/*rightExtraCode*/["push"](".resolve(");;
-PL$242/*rightExtraCode*/["push"](PL$239/*right*/);;
-PL$242/*rightExtraCode*/["push"](");\n");;
-PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$242/*rightExtraCode*/));;
+PL$241/*rightExtraCode*/ = this["newResult"]();
+PL$241/*rightExtraCode*/["push"](PL$218/*tempPromise*/);;
+PL$241/*rightExtraCode*/["push"](".resolve(");;
+PL$241/*rightExtraCode*/["push"](PL$238/*right*/);;
+PL$241/*rightExtraCode*/["push"](");\n");;
+PL$49/*res*/["addPre"](this["makeCompleteStatement"](PL$241/*rightExtraCode*/));;
 PL$49/*res*/["addPre"]("};\n");;
-PL$49/*res*/["addPre"](PL$219/*tempPromise*/);;
+PL$49/*res*/["addPre"](PL$218/*tempPromise*/);;
 PL$49/*res*/["addPre"](".then(");;
 PL$49/*res*/["setPromiseName"](this["getUniqueName"]());;
 PL$49/*res*/["addPre"](PL$49/*res*/["getPromiseName"]());;
@@ -3498,8 +3509,8 @@ PL$49/*res*/["addPre"]("){");;
 PL$49/*res*/["addPost"]("});");;
 
 }else{
-PL$49/*res*/["push"](this["getBinaryExpressionCode"]({"left": PL$238/*left*/,
-"right": PL$239/*right*/,
+PL$49/*res*/["push"](this["getBinaryExpressionCode"]({"left": PL$237/*left*/,
+"right": PL$238/*right*/,
 "operator": PL$24/*par*/["operator"],
 "errorFun": this["getWarningFun"](PL$24/*par*/)}));;
 };
@@ -3509,11 +3520,11 @@ return PL$49/*res*/;;
 });;
 this["expMemberExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$243/*base*/;
+var PL$242/*base*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$243/*base*/ = this["parseExpression"](PL$24/*par*/["object"]);
-PL$49/*res*/["pushType"](this["getGetPropertyCode"]({"instance": PL$243/*base*/,
+PL$242/*base*/ = this["parseExpression"](PL$24/*par*/["object"]);
+PL$49/*res*/["pushType"](this["getGetPropertyCode"]({"instance": PL$242/*base*/,
 "property": (PL$24/*par*/["computed"] ? undefined : PL$27/*identifierName*/(PL$24/*par*/["property"])),
 "propertyValue": (PL$24/*par*/["computed"] ? this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["property"])) : undefined),
 "errorFun": this["getWarningFun"](PL$24/*par*/)}));;
@@ -3522,16 +3533,16 @@ return PL$49/*res*/;;
 });;
 this["newInherited"] = (function(){
 ;
-return new PL$244/*InheritedSystem*/(this);;
+return new PL$243/*InheritedSystem*/(this);;
 ;
 });;
-PL$244/*InheritedSystem*/ = (function(PL$24/*par*/){
+PL$243/*InheritedSystem*/ = (function(PL$24/*par*/){
 ;
 this["instance"] = PL$24/*par*/;;
 this["used"] = {};;
 ;
 });
-PL$244/*InheritedSystem*/["prototype"] = {"setCurrent": (function(PL$24/*par*/){
+PL$243/*InheritedSystem*/["prototype"] = {"setCurrent": (function(PL$24/*par*/){
 ;
 this["currentMember"] = PL$24/*par*/;;
 ;
@@ -3547,71 +3558,71 @@ return this["used"][this["currentMember"]];;
 })};;
 this["expObjectExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$245/*isClassObject*/;
+var PL$244/*isClassObject*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$246/*currentMember*/;
-var PL$160/*prop*/;
-var PL$247/*v*/;
+var PL$88/*l*/;
+var PL$245/*currentMember*/;
+var PL$159/*prop*/;
+var PL$246/*v*/;
 var PL$25/*name*/;
-var PL$248/*functionRes*/;
+var PL$247/*functionRes*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$245/*isClassObject*/ = this["isClassObject"];
+PL$244/*isClassObject*/ = this["isClassObject"];
 this["stack"]("isClassObject");;
 this["isClassObject"] = false;;
 PL$49/*res*/["push"]("{");;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{this["isClassObject"] = false;;
-PL$246/*currentMember*/;
+PL$88/*l*/ = ((PL$24/*par*/["properties"] && PL$24/*par*/["properties"]["length"]) || 0);
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{this["isClassObject"] = false;;
+PL$245/*currentMember*/;
 if(PL$32/*i*/){
 PL$49/*res*/["push"](",\n");;
 };
 ;
-PL$160/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
-if((PL$160/*prop*/["kind"] == "init")){
-PL$246/*currentMember*/ = PL$27/*identifierName*/(PL$160/*prop*/["key"]);;
+PL$159/*prop*/ = PL$24/*par*/["properties"][PL$32/*i*/];
+if((PL$159/*prop*/["kind"] == "init")){
+PL$245/*currentMember*/ = PL$27/*identifierName*/(PL$159/*prop*/["key"]);;
 if(this["inheritedSystem"]){
-this["inheritedSystem"]["setCurrent"](PL$246/*currentMember*/);;
+this["inheritedSystem"]["setCurrent"](PL$245/*currentMember*/);;
 };
 ;
-PL$49/*res*/["push"]((PL$14/*stringEncodeStr*/(PL$27/*identifierName*/(PL$160/*prop*/["key"])) + ": "));;
-if(PL$160/*prop*/["value"]){
-if(PL$35/*checkIsFunction*/(PL$160/*prop*/["value"])){
-if(PL$245/*isClassObject*/){
+PL$49/*res*/["push"]((PL$14/*stringEncodeStr*/(PL$27/*identifierName*/(PL$159/*prop*/["key"])) + ": "));;
+if(PL$159/*prop*/["value"]){
+if(PL$35/*checkIsFunction*/(PL$159/*prop*/["value"])){
+if(PL$244/*isClassObject*/){
 this["isClassObject"] = true;;
 };
 ;
 };
 ;
-PL$247/*v*/ = this["parseExpression"](PL$160/*prop*/["value"]);
-PL$49/*res*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({"value": PL$247/*v*/,
-"valueType": PL$247/*v*/["getType"](),
-"type": this["getType"]((PL$160/*prop*/["typename"] || "var"), PL$24/*par*/),
+PL$246/*v*/ = this["parseExpression"](PL$159/*prop*/["value"]);
+PL$49/*res*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({"value": PL$246/*v*/,
+"valueType": PL$246/*v*/["getType"](),
+"type": this["getType"]((PL$159/*prop*/["typename"] || "var"), PL$24/*par*/),
 "errorFun": this["getWarningFun"](PL$24/*par*/)})));;
 };
 ;
 
 }else{
-if((PL$160/*prop*/["kind"] == "function")){
-if(PL$245/*isClassObject*/){
+if((PL$159/*prop*/["kind"] == "function")){
+if(PL$244/*isClassObject*/){
 this["isClassObject"] = true;;
 };
 ;
-PL$25/*name*/ = PL$27/*identifierName*/(PL$160/*prop*/["id"]);
-PL$246/*currentMember*/ = PL$25/*name*/;;
+PL$25/*name*/ = PL$27/*identifierName*/(PL$159/*prop*/["id"]);
+PL$245/*currentMember*/ = PL$25/*name*/;;
 if(this["inheritedSystem"]){
-this["inheritedSystem"]["setCurrent"](PL$246/*currentMember*/);;
+this["inheritedSystem"]["setCurrent"](PL$245/*currentMember*/);;
 };
 ;
-PL$160/*prop*/["id"] = undefined;;
+PL$159/*prop*/["id"] = undefined;;
 PL$49/*res*/["push"]((PL$14/*stringEncodeStr*/(PL$25/*name*/) + ": "));;
-PL$248/*functionRes*/ = this["expectTypeVar"](this["parseExpression"](PL$160/*prop*/));
-PL$49/*res*/["push"](PL$248/*functionRes*/);;
+PL$247/*functionRes*/ = this["expectTypeVar"](this["parseExpression"](PL$159/*prop*/));
+PL$49/*res*/["push"](PL$247/*functionRes*/);;
 
 }else{
-if((PL$160/*prop*/["kind"] == "block")){
+if((PL$159/*prop*/["kind"] == "block")){
 
 }else{
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["unknownPropertyAssignmentType"]);;
@@ -3639,18 +3650,18 @@ return PL$49/*res*/;;
 });;
 this["expectTypeVar"] = (function(PL$24/*par*/){
 var PL$45/*self*/;
-var PL$169/*e*/;
+var PL$168/*e*/;
 ;
 if((PL$24/*par*/["getType"]() === this["getType"]("var"))){
 return PL$24/*par*/;;
 };
 ;
 PL$45/*self*/ = this;
-PL$169/*e*/ = this["addError"](PL$24/*par*/["getParsed"](), PL$12/*errorMsg*/["expectedVar"]);
+PL$168/*e*/ = this["addError"](PL$24/*par*/["getParsed"](), PL$12/*errorMsg*/["expectedVar"]);
 PL$18/*classSystem*/["definitionPromise"](PL$24/*par*/["getType"]())["then"]((function(PL$30/*t*/){
 ;
 if((PL$30/*t*/ === PL$45/*self*/["getType"]("var"))){
-PL$169/*e*/["resolve"]();;
+PL$168/*e*/["resolve"]();;
 };
 ;
 ;
@@ -3660,33 +3671,33 @@ return PL$24/*par*/;;
 });;
 this["expVariableStatement"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$249/*declarations*/;
+var PL$248/*declarations*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$250/*usedType*/;
+var PL$88/*l*/;
+var PL$249/*usedType*/;
 var PL$50/*r*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$249/*declarations*/ = PL$24/*par*/["declarations"];
-if(! PL$249/*declarations*/){
+PL$248/*declarations*/ = PL$24/*par*/["declarations"];
+if(! PL$248/*declarations*/){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["missingDeclarations"]);;
 return "";;
 };
 ;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = PL$249/*declarations*/["length"];
-PL$250/*usedType*/ = this["getType"](PL$27/*identifierName*/(PL$24/*par*/["typename"]), PL$24/*par*/);
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{if((PL$249/*declarations*/[PL$32/*i*/]["type"] == "VariableDeclaration")){
-PL$50/*r*/ = this["parseExpression"](PL$249/*declarations*/[PL$32/*i*/]);
+PL$88/*l*/ = PL$248/*declarations*/["length"];
+PL$249/*usedType*/ = this["getType"](PL$27/*identifierName*/(PL$24/*par*/["typename"]), PL$24/*par*/);
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{if((PL$248/*declarations*/[PL$32/*i*/]["type"] == "VariableDeclaration")){
+PL$50/*r*/ = this["parseExpression"](PL$248/*declarations*/[PL$32/*i*/]);
 PL$49/*res*/["push"](PL$50/*r*/);;
 
 }else{
-this["error"](PL$249/*declarations*/[PL$32/*i*/], PL$12/*errorMsg*/["unknownType"]);;
+this["error"](PL$248/*declarations*/[PL$32/*i*/], PL$12/*errorMsg*/["unknownType"]);;
 };
 ;
 }};
 ;
-PL$49/*res*/["setType"](PL$250/*usedType*/);;
+PL$49/*res*/["setType"](PL$249/*usedType*/);;
 return PL$49/*res*/;;
 ;
 });;
@@ -3742,83 +3753,83 @@ return this["getType"](PL$30/*t*/);;
 return PL$30/*t*/;;
 ;
 });;
-this["getFunctionArgumentType"] = (function(PL$71/*parType*/, PL$251/*parIndex*/, PL$68/*parsed*/){
-var PL$252/*retType*/;
+this["getFunctionArgumentType"] = (function(PL$70/*parType*/, PL$250/*parIndex*/, PL$67/*parsed*/){
+var PL$251/*retType*/;
 var PL$45/*self*/;
 ;
-PL$252/*retType*/ = this["getProvisionalType"](PL$68/*parsed*/);
+PL$251/*retType*/ = this["getProvisionalType"](PL$67/*parsed*/);
 PL$45/*self*/ = this;
-PL$18/*classSystem*/["readyPromise"](PL$71/*parType*/)["then"]((function(PL$71/*parType*/){
+PL$18/*classSystem*/["readyPromise"](PL$70/*parType*/)["then"]((function(PL$70/*parType*/){
 ;
-PL$45/*self*/["resolveProvisional"](PL$252/*retType*/, PL$18/*classSystem*/["getFunctionArgumentType"](PL$71/*parType*/, PL$251/*parIndex*/));;
+PL$45/*self*/["resolveProvisional"](PL$251/*retType*/, PL$18/*classSystem*/["getFunctionArgumentType"](PL$70/*parType*/, PL$250/*parIndex*/));;
 ;
 }));;
-return PL$252/*retType*/;;
+return PL$251/*retType*/;;
 ;
 });;
-this["callClassSystem"] = (function(PL$113/*parFun*/, PL$24/*par*/){
-var PL$253/*dynamic*/;
-var PL$254/*typeProps*/;
-var PL$255/*ignoreProps*/;
+this["callClassSystem"] = (function(PL$112/*parFun*/, PL$24/*par*/){
+var PL$252/*dynamic*/;
+var PL$253/*typeProps*/;
+var PL$254/*ignoreProps*/;
 var PL$32/*i*/;
 var PL$34/*p*/;
-var PL$256/*promises*/;
-var PL$68/*parsed*/;
-var PL$257/*errRes*/;
+var PL$255/*promises*/;
+var PL$67/*parsed*/;
+var PL$256/*errRes*/;
 var PL$45/*self*/;
-var PL$258/*resolveType*/;
+var PL$257/*resolveType*/;
 var PL$30/*t*/;
 ;
-PL$253/*dynamic*/ = false;
-PL$254/*typeProps*/ = {"type": true,
+PL$252/*dynamic*/ = false;
+PL$253/*typeProps*/ = {"type": true,
 "valueType": true,
 "leftType": true,
 "rightType": true};
-PL$255/*ignoreProps*/ = {"errorFun": true,
+PL$254/*ignoreProps*/ = {"errorFun": true,
 "parsed": true};
 PL$32/*i*/ = 0;
 PL$34/*p*/;
-PL$256/*promises*/ = [];
-PL$68/*parsed*/ = PL$24/*par*/["parsed"];
-PL$68/*parsed*/ = (PL$68/*parsed*/ || (PL$24/*par*/["value"] && PL$24/*par*/["value"]["getParsed"]()));;
-PL$68/*parsed*/ = (PL$68/*parsed*/ || (PL$24/*par*/["instance"] && PL$24/*par*/["instance"]["getParsed"]()));;
-PL$68/*parsed*/ = (PL$68/*parsed*/ || (PL$24/*par*/["left"] && PL$24/*par*/["left"]["getParsed"]()));;
-PL$68/*parsed*/ = (PL$68/*parsed*/ || (PL$24/*par*/["right"] && PL$24/*par*/["right"]["getParsed"]()));;
-if(! PL$68/*parsed*/){
+PL$255/*promises*/ = [];
+PL$67/*parsed*/ = PL$24/*par*/["parsed"];
+PL$67/*parsed*/ = (PL$67/*parsed*/ || (PL$24/*par*/["value"] && PL$24/*par*/["value"]["getParsed"]()));;
+PL$67/*parsed*/ = (PL$67/*parsed*/ || (PL$24/*par*/["instance"] && PL$24/*par*/["instance"]["getParsed"]()));;
+PL$67/*parsed*/ = (PL$67/*parsed*/ || (PL$24/*par*/["left"] && PL$24/*par*/["left"]["getParsed"]()));;
+PL$67/*parsed*/ = (PL$67/*parsed*/ || (PL$24/*par*/["right"] && PL$24/*par*/["right"]["getParsed"]()));;
+if(! PL$67/*parsed*/){
 PL$11/*errorFun*/({}, PL$12/*errorMsg*/["internalParserInfoMissing"]);;
 ;
 };
 ;
-PL$257/*errRes*/ = this["runtimeError"](PL$68/*parsed*/, PL$12/*errorMsg*/["typeLookupFailed"]);
+PL$256/*errRes*/ = this["runtimeError"](PL$67/*parsed*/, PL$12/*errorMsg*/["typeLookupFailed"]);
 PL$45/*self*/ = this;
-PL$258/*resolveType*/ = (function(PL$160/*prop*/, PL$70/*ps*/, PL$259/*parArgument*/){
+PL$257/*resolveType*/ = (function(PL$159/*prop*/, PL$69/*ps*/, PL$258/*parArgument*/){
 var PL$49/*res*/;
 ;
 PL$49/*res*/ = new PL$16/*Promise*/();
-PL$70/*ps*/["then"]((function(PL$30/*t*/){
+PL$69/*ps*/["then"]((function(PL$30/*t*/){
 ;
-if(PL$259/*parArgument*/){
-PL$24/*par*/["arguments"][PL$160/*prop*/]["type"] = PL$30/*t*/;;
+if(PL$258/*parArgument*/){
+PL$24/*par*/["arguments"][PL$159/*prop*/]["type"] = PL$30/*t*/;;
 
 }else{
-PL$24/*par*/[PL$160/*prop*/] = PL$30/*t*/;;
+PL$24/*par*/[PL$159/*prop*/] = PL$30/*t*/;;
 };
 ;
 PL$49/*res*/["resolve"]();;
 ;
 }));;
-PL$256/*promises*/["push"](PL$49/*res*/);;
+PL$255/*promises*/["push"](PL$49/*res*/);;
 return PL$49/*res*/;;
 ;
 });
 PL$30/*t*/;
-for(PL$34/*p*/ in PL$254/*typeProps*/){PL$30/*t*/ = PL$24/*par*/[PL$34/*p*/];;
+for(PL$34/*p*/ in PL$253/*typeProps*/){PL$30/*t*/ = PL$24/*par*/[PL$34/*p*/];;
 if(PL$30/*t*/){
 if(PL$30/*t*/["isDynamic"]){
-PL$253/*dynamic*/ = true;;
+PL$252/*dynamic*/ = true;;
 
 }else{
-PL$258/*resolveType*/(PL$34/*p*/, PL$18/*classSystem*/["readyPromise"](PL$30/*t*/));;
+PL$257/*resolveType*/(PL$34/*p*/, PL$18/*classSystem*/["readyPromise"](PL$30/*t*/));;
 };
 ;
 };
@@ -3829,10 +3840,10 @@ if(PL$24/*par*/["arguments"]){
 for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$24/*par*/["arguments"]["length"]);++PL$32/*i*/){{PL$30/*t*/ = PL$24/*par*/["arguments"][PL$32/*i*/]["type"];;
 if(PL$30/*t*/){
 if(PL$30/*t*/["isDynamic"]){
-PL$253/*dynamic*/ = true;;
+PL$252/*dynamic*/ = true;;
 
 }else{
-PL$258/*resolveType*/(PL$32/*i*/, PL$18/*classSystem*/["readyPromise"](PL$30/*t*/), true);;
+PL$257/*resolveType*/(PL$32/*i*/, PL$18/*classSystem*/["readyPromise"](PL$30/*t*/), true);;
 };
 ;
 };
@@ -3841,42 +3852,42 @@ PL$258/*resolveType*/(PL$32/*i*/, PL$18/*classSystem*/["readyPromise"](PL$30/*t*
 ;
 };
 ;
-PL$17/*promiseland*/["all"](PL$256/*promises*/)["then"]((function(){
+PL$17/*promiseland*/["all"](PL$255/*promises*/)["then"]((function(){
 var PL$34/*p*/;
 var PL$49/*res*/;
-var PL$260/*propsStarted*/;
-var PL$261/*addProperty*/;
-var PL$262/*dynRes*/;
+var PL$259/*propsStarted*/;
+var PL$260/*addProperty*/;
+var PL$261/*dynRes*/;
 var PL$48/*tempRes*/;
 ;
 PL$34/*p*/;
-if(PL$253/*dynamic*/){
+if(PL$252/*dynamic*/){
 PL$45/*self*/["common"]["useClassSystem"] = true;;
 PL$49/*res*/ = PL$45/*self*/["newResult"]();
 PL$49/*res*/["push"]("classSystem.");;
-PL$49/*res*/["push"](PL$113/*parFun*/);;
+PL$49/*res*/["push"](PL$112/*parFun*/);;
 PL$49/*res*/["push"]("({");;
-PL$260/*propsStarted*/ = false;
-PL$261/*addProperty*/ = (function(PL$34/*p*/){
+PL$259/*propsStarted*/ = false;
+PL$260/*addProperty*/ = (function(PL$34/*p*/){
 ;
-if(PL$260/*propsStarted*/){
+if(PL$259/*propsStarted*/){
 PL$49/*res*/["push"](", ");;
 };
 ;
-PL$260/*propsStarted*/ = true;;
+PL$259/*propsStarted*/ = true;;
 PL$49/*res*/["push"](PL$14/*stringEncodeStr*/(PL$34/*p*/));;
 PL$49/*res*/["push"](":");;
 ;
 });
-for(PL$34/*p*/ in PL$24/*par*/){if((! PL$24/*par*/[PL$34/*p*/] || PL$255/*ignoreProps*/[PL$34/*p*/])){
+for(PL$34/*p*/ in PL$24/*par*/){if((! PL$24/*par*/[PL$34/*p*/] || PL$254/*ignoreProps*/[PL$34/*p*/])){
 
 }else{
-if(PL$254/*typeProps*/[PL$34/*p*/]){
-PL$261/*addProperty*/(PL$34/*p*/);;
-PL$49/*res*/["push"](PL$45/*self*/["renderType"](PL$24/*par*/[PL$34/*p*/], PL$68/*parsed*/));;
+if(PL$253/*typeProps*/[PL$34/*p*/]){
+PL$260/*addProperty*/(PL$34/*p*/);;
+PL$49/*res*/["push"](PL$45/*self*/["renderType"](PL$24/*par*/[PL$34/*p*/], PL$67/*parsed*/));;
 
 }else{
-PL$261/*addProperty*/(PL$34/*p*/);;
+PL$260/*addProperty*/(PL$34/*p*/);;
 PL$49/*res*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$24/*par*/[PL$34/*p*/]));;
 };
 };
@@ -3884,116 +3895,125 @@ PL$49/*res*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$24/*par*/[
 };
 ;
 PL$49/*res*/["push"]("})");;
-PL$262/*dynRes*/ = PL$45/*self*/["newResult"]();
-PL$262/*dynRes*/["push"](PL$45/*self*/["makeCompleteStatement"](PL$49/*res*/), undefined, {"dynamic": true});;
-PL$257/*errRes*/["resolve"](PL$262/*dynRes*/);;
+PL$261/*dynRes*/ = PL$45/*self*/["newResult"]();
+PL$261/*dynRes*/["push"](PL$45/*self*/["makeCompleteStatement"](PL$49/*res*/), undefined, {"dynamic": true});;
+PL$256/*errRes*/["resolve"](PL$261/*dynRes*/);;
 
 }else{
 PL$48/*tempRes*/ = PL$45/*self*/["newResult"]();
 PL$24/*par*/["result"] = PL$48/*tempRes*/;;
-PL$257/*errRes*/["resolve"](PL$17/*promiseland*/["classSystem"][PL$113/*parFun*/](PL$24/*par*/));;
+PL$256/*errRes*/["resolve"](PL$17/*promiseland*/["classSystem"][PL$112/*parFun*/](PL$24/*par*/));;
 };
 ;
 ;
 }));;
-return PL$257/*errRes*/;;
+return PL$256/*errRes*/;;
 ;
 });;
-this["isTrackedClassConRes"] = (function(PL$71/*parType*/, PL$54/*parParsed*/){
+this["isTrackedClassConRes"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 var PL$45/*self*/;
 var PL$49/*res*/;
 ;
 PL$45/*self*/ = this;
-if(PL$71/*parType*/["isDynamic"]){
+if(PL$70/*parType*/["isDynamic"]){
 PL$49/*res*/ = PL$45/*self*/["newResult"]();
 PL$45/*self*/["common"]["useClassSystem"] = true;;
 PL$49/*res*/["push"]("classSystem.isTrackedClass");;
 PL$49/*res*/["push"]("(");;
-PL$49/*res*/["push"](PL$45/*self*/["renderType"](PL$71/*parType*/, PL$54/*parParsed*/));;
+PL$49/*res*/["push"](PL$45/*self*/["renderType"](PL$70/*parType*/, PL$54/*parParsed*/));;
 PL$49/*res*/["push"](")");;
 return PL$49/*res*/;;
 };
 ;
-return PL$18/*classSystem*/["isTrackedClass"](PL$71/*parType*/);;
+return PL$18/*classSystem*/["isTrackedClass"](PL$70/*parType*/);;
 ;
 });;
-this["createConditionalCode"] = (function(PL$263/*parTrueRes*/, PL$264/*parFalseRes*/){
+this["createConditionalCode"] = (function(PL$262/*parTrueRes*/, PL$263/*parFalseRes*/){
 var PL$45/*self*/;
-var PL$265/*isDecided*/;
-var PL$266/*conditions*/;
+var PL$264/*isDecided*/;
+var PL$265/*conditions*/;
 var PL$49/*res*/;
 ;
 PL$45/*self*/ = this;
-PL$263/*parTrueRes*/ = (PL$263/*parTrueRes*/ || this["newResult"]());;
-PL$264/*parFalseRes*/ = (PL$264/*parFalseRes*/ || this["newResult"]());;
-PL$265/*isDecided*/ = false;
-PL$266/*conditions*/ = [];
+PL$262/*parTrueRes*/ = (PL$262/*parTrueRes*/ || this["newResult"]());;
+PL$263/*parFalseRes*/ = (PL$263/*parFalseRes*/ || this["newResult"]());;
+PL$264/*isDecided*/ = false;
+PL$265/*conditions*/ = [];
 PL$49/*res*/ = this["newResult"]();
-PL$49/*res*/["replace"](PL$264/*parFalseRes*/);;
+PL$49/*res*/["replace"](PL$263/*parFalseRes*/);;
 return {"res": PL$49/*res*/,
-"addCondition": (function(PL$108/*parCondition*/){
-var PL$267/*ifRes*/;
+"addCondition": (function(PL$107/*parCondition*/){
+var PL$266/*ifRes*/;
 var PL$32/*i*/;
-var PL$262/*dynRes*/;
+var PL$261/*dynRes*/;
 ;
-if(PL$265/*isDecided*/){
+if(PL$264/*isDecided*/){
 return;;
 };
 ;
-if((PL$108/*parCondition*/ === true)){
-PL$265/*isDecided*/ = true;;
-PL$49/*res*/["replace"](PL$263/*parTrueRes*/);;
+if((PL$107/*parCondition*/ === true)){
+PL$264/*isDecided*/ = true;;
+PL$49/*res*/["replace"](PL$262/*parTrueRes*/);;
 return;;
 };
 ;
-if((PL$108/*parCondition*/ === false)){
+if((PL$107/*parCondition*/ === false)){
 return;;
 };
 ;
-PL$266/*conditions*/["push"](PL$108/*parCondition*/);;
-PL$267/*ifRes*/ = PL$45/*self*/["newResult"]();
-PL$267/*ifRes*/["push"]("((");;
+PL$265/*conditions*/["push"](PL$107/*parCondition*/);;
+PL$266/*ifRes*/ = PL$45/*self*/["newResult"]();
+PL$266/*ifRes*/["push"]("((");;
 PL$32/*i*/ = 0;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$266/*conditions*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
-PL$267/*ifRes*/["push"](" && ");;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$265/*conditions*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$266/*ifRes*/["push"](" && ");;
 };
 ;
-PL$267/*ifRes*/["push"](PL$266/*conditions*/[PL$32/*i*/]);;
+PL$266/*ifRes*/["push"](PL$265/*conditions*/[PL$32/*i*/]);;
 }};
 ;
-PL$267/*ifRes*/["push"](") ? (");;
-PL$267/*ifRes*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$263/*parTrueRes*/));;
-PL$267/*ifRes*/["push"](") : (");;
-PL$267/*ifRes*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$264/*parFalseRes*/));;
-PL$267/*ifRes*/["push"]("))");;
-PL$262/*dynRes*/ = PL$45/*self*/["newResult"]();
-PL$262/*dynRes*/["push"](PL$45/*self*/["makeCompleteStatement"](PL$267/*ifRes*/), undefined, {"dynamic": true});;
-PL$49/*res*/["replace"](PL$262/*dynRes*/);;
+PL$266/*ifRes*/["push"](") ? (");;
+PL$266/*ifRes*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$262/*parTrueRes*/));;
+PL$266/*ifRes*/["push"](") : (");;
+PL$266/*ifRes*/["push"](PL$45/*self*/["makeCompleteStatementDynamic"](PL$263/*parFalseRes*/));;
+PL$266/*ifRes*/["push"]("))");;
+PL$261/*dynRes*/ = PL$45/*self*/["newResult"]();
+PL$261/*dynRes*/["push"](PL$45/*self*/["makeCompleteStatement"](PL$266/*ifRes*/), undefined, {"dynamic": true});;
+PL$49/*res*/["replace"](PL$261/*dynRes*/);;
 ;
 })};;
 ;
 });;
-this["isTrackedClass"] = (function(PL$71/*parType*/){
+this["isTrackedClass"] = (function(PL$70/*parType*/){
 ;
-return PL$18/*classSystem*/["isTrackedClass"](PL$71/*parType*/);;
+return PL$18/*classSystem*/["isTrackedClass"](PL$70/*parType*/);;
 ;
 });;
-this["createTemporaryTrackedClass"] = (function(PL$71/*parType*/, PL$54/*parParsed*/){
+this["createTemporaryTrackedClass"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 ;
-if(PL$71/*parType*/["isDynamic"]){
-return this["createExtraDynamicType"](PL$71/*parType*/, {"temporaryTracked": true}, PL$54/*parParsed*/);;
+if(PL$70/*parType*/["isDynamic"]){
+return this["createExtraDynamicType"](PL$70/*parType*/, {"temporaryTracked": true}, PL$54/*parParsed*/);;
 };
 ;
-return PL$18/*classSystem*/["_createTemporaryTrackedClass"](PL$71/*parType*/);;
+return PL$18/*classSystem*/["_createTemporaryTrackedClass"](PL$70/*parType*/);;
 ;
 });;
-this["parseAsType"] = (function(PL$71/*parType*/, PL$24/*par*/){
-var PL$181/*value*/;
+this["getConstructorReturnType"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 ;
-PL$181/*value*/ = this["parseExpression"](PL$24/*par*/);
-return this["getPassAsTypeCode"]({"value": PL$181/*value*/,
-"valueType": PL$181/*value*/["getType"](),
-"type": PL$71/*parType*/,
+if(PL$70/*parType*/["isDynamic"]){
+return this["createExtraDynamicType"](PL$70/*parType*/, {"constructorReturn": true}, PL$54/*parParsed*/);;
+};
+;
+return PL$18/*classSystem*/["getConstructorReturnType"](PL$70/*parType*/);;
+;
+});;
+this["parseAsType"] = (function(PL$70/*parType*/, PL$24/*par*/){
+var PL$180/*value*/;
+;
+PL$180/*value*/ = this["parseExpression"](PL$24/*par*/);
+return this["getPassAsTypeCode"]({"value": PL$180/*value*/,
+"valueType": PL$180/*value*/["getType"](),
+"type": PL$70/*parType*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/),
 "parsed": PL$24/*par*/});;
 ;
@@ -4012,36 +4032,36 @@ return PL$49/*res*/;;
 });;
 this["getDestroyTemporaryClassCode"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$181/*value*/;
-var PL$268/*valueType*/;
+var PL$180/*value*/;
+var PL$267/*valueType*/;
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$181/*value*/ = PL$24/*par*/["value"];
-PL$268/*valueType*/ = PL$181/*value*/["getType"]();
-PL$49/*res*/["push"](this["callClassSystem"]("getDestroyTemporaryClassCode", {"value": PL$181/*value*/,
-"valueType": PL$181/*value*/["getType"](),
+PL$180/*value*/ = PL$24/*par*/["value"];
+PL$267/*valueType*/ = PL$180/*value*/["getType"]();
+PL$49/*res*/["push"](this["callClassSystem"]("getDestroyTemporaryClassCode", {"value": PL$180/*value*/,
+"valueType": PL$180/*value*/["getType"](),
 "errorFun": PL$24/*par*/["errorFun"],
 "noValueRequired": (PL$24/*par*/ ? PL$24/*par*/["noValueRequired"] : undefined)}));;
-PL$49/*res*/["setType"](this["getClassFromTemporaryTracked"](PL$268/*valueType*/, PL$181/*value*/["getParsed"]()));;
+PL$49/*res*/["setType"](this["getClassFromTemporaryTracked"](PL$267/*valueType*/, PL$180/*value*/["getParsed"]()));;
 return PL$49/*res*/;;
 ;
 });;
-this["getClassFromTemporaryTracked"] = (function(PL$71/*parType*/, PL$54/*parParsed*/){
+this["getClassFromTemporaryTracked"] = (function(PL$70/*parType*/, PL$54/*parParsed*/){
 var PL$45/*self*/;
-var PL$269/*resType*/;
+var PL$268/*resType*/;
 ;
 PL$45/*self*/ = this;
-if(PL$71/*parType*/["isDynamic"]){
-return this["createExtraDynamicType"](PL$71/*parType*/, {"temporaryTrackedResolved": true}, PL$54/*parParsed*/);;
+if(PL$70/*parType*/["isDynamic"]){
+return this["createExtraDynamicType"](PL$70/*parType*/, {"temporaryTrackedResolved": true}, PL$54/*parParsed*/);;
 };
 ;
-PL$269/*resType*/ = this["getProvisionalType"](PL$54/*parParsed*/, PL$54/*parParsed*/);
-PL$18/*classSystem*/["definitionPromise"](PL$71/*parType*/)["then"]((function(PL$270/*parDefinedType*/){
+PL$268/*resType*/ = this["getProvisionalType"](PL$54/*parParsed*/, PL$54/*parParsed*/);
+PL$18/*classSystem*/["definitionPromise"](PL$70/*parType*/)["then"]((function(PL$269/*parDefinedType*/){
 ;
-PL$45/*self*/["resolveProvisional"](PL$269/*resType*/, PL$18/*classSystem*/["getClassFromTemporaryTracked"](PL$270/*parDefinedType*/));;
+PL$45/*self*/["resolveProvisional"](PL$268/*resType*/, PL$18/*classSystem*/["getClassFromTemporaryTracked"](PL$269/*parDefinedType*/));;
 ;
 }));;
-return PL$269/*resType*/;;
+return PL$268/*resType*/;;
 ;
 });;
 this["getSetPropertyCode"] = (function(PL$24/*par*/){
@@ -4201,26 +4221,26 @@ PL$49/*res*/["setType"](PL$19/*statementType*/);;
 return PL$49/*res*/;;
 ;
 });;
-this["getClassFromPromiseOf"] = (function(PL$71/*parType*/){
+this["getClassFromPromiseOf"] = (function(PL$70/*parType*/){
 ;
-return PL$18/*classSystem*/["getClassFromPromiseOf"](PL$71/*parType*/);;
+return PL$18/*classSystem*/["getClassFromPromiseOf"](PL$70/*parType*/);;
 ;
 });;
 this["getPropertyType"] = (function(PL$24/*par*/, PL$54/*parParsed*/){
-var PL$69/*type*/;
+var PL$68/*type*/;
 var PL$45/*self*/;
 var PL$50/*r*/;
 ;
-PL$69/*type*/ = PL$24/*par*/["type"];
+PL$68/*type*/ = PL$24/*par*/["type"];
 PL$45/*self*/ = this;
-if(PL$69/*type*/["isDynamic"]){
-return this["createExtraDynamicType"](PL$69/*type*/, {"property": PL$24/*par*/["property"]}, PL$54/*parParsed*/);;
+if(PL$68/*type*/["isDynamic"]){
+return this["createExtraDynamicType"](PL$68/*type*/, {"property": PL$24/*par*/["property"]}, PL$54/*parParsed*/);;
 
 }else{
 PL$50/*r*/ = this["getProvisionalType"](PL$54/*parParsed*/);
-PL$18/*classSystem*/["readyPromise"](PL$24/*par*/["type"])["then"]((function(PL$156/*resultType*/){
+PL$18/*classSystem*/["readyPromise"](PL$24/*par*/["type"])["then"]((function(PL$155/*resultType*/){
 ;
-PL$45/*self*/["resolveProvisional"](PL$50/*r*/, PL$17/*promiseland*/["classSystem"]["getPropertyType"]({"type": PL$156/*resultType*/,
+PL$45/*self*/["resolveProvisional"](PL$50/*r*/, PL$17/*promiseland*/["classSystem"]["getPropertyType"]({"type": PL$155/*resultType*/,
 "property": PL$24/*par*/["property"]}));;
 ;
 }));;
@@ -4230,22 +4250,22 @@ return PL$50/*r*/;;
 ;
 });;
 this["getConstructorType"] = (function(PL$24/*par*/, PL$54/*parParsed*/){
-var PL$69/*type*/;
+var PL$68/*type*/;
 var PL$45/*self*/;
 var PL$50/*r*/;
 ;
-PL$69/*type*/ = PL$24/*par*/["type"];
+PL$68/*type*/ = PL$24/*par*/["type"];
 PL$45/*self*/ = this;
-if(PL$69/*type*/["isDynamic"]){
-return this["createExtraDynamicType"](PL$69/*type*/, {"property": "constructor"}, PL$54/*parParsed*/);;
+if(PL$68/*type*/["isDynamic"]){
+return this["createExtraDynamicType"](PL$68/*type*/, {"property": "constructor"}, PL$54/*parParsed*/);;
 
 }else{
 PL$50/*r*/ = this["getProvisionalType"](PL$54/*parParsed*/);
-PL$18/*classSystem*/["readyPromise"](PL$24/*par*/["type"])["then"]((function(PL$156/*resultType*/){
+PL$18/*classSystem*/["readyPromise"](PL$24/*par*/["type"])["then"]((function(PL$155/*resultType*/){
 ;
 try
-{PL$45/*self*/["resolveProvisional"](PL$50/*r*/, PL$17/*promiseland*/["classSystem"]["getConstructorType"]({"type": PL$156/*resultType*/}));;
-}catch(PL$169/*e*/){PL$45/*self*/["error"](PL$54/*parParsed*/, PL$169/*e*/);;
+{PL$45/*self*/["resolveProvisional"](PL$50/*r*/, PL$17/*promiseland*/["classSystem"]["getConstructorType"]({"type": PL$155/*resultType*/}));;
+}catch(PL$168/*e*/){PL$45/*self*/["error"](PL$54/*parParsed*/, PL$168/*e*/);;
 };
 ;
 ;
@@ -4291,24 +4311,24 @@ return PL$49/*res*/;;
 });;
 this["expAssignmentExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
-var PL$243/*base*/;
+var PL$242/*base*/;
 var PL$39/*property*/;
-var PL$271/*propertyValue*/;
+var PL$270/*propertyValue*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 if((PL$24/*par*/["left"]["type"] == "MemberExpression")){
-PL$243/*base*/ = this["parseExpression"](PL$24/*par*/["left"]["object"]);
+PL$242/*base*/ = this["parseExpression"](PL$24/*par*/["left"]["object"]);
 PL$39/*property*/;
-PL$271/*propertyValue*/;
+PL$270/*propertyValue*/;
 if(PL$24/*par*/["left"]["computed"]){
-PL$271/*propertyValue*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["left"]["property"]));;
+PL$270/*propertyValue*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["left"]["property"]));;
 
 }else{
 PL$39/*property*/ = PL$27/*identifierName*/(PL$24/*par*/["left"]["property"]);;
 };
 ;
-PL$49/*res*/["pushType"](this["getSetPropertyCode"]({"instance": PL$243/*base*/,
-"propertyValue": PL$271/*propertyValue*/,
+PL$49/*res*/["pushType"](this["getSetPropertyCode"]({"instance": PL$242/*base*/,
+"propertyValue": PL$270/*propertyValue*/,
 "property": PL$39/*property*/,
 "computed": PL$24/*par*/["left"]["computed"],
 "value": this["parseExpression"](PL$24/*par*/["right"]),
@@ -4333,61 +4353,61 @@ this["isCallableType"] = (function(){
 this["expCallExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$272/*calleeRes*/;
-var PL$273/*args*/;
-var PL$274/*argType*/;
-var PL$275/*argRes*/;
+var PL$88/*l*/;
+var PL$271/*calleeRes*/;
+var PL$272/*args*/;
+var PL$273/*argType*/;
+var PL$274/*argRes*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$32/*i*/ = 0;
-PL$89/*l*/;
-PL$272/*calleeRes*/ = this["parseExpression"](PL$24/*par*/["callee"]);
-PL$273/*args*/ = [];
+PL$88/*l*/;
+PL$271/*calleeRes*/ = this["parseExpression"](PL$24/*par*/["callee"]);
+PL$272/*args*/ = [];
 if(PL$24/*par*/["arguments"]){
-PL$89/*l*/ = PL$24/*par*/["arguments"]["length"];;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{PL$274/*argType*/ = this["getFunctionArgumentType"](PL$272/*calleeRes*/["getType"](), PL$32/*i*/, PL$24/*par*/["arguments"][PL$32/*i*/]);
-PL$275/*argRes*/ = this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]);
-PL$275/*argRes*/ = this["getPassAsTypeCode"]({"value": PL$275/*argRes*/,
-"valueType": PL$275/*argRes*/["getType"](),
-"type": PL$274/*argType*/,
+PL$88/*l*/ = PL$24/*par*/["arguments"]["length"];;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{PL$273/*argType*/ = this["getFunctionArgumentType"](PL$271/*calleeRes*/["getType"](), PL$32/*i*/, PL$24/*par*/["arguments"][PL$32/*i*/]);
+PL$274/*argRes*/ = this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]);
+PL$274/*argRes*/ = this["getPassAsTypeCode"]({"value": PL$274/*argRes*/,
+"valueType": PL$274/*argRes*/["getType"](),
+"type": PL$273/*argType*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/)});;
-PL$273/*args*/["push"]({"type": PL$275/*argRes*/["getType"](),
-"value": PL$275/*argRes*/});;
+PL$272/*args*/["push"]({"type": PL$274/*argRes*/["getType"](),
+"value": PL$274/*argRes*/});;
 }};
 ;
 };
 ;
-PL$49/*res*/["push"](this["callClassSystem"]("getCallCode", {"type": PL$272/*calleeRes*/["getType"](),
-"instance": PL$272/*calleeRes*/,
-"arguments": PL$273/*args*/}));;
-PL$49/*res*/["setType"](this["getFunctionReturnType"](PL$272/*calleeRes*/["getType"](), PL$24/*par*/));;
+PL$49/*res*/["push"](this["callClassSystem"]("getCallCode", {"type": PL$271/*calleeRes*/["getType"](),
+"instance": PL$271/*calleeRes*/,
+"arguments": PL$272/*args*/}));;
+PL$49/*res*/["setType"](this["getFunctionReturnType"](PL$271/*calleeRes*/["getType"](), PL$24/*par*/));;
 return PL$49/*res*/;;
 ;
 });;
-this["getFunctionReturnType"] = (function(PL$71/*parType*/, PL$68/*parsed*/){
+this["getFunctionReturnType"] = (function(PL$70/*parType*/, PL$67/*parsed*/){
 var PL$30/*t*/;
 var PL$45/*self*/;
 ;
-PL$30/*t*/ = this["getProvisionalType"](PL$68/*parsed*/);
+PL$30/*t*/ = this["getProvisionalType"](PL$67/*parsed*/);
 PL$45/*self*/ = this;
-PL$18/*classSystem*/["readyPromise"](PL$71/*parType*/)["then"]((function(PL$276/*newt*/){
+PL$18/*classSystem*/["readyPromise"](PL$70/*parType*/)["then"]((function(PL$275/*newt*/){
 ;
-PL$45/*self*/["resolveProvisional"](PL$30/*t*/, PL$18/*classSystem*/["getFunctionReturnType"](PL$276/*newt*/, PL$68/*parsed*/));;
+PL$45/*self*/["resolveProvisional"](PL$30/*t*/, PL$18/*classSystem*/["getFunctionReturnType"](PL$275/*newt*/, PL$67/*parsed*/));;
 ;
 }));;
 return PL$30/*t*/;;
 ;
 });;
-this["getFunctionArgumentCount"] = (function(PL$71/*parType*/, PL$68/*parsed*/){
+this["getFunctionArgumentCount"] = (function(PL$70/*parType*/, PL$67/*parsed*/){
 ;
-return PL$18/*classSystem*/["getFunctionArgumentCount"](PL$71/*parType*/);;
+return PL$18/*classSystem*/["getFunctionArgumentCount"](PL$70/*parType*/);;
 ;
 });;
-this["isVar"] = (function(PL$71/*parType*/){
+this["isVar"] = (function(PL$70/*parType*/){
 ;
-if((typeof PL$71/*parType*/ == "function")){
-return PL$18/*classSystem*/["isVar"](PL$71/*parType*/);;
+if((typeof PL$70/*parType*/ == "function")){
+return PL$18/*classSystem*/["isVar"](PL$70/*parType*/);;
 };
 ;
 return false;;
@@ -4396,9 +4416,9 @@ return false;;
 this["expInheritedExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
-var PL$273/*args*/;
-var PL$275/*argRes*/;
+var PL$88/*l*/;
+var PL$272/*args*/;
+var PL$274/*argRes*/;
 ;
 if(! this["inheritedAvailable"]){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["inheritedOnlyInMember"]);;
@@ -4407,19 +4427,19 @@ return;;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$32/*i*/ = 0;
-PL$89/*l*/;
+PL$88/*l*/;
 PL$49/*res*/["push"](this["inheritedSystem"]["getCurrent"]());;
 PL$49/*res*/["push"](".apply(this");;
-PL$273/*args*/ = [];
+PL$272/*args*/ = [];
 if(PL$24/*par*/["arguments"]){
 PL$49/*res*/["push"](", [");;
-PL$89/*l*/ = PL$24/*par*/["arguments"]["length"];;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$88/*l*/ = PL$24/*par*/["arguments"]["length"];;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
 PL$49/*res*/["push"](", ");;
 };
 ;
-PL$275/*argRes*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]));
-PL$49/*res*/["push"](PL$275/*argRes*/);;
+PL$274/*argRes*/ = this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["arguments"][PL$32/*i*/]));
+PL$49/*res*/["push"](PL$274/*argRes*/);;
 }};
 ;
 PL$49/*res*/["push"]("]");;
@@ -4439,13 +4459,13 @@ return PL$49/*res*/;;
 this["expArrayExpression"] = (function(PL$24/*par*/){
 var PL$49/*res*/;
 var PL$32/*i*/;
-var PL$89/*l*/;
+var PL$88/*l*/;
 ;
 PL$49/*res*/ = this["newResult"]();
 PL$49/*res*/["push"]("[");;
 PL$32/*i*/ = 0;
-PL$89/*l*/ = ((PL$24/*par*/["elements"] && PL$24/*par*/["elements"]["length"]) || 0);
-for(PL$32/*i*/;(PL$32/*i*/ < PL$89/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$88/*l*/ = ((PL$24/*par*/["elements"] && PL$24/*par*/["elements"]["length"]) || 0);
+for(PL$32/*i*/;(PL$32/*i*/ < PL$88/*l*/);++PL$32/*i*/){{if(PL$32/*i*/){
 PL$49/*res*/["push"](", ");;
 };
 ;
@@ -4457,35 +4477,35 @@ PL$49/*res*/["setType"]("var");;
 return PL$49/*res*/;;
 ;
 });;
-this["expReturnStatement"] = (function(PL$24/*par*/, PL$277/*closingFun*/){
+this["expReturnStatement"] = (function(PL$24/*par*/, PL$276/*closingFun*/){
 var PL$49/*res*/;
-var PL$117/*valueRes*/;
-var PL$278/*passAsType*/;
-var PL$247/*v*/;
+var PL$116/*valueRes*/;
+var PL$277/*passAsType*/;
+var PL$246/*v*/;
 ;
 if(this["preventreturn"]){
 this["error"](PL$24/*par*/, PL$12/*errorMsg*/["returnNotAllowedHere"]);;
 };
 ;
 PL$49/*res*/ = this["newResult"]();
-PL$117/*valueRes*/;
+PL$116/*valueRes*/;
 if(PL$24/*par*/["argument"]){
-PL$117/*valueRes*/ = this["newResult"]();;
-PL$278/*passAsType*/ = this["getReturnType"]();
+PL$116/*valueRes*/ = this["newResult"]();;
+PL$277/*passAsType*/ = this["getReturnType"]();
 if(this["promising"]){
-PL$278/*passAsType*/ = this["getClassFromPromiseOf"](PL$278/*passAsType*/);;
+PL$277/*passAsType*/ = this["getClassFromPromiseOf"](PL$277/*passAsType*/);;
 };
 ;
-PL$278/*passAsType*/ = this["createTemporaryTrackedClass"](PL$278/*passAsType*/);;
-PL$247/*v*/ = this["parseExpression"](PL$24/*par*/["argument"]);
-PL$117/*valueRes*/["push"](this["getPassAsTypeCode"]({"value": PL$247/*v*/,
-"valueType": PL$247/*v*/["getType"](),
-"type": PL$278/*passAsType*/,
+PL$277/*passAsType*/ = this["createTemporaryTrackedClass"](PL$277/*passAsType*/);;
+PL$246/*v*/ = this["parseExpression"](PL$24/*par*/["argument"]);
+PL$116/*valueRes*/["push"](this["getPassAsTypeCode"]({"value": PL$246/*v*/,
+"valueType": PL$246/*v*/["getType"](),
+"type": PL$277/*passAsType*/,
 "errorFun": this["getWarningFun"](PL$24/*par*/)}));;
 };
 ;
 PL$49/*res*/["push"](this["getReturnCode"]({"return": true,
-"value": PL$117/*valueRes*/}));;
+"value": PL$116/*valueRes*/}));;
 PL$49/*res*/["setType"](PL$19/*statementType*/);;
 return PL$49/*res*/;;
 ;
@@ -4493,83 +4513,83 @@ return PL$49/*res*/;;
 this["_start"]();;
 ;
 });
-PL$279/*loaderStr*/ = (function(PL$24/*par*/){
-var PL$280/*resStr*/;
+PL$278/*loaderStr*/ = (function(PL$24/*par*/){
+var PL$279/*resStr*/;
 var PL$32/*i*/;
-var PL$281/*modules*/;
-var PL$95/*extraModules*/;
-var PL$282/*extraModulesAr*/;
+var PL$280/*modules*/;
+var PL$94/*extraModules*/;
+var PL$281/*extraModulesAr*/;
 ;
-PL$280/*resStr*/ = "";
+PL$279/*resStr*/ = "";
 PL$32/*i*/;
-PL$280/*resStr*/ += "(function(){\n  var defineFun;\n  var requireFun;\n  \n  if (typeof exports == \"object\" && typeof module == \"object\"){ // CommonJS\n    requireFun = function(modulesAr, callback, errBack){\n      try{\n        var i = 0;\n        var l = modulesAr.length;\n        var args = [];\n        for (i; i < l; ++i){\n          args.push(require(modulesAr[i]));\n        };\n      }catch(e){\n        errBack(e);\n        return;\n      };\n      callback.apply(callback, args);\n    };\n    defineFun = function(requireAr, callback){\n      requireFun(requireAr, function(){\n        module.exports = callback.apply(callback, arguments);\n      });\n    };\n    \n  }else if (typeof define == \"function\" && define.amd){ // AMD\n    var _define = define;\n    requireFun = require;\n    \n    defineFun = function(par1, par2){\n      if (par1 instanceof Array){\n        par1.unshift(\"require\");\n      }else{\n        par2 = par1;\n        par1 = [\"require\"];\n      };\n      _define(par1, function(){\n        requireFun = arguments[0];\n        var args = [];\n        for (var i = 1; i < arguments.length; ++i){\n          args.push(arguments[i]);\n        };\n        return par2.apply(par2, args);\n      });\n    };\n    requireFun = require;\n    \n  }else{ // Plain browser env\n    alert(\"not working out!\");\n    \n  };\n  ";;
-PL$281/*modules*/ = [];
+PL$279/*resStr*/ += "(function(){\n  var defineFun;\n  var requireFun;\n  \n  if (typeof exports == \"object\" && typeof module == \"object\"){ // CommonJS\n    requireFun = function(modulesAr, callback, errBack){\n      try{\n        var i = 0;\n        var l = modulesAr.length;\n        var args = [];\n        for (i; i < l; ++i){\n          args.push(require(modulesAr[i]));\n        };\n      }catch(e){\n        errBack(e);\n        return;\n      };\n      callback.apply(callback, args);\n    };\n    defineFun = function(requireAr, callback){\n      requireFun(requireAr, function(){\n        module.exports = callback.apply(callback, arguments);\n      });\n    };\n    \n  }else if (typeof define == \"function\" && define.amd){ // AMD\n    var _define = define;\n    requireFun = require;\n    \n    defineFun = function(par1, par2){\n      if (par1 instanceof Array){\n        par1.unshift(\"require\");\n      }else{\n        par2 = par1;\n        par1 = [\"require\"];\n      };\n      _define(par1, function(){\n        requireFun = arguments[0];\n        var args = [];\n        for (var i = 1; i < arguments.length; ++i){\n          args.push(arguments[i]);\n        };\n        return par2.apply(par2, args);\n      });\n    };\n    requireFun = require;\n    \n  }else{ // Plain browser env\n    alert(\"not working out!\");\n    \n  };\n  ";;
+PL$280/*modules*/ = [];
 if(! PL$24/*par*/["promiseLandModule"]){
-PL$281/*modules*/["push"]({"varName": "promiseland",
+PL$280/*modules*/["push"]({"varName": "promiseland",
 "moduleName": "promiseland"});;
 };
 ;
-PL$95/*extraModules*/ = PL$24/*par*/["extraModules"];
-if(PL$95/*extraModules*/){
-PL$282/*extraModulesAr*/ = PL$95/*extraModules*/["getArray"]();
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$282/*extraModulesAr*/["length"]);++PL$32/*i*/){{PL$281/*modules*/["push"]({"varName": PL$24/*par*/["variableNames"]["get"](PL$282/*extraModulesAr*/[PL$32/*i*/]["key"]),
-"moduleName": PL$282/*extraModulesAr*/[PL$32/*i*/]["value"]});;
+PL$94/*extraModules*/ = PL$24/*par*/["extraModules"];
+if(PL$94/*extraModules*/){
+PL$281/*extraModulesAr*/ = PL$94/*extraModules*/["getArray"]();
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$281/*extraModulesAr*/["length"]);++PL$32/*i*/){{PL$280/*modules*/["push"]({"varName": PL$24/*par*/["variableNames"]["get"](PL$281/*extraModulesAr*/[PL$32/*i*/]["key"]),
+"moduleName": PL$281/*extraModulesAr*/[PL$32/*i*/]["value"]});;
 }};
 ;
 };
 ;
-PL$280/*resStr*/ += "defineFun([";;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$281/*modules*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
-PL$280/*resStr*/ += ", ";;
+PL$279/*resStr*/ += "defineFun([";;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$280/*modules*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$279/*resStr*/ += ", ";;
 };
 ;
-PL$280/*resStr*/ += PL$14/*stringEncodeStr*/(PL$281/*modules*/[PL$32/*i*/]["moduleName"]);;
+PL$279/*resStr*/ += PL$14/*stringEncodeStr*/(PL$280/*modules*/[PL$32/*i*/]["moduleName"]);;
 }};
 ;
-PL$280/*resStr*/ += "], function(";;
-for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$281/*modules*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
-PL$280/*resStr*/ += ", ";;
+PL$279/*resStr*/ += "], function(";;
+for(PL$32/*i*/ = 0;(PL$32/*i*/ < PL$280/*modules*/["length"]);++PL$32/*i*/){{if(PL$32/*i*/){
+PL$279/*resStr*/ += ", ";;
 };
 ;
-PL$280/*resStr*/ += PL$281/*modules*/[PL$32/*i*/]["varName"];;
+PL$279/*resStr*/ += PL$280/*modules*/[PL$32/*i*/]["varName"];;
 }};
 ;
-PL$280/*resStr*/ += "){\n";;
+PL$279/*resStr*/ += "){\n";;
 if(PL$24/*par*/["promiseLandModule"]){
-PL$280/*resStr*/ += "var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;\n";;
+PL$279/*resStr*/ += "var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;\n";;
 
 }else{
-PL$280/*resStr*/ += "var __require = requireFun;\n";;
+PL$279/*resStr*/ += "var __require = requireFun;\n";;
 };
 ;
-PL$280/*resStr*/ += "\n";;
+PL$279/*resStr*/ += "\n";;
 if((PL$24/*par*/["usePromise"] || PL$24/*par*/["useRequire"])){
-PL$280/*resStr*/ += "var __Promise = promiseland.Promise;\n";;
-PL$280/*resStr*/ += "var Promise = promiseland.Promise;\n";;
+PL$279/*resStr*/ += "var __Promise = promiseland.Promise;\n";;
+PL$279/*resStr*/ += "var Promise = promiseland.Promise;\n";;
 };
 ;
 if(PL$24/*par*/["useClassSystem"]){
-PL$280/*resStr*/ += "var classSystem = promiseland.classSystem;\n";;
+PL$279/*resStr*/ += "var classSystem = promiseland.classSystem;\n";;
 };
 ;
 if(PL$24/*par*/["useRequire"]){
-PL$280/*resStr*/ += "var __requireFun = function(parModule){\n      var returnPromise = new __Promise();\n      try{__require([parModule], function(m){\n        if (promiseland.isPromiseLandPromisingModule(m)){\n          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});\n        }else{\n          returnPromise.resolve(m);\n        };\n        }, function(err){ returnPromise.reject(err); });\n      }catch(e){ returnPromise.reject(e); };\n      return returnPromise.promise;};\n    ";;
+PL$279/*resStr*/ += "var __requireFun = function(parModule){\n      var returnPromise = new __Promise();\n      try{__require([parModule], function(m){\n        if (promiseland.isPromiseLandPromisingModule(m)){\n          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});\n        }else{\n          returnPromise.resolve(m);\n        };\n        }, function(err){ returnPromise.reject(err); });\n      }catch(e){ returnPromise.reject(e); };\n      return returnPromise.promise;};\n    ";;
 };
 ;
-return PL$280/*resStr*/;;
+return PL$279/*resStr*/;;
 ;
 });
-PL$283/*promiselandRequireStr*/ = (function(){
+PL$282/*promiselandRequireStr*/ = (function(){
 ;
 return "";;
 ;
 });
-PL$284/*callbackRequireStr*/ = (function(){
+PL$283/*callbackRequireStr*/ = (function(){
 ;
 return "var Callback = promiseland.Callback;\n";;
 ;
 });
-PL$285/*loaderEndStr*/ = (function(PL$24/*par*/){
+PL$284/*loaderEndStr*/ = (function(PL$24/*par*/){
 ;
 if(PL$24/*par*/["promiseLandModule"]){
 return "}; return function(){ return __execute.apply(null, arguments); } });\n})();";;
@@ -4580,146 +4600,146 @@ return "});\n})();";;
 ;
 ;
 });
-PL$286/*createHeader*/ = (function(PL$24/*par*/){
-var PL$280/*resStr*/;
-var PL$287/*loaderParam*/;
+PL$285/*createHeader*/ = (function(PL$24/*par*/){
+var PL$279/*resStr*/;
+var PL$286/*loaderParam*/;
 ;
 if(PL$15/*_pureCode*/){
 return "";;
 };
 ;
-PL$280/*resStr*/ = "";
-PL$287/*loaderParam*/ = {"usePromise": PL$24/*par*/["usePromise"],
+PL$279/*resStr*/ = "";
+PL$286/*loaderParam*/ = {"usePromise": PL$24/*par*/["usePromise"],
 "useRequire": PL$24/*par*/["useRequire"],
 "useClassSystem": PL$24/*par*/["useClassSystem"],
 "extraModules": PL$24/*par*/["extraModules"],
 "variableNames": PL$24/*par*/["variableNames"]};
 if(PL$24/*par*/["makePromiseLandModule"]){
-PL$287/*loaderParam*/["promiseLandModule"] = true;;
+PL$286/*loaderParam*/["promiseLandModule"] = true;;
 };
 ;
-PL$280/*resStr*/ += PL$279/*loaderStr*/(PL$287/*loaderParam*/);;
-PL$280/*resStr*/ += PL$283/*promiselandRequireStr*/();;
+PL$279/*resStr*/ += PL$278/*loaderStr*/(PL$286/*loaderParam*/);;
+PL$279/*resStr*/ += PL$282/*promiselandRequireStr*/();;
 if(PL$24/*par*/["useCallback"]){
-PL$280/*resStr*/ += PL$284/*callbackRequireStr*/();;
+PL$279/*resStr*/ += PL$283/*callbackRequireStr*/();;
 };
 ;
-PL$280/*resStr*/ += (((("if (promiseland._hasModule({ hashStr: \"" + PL$24/*par*/["hashStr"]) + "\" })){ return promiseland._getModule(\"") + PL$24/*par*/["hashStr"]) + "\"); };\n");;
-return PL$280/*resStr*/;;
+PL$279/*resStr*/ += (((("if (promiseland._hasModule({ hashStr: \"" + PL$24/*par*/["hashStr"]) + "\" })){ return promiseland._getModule(\"") + PL$24/*par*/["hashStr"]) + "\"); };\n");;
+return PL$279/*resStr*/;;
 ;
 });
-PL$288/*createFooter*/ = (function(PL$24/*par*/){
-var PL$280/*resStr*/;
+PL$287/*createFooter*/ = (function(PL$24/*par*/){
+var PL$279/*resStr*/;
 ;
 if(PL$15/*_pureCode*/){
 return "";;
 };
 ;
-PL$280/*resStr*/ = "";
+PL$279/*resStr*/ = "";
 if(PL$24/*par*/["makePromiseLandModule"]){
-PL$280/*resStr*/ += PL$285/*loaderEndStr*/({"promiseLandModule": true});;
+PL$279/*resStr*/ += PL$284/*loaderEndStr*/({"promiseLandModule": true});;
 
 }else{
-PL$280/*resStr*/ += PL$285/*loaderEndStr*/({});;
+PL$279/*resStr*/ += PL$284/*loaderEndStr*/({});;
 };
 ;
-return PL$280/*resStr*/;;
+return PL$279/*resStr*/;;
 ;
 });
-PL$289/*parser*/ = {"parse": (function(PL$290/*promiselandCodeStr*/){
+PL$288/*parser*/ = {"parse": (function(PL$289/*promiselandCodeStr*/){
 var PL$34/*p*/;
-var PL$289/*parser*/;
-var PL$291/*hashStr*/;
-var PL$68/*parsed*/;
-var PL$280/*resStr*/;
-var PL$183/*cp*/;
+var PL$288/*parser*/;
+var PL$290/*hashStr*/;
+var PL$67/*parsed*/;
+var PL$279/*resStr*/;
+var PL$182/*cp*/;
 var PL$49/*res*/;
-var PL$96/*parsingConfig*/;
-var PL$292/*makePromiseLandModule*/;
-var PL$95/*extraModules*/;
-var PL$293/*variableNames*/;
-var PL$294/*result*/;
-var PL$295/*programStr*/;
-var PL$296/*mainPartStr*/;
+var PL$95/*parsingConfig*/;
+var PL$291/*makePromiseLandModule*/;
+var PL$94/*extraModules*/;
+var PL$292/*variableNames*/;
+var PL$293/*result*/;
+var PL$294/*programStr*/;
+var PL$295/*mainPartStr*/;
 ;
 PL$34/*p*/ = new PL$17/*promiseland*/["Promise"]();
-PL$289/*parser*/ = PL$7/*_parser*/;
-PL$291/*hashStr*/ = PL$5/*md5*/(PL$290/*promiselandCodeStr*/);
-PL$68/*parsed*/ = PL$289/*parser*/["parse"](PL$290/*promiselandCodeStr*/);
-PL$280/*resStr*/ = "";
-PL$183/*cp*/;
+PL$288/*parser*/ = PL$7/*_parser*/;
+PL$290/*hashStr*/ = PL$5/*md5*/(PL$289/*promiselandCodeStr*/);
+PL$67/*parsed*/ = PL$288/*parser*/["parse"](PL$289/*promiselandCodeStr*/);
+PL$279/*resStr*/ = "";
+PL$182/*cp*/;
 PL$49/*res*/ = {};
-if((PL$68/*parsed*/["length"] === undefined)){
-if((PL$68/*parsed*/["type"] == "Program")){
-PL$96/*parsingConfig*/ = PL$68/*parsed*/["config"];
-PL$183/*cp*/ = new PL$44/*CodeParser*/({"toParse": PL$68/*parsed*/,
-"hashStr": PL$291/*hashStr*/,
-"parsingConfig": PL$96/*parsingConfig*/});;
-PL$292/*makePromiseLandModule*/ = false;
-PL$95/*extraModules*/ = PL$183/*cp*/["common"]["extraModules"];
-PL$293/*variableNames*/ = PL$183/*cp*/["common"]["variableNames"];
-if(PL$96/*parsingConfig*/){
-PL$292/*makePromiseLandModule*/ = PL$183/*cp*/["getTemplateProperty"](PL$96/*parsingConfig*/, "__promiseLandModule", "Literal");;
-if((PL$292/*makePromiseLandModule*/ && (PL$292/*makePromiseLandModule*/["value"] === true))){
-PL$292/*makePromiseLandModule*/ = true;;
+if((PL$67/*parsed*/["length"] === undefined)){
+if((PL$67/*parsed*/["type"] == "Program")){
+PL$95/*parsingConfig*/ = PL$67/*parsed*/["config"];
+PL$182/*cp*/ = new PL$44/*CodeParser*/({"toParse": PL$67/*parsed*/,
+"hashStr": PL$290/*hashStr*/,
+"parsingConfig": PL$95/*parsingConfig*/});;
+PL$291/*makePromiseLandModule*/ = false;
+PL$94/*extraModules*/ = PL$182/*cp*/["common"]["extraModules"];
+PL$292/*variableNames*/ = PL$182/*cp*/["common"]["variableNames"];
+if(PL$95/*parsingConfig*/){
+PL$291/*makePromiseLandModule*/ = PL$182/*cp*/["getTemplateProperty"](PL$95/*parsingConfig*/, "__promiseLandModule", "Literal");;
+if((PL$291/*makePromiseLandModule*/ && (PL$291/*makePromiseLandModule*/["value"] === true))){
+PL$291/*makePromiseLandModule*/ = true;;
 
 }else{
-PL$292/*makePromiseLandModule*/ = false;;
+PL$291/*makePromiseLandModule*/ = false;;
 };
 ;
 };
 ;
-PL$294/*result*/ = PL$183/*cp*/["getResult"]();
-PL$295/*programStr*/ = ((PL$294/*result*/["getPreCodeStr"]() + PL$294/*result*/["getCodeStr"]()) + PL$294/*result*/["getPostCodeStr"]());
-PL$49/*res*/["warnings"] = PL$183/*cp*/["getWarnings"]();;
-PL$49/*res*/["errors"] = PL$183/*cp*/["getErrors"]();;
-PL$296/*mainPartStr*/ = "";
+PL$293/*result*/ = PL$182/*cp*/["getResult"]();
+PL$294/*programStr*/ = ((PL$293/*result*/["getPreCodeStr"]() + PL$293/*result*/["getCodeStr"]()) + PL$293/*result*/["getPostCodeStr"]());
+PL$49/*res*/["warnings"] = PL$182/*cp*/["getWarnings"]();;
+PL$49/*res*/["errors"] = PL$182/*cp*/["getErrors"]();;
+PL$295/*mainPartStr*/ = "";
 if(PL$15/*_pureCode*/){
-PL$280/*resStr*/ = PL$295/*programStr*/;;
+PL$279/*resStr*/ = PL$294/*programStr*/;;
 
 }else{
-if(PL$183/*cp*/["programPromiseStr"]){
-PL$296/*mainPartStr*/ += (((("var " + PL$183/*cp*/["programPromiseStr"]) + " = ") + PL$183/*cp*/["newPromiseStr"]()) + ";\n");;
-PL$296/*mainPartStr*/ += (((("promiseland._registerModule({ hashStr: \"" + PL$291/*hashStr*/) + "\", \"module\": ") + PL$183/*cp*/["programPromiseStr"]) + ", promising: true });\n");;
-PL$296/*mainPartStr*/ += PL$295/*programStr*/;;
-PL$296/*mainPartStr*/ += (";\nreturn " + PL$183/*cp*/["programPromiseStr"]);;
+if(PL$182/*cp*/["programPromiseStr"]){
+PL$295/*mainPartStr*/ += (((("var " + PL$182/*cp*/["programPromiseStr"]) + " = ") + PL$182/*cp*/["newPromiseStr"]()) + ";\n");;
+PL$295/*mainPartStr*/ += (((("promiseland._registerModule({ hashStr: \"" + PL$290/*hashStr*/) + "\", \"module\": ") + PL$182/*cp*/["programPromiseStr"]) + ", promising: true });\n");;
+PL$295/*mainPartStr*/ += PL$294/*programStr*/;;
+PL$295/*mainPartStr*/ += (";\nreturn " + PL$182/*cp*/["programPromiseStr"]);;
 
 }else{
-PL$296/*mainPartStr*/ += PL$295/*programStr*/;;
-PL$296/*mainPartStr*/ += (("return " + PL$183/*cp*/["resultNameStr"]) + ";\n");;
+PL$295/*mainPartStr*/ += PL$294/*programStr*/;;
+PL$295/*mainPartStr*/ += (("return " + PL$182/*cp*/["resultNameStr"]) + ";\n");;
 };
 ;
-PL$280/*resStr*/ += PL$286/*createHeader*/({"makePromiseLandModule": PL$292/*makePromiseLandModule*/,
-"extraModules": PL$95/*extraModules*/,
-"variableNames": PL$293/*variableNames*/,
-"hashStr": PL$291/*hashStr*/,
-"usePromise": PL$183/*cp*/["common"]["usePromise"],
-"useRequire": PL$183/*cp*/["common"]["useRequire"],
-"useCallback": PL$183/*cp*/["common"]["useCallback"],
-"useClassSystem": PL$183/*cp*/["common"]["useClassSystem"]});;
-PL$280/*resStr*/ += PL$296/*mainPartStr*/;;
-PL$280/*resStr*/ += PL$288/*createFooter*/({"makePromiseLandModule": PL$292/*makePromiseLandModule*/});;
-};
-;
-
-}else{
-this["error"](PL$68/*parsed*/, PL$12/*errorMsg*/["unknownType"]);;
+PL$279/*resStr*/ += PL$285/*createHeader*/({"makePromiseLandModule": PL$291/*makePromiseLandModule*/,
+"extraModules": PL$94/*extraModules*/,
+"variableNames": PL$292/*variableNames*/,
+"hashStr": PL$290/*hashStr*/,
+"usePromise": PL$182/*cp*/["common"]["usePromise"],
+"useRequire": PL$182/*cp*/["common"]["useRequire"],
+"useCallback": PL$182/*cp*/["common"]["useCallback"],
+"useClassSystem": PL$182/*cp*/["common"]["useClassSystem"]});;
+PL$279/*resStr*/ += PL$295/*mainPartStr*/;;
+PL$279/*resStr*/ += PL$287/*createFooter*/({"makePromiseLandModule": PL$291/*makePromiseLandModule*/});;
 };
 ;
 
 }else{
-PL$11/*errorFun*/(PL$68/*parsed*/, PL$12/*errorMsg*/["severalProgramElements"]);;
+this["error"](PL$67/*parsed*/, PL$12/*errorMsg*/["unknownType"]);;
+};
+;
+
+}else{
+PL$11/*errorFun*/(PL$67/*parsed*/, PL$12/*errorMsg*/["severalProgramElements"]);;
 };
 ;
 if(! (PL$49/*res*/["errors"] && PL$49/*res*/["errors"]["length"])){
-PL$49/*res*/["javascript"] = PL$280/*resStr*/;;
+PL$49/*res*/["javascript"] = PL$279/*resStr*/;;
 };
 ;
 PL$34/*p*/["resolve"](PL$49/*res*/);;
 return PL$34/*p*/["promise"];;
 ;
 })};
-PL$1.resolve(PL$289/*parser*/); return;;
+PL$1.resolve(PL$288/*parser*/); return;;
 PL$1.resolve(); return;;
 }), PL$4);
 ;}), PL$4);

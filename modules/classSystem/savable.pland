@@ -141,7 +141,7 @@ return (classSystem, internals){
     //load each individual member
     for (i = 0; i < map.membersAr.length; ++i){
       var mDef = map.membersAr[i];
-      if (!pcs.isSavableType(mDef.type)){
+      if (!pcs.isSavableType(mDef.type) || mDef.noSave){
         continue;
       };
       //parInstance
