@@ -2,9 +2,15 @@ try{
 
   class SaveHandler {
     registerClass: (par)*{
+      console.log("register:");
       console.log(par);
       return {
         save: (par)*{
+          console.log("save:");
+          console.log(par);
+        },
+        load: (par)*{
+          console.log("load:");
           console.log(par);
         }
       };
@@ -18,9 +24,10 @@ try{
     y: 2
   };
   
-  C1 a = new C1();
+  C1 a = *new C1("x");
   a.save();
 
 }catch(e){
+  console.log("err:");
   console.log(e);
 }

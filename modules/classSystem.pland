@@ -203,6 +203,11 @@ var privateClassSystem = {
   
   hasOwnProperty: (obj, property){
     return hasOwnProperty.apply(obj, [property]);
+  },
+  
+  resolvePromise: (parType, parPromise, parInstance){
+    parPromise.resolve(parInstance);
+    return parPromise;
   }
 };
 
@@ -484,6 +489,10 @@ var classSystem = {
         };
         cDef.syncMembers.push(mDef);
       };
+      
+      if (m.noSave){
+        mDef.noSave = true;
+      };
 
       map.members[m.name] = mDef;
       map.membersByIndex[mDef.index] = mDef;
@@ -605,14 +614,16 @@ var classSystem = {
           if (cDef.savable){
             classLiteral.members.unshift({
               name: "save",
-              "type": classSystem.getBuiltinType("var")
+              "type": classSystem.getBuiltinType("var"),
+              noSave: true
             });
             parDefaults.save = (){
               *pcs.saveInstance(cf, this);
             };
             classLiteral.members.unshift({
               name: "load",
-              "type": classSystem.getBuiltinType("var")
+              "type": classSystem.getBuiltinType("var"),
+              noSave: true
             });
             parDefaults.load = (){
               *pcs.loadInstance(cf, this);
@@ -722,7 +733,13 @@ var classSystem = {
           var idType = cDef.idType;
           importVar(idType, "idType");
           var idDef = cDef.idDef;
-
+          
+          if (cDef.savable){
+            importVar(cs, "cs");
+            importVar(cDef, "cDef");
+            constructorStr += "var resPs = new (cs.getTypeConstructor(cDef.constructorReturnType));";
+          };
+          
           // standard unique constructor
           if (hasVarId){
             importVar(stringify, "stringify");
@@ -773,6 +790,7 @@ var classSystem = {
         };
 
         // unique constructor part 2
+
         if (cDef.unique){
           importVar(cf, "cf");
           importVar(idDef, "idDef");
@@ -780,12 +798,15 @@ var classSystem = {
           constructorStr += "uniqueMap.set(key, r);";
           constructorStr += "r.map = uniqueMap;";
           constructorStr += "r.key = key;";
+
+          if (cDef.savable){
+            constructorStr += "var doLoad = true;";
+          };
+
           constructorStr += "};";
         };
-        
-        
         constructorStr += "var realInstance = r;";
-        
+
         // track constructor part
         if (cDef.track){
           importVar(Tracker, "Tracker");
@@ -803,6 +824,21 @@ var classSystem = {
           constructorStr += "realInstance[trackRootIdx] = t[1];";
           constructorStr += "realInstance[trackMemberIdx] = t[2];";
           constructorStr += "r = [realInstance, realInstance[trackRootIdx]()];";
+        };
+        
+        constructorStr += "var nonPromiseResult = r;";
+
+        if (cDef.savable){
+          importVar(pcs, "pcs");
+          constructorStr += "if (doLoad){";
+          constructorStr += "pcs.loadInstance(cf, realInstance).then(function(){";
+          constructorStr += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
+          constructorStr += "}, function(e){ resPs.reject(e); });";
+          constructorStr += "}else{";
+
+          constructorStr += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
+          constructorStr += "};";
+          constructorStr += "r = resPs;";
         };
 
         constructorStr += "return r;";

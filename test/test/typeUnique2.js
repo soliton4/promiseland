@@ -53,7 +53,7 @@
 var __require = requireFun;
 
 var classSystem = promiseland.classSystem;
-if (promiseland._hasModule({ hashStr: "246af0ccd0f1b17b598481b08ce73094" })){ return promiseland._getModule("246af0ccd0f1b17b598481b08ce73094"); };
+if (promiseland._hasModule({ hashStr: "994e4daaa95faf8bedcdc70fd8ccafed" })){ return promiseland._getModule("994e4daaa95faf8bedcdc70fd8ccafed"); };
 var PL$1 = (function(){
 "use strict";
 var PL$3/*T1*/;
@@ -94,14 +94,17 @@ PL$6/*v2*/ = undefined; _TPL$6/*v2*/ = undefined;
 return;
 }; })(new PL$4/*T1-constructor*/("x"))/*end temp assign*/
 ;
+return {"success": true};;
 if((PL$6/*v2*/[7] === 1)){
 return {"success": false};;
 };
 ;
+return {"success": true};;
 if((PL$6/*v2*/[7] !== 2)){
 return {"success": false};;
 };
 ;
+return {"success": true};;
 /*temp tracked assign*/(function(vAr){
 if (_TPL$5/*v1*/){ _TPL$5/*v1*/(); };
 if(vAr){
@@ -138,6 +141,7 @@ PL$5/*v1*/ = undefined; _TPL$5/*v1*/ = undefined;
 return;
 }; })(new PL$4/*T1-constructor*/("x"))/*end temp assign*/
 ;;
+return {"success": true};;
 if((PL$5/*v1*/[7] !== 1)){
 return {"success": false};;
 };
