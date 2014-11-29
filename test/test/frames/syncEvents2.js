@@ -153,7 +153,7 @@ PL$8/*isClient*/ = true;;
 ;
 })();;
 PL$9/*checkVar*/ = 1;
-classSystem._resolveProvisional(PL$3/*type:C2*/, classSystem.createClass({members: [{"name":"c","type":classSystem.getBuiltinType("var")},{"name":"d","type":classSystem.getBuiltinType("var")},{"name":"fun1","type":(classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [classSystem.getBuiltinType("var")]}))}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":12,"offset":108}, "hashStr": "f7b004e050b8d655168c8ab2de8c2aef", "name": "C2"}, {"c": 3, "d": 4, "fun1": (function(PL$10/*v*/){
+classSystem._resolveProvisional(PL$3/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"c","type":classSystem.getBuiltinType("var")},{"name":"d","type":classSystem.getBuiltinType("var")},{"name":"fun1","type":(classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [classSystem.getBuiltinType("var")]}))}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":12,"offset":108}, "hashStr": "f7b004e050b8d655168c8ab2de8c2aef", "name": "C2"}, {"c": 3, "d": 4, "fun1": (function(PL$10/*v*/){
 ;
 PL$9/*checkVar*/ = PL$10/*v*/;;
 ;

@@ -72,14 +72,14 @@ PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});;
 PL$8/*failed*/ = false;
 PL$9/*cnt*/ = 0;
-classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"circ","type":PL$2/*type:C1*/},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"circ": undefined, "id": 0, "destroy": (function(){
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"circ","type":PL$2/*type:C1*/},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"circ": undefined, "id": 0, "destroy": (function(){
 var PL$10/*checkid*/;
 ;
 PL$10/*checkid*/ = this[8];
 PL$9/*cnt*/++;;
 ;
 })}));PL$3/*C1*/;;
-classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true}, {"m1": undefined}));PL$6/*C2*/;;
+classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true}, {"m1": undefined}));PL$6/*C2*/;;
 /*temp tracked assign*/(function(vAr){
 if (_TPL$11/*v1*/){ _TPL$11/*v1*/(); };
 if(vAr){

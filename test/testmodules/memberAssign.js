@@ -67,8 +67,8 @@ PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});var PL$5/*type:C2*/ = classSystem._createProvisionalClass();
 PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});;
-classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":1,"column":12,"offset":11}, "hashStr": "4f5d6014ef362785f1ec558e6d262a77", "name": "C1"}, {"a": 1}));PL$3/*C1*/;;
-classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({members: [{"name":"m","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":5,"column":12,"offset":42}, "hashStr": "4f5d6014ef362785f1ec558e6d262a77", "name": "C2"}, {"m": undefined}));PL$6/*C2*/;;
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":1,"column":12,"offset":11}, "hashStr": "4f5d6014ef362785f1ec558e6d262a77", "name": "C1"}, {"a": 1}));PL$3/*C1*/;;
+classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":5,"column":12,"offset":42}, "hashStr": "4f5d6014ef362785f1ec558e6d262a77", "name": "C2"}, {"m": undefined}));PL$6/*C2*/;;
 /*temp tracked assign*/(function(vAr){
 if (_TPL$8/*x*/){ _TPL$8/*x*/(); };
 if(vAr){

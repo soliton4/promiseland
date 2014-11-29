@@ -130,7 +130,7 @@ return PL$14;
 })}, [], PL$12/*inherited*/);
 return res; })();PL$31/*SaveHandler*/;;
 PL$19/*promiseland*/["classSystem"]["setSaveHandler"](new PL$31/*SaveHandler*/());;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;;
+classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;;
 /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$33){/*temp tracked assign*/(function(vAr){
 if (_TPL$32/*a*/){ _TPL$32/*a*/(); };

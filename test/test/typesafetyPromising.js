@@ -88,7 +88,7 @@ PL$11.resolve(); return;;
 return PL$11;
 });
 PL$6(function(){;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2}));PL$4/*C1*/;;
+classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2}));PL$4/*C1*/;;
 PL$18/*f1*/;
 PL$19/*a*/;
 PL$18/*f1*/().then(PL$6(function(PL$20){PL$19/*a*/ = PL$20;;

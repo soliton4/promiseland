@@ -54,7 +54,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "3fa2f12ff0ab5cde0291f8a9cd5c52c8" })){ return promiseland._getModule("3fa2f12ff0ab5cde0291f8a9cd5c52c8"); };
+if (promiseland._hasModule({ hashStr: "4207cd41c2d2b24c1eb575435c73f695" })){ return promiseland._getModule("4207cd41c2d2b24c1eb575435c73f695"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$32/*JSON*/;try{PL$32/*JSON*/ = JSON;}catch(e){};
 var PL$57/*Object*/;try{PL$57/*Object*/ = Object;}catch(e){};
@@ -419,7 +419,9 @@ PL$60/*cDef*/ = {"constructor": undefined,
 "unique": PL$75/*classLiteral*/["unique"],
 "savable": PL$75/*classLiteral*/["savable"],
 "readyPromise": new PL$80/*Promise*/(),
-"syncMembers": []};
+"syncMembers": [],
+"moduleName": PL$75/*classLiteral*/["moduleName"],
+"className": PL$75/*classLiteral*/["className"]};
 PL$52/*cf*/ = PL$53/*classHider*/(PL$60/*cDef*/);
 if(PL$60/*cDef*/["sync"]){
 if(PL$60/*cDef*/["sync"]["serve"]){

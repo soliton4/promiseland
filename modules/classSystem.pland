@@ -350,7 +350,9 @@ var classSystem = {
       unique: classLiteral.unique,
       savable: classLiteral.savable,
       readyPromise: new Promise(),
-      syncMembers: []
+      syncMembers: [],
+      moduleName: classLiteral.moduleName,
+      className: classLiteral.className
     };
     //class hider to pass type arround without changing it
     var cf = classHider(cDef);

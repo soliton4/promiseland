@@ -760,6 +760,10 @@ var mixin = function(){
           if (reqireProperty){
             extraModules = this.getTemplateRequireProperty(reqireProperty);
           };
+          var nameProperty = this.getTemplateProperty(parsingConfig, "name", "Literal");
+          if (nameProperty){
+            this.common.name = nameProperty;
+          };
         };
         this.common.extraModules = extraModules;
         
@@ -1779,7 +1783,7 @@ var mixin = function(){
             this.isClassObject = true;
             
             var literal = this.createClassLiteral(par.body.literal, ci, name);
-            classRes.push(this.stringifyClassLiteral(literal));
+            classRes.push(this.stringifyClassLiteral(literal, name));
             classRes.push(", ");
             classRes.push(this.createClassDefaults(par.body.literal));
             
@@ -1966,10 +1970,16 @@ var mixin = function(){
         return ret;
       };
       
-      this.stringifyClassLiteral = function(par){
+      this.stringifyClassLiteral = function(par, parClassNameStr){
         var res = this.newResult();
         
         res.push("{");
+        if (this.common.name){
+          res.push("moduleName: " + stringEncodeStr(identifierName(this.common.name)) + ",");
+        };
+        if (parClassNameStr){
+          res.push("className: " + stringEncodeStr(identifierName(parClassNameStr)) + ",");
+        };
         res.push("members: [");
         
         var i = 0;

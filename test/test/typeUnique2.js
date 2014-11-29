@@ -64,7 +64,7 @@ var _TPL$6/*v2*/;
 var PL$2/*type:T1*/ = classSystem._createProvisionalClass();
 PL$3/*T1*/ = PL$2/*type:T1*/;
 var PL$4/*T1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:T1*/).then(function(parType){PL$2/*type:T1*/ = parType;PL$4/*T1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:T1*/);});;
-classSystem._resolveProvisional(PL$2/*type:T1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "unique": true}, {"a": 1}));PL$3/*T1*/;;
+classSystem._resolveProvisional(PL$2/*type:T1*/, classSystem.createClass({className: "T1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "unique": true}, {"a": 1}));PL$3/*T1*/;;
 /*temp tracked assign*/(function(vAr){
 if (_TPL$5/*v1*/){ _TPL$5/*v1*/(); };
 if(vAr){

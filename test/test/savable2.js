@@ -81,7 +81,7 @@ var PL$3/*type:C1*/ = classSystem._createProvisionalClass();
 PL$4/*C1*/ = PL$3/*type:C1*/;
 var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});PL$6(function(){;
 __requireFun("./savable").then(PL$6(function(PL$9){PL$8/*savable*/ = PL$9;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"a": 1, "b": 2}));PL$4/*C1*/;;
+classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"a": 1, "b": 2}));PL$4/*C1*/;;
 /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$11){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };

@@ -67,8 +67,8 @@ PL$3/*Type1*/ = PL$2/*type:Type1*/;
 var PL$4/*Type1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Type1*/).then(function(parType){PL$2/*type:Type1*/ = parType;PL$4/*Type1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Type1*/);});var PL$5/*type:Type2*/ = classSystem._createProvisionalClass();
 PL$6/*Type2*/ = PL$5/*type:Type2*/;
 var PL$7/*Type2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){PL$5/*type:Type2*/ = parType;PL$7/*Type2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Type2*/);});;
-classSystem._resolveProvisional(PL$2/*type:Type1*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));PL$3/*Type1*/;;
-classSystem._resolveProvisional(PL$5/*type:Type2*/, classSystem.createClass({members: [], "extends": [], "hasFreePart": true}, {}));PL$6/*Type2*/;;
+classSystem._resolveProvisional(PL$2/*type:Type1*/, classSystem.createClass({className: "Type1",members: [], "extends": [], "hasFreePart": true}, {}));PL$3/*Type1*/;;
+classSystem._resolveProvisional(PL$5/*type:Type2*/, classSystem.createClass({className: "Type2",members: [], "extends": [], "hasFreePart": true}, {}));PL$6/*Type2*/;;
 try
 {PL$8/*a*/;
 PL$9/*b*/;

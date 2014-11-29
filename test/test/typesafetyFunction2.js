@@ -70,7 +70,7 @@ return PL$6/*c*/;;
 ;
 };
 ;
-classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1}));PL$3/*C1*/;;
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a": 1}));PL$3/*C1*/;;
 PL$5/*b*/ = new PL$4/*C1-constructor*/();
 PL$7/*fun1*/;
 ;

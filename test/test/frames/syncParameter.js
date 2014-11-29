@@ -156,7 +156,7 @@ return;
 PL$9/*isClient*/ = true;;
 ;
 })();;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":10,"column":12,"offset":110}, "hashStr": "da40cc33921b9c46c8c6f40737bb3c21", "name": "C1"}, {"a": 1, "b": 2}));PL$4/*C1*/;;
+classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":10,"column":12,"offset":110}, "hashStr": "da40cc33921b9c46c8c6f40737bb3c21", "name": "C1"}, {"a": 1, "b": 2}));PL$4/*C1*/;;
 PL$10/*local*/;
 PL$11/*init*/ = ((function(f){
 promiseland.registerRemote("server", "da40cc33921b9c46c8c6f40737bb3c21", "PL$16", f, classSystem.getBuiltinType("var"));

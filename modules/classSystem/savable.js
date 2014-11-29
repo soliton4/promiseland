@@ -54,7 +54,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "8f1412255cd29dd0dfddde35914d7b6a" })){ return promiseland._getModule("8f1412255cd29dd0dfddde35914d7b6a"); };
+if (promiseland._hasModule({ hashStr: "093599040f4615c97cbcd41047f3e57a" })){ return promiseland._getModule("093599040f4615c97cbcd41047f3e57a"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$26/*Promise*/;try{PL$26/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
@@ -160,7 +160,9 @@ try
 {if(PL$32/*handler*/["registerClass"]){
 PL$28/*cDef*/["saveHandler"] = PL$32/*handler*/["registerClass"]({"idType": PL$28/*cDef*/["idType"],
 "properties": PL$35/*properties*/,
-"propertiesAr": PL$34/*propertiesAr*/});;
+"propertiesAr": PL$34/*propertiesAr*/,
+"moduleName": PL$28/*cDef*/["moduleName"],
+"className": PL$28/*cDef*/["className"]});;
 };
 ;
 }catch(PL$40/*e*/){};

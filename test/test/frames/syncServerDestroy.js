@@ -131,7 +131,7 @@ return PL$20;
 });
 PL$6(function(){;
 PL$8/*destroyed*/ = false;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":3,"column":12,"offset":35}, "hashStr": "367388894588dfac0390ede580e7148f", "name": "C1"}, {"a": 1, "destroy": (function(){
+classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":3,"column":12,"offset":35}, "hashStr": "367388894588dfac0390ede580e7148f", "name": "C1"}, {"a": 1, "destroy": (function(){
 ;
 PL$8/*destroyed*/ = true;;
 ;

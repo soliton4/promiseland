@@ -87,7 +87,7 @@ if (_TPL$9/*a*/){ _TPL$9/*a*/();};}catch(e){if (_TPL$9/*a*/){ _TPL$9/*a*/();};th
 ;
 PL$5/*failed*/ = false;
 PL$6/*cnt*/ = 0;
-classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
+classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
 ;
 PL$6/*cnt*/++;;
 ;

@@ -71,7 +71,9 @@ return (classSystem, internals){
         cDef.saveHandler = handler.registerClass({
           idType: cDef.idType,
           properties: properties,
-          propertiesAr: propertiesAr
+          propertiesAr: propertiesAr,
+          moduleName: cDef.moduleName,
+          className: cDef.className
         });
       };
     }catch(e){};

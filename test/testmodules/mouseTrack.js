@@ -152,7 +152,7 @@ PL$16.resolve(); return;;
 return PL$16;
 });
 PL$24/*nextId*/ = 1;
-classSystem._resolveProvisional(PL$3/*type:Ses*/, classSystem.createClass({members: [{"name":"constructor","type":classSystem.getBuiltinType("var")},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":14,"offset":146}, "hashStr": "2ce826e49303a51951d5788126b893c0", "name": "Ses"}, {"constructor": (function(){
+classSystem._resolveProvisional(PL$3/*type:Ses*/, classSystem.createClass({className: "Ses",members: [{"name":"constructor","type":classSystem.getBuiltinType("var")},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":14,"offset":146}, "hashStr": "2ce826e49303a51951d5788126b893c0", "name": "Ses"}, {"constructor": (function(){
 ;
 (function(s, v){ v = s[10](v); s[9] = v; return v; })(this, PL$24/*nextId*/++);;
 ;
@@ -167,7 +167,7 @@ PL$25/*console*/["log"](PL$26/*p*/);;
 (function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$27/*pos*/, PL$26/*p*/);;
 ;
 })}));PL$4/*Ses*/;;
-classSystem._resolveProvisional(PL$6/*type:Pos*/, classSystem.createClass({members: [{"name":"p","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":26,"column":14,"offset":416}, "hashStr": "2ce826e49303a51951d5788126b893c0", "name": "Pos"}, {"p": {}}));PL$7/*Pos*/;;
+classSystem._resolveProvisional(PL$6/*type:Pos*/, classSystem.createClass({className: "Pos",members: [{"name":"p","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":26,"column":14,"offset":416}, "hashStr": "2ce826e49303a51951d5788126b893c0", "name": "Pos"}, {"p": {}}));PL$7/*Pos*/;;
 PL$27/*pos*/;
 PL$28/*gotit*/ = false;
 (function(){
