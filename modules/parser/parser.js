@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "38ffa0887253f1add24ab2e9d0ee8a64" })){ return promiseland._getModule("38ffa0887253f1add24ab2e9d0ee8a64"); };
+    if (promiseland._hasModule({ hashStr: "8bf075ee8f8d9c11c35b1ecb48c7ca47" })){ return promiseland._getModule("8bf075ee8f8d9c11c35b1ecb48c7ca47"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "38ffa0887253f1add24ab2e9d0ee8a64", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "8bf075ee8f8d9c11c35b1ecb48c7ca47", "module": PL$1, promising: true });
 var PL$17/*promiseland*/;try{PL$17/*promiseland*/ = promiseland;}catch(e){};
 var PL$167/*JSON*/;try{PL$167/*JSON*/ = JSON;}catch(e){};
 var PL$180/*Array*/;try{PL$180/*Array*/ = Array;}catch(e){};
@@ -2330,7 +2330,7 @@ PL$49/*res*/["push"]("catch(");;
 };
 ;
 PL$175/*temporaryPs*/;
-if(PL$24/*par*/["handler"]["param"]){
+if((PL$24/*par*/["handler"] && PL$24/*par*/["handler"]["param"])){
 PL$49/*res*/["push"](this["getVariableName"](PL$27/*identifierName*/(PL$24/*par*/["handler"]["param"])));;
 PL$175/*temporaryPs*/ = this["addLocalVariableTemporary"]({"name": PL$27/*identifierName*/(PL$24/*par*/["handler"]["param"]),
 "typename": "var",
@@ -2338,6 +2338,7 @@ PL$175/*temporaryPs*/ = this["addLocalVariableTemporary"]({"name": PL$27/*identi
 };
 ;
 PL$49/*res*/["push"](")");;
+if(PL$24/*par*/["handler"]){
 PL$137/*b*/ = PL$24/*par*/["handler"]["body"];;
 PL$138/*extraPar*/ = {};;
 PL$137/*b*/["brackets"] = true;;
@@ -2346,6 +2347,16 @@ PL$138/*extraPar*/["postCode"] = this["newResult"]((PL$174/*continuePromise*/ + 
 };
 ;
 PL$49/*res*/["push"](this["makeCompleteStatement"](this["blockCreator"](PL$137/*b*/, PL$138/*extraPar*/)));;
+
+}else{
+PL$49/*res*/["push"]("{");;
+if(PL$37/*checkPromising*/(PL$24/*par*/)){
+PL$49/*res*/["push"]((PL$174/*continuePromise*/ + ".resolve();"));;
+};
+;
+PL$49/*res*/["push"]("}");;
+};
+;
 if(PL$37/*checkPromising*/(PL$24/*par*/)){
 PL$49/*res*/["push"]("));\n");;
 PL$49/*res*/["push"](PL$174/*continuePromise*/);;

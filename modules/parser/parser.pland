@@ -2245,7 +2245,7 @@ var mixin = function(){
         };
         
         var temporaryPs;
-        if (par.handler.param){
+        if (par.handler && par.handler.param){
           res.push(this.getVariableName(identifierName(par.handler.param)));
           temporaryPs = this.addLocalVariableTemporary({
             name: identifierName(par.handler.param), 
@@ -2255,13 +2255,22 @@ var mixin = function(){
         };
         res.push(")");
         
-        b = par.handler.body;
-        extraPar = {};
-        b.brackets = true;
-        if (checkPromising(par)){
-          extraPar.postCode = this.newResult(continuePromise + ".resolve();");
+        if (par.handler){
+          b = par.handler.body;
+          extraPar = {};
+          b.brackets = true;
+          if (checkPromising(par)){
+            extraPar.postCode = this.newResult(continuePromise + ".resolve();");
+          };
+          res.push(this.makeCompleteStatement(this.blockCreator(b, extraPar)));
+        }else{
+          // no handler
+          res.push("{");
+          if (checkPromising(par)){
+            res.push(continuePromise + ".resolve();");
+          };
+          res.push("}");
         };
-        res.push(this.makeCompleteStatement(this.blockCreator(b, extraPar)));
         
         if (checkPromising(par)){
           res.push("));\n");

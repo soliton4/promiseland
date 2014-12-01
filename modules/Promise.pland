@@ -3,7 +3,7 @@
 
     // main promise implementation
     // ------------------------------------------------------------------------------------------------------------------------------
-    var Promise = function(){
+    var Promise = function(parCancelCallback){
       
       var thenAr = [];
       var elseAr = [];
@@ -66,6 +66,16 @@
       this.then = function(par1, par2){
         thenFun(par1, par2);
       };
+      
+      
+      this.cancel = (parReason){
+        this.cancel = (){};
+        thenFun = (){};
+        if (parCancelCallback){
+          parCancelCallback(parReason);
+        };
+      };
+      
       /*this.promise = {
         then: this.then
       };*/

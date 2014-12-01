@@ -479,6 +479,7 @@ Zs = [\u0020\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]
 /* Tokens */
 
 BreakToken      = "break"      !IdentifierPart
+CancelToken     = "cancel"     !IdentifierPart   // promiseland
 CaseToken       = "case"       !IdentifierPart
 CatchToken      = "catch"      !IdentifierPart
 ClassToken      = "class"      !IdentifierPart
@@ -1389,6 +1390,9 @@ ReturnStatement
   / ReturnToken _ argument:Expression EOS {
       return posRes({ type: "ReturnStatement", argument: argument });
     }
+  / CancelToken _ ReturnToken _ EOS {
+      return posRes({ type: "ReturnStatement", cancel: true });
+    }
 
 WithStatement
   = WithToken __ "(" __ object:Expression __ ")" __
@@ -1488,6 +1492,22 @@ TryStatement
         block:     block,
         handler:   null,
         finalizer: finalizer
+      });
+    }
+  / TryToken __ block:Block {
+      return posRes({
+        type:      "TryStatement",
+        block:     block,
+        handler:   null,
+        finalizer: null
+      });
+    }
+  / handler:Catch {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   handler,
+        finalizer: null
       });
     }
 
