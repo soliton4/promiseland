@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -38,97 +43,97 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
     
   };
-  
-defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+  defineFun([], function(){
+var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var __requireFun = function(parModule){
-    var returnPromise = new __Promise();
-    try{__require([parModule], function(m){
-    if (promiseland.isPromiseLandPromisingModule(m)){
-      m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
-    }else{
-      returnPromise.resolve(m);
-    };
-    });
-    }catch(e){returnPromise.reject(e);};
-    return returnPromise.promise;};
-if (promiseland._hasModule({ hashStr: "5a77e69e7bd7e39b4101f1603b840d3d" })){ return promiseland._getModule("5a77e69e7bd7e39b4101f1603b840d3d"); };
-var _V24/*promiseland*/;try{_V24/*promiseland*/ = promiseland;}catch(e){};
-var _V1 = (function(){
+      var returnPromise = new __Promise();
+      try{__require([parModule], function(m){
+        if (promiseland.isPromiseLandPromisingModule(m)){
+          m.then(function(realm){returnPromise.resolve(realm);}, function(e){returnPromise.reject(e);});
+        }else{
+          returnPromise.resolve(m);
+        };
+        }, function(err){ returnPromise.reject(err); });
+      }catch(e){ returnPromise.reject(e); };
+      return returnPromise.promise;};
+    if (promiseland._hasModule({ hashStr: "5a77e69e7bd7e39b4101f1603b840d3d" })){ return promiseland._getModule("5a77e69e7bd7e39b4101f1603b840d3d"); };
+var PL$24/*promiseland*/;try{PL$24/*promiseland*/ = promiseland;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*_parserPs*/;
-var _V3/*_getParser*/;
-var _V4/*_getParserPromise*/;
-var _V11/*ParserClass*/;
+var PL$2/*_parserPs*/;
+var PL$3/*_getParser*/;
+var PL$4/*_getParserPromise*/;
+var PL$11/*ParserClass*/;
 ;
 ;
-_V2/*_parserPs*/;
-_V3/*_getParser*/ = (function(){
+PL$2/*_parserPs*/;
+PL$3/*_getParser*/ = (function(){
 ;
-if(_V2/*_parserPs*/){
-return _V2/*_parserPs*/;;
+if(PL$2/*_parserPs*/){
+return PL$2/*_parserPs*/;;
 };
 ;
-_V2/*_parserPs*/ = _V4/*_getParserPromise*/();;
-return _V2/*_parserPs*/;;
+PL$2/*_parserPs*/ = PL$4/*_getParserPromise*/();;
+return PL$2/*_parserPs*/;;
 ;
 });
-_V4/*_getParserPromise*/ = (function(){
-var _V5 = new __Promise();
-var _V7 = function(code){ return function(res){ try{code(res);}catch(e){ _V5.reject(e); }; }; };
-var _V8 = function(e){ _V5.reject(e); };
-var _V9/*parser*/;
-_V7(function(){;
-__requireFun("./parser/parser").then(_V7(function(_V10){_V9/*parser*/ = _V10;
-_V5.resolve(_V9/*parser*/); return;;
-_V5.resolve(); return;;
-}));})();
-return _V5;
-});
-_V11/*ParserClass*/ = (function(_V12/*par*/){
-;
-this["parse"] = (function(_V13/*parStr*/){
-var _V14 = new __Promise();
-var _V15 = function(code){ return function(res){ try{code(res);}catch(e){ _V14.reject(e); }; }; };
-var _V16 = function(e){ _V14.reject(e); };
-var _V9/*parser*/;
-_V15(function(){;
-var _V17 = new __Promise();
-var _V18 = new __Promise();
-var _V19/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ _V18.resolve(e); }; }; };
-var _V20 = function(e){ _V18.resolve(e); };
-_V19/*try catch*/(function(){_V3/*_getParser*/().then(_V19/*try catch*/(function(_V21){_V9/*parser*/ = _V21;
-_V9/*parser*/["parse"](_V13/*parStr*/).then(_V19/*try catch*/(function(_V22){_V14.resolve(_V22); return;;
-_V17.resolve();
-}), _V20);
-;}), _V20);
+PL$4/*_getParserPromise*/ = (function(){
+var PL$5 = new __Promise();
+var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
+var PL$8 = function(e){ PL$5.reject(e); };
+var PL$9/*parser*/;
+PL$7(function(){;
+__requireFun("./parser/parser").then(PL$7(function(PL$10){PL$9/*parser*/ = PL$10;
+PL$5.resolve(PL$9/*parser*/); return;;
+PL$5.resolve(); return;;
+}), PL$8);
 ;})();
-_V18.then(_V15(function(_V23/*e*/){if(! _V23/*e*/["msg"]){
-_V23/*e*/["msg"] = _V23/*e*/["message"];;
+return PL$5;
+});
+PL$11/*ParserClass*/ = (function(PL$12/*par*/){
+;
+this["parse"] = (function(PL$13/*parStr*/){
+var PL$14 = new __Promise();
+var PL$15 = function(code){ return function(res){ try{code(res);}catch(e){ PL$14.reject(e); }; }; };
+var PL$16 = function(e){ PL$14.reject(e); };
+var PL$9/*parser*/;
+PL$15(function(){;
+var PL$17 = new __Promise();
+var PL$18 = new __Promise();
+var PL$19/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$18.resolve(e); }; }; };
+var PL$20 = function(e){ PL$18.resolve(e); };
+PL$19/*try catch*/(function(){PL$3/*_getParser*/().then(PL$19/*try catch*/(function(PL$21){PL$9/*parser*/ = PL$21;
+PL$9/*parser*/["parse"](PL$13/*parStr*/).then(PL$19/*try catch*/(function(PL$22){PL$14.resolve(PL$22); return;;
+PL$17.resolve();
+}), PL$20);
+;}), PL$20);
+;})();
+PL$18.then(PL$15(function(PL$23/*e*/){if(! PL$23/*e*/["msg"]){
+PL$23/*e*/["msg"] = PL$23/*e*/["message"];;
 };
 ;
-throw _V23/*e*/;
-_V17.resolve();;
+throw PL$23/*e*/;
+PL$17.resolve();;
 }));
-_V17.then(_V15(function(){;
+PL$17.then(PL$15(function(){;
 ;
-_V14.resolve(); return;;
-}), _V16)})();
-return _V14;
+PL$14.resolve(); return;;
+}), PL$16)})();
+return PL$14;
 });;
 ;
 });
-_V24/*promiseland*/["Parser"] = _V11/*ParserClass*/;;
+PL$24/*promiseland*/["Parser"] = PL$11/*ParserClass*/;;
 ;
 })();
-;return _V1;
+;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

@@ -2252,6 +2252,8 @@ var mixin = function(){
             typename: "var", 
             parameter: true
           }, par.handler);
+        }else{
+          res.push("__dummy");
         };
         res.push(")");
         
@@ -2355,7 +2357,7 @@ var mixin = function(){
           if(par["type"] == "BlockStatement"){
             sAr = par.body;
           }else{
-            console.log("here <------------------------");
+            //console.log("here <------------------------");
             sAr.push(this.parseExpression(par));
           };
         };
@@ -2366,6 +2368,18 @@ var mixin = function(){
         
         var i = 0;
         var l = sAr.length;
+        
+        for (i; i < l; ++i){
+          if (sAr[i].type == "TryStatement" && !sAr[i].block){
+            sAr[i].block = sAr.splice(0, i);
+            i = 0;
+            l = sAr.length;
+          };
+        };
+        
+        i = 0;
+        l = sAr.length;
+        
         for (i; i < l; ++i){
           blockRes.push(this.makeStatement(this.parseExpression(sAr[i])));
         };
@@ -4548,6 +4562,8 @@ var mixin = function(){
 var loaderStr = function(par){
   var resStr = "";
   var i;
+//      _define(\"__promiselandModule\" + " + stringEncodeStr(par.hashStr) + ", par1, function(){
+
   resStr += "(function(){
   var defineFun;
   var requireFun;
@@ -4581,11 +4597,11 @@ var loaderStr = function(par){
       if (par1 instanceof Array){
         par1.unshift(\"require\");
       }else{
-        par2 = par1;\n\
-        par1 = [\"require\"];\n\
-      };\n\
-      _define(par1, function(){\n\
-        requireFun = arguments[0];\n\
+        par2 = par1;
+        par1 = [\"require\"];
+      };
+      _define(par1, function(){
+        requireFun = arguments[0];
         var args = [];\n\
         for (var i = 1; i < arguments.length; ++i){\n\
           args.push(arguments[i]);\n\
@@ -4593,7 +4609,6 @@ var loaderStr = function(par){
         return par2.apply(par2, args);\n\
       });\n\
     };\n\
-    requireFun = require;\n\
     \n\
   }else{ // Plain browser env\n\
     alert(\"not working out!\");\n\
@@ -4693,7 +4708,8 @@ var loaderStr = function(par){
         useRequire: par.useRequire,
         useClassSystem: par.useClassSystem,
         extraModules: par.extraModules,
-        variableNames: par.variableNames
+        variableNames: par.variableNames,
+        hashStr: par.hashStr
       };
       
       if (par.makePromiseLandModule){

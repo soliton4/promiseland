@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -38,53 +43,52 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
     
   };
-  
-defineFun(["promiseland"], function(promiseland){ var __require = requireFun;
+  defineFun(["promiseland"], function(promiseland){
+var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "fd537a0410655be5ac8cae2363b1e88f" })){ return promiseland._getModule("fd537a0410655be5ac8cae2363b1e88f"); };
-var _V5/*RegExp*/;try{_V5/*RegExp*/ = RegExp;}catch(e){};
-var _V1 = (function(){
+var PL$5/*RegExp*/;try{PL$5/*RegExp*/ = RegExp;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*_stringEncodeStr*/;
-var _V6/*stringEncodeStr*/;
-var _V7/*errorFun*/;
-var _V9/*errorMsg*/;
+var PL$2/*_stringEncodeStr*/;
+var PL$6/*stringEncodeStr*/;
+var PL$7/*errorFun*/;
+var PL$9/*errorMsg*/;
 ;
-_V2/*_stringEncodeStr*/ = (function(_V3/*par*/){
-var _V4/*s*/;
+PL$2/*_stringEncodeStr*/ = (function(PL$3/*par*/){
+var PL$4/*s*/;
 ;
-_V4/*s*/ = _V3/*par*/["replace"](new _V5/*RegExp*/("\\\\", "g"), "\\\\");
-_V4/*s*/ = _V4/*s*/["replace"](new _V5/*RegExp*/("\\n", "g"), "\\n");;
-_V4/*s*/ = _V4/*s*/["replace"](new _V5/*RegExp*/("\\r", "g"), "\\r");;
-_V4/*s*/ = _V4/*s*/["replace"](new _V5/*RegExp*/("\\\"", "g"), "\\\"");;
-_V4/*s*/ = _V4/*s*/["replace"](new _V5/*RegExp*/("\\u2028", "g"), "\\u2028");;
-_V4/*s*/ = _V4/*s*/["replace"](new _V5/*RegExp*/("\\u2029", "g"), "\\u2029");;
-return _V4/*s*/;;
-;
-});
-_V6/*stringEncodeStr*/ = (function(_V3/*par*/){
-;
-return (("\"" + _V2/*_stringEncodeStr*/(_V3/*par*/)) + "\"");;
+PL$4/*s*/ = PL$3/*par*/["replace"](new PL$5/*RegExp*/("\\\\", "g"), "\\\\");
+PL$4/*s*/ = PL$4/*s*/["replace"](new PL$5/*RegExp*/("\\n", "g"), "\\n");;
+PL$4/*s*/ = PL$4/*s*/["replace"](new PL$5/*RegExp*/("\\r", "g"), "\\r");;
+PL$4/*s*/ = PL$4/*s*/["replace"](new PL$5/*RegExp*/("\\\"", "g"), "\\\"");;
+PL$4/*s*/ = PL$4/*s*/["replace"](new PL$5/*RegExp*/("\\u2028", "g"), "\\u2028");;
+PL$4/*s*/ = PL$4/*s*/["replace"](new PL$5/*RegExp*/("\\u2029", "g"), "\\u2029");;
+return PL$4/*s*/;;
 ;
 });
-_V7/*errorFun*/ = (function(_V3/*par*/, _V8/*err*/){
+PL$6/*stringEncodeStr*/ = (function(PL$3/*par*/){
 ;
-if((! _V3/*par*/ || ! _V3/*par*/["line"])){
-throw _V9/*errorMsg*/["internalParserInfoMissing"];
+return (("\"" + PL$2/*_stringEncodeStr*/(PL$3/*par*/)) + "\"");;
+;
+});
+PL$7/*errorFun*/ = (function(PL$3/*par*/, PL$8/*err*/){
+;
+if((! PL$3/*par*/ || ! PL$3/*par*/["line"])){
+throw PL$9/*errorMsg*/["internalParserInfoMissing"];
 };
 ;
-_V8/*err*/["line"] = _V3/*par*/["line"];;
-_V8/*err*/["column"] = _V3/*par*/["column"];;
-throw _V8/*err*/;
+PL$8/*err*/["line"] = PL$3/*par*/["line"];;
+PL$8/*err*/["column"] = PL$3/*par*/["column"];;
+throw PL$8/*err*/;
 ;
 });
-_V9/*errorMsg*/ = {"typeExists": {"id": 100,
+PL$9/*errorMsg*/ = {"typeExists": {"id": 100,
 "msg": "type already exists"},
 "needsClassBodyLiteral": {"id": 101,
 "msg": "class types need to be defined with a literal body"},
@@ -169,12 +173,12 @@ _V9/*errorMsg*/ = {"typeExists": {"id": 100,
 "internalParserInfoMissing": {"id": 1012,
 "msg": "internal: missing parser info",
 "additional": "pls provide this error in a github issue"}};
-return {"errorFun": _V7/*errorFun*/,
-"errorMsg": _V9/*errorMsg*/,
-"_stringEncodeStr": _V2/*_stringEncodeStr*/,
-"stringEncodeStr": _V6/*stringEncodeStr*/};;
+return {"errorFun": PL$7/*errorFun*/,
+"errorMsg": PL$9/*errorMsg*/,
+"_stringEncodeStr": PL$2/*_stringEncodeStr*/,
+"stringEncodeStr": PL$6/*stringEncodeStr*/};;
 ;
 })();
-;return _V1;
+;return PL$1;
 });
 })();

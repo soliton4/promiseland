@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -38,114 +43,113 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
     
   };
-  
-defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+  defineFun([], function(){
+var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "4a01c4f3b4388a1628a72080d91dbb50" })){ return promiseland._getModule("4a01c4f3b4388a1628a72080d91dbb50"); };
-var _V18/*Array*/;try{_V18/*Array*/ = Array;}catch(e){};
-var _V1 = (function(){
+var PL$18/*Array*/;try{PL$18/*Array*/ = Array;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*mixinPrototype*/;
-var _V9/*getProperty*/;
-var _V13/*createClass*/;
+var PL$2/*mixinPrototype*/;
+var PL$9/*getProperty*/;
+var PL$13/*createClass*/;
 ;
 ;
-_V2/*mixinPrototype*/ = (function(_V3/*parProto*/, _V4/*parMixin*/, _V5/*inheritedObject*/, _V6/*gotit*/){
-var _V7/*i*/;
-var _V8/*proto*/;
+PL$2/*mixinPrototype*/ = (function(PL$3/*parProto*/, PL$4/*parMixin*/, PL$5/*inheritedObject*/, PL$6/*gotit*/){
+var PL$7/*i*/;
+var PL$8/*proto*/;
 ;
-if((! _V4/*parMixin*/ || ! _V4/*parMixin*/["prototype"])){
+if((! PL$4/*parMixin*/ || ! PL$4/*parMixin*/["prototype"])){
 return;;
 };
 ;
-if(! _V6/*gotit*/){
-_V6/*gotit*/ = {};;
+if(! PL$6/*gotit*/){
+PL$6/*gotit*/ = {};;
 };
 ;
-_V7/*i*/;
-_V8/*proto*/ = _V4/*parMixin*/["prototype"];
-for(_V7/*i*/ in _V8/*proto*/){if(((_V7/*i*/ === "prototype") || _V6/*gotit*/[_V7/*i*/])){
+PL$7/*i*/;
+PL$8/*proto*/ = PL$4/*parMixin*/["prototype"];
+for(PL$7/*i*/ in PL$8/*proto*/){if(((PL$7/*i*/ === "prototype") || PL$6/*gotit*/[PL$7/*i*/])){
 continue;;
 };
 ;
-_V3/*parProto*/[_V7/*i*/] = _V8/*proto*/[_V7/*i*/];;
-_V5/*inheritedObject*/[_V7/*i*/] = _V3/*parProto*/[_V7/*i*/];;
-_V6/*gotit*/[_V7/*i*/] = true;;
+PL$3/*parProto*/[PL$7/*i*/] = PL$8/*proto*/[PL$7/*i*/];;
+PL$5/*inheritedObject*/[PL$7/*i*/] = PL$3/*parProto*/[PL$7/*i*/];;
+PL$6/*gotit*/[PL$7/*i*/] = true;;
 };
 ;
-if(_V4/*parMixin*/["prototype"]){
-_V2/*mixinPrototype*/(_V3/*parProto*/, _V4/*parMixin*/["prototype"], _V5/*inheritedObject*/, _V6/*gotit*/);;
+if(PL$4/*parMixin*/["prototype"]){
+PL$2/*mixinPrototype*/(PL$3/*parProto*/, PL$4/*parMixin*/["prototype"], PL$5/*inheritedObject*/, PL$6/*gotit*/);;
 };
 ;
 ;
 });
-_V9/*getProperty*/ = (function(_V10/*par*/, _V11/*parProperty*/, _V12/*parDefault*/){
+PL$9/*getProperty*/ = (function(PL$10/*par*/, PL$11/*parProperty*/, PL$12/*parDefault*/){
 ;
-if(_V10/*par*/["hasOwnProperty"](_V11/*parProperty*/)){
-return _V10/*par*/[_V11/*parProperty*/];;
+if(PL$10/*par*/["hasOwnProperty"](PL$11/*parProperty*/)){
+return PL$10/*par*/[PL$11/*parProperty*/];;
 };
 ;
-return _V12/*parDefault*/;;
+return PL$12/*parDefault*/;;
 ;
 });
-_V13/*createClass*/ = (function(_V10/*par*/, _V14/*parExtends*/, _V5/*inheritedObject*/){
-var _V15/*constructorFun*/;
-var _V8/*proto*/;
-var _V7/*i*/;
-var _V16/*l*/;
-var _V17/*realConstructorFun*/;
-var _V19/*extendConstructors*/;
-var _V20/*cl*/;
+PL$13/*createClass*/ = (function(PL$10/*par*/, PL$14/*parExtends*/, PL$5/*inheritedObject*/){
+var PL$15/*constructorFun*/;
+var PL$8/*proto*/;
+var PL$7/*i*/;
+var PL$16/*l*/;
+var PL$17/*realConstructorFun*/;
+var PL$19/*extendConstructors*/;
+var PL$20/*cl*/;
 ;
-_V15/*constructorFun*/ = _V9/*getProperty*/(_V10/*par*/, "constructor", (function(){
+PL$15/*constructorFun*/ = PL$9/*getProperty*/(PL$10/*par*/, "constructor", (function(){
 ;
 ;
 }));
-_V8/*proto*/ = {};
-_V7/*i*/;
-_V16/*l*/;
-if(_V14/*parExtends*/){
-_V17/*realConstructorFun*/ = _V15/*constructorFun*/;
-if((_V14/*parExtends*/ instanceof _V18/*Array*/)){
-_V16/*l*/ = _V14/*parExtends*/["length"];;
-_V19/*extendConstructors*/ = [];
-for(_V7/*i*/ = 0;(_V7/*i*/ < _V16/*l*/);++_V7/*i*/){{_V2/*mixinPrototype*/(_V8/*proto*/, _V14/*parExtends*/[_V7/*i*/], _V5/*inheritedObject*/);;
-if((typeof _V14/*parExtends*/[_V7/*i*/] === "function")){
-_V19/*extendConstructors*/["push"](_V14/*parExtends*/[_V7/*i*/]);;
+PL$8/*proto*/ = {};
+PL$7/*i*/;
+PL$16/*l*/;
+if(PL$14/*parExtends*/){
+PL$17/*realConstructorFun*/ = PL$15/*constructorFun*/;
+if((PL$14/*parExtends*/ instanceof PL$18/*Array*/)){
+PL$16/*l*/ = PL$14/*parExtends*/["length"];;
+PL$19/*extendConstructors*/ = [];
+for(PL$7/*i*/ = 0;(PL$7/*i*/ < PL$16/*l*/);++PL$7/*i*/){{PL$2/*mixinPrototype*/(PL$8/*proto*/, PL$14/*parExtends*/[PL$7/*i*/], PL$5/*inheritedObject*/);;
+if((typeof PL$14/*parExtends*/[PL$7/*i*/] === "function")){
+PL$19/*extendConstructors*/["push"](PL$14/*parExtends*/[PL$7/*i*/]);;
 };
 ;
 }};
 ;
-_V20/*cl*/ = _V19/*extendConstructors*/["length"];
-if(_V20/*cl*/){
-_V15/*constructorFun*/ = (function(){
-var _V7/*i*/;
-var _V21/*arguments*/ = arguments;
+PL$20/*cl*/ = PL$19/*extendConstructors*/["length"];
+if(PL$20/*cl*/){
+PL$15/*constructorFun*/ = (function(){
+var PL$7/*i*/;
+var PL$21/*arguments*/ = arguments;
 ;
-_V7/*i*/;
-for(_V7/*i*/ = 0;(_V7/*i*/ < _V20/*cl*/);++_V7/*i*/){{_V19/*extendConstructors*/[_V7/*i*/]["apply"](this, _V21/*arguments*/);;
+PL$7/*i*/;
+for(PL$7/*i*/ = 0;(PL$7/*i*/ < PL$20/*cl*/);++PL$7/*i*/){{PL$19/*extendConstructors*/[PL$7/*i*/]["apply"](this, PL$21/*arguments*/);;
 }};
 ;
-return _V17/*realConstructorFun*/["apply"](this, _V21/*arguments*/);;
+return PL$17/*realConstructorFun*/["apply"](this, PL$21/*arguments*/);;
 ;
 });;
 };
 ;
 
 }else{
-_V2/*mixinPrototype*/(_V8/*proto*/, _V14/*parExtends*/, _V5/*inheritedObject*/);;
-if((typeof _V14/*parExtends*/ === "function")){
-_V15/*constructorFun*/ = (function(){
-var _V21/*arguments*/ = arguments;
+PL$2/*mixinPrototype*/(PL$8/*proto*/, PL$14/*parExtends*/, PL$5/*inheritedObject*/);;
+if((typeof PL$14/*parExtends*/ === "function")){
+PL$15/*constructorFun*/ = (function(){
+var PL$21/*arguments*/ = arguments;
 ;
-_V14/*parExtends*/["apply"](this, _V21/*arguments*/);;
-return _V17/*realConstructorFun*/["apply"](this, _V21/*arguments*/);;
+PL$14/*parExtends*/["apply"](this, PL$21/*arguments*/);;
+return PL$17/*realConstructorFun*/["apply"](this, PL$21/*arguments*/);;
 ;
 });;
 };
@@ -154,16 +158,16 @@ return _V17/*realConstructorFun*/["apply"](this, _V21/*arguments*/);;
 ;
 };
 ;
-for(_V7/*i*/ in _V10/*par*/){_V8/*proto*/[_V7/*i*/] = _V10/*par*/[_V7/*i*/];;
+for(PL$7/*i*/ in PL$10/*par*/){PL$8/*proto*/[PL$7/*i*/] = PL$10/*par*/[PL$7/*i*/];;
 };
 ;
-_V15/*constructorFun*/["prototype"] = _V8/*proto*/;;
-return _V15/*constructorFun*/;;
+PL$15/*constructorFun*/["prototype"] = PL$8/*proto*/;;
+return PL$15/*constructorFun*/;;
 ;
 });
-return _V13/*createClass*/;;
+return PL$13/*createClass*/;;
 ;
 })();
-;return _V1;
+;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

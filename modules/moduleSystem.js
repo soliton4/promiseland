@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -38,54 +43,53 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
     
   };
-  
-defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+  defineFun([], function(){
+var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "b4d87d3050f4ff97d753b76790f08b0f" })){ return promiseland._getModule("b4d87d3050f4ff97d753b76790f08b0f"); };
-var _V3/*promiseland*/;try{_V3/*promiseland*/ = promiseland;}catch(e){};
-var _V1 = (function(){
+var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*modules*/;
+var PL$2/*modules*/;
 ;
 ;
-_V2/*modules*/ = {};
-_V3/*promiseland*/["_registerModule"] = (function(_V4/*par*/){
+PL$2/*modules*/ = {};
+PL$3/*promiseland*/["_registerModule"] = (function(PL$4/*par*/){
 ;
-if(this["_hasModule"](_V4/*par*/["hashStr"])){
+if(this["_hasModule"](PL$4/*par*/["hashStr"])){
 return false;;
 };
 ;
-_V2/*modules*/[_V4/*par*/["hashStr"]] = {"promising": _V4/*par*/["promising"],
-"module": _V4/*par*/["module"]};;
+PL$2/*modules*/[PL$4/*par*/["hashStr"]] = {"promising": PL$4/*par*/["promising"],
+"module": PL$4/*par*/["module"]};;
 return true;;
 ;
 });;
-_V3/*promiseland*/["_getModule"] = (function(_V5/*parHashStr*/){
+PL$3/*promiseland*/["_getModule"] = (function(PL$5/*parHashStr*/){
 ;
-return _V2/*modules*/[_V5/*parHashStr*/]["module"];;
+return PL$2/*modules*/[PL$5/*parHashStr*/]["module"];;
 ;
 });;
-_V3/*promiseland*/["_hasModule"] = (function(_V5/*parHashStr*/){
+PL$3/*promiseland*/["_hasModule"] = (function(PL$5/*parHashStr*/){
 ;
-if(_V2/*modules*/[_V5/*parHashStr*/]){
+if(PL$2/*modules*/[PL$5/*parHashStr*/]){
 return true;;
 };
 ;
 return false;;
 ;
 });;
-_V3/*promiseland*/["isPromiseLandPromisingModule"] = (function(_V6/*parM*/){
-var _V7/*i*/;
+PL$3/*promiseland*/["isPromiseLandPromisingModule"] = (function(PL$6/*parM*/){
+var PL$7/*i*/;
 ;
-_V7/*i*/;
-for(_V7/*i*/ in _V2/*modules*/){if((_V2/*modules*/[_V7/*i*/] && (_V2/*modules*/[_V7/*i*/]["module"] === _V6/*parM*/))){
-return _V2/*modules*/[_V7/*i*/]["promising"];;
+PL$7/*i*/;
+for(PL$7/*i*/ in PL$2/*modules*/){if((PL$2/*modules*/[PL$7/*i*/] && (PL$2/*modules*/[PL$7/*i*/]["module"] === PL$6/*parM*/))){
+return PL$2/*modules*/[PL$7/*i*/]["promising"];;
 };
 ;
 };
@@ -93,9 +97,9 @@ return _V2/*modules*/[_V7/*i*/]["promising"];;
 return false;;
 ;
 });;
-return _V2/*modules*/;;
+return PL$2/*modules*/;;
 ;
 })();
-;return _V1;
+;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

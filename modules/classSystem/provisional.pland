@@ -2,9 +2,11 @@
   
 var errorMsg = extra.errorMsg;
 
-return (classSystem){
+
+return (classSystem, internals){
   var cs = classSystem;
-  
+  var classHider = internals.classHider;
+  var getClass = internals.getClass;
   
   /*
         a placeholder for a class that will be constructed in the future
@@ -23,7 +25,7 @@ return (classSystem){
     });
     var cf = classHider(cDef);
     return cf;
-  },
+  };
 
   cs._resolveProvisional = function(parType, parResult){
     var self = this;
@@ -37,7 +39,7 @@ return (classSystem){
     }else{
       typeDef.promise.resolve(parResult);
     };
-  },
+  };
       
   cs.isProvisional = function(parType){
     var typeDef = getClass(parType);
@@ -45,7 +47,7 @@ return (classSystem){
       return true;
     };
     return false;
-  },
+  };
 
   /*
         returns the actual class object (hidefunction)
@@ -61,7 +63,7 @@ return (classSystem){
     var p = new Promise();
     p.resolve(parType);
     return p;
-  },
+  };
   
   /*
       the final class everything is ready to use. it could be that some of the member types are not ready yet,
@@ -81,7 +83,7 @@ return (classSystem){
       return;
     });
     return p;
-  }
+  };
 
   
 };

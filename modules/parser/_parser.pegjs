@@ -1470,12 +1470,30 @@ ConnectExpression
     }
 
 TryStatement
-  = TryToken __ block:Block __ handler:Catch __ finalizer:Finally {
+  = TryToken __ block:Block __ handler:Catch __ finalizer:Finally __ cancelHandler:Cancel{
+      return posRes({
+        type:      "TryStatement",
+        block:     block,
+        handler:   handler,
+        finalizer: finalizer,
+        cancel:    cancelHandler
+      });
+    }
+  / TryToken __ block:Block __ handler:Catch __ finalizer:Finally {
       return posRes({
         type:      "TryStatement",
         block:     block,
         handler:   handler,
         finalizer: finalizer
+      });
+    }
+  / TryToken __ block:Block __ handler:Catch __ cancelHandler:Cancel{
+      return posRes({
+        type:      "TryStatement",
+        block:     block,
+        handler:   handler,
+        finalizer: null,
+        cancel:    cancelHandler
       });
     }
   / TryToken __ block:Block __ handler:Catch {
@@ -1486,12 +1504,30 @@ TryStatement
         finalizer: null
       });
     }
+  / TryToken __ block:Block __ finalizer:Finally __ cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     block,
+        handler:   null,
+        finalizer: finalizer,
+        cancel:    cancelHandler
+      });
+    }
   / TryToken __ block:Block __ finalizer:Finally {
       return posRes({
         type:      "TryStatement",
         block:     block,
         handler:   null,
         finalizer: finalizer
+      });
+    }
+  / TryToken __ block:Block __ cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     block,
+        handler:   null,
+        finalizer: null,
+        cancel:    cancelHandler
       });
     }
   / TryToken __ block:Block {
@@ -1502,6 +1538,32 @@ TryStatement
         finalizer: null
       });
     }
+  / TryToken __ handler:Catch __ finalizer:Finally __ cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   handler,
+        finalizer: finalizer,
+        cancel:    cancelHandler
+      });
+    }
+  / TryToken __ handler:Catch __ finalizer:Finally {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   handler,
+        finalizer: finalizer
+      });
+    }
+  / handler:Catch __ cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   handler,
+        finalizer: null,
+        cancel:    cancelHandler
+      });
+    }
   / handler:Catch {
       return posRes({
         type:      "TryStatement",
@@ -1510,11 +1572,46 @@ TryStatement
         finalizer: null
       });
     }
+  / finalizer:Finally __ cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   null,
+        finalizer: finalizer,
+        cancel:    cancelHandler
+      });
+    }
+  / finalizer:Finally {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   null,
+        finalizer: finalizer
+      });
+    }
+  / cancelHandler:Cancel {
+      return posRes({
+        type:      "TryStatement",
+        block:     null,
+        handler:   null,
+        finalizer: null,
+        cancel:    cancelHandler
+      });
+    }
 
 Catch
   = CatchToken __ "(" __ param:Identifier __ ")" __ body:Block {
       return posRes({
         type:  "CatchClause",
+        param: param,
+        body:  body
+      });
+    }
+    
+Cancel
+  = CancelToken __ "(" __ param:Identifier __ ")" __ body:Block {
+      return posRes({
+        type:  "CancelClause",
         param: param,
         body:  body
       });

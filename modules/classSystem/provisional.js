@@ -43,7 +43,6 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
@@ -54,7 +53,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "f7e174687063435436eb7b8a7ae6eb4c" })){ return promiseland._getModule("f7e174687063435436eb7b8a7ae6eb4c"); };
+if (promiseland._hasModule({ hashStr: "c72038a1ddad16a0b5bfd21bed1bba34" })){ return promiseland._getModule("c72038a1ddad16a0b5bfd21bed1bba34"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$10/*Promise*/;try{PL$10/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){

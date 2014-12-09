@@ -43,7 +43,6 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
@@ -65,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "1b591c385f98d83ca3fdf80147e348e6" })){ return promiseland._getModule("1b591c385f98d83ca3fdf80147e348e6"); };
+    if (promiseland._hasModule({ hashStr: "8efd11d4404375295a4d84fabebd4610" })){ return promiseland._getModule("8efd11d4404375295a4d84fabebd4610"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "1b591c385f98d83ca3fdf80147e348e6", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "8efd11d4404375295a4d84fabebd4610", "module": PL$1, promising: true });
 var PL$24/*console*/;try{PL$24/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -81,10 +80,10 @@ var PL$25/*funReturning4*/;
 var PL$27/*funReturning4debug*/;
 var PL$28/*returning4*/;
 var PL$49/*modRes4*/;
-var PL$83/*c*/;
-var PL$84/*s*/;
-var PL$85/*f*/;
-var PL$86/*m*/;
+var PL$87/*c*/;
+var PL$88/*s*/;
+var PL$89/*f*/;
+var PL$90/*m*/;
 PL$3(function(){;
 __requireFun("./testObj").then(PL$3(function(PL$6){PL$5/*testObj*/ = PL$6;
 PL$7/*successFun*/ = (function(PL$8/*mod*/, PL$9/*success*/){
@@ -255,29 +254,37 @@ PL$11/*createTest*/("typesafetyDestructorParameter", PL$7/*successFun*/).then(PL
 PL$11/*createTest*/("typesafetyDestructorReturn", PL$7/*successFun*/).then(PL$3(function(PL$75){PL$75;;
 PL$11/*createTest*/("typesafetyPromising", PL$7/*successFun*/).then(PL$3(function(PL$76){PL$76;;
 PL$11/*createTest*/("connect", PL$7/*successFun*/).then(PL$3(function(PL$77){PL$77;;
-PL$11/*createTest*/("extraRequire", PL$7/*successFun*/).then(PL$3(function(PL$78){PL$78;;
-PL$11/*createTest*/("typeUnique", PL$7/*successFun*/).then(PL$3(function(PL$79){PL$79;;
-PL$11/*createTest*/("typeUnique2", PL$7/*successFun*/).then(PL$3(function(PL$80){PL$80;;
-PL$11/*createTest*/("savable", PL$7/*successFun*/).then(PL$3(function(PL$81){PL$81;;
-PL$11/*createTest*/("savable2", PL$7/*successFun*/).then(PL$3(function(PL$82){PL$82;;
-PL$83/*c*/ = 0;
-PL$84/*s*/ = 0;
-PL$85/*f*/ = 0;
-for(PL$86/*m*/ in PL$5/*testObj*/){PL$83/*c*/++;;
-if(PL$5/*testObj*/[PL$86/*m*/]){
-PL$84/*s*/++;;
+PL$11/*createTest*/("connect2", PL$7/*successFun*/).then(PL$3(function(PL$78){PL$78;;
+PL$11/*createTest*/("extraRequire", PL$7/*successFun*/).then(PL$3(function(PL$79){PL$79;;
+PL$11/*createTest*/("typeUnique", PL$7/*successFun*/).then(PL$3(function(PL$80){PL$80;;
+PL$11/*createTest*/("typeUnique2", PL$7/*successFun*/).then(PL$3(function(PL$81){PL$81;;
+PL$11/*createTest*/("savable", PL$7/*successFun*/).then(PL$3(function(PL$82){PL$82;;
+PL$11/*createTest*/("savable2", PL$7/*successFun*/).then(PL$3(function(PL$83){PL$83;;
+PL$11/*createTest*/("leaveCatch", PL$7/*successFun*/).then(PL$3(function(PL$84){PL$84;;
+PL$11/*createTest*/("leaveCatchAsync", PL$7/*successFun*/).then(PL$3(function(PL$85){PL$85;;
+PL$11/*createTest*/("leaveTry", PL$7/*successFun*/).then(PL$3(function(PL$86){PL$86;;
+PL$87/*c*/ = 0;
+PL$88/*s*/ = 0;
+PL$89/*f*/ = 0;
+for(PL$90/*m*/ in PL$5/*testObj*/){PL$87/*c*/++;;
+if(PL$5/*testObj*/[PL$90/*m*/]){
+PL$88/*s*/++;;
 
 }else{
-PL$24/*console*/["log"]((PL$86/*m*/ + " failed!"));;
-PL$85/*f*/++;;
+PL$24/*console*/["log"]((PL$90/*m*/ + " failed!"));;
+PL$89/*f*/++;;
 };
 ;
 };
 ;
-PL$24/*console*/["log"]((((((("run " + PL$83/*c*/) + " tests. ") + PL$84/*s*/) + " successful, ") + PL$85/*f*/) + " failed"));;
+PL$24/*console*/["log"]((((((("run " + PL$87/*c*/) + " tests. ") + PL$88/*s*/) + " successful, ") + PL$89/*f*/) + " failed"));;
 PL$1.resolve(PL$5/*testObj*/); return;;
 PL$1.resolve(); return;;
 }), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
+;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

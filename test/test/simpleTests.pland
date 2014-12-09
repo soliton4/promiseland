@@ -158,13 +158,18 @@
   *createTest("typesafetyPromising", successFun);
 
   *createTest("connect", successFun);
+  *createTest("connect2", successFun);
 
   *createTest("extraRequire", successFun);
   *createTest("typeUnique", successFun);
   *createTest("typeUnique2", successFun);
   *createTest("savable", successFun);
   *createTest("savable2", successFun);
-  //*createTest("savable2", successFun);
+
+  *createTest("leaveCatch", successFun);
+  *createTest("leaveCatchAsync", successFun);
+  *createTest("leaveTry", successFun);
+  //*createTest("leaveTry", successFun);
 
   
     var c = 0;

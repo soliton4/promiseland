@@ -3,12 +3,17 @@
   var requireFun;
   
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback){
-      var i = 0;
-      var l = modulesAr.length;
-      var args = [];
-      for (i; i < l; ++i){
-        args.push(require(modulesAr[i]));
+    requireFun = function(modulesAr, callback, errBack){
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        var args = [];
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
       };
       callback.apply(callback, args);
     };
@@ -38,79 +43,77 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
     
   };
-  
-defineFun([], function(){ var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+  defineFun([], function(){
+var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
 if (promiseland._hasModule({ hashStr: "a6076e949f2f20c5de497d86852c849d" })){ return promiseland._getModule("a6076e949f2f20c5de497d86852c849d"); };
-var _V8/*undefined*/;try{_V8/*undefined*/ = undefined;}catch(e){};
-var _V9/*stringifyStr*/;try{_V9/*stringifyStr*/ = stringifyStr;}catch(e){};
-var _V1 = (function(){
+var PL$8/*stringifyStr*/;try{PL$8/*stringifyStr*/ = stringifyStr;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var _V2/*complete*/;
+var PL$2/*complete*/;
 ;
 ;
-_V2/*complete*/ = (function(_V3/*original*/){
-var _V4/*path*/;
-var _V5/*resStr*/;
-var _V6/*_run*/;
-var _V11/*res*/;
+PL$2/*complete*/ = (function(PL$3/*original*/){
+var PL$4/*path*/;
+var PL$5/*resStr*/;
+var PL$6/*_run*/;
+var PL$10/*res*/;
 ;
-_V4/*path*/ = [];
-_V5/*resStr*/ = "";
-_V6/*_run*/ = (function(_V7/*o*/){
-var _V10/*m*/;
+PL$4/*path*/ = [];
+PL$5/*resStr*/ = "";
+PL$6/*_run*/ = (function(PL$7/*o*/){
+var PL$9/*m*/;
 ;
-switch (_V7/*o*/){
+switch (PL$7/*o*/){
 case null:
-_V5/*resStr*/ += "null";;
+PL$5/*resStr*/ += "null";;
 break;;
-case _V8/*undefined*/:
-_V5/*resStr*/ += "undefined";;
+case undefined:
+PL$5/*resStr*/ += "undefined";;
 break;;
 default:
-switch (typeof _V7/*o*/){
+switch (typeof PL$7/*o*/){
 case "number":
-_V5/*resStr*/ += _V7/*o*/;;
+PL$5/*resStr*/ += PL$7/*o*/;;
 break;;
 case "string":
-_V5/*resStr*/ += _V9/*stringifyStr*/(_V7/*o*/);;
+PL$5/*resStr*/ += PL$8/*stringifyStr*/(PL$7/*o*/);;
 break;;
 case "function":
-_V5/*resStr*/ += "null";;
+PL$5/*resStr*/ += "null";;
 break;;
 case "object":
-_V5/*resStr*/ += "{";;
-for(_V10/*m*/ in _V7/*o*/){_V5/*resStr*/ += _V9/*stringifyStr*/(_V10/*m*/);;
-_V5/*resStr*/ += ":";;
-_V6/*_run*/(_V7/*o*/[_V10/*m*/]);;
+PL$5/*resStr*/ += "{";;
+for(PL$9/*m*/ in PL$7/*o*/){PL$5/*resStr*/ += PL$8/*stringifyStr*/(PL$9/*m*/);;
+PL$5/*resStr*/ += ":";;
+PL$6/*_run*/(PL$7/*o*/[PL$9/*m*/]);;
 };
 ;
-_V5/*resStr*/ += "}";;
+PL$5/*resStr*/ += "}";;
 break;;
 default:
 throw {"id": 1301,
-"msg": (("type " + typeof _V7/*o*/) + " can not be serialized")};
+"msg": (("type " + typeof PL$7/*o*/) + " can not be serialized")};
 }
 ;
 ;
 }
 ;
 ;
-_V6/*_run*/(_V3/*original*/);;
-return _V5/*resStr*/;;
+PL$6/*_run*/(PL$3/*original*/);;
+return PL$5/*resStr*/;;
 ;
 });
-_V11/*res*/ = _V6/*_run*/(_V3/*original*/);
+PL$10/*res*/ = PL$6/*_run*/(PL$3/*original*/);
 ;
 });
 ;
 })();
-;return _V1;
+;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();
