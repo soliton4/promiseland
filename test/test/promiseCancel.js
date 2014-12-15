@@ -73,12 +73,13 @@ var PL$5 = new __Promise();
 var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
 var PL$8 = function(e){ PL$5.reject(e); };
 var PL$9/*cb*/;
-PL$7(function(){;
-PL$9/*cb*/ = new PL$10/*Callback*/();
-PL$11/*setTimeout*/(PL$9/*cb*/, 100);;
-PL$9/*cb*/["promise"].then(PL$7(function(PL$12){PL$12;;
-PL$5.resolve(); return;;
-}), PL$8);
+PL$7(function(){
+
+  ;
+  PL$9/*cb*/ = new PL$10/*Callback*/();
+  PL$11/*setTimeout*/(PL$9/*cb*/, 100);
+  PL$9/*cb*/["promise"].then(PL$7(function(PL$12){PL$12;
+  PL$5.resolve(); return;}), PL$8);
 ;})();
 return PL$5;
 };
@@ -88,50 +89,52 @@ var PL$17 = function(code){ return function(res){ try{code(res);}catch(e){ PL$16
 var PL$18 = function(e){ PL$16.reject(e); };
 var PL$25/*cancel*/;
 var PL$25/*cancel*/ = function(PL$24/*reason*/){
-;
-PL$14/*cancelReason*/ = PL$24/*reason*/;;
-;
-};
-PL$17(function(){;
-var PL$19 = new __Promise();
+
+  ;
+  PL$14/*cancelReason*/ = PL$24/*reason*/;
+  ;};
+PL$17(function(){
+
+  ;
+  var PL$19 = new __Promise();
 var PL$20 = new __Promise();
 var PL$21/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$20.resolve(e); }; }; };
 var PL$22 = function(e){ PL$20.resolve(e); };
-PL$21/*try catch*/(function(){PL$13/*wait*/().then(PL$21/*try catch*/(function(PL$23){PL$23;;
-PL$16.resolve(); return;;
-PL$19.resolve();
-}), PL$22);
+PL$21/*try catch*/(function(){
+    PL$13/*wait*/().then(PL$21/*try catch*/(function(PL$23){PL$23;
+    PL$16.resolve(); return;
+    PL$19.resolve();}), PL$22);
 ;})();
 PL$20.then(PL$17(function(__dummy){PL$19.resolve();}));
 PL$19.then(PL$17(function(){;
-PL$25/*cancel*/;
-;
-PL$15/*runThrough*/ = true;;
-PL$16.resolve(); return;;
-}), PL$18)})();
+  PL$25/*cancel*/;
+  ;
+  PL$15/*runThrough*/ = true;
+  PL$16.resolve(); return;}), PL$18)})();
 return PL$16;
 };
-PL$3(function(){;
-PL$13/*wait*/;
-PL$14/*cancelReason*/;
-PL$15/*runThrough*/;
-PL$26/*f*/;
-;
-PL$27/*res*/ = PL$26/*f*/();
-PL$27/*res*/["cancel"](4);;
-PL$13/*wait*/().then(PL$3(function(PL$28){PL$28;;
-PL$13/*wait*/().then(PL$3(function(PL$29){PL$29;;
-if((PL$14/*cancelReason*/ != 4)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-if(PL$15/*runThrough*/){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$1.resolve({"success": true}); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+PL$3(function(){
+
+  ;
+  PL$13/*wait*/;
+  PL$14/*cancelReason*/;
+  PL$15/*runThrough*/;
+  PL$26/*f*/;
+  ;
+  PL$27/*res*/ = PL$26/*f*/();
+  PL$27/*res*/["cancel"](4);
+  PL$13/*wait*/().then(PL$3(function(PL$28){PL$28;
+  PL$13/*wait*/().then(PL$3(function(PL$29){PL$29;
+  if((PL$14/*cancelReason*/ != 4)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  if(PL$15/*runThrough*/){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$1.resolve({"success": true}); return;
+  PL$1.resolve(); return;}), PL$4);
 ;}), PL$4);
 ;})();
 return PL$1;

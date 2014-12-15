@@ -75,18 +75,20 @@ return promiseland.remoteExec("773ce5585497692b2163faac5abad48a", "PL$9", argume
 var PL$5 = new __Promise();
 var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
 var PL$8 = function(e){ PL$5.reject(e); };
-PL$7(function(){;
-PL$5.resolve(); return;;
-})();
+PL$7(function(){
+
+  ;
+  PL$5.resolve(); return;})();
 return PL$5;
 });
-PL$3(function(){;
-PL$10/*test*/;
-;
-PL$10/*test*/().then(PL$3(function(PL$11){PL$11;;
-PL$1.resolve({"success": true}); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+PL$3(function(){
+
+  ;
+  PL$10/*test*/;
+  ;
+  PL$10/*test*/().then(PL$3(function(PL$11){PL$11;
+  PL$1.resolve({"success": true}); return;
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

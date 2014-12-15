@@ -90,42 +90,48 @@ var PL$28;
 var _TPL$28;
 (function(){ var vAr = new PL$27/*Cs1*-constructor*/(); PL$28 = vAr[0]; _TPL$28 = vAr[1]; })();var PL$29 = function(code){ return function(res){ try{code(res);}catch(e){ PL$28.reject(e); }; }; };
 var PL$30 = function(e){ PL$28.reject(e); };
-PL$29(function(){;
-PL$31/*console*/["log"]("doing the sync request");;
-PL$28.resolve((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$21/*a*/)); return;;
-PL$28.resolve(); return;;
-})();
+PL$29(function(){
+
+  ;
+  PL$31/*console*/["log"]("doing the sync request");
+  PL$28.resolve((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$21/*a*/)); return;
+  PL$28.resolve(); return;})();
 return [PL$28, _TPL$28];
 }));
-PL$6(function(){;
-var PL$8 = new __Promise();
+PL$6(function(){
+
+  ;
+  var PL$8 = new __Promise();
 var PL$9 = new __Promise();
 var PL$10/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$9.resolve(e); }; }; };
 var PL$11 = function(e){ PL$9.resolve(e); };
-PL$10/*try catch*/(function(){PL$12/*waitFun*/ = (function(){
-var PL$13 = new __Promise();
+PL$10/*try catch*/(function(){
+    PL$12/*waitFun*/ = (function(){
+    var PL$13 = new __Promise();
 var PL$15 = function(code){ return function(res){ try{code(res);}catch(e){ PL$13.reject(e); }; }; };
 var PL$16 = function(e){ PL$13.reject(e); };
 var PL$17/*cb*/;
-PL$15(function(){;
-PL$17/*cb*/ = new PL$18/*Callback*/();
-PL$19/*setTimeout*/(PL$17/*cb*/, 2000);;
-PL$17/*cb*/["promise"].then(PL$15(function(PL$20){PL$20;;
-PL$13.resolve(); return;;
-}), PL$16);
+PL$15(function(){
+    
+      ;
+      PL$17/*cb*/ = new PL$18/*Callback*/();
+      PL$19/*setTimeout*/(PL$17/*cb*/, 2000);
+      PL$17/*cb*/["promise"].then(PL$15(function(PL$20){PL$20;
+      PL$13.resolve(); return;}), PL$16);
 ;})();
 return PL$13;
 });
-classSystem._resolveProvisional(PL$3/*type:Cs1*/, classSystem.createClass({className: "Cs1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":10,"column":12,"offset":126}, "hashStr": "526adb710b3b5518eafd3ced0386c4bc", "name": "Cs1"}, {"a": 1, "b": 4}));PL$4/*Cs1*/;;
-PL$21/*a*/;
-PL$22/*gotit*/ = false;
-(function(){
-if (!promiseland.profileHas("server")){
-return;
+    classSystem._resolveProvisional(PL$3/*type:Cs1*/, classSystem.createClass({className: "Cs1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":10,"column":12,"offset":126}, "hashStr": "526adb710b3b5518eafd3ced0386c4bc", "name": "Cs1"}, {"a": 1, "b": 4}));PL$4/*Cs1*/;
+    PL$21/*a*/;
+    PL$22/*gotit*/ = false;
+    (function(){
+    if (!promiseland.profileHas("server")){
+    return;
 };
 var PL$23/*next*/;
-;
-/*temp tracked assign*/(function(vAr){
+
+      ;
+      /*temp tracked assign*/(function(vAr){
 if (_TPL$21/*a*/){ _TPL$21/*a*/(); };
 if(vAr){
 var v = vAr[0];
@@ -136,23 +142,22 @@ return v;
 PL$21/*a*/ = undefined; _TPL$21/*a*/ = undefined;
 return;
 }; })(new PL$5/*Cs1-constructor*/())/*end temp assign*/
-;;
-(function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$21/*a*/, 3);;
-PL$22/*gotit*/ = true;;
-PL$23/*next*/ = 10;
-PL$24/*setInterval*/((function(){
 ;
-(function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$21/*a*/, PL$23/*next*/++);;
-;
-}), 1000);;
-;
-})();;
-PL$33/*x*/;;
-PL$12/*waitFun*/().then(PL$10/*try catch*/(function(PL$34){PL$34;;
-var PL$35 = new __Promise();
-if(! PL$22/*gotit*/){
-PL$31/*console*/["log"]("step1");;
-/*temptracked promise*/(function(vAr){
+      (function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$21/*a*/, 3);
+      PL$22/*gotit*/ = true;
+      PL$23/*next*/ = 10;
+      PL$24/*setInterval*/((function(){
+      
+        ;
+        (function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$21/*a*/, PL$23/*next*/++);
+        ;}), 1000);
+      ;})();
+    PL$33/*x*/;
+    PL$12/*waitFun*/().then(PL$10/*try catch*/(function(PL$34){PL$34;
+    
+    var PL$35 = new __Promise();if(! PL$22/*gotit*/){
+      PL$31/*console*/["log"]("step1");
+      /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$36){/*temp tracked assign*/(function(vAr){
 if (_TPL$21/*a*/){ _TPL$21/*a*/(); };
 if(vAr){
@@ -164,31 +169,28 @@ return v;
 PL$21/*a*/ = undefined; _TPL$21/*a*/ = undefined;
 return;
 }; })(PL$36)/*end temp assign*/
-;;
-PL$31/*console*/["log"]("step2");;
-PL$24/*setInterval*/((function(){
 ;
-PL$31/*console*/["log"](PL$21/*a*/[7]);;
-;
-}), 1000);;
-PL$35.resolve();;
-}), PL$11);
+      PL$31/*console*/["log"]("step2");
+      PL$24/*setInterval*/((function(){
+      
+        ;
+        PL$31/*console*/["log"](PL$21/*a*/[7]);
+        ;}), 1000);
+      PL$35.resolve();;}), PL$11);
 return r;
 })(PL$33/*x*/());/*temptracked promise end*/
 ;
-}else{
-PL$35.resolve();}; PL$35.then(function(){;
-;
-PL$8.resolve();
-});}), PL$11);
+    }else{PL$35.resolve();
+    }; PL$35.then(function(){;
+    ;
+    PL$8.resolve();});}), PL$11);
 ;})();
-PL$9.then(PL$6(function(PL$37/*e*/){PL$31/*console*/["log"]("error:");;
-PL$31/*console*/["log"](PL$37/*e*/);;
-PL$8.resolve();;
-}));
+PL$9.then(PL$6(function(PL$37/*e*/){
+    PL$31/*console*/["log"]("error:");
+    PL$31/*console*/["log"](PL$37/*e*/);
+    PL$8.resolve();;}));
 PL$8.then(PL$6(function(){;
-PL$1.resolve(); return;;
-}), PL$7)})();
+  PL$1.resolve(); return;}), PL$7)})();
 return PL$1;
 })();
 ;;

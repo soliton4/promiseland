@@ -74,8 +74,9 @@ var PL$32/*tempRes*/;
 var PL$3/*type:C2*/ = classSystem._createProvisionalClass();
 PL$4/*C2*/ = PL$3/*type:C2*/;
 var PL$5/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C2*/).then(function(parType){PL$3/*type:C2*/ = parType;PL$5/*C2-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C2*/);});var PL$12/*doInit*/ = function(){
-;
-/*temp tracked assign*/(function(vAr){
+
+  ;
+  /*temp tracked assign*/(function(vAr){
 if (_TPL$11/*local*/){ _TPL$11/*local*/(); };
 if(vAr){
 var v = vAr[0];
@@ -86,10 +87,9 @@ return v;
 PL$11/*local*/ = undefined; _TPL$11/*local*/ = undefined;
 return;
 }; })(new PL$5/*C2-constructor*/())/*end temp assign*/
-;;
-PL$9/*checkVar*/ = 1;;
 ;
-};
+  PL$9/*checkVar*/ = 1;
+  ;};
 var PL$24/*x*/ = (function(f){
 promiseland.registerRemote("server", "f7b004e050b8d655168c8ab2de8c2aef", "PL$23", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$3/*type:C2*/]})));
 if (promiseland.profileHas("server")){
@@ -106,8 +106,10 @@ var PL$22 = function(e){ if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.reject(
 var _TPL$19/*par1*/;
 if(PL$19/*par1*/){ _TPL$19/*par1*/ = PL$19/*par1*/[1];
 PL$19/*par1*/ = PL$19/*par1*/[0];}
-PL$21(function(){;
-/*tracked assign*/(function(v){
+PL$21(function(){
+
+  ;
+  /*tracked assign*/(function(v){
 if (_TPL$11/*local*/){ _TPL$11/*local*/(); };
 PL$11/*local*/ = v;
 if (v){
@@ -117,9 +119,8 @@ _TPL$11/*local*/ = undefined;
 };
 return v;
 })(PL$19/*par1*/)/*end assign*/
-;;
-if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.resolve(); return;;
-})();
+;
+  if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.resolve(); return;;})();
 return PL$20;
 });
 var PL$29/*getCheck*/ = (function(f){
@@ -135,32 +136,35 @@ return promiseland.remoteExec("f7b004e050b8d655168c8ab2de8c2aef", "PL$28", argum
 var PL$25 = new __Promise();
 var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$25.reject(e); }; }; };
 var PL$27 = function(e){ PL$25.reject(e); };
-PL$26(function(){;
-PL$25.resolve(PL$9/*checkVar*/); return;;
-PL$25.resolve(); return;;
-})();
+PL$26(function(){
+
+  ;
+  PL$25.resolve(PL$9/*checkVar*/); return;
+  PL$25.resolve(); return;})();
 return PL$25;
 });
-PL$6(function(){;
-PL$8/*isClient*/ = false;
-(function(){
-if (!promiseland.profileHas("client")){
-return;
+PL$6(function(){
+
+  ;
+  PL$8/*isClient*/ = false;
+  (function(){
+  if (!promiseland.profileHas("client")){
+  return;
 };
-;
-PL$8/*isClient*/ = true;;
-;
-})();;
-PL$9/*checkVar*/ = 1;
-classSystem._resolveProvisional(PL$3/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"c","type":classSystem.getBuiltinType("var")},{"name":"d","type":classSystem.getBuiltinType("var")},{"name":"fun1","type":(classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [classSystem.getBuiltinType("var")]}))}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":12,"offset":108}, "hashStr": "f7b004e050b8d655168c8ab2de8c2aef", "name": "C2"}, {"c": 3, "d": 4, "fun1": (function(PL$10/*v*/){
-;
-PL$9/*checkVar*/ = PL$10/*v*/;;
-;
-})}));PL$4/*C2*/;;
-PL$11/*local*/;
-PL$12/*doInit*/;
-;
-PL$13/*init*/ = ((function(f){
+
+    ;
+    PL$8/*isClient*/ = true;
+    ;})();
+  PL$9/*checkVar*/ = 1;
+  classSystem._resolveProvisional(PL$3/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"c","type":classSystem.getBuiltinType("var")},{"name":"d","type":classSystem.getBuiltinType("var")},{"name":"fun1","type":(classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [classSystem.getBuiltinType("var")]}))}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":11,"column":12,"offset":108}, "hashStr": "f7b004e050b8d655168c8ab2de8c2aef", "name": "C2"}, {"c": 3, "d": 4, "fun1": (function(PL$10/*v*/){
+  
+    ;
+    PL$9/*checkVar*/ = PL$10/*v*/;
+    ;})}));PL$4/*C2*/;
+  PL$11/*local*/;
+  PL$12/*doInit*/;
+  ;
+  PL$13/*init*/ = ((function(f){
 promiseland.registerRemote("server", "f7b004e050b8d655168c8ab2de8c2aef", "PL$18", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
@@ -170,42 +174,42 @@ return promiseland.remoteExec("f7b004e050b8d655168c8ab2de8c2aef", "PL$18", argum
 }
 };
 })(function(){
-var PL$14 = new __Promise();
+  var PL$14 = new __Promise();
 var PL$16 = function(code){ return function(res){ try{code(res);}catch(e){ PL$14.reject(e); }; }; };
 var PL$17 = function(e){ PL$14.reject(e); };
-PL$16(function(){;
-PL$12/*doInit*/();;
-PL$14.resolve(); return;;
-})();
+PL$16(function(){
+  
+    ;
+    PL$12/*doInit*/();
+    PL$14.resolve(); return;})();
 return PL$14;
 }));
-PL$24/*x*/;
-;
-PL$29/*getCheck*/;
-;
-if(! PL$8/*isClient*/){
-PL$1.resolve({"success": true}); return;;
-};
-;
-PL$13/*init*/().then(PL$6(function(PL$30){PL$30;;
-PL$12/*doInit*/();;
-PL$29/*getCheck*/().then(PL$6(function(PL$31){if((PL$31 !== 1)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$24/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$11/*local*/)).then(PL$6(function(PL$33){PL$32/*tempRes*/ = PL$33;
-PL$29/*getCheck*/().then(PL$6(function(PL$34){if((PL$34 !== 1)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$11/*local*/[11](2);;
-PL$29/*getCheck*/().then(PL$6(function(PL$35){if((PL$35 !== 2)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$1.resolve({"success": true}); return;;
-PL$1.resolve(); return;;
-}), PL$7);
+  PL$24/*x*/;
+  ;
+  PL$29/*getCheck*/;
+  ;
+  if(! PL$8/*isClient*/){
+    PL$1.resolve({"success": true}); return;
+  };
+  ;
+  PL$13/*init*/().then(PL$6(function(PL$30){PL$30;
+  PL$12/*doInit*/();
+  PL$29/*getCheck*/().then(PL$6(function(PL$31){if((PL$31 !== 1)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$24/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$11/*local*/)).then(PL$6(function(PL$33){PL$32/*tempRes*/ = PL$33;
+  PL$29/*getCheck*/().then(PL$6(function(PL$34){if((PL$34 !== 1)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$11/*local*/[11](2);
+  PL$29/*getCheck*/().then(PL$6(function(PL$35){if((PL$35 !== 2)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$1.resolve({"success": true}); return;
+  PL$1.resolve(); return;}), PL$7);
 ;}), PL$7);
 ;}), PL$7);
 ;}), PL$7);

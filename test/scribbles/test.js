@@ -57,10 +57,10 @@ var PL$3/*filename*/;try{PL$3/*filename*/ = filename;}catch(e){};
 var PL$4/*callback*/;try{PL$4/*callback*/ = callback;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-;
-PL$2/*fs*/["readFile"](PL$3/*filename*/, {"encoding": "utf8"}, PL$4/*callback*/["callback"]);;
-;
-})();
+
+  ;
+  PL$2/*fs*/["readFile"](PL$3/*filename*/, {"encoding": "utf8"}, PL$4/*callback*/["callback"]);
+  ;})();
 ;return PL$1;
 });
 })();

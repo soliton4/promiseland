@@ -83,96 +83,97 @@ var PL$14/*server*/;
 var PL$22/*ClientProfile*/;
 var PL$27/*clientProfile*/;
 var PL$28/*mainio*/;
-PL$3(function(){;
-__requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
-__requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
-__requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
-__requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
-PL$13/*app*/ = PL$5/*express*/();
-PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
-PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
-;
-PL$16/*res*/["setHeader"]("Content-Type", "text/html");;
-PL$9/*fs*/["readFile"]("./clientServerTest.html", (function(PL$17/*err*/, PL$18/*data*/){
-var PL$19/*s*/;
-;
-if(PL$17/*err*/){
-PL$16/*res*/["end"](PL$17/*err*/);;
-return;;
-};
-;
-PL$19/*s*/ = PL$18/*data*/["toString"]();
-PL$16/*res*/["end"](PL$19/*s*/);;
-;
-}));;
-;
-}));;
-PL$13/*app*/["use"]("/promiseland", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));;
-PL$13/*app*/["use"]("/pl", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));;
-PL$13/*app*/["use"]("/requirejs", PL$5/*express*/["static"]("./requirejs"));;
-PL$13/*app*/["use"]("/testmodules", PL$5/*express*/["static"]("./testmodules"));;
-PL$13/*app*/["use"]("/test", PL$5/*express*/["static"]("./test"));;
-PL$13/*app*/["use"]("/testapp", PL$5/*express*/["static"](PL$20/*__dirname*/));;
-PL$14/*server*/["listen"](3010);;
-PL$21/*promiseland*/["set"]("profile", "server");;
-PL$22/*ClientProfile*/ = (function(){
-var PL$24/*nextid*/;
-;
-this["name"] = (function(){
-;
-return "client";;
-;
-});;
-this["connections"] = {};;
-this["find"] = (function(PL$23/*parId*/){
-;
-return this["connections"][PL$23/*parId*/];;
-;
-});;
-PL$24/*nextid*/ = 1;
-this["addConnection"] = (function(PL$25/*connection*/){
-var PL$26/*id*/;
-;
-PL$26/*id*/ = PL$24/*nextid*/;
-PL$24/*nextid*/++;;
-this["connections"][PL$26/*id*/] = PL$25/*connection*/;;
-this["emit"]("connection", PL$25/*connection*/);;
-;
-});;
-;
-});
-PL$22/*ClientProfile*/["prototype"] = new PL$21/*promiseland*/["ProfileBaseClass"]();;
-PL$27/*clientProfile*/ = new PL$22/*ClientProfile*/();
-PL$21/*promiseland*/["addProfile"](PL$27/*clientProfile*/);;
-PL$28/*mainio*/ = PL$11/*socketIo*/["listen"](PL$14/*server*/);
-PL$28/*mainio*/["on"]("connection", (function(PL$29/*socket*/){
-var PL$25/*connection*/;
-;
-PL$30/*console*/["log"]("got connected");;
-PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
-PL$25/*connection*/["socket"] = PL$29/*socket*/;;
-PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
-;
-PL$25/*connection*/["emit"]("data", PL$18/*data*/);;
-;
-}));;
-PL$25/*connection*/["send"] = (function(PL$18/*data*/){
-;
-PL$29/*socket*/["emit"]("pl", PL$18/*data*/);;
-;
-});;
-PL$27/*clientProfile*/["addConnection"](PL$25/*connection*/);;
-PL$29/*socket*/["on"]("disconnect", (function(){
-;
-PL$25/*connection*/["emit"]("disconnect");;
-;
-}));;
-return;;
-;
-}));;
-__requireFun("./testmodules/syncEvents").then(PL$3(function(PL$31){PL$31;;
-PL$1.resolve(); return;;
-}), PL$4);
+PL$3(function(){
+
+  ;
+  __requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
+  __requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
+  __requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
+  __requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
+  PL$13/*app*/ = PL$5/*express*/();
+  PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
+  PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
+  
+    ;
+    PL$16/*res*/["setHeader"]("Content-Type", "text/html");
+    PL$9/*fs*/["readFile"]("./clientServerTest.html", (function(PL$17/*err*/, PL$18/*data*/){
+    var PL$19/*s*/;
+
+      ;
+      if(PL$17/*err*/){
+        PL$16/*res*/["end"](PL$17/*err*/);
+        return;
+      };
+      ;
+      PL$19/*s*/ = PL$18/*data*/["toString"]();
+      PL$16/*res*/["end"](PL$19/*s*/);
+      ;}));
+    ;}));
+  PL$13/*app*/["use"]("/promiseland", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));
+  PL$13/*app*/["use"]("/pl", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));
+  PL$13/*app*/["use"]("/requirejs", PL$5/*express*/["static"]("./requirejs"));
+  PL$13/*app*/["use"]("/testmodules", PL$5/*express*/["static"]("./testmodules"));
+  PL$13/*app*/["use"]("/test", PL$5/*express*/["static"]("./test"));
+  PL$13/*app*/["use"]("/testapp", PL$5/*express*/["static"](PL$20/*__dirname*/));
+  PL$14/*server*/["listen"](3010);
+  PL$21/*promiseland*/["set"]("profile", "server");
+  PL$22/*ClientProfile*/ = (function(){
+  var PL$24/*nextid*/;
+
+    ;
+    this["name"] = (function(){
+    
+      ;
+      return "client";
+      ;});
+    this["connections"] = {};
+    this["find"] = (function(PL$23/*parId*/){
+    
+      ;
+      return this["connections"][PL$23/*parId*/];
+      ;});
+    PL$24/*nextid*/ = 1;
+    this["addConnection"] = (function(PL$25/*connection*/){
+    var PL$26/*id*/;
+
+      ;
+      PL$26/*id*/ = PL$24/*nextid*/;
+      PL$24/*nextid*/++;
+      this["connections"][PL$26/*id*/] = PL$25/*connection*/;
+      this["emit"]("connection", PL$25/*connection*/);
+      ;});
+    ;});
+  PL$22/*ClientProfile*/["prototype"] = new PL$21/*promiseland*/["ProfileBaseClass"]();
+  PL$27/*clientProfile*/ = new PL$22/*ClientProfile*/();
+  PL$21/*promiseland*/["addProfile"](PL$27/*clientProfile*/);
+  PL$28/*mainio*/ = PL$11/*socketIo*/["listen"](PL$14/*server*/);
+  PL$28/*mainio*/["on"]("connection", (function(PL$29/*socket*/){
+  var PL$25/*connection*/;
+
+    ;
+    PL$30/*console*/["log"]("got connected");
+    PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
+    PL$25/*connection*/["socket"] = PL$29/*socket*/;
+    PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
+    
+      ;
+      PL$25/*connection*/["emit"]("data", PL$18/*data*/);
+      ;}));
+    PL$25/*connection*/["send"] = (function(PL$18/*data*/){
+    
+      ;
+      PL$29/*socket*/["emit"]("pl", PL$18/*data*/);
+      ;});
+    PL$27/*clientProfile*/["addConnection"](PL$25/*connection*/);
+    PL$29/*socket*/["on"]("disconnect", (function(){
+    
+      ;
+      PL$25/*connection*/["emit"]("disconnect");
+      ;}));
+    return;
+    ;}));
+  __requireFun("./testmodules/syncEvents").then(PL$3(function(PL$31){PL$31;
+  PL$1.resolve(); return;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

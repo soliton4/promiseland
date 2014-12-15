@@ -63,38 +63,40 @@ var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.r
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*a*/;
 var PL$12/*res*/;
-PL$3(function(){;
-PL$5/*a*/ = (function(){
-var PL$6 = new __Promise();
+PL$3(function(){
+
+  ;
+  PL$5/*a*/ = (function(){
+  var PL$6 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
 var PL$9 = function(e){ PL$6.reject(e); };
-PL$8(function(){;
-PL$10/*x*/.then(PL$8(function(PL$11){PL$11;;
-PL$6.resolve(1); return;;
-PL$6.resolve(); return;;
-}), PL$9);
+PL$8(function(){
+  
+    ;
+    PL$10/*x*/.then(PL$8(function(PL$11){PL$11;
+    PL$6.resolve(1); return;
+    PL$6.resolve(); return;}), PL$9);
 ;})();
 return PL$6;
 });
-PL$12/*res*/;
-var PL$13 = new __Promise();
+  PL$12/*res*/;
+  var PL$13 = new __Promise();
 var PL$14 = new __Promise();
 var PL$15/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$14.resolve(e); }; }; };
 var PL$16 = function(e){ PL$14.resolve(e); };
-PL$15/*try catch*/(function(){PL$5/*a*/().then(PL$15/*try catch*/(function(PL$17){PL$12/*res*/ = PL$17;;
-PL$13.resolve();
-}), PL$16);
+PL$15/*try catch*/(function(){
+    PL$5/*a*/().then(PL$15/*try catch*/(function(PL$17){PL$12/*res*/ = PL$17;
+    PL$13.resolve();}), PL$16);
 ;})();
 PL$14.then(PL$3(function(__dummy){PL$13.resolve();}));
 PL$13.then(PL$3(function(){;
-;
-if((PL$12/*res*/ == 1)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$1.resolve({"success": true}); return;;
-PL$1.resolve(); return;;
-}), PL$4)})();
+  ;
+  if((PL$12/*res*/ == 1)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$1.resolve({"success": true}); return;
+  PL$1.resolve(); return;}), PL$4)})();
 return PL$1;
 })();
 ;;

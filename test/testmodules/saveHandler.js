@@ -61,22 +61,22 @@ var PL$7/*promiseland*/;try{PL$7/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$6/*SaveHandler*/;
-;
-try
-{PL$6/*SaveHandler*/ = (function(){var PL$2/*inherited*/ = {};
+
+  ;
+  try
+{
+    PL$6/*SaveHandler*/ = (function(){var PL$2/*inherited*/ = {};
 var res = promiseland.createClass({"registerClass": (function(PL$3/*par*/){
-;
-PL$4/*console*/["log"](PL$3/*par*/);;
-return new PL$5/*Promise*/();;
-;
-})}, [], PL$2/*inherited*/);
-return res; })();PL$6/*SaveHandler*/;;
-PL$7/*promiseland*/["classSystem"]["setSaveHandler"](new PL$6/*SaveHandler*/());;
-classSystem.createClass({members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "savable": true}, {"x": 1, "y": 2});;
-}catch(PL$8/*e*/){PL$4/*console*/["log"](PL$8/*e*/);;
-};
-;
-})();
+    
+      ;
+      PL$4/*console*/["log"](PL$3/*par*/);
+      return new PL$5/*Promise*/();
+      ;})}, [], PL$2/*inherited*/);
+return res; })();PL$6/*SaveHandler*/;
+    PL$7/*promiseland*/["classSystem"]["setSaveHandler"](new PL$6/*SaveHandler*/());
+    classSystem.createClass({members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "savable": true}, {"x": 1, "y": 2});}catch(PL$8/*e*/){
+    PL$4/*console*/["log"](PL$8/*e*/);};
+  ;})();
 ;return PL$1;
 });
 })();

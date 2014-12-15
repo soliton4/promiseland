@@ -78,25 +78,28 @@ var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*fs*/;
 var PL$11/*x*/;
 var PL$21/*res*/;
-PL$3(function(){;
-PL$5/*fs*/;
-(function(){
-if (!promiseland.profileHas("server")){
-var p = new __Promise();
+PL$3(function(){
+
+  ;
+  PL$5/*fs*/;
+  (function(){
+  if (!promiseland.profileHas("server")){
+  var p = new __Promise();
 p.reject({id: 14, msg: "function does not execute in this frame."});
 return p;
 };
 var PL$6 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
 var PL$9 = function(e){ PL$6.reject(e); };
-PL$8(function(){;
-__requireFun("fs").then(PL$8(function(PL$10){PL$5/*fs*/ = PL$10;;
-PL$6.resolve(); return;;
-}), PL$9);
+PL$8(function(){
+  
+    ;
+    __requireFun("fs").then(PL$8(function(PL$10){PL$5/*fs*/ = PL$10;
+    PL$6.resolve(); return;}), PL$9);
 ;})();
 return PL$6;
-})();;
-PL$11/*x*/ = ((function(f){
+})();
+  PL$11/*x*/ = ((function(f){
 promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$20", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
@@ -106,29 +109,29 @@ return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$20", argum
 }
 };
 })(function(){
-var PL$12 = new __Promise();
+  var PL$12 = new __Promise();
 var PL$13 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
 var PL$14 = function(e){ PL$12.reject(e); };
 var PL$15/*cb*/;
 var PL$17/*filenameStr*/;
-PL$13(function(){;
-PL$15/*cb*/ = new PL$16/*Callback*/();
-PL$17/*filenameStr*/ = (PL$18/*__dirname*/ + "/clientServer.txt");
-PL$5/*fs*/["readFile"](PL$17/*filenameStr*/, {"encoding": "utf8"}, PL$15/*cb*/);;
-PL$15/*cb*/["promise"].then(PL$13(function(PL$19){PL$12.resolve(PL$19[1]); return;;
-PL$12.resolve(); return;;
-}), PL$14);
+PL$13(function(){
+  
+    ;
+    PL$15/*cb*/ = new PL$16/*Callback*/();
+    PL$17/*filenameStr*/ = (PL$18/*__dirname*/ + "/clientServer.txt");
+    PL$5/*fs*/["readFile"](PL$17/*filenameStr*/, {"encoding": "utf8"}, PL$15/*cb*/);
+    PL$15/*cb*/["promise"].then(PL$13(function(PL$19){PL$12.resolve(PL$19[1]); return;
+    PL$12.resolve(); return;}), PL$14);
 ;})();
 return PL$12;
 }));
-PL$11/*x*/().then(PL$3(function(PL$22){PL$21/*res*/ = PL$22;
-if((PL$21/*res*/ == "the test content")){
-PL$1.resolve({"success": true}); return;;
-};
-;
-PL$1.resolve({"success": false}); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+  PL$11/*x*/().then(PL$3(function(PL$22){PL$21/*res*/ = PL$22;
+  if((PL$21/*res*/ == "the test content")){
+    PL$1.resolve({"success": true}); return;
+  };
+  ;
+  PL$1.resolve({"success": false}); return;
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

@@ -72,12 +72,13 @@ var PL$2 = (function(){
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*mod*/;
-PL$3(function(){;
-__requireFun("./requiredModule2").then(PL$3(function(PL$6){PL$5/*mod*/ = PL$6;
-PL$1.resolve({"msg": "this is the message",
-"id": PL$5/*mod*/["id"]}); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+PL$3(function(){
+
+  ;
+  __requireFun("./requiredModule2").then(PL$3(function(PL$6){PL$5/*mod*/ = PL$6;
+  PL$1.resolve({"msg": "this is the message",
+"id": PL$5/*mod*/["id"]}); return;
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

@@ -58,26 +58,26 @@ var PL$1 = (function(){
 var PL$2/*result*/;
 var PL$3/*dootherStuff*/;
 var PL$4/*x*/;
-;
-PL$2/*result*/ = {"res": 1};
-PL$3/*dootherStuff*/ = (function(){
-;
-PL$2/*result*/["res"] = 4;;
-;
-});
-PL$4/*x*/ = (function(){
-;
-try
-{PL$5/*dostuff*/();;
-}catch(PL$6/*e*/){PL$3/*dootherStuff*/();;
-};
-;
-;
-});
-PL$4/*x*/();;
-return PL$2/*result*/;;
-;
-})();
+
+  ;
+  PL$2/*result*/ = {"res": 1};
+  PL$3/*dootherStuff*/ = (function(){
+  
+    ;
+    PL$2/*result*/["res"] = 4;
+    ;});
+  PL$4/*x*/ = (function(){
+  
+    ;
+    try
+{
+      PL$5/*dostuff*/();}catch(PL$6/*e*/){
+      PL$3/*dootherStuff*/();};
+    ;
+    ;});
+  PL$4/*x*/();
+  return PL$2/*result*/;
+  ;})();
 ;return PL$1;
 });
 })();

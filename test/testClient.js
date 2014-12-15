@@ -82,100 +82,101 @@ var PL$18/*querySt*/;
 var PL$11/*runTests*/;
 var PL$18/*querySt*/ = function(PL$12/*Key*/){
 var PL$13/*url*/;
-;
-PL$13/*url*/ = PL$14/*window*/["location"]["href"];
-PL$15/*KeysValues*/ = PL$13/*url*/["split"](/[\?&]+/);;
-for(PL$16/*i*/ = 0;(PL$16/*i*/ < PL$15/*KeysValues*/["length"]);PL$16/*i*/++){{PL$17/*KeyValue*/ = PL$15/*KeysValues*/[PL$16/*i*/]["split"]("=");;
-if((PL$17/*KeyValue*/[0] == PL$12/*Key*/)){
-return PL$17/*KeyValue*/[1];;
-};
-;
-}};
-;
-;
-};
-;
-PL$2/*promiseland*/["set"]("profile", "client");;
-PL$3/*ServerProfile*/ = (function(){
-;
-this["name"] = (function(){
-;
-return "server";;
-;
-});;
-this["find"] = (function(){
-;
-return this["connection"];;
-;
-});;
-;
-});
-PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();;
-PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
-var PL$6/*self*/;
-;
-this["socket"] = PL$5/*socket*/;;
-PL$6/*self*/ = this;
-PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
-;
-PL$6/*self*/["emit"]("data", PL$7/*data*/);;
-;
-}));;
-this["send"] = (function(PL$7/*data*/){
-;
-PL$5/*socket*/["emit"]("pl", PL$7/*data*/);;
-;
-});;
-;
-});
-PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();;
-PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
-PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);;
-PL$5/*socket*/ = PL$9/*io*/["connect"]();
-PL$5/*socket*/["on"]("connect", (function(){
-var PL$10/*connection*/;
-;
-PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
-PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;;
-PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);;
-PL$11/*runTests*/();;
-;
-}));;
-PL$5/*socket*/["on"]("disconnect", (function(){
-;
-PL$8/*serverProfile*/["connection"]["emit"]("disconnect");;
-PL$8/*serverProfile*/["connection"] = undefined;;
-;
-}));;
-PL$18/*querySt*/;
-;
-PL$11/*runTests*/ = (function(){
-var PL$19 = new __Promise();
+
+  ;
+  PL$13/*url*/ = PL$14/*window*/["location"]["href"];
+  PL$15/*KeysValues*/ = PL$13/*url*/["split"](/[\?&]+/);
+  for(PL$16/*i*/ = 0;(PL$16/*i*/ < PL$15/*KeysValues*/["length"]);PL$16/*i*/++){{
+    PL$17/*KeyValue*/ = PL$15/*KeysValues*/[PL$16/*i*/]["split"]("=");
+    if((PL$17/*KeyValue*/[0] == PL$12/*Key*/)){
+      return PL$17/*KeyValue*/[1];
+    };
+    ;}};
+  ;
+  ;};
+
+  ;
+  PL$2/*promiseland*/["set"]("profile", "client");
+  PL$3/*ServerProfile*/ = (function(){
+  
+    ;
+    this["name"] = (function(){
+    
+      ;
+      return "server";
+      ;});
+    this["find"] = (function(){
+    
+      ;
+      return this["connection"];
+      ;});
+    ;});
+  PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();
+  PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
+  var PL$6/*self*/;
+
+    ;
+    this["socket"] = PL$5/*socket*/;
+    PL$6/*self*/ = this;
+    PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
+    
+      ;
+      PL$6/*self*/["emit"]("data", PL$7/*data*/);
+      ;}));
+    this["send"] = (function(PL$7/*data*/){
+    
+      ;
+      PL$5/*socket*/["emit"]("pl", PL$7/*data*/);
+      ;});
+    ;});
+  PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();
+  PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
+  PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);
+  PL$5/*socket*/ = PL$9/*io*/["connect"]();
+  PL$5/*socket*/["on"]("connect", (function(){
+  var PL$10/*connection*/;
+
+    ;
+    PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
+    PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;
+    PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);
+    PL$11/*runTests*/();
+    ;}));
+  PL$5/*socket*/["on"]("disconnect", (function(){
+  
+    ;
+    PL$8/*serverProfile*/["connection"]["emit"]("disconnect");
+    PL$8/*serverProfile*/["connection"] = undefined;
+    ;}));
+  PL$18/*querySt*/;
+  ;
+  PL$11/*runTests*/ = (function(){
+  var PL$19 = new __Promise();
 var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.reject(e); }; }; };
 var PL$22 = function(e){ PL$19.reject(e); };
 var PL$24/*testObj*/;
 var PL$27/*collector*/;
 var PL$29/*type*/;
-PL$21(function(){;
-PL$23/*console*/["log"]("running tests");;
-__requireFun("test/simpleTests").then(PL$21(function(PL$25){PL$24/*testObj*/ = PL$25;
-__requireFun("test/frameTests").then(PL$21(function(PL$26){PL$26;;
-__requireFun("./testCollector").then(PL$21(function(PL$28){PL$27/*collector*/ = PL$28;
-debugger;
-PL$29/*type*/ = (PL$18/*querySt*/("type") || "unknown");
-PL$27/*collector*/["postResult"](PL$29/*type*/, PL$24/*testObj*/);;
-PL$27/*collector*/["waitForFinish"](PL$29/*type*/).then(PL$21(function(PL$30){PL$30;;
-PL$14/*window*/["close"]();;
-PL$19.resolve(); return;;
-}), PL$22);
+PL$21(function(){
+  
+    ;
+    PL$23/*console*/["log"]("running tests");
+    __requireFun("test/simpleTests").then(PL$21(function(PL$25){PL$24/*testObj*/ = PL$25;
+    __requireFun("test/frameTests").then(PL$21(function(PL$26){PL$26;
+    __requireFun("./testCollector").then(PL$21(function(PL$28){PL$27/*collector*/ = PL$28;
+    debugger;
+    PL$29/*type*/ = (PL$18/*querySt*/("type") || "unknown");
+    PL$27/*collector*/["postResult"](PL$29/*type*/, PL$24/*testObj*/);
+    PL$27/*collector*/["waitForFinish"](PL$29/*type*/).then(PL$21(function(PL$30){PL$30;
+    PL$14/*window*/["close"]();
+    PL$19.resolve(); return;}), PL$22);
 ;}), PL$22);
 ;}), PL$22);
 ;}), PL$22);
 ;})();
 return PL$19;
 });
-;
-})();
+  ;})();
 ;return PL$1;
 });
 })();

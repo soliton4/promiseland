@@ -57,11 +57,11 @@ var PL$4/*promiseland*/;try{PL$4/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$2/*o*/;
-;
-PL$2/*o*/ = {"x": 1};
-PL$3/*console*/["log"](PL$4/*promiseland*/["javascriptEval"]("x", PL$2/*o*/));;
-;
-})();
+
+  ;
+  PL$2/*o*/ = {"x": 1};
+  PL$3/*console*/["log"](PL$4/*promiseland*/["javascriptEval"]("x", PL$2/*o*/));
+  ;})();
 ;return PL$1;
 });
 })();

@@ -57,20 +57,20 @@ var PL$1 = (function(){
 "use strict";
 var PL$2/*catched*/;
 var PL$3/*res*/;
-;
-try
-{PL$2/*catched*/;
-PL$3/*res*/ = PL$4/*some*/["error"]();
-}catch(PL$5/*e*/){PL$2/*catched*/ = true;;
-};
-;
-if(! PL$2/*catched*/){
-return {"success": false};;
-};
-;
-return {"success": true};;
-;
-})();
+
+  ;
+  try
+{
+    PL$2/*catched*/;
+    PL$3/*res*/ = PL$4/*some*/["error"]();}catch(PL$5/*e*/){
+    PL$2/*catched*/ = true;};
+  ;
+  if(! PL$2/*catched*/){
+    return {"success": false};
+  };
+  ;
+  return {"success": true};
+  ;})();
 ;return PL$1;
 });
 })();

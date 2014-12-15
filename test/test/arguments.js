@@ -66,42 +66,45 @@ var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*p*/;
 var PL$14/*res*/;
 var PL$15/*x*/;
-PL$3(function(){;
-PL$5/*p*/ = (function(){
-var PL$6 = new __Promise();
+PL$3(function(){
+
+  ;
+  PL$5/*p*/ = (function(){
+  var PL$6 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
 var PL$9 = function(e){ PL$6.reject(e); };
 var PL$10/*c*/;
-PL$8(function(){;
-PL$10/*c*/ = new PL$11/*Callback*/();
-PL$12/*setTimeout*/(PL$10/*c*/, 100);;
-PL$10/*c*/["promise"].then(PL$8(function(PL$13){PL$13;;
-PL$6.resolve(); return;;
-PL$6.resolve(); return;;
-}), PL$9);
+PL$8(function(){
+  
+    ;
+    PL$10/*c*/ = new PL$11/*Callback*/();
+    PL$12/*setTimeout*/(PL$10/*c*/, 100);
+    PL$10/*c*/["promise"].then(PL$8(function(PL$13){PL$13;
+    PL$6.resolve(); return;
+    PL$6.resolve(); return;}), PL$9);
 ;})();
 return PL$6;
 });
-PL$14/*res*/ = {};
-PL$15/*x*/ = (function(PL$16/*para*/, PL$17/*parb*/){
-var PL$18 = new __Promise();
+  PL$14/*res*/ = {};
+  PL$15/*x*/ = (function(PL$16/*para*/, PL$17/*parb*/){
+  var PL$18 = new __Promise();
 var PL$19 = function(code){ return function(res){ try{code(res);}catch(e){ PL$18.reject(e); }; }; };
 var PL$20 = function(e){ PL$18.reject(e); };
 var PL$22/*arguments*/ = arguments;
-PL$19(function(){;
-PL$14/*res*/["a"] = PL$16/*para*/;;
-PL$5/*p*/().then(PL$19(function(PL$21){PL$21;;
-PL$14/*res*/["b"] = PL$17/*parb*/;;
-PL$14/*res*/["c"] = PL$22/*arguments*/[2];;
-PL$18.resolve(); return;;
-}), PL$20);
+PL$19(function(){
+  
+    ;
+    PL$14/*res*/["a"] = PL$16/*para*/;
+    PL$5/*p*/().then(PL$19(function(PL$21){PL$21;
+    PL$14/*res*/["b"] = PL$17/*parb*/;
+    PL$14/*res*/["c"] = PL$22/*arguments*/[2];
+    PL$18.resolve(); return;}), PL$20);
 ;})();
 return PL$18;
 });
-PL$15/*x*/(1, 1, 2).then(PL$3(function(PL$23){PL$23;;
-PL$1.resolve(((PL$14/*res*/["a"] + PL$14/*res*/["b"]) + PL$14/*res*/["c"])); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+  PL$15/*x*/(1, 1, 2).then(PL$3(function(PL$23){PL$23;
+  PL$1.resolve(((PL$14/*res*/["a"] + PL$14/*res*/["b"]) + PL$14/*res*/["c"])); return;
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

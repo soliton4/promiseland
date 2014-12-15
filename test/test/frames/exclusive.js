@@ -60,51 +60,51 @@ var PL$4/*serverRun*/;
 var PL$5/*clientRun*/;
 var PL$6/*exs*/;
 var PL$7/*exc*/;
-;
-PL$2/*isServer*/ = false;
-if(PL$3/*__dirname*/){
-PL$2/*isServer*/ = true;;
+
+  ;
+  PL$2/*isServer*/ = false;
+  if(PL$3/*__dirname*/){
+    PL$2/*isServer*/ = true;
+  };
+  ;
+  PL$4/*serverRun*/ = false;
+  PL$5/*clientRun*/ = false;
+  PL$6/*exs*/ = (function(){
+  if (!promiseland.profileHas("server")){
+  return;
 };
-;
-PL$4/*serverRun*/ = false;
-PL$5/*clientRun*/ = false;
-PL$6/*exs*/ = (function(){
-if (!promiseland.profileHas("server")){
-return;
+
+    ;
+    PL$4/*serverRun*/ = true;
+    ;});
+  PL$7/*exc*/ = (function(){
+  if (!promiseland.profileHas("client")){
+  return;
 };
-;
-PL$4/*serverRun*/ = true;;
-;
-});
-PL$7/*exc*/ = (function(){
-if (!promiseland.profileHas("client")){
-return;
-};
-;
-PL$5/*clientRun*/ = true;;
-;
-});
-PL$6/*exs*/();;
-PL$7/*exc*/();;
-if((PL$2/*isServer*/ && PL$5/*clientRun*/)){
-return {"success": false};;
-};
-;
-if((PL$2/*isServer*/ && ! PL$4/*serverRun*/)){
-return {"success": false};;
-};
-;
-if((! PL$2/*isServer*/ && PL$4/*serverRun*/)){
-return {"success": false};;
-};
-;
-if((! PL$2/*isServer*/ && ! PL$5/*clientRun*/)){
-return {"success": false};;
-};
-;
-return {"success": true};;
-;
-})();
+
+    ;
+    PL$5/*clientRun*/ = true;
+    ;});
+  PL$6/*exs*/();
+  PL$7/*exc*/();
+  if((PL$2/*isServer*/ && PL$5/*clientRun*/)){
+    return {"success": false};
+  };
+  ;
+  if((PL$2/*isServer*/ && ! PL$4/*serverRun*/)){
+    return {"success": false};
+  };
+  ;
+  if((! PL$2/*isServer*/ && PL$4/*serverRun*/)){
+    return {"success": false};
+  };
+  ;
+  if((! PL$2/*isServer*/ && ! PL$5/*clientRun*/)){
+    return {"success": false};
+  };
+  ;
+  return {"success": true};
+  ;})();
 ;return PL$1;
 });
 })();

@@ -55,15 +55,15 @@ if (promiseland._hasModule({ hashStr: "650dd5eeb2dfc19355783db917815d33" })){ re
 var PL$1 = (function(){
 "use strict";
 var PL$2/*a*/;
-;
-PL$2/*a*/ = (function(){
-var PL$3/*b*/;
-;
-PL$3/*b*/ = 1;
-;
-});
-;
-})();
+
+  ;
+  PL$2/*a*/ = (function(){
+  var PL$3/*b*/;
+
+    ;
+    PL$3/*b*/ = 1;
+    ;});
+  ;})();
 ;return PL$1;
 });
 })();

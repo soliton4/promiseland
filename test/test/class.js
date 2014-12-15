@@ -56,28 +56,28 @@ var PL$1 = (function(){
 "use strict";
 var PL$2/*C1*/;
 var PL$4/*c*/;
-;
-PL$2/*C1*/ = (function(){var PL$3/*inherited*/ = {};
+
+  ;
+  PL$2/*C1*/ = (function(){var PL$3/*inherited*/ = {};
 var res = promiseland.createClass({"constructor": (function(){
-;
-this["a"] = 1;;
-;
-}),
+  
+    ;
+    this["a"] = 1;
+    ;}),
 "b": 1,
 "doSomething": (function(){
-;
-return (this["a"] + this["b"]);;
-;
-})}, [], PL$3/*inherited*/);
+  
+    ;
+    return (this["a"] + this["b"]);
+    ;})}, [], PL$3/*inherited*/);
 return res; })();
-PL$4/*c*/ = new PL$2/*C1*/();
-if((((PL$4/*c*/["a"] == 1) && (PL$4/*c*/["b"] == 1)) && (PL$4/*c*/["doSomething"]() == 2))){
-return {"success": true};;
-};
-;
-return {"success": false};;
-;
-})();
+  PL$4/*c*/ = new PL$2/*C1*/();
+  if((((PL$4/*c*/["a"] == 1) && (PL$4/*c*/["b"] == 1)) && (PL$4/*c*/["doSomething"]() == 2))){
+    return {"success": true};
+  };
+  ;
+  return {"success": false};
+  ;})();
 ;return PL$1;
 });
 })();

@@ -72,23 +72,24 @@ var PL$2 = (function(){
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*a*/;
-PL$3(function(){;
-PL$5/*a*/ = 1;
-var PL$6 = new __Promise();
+PL$3(function(){
+
+  ;
+  PL$5/*a*/ = 1;
+  var PL$6 = new __Promise();
 var PL$7 = new __Promise();
 var PL$8/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.resolve(e); }; }; };
 var PL$9 = function(e){ PL$7.resolve(e); };
-PL$8/*try catch*/(function(){__requireFun("x").then(PL$8/*try catch*/(function(PL$10){PL$5/*a*/ = PL$10;;
-PL$6.resolve();
-}), PL$9);
+PL$8/*try catch*/(function(){
+    __requireFun("x").then(PL$8/*try catch*/(function(PL$10){PL$5/*a*/ = PL$10;
+    PL$6.resolve();}), PL$9);
 ;})();
-PL$7.then(PL$3(function(PL$11/*e*/){PL$5/*a*/ = 2;;
-PL$6.resolve();;
-}));
+PL$7.then(PL$3(function(PL$11/*e*/){
+    PL$5/*a*/ = 2;
+    PL$6.resolve();;}));
 PL$6.then(PL$3(function(){;
-;
-PL$1.resolve(); return;;
-}), PL$4)})();
+  ;
+  PL$1.resolve(); return;}), PL$4)})();
 return PL$1;
 })();
 ;;

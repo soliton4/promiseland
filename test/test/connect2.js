@@ -64,32 +64,32 @@ var PL$2/*type:Emitter*/ = classSystem._createProvisionalClass();
 PL$3/*Emitter*/ = PL$2/*type:Emitter*/;
 var PL$4/*Emitter-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Emitter*/).then(function(parType){PL$2/*type:Emitter*/ = parType;PL$4/*Emitter-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Emitter*/);});var PL$5/*type:Reciever*/ = classSystem._createProvisionalClass();
 PL$6/*Reciever*/ = PL$5/*type:Reciever*/;
-var PL$7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){PL$5/*type:Reciever*/ = parType;PL$7/*Reciever-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Reciever*/);});;
-classSystem._resolveProvisional(PL$2/*type:Emitter*/, classSystem.createClass({className: "Emitter",members: [{"name":"event","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"event": (function(PL$8/*amount*/){
-;
-;
-})}));PL$3/*Emitter*/;;
-classSystem._resolveProvisional(PL$5/*type:Reciever*/, classSystem.createClass({className: "Reciever",members: [{"name":"eventSlot","type":classSystem.getBuiltinType("var")},{"name":"amount","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"eventSlot": (function(PL$8/*amount*/){
-;
-this[4] += PL$8/*amount*/;;
-;
-}), "amount": 1}));PL$6/*Reciever*/;;
-PL$9/*e*/ = new PL$4/*Emitter-constructor*/();
-PL$10/*r*/ = new PL$7/*Reciever-constructor*/();
-PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
-PL$9/*e*/[3](2);;
-if((PL$10/*r*/[4] !== 3)){
-return {"success": false};;
-};
-;
-PL$11/*c*/();;
-if((PL$10/*r*/[4] !== 3)){
-return {"success": false};;
-};
-;
-return {"success": true};;
-;
-})();
+var PL$7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){PL$5/*type:Reciever*/ = parType;PL$7/*Reciever-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Reciever*/);});
+  ;
+  classSystem._resolveProvisional(PL$2/*type:Emitter*/, classSystem.createClass({className: "Emitter",members: [{"name":"event","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"event": (function(PL$8/*amount*/){
+  
+    ;
+    ;})}));PL$3/*Emitter*/;
+  classSystem._resolveProvisional(PL$5/*type:Reciever*/, classSystem.createClass({className: "Reciever",members: [{"name":"eventSlot","type":classSystem.getBuiltinType("var")},{"name":"amount","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"eventSlot": (function(PL$8/*amount*/){
+  
+    ;
+    this[4] += PL$8/*amount*/;
+    ;}), "amount": 1}));PL$6/*Reciever*/;
+  PL$9/*e*/ = new PL$4/*Emitter-constructor*/();
+  PL$10/*r*/ = new PL$7/*Reciever-constructor*/();
+  PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
+  PL$9/*e*/[3](2);
+  if((PL$10/*r*/[4] !== 3)){
+    return {"success": false};
+  };
+  ;
+  PL$11/*c*/();
+  if((PL$10/*r*/[4] !== 3)){
+    return {"success": false};
+  };
+  ;
+  return {"success": true};
+  ;})();
 ;return PL$1;
 });
 })();

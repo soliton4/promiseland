@@ -57,44 +57,45 @@ if (promiseland._hasModule({ hashStr: "3d967a2fc2c58e3c614e3a48c072b07e" })){ re
 var PL$1 = (function(){
 "use strict";
 var PL$2/*somefun*/;
-;
-PL$2/*somefun*/ = (function(){
-var PL$3 = new __Promise();
+
+  ;
+  PL$2/*somefun*/ = (function(){
+  var PL$3 = new __Promise();
 var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
 var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){;
-PL$3.resolve(1); return;;
-PL$3.resolve(); return;;
-})();
+PL$5(function(){
+  
+    ;
+    PL$3.resolve(1); return;
+    PL$3.resolve(); return;})();
 return PL$3;
 });
-return {"fun": (function(){
-var PL$7 = new __Promise();
+  return {"fun": (function(){
+  var PL$7 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
 var PL$9 = function(e){ PL$7.reject(e); };
 var PL$10/*a*/;
-PL$8(function(){;
-PL$10/*a*/ = 1;
-var PL$11 = new __Promise();
-if(((PL$10/*a*/ + 1) == 2)){
-PL$2/*somefun*/().then(PL$8(function(PL$12){PL$10/*a*/ = (PL$10/*a*/ + PL$12);;
-PL$11.resolve();;
-}), PL$9);
+PL$8(function(){
+  
+    ;
+    PL$10/*a*/ = 1;
+    
+    var PL$11 = new __Promise();if(((PL$10/*a*/ + 1) == 2)){
+      PL$2/*somefun*/().then(PL$8(function(PL$12){PL$10/*a*/ = (PL$10/*a*/ + PL$12);
+      PL$11.resolve();;}), PL$9);
 ;
-}else{
-PL$11.resolve();}; PL$11.then(function(){;
-;
-if((PL$10/*a*/ == 2)){
-PL$7.resolve(4); return;;
-};
-;
-PL$7.resolve(0); return;;
-PL$7.resolve(); return;;
-});})();
+    }else{PL$11.resolve();
+    }; PL$11.then(function(){;
+    ;
+    if((PL$10/*a*/ == 2)){
+      PL$7.resolve(4); return;
+    };
+    ;
+    PL$7.resolve(0); return;
+    PL$7.resolve(); return;});})();
 return PL$7;
-})};;
-;
-})();
+})};
+  ;})();
 ;return PL$1;
 });
 })();

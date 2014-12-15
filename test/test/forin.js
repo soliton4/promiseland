@@ -58,20 +58,20 @@ var PL$2/*a*/;
 var PL$3/*namesStr*/;
 var PL$4/*cnt*/;
 var PL$5/*i*/;
-;
-PL$2/*a*/ = {"a": 1,
+
+  ;
+  PL$2/*a*/ = {"a": 1,
 "b": 2,
 "c": 3};
-PL$3/*namesStr*/ = "";
-PL$4/*cnt*/ = 0;
-for(PL$5/*i*/ in PL$2/*a*/){PL$3/*namesStr*/ += PL$5/*i*/;;
-PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];;
-};
-;
-return {"names": PL$3/*namesStr*/,
-"cnt": PL$4/*cnt*/};;
-;
-})();
+  PL$3/*namesStr*/ = "";
+  PL$4/*cnt*/ = 0;
+  for(PL$5/*i*/ in PL$2/*a*/){
+    PL$3/*namesStr*/ += PL$5/*i*/;
+    PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];};
+  ;
+  return {"names": PL$3/*namesStr*/,
+"cnt": PL$4/*cnt*/};
+  ;})();
 ;return PL$1;
 });
 })();

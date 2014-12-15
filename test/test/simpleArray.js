@@ -56,15 +56,15 @@ var PL$1 = (function(){
 "use strict";
 var PL$2/*a*/;
 var PL$3/*b*/;
-;
-PL$2/*a*/ = [];
-PL$3/*b*/ = [PL$2/*a*/, 0, ""];
-if(((PL$2/*a*/["length"] == 0) && (PL$3/*b*/["length"] == 3))){
-return {"success": true};;
-};
-return {"success": false};;
-;
-})();
+
+  ;
+  PL$2/*a*/ = [];
+  PL$3/*b*/ = [PL$2/*a*/, 0, ""];
+  if(((PL$2/*a*/["length"] == 0) && (PL$3/*b*/["length"] == 3))){
+    return {"success": true};
+  };
+  return {"success": false};
+  ;})();
 ;return PL$1;
 });
 })();

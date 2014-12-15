@@ -89,123 +89,124 @@ var PL$33/*collector*/;
 var PL$35/*cp*/;
 var PL$37/*chromeChild*/;
 var PL$38/*chromePs*/;
-PL$3(function(){;
-__requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
-__requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
-__requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
-__requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
-PL$13/*app*/ = PL$5/*express*/();
-PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
-PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
-;
-PL$16/*res*/["setHeader"]("Content-Type", "text/html");;
-PL$9/*fs*/["readFile"]("./testClient.html", (function(PL$17/*err*/, PL$18/*data*/){
-var PL$19/*s*/;
-;
-if(PL$17/*err*/){
-PL$16/*res*/["end"](PL$17/*err*/);;
-return;;
-};
-;
-PL$19/*s*/ = PL$18/*data*/["toString"]();
-PL$16/*res*/["end"](PL$19/*s*/);;
-;
-}));;
-;
-}));;
-PL$13/*app*/["use"]("/promiseland", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));;
-PL$13/*app*/["use"]("/pl", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));;
-PL$13/*app*/["use"]("/requirejs", PL$5/*express*/["static"]("./requirejs"));;
-PL$13/*app*/["use"]("/testmodules", PL$5/*express*/["static"]("./testmodules"));;
-PL$13/*app*/["use"]("/test", PL$5/*express*/["static"]("./test"));;
-PL$13/*app*/["use"]("/testapp", PL$5/*express*/["static"](PL$20/*__dirname*/));;
-PL$14/*server*/["listen"](3008);;
-PL$21/*promiseland*/["set"]("profile", "server");;
-PL$22/*ClientProfile*/ = (function(){
-var PL$24/*nextid*/;
-;
-this["name"] = (function(){
-;
-return "client";;
-;
-});;
-this["connections"] = {};;
-this["find"] = (function(PL$23/*parId*/){
-;
-return this["connections"][PL$23/*parId*/];;
-;
-});;
-PL$24/*nextid*/ = 1;
-this["addConnection"] = (function(PL$25/*connection*/){
-var PL$26/*id*/;
-;
-PL$26/*id*/ = PL$24/*nextid*/;
-PL$24/*nextid*/++;;
-this["connections"][PL$26/*id*/] = PL$25/*connection*/;;
-this["emit"]("connection", PL$25/*connection*/);;
-;
-});;
-;
-});
-PL$22/*ClientProfile*/["prototype"] = new PL$21/*promiseland*/["ProfileBaseClass"]();;
-PL$27/*clientProfile*/ = new PL$22/*ClientProfile*/();
-PL$21/*promiseland*/["addProfile"](PL$27/*clientProfile*/);;
-PL$28/*mainio*/ = PL$11/*socketIo*/["listen"](PL$14/*server*/);
-PL$28/*mainio*/["on"]("connection", (function(PL$29/*socket*/){
-var PL$25/*connection*/;
-;
-PL$30/*console*/["log"]("got connected");;
-PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
-PL$25/*connection*/["socket"] = PL$29/*socket*/;;
-PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
-;
-PL$25/*connection*/["emit"]("data", PL$18/*data*/);;
-;
-}));;
-PL$25/*connection*/["send"] = (function(PL$18/*data*/){
-;
-PL$29/*socket*/["emit"]("pl", PL$18/*data*/);;
-;
-});;
-PL$27/*clientProfile*/["addConnection"](PL$25/*connection*/);;
-PL$29/*socket*/["on"]("disconnect", (function(){
-;
-PL$25/*connection*/["emit"]("disconnect");;
-;
-}));;
-return;;
-;
-}));;
-__requireFun("./test/frameTests").then(PL$3(function(PL$31){PL$31;;
-PL$32/*tests*/ = {};
-__requireFun("./testCollector").then(PL$3(function(PL$34){PL$33/*collector*/ = PL$34;
-__requireFun("./createProcess").then(PL$3(function(PL$36){PL$35/*cp*/ = PL$36;
-PL$37/*chromeChild*/ = PL$35/*cp*/("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"])["child"];
-PL$38/*chromePs*/ = PL$33/*collector*/["getResultPromise"]("chrome");
-PL$38/*chromePs*/.then(PL$3(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;;
-PL$33/*collector*/["finish"]("chrome");;
-PL$14/*server*/["close"]();;
-var PL$40 = new __Promise();
+PL$3(function(){
+
+  ;
+  __requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
+  __requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
+  __requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
+  __requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
+  PL$13/*app*/ = PL$5/*express*/();
+  PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
+  PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
+  
+    ;
+    PL$16/*res*/["setHeader"]("Content-Type", "text/html");
+    PL$9/*fs*/["readFile"]("./testClient.html", (function(PL$17/*err*/, PL$18/*data*/){
+    var PL$19/*s*/;
+
+      ;
+      if(PL$17/*err*/){
+        PL$16/*res*/["end"](PL$17/*err*/);
+        return;
+      };
+      ;
+      PL$19/*s*/ = PL$18/*data*/["toString"]();
+      PL$16/*res*/["end"](PL$19/*s*/);
+      ;}));
+    ;}));
+  PL$13/*app*/["use"]("/promiseland", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));
+  PL$13/*app*/["use"]("/pl", PL$5/*express*/["static"]((PL$20/*__dirname*/ + "/../")));
+  PL$13/*app*/["use"]("/requirejs", PL$5/*express*/["static"]("./requirejs"));
+  PL$13/*app*/["use"]("/testmodules", PL$5/*express*/["static"]("./testmodules"));
+  PL$13/*app*/["use"]("/test", PL$5/*express*/["static"]("./test"));
+  PL$13/*app*/["use"]("/testapp", PL$5/*express*/["static"](PL$20/*__dirname*/));
+  PL$14/*server*/["listen"](3008);
+  PL$21/*promiseland*/["set"]("profile", "server");
+  PL$22/*ClientProfile*/ = (function(){
+  var PL$24/*nextid*/;
+
+    ;
+    this["name"] = (function(){
+    
+      ;
+      return "client";
+      ;});
+    this["connections"] = {};
+    this["find"] = (function(PL$23/*parId*/){
+    
+      ;
+      return this["connections"][PL$23/*parId*/];
+      ;});
+    PL$24/*nextid*/ = 1;
+    this["addConnection"] = (function(PL$25/*connection*/){
+    var PL$26/*id*/;
+
+      ;
+      PL$26/*id*/ = PL$24/*nextid*/;
+      PL$24/*nextid*/++;
+      this["connections"][PL$26/*id*/] = PL$25/*connection*/;
+      this["emit"]("connection", PL$25/*connection*/);
+      ;});
+    ;});
+  PL$22/*ClientProfile*/["prototype"] = new PL$21/*promiseland*/["ProfileBaseClass"]();
+  PL$27/*clientProfile*/ = new PL$22/*ClientProfile*/();
+  PL$21/*promiseland*/["addProfile"](PL$27/*clientProfile*/);
+  PL$28/*mainio*/ = PL$11/*socketIo*/["listen"](PL$14/*server*/);
+  PL$28/*mainio*/["on"]("connection", (function(PL$29/*socket*/){
+  var PL$25/*connection*/;
+
+    ;
+    PL$30/*console*/["log"]("got connected");
+    PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
+    PL$25/*connection*/["socket"] = PL$29/*socket*/;
+    PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
+    
+      ;
+      PL$25/*connection*/["emit"]("data", PL$18/*data*/);
+      ;}));
+    PL$25/*connection*/["send"] = (function(PL$18/*data*/){
+    
+      ;
+      PL$29/*socket*/["emit"]("pl", PL$18/*data*/);
+      ;});
+    PL$27/*clientProfile*/["addConnection"](PL$25/*connection*/);
+    PL$29/*socket*/["on"]("disconnect", (function(){
+    
+      ;
+      PL$25/*connection*/["emit"]("disconnect");
+      ;}));
+    return;
+    ;}));
+  __requireFun("./test/frameTests").then(PL$3(function(PL$31){PL$31;
+  PL$32/*tests*/ = {};
+  __requireFun("./testCollector").then(PL$3(function(PL$34){PL$33/*collector*/ = PL$34;
+  __requireFun("./createProcess").then(PL$3(function(PL$36){PL$35/*cp*/ = PL$36;
+  PL$37/*chromeChild*/ = PL$35/*cp*/("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"])["child"];
+  PL$38/*chromePs*/ = PL$33/*collector*/["getResultPromise"]("chrome");
+  PL$38/*chromePs*/.then(PL$3(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;
+  PL$33/*collector*/["finish"]("chrome");
+  PL$14/*server*/["close"]();
+  var PL$40 = new __Promise();
 var PL$41 = new __Promise();
 var PL$42/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$41.resolve(e); }; }; };
 var PL$43 = function(e){ PL$41.resolve(e); };
-PL$42/*try catch*/(function(){__requireFun("./test/simpleTests").then(PL$42/*try catch*/(function(PL$44){PL$32/*tests*/["node"] = PL$44;;
-PL$40.resolve();
-}), PL$43);
+PL$42/*try catch*/(function(){
+    __requireFun("./test/simpleTests").then(PL$42/*try catch*/(function(PL$44){PL$32/*tests*/["node"] = PL$44;
+    PL$40.resolve();}), PL$43);
 ;})();
-PL$41.then(PL$3(function(PL$45/*e*/){PL$30/*console*/["log"](PL$45/*e*/);;
-PL$40.resolve();;
-}));
+PL$41.then(PL$3(function(PL$45/*e*/){
+    PL$30/*console*/["log"](PL$45/*e*/);
+    PL$40.resolve();;}));
 PL$40.then(PL$3(function(){;
-;
-try
-{PL$46/*process*/["send"](PL$32/*tests*/);;
-}catch(PL$45/*e*/){PL$30/*console*/["log"](PL$32/*tests*/);;
-};
-;
-PL$46/*process*/["exit"](0);;
-PL$1.resolve(); return;;
-}), PL$4)}), PL$4);
+  ;
+  try
+{
+    PL$46/*process*/["send"](PL$32/*tests*/);}catch(PL$45/*e*/){
+    PL$30/*console*/["log"](PL$32/*tests*/);};
+  ;
+  PL$46/*process*/["exit"](0);
+  PL$1.resolve(); return;}), PL$4)}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

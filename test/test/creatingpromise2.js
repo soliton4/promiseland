@@ -56,19 +56,20 @@ var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "cfd61e183b4bf6d2ea80744ad61d0e79" })){ return promiseland._getModule("cfd61e183b4bf6d2ea80744ad61d0e79"); };
 var PL$1 = (function(){
 "use strict";
-;
-return {"fun": (function(){
-var PL$2 = new __Promise();
+
+  ;
+  return {"fun": (function(){
+  var PL$2 = new __Promise();
 var PL$4 = function(code){ return function(res){ try{code(res);}catch(e){ PL$2.reject(e); }; }; };
 var PL$5 = function(e){ PL$2.reject(e); };
-PL$4(function(){;
-PL$2.resolve(4); return;;
-PL$2.resolve(); return;;
-})();
+PL$4(function(){
+  
+    ;
+    PL$2.resolve(4); return;
+    PL$2.resolve(); return;})();
 return PL$2;
-})};;
-;
-})();
+})};
+  ;})();
 ;return PL$1;
 });
 })();

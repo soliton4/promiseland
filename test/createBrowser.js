@@ -74,12 +74,13 @@ var PL$2 = (function(){
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*cp*/;
-PL$3(function(){;
-__requireFun("./createProcess").then(PL$3(function(PL$6){PL$5/*cp*/ = PL$6;
-PL$7/*res*/ = PL$5/*cp*/("google-chrome", ["http://localhost:3008/"]);;
-PL$7/*res*/.then(PL$3(function(PL$9){PL$8/*console*/["log"](PL$9);;
-PL$1.resolve(); return;;
-}), PL$4);
+PL$3(function(){
+
+  ;
+  __requireFun("./createProcess").then(PL$3(function(PL$6){PL$5/*cp*/ = PL$6;
+  PL$7/*res*/ = PL$5/*cp*/("google-chrome", ["http://localhost:3008/"]);
+  PL$7/*res*/.then(PL$3(function(PL$9){PL$8/*console*/["log"](PL$9);
+  PL$1.resolve(); return;}), PL$4);
 ;}), PL$4);
 ;})();
 return PL$1;

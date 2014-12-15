@@ -1,0 +1,78 @@
+var Map = promiseland.Map;
+var classSystem = promiseland.classSystem;
+
+var basics = require "./basics";
+var errorFun = basics.errorFun;
+var errorMsg = basics.errorMsg;
+var _stringEncodeStr = basics._stringEncodeStr;
+var stringEncodeStr = basics.stringEncodeStr;
+
+var VariableNames = basics.VariableNames;
+var mixin = basics.mixin;
+var identifierName = basics.identifierName;
+var checkIsFunction = basics.checkIsFunction;
+var getExtraFromPar = basics.getExtraFromPar;
+var statementType = basics.statementType;
+var checkPromising = basics.checkPromising;
+
+
+
+
+return (parInstance, par){
+  
+  var f = (par){
+    
+    
+      this.expClassObjectExpression = function(par){
+        this.stack("isClassObject");
+        this.isClassObject = true;
+        
+        var res = this.expObjectExpression(par);
+        this.unstack("isClassObject");
+        return res;
+      };
+
+
+      this.expInheritedExpression = function(par){
+        if (!this.inheritedAvailable){
+          this.error(par, errorMsg.inheritedOnlyInMember);
+          return;
+        };
+        
+        var res = this.newResult();
+        var i = 0;
+        var l;
+        
+        res.push(this.inheritedSystem.getCurrent());
+        res.push(".apply(this");
+        
+        var args = [];
+        if (par["arguments"]){
+          res.push(", [");
+          l = par["arguments"].length;
+          for (i = 0; i < l; ++i){
+            if (i){
+              res.push(", ");
+            };
+            var argRes = this.expectTypeVar(this.parseExpression(par["arguments"][i]));
+            res.push(argRes);
+          };
+          res.push("]");
+          
+        }else if (par.expression){
+          res.push(", ");
+          this.expectTypeVar(this.parseExpression(par.expression));
+          
+        };
+        res.push(")");
+        
+        res.setType("var");
+        return res;
+        
+      };
+
+    
+  };
+  f.apply(parInstance, [par]);
+  
+};

@@ -74,72 +74,73 @@ var PL$4/*ServerConnection*/;
 var PL$8/*serverProfile*/;
 var PL$5/*socket*/;
 var PL$11/*runTests*/;
-;
-PL$2/*promiseland*/["set"]("profile", "client");;
-PL$3/*ServerProfile*/ = (function(){
-;
-this["name"] = (function(){
-;
-return "server";;
-;
-});;
-this["find"] = (function(){
-;
-return this["connection"];;
-;
-});;
-;
-});
-PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();;
-PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
-var PL$6/*self*/;
-;
-this["socket"] = PL$5/*socket*/;;
-PL$6/*self*/ = this;
-PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
-;
-PL$6/*self*/["emit"]("data", PL$7/*data*/);;
-;
-}));;
-this["send"] = (function(PL$7/*data*/){
-;
-PL$5/*socket*/["emit"]("pl", PL$7/*data*/);;
-;
-});;
-;
-});
-PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();;
-PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
-PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);;
-PL$5/*socket*/ = PL$9/*io*/["connect"]();
-PL$5/*socket*/["on"]("connect", (function(){
-var PL$10/*connection*/;
-;
-PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
-PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;;
-PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);;
-PL$11/*runTests*/();;
-;
-}));;
-PL$5/*socket*/["on"]("disconnect", (function(){
-;
-PL$8/*serverProfile*/["connection"]["emit"]("disconnect");;
-PL$8/*serverProfile*/["connection"] = undefined;;
-;
-}));;
-PL$11/*runTests*/ = (function(){
-var PL$12 = new __Promise();
+
+  ;
+  PL$2/*promiseland*/["set"]("profile", "client");
+  PL$3/*ServerProfile*/ = (function(){
+  
+    ;
+    this["name"] = (function(){
+    
+      ;
+      return "server";
+      ;});
+    this["find"] = (function(){
+    
+      ;
+      return this["connection"];
+      ;});
+    ;});
+  PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();
+  PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
+  var PL$6/*self*/;
+
+    ;
+    this["socket"] = PL$5/*socket*/;
+    PL$6/*self*/ = this;
+    PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
+    
+      ;
+      PL$6/*self*/["emit"]("data", PL$7/*data*/);
+      ;}));
+    this["send"] = (function(PL$7/*data*/){
+    
+      ;
+      PL$5/*socket*/["emit"]("pl", PL$7/*data*/);
+      ;});
+    ;});
+  PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();
+  PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
+  PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);
+  PL$5/*socket*/ = PL$9/*io*/["connect"]();
+  PL$5/*socket*/["on"]("connect", (function(){
+  var PL$10/*connection*/;
+
+    ;
+    PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
+    PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;
+    PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);
+    PL$11/*runTests*/();
+    ;}));
+  PL$5/*socket*/["on"]("disconnect", (function(){
+  
+    ;
+    PL$8/*serverProfile*/["connection"]["emit"]("disconnect");
+    PL$8/*serverProfile*/["connection"] = undefined;
+    ;}));
+  PL$11/*runTests*/ = (function(){
+  var PL$12 = new __Promise();
 var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
 var PL$15 = function(e){ PL$12.reject(e); };
-PL$14(function(){;
-__requireFun("testmodules/syncEvents").then(PL$14(function(PL$16){PL$16;;
-PL$12.resolve(); return;;
-}), PL$15);
+PL$14(function(){
+  
+    ;
+    __requireFun("testmodules/syncEvents").then(PL$14(function(PL$16){PL$16;
+    PL$12.resolve(); return;}), PL$15);
 ;})();
 return PL$12;
 });
-;
-})();
+  ;})();
 ;return PL$1;
 });
 })();

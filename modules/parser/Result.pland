@@ -136,14 +136,17 @@ var stringEncodeStr = basics.stringEncodeStr;
         };
         
       }
+      
+      // keeping track of dynamic encoding and indentation
       , _iterPar: function(par){
         if (!par){
           par = {
-            stringEncode: 0
+            stringEncode: 0,
           };
         };
         par = {
-          stringEncode: par.stringEncode || 0
+          stringEncode: par.stringEncode || 0,
+          indent: par.indent || new IndentTracker(par)
         };
         if (this._stringEncode){
           par.stringEncode += 1;
@@ -247,18 +250,37 @@ var stringEncodeStr = basics.stringEncodeStr;
           return this.replacement.getCodeStr(par);
         };
         par = this._iterPar(par);
+        
         var resStr = "";
+        /*if (this._newLine){
+          // implementation of newline
+          // there may be other newlines in the result that are not covered by this
+          resStr += "\n";
+          resStr += par.indent.getStr();
+        };*/
+        
+        if (this._indent){
+          var indentDst = par.indent.inc();
+        };
+        
         var i;
         if (this.isStatement || this.isComplete){
           resStr += this._getPreCodeStr(par);
         };
         
-        if (this.codeAr){
+        if (this.codeAr && !this._newLine){
           for (i = 0; i < this.codeAr.length; ++i){
             resStr += this.codeAr[i].getCodeStr(par);
           };
-        }else if (this.codeStr){
-          var tempCodeStr = this.codeStr;
+          
+        }else if (this.codeStr || this._newLine){
+          var tempCodeStr;
+          if (this._newLine){
+            tempCodeStr = "\n";
+            tempCodeStr += par.indent.getStr();
+          }else{
+            tempCodeStr = this.codeStr;
+          };
           if (par.stringEncode < 0){
             errorFun(undefined, errorMsg.internalNegativeStringEncode);
           };
@@ -275,6 +297,11 @@ var stringEncodeStr = basics.stringEncodeStr;
         if (this.isComplete){
           resStr += this._getPostCodeStr(par);
         };
+        
+        if (this._indent){
+          indentDst();
+        };
+
         
         return resStr;
       }
@@ -313,6 +340,12 @@ var stringEncodeStr = basics.stringEncodeStr;
         }else{
           return this._getPostCodeStr(par);
         };
+      }
+      
+      // get the complete compiled program
+      , getProgramCodeStr: function(par){
+        par = this._iterPar(par);
+        return this.getPreCodeStr(par) + this.getCodeStr(par) + this.getPostCodeStr(par);
       }
       
       , makePromising: function(){
@@ -401,6 +434,39 @@ var stringEncodeStr = basics.stringEncodeStr;
         this.providesType = par;
       }
     };
+
+class IndentTracker {
+  constructor: (par){
+    this.unit = 2;
+    if (par){
+      this.unit = par.unit || this.unit;
+    };
+    this.cnt = 0;
+  },
+  inc: (){
+    this.cnt += 1;
+    var done;
+    var self = this;
+    return (){
+      if (done) {
+        return;
+      };
+      self.cnt -= 1;
+      done = true;
+    }
+  },
+  getStr: (){
+    var i = 0;
+    var resStr = "";
+    for (i = 0; i < this.cnt; ++i){
+      var j = 0;
+      for (j = 0; j < this.unit; ++j){
+        resStr += " ";
+      };
+    };
+    return resStr;
+  }
+};
 
 
 return _Result;

@@ -85,65 +85,67 @@ var PL$20/*main*/;
 var PL$22/*tc*/;
 var PL$23/*runTests*/;
 var PL$40/*b*/;
-PL$3(function(){;
-PL$5/*promiseland*/["set"]("profile", "client");;
-PL$6/*ServerProfile*/ = (function(){
-;
-this["name"] = (function(){
-;
-return "server";;
-;
-});;
-this["find"] = (function(){
-;
-return this["connection"];;
-;
-});;
-;
-});
-PL$6/*ServerProfile*/["prototype"] = new PL$5/*promiseland*/["ProfileBaseClass"]();;
-PL$7/*ServerConnection*/ = (function(PL$8/*socket*/){
-var PL$9/*self*/;
-;
-this["socket"] = PL$8/*socket*/;;
-PL$9/*self*/ = this;
-PL$8/*socket*/["on"]("pl", (function(PL$10/*data*/){
-;
-PL$9/*self*/["emit"]("data", PL$10/*data*/);;
-;
-}));;
-this["send"] = (function(PL$10/*data*/){
-;
-PL$8/*socket*/["emit"]("pl", PL$10/*data*/);;
-;
-});;
-;
-});
-PL$7/*ServerConnection*/["prototype"] = new PL$5/*promiseland*/["ConnectionBaseClass"]();;
-PL$11/*serverProfile*/ = new PL$6/*ServerProfile*/();
-PL$5/*promiseland*/["addProfile"](PL$11/*serverProfile*/);;
-PL$8/*socket*/ = PL$12/*io*/["connect"]();
-PL$8/*socket*/["on"]("connect", (function(){
-var PL$13/*connection*/;
-;
-PL$13/*connection*/ = new PL$7/*ServerConnection*/(PL$8/*socket*/);
-PL$11/*serverProfile*/["connection"] = PL$13/*connection*/;;
-PL$11/*serverProfile*/["emit"]("connection", PL$13/*connection*/);;
-;
-}));;
-PL$8/*socket*/["on"]("disconnect", (function(){
-;
-PL$11/*serverProfile*/["connection"]["emit"]("disconnect");;
-PL$11/*serverProfile*/["connection"] = undefined;;
-;
-}));;
-__requireFun("dijit/form/Button").then(PL$3(function(PL$15){PL$14/*Button*/ = PL$15;
-__requireFun("dojox/layout/TableContainer").then(PL$3(function(PL$17){PL$16/*TableContainer*/ = PL$17;
-__requireFun("./Text").then(PL$3(function(PL$19){PL$18/*Text*/ = PL$19;
-__requireFun("testConsole/main").then(PL$3(function(PL$21){PL$20/*main*/ = PL$21;
-PL$22/*tc*/;
-PL$23/*runTests*/ = (function(){
-var PL$24 = new __Promise();
+PL$3(function(){
+
+  ;
+  PL$5/*promiseland*/["set"]("profile", "client");
+  PL$6/*ServerProfile*/ = (function(){
+  
+    ;
+    this["name"] = (function(){
+    
+      ;
+      return "server";
+      ;});
+    this["find"] = (function(){
+    
+      ;
+      return this["connection"];
+      ;});
+    ;});
+  PL$6/*ServerProfile*/["prototype"] = new PL$5/*promiseland*/["ProfileBaseClass"]();
+  PL$7/*ServerConnection*/ = (function(PL$8/*socket*/){
+  var PL$9/*self*/;
+
+    ;
+    this["socket"] = PL$8/*socket*/;
+    PL$9/*self*/ = this;
+    PL$8/*socket*/["on"]("pl", (function(PL$10/*data*/){
+    
+      ;
+      PL$9/*self*/["emit"]("data", PL$10/*data*/);
+      ;}));
+    this["send"] = (function(PL$10/*data*/){
+    
+      ;
+      PL$8/*socket*/["emit"]("pl", PL$10/*data*/);
+      ;});
+    ;});
+  PL$7/*ServerConnection*/["prototype"] = new PL$5/*promiseland*/["ConnectionBaseClass"]();
+  PL$11/*serverProfile*/ = new PL$6/*ServerProfile*/();
+  PL$5/*promiseland*/["addProfile"](PL$11/*serverProfile*/);
+  PL$8/*socket*/ = PL$12/*io*/["connect"]();
+  PL$8/*socket*/["on"]("connect", (function(){
+  var PL$13/*connection*/;
+
+    ;
+    PL$13/*connection*/ = new PL$7/*ServerConnection*/(PL$8/*socket*/);
+    PL$11/*serverProfile*/["connection"] = PL$13/*connection*/;
+    PL$11/*serverProfile*/["emit"]("connection", PL$13/*connection*/);
+    ;}));
+  PL$8/*socket*/["on"]("disconnect", (function(){
+  
+    ;
+    PL$11/*serverProfile*/["connection"]["emit"]("disconnect");
+    PL$11/*serverProfile*/["connection"] = undefined;
+    ;}));
+  __requireFun("dijit/form/Button").then(PL$3(function(PL$15){PL$14/*Button*/ = PL$15;
+  __requireFun("dojox/layout/TableContainer").then(PL$3(function(PL$17){PL$16/*TableContainer*/ = PL$17;
+  __requireFun("./Text").then(PL$3(function(PL$19){PL$18/*Text*/ = PL$19;
+  __requireFun("testConsole/main").then(PL$3(function(PL$21){PL$20/*main*/ = PL$21;
+  PL$22/*tc*/;
+  PL$23/*runTests*/ = (function(){
+  var PL$24 = new __Promise();
 var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$24.reject(e); }; }; };
 var PL$27 = function(e){ PL$24.reject(e); };
 var PL$28/*results*/;
@@ -156,57 +158,55 @@ var PL$36/*testName*/;
 var PL$37/*errorStr*/;
 var PL$38/*textStr*/;
 var PL$39/*w*/;
-PL$26(function(){;
-PL$20/*main*/["runTests"]().then(PL$26(function(PL$29){PL$28/*results*/ = PL$29;
-if(PL$22/*tc*/){
-PL$22/*tc*/["destroy"]();;
-};
-;
-PL$22/*tc*/ = new PL$16/*TableContainer*/({});;
-PL$22/*tc*/["placeAt"](PL$30/*document*/["body"]);;
-if(PL$28/*results*/["failed"]){
-PL$31/*f*/ = new PL$18/*Text*/({"label": "failed",
+PL$26(function(){
+  
+    ;
+    PL$20/*main*/["runTests"]().then(PL$26(function(PL$29){PL$28/*results*/ = PL$29;
+    if(PL$22/*tc*/){
+      PL$22/*tc*/["destroy"]();
+    };
+    ;
+    PL$22/*tc*/ = new PL$16/*TableContainer*/({});
+    PL$22/*tc*/["placeAt"](PL$30/*document*/["body"]);
+    if(PL$28/*results*/["failed"]){
+      PL$31/*f*/ = new PL$18/*Text*/({"label": "failed",
 "text": "-"});
-PL$22/*tc*/["addChild"](PL$31/*f*/);;
-
-}else{
-PL$32/*t*/;
-for(PL$32/*t*/ in PL$28/*results*/){PL$33/*testRes*/ = PL$28/*results*/[PL$32/*t*/];
-PL$34/*cnt*/ = 0;
-PL$35/*successCnt*/ = 0;
-PL$36/*testName*/;
-PL$37/*errorStr*/ = "";
-for(PL$36/*testName*/ in PL$33/*testRes*/){++PL$34/*cnt*/;;
-if(PL$33/*testRes*/[PL$36/*testName*/]){
-++PL$35/*successCnt*/;;
-
-}else{
-PL$37/*errorStr*/ += (PL$36/*testName*/ + " failed; \n");;
-};
-;
-};
-;
-PL$38/*textStr*/ = (("run " + PL$34/*cnt*/) + " tests. \n");
-PL$38/*textStr*/ += ((PL$34/*cnt*/ - PL$35/*successCnt*/) + " failed. \n");;
-PL$38/*textStr*/ += PL$37/*errorStr*/;;
-PL$39/*w*/ = new PL$18/*Text*/({"label": PL$32/*t*/,
+      PL$22/*tc*/["addChild"](PL$31/*f*/);
+    }else{
+    PL$32/*t*/;
+    for(PL$32/*t*/ in PL$28/*results*/){
+      PL$33/*testRes*/ = PL$28/*results*/[PL$32/*t*/];
+      PL$34/*cnt*/ = 0;
+      PL$35/*successCnt*/ = 0;
+      PL$36/*testName*/;
+      PL$37/*errorStr*/ = "";
+      for(PL$36/*testName*/ in PL$33/*testRes*/){
+        ++PL$34/*cnt*/;
+        if(PL$33/*testRes*/[PL$36/*testName*/]){
+          ++PL$35/*successCnt*/;
+        }else{
+        PL$37/*errorStr*/ += (PL$36/*testName*/ + " failed; \n");
+        };
+        ;};
+      ;
+      PL$38/*textStr*/ = (("run " + PL$34/*cnt*/) + " tests. \n");
+      PL$38/*textStr*/ += ((PL$34/*cnt*/ - PL$35/*successCnt*/) + " failed. \n");
+      PL$38/*textStr*/ += PL$37/*errorStr*/;
+      PL$39/*w*/ = new PL$18/*Text*/({"label": PL$32/*t*/,
 "text": PL$38/*textStr*/});
-PL$22/*tc*/["addChild"](PL$39/*w*/);;
-};
-;
-};
-;
-PL$22/*tc*/["startup"]();;
-PL$24.resolve(); return;;
-}), PL$27);
+      PL$22/*tc*/["addChild"](PL$39/*w*/);};
+    ;
+    };
+    ;
+    PL$22/*tc*/["startup"]();
+    PL$24.resolve(); return;}), PL$27);
 ;})();
 return PL$24;
 });
-PL$40/*b*/ = new PL$14/*Button*/({"label": "test",
+  PL$40/*b*/ = new PL$14/*Button*/({"label": "test",
 "onClick": PL$23/*runTests*/});
-PL$40/*b*/["placeAt"](PL$30/*document*/["body"]);;
-PL$1.resolve(); return;;
-}), PL$4);
+  PL$40/*b*/["placeAt"](PL$30/*document*/["body"]);
+  PL$1.resolve(); return;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);
 ;}), PL$4);

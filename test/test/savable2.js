@@ -78,10 +78,12 @@ var PL$10/*a*/;
 var _TPL$10/*a*/;
 var PL$3/*type:C1*/ = classSystem._createProvisionalClass();
 PL$4/*C1*/ = PL$3/*type:C1*/;
-var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});PL$6(function(){;
-__requireFun("./savable").then(PL$6(function(PL$9){PL$8/*savable*/ = PL$9;
-classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"a": 1, "b": 2}));PL$4/*C1*/;;
-/*temptracked promise*/(function(vAr){
+var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});PL$6(function(){
+
+  ;
+  __requireFun("./savable").then(PL$6(function(PL$9){PL$8/*savable*/ = PL$9;
+  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "savable": true}, {"a": 1, "b": 2}));PL$4/*C1*/;
+  /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$11){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };
 if(vAr){
@@ -94,16 +96,16 @@ PL$10/*a*/ = undefined; _TPL$10/*a*/ = undefined;
 return;
 }; })(PL$11)/*end temp assign*/
 ;
-if((PL$10/*a*/[9] != 1)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-PL$10/*a*/[9] = 3;;
-if((PL$10/*a*/[9] != 3)){
-PL$1.resolve({"success": false}); return;;
-};
-;
-/*temptracked promise*/(function(vAr){
+  if((PL$10/*a*/[9] != 1)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$10/*a*/[9] = 3;
+  if((PL$10/*a*/[9] != 3)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$12){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };
 if(vAr){
@@ -115,8 +117,8 @@ return v;
 PL$10/*a*/ = undefined; _TPL$10/*a*/ = undefined;
 return;
 }; })(PL$12)/*end temp assign*/
-;;
-/*temptracked promise*/(function(vAr){
+;
+  /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$13){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };
 if(vAr){
@@ -128,14 +130,14 @@ return v;
 PL$10/*a*/ = undefined; _TPL$10/*a*/ = undefined;
 return;
 }; })(PL$13)/*end temp assign*/
-;;
-if((PL$10/*a*/[9] != 1)){
-PL$1.resolve({"success": false}); return;;
-};
 ;
-PL$10/*a*/[9] = 4;;
-PL$10/*a*/[7]().then(PL$6(function(PL$14){PL$14;;
-/*temptracked promise*/(function(vAr){
+  if((PL$10/*a*/[9] != 1)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$10/*a*/[9] = 4;
+  PL$10/*a*/[7]().then(PL$6(function(PL$14){PL$14;
+  /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$15){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };
 if(vAr){
@@ -147,8 +149,8 @@ return v;
 PL$10/*a*/ = undefined; _TPL$10/*a*/ = undefined;
 return;
 }; })(PL$15)/*end temp assign*/
-;;
-/*temptracked promise*/(function(vAr){
+;
+  /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$6(function(PL$16){/*temp tracked assign*/(function(vAr){
 if (_TPL$10/*a*/){ _TPL$10/*a*/(); };
 if(vAr){
@@ -160,14 +162,13 @@ return v;
 PL$10/*a*/ = undefined; _TPL$10/*a*/ = undefined;
 return;
 }; })(PL$16)/*end temp assign*/
-;;
-if((PL$10/*a*/[9] != 4)){
-PL$1.resolve({"success": false}); return;;
-};
 ;
-PL$1.resolve({"success": true}); return;;
-PL$1.resolve(); return;;
-}), PL$7);
+  if((PL$10/*a*/[9] != 4)){
+    PL$1.resolve({"success": false}); return;
+  };
+  ;
+  PL$1.resolve({"success": true}); return;
+  PL$1.resolve(); return;}), PL$7);
 return r;
 })(new PL$5/*C1-constructor*/("id1"));/*temptracked promise end*/
 ;}), PL$7);

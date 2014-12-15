@@ -74,14 +74,15 @@ var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.r
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*Fw*/;
 var PL$7/*fw*/;
-PL$3(function(){;
-__requireFun("promiseland-webframework").then(PL$3(function(PL$6){PL$5/*Fw*/ = PL$6;
-PL$7/*fw*/ = new PL$5/*Fw*/({"load": "test/saveHandler",
+PL$3(function(){
+
+  ;
+  __requireFun("promiseland-webframework").then(PL$3(function(PL$6){PL$5/*Fw*/ = PL$6;
+  PL$7/*fw*/ = new PL$5/*Fw*/({"load": "test/saveHandler",
 "dirs": [{"client": "/test",
 "server": (PL$8/*__dirname*/ + "/test/")}]});
-PL$7/*fw*/["listen"](4000);;
-PL$1.resolve(); return;;
-}), PL$4);
+  PL$7/*fw*/["listen"](4000);
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

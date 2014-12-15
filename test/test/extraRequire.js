@@ -54,15 +54,15 @@ var __require = requireFun;
 if (promiseland._hasModule({ hashStr: "c3524211fbff8d0dc294d515bc7b1eaf" })){ return promiseland._getModule("c3524211fbff8d0dc294d515bc7b1eaf"); };
 var PL$1 = (function(){
 "use strict";
-;
-;
-if((PL$2/*extraModule*/["value"] == 4)){
-return {"success": true};;
-};
-;
-return {"success": false};;
-;
-})();
+
+  ;
+  ;
+  if((PL$2/*extraModule*/["value"] == 4)){
+    return {"success": true};
+  };
+  ;
+  return {"success": false};
+  ;})();
 ;return PL$1;
 });
 })();

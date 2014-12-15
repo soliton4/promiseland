@@ -57,37 +57,38 @@ if (promiseland._hasModule({ hashStr: "7e2ff512946bcef40a808431919fd11a" })){ re
 var PL$1 = (function(){
 "use strict";
 var PL$2/*b*/;
-;
-PL$2/*b*/ = (function(){
-var PL$3 = new __Promise();
+
+  ;
+  PL$2/*b*/ = (function(){
+  var PL$3 = new __Promise();
 var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
 var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){;
-PL$3.resolve(); return;;
-})();
+PL$5(function(){
+  
+    ;
+    PL$3.resolve(); return;})();
 return PL$3;
 });
-return {"fun": (function(){
-var PL$7 = new __Promise();
+  return {"fun": (function(){
+  var PL$7 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
 var PL$9 = function(e){ PL$7.reject(e); };
-PL$8(function(){;
-var PL$10 = new __Promise();
-if((1 < 0)){
-PL$2/*b*/.then(PL$8(function(PL$11){PL$11;;
-PL$10.resolve();;
-}), PL$9);
+PL$8(function(){
+  
+    ;
+    
+    var PL$10 = new __Promise();if((1 < 0)){
+      PL$2/*b*/.then(PL$8(function(PL$11){PL$11;
+      PL$10.resolve();;}), PL$9);
 ;
-}else{
-PL$10.resolve();}; PL$10.then(function(){;
-;
-PL$7.resolve(4); return;;
-PL$7.resolve(); return;;
-});})();
+    }else{PL$10.resolve();
+    }; PL$10.then(function(){;
+    ;
+    PL$7.resolve(4); return;
+    PL$7.resolve(); return;});})();
 return PL$7;
-})};;
-;
-})();
+})};
+  ;})();
 ;return PL$1;
 });
 })();

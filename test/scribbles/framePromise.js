@@ -71,16 +71,17 @@ return promiseland.remoteExec("25de7adaa1494a8c3cd1a849bde67c15", "PL$6", argume
 var PL$2 = new __Promise();
 var PL$4 = function(code){ return function(res){ try{code(res);}catch(e){ PL$2.reject(e); }; }; };
 var PL$5 = function(e){ PL$2.reject(e); };
-PL$4(function(){;
-PL$2.resolve(1); return;;
-PL$2.resolve(); return;;
-})();
+PL$4(function(){
+
+  ;
+  PL$2.resolve(1); return;
+  PL$2.resolve(); return;})();
 return PL$2;
 });
-;
-PL$7/*test*/;
-;
-})();
+
+  ;
+  PL$7/*test*/;
+  ;})();
 ;return PL$1;
 });
 })();
