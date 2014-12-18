@@ -62,6 +62,9 @@ return (classSystem, internals){
         isVar: classSystem.isVar(mDef.type),
         defaultValue: classSystem.isVar(mDef.type) ? mDef.defaultValue : pcs.stringifyInstance(mDef.type, mDef.defaultValue)
       };
+      if (mDef.meta){
+        p.meta = mDef.meta;
+      };
       propertiesAr.push(p);
       properties[mDef.name] = p;
     };

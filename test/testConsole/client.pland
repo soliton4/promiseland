@@ -48,6 +48,7 @@ var main = require "testConsole/main";
 var tc;
 
 var runTests = (){
+  
   var results = *(main.runTests());
   if (tc){
     tc.destroy();

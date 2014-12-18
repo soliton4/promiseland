@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "0e592225f9adb7e74dd217702589e9e7" })){ return promiseland._getModule("0e592225f9adb7e74dd217702589e9e7"); };
+    if (promiseland._hasModule({ hashStr: "dad109106b66194f53ef31dbb39e0a88" })){ return promiseland._getModule("dad109106b66194f53ef31dbb39e0a88"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "0e592225f9adb7e74dd217702589e9e7", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "dad109106b66194f53ef31dbb39e0a88", "module": PL$1, promising: true });
 var PL$5/*promiseland*/;try{PL$5/*promiseland*/ = promiseland;}catch(e){};
 var PL$12/*io*/;try{PL$12/*io*/ = io;}catch(e){};
 var PL$30/*document*/;try{PL$30/*document*/ = document;}catch(e){};

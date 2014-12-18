@@ -327,7 +327,7 @@ var classSystem = {
         },
         ... // members
       ]
-      */
+  */
   _createClass: function(classLiteral, parDefaults){
     var cAr = [];
     var self = this;
@@ -476,6 +476,9 @@ var classSystem = {
       };
       if (syncAll || m.sync){
         mDef.sync = true;
+      };
+      if (m.meta){
+        mDef.meta = m.meta;
       };
       mDef.type = m.type;
       var mType = m.type;

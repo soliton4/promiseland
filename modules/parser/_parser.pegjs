@@ -607,10 +607,10 @@ ClassObjectLiteral // promiseland
       objLit.type = "ClassObjectExpression";
       return objLit;
     }
-  / "{" __ properties:PropertyNameAndValueList __ "}" {
+  / "{" __ properties:ObjectPropertyNameAndValueList __ "}" {
        return posRes({ type: "ClassObjectExpression", properties: properties });
      }
-  / "{" __ properties:PropertyNameAndValueList __ "," __ "}" {
+  / "{" __ properties:ObjectPropertyNameAndValueList __ "," __ "}" {
        return posRes({ type: "ClassObjectExpression", properties: properties });
      }
 
@@ -628,13 +628,130 @@ PropertyNameAndValueList
   = first:PropertyAssignment rest:(__ "," __ PropertyAssignment)* {
       return buildList(first, rest, 3);
     }
-
+    
 PropertyAssignment
   = key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init"}); // promiseland
     }
   / typename:Typename __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
       return posRes({ key: key, value: value, kind: "init", typename: typename }); // promiseland
+    }
+  / funcDec:FunctionDeclaration { // promiseland
+      funcDec.kind = "function";
+      funcDec.type = "MemberFunction";
+      return funcDec;
+    }
+  / block:Block {
+      block.kind = "block"
+      return block;
+    }
+  / GetToken __ key:PropertyName __
+    "(" __ ")" __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return posRes({
+        key:   key,
+        value: {
+          type:   "FunctionExpression",
+          id:     null,
+          params: [],
+          body:   body
+        },
+        kind:  "get"
+      });
+    }
+  / SetToken __ key:PropertyName __
+    "(" __ params:PropertySetParameterList __ ")" __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return posRes({
+        key:   key,
+        value: {
+          type:   "FunctionExpression",
+          id:     null,
+          params: params,
+          body:   body
+        },
+        kind:  "set"
+      });
+    }
+
+
+// ---------------------------
+// object properties
+
+ObjectPropertyNameAndValueList
+  = first:ObjectPropertyAssignment rest:(__ "," __ ObjectPropertyAssignment)* {
+      return buildList(first, rest, 3);
+    }
+
+    
+ObjectPropertyMetaClaus
+  = "meta" __ exp:AssignmentExpression __ { return posRes({ "type": "meta", expression: exp }); }
+
+ObjectPropertyConstClaus
+  = "const" __ { return posRes({ "type": "const" }); }
+
+ObjectPropertyPrivateClaus
+  = "private" __ { return posRes({ "type": "private" }); }
+  
+ObjectPropertyProtectedClaus
+  = "protected" __ { return posRes({ "type": "protected" }); }
+  
+ObjectPropertyPublicClaus
+  = "public" __ { return posRes({ "type": "public" }); }
+
+ObjectPropertySyncClaus
+  = "sync" __ { return posRes({ "type": "sync" }); }
+
+ObjectPropertyKeyword
+  = ObjectPropertyMetaClaus
+  / ObjectPropertyConstClaus
+  / ObjectPropertyPrivateClaus
+  / ObjectPropertyProtectedClaus
+  / ObjectPropertyPublicClaus
+  / ObjectPropertySyncClaus
+
+ObjectPropertyKeywords
+  = arr:ObjectPropertyKeyword+ {
+  var present = {};
+  arr.filter(function (e, i, arr) {
+    if (present[e.type]){
+      error('Class keyword ' + e.type + ' can only be used once' + text());
+    };
+    present[e.type] = true;
+  });
+  return arr;
+}  
+    
+
+ObjectPropertyAssignment
+  // no keywords
+  // no type
+  = key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+      return posRes({ 
+        key: key, 
+        value: value, 
+        kind: "init"
+      }); // promiseland
+    }
+    // only type
+  / typename:Typename __ key:PropertyName __ ":" __ value:AssignmentExpression? { // promiseland
+      return posRes({ 
+        key: key, 
+        value: value, 
+        kind: "init", 
+        typename: typename
+      }); // promiseland
+    }
+  / typename:Typename __ keywords:ObjectPropertyKeywords __ key:PropertyName __":" __ value:AssignmentExpression? { // promiseland
+      return posRes({ 
+        key: key, 
+        value: value, 
+        kind: "init", 
+        typename: typename,
+        keywords: keywords
+      }); // promiseland
     }
   / funcDec:FunctionDeclaration { // promiseland
       funcDec.kind = "function";

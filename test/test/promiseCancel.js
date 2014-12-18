@@ -66,8 +66,8 @@ var PL$4 = function(e){ PL$1.reject(e); };
 var PL$13/*wait*/;
 var PL$14/*cancelReason*/;
 var PL$15/*runThrough*/;
-var PL$26/*f*/;
-var PL$27/*res*/;
+var PL$24/*f*/;
+var PL$25/*res*/;
 var PL$13/*wait*/ = function(){
 var PL$5 = new __Promise();
 var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
@@ -83,16 +83,10 @@ PL$7(function(){
 ;})();
 return PL$5;
 };
-var PL$26/*f*/ = function(){
+var PL$24/*f*/ = function(){
 var PL$16 = new __Promise();
 var PL$17 = function(code){ return function(res){ try{code(res);}catch(e){ PL$16.reject(e); }; }; };
 var PL$18 = function(e){ PL$16.reject(e); };
-var PL$25/*cancel*/;
-var PL$25/*cancel*/ = function(PL$24/*reason*/){
-
-  ;
-  PL$14/*cancelReason*/ = PL$24/*reason*/;
-  ;};
 PL$17(function(){
 
   ;
@@ -107,7 +101,6 @@ PL$21/*try catch*/(function(){
 ;})();
 PL$20.then(PL$17(function(__dummy){PL$19.resolve();}));
 PL$19.then(PL$17(function(){;
-  PL$25/*cancel*/;
   ;
   PL$15/*runThrough*/ = true;
   PL$16.resolve(); return;}), PL$18)})();
@@ -119,12 +112,12 @@ PL$3(function(){
   PL$13/*wait*/;
   PL$14/*cancelReason*/;
   PL$15/*runThrough*/;
-  PL$26/*f*/;
+  PL$24/*f*/;
   ;
-  PL$27/*res*/ = PL$26/*f*/();
-  PL$27/*res*/["cancel"](4);
-  PL$13/*wait*/().then(PL$3(function(PL$28){PL$28;
-  PL$13/*wait*/().then(PL$3(function(PL$29){PL$29;
+  PL$25/*res*/ = PL$24/*f*/();
+  PL$25/*res*/["cancel"](4);
+  PL$13/*wait*/().then(PL$3(function(PL$26){PL$26;
+  PL$13/*wait*/().then(PL$3(function(PL$27){PL$27;
   if((PL$14/*cancelReason*/ != 4)){
     PL$1.resolve({"success": false}); return;
   };
