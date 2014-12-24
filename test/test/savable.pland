@@ -43,7 +43,7 @@ class SaveHandler {
   }
 };
 
-promiseland.classSystem.setSaveHandler(new SaveHandler());
+promiseland.classSystem.setStorageEngine(new SaveHandler());
 
 class type savable C1{
   x: 1,

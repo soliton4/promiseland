@@ -30,7 +30,7 @@ return (classSystem, internals){
   
   // savable
   
-  var saveHandlerPs = new Promise();
+  var storageEnginePs = new Promise();
   
   pcs.isSavableType = (parType){
     if (cs.isVar(parType)){
@@ -44,8 +44,12 @@ return (classSystem, internals){
   };
 
   pcs.registerSavableClass = (parType){
-    var handler = *saveHandlerPs;
     var cDef = getClass(parType);
+    if (cDef.storageEngine){
+      var engine = cDef.storageEngine;
+    }else{
+      var engine = *storageEnginePs;
+    };
     
     var propertiesAr = [];
     var properties = {};
@@ -70,8 +74,8 @@ return (classSystem, internals){
     };
     
     try{
-      if (handler.registerClass){
-        cDef.saveHandler = handler.registerClass({
+      if (engine.registerClass){
+        cDef.storageHandler = engine.registerClass({
           idType: cDef.idType,
           properties: properties,
           propertiesAr: propertiesAr,
@@ -84,7 +88,7 @@ return (classSystem, internals){
   
   pcs.saveInstance = (parType, parInstance){
     var cDef = getClass(parType);
-    var h = *cDef.saveHandler;
+    var h = *cDef.storageHandler;
     
     var propertiesAr = [];
     var properties = {};
@@ -113,7 +117,7 @@ return (classSystem, internals){
   
   pcs.loadInstance = (parType, parInstance){
     var cDef = getClass(parType);
-    var h = *cDef.saveHandler;
+    var h = *cDef.storageHandler;
     
     var propertiesAr = [];
     var properties = {};
@@ -161,8 +165,21 @@ return (classSystem, internals){
     
   };
   
-  cs.setSaveHandler = (parSaveHandler){
-    saveHandlerPs.resolve(parSaveHandler);
+  cs.setStorageEngine = (parStorageEngine, parType){
+    if (parType){
+      var type = *cs.readyPromise(parType);
+      var cDef = getClass(type);
+      cDef.storageEngine = parStorageEngine;
+      pcs.registerSavableClass(type);
+      return;
+    };
+    try{
+      storageEnginePs.resolve(parStorageEngine);
+    };
+    storageEnginePs = new Promise();
+    storageEnginePs.resolve(parStorageEngine);
   };
+  
+  //cs.setSaveHandler = cs.setStorageEngine;
   
 };

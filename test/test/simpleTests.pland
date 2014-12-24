@@ -169,7 +169,10 @@
   *createTest("leaveCatch", successFun);
   *createTest("leaveCatchAsync", successFun);
   *createTest("leaveTry", successFun);
-  //*createTest("leaveTry", successFun);
+  
+  *createTest("storage/setStorageEngine", successFun);
+  *createTest("storage/meta", successFun);
+//*createTest("storage/meta", successFun);
 
   
     var c = 0;

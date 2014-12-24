@@ -53,7 +53,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "1f9dfb6fbee932b55adb26d902ee3039" })){ return promiseland._getModule("1f9dfb6fbee932b55adb26d902ee3039"); };
+if (promiseland._hasModule({ hashStr: "36e28d890780ab3184b06d6fb4d10568" })){ return promiseland._getModule("36e28d890780ab3184b06d6fb4d10568"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$26/*Promise*/;try{PL$26/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
@@ -91,7 +91,7 @@ var PL$21/*cs*/;
 var PL$22/*pcs*/;
 var PL$23/*getClass*/;
 var PL$24/*DynInstance*/;
-var PL$25/*saveHandlerPs*/;
+var PL$25/*storageEnginePs*/;
 
     ;
     PL$16/*privateClassSystem*/ = PL$15/*internals*/["privateClassSystem"];
@@ -111,7 +111,7 @@ return PL$17;
     PL$22/*pcs*/ = PL$16/*privateClassSystem*/;
     PL$23/*getClass*/ = PL$15/*internals*/["getClass"];
     PL$24/*DynInstance*/ = PL$15/*internals*/["DynInstance"];
-    PL$25/*saveHandlerPs*/ = new PL$26/*Promise*/();
+    PL$25/*storageEnginePs*/ = new PL$26/*Promise*/();
     PL$22/*pcs*/["isSavableType"] = (function(PL$27/*parType*/){
     var PL$28/*cDef*/;
 
@@ -131,165 +131,198 @@ return PL$17;
     var PL$29 = new __Promise();
 var PL$30 = function(code){ return function(res){ try{code(res);}catch(e){ PL$29.reject(e); }; }; };
 var PL$31 = function(e){ PL$29.reject(e); };
-var PL$32/*handler*/;
 var PL$28/*cDef*/;
-var PL$34/*propertiesAr*/;
-var PL$35/*properties*/;
-var PL$36/*map*/;
-var PL$37/*i*/;
-var PL$38/*mDef*/;
-var PL$39/*p*/;
+var PL$33/*engine*/;
+var PL$35/*propertiesAr*/;
+var PL$36/*properties*/;
+var PL$37/*map*/;
+var PL$38/*i*/;
+var PL$39/*mDef*/;
+var PL$40/*p*/;
 PL$30(function(){
     
       ;
-      PL$25/*saveHandlerPs*/.then(PL$30(function(PL$33){PL$32/*handler*/ = PL$33;
       PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      PL$34/*propertiesAr*/ = [];
-      PL$35/*properties*/ = {};
-      PL$36/*map*/ = PL$28/*cDef*/["map"];
-      PL$37/*i*/ = 0;
-      for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$36/*map*/["membersAr"]["length"]);++PL$37/*i*/){{
-        PL$38/*mDef*/ = PL$36/*map*/["membersAr"][PL$37/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"]) || PL$38/*mDef*/["noSave"])){
+      
+      var PL$32 = new __Promise();if(PL$28/*cDef*/["storageEngine"]){
+        PL$33/*engine*/ = PL$28/*cDef*/["storageEngine"];
+        PL$32.resolve();;
+      }else{
+      PL$25/*storageEnginePs*/.then(PL$30(function(PL$34){PL$33/*engine*/ = PL$34;
+      PL$32.resolve();;}), PL$31);
+;
+      }; PL$32.then(function(){;
+      ;
+      PL$35/*propertiesAr*/ = [];
+      PL$36/*properties*/ = {};
+      PL$37/*map*/ = PL$28/*cDef*/["map"];
+      PL$38/*i*/ = 0;
+      for(PL$38/*i*/ = 0;(PL$38/*i*/ < PL$37/*map*/["membersAr"]["length"]);++PL$38/*i*/){{
+        PL$39/*mDef*/ = PL$37/*map*/["membersAr"][PL$38/*i*/];
+        if((! PL$22/*pcs*/["isSavableType"](PL$39/*mDef*/["type"]) || PL$39/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$39/*p*/ = {"name": PL$38/*mDef*/["name"],
-"type": PL$38/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"]),
-"defaultValue": (PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"]) ? PL$38/*mDef*/["defaultValue"] : PL$22/*pcs*/["stringifyInstance"](PL$38/*mDef*/["type"], PL$38/*mDef*/["defaultValue"]))};
-        if(PL$38/*mDef*/["meta"]){
-          PL$39/*p*/["meta"] = PL$38/*mDef*/["meta"];
+        PL$40/*p*/ = {"name": PL$39/*mDef*/["name"],
+"type": PL$39/*mDef*/["type"],
+"isVar": PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"]),
+"defaultValue": (PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"]) ? PL$39/*mDef*/["defaultValue"] : PL$22/*pcs*/["stringifyInstance"](PL$39/*mDef*/["type"], PL$39/*mDef*/["defaultValue"]))};
+        if(PL$39/*mDef*/["meta"]){
+          PL$40/*p*/["meta"] = PL$39/*mDef*/["meta"];
         };
         ;
-        PL$34/*propertiesAr*/["push"](PL$39/*p*/);
-        PL$35/*properties*/[PL$38/*mDef*/["name"]] = PL$39/*p*/;}};
+        PL$35/*propertiesAr*/["push"](PL$40/*p*/);
+        PL$36/*properties*/[PL$39/*mDef*/["name"]] = PL$40/*p*/;}};
       ;
       try
 {
-        if(PL$32/*handler*/["registerClass"]){
-          PL$28/*cDef*/["saveHandler"] = PL$32/*handler*/["registerClass"]({"idType": PL$28/*cDef*/["idType"],
-"properties": PL$35/*properties*/,
-"propertiesAr": PL$34/*propertiesAr*/,
+        if(PL$33/*engine*/["registerClass"]){
+          PL$28/*cDef*/["storageHandler"] = PL$33/*engine*/["registerClass"]({"idType": PL$28/*cDef*/["idType"],
+"properties": PL$36/*properties*/,
+"propertiesAr": PL$35/*propertiesAr*/,
 "moduleName": PL$28/*cDef*/["moduleName"],
 "className": PL$28/*cDef*/["className"]});
         };
-        ;}catch(PL$40/*e*/){};
+        ;}catch(PL$41/*e*/){};
       ;
-      PL$29.resolve(); return;}), PL$31);
-;})();
+      PL$29.resolve(); return;});})();
 return PL$29;
 });
-    PL$22/*pcs*/["saveInstance"] = (function(PL$27/*parType*/, PL$41/*parInstance*/){
-    var PL$42 = new __Promise();
-var PL$43 = function(code){ return function(res){ try{code(res);}catch(e){ PL$42.reject(e); }; }; };
-var PL$44 = function(e){ PL$42.reject(e); };
+    PL$22/*pcs*/["saveInstance"] = (function(PL$27/*parType*/, PL$42/*parInstance*/){
+    var PL$43 = new __Promise();
+var PL$44 = function(code){ return function(res){ try{code(res);}catch(e){ PL$43.reject(e); }; }; };
+var PL$45 = function(e){ PL$43.reject(e); };
 var PL$28/*cDef*/;
-var PL$45/*h*/;
-var PL$34/*propertiesAr*/;
-var PL$35/*properties*/;
-var PL$36/*map*/;
-var PL$37/*i*/;
-var PL$38/*mDef*/;
-var PL$39/*p*/;
-PL$43(function(){
+var PL$46/*h*/;
+var PL$35/*propertiesAr*/;
+var PL$36/*properties*/;
+var PL$37/*map*/;
+var PL$38/*i*/;
+var PL$39/*mDef*/;
+var PL$40/*p*/;
+PL$44(function(){
     
       ;
       PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      PL$28/*cDef*/["saveHandler"].then(PL$43(function(PL$46){PL$45/*h*/ = PL$46;
-      PL$34/*propertiesAr*/ = [];
-      PL$35/*properties*/ = {};
-      PL$36/*map*/ = PL$28/*cDef*/["map"];
-      PL$37/*i*/ = 0;
-      for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$36/*map*/["membersAr"]["length"]);++PL$37/*i*/){{
-        PL$38/*mDef*/ = PL$36/*map*/["membersAr"][PL$37/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"]) || PL$38/*mDef*/["noSave"])){
+      PL$28/*cDef*/["storageHandler"].then(PL$44(function(PL$47){PL$46/*h*/ = PL$47;
+      PL$35/*propertiesAr*/ = [];
+      PL$36/*properties*/ = {};
+      PL$37/*map*/ = PL$28/*cDef*/["map"];
+      PL$38/*i*/ = 0;
+      for(PL$38/*i*/ = 0;(PL$38/*i*/ < PL$37/*map*/["membersAr"]["length"]);++PL$38/*i*/){{
+        PL$39/*mDef*/ = PL$37/*map*/["membersAr"][PL$38/*i*/];
+        if((! PL$22/*pcs*/["isSavableType"](PL$39/*mDef*/["type"]) || PL$39/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$39/*p*/ = {"name": PL$38/*mDef*/["name"],
-"type": PL$38/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"]),
-"value": (PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"]) ? PL$41/*parInstance*/[PL$38/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$38/*mDef*/["type"], PL$41/*parInstance*/[PL$38/*mDef*/["index"]]))};
-        PL$34/*propertiesAr*/["push"](PL$39/*p*/);
-        PL$35/*properties*/[PL$38/*mDef*/["name"]] = PL$39/*p*/;}};
+        PL$40/*p*/ = {"name": PL$39/*mDef*/["name"],
+"type": PL$39/*mDef*/["type"],
+"isVar": PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"]),
+"value": (PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"]) ? PL$42/*parInstance*/[PL$39/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$39/*mDef*/["type"], PL$42/*parInstance*/[PL$39/*mDef*/["index"]]))};
+        PL$35/*propertiesAr*/["push"](PL$40/*p*/);
+        PL$36/*properties*/[PL$39/*mDef*/["name"]] = PL$40/*p*/;}};
       ;
-      PL$45/*h*/["save"]({"properties": PL$35/*properties*/,
-"propertiesAr": PL$34/*propertiesAr*/}).then(PL$43(function(PL$47){PL$42.resolve(PL$47); return;
-      PL$42.resolve(); return;}), PL$44);
-;}), PL$44);
+      PL$46/*h*/["save"]({"properties": PL$36/*properties*/,
+"propertiesAr": PL$35/*propertiesAr*/}).then(PL$44(function(PL$48){PL$43.resolve(PL$48); return;
+      PL$43.resolve(); return;}), PL$45);
+;}), PL$45);
 ;})();
-return PL$42;
+return PL$43;
 });
-    PL$22/*pcs*/["loadInstance"] = (function(PL$27/*parType*/, PL$41/*parInstance*/){
-    var PL$48 = new __Promise();
-var PL$49 = function(code){ return function(res){ try{code(res);}catch(e){ PL$48.reject(e); }; }; };
-var PL$50 = function(e){ PL$48.reject(e); };
+    PL$22/*pcs*/["loadInstance"] = (function(PL$27/*parType*/, PL$42/*parInstance*/){
+    var PL$49 = new __Promise();
+var PL$50 = function(code){ return function(res){ try{code(res);}catch(e){ PL$49.reject(e); }; }; };
+var PL$51 = function(e){ PL$49.reject(e); };
 var PL$28/*cDef*/;
-var PL$45/*h*/;
-var PL$34/*propertiesAr*/;
-var PL$35/*properties*/;
-var PL$36/*map*/;
-var PL$37/*i*/;
-var PL$38/*mDef*/;
-var PL$39/*p*/;
-var PL$52/*loadVar*/;
-PL$49(function(){
+var PL$46/*h*/;
+var PL$35/*propertiesAr*/;
+var PL$36/*properties*/;
+var PL$37/*map*/;
+var PL$38/*i*/;
+var PL$39/*mDef*/;
+var PL$40/*p*/;
+var PL$53/*loadVar*/;
+PL$50(function(){
     
       ;
       PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      PL$28/*cDef*/["saveHandler"].then(PL$49(function(PL$51){PL$45/*h*/ = PL$51;
-      PL$34/*propertiesAr*/ = [];
-      PL$35/*properties*/ = {};
-      PL$36/*map*/ = PL$28/*cDef*/["map"];
-      PL$37/*i*/ = 0;
-      for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$36/*map*/["membersAr"]["length"]);++PL$37/*i*/){{
-        PL$38/*mDef*/ = PL$36/*map*/["membersAr"][PL$37/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"]) || PL$38/*mDef*/["noSave"])){
+      PL$28/*cDef*/["storageHandler"].then(PL$50(function(PL$52){PL$46/*h*/ = PL$52;
+      PL$35/*propertiesAr*/ = [];
+      PL$36/*properties*/ = {};
+      PL$37/*map*/ = PL$28/*cDef*/["map"];
+      PL$38/*i*/ = 0;
+      for(PL$38/*i*/ = 0;(PL$38/*i*/ < PL$37/*map*/["membersAr"]["length"]);++PL$38/*i*/){{
+        PL$39/*mDef*/ = PL$37/*map*/["membersAr"][PL$38/*i*/];
+        if((! PL$22/*pcs*/["isSavableType"](PL$39/*mDef*/["type"]) || PL$39/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$39/*p*/ = {"name": PL$38/*mDef*/["name"],
-"type": PL$38/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"])};
-        if((PL$38/*mDef*/["name"] == "id")){
-          PL$39/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"]) ? PL$41/*parInstance*/[PL$38/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$38/*mDef*/["type"], PL$41/*parInstance*/[PL$38/*mDef*/["index"]]));
+        PL$40/*p*/ = {"name": PL$39/*mDef*/["name"],
+"type": PL$39/*mDef*/["type"],
+"isVar": PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"])};
+        if((PL$39/*mDef*/["name"] == "id")){
+          PL$40/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"]) ? PL$42/*parInstance*/[PL$39/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$39/*mDef*/["type"], PL$42/*parInstance*/[PL$39/*mDef*/["index"]]));
         };
         ;
-        PL$34/*propertiesAr*/["push"](PL$39/*p*/);
-        PL$35/*properties*/[PL$38/*mDef*/["name"]] = PL$39/*p*/;}};
+        PL$35/*propertiesAr*/["push"](PL$40/*p*/);
+        PL$36/*properties*/[PL$39/*mDef*/["name"]] = PL$40/*p*/;}};
       ;
-      PL$45/*h*/["load"]({"properties": PL$35/*properties*/,
-"propertiesAr": PL$34/*propertiesAr*/}).then(PL$49(function(PL$53){PL$52/*loadVar*/ = PL$53;
-      if(! PL$52/*loadVar*/){
-        PL$48.resolve(); return;
+      PL$46/*h*/["load"]({"properties": PL$36/*properties*/,
+"propertiesAr": PL$35/*propertiesAr*/}).then(PL$50(function(PL$54){PL$53/*loadVar*/ = PL$54;
+      if(! PL$53/*loadVar*/){
+        PL$49.resolve(); return;
       };
       ;
-      for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$36/*map*/["membersAr"]["length"]);++PL$37/*i*/){{
-        PL$38/*mDef*/ = PL$36/*map*/["membersAr"][PL$37/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$38/*mDef*/["type"]) || PL$38/*mDef*/["noSave"])){
+      for(PL$38/*i*/ = 0;(PL$38/*i*/ < PL$37/*map*/["membersAr"]["length"]);++PL$38/*i*/){{
+        PL$39/*mDef*/ = PL$37/*map*/["membersAr"][PL$38/*i*/];
+        if((! PL$22/*pcs*/["isSavableType"](PL$39/*mDef*/["type"]) || PL$39/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        if(PL$22/*pcs*/["hasOwnProperty"](PL$52/*loadVar*/, PL$38/*mDef*/["name"])){
-          if(PL$14/*classSystem*/["isVar"](PL$38/*mDef*/["type"])){
-            PL$22/*pcs*/["setMemberByDefFromInstance"](PL$27/*parType*/, PL$41/*parInstance*/, PL$38/*mDef*/, PL$52/*loadVar*/[PL$38/*mDef*/["name"]]);
+        if(PL$22/*pcs*/["hasOwnProperty"](PL$53/*loadVar*/, PL$39/*mDef*/["name"])){
+          if(PL$14/*classSystem*/["isVar"](PL$39/*mDef*/["type"])){
+            PL$22/*pcs*/["setMemberByDefFromInstance"](PL$27/*parType*/, PL$42/*parInstance*/, PL$39/*mDef*/, PL$53/*loadVar*/[PL$39/*mDef*/["name"]]);
           }else{
           };
           ;
         };
         ;}};
       ;
-      PL$48.resolve(); return;}), PL$50);
-;}), PL$50);
+      PL$49.resolve(); return;}), PL$51);
+;}), PL$51);
 ;})();
-return PL$48;
+return PL$49;
 });
-    PL$21/*cs*/["setSaveHandler"] = (function(PL$54/*parSaveHandler*/){
+    PL$21/*cs*/["setStorageEngine"] = (function(PL$55/*parStorageEngine*/, PL$27/*parType*/){
+    var PL$56 = new __Promise();
+var PL$57 = function(code){ return function(res){ try{code(res);}catch(e){ PL$56.reject(e); }; }; };
+var PL$58 = function(e){ PL$56.reject(e); };
+var PL$60/*type*/;
+var PL$28/*cDef*/;
+PL$57(function(){
     
       ;
-      PL$25/*saveHandlerPs*/["resolve"](PL$54/*parSaveHandler*/);
-      ;});
+      
+      var PL$59 = new __Promise();if(PL$27/*parType*/){
+        PL$21/*cs*/["readyPromise"](PL$27/*parType*/).then(PL$57(function(PL$61){PL$60/*type*/ = PL$61;
+        PL$28/*cDef*/ = PL$23/*getClass*/(PL$60/*type*/);
+        PL$28/*cDef*/["storageEngine"] = PL$55/*parStorageEngine*/;
+        PL$22/*pcs*/["registerSavableClass"](PL$60/*type*/);
+        PL$56.resolve(); return;
+        PL$59.resolve();;}), PL$58);
+;
+      }else{PL$59.resolve();
+      }; PL$59.then(function(){;
+      ;
+      try
+{
+        PL$25/*storageEnginePs*/["resolve"](PL$55/*parStorageEngine*/);}catch(__dummy){};
+      ;
+      PL$25/*storageEnginePs*/ = new PL$26/*Promise*/();
+      PL$25/*storageEnginePs*/["resolve"](PL$55/*parStorageEngine*/);
+      PL$56.resolve(); return;});})();
+return PL$56;
+});
     ;});
   ;})();
 ;return PL$1;

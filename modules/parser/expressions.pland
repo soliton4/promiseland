@@ -163,7 +163,8 @@ return (parInstance, par){
       case "WhileStatement":
         return this.whileStatement(value);
 
-        default:
+      default:
+        debugger;
         this.error(value, errorMsg.unknownType);
       };
       return "/*this should not happen*/";

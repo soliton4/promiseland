@@ -349,7 +349,7 @@ return (parInstance, par){
           res.push(this.renderType(m["type"], par.parsed));
           if (m.meta){
             res.push(",\"meta\":");
-            res.push(this.parseExpression(m.meta));
+            res.push(this.parseExpression(m.meta.expression));
           };
           res.push("}");
           
