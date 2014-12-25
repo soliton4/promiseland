@@ -428,9 +428,17 @@ return (parInstance, par){
        this expression is a promise. we return code that be treated as the resolved value
       */
       this.expPromiseExpression = function(parExpression){
+        return this.dereference(this.parseExpression(parExpression));
+      };
+        
+      this.dereference = (parRes){
         var res = this.newResult();
         
-        var expressionRes = this.parseExpression(parExpression);
+        var expressionRes = parRes;
+        if (typeof parRes == "string"){
+          expressionRes = this.newResult();
+          expressionRes.push(parRes);
+        };
         
         var promiseNameStr = this.getUniqueName();
         
@@ -466,6 +474,13 @@ return (parInstance, par){
         res.setType(this.getClassFromPromiseOf(promiseType));
         return res;
       };
+      
+      // statement means the dereference code stays local and will not be added in front of the current statement
+      this.dereferenceStatement = (parRes){
+        return this.makeStatement(this.dereference(parRes));
+      };
+        
+        
       
       this.expUnaryExpression = function(parExpression){
         var res = this.newResult();

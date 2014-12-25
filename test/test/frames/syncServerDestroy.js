@@ -191,7 +191,7 @@ return PL$29;
   }else{
   PL$1.resolve({"success": true}); return;
   PL$34.resolve();;
-  }; PL$34.then(function(){;
+  };PL$34.then(PL$6(function(PL$36){PL$36;;
   ;
   if((PL$26/*tempres*/ != 2)){
     PL$1.resolve({"success": false}); return;
@@ -201,13 +201,14 @@ return PL$29;
     PL$1.resolve({"success": false}); return;
   };
   ;
-  PL$25/*check*/().then(PL$6(function(PL$36){if(PL$36){
+  PL$25/*check*/().then(PL$6(function(PL$37){if(PL$37){
     PL$1.resolve({"success": true}); return;
   };
   ;
   PL$1.resolve({"success": false}); return;
   PL$1.resolve(); return;}), PL$7);
-;});})();
+;}), PL$7);
+;})();
 return PL$1;
 })();
 ;;

@@ -48,10 +48,16 @@ return (parInstance, par){
       var continuePromise;
       var continueCode;
       if (promising) {
-        continuePromise = this.getUniqueName();
+        continuePromise = this.newResult(this.getUniqueName());
+        continuePromise.setParsed(par);
+        continuePromise.setType("var");
         res.push(this.newLine());
-        res.push("var " + continuePromise + " = " + this.newPromiseStr() + ";");
-        continueCode = continuePromise + ".resolve();";
+        res.push("var ");
+        res.push(continuePromise);
+        res.push(" = " + this.newPromiseStr() + ";");
+        continueCode = this.newResult();
+        continueCode.push(continuePromise);
+        continueCode.push(".resolve();");
       };
       res.push("if(");
       res.push(this.expectTypeVar(this.parseExpression(par.test)));
@@ -105,8 +111,10 @@ return (parInstance, par){
       res.push(this.newLine());
       res.push("}");
       if (promising){
-        res.push("; " + continuePromise + ".then(function(){");
-        res.addPost("});");
+        //res.push("; " + continuePromise + ".then(function(){");
+        //res.addPost("});");
+        res.push(";");
+        res.push(this.dereferenceStatement(continuePromise));
       };
 
       this.unstack("conditionalCode");

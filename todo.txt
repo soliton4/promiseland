@@ -1,6 +1,3 @@
-done:
-- make storage engines setable
-- savable meta test
 
 todo:
 - write storage postgres

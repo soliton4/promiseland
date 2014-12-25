@@ -1,5 +1,4 @@
 
-
 var fs = require "fs";
 
 
@@ -10,9 +9,11 @@ var callback = new Callback();
 fs.readdir(parDir, callback);
 
 var files = (*callback.promise)[1];
+//console.log(files);
 
 
 if (files){
+  //console.log("files");
   for (var i = 0; i < files.length; ++i){
     callback = new Callback();
     var filename = files[i];

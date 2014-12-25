@@ -172,7 +172,8 @@
   
   *createTest("storage/setStorageEngine", successFun);
   *createTest("storage/meta", successFun);
-//*createTest("storage/meta", successFun);
+  *createTest("promise/catchAfterIf", successFun);
+//*createTest("promise/catchAfterIf", successFun);
 
   
     var c = 0;

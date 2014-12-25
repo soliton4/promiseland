@@ -87,14 +87,15 @@ PL$8(function(){
     PL$2/*somefun*/().then(PL$8(function(PL$12){PL$10/*a*/ = (PL$10/*a*/ + PL$12);
     PL$11.resolve();;}), PL$9);
 ;
-    }; PL$11.then(function(){;
+    };PL$11.then(PL$8(function(PL$13){PL$13;;
     ;
     if((PL$10/*a*/ == 2)){
       PL$7.resolve(4); return;
     };
     ;
     PL$7.resolve(0); return;
-    PL$7.resolve(); return;});})();
+    PL$7.resolve(); return;}), PL$9);
+;})();
 return PL$7;
 })};
   ;})();

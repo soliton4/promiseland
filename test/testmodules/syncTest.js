@@ -181,13 +181,14 @@ return r;
 })(PL$33/*x*/());/*temptracked promise end*/
 ;
     }else{PL$35.resolve();
-    }; PL$35.then(function(){;
+    };PL$35.then(PL$10/*try catch*/(function(PL$37){PL$37;;
     ;
-    PL$8.resolve();});}), PL$11);
+    PL$8.resolve();}), PL$11);
+;}), PL$11);
 ;})();
-PL$9.then(PL$6(function(PL$37/*e*/){
+PL$9.then(PL$6(function(PL$38/*e*/){
     PL$31/*console*/["log"]("error:");
-    PL$31/*console*/["log"](PL$37/*e*/);
+    PL$31/*console*/["log"](PL$38/*e*/);
     PL$8.resolve();;}));
 PL$8.then(PL$6(function(){;
   PL$1.resolve(); return;}), PL$7)})();
