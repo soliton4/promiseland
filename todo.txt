@@ -1,5 +1,6 @@
 
 todo:
+- storage meta test
 - write storage postgres
 
 - adept codemirror mode for line breaking strings

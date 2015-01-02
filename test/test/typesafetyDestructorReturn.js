@@ -87,7 +87,7 @@ return;
   ;
   PL$5/*failed*/ = false;
   PL$6/*cnt*/ = 0;
-  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
+  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "95e1f6e92615bcdaf9c56a0938f3df32", "name": "C1"}, {"destroy": (function(){
   
     ;
     PL$6/*cnt*/++;

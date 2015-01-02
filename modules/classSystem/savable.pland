@@ -80,7 +80,8 @@ return (classSystem, internals){
           properties: properties,
           propertiesAr: propertiesAr,
           moduleName: cDef.moduleName,
-          className: cDef.className
+          className: cDef.className,
+          moduleHash: cDef.moduleHash
         });
       };
     }catch(e){};

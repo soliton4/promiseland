@@ -1,19 +1,41 @@
-try{
+<{name: "xxx"}>
+  
+var properties;
 
 class SaveHandler {
-  registerClass: (par){
+  registerClass: (par)*{
     console.log(par);
-    return new Promise();
+    var map = new promiseland.Map();
+    properties = par.properties;
+    return {
+      save: (par)*{
+        var i = 0;
+        var o = {};
+        for (i = 0; i < par.propertiesAr.length; ++i){
+          if (par.propertiesAr[i].name == "id"){
+            continue;
+          };
+          o[par.propertiesAr[i].name] = par.propertiesAr[i].value;
+        };
+        map.set(par.properties.id.value, o);
+      },
+      load: (par)*{
+        return map.get(par.properties.id.value);
+      },
+      delete: (par)*{
+        return map.delete(par.properties.id.value);
+      }
+    };
+    
   }
 };
 
-promiseland.classSystem.setSaveHandler(new SaveHandler());
-
-class type savable {
-  x: 1,
+class type savable C1{
+  var meta {
+    type: "int"
+  } x: 1,
   y: 2
 };
-  
-}catch(e){
-  console.log(e);
-}
+
+promiseland.classSystem.setStorageEngine(new SaveHandler(), C1);
+

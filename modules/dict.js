@@ -1,57 +1,4 @@
-<{  __promiseLandModule: true }>;
-
-/*class OldMap {
-  constructor: (){
-    this.map = {};
-  },
-  set: (key, value){
-    this.map[key] = value
-  },
-  get: (key){
-    if (Object.prototype.hasOwnProperty.call(this.map, key)){
-      return this.map[key];
-    };
-  },
-  has: (key){
-    if (Object.prototype.hasOwnProperty.call(this.map, key)){
-      return true;
-    };
-    return false;
-  },
-  delete: (key){
-    delete this.map[key];
-  },
-  getArray: (){
-    var res = [];
-    var n;
-    for (n in this.map){
-      res.push({
-        key: n,
-        value: this.map[n]
-      });
-    };
-    return res;
-  },
-  mixin: (other){
-    if (!other){
-      return this;
-    };
-    var a = other.getArray();
-    var i;
-    for (i = 0; i < a.length; ++i){
-      this.set(a[i].key, a[i].value);
-    };
-    return this;
-  }
-};*/
-
-  
-  /* 
-  
-    copied from https://github.com/domenic/dict
-    
-  */
-
+"use strict";
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var MANGLE_STRING = "~";
@@ -80,7 +27,7 @@ function assertString(key) {
     }
 }
 
-var Map = function (initializer) {
+module.exports = function (initializer) {
     var store = Object.create(null);
     var size = 0;
 
@@ -134,44 +81,7 @@ var Map = function (initializer) {
                     callback.call(thisArg, value, key, dict);
                 }
             }
-        },
-        forEachP: function (callback, thisArg) {
-            if (typeof callback !== "function") {
-                throw new TypeError("`callback` must be a function");
-            }
-
-            for (var mangledKey in store) {
-              if (hasOwnProperty.call(store, mangledKey)) {
-                var key = unmangle(mangledKey);
-                var value = store[mangledKey];
-
-                *(callback.call(thisArg, value, key, dict));
-              };
-            };
-        },
-        getArray: (){
-          var res = [];
-          this.forEach((value, key){
-            res.push({
-              key: key,
-              value: value
-            });
-          });
-          return res;
-        },
-          
-        mixin: (other){
-          if (!other){
-            return this;
-          };
-          var a = other.getArray();
-          var i;
-          for (i = 0; i < a.length; ++i){
-            this.set(a[i].key, a[i].value);
-          };
-          return this;
         }
-          
     });
 
     Object.defineProperty(dict, "size", {
@@ -189,9 +99,3 @@ var Map = function (initializer) {
 
     return dict;
 };
-
-
-
-promiseland.Map = Map;
-
-return Map;

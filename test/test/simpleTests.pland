@@ -89,6 +89,8 @@
   
   *createTest("forloop", funReturning4);
   *createTest("forloop2", funReturning4);
+  *createTest("for/forIn", successFun);
+  *createTest("for/forInP", successFun);
   
   *createTest("whileloop", funReturning4);
   *createTest("whileloop2", funReturning4);
@@ -173,6 +175,7 @@
   *createTest("storage/setStorageEngine", successFun);
   *createTest("storage/meta", successFun);
   *createTest("promise/catchAfterIf", successFun);
+  *createTest("map", successFun);
 //*createTest("promise/catchAfterIf", successFun);
 
   

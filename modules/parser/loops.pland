@@ -241,7 +241,7 @@ return (parInstance, par){
             , postCode: postCodeRes
           }));
           
-          res.push("}");
+          //res.push("}");
           
         }else{
           res.push("for(");

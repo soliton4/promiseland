@@ -131,7 +131,7 @@ return PL$25;
 return PL$11;
 })}, [], PL$9/*inherited*/);
 return res; })();PL$28/*SaveHandler*/;
-  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var"),"meta":{"type": "int"}},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;
+  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var"),"meta":{"type": "int"}},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "77cc02dd044b16afcb2e77dad8305f70", "name": "C1", "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;
   PL$16/*promiseland*/["classSystem"]["setStorageEngine"](new PL$28/*SaveHandler*/(), PL$4/*C1*/);
   new PL$5/*C1-constructor*/("xxx").then(PL$6(function(PL$30){PL$29/*a*/ = PL$30;
   PL$29/*a*/[4]().then(PL$6(function(PL$31){PL$31;

@@ -65,12 +65,12 @@ PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});
   ;
   PL$8/*i*/ = 2;
-  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
+  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "575c4be1e0319423fd58de62903afcaf", "name": "C1"}, {"destroy": (function(){
   
     ;
     --PL$8/*i*/;
     ;})}));PL$3/*C1*/;
-  classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true}, {"m": undefined}));PL$6/*C2*/;
+  classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "575c4be1e0319423fd58de62903afcaf", "name": "C2"}, {"m": undefined}));PL$6/*C2*/;
   (function(){
   var PL$9/*m*/;
 var _TPL$9/*m*/;

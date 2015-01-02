@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "2e0df68a62e24ede20492612975b9934" })){ return promiseland._getModule("2e0df68a62e24ede20492612975b9934"); };
+    if (promiseland._hasModule({ hashStr: "b80c2c3c9ea994109394e54336ed1257" })){ return promiseland._getModule("b80c2c3c9ea994109394e54336ed1257"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "2e0df68a62e24ede20492612975b9934", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "b80c2c3c9ea994109394e54336ed1257", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$55/*JSON*/;try{PL$55/*JSON*/ = JSON;}catch(e){};
 var PL$2 = (function(){
@@ -448,10 +448,10 @@ var PL$51/*m*/;
         if(PL$22/*par*/["sync"]){
           PL$24/*res*/["push"](", \"sync\": ");
           PL$24/*res*/["push"](PL$55/*JSON*/["stringify"](PL$22/*par*/["sync"]));
-          PL$24/*res*/["push"]((", \"hashStr\": " + PL$13/*stringEncodeStr*/(PL$22/*par*/["hashStr"])));
-          PL$24/*res*/["push"]((", \"name\": " + PL$13/*stringEncodeStr*/(PL$22/*par*/["name"])));
         };
         ;
+        PL$24/*res*/["push"]((", \"hashStr\": " + PL$13/*stringEncodeStr*/(PL$22/*par*/["hashStr"])));
+        PL$24/*res*/["push"]((", \"name\": " + PL$13/*stringEncodeStr*/(PL$22/*par*/["name"])));
         if(PL$22/*par*/["unique"]){
           PL$24/*res*/["push"](", \"unique\": true");
         };

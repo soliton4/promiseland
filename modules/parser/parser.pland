@@ -393,6 +393,9 @@ var _Result = require "./Result";
             if (name == "Callback"){
               this.common.useCallback = true;
             };
+            if (name == "Map"){
+              this.common.useMap = true;
+            };
             if (extraModules.get(name)){
               continue;
             };
@@ -874,6 +877,9 @@ var _Result = require "./Result";
     var callbackRequireStr = function(){
       return "var Callback = promiseland.Callback;\n";
     };
+    var mapRequireStr = function(){
+      return "var Map = promiseland.Map;\n";
+    };
     
     var loaderEndStr = function(par){
       if (par.promiseLandModule){
@@ -909,6 +915,9 @@ var _Result = require "./Result";
       resStr += promiselandRequireStr();
       if (par.useCallback){
         resStr += callbackRequireStr();
+      };
+      if (par.useMap){
+        resStr += mapRequireStr();
       };
       
       resStr += "if (promiseland._hasModule({ hashStr: \"" + par.hashStr + "\" })){ return promiseland._getModule(\"" + par.hashStr + "\"); };\n";
@@ -1001,6 +1010,7 @@ var _Result = require "./Result";
                 usePromise: cp.common.usePromise,
                 useRequire: cp.common.useRequire,
                 useCallback: cp.common.useCallback,
+                useMap: cp.common.useMap,
                 useClassSystem: cp.common.useClassSystem
               });
 

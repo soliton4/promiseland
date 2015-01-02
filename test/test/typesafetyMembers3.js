@@ -68,9 +68,9 @@ var PL$7/*Type1-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Ty
 PL$9/*Type2*/ = PL$8/*type:Type2*/;
 var PL$10/*Type2-constructor*/ = undefined;classSystem.readyPromise(PL$8/*type:Type2*/).then(function(parType){PL$8/*type:Type2*/ = parType;PL$10/*Type2-constructor*/ = classSystem.getTypeConstructor(PL$8/*type:Type2*/);});
   ;
-  classSystem._resolveProvisional(PL$2/*type:Mt1*/, classSystem.createClass({className: "Mt1",members: [{"name":"a1","type":classSystem.getBuiltinType("var")},{"name":"a2","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"a1": 20, "a2": 30}));PL$3/*Mt1*/;
-  classSystem._resolveProvisional(PL$5/*type:Type1*/, classSystem.createClass({className: "Type1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")},{"name":"m1","type":PL$2/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"a": 1, "b": 2, "m1": undefined}));PL$6/*Type1*/;
-  classSystem._resolveProvisional(PL$8/*type:Type2*/, classSystem.createClass({className: "Type2",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")},{"name":"m2","type":PL$2/*type:Mt1*/}], "extends": [], "hasFreePart": true}, {"x": 3, "y": 4, "m2": undefined}));PL$9/*Type2*/;
+  classSystem._resolveProvisional(PL$2/*type:Mt1*/, classSystem.createClass({className: "Mt1",members: [{"name":"a1","type":classSystem.getBuiltinType("var")},{"name":"a2","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "651db8f5c5e2a5af36d3c64ac8f972d2", "name": "Mt1"}, {"a1": 20, "a2": 30}));PL$3/*Mt1*/;
+  classSystem._resolveProvisional(PL$5/*type:Type1*/, classSystem.createClass({className: "Type1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")},{"name":"m1","type":PL$2/*type:Mt1*/}], "extends": [], "hasFreePart": true, "hashStr": "651db8f5c5e2a5af36d3c64ac8f972d2", "name": "Type1"}, {"a": 1, "b": 2, "m1": undefined}));PL$6/*Type1*/;
+  classSystem._resolveProvisional(PL$8/*type:Type2*/, classSystem.createClass({className: "Type2",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")},{"name":"m2","type":PL$2/*type:Mt1*/}], "extends": [], "hasFreePart": true, "hashStr": "651db8f5c5e2a5af36d3c64ac8f972d2", "name": "Type2"}, {"x": 3, "y": 4, "m2": undefined}));PL$9/*Type2*/;
   try
 {
     PL$11/*a*/ = new PL$7/*Type1-constructor*/();

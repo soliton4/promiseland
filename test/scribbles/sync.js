@@ -62,7 +62,7 @@ var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
 PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});
   ;
-  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [], "extends": [], "hasFreePart": true}, {}));PL$3/*C1*/;
+  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [], "extends": [], "hasFreePart": true, "hashStr": "b0c15cb3f9a170a2864940c37e633d4b", "name": "C1"}, {}));PL$3/*C1*/;
   ((function(f){
 promiseland.registerRemote("server", "b0c15cb3f9a170a2864940c37e633d4b", "PL$10", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$2/*type:C1*/]})));
 if (promiseland.profileHas("server")){

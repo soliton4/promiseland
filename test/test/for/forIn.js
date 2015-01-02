@@ -51,41 +51,29 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-var classSystem = promiseland.classSystem;
-if (promiseland._hasModule({ hashStr: "54c5b667b0d94bacc1162b8a20e2c8f4" })){ return promiseland._getModule("54c5b667b0d94bacc1162b8a20e2c8f4"); };
+if (promiseland._hasModule({ hashStr: "f0e9248ed0ed8f99151b0fb84ca11594" })){ return promiseland._getModule("f0e9248ed0ed8f99151b0fb84ca11594"); };
 var PL$1 = (function(){
 "use strict";
+var PL$2/*a*/;
+var PL$3/*namesStr*/;
+var PL$4/*cnt*/;
 var PL$5/*i*/;
-var PL$3/*C1*/;
-var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
-PL$3/*C1*/ = PL$2/*type:C1*/;
-var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});
-  ;
-  PL$5/*i*/ = 1;
-  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "54c5b667b0d94bacc1162b8a20e2c8f4", "name": "C1"}, {"destroy": (function(){
-  
-    ;
-    --PL$5/*i*/;
-    ;})}));PL$3/*C1*/;
-  (function(){
-  var PL$6/*v*/;
-var _TPL$6/*v*/;
 
-    try{;
-    /*temp tracked assign*/(function(vAr){
-if (_TPL$6/*v*/){ _TPL$6/*v*/(); };
-if(vAr){
-var v = vAr[0];
-PL$6/*v*/ = v;
-_TPL$6/*v*/ = vAr[1];
-return v;
-}else{
-PL$6/*v*/ = undefined; _TPL$6/*v*/ = undefined;
-return;
-}; })(new PL$4/*C1-constructor*/())/*end temp assign*/
-;
-    if (_TPL$6/*v*/){ _TPL$6/*v*/();};}catch(e){if (_TPL$6/*v*/){ _TPL$6/*v*/();};throw e};;})();
-  if((PL$5/*i*/ == 1)){
+  ;
+  PL$2/*a*/ = {"a": 1,
+"b": 2,
+"c": 3};
+  PL$3/*namesStr*/ = "";
+  PL$4/*cnt*/ = 0;
+  for(PL$5/*i*/ in PL$2/*a*/){
+    PL$3/*namesStr*/ += PL$5/*i*/;
+    PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];};
+  ;
+  if((PL$3/*namesStr*/["length"] != 3)){
+    return {"success": false};
+  };
+  ;
+  if((PL$4/*cnt*/ != 6)){
     return {"success": false};
   };
   ;

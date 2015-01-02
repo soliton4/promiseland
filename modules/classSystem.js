@@ -53,7 +53,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "4d6894ec41d6fa68cf28563fd4f1184f" })){ return promiseland._getModule("4d6894ec41d6fa68cf28563fd4f1184f"); };
+if (promiseland._hasModule({ hashStr: "5b5c0aafecf90fd91292cee25caedd38" })){ return promiseland._getModule("5b5c0aafecf90fd91292cee25caedd38"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$32/*JSON*/;try{PL$32/*JSON*/ = JSON;}catch(e){};
 var PL$57/*Object*/;try{PL$57/*Object*/ = Object;}catch(e){};
@@ -425,7 +425,8 @@ var PL$141/*finalPs*/;
 "readyPromise": new PL$80/*Promise*/(),
 "syncMembers": [],
 "moduleName": PL$75/*classLiteral*/["moduleName"],
-"className": PL$75/*classLiteral*/["className"]};
+"className": PL$75/*classLiteral*/["className"],
+"moduleHash": PL$75/*classLiteral*/["hashStr"]};
     PL$52/*cf*/ = PL$53/*classHider*/(PL$60/*cDef*/);
     if(PL$60/*cDef*/["sync"]){
       if(PL$60/*cDef*/["sync"]["serve"]){

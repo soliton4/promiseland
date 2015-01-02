@@ -365,9 +365,9 @@ return (parInstance, par){
         if (par.sync){
           res.push(", \"sync\": ");
           res.push(JSON.stringify(par.sync));
-          res.push(", \"hashStr\": " + stringEncodeStr(par.hashStr));
-          res.push(", \"name\": " + stringEncodeStr(par.name));
         };
+        res.push(", \"hashStr\": " + stringEncodeStr(par.hashStr));
+        res.push(", \"name\": " + stringEncodeStr(par.name));
         if (par.unique){
           res.push(", \"unique\": true");
         };

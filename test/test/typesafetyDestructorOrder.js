@@ -71,12 +71,12 @@ var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/)
   ;
   PL$8/*failed*/ = false;
   PL$9/*cnt*/ = 0;
-  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true}, {"destroy": (function(){
+  classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "9d4c45c6545311d7a14ef435c0a3d1c0", "name": "C1"}, {"destroy": (function(){
   
     ;
     PL$9/*cnt*/++;
     ;})}));PL$3/*C1*/;
-  classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true}, {"m1": undefined}));PL$6/*C2*/;
+  classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "9d4c45c6545311d7a14ef435c0a3d1c0", "name": "C2"}, {"m1": undefined}));PL$6/*C2*/;
   PL$10/*cntSupposed*/ = (function(PL$11/*s*/){
   
     ;

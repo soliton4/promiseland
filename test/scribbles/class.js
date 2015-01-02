@@ -66,8 +66,8 @@ var PL$4/*Ca-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Ca*/)
 PL$6/*Cb*/ = PL$5/*type:Cb*/;
 var PL$7/*Cb-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Cb*/).then(function(parType){PL$5/*type:Cb*/ = parType;PL$7/*Cb-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Cb*/);});
   ;
-  classSystem._resolveProvisional(PL$2/*type:Ca*/, classSystem.createClass({className: "Ca",members: [{"name":"m","type":PL$5/*type:Cb*/},{"name":"s","type":PL$2/*type:Ca*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 1}));PL$3/*Ca*/;
-  classSystem._resolveProvisional(PL$5/*type:Cb*/, classSystem.createClass({className: "Cb",members: [{"name":"m","type":PL$2/*type:Ca*/},{"name":"s","type":PL$5/*type:Cb*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true}, {"m": undefined, "s": undefined, "id": 2}));PL$6/*Cb*/;
+  classSystem._resolveProvisional(PL$2/*type:Ca*/, classSystem.createClass({className: "Ca",members: [{"name":"m","type":PL$5/*type:Cb*/},{"name":"s","type":PL$2/*type:Ca*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "d4ed6ebe11e279453b7f908db653becd", "name": "Ca"}, {"m": undefined, "s": undefined, "id": 1}));PL$3/*Ca*/;
+  classSystem._resolveProvisional(PL$5/*type:Cb*/, classSystem.createClass({className: "Cb",members: [{"name":"m","type":PL$2/*type:Ca*/},{"name":"s","type":PL$5/*type:Cb*/},{"name":"id","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "d4ed6ebe11e279453b7f908db653becd", "name": "Cb"}, {"m": undefined, "s": undefined, "id": 2}));PL$6/*Cb*/;
   PL$8/*a*/ = new PL$4/*Ca-constructor*/();
   PL$9/*b*/ = new PL$7/*Cb-constructor*/();
   PL$9/*b*/[3] = PL$8/*a*/;

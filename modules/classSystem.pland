@@ -352,7 +352,8 @@ var classSystem = {
       readyPromise: new Promise(),
       syncMembers: [],
       moduleName: classLiteral.moduleName,
-      className: classLiteral.className
+      className: classLiteral.className,
+      moduleHash: classLiteral.hashStr
     };
     //class hider to pass type arround without changing it
     var cf = classHider(cDef);

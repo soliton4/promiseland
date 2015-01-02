@@ -168,7 +168,7 @@ return PL$12;
 })}, [], PL$10/*inherited*/);
 return res; })();PL$35/*SaveHandler*/;
   PL$23/*promiseland*/["classSystem"]["setStorageEngine"](new PL$35/*SaveHandler*/());
-  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;
+  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "eaf17bd617d5f199678a6ff0aa53647f", "name": "C1", "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;
   new PL$5/*C1-constructor*/("xxx").then(PL$6(function(PL$37){PL$36/*a*/ = PL$37;
   PL$36/*a*/[4]();
   PL$8/*collect*/ = false;
