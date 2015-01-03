@@ -23,7 +23,7 @@ return (parInstance, par){
   
   var f = (par){
     
-          this.breakOrContinuePromise = function(par){
+      this.breakOrContinuePromise = function(par){
         var res = this.newResult();
         res.makePromising();
         
@@ -46,11 +46,27 @@ return (parInstance, par){
           outerBlock.push("){");
         };
         
+        var postCode = this.newResult();
+        if (par.postCondition){
+          var postCheck = this.newResult();
+          postCheck.push("if(");
+          postCheck.push(par.postCondition);
+          postCheck.push("){");
+          postCheck.push(this.continueCode);
+          postCheck.push("}else{\n");
+          postCheck.push(this.breakCode);
+          postCheck.push("};\n");
+          postCode.push(this.makeCompleteStatement(postCheck));
+          
+        }else{
+          postCode.push(this.continueCode);
+        };
+        
         //createBlock
         var b = par.block;
         b.brackets = false;
         var block = this.blockCreator(b, {
-          postCode: this.newResult(this.continueCode)
+          postCode: postCode
         });
         
         
@@ -84,6 +100,7 @@ return (parInstance, par){
           block: par.block
           , preCondition: par.preCondition
           , postCode: par.postCode
+          , postCondition: par.postCondition
         });
         res.push(this.makeStatement(this.makeCompleteStatement(loopCode)));
         
@@ -152,11 +169,17 @@ return (parInstance, par){
           
         }else{
           res.push("for(");
-          res.push(this.parseExpression(par.init));
+          if (par.init){
+            res.push(this.parseExpression(par.init));
+          };
           res.push(";");
-          res.push(this.parseExpression(par.test));
+          if (par.test){
+            res.push(this.parseExpression(par.test));
+          };
           res.push(";");
-          res.push(this.parseExpression(par.update));
+          if (par.update){
+            res.push(this.parseExpression(par.update));
+          };
           res.push("){");
           
           this.stack("breakCode");
@@ -312,6 +335,52 @@ return (parInstance, par){
           this.unstack("continueCode");
           
           res.push("}");
+          
+        };
+        
+        this.unstack("dynamicCode");
+        this.unstack("algorithmicCode");
+        res.setType(statementType);
+        return res;
+      };
+      
+      this.expDoWhileStatement = function(par){
+        //{type: "WhileStatement", condition: Object, statement: Object}
+        
+        this.stack("dynamicCode");
+        this.dynamicCode = true;
+        
+        this.stack("algorithmicCode");
+        this.algorithmicCode = true;
+        
+        var res = this.newResult();
+        
+        var statements;
+        var condition = this.expectTypeVar(this.parseExpression(par.test));
+        if (checkPromising(condition) || checkPromising(par.body)){
+          
+          res.push(this.generateLoop({
+            block: par.body
+            , postCondition: condition
+          }));
+          
+        }else{
+          res.push("do");
+          res.push("{\n");
+          
+          this.stack("breakCode");
+          this.breakCode = "break;";
+          this.stack("continueCode");
+          this.continueCode = "continue;";
+          
+          res.push(this.makeCompleteStatement(this.parseExpression(par.body)));
+          
+          this.unstack("breakCode");
+          this.unstack("continueCode");
+          
+          res.push("} while (");
+          res.push(condition);
+          res.push(")");
           
         };
         

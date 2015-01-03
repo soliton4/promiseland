@@ -51,27 +51,55 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "eb2da6464c8ef09a7c4e9bb772e7d8de" })){ return promiseland._getModule("eb2da6464c8ef09a7c4e9bb772e7d8de"); };
-var PL$1 = (function(){
+var __Promise = promiseland.Promise;
+var Promise = promiseland.Promise;
+if (promiseland._hasModule({ hashStr: "6b8ec887e2e2ef75dc50107c1d6615af" })){ return promiseland._getModule("6b8ec887e2e2ef75dc50107c1d6615af"); };
+var PL$1 = new __Promise();
+promiseland._registerModule({ hashStr: "6b8ec887e2e2ef75dc50107c1d6615af", "module": PL$1, promising: true });
+var PL$2 = (function(){
 "use strict";
-var PL$2/*a*/;
-var PL$3/*namesStr*/;
-var PL$4/*cnt*/;
-var PL$5/*i*/;
+var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
+var PL$4 = function(e){ PL$1.reject(e); };
+var PL$5/*p*/;
+var PL$6/*i*/;
+PL$3(function(){
 
   ;
-  PL$2/*a*/ = {"a": 1,
-"b": 2,
-"c": 3};
-  PL$3/*namesStr*/ = "";
-  PL$4/*cnt*/ = 0;
-  for(PL$5/*i*/ in PL$2/*a*/){
-    PL$3/*namesStr*/ += PL$5/*i*/;
-    PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];};
+  PL$5/*p*/;
+  PL$6/*i*/ = 0;
+  var PL$8 = new __Promise();
+var PL$7 = function(){var PL$9 = new __Promise();
+
+  PL$6/*i*/ += 1;
+  
+  var PL$10 = new __Promise();if(false){
+    PL$5/*p*/.then(PL$3(function(PL$11){PL$11;
+    PL$10.resolve();;}), PL$4);
+;
+  }else{PL$10.resolve();
+  };PL$10.then(PL$3(function(PL$12){PL$12;;
   ;
-  return {"names": PL$3/*namesStr*/,
-"cnt": PL$4/*cnt*/};
-  ;})();
-;return PL$1;
+  if((PL$6/*i*/ < 4)){PL$9.resolve(true); return PL$9;
+}else{
+PL$9.resolve(false); return PL$9;
+};
+;}), PL$4);
+;PL$9;return PL$9;
+};
+var PL$13 = function(){PL$7().then(function(contLoop){
+if (contLoop){PL$13();}else{PL$8.resolve();};
 });
+};
+PL$13();
+PL$8.then(function(){;
+  if((PL$6/*i*/ == 4)){
+    PL$1.resolve({"success": true}); return;
+  };
+  ;
+  PL$1.resolve({"success": false}); return;
+  PL$1.resolve(); return;});})();
+return PL$1;
+})();
+;;
+return PL$1});
 })();

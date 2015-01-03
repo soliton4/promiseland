@@ -83,6 +83,9 @@ return (parInstance, par){
 
       case "DebuggerStatement":
         return this.expDebuggerStatement(value);
+        
+      case "DoWhileStatement":
+        return this.expDoWhileStatement(value);
 
       case "EmptyStatement":
         // why does this exist?
@@ -129,6 +132,9 @@ return (parInstance, par){
 
       case "ReturnStatement":
         return this.expReturnStatement(value);
+        
+      case "SequenceExpression":
+        return this.expSequenceExpression(value);
 
       case "SwitchStatement":
         return this.expSwitchStatement(value);
@@ -198,6 +204,28 @@ return (parInstance, par){
       res.setType(this.thisType);
       return res;
     };
+      
+      
+    /*
+      sequence
+    */
+      
+    this.expSequenceExpression = (par){
+      var res = this.newResult();
+      
+      if (par.expressions && par.expressions.length){
+        var i = 0;
+        for (i = 0; i < par.expressions.length; ++i){
+          if (i > 0){
+            res.push(",");
+          };
+          res.push(this.expectTypeVar(this.parseExpression(par.expressions[i])));
+        };
+      };
+      
+      res.setType("var");
+      return res;
+    }
     
     
       /*

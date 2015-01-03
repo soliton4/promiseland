@@ -176,7 +176,11 @@
   *createTest("storage/meta", successFun);
   *createTest("promise/catchAfterIf", successFun);
   *createTest("map", successFun);
-//*createTest("promise/catchAfterIf", successFun);
+
+  *createTest("for/forNoParam", successFun);
+  *createTest("while/doWhile", successFun);
+  *createTest("while/doWhileP", successFun);
+//*createTest("while/doWhileP", successFun);
 
   
     var c = 0;
