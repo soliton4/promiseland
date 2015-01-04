@@ -27,6 +27,8 @@ var typesModule = require "./types";
 var expressionsModule = require "./expressions";
 var dynamicModule = require "./dynamic";
 
+var asmModule = require "./asm";
+
 
 /* debugging flags
 */
@@ -191,11 +193,6 @@ var _Result = require "./Result";
       
       
       
-      this.functionsAr = [];
-      this.addFunction = (res, name, par){
-        this.resolveFunctionType({name: identifierName(name), type: res.getType()}, par);
-        this.functionsAr.push({res: res, name: name});
-      };
       
       
       
@@ -863,7 +860,7 @@ var _Result = require "./Result";
       
       
       
-      
+      asmModule(this, par);
       
       
       this._start();

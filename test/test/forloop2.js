@@ -54,7 +54,7 @@ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "4e84e403eb11ef3aad15c8c7b151734b" })){ return promiseland._getModule("4e84e403eb11ef3aad15c8c7b151734b"); };
+if (promiseland._hasModule({ hashStr: "4d8e3804560467d876b612b67465dc2e" })){ return promiseland._getModule("4d8e3804560467d876b612b67465dc2e"); };
 var PL$9/*Callback*/;try{PL$9/*Callback*/ = Callback;}catch(e){};
 var PL$10/*setTimeout*/;try{PL$10/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$1 = (function(){

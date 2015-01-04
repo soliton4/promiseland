@@ -1,6 +1,5 @@
 
   var testObj = require "./testObj";
-
   
   
   var successFun = function(mod, success){
@@ -27,31 +26,43 @@
     };
     try{
       var mod = require ("./" + parModuleName);
-      parFun(mod, successFun);
+      var res = parFun(mod, successFun);
+      if (res && res.then){
+        *res;
+      };
     }catch(e){
       console.log("something went wrong");
     };
   };
   
   var funReturning4 = function(mod, success){
+    var p = new Promise();
     try{
       mod.fun().then(function(value){
         if (value == 4){
           success();
         };
+        p.resolve();
       });
     }catch(e){};
+    return p;
   };
   
   var funReturning4debug = function(mod, success){
-    debugger;
+    //debugger;
     try{
       mod.fun().then(function(value){
         if (value == 4){
           success();
-        };
+        }else{
+          console.log("error:");
+          console.log(value);
+        }
       });
-    }catch(e){};
+    }catch(e){
+      console.log("error:");
+      console.log(e);
+    };
   };
   
   var returning4 = function(mod, success){
@@ -65,6 +76,8 @@
       success();
     };
   });
+
+  *createTest("function/funExpr", successFun);
   
   *createTest("creatingpromise", funReturning4);
   *createTest("creatingpromise2", funReturning4);
@@ -88,7 +101,7 @@
   *createTest("callback2", funReturning4);
   
   *createTest("forloop", funReturning4);
-  *createTest("forloop2", funReturning4);
+  *createTest("forloop2", funReturning4debug);
   *createTest("for/forIn", successFun);
   *createTest("for/forInP", successFun);
   

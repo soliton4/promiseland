@@ -54,7 +54,7 @@ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "41511671c2f8e5b0c3ec3b98ee6bb357" })){ return promiseland._getModule("41511671c2f8e5b0c3ec3b98ee6bb357"); };
+if (promiseland._hasModule({ hashStr: "ff44041371deff63b7b11d4235e9511e" })){ return promiseland._getModule("ff44041371deff63b7b11d4235e9511e"); };
 var PL$9/*Callback*/;try{PL$9/*Callback*/ = Callback;}catch(e){};
 var PL$10/*setTimeout*/;try{PL$10/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$1 = (function(){
@@ -71,7 +71,7 @@ PL$6(function(){
   
     ;
     PL$8/*c*/ = new PL$9/*Callback*/();
-    PL$10/*setTimeout*/(PL$8/*c*/["callback"], 100);
+    PL$10/*setTimeout*/(PL$8/*c*/["callback"], 50);
     PL$8/*c*/["promise"].then(PL$6(function(PL$11){PL$11;
     PL$4.resolve((PL$3/*par*/ + 1)); return;
     PL$4.resolve(); return;}), PL$7);

@@ -301,7 +301,10 @@ var stringEncodeStr = basics.stringEncodeStr;
         if (this._indent){
           indentDst();
         };
-
+        
+        if (this.checkasm){
+          this._cp.checkAsm(this, resStr);
+        };
         
         return resStr;
       }

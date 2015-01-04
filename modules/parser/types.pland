@@ -171,9 +171,12 @@ return (parInstance, par){
           "return": this.getType("var"),
           "arguments": []
         };
-        if (par.returnTypename){
+        
+        var functionInfo = this.functionInfo(par);
+        
+        if (functionInfo.hasReturnType){
           isTyped = true;
-          functionTypeParam["return"] = this.getType(par.returnTypename);
+          functionTypeParam["return"] = functionInfo.returnType;
         };
         
         // parameters
@@ -220,7 +223,7 @@ return (parInstance, par){
       
       this.addType = function(par, parParsed){
         var name = identifierName(par.name);
-        if (this.types.has[name]){
+        if (this.types.has(name)){
           this.error(parParsed, errorMsg.typeExists);
         };
         

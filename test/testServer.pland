@@ -123,6 +123,7 @@ try{
 server.close();
 
 
+console.log("starting node tests");
 
 try{
   tests.node = require "./test/simpleTests";
@@ -133,7 +134,7 @@ try{
 try{
   process.send(tests);
 }catch(e){
-  console.log(tests);
+  //console.log(tests);
 };
 
 process.exit(0);

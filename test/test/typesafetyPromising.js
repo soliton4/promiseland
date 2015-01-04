@@ -55,9 +55,9 @@ var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var classSystem = promiseland.classSystem;
 var Callback = promiseland.Callback;
-if (promiseland._hasModule({ hashStr: "86f889f1b341a40e6f299cccd09ab881" })){ return promiseland._getModule("86f889f1b341a40e6f299cccd09ab881"); };
+if (promiseland._hasModule({ hashStr: "9e8ad0e066a50a20708e703896d17dc0" })){ return promiseland._getModule("9e8ad0e066a50a20708e703896d17dc0"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "86f889f1b341a40e6f299cccd09ab881", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "9e8ad0e066a50a20708e703896d17dc0", "module": PL$1, promising: true });
 var PL$15/*Callback*/;try{PL$15/*Callback*/ = Callback;}catch(e){};
 var PL$16/*setTimeout*/;try{PL$16/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$2 = (function(){
@@ -80,7 +80,7 @@ PL$12(function(){
 
   ;
   PL$14/*cb*/ = new PL$15/*Callback*/();
-  PL$16/*setTimeout*/(PL$14/*cb*/, 500);
+  PL$16/*setTimeout*/(PL$14/*cb*/, 50);
   PL$14/*cb*/["promise"].then(PL$12(function(PL$17){PL$17;
   PL$11.resolve(new PL$5/*C1-constructor*/()); return;
   PL$11.resolve(); return;}), PL$13);
@@ -90,7 +90,7 @@ return PL$11;
 PL$6(function(){
 
   ;
-  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "86f889f1b341a40e6f299cccd09ab881", "name": "C1"}, {"a": 1, "b": 2}));PL$4/*C1*/;
+  classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "9e8ad0e066a50a20708e703896d17dc0", "name": "C1"}, {"a": 1, "b": 2}));PL$4/*C1*/;
   PL$18/*f1*/;
   PL$19/*a*/;
   PL$18/*f1*/().then(PL$6(function(PL$20){PL$19/*a*/ = PL$20;

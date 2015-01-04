@@ -1,0 +1,16 @@
+try{
+  
+  
+  var x = function y(){
+    console.log("exec");
+  };
+  
+  x();
+  y();
+  
+  
+}catch(e){
+  console.log(e);
+};
+
+console.log("finale");

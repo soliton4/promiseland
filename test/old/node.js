@@ -1,3 +1,4 @@
+/*
 promiseland = require("promiseland");
 
   var testObj = {
@@ -55,3 +56,4 @@ promiseland = require("promiseland");
     };
     console.log("run " + c + " tests. " + s + " successful, " + f + " failed");
   }, 2000);
+*/

@@ -1,10 +1,9 @@
 var somefun = (par){
   var c = new Callback();
-  setTimeout(c.callback, 100);
+  setTimeout(c.callback, 50);
   *c.promise;
   return par + 1;
 };
-
 
 
 return {

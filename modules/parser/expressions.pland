@@ -354,50 +354,6 @@ return (parInstance, par){
         return res;
       };
       
-      // the function statement
-      this.expFunctionExpression = function(value, declaration){
-        var cp = this.newInstance(value, {dynamicCode: this.dynamicCode || this.isFunction});
-        var funName = cp.getFunctionName();
-        var funRes = cp.getFunctionRes();
-        
-        // collect used variables from parsed function
-        var uv = cp._getUsedVairables();
-        var name;
-        for (name in uv){
-          if (uv[name] === true){
-            this._addUsedVariable(name);
-          };
-        };
-        
-        var res;
-        
-        if (funName && funRes){
-          
-          this.addFunction(funRes, funName);
-          res = this.newResult(this.getVariableName(funName));
-          res.setType(funRes.getType());
-          return res;
-        };
-        
-        res = this.newResult();
-        if (!declaration){
-          res.push("(");
-        };
-        res.pushType(funRes || cp.getResult());
-        if (!declaration){
-          res.push(")");
-        };
-        
-        return res;
-        
-      };
-      this.expFunctionDeclaration = function(value){
-        return this.expFunctionExpression(value, true);
-      };
-      this.expMemberFunction = function(value){
-        value.id = undefined;
-        return this.expFunctionExpression(value);
-      };
       
       
       this.expUpdateExpression = function(par){

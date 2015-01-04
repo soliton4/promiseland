@@ -52,6 +52,10 @@ return (parInstance, par){
           
         };
         
+        if (par.localFunction){
+          this.localVariables.get(name).localFunction = par.localFunction;
+        };
+        
         if (par.parameter){
           this.localVariables.get(name).parameter = par.parameter;
         };

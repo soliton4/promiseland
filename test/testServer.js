@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "3c6e59ad1883177416a116152a7a45b3" })){ return promiseland._getModule("3c6e59ad1883177416a116152a7a45b3"); };
+    if (promiseland._hasModule({ hashStr: "11ad4d5a5659b2fd1400679188661d2f" })){ return promiseland._getModule("11ad4d5a5659b2fd1400679188661d2f"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "3c6e59ad1883177416a116152a7a45b3", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "11ad4d5a5659b2fd1400679188661d2f", "module": PL$1, promising: true });
 var PL$20/*__dirname*/;try{PL$20/*__dirname*/ = __dirname;}catch(e){};
 var PL$21/*promiseland*/;try{PL$21/*promiseland*/ = promiseland;}catch(e){};
 var PL$30/*console*/;try{PL$30/*console*/ = console;}catch(e){};
@@ -187,6 +187,7 @@ PL$3(function(){
   PL$38/*chromePs*/.then(PL$3(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;
   PL$33/*collector*/["finish"]("chrome");
   PL$14/*server*/["close"]();
+  PL$30/*console*/["log"]("starting node tests");
   var PL$40 = new __Promise();
 var PL$41 = new __Promise();
 var PL$42/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$41.resolve(e); }; }; };
@@ -202,8 +203,7 @@ PL$40.then(PL$3(function(){;
   ;
   try
 {
-    PL$46/*process*/["send"](PL$32/*tests*/);}catch(PL$45/*e*/){
-    PL$30/*console*/["log"](PL$32/*tests*/);};
+    PL$46/*process*/["send"](PL$32/*tests*/);}catch(PL$45/*e*/){};
   ;
   PL$46/*process*/["exit"](0);
   PL$1.resolve(); return;}), PL$4)}), PL$4);
