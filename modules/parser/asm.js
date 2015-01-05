@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "3b62c558c8c395c7ae32650363ac07ea" })){ return promiseland._getModule("3b62c558c8c395c7ae32650363ac07ea"); };
+    if (promiseland._hasModule({ hashStr: "df96e7a5ae5add4c4beaf9e49ad7b636" })){ return promiseland._getModule("df96e7a5ae5add4c4beaf9e49ad7b636"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "3b62c558c8c395c7ae32650363ac07ea", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "df96e7a5ae5add4c4beaf9e49ad7b636", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -85,6 +85,7 @@ var PL$16/*checkIsFunction*/;
 var PL$17/*getExtraFromPar*/;
 var PL$18/*statementType*/;
 var PL$19/*checkPromising*/;
+var PL$20/*asm*/;
 PL$3(function(){
 
   ;
@@ -101,25 +102,63 @@ PL$3(function(){
   PL$17/*getExtraFromPar*/ = PL$7/*basics*/["getExtraFromPar"];
   PL$18/*statementType*/ = PL$7/*basics*/["statementType"];
   PL$19/*checkPromising*/ = PL$7/*basics*/["checkPromising"];
-  PL$1.resolve((function(PL$20/*parInstance*/, PL$21/*par*/){
-  var PL$22/*f*/;
+  __requireFun("./amdbr6").then(PL$3(function(PL$21){PL$20/*asm*/ = PL$21;
+  PL$1.resolve((function(PL$22/*parInstance*/, PL$23/*par*/){
+  var PL$24/*f*/;
 
     ;
-    PL$22/*f*/ = (function(PL$21/*par*/){
+    PL$24/*f*/ = (function(PL$23/*par*/){
     
       ;
-      this["checkAsm"] = (function(PL$23/*parResult*/, PL$24/*parStr*/){
-      
+      this["checkAsm"] = (function(PL$25/*parResult*/, PL$26/*parStr*/){
+      var PL$27/*validation*/;
+
         ;
-        if(! PL$24/*parStr*/){
+        if(! PL$26/*parStr*/){
           return;
         };
         ;
+        try
+{
+          PL$27/*validation*/ = PL$20/*asm*/["validate"](PL$26/*parStr*/);}catch(PL$28/*e*/){
+          this["warning"](PL$25/*parResult*/["getParsed"](), PL$10/*errorMsg*/["asmValidationFailed"]);};
+        ;
+        ;});
+      this["isAsmFun"] = (function(PL$29/*parsed*/){
+      var PL$30/*body*/;
+var PL$31/*first*/;
+var PL$32/*expression*/;
+
+        ;
+        if((! PL$29/*parsed*/ || ! PL$29/*parsed*/["body"])){
+          return false;
+        };
+        ;
+        PL$30/*body*/ = PL$29/*parsed*/["body"];
+        if(PL$30/*body*/["body"]){
+          PL$30/*body*/ = PL$30/*body*/["body"];
+        };
+        ;
+        if(! PL$30/*body*/["length"]){
+          return false;
+        };
+        ;
+        PL$31/*first*/ = PL$30/*body*/[0];
+        if((PL$31/*first*/["type"] == "ExpressionStatement")){
+          PL$32/*expression*/ = PL$31/*first*/["expression"];
+          if((((PL$32/*expression*/ && (PL$32/*expression*/["type"] == "Literal")) && (typeof PL$32/*expression*/["value"] == "string")) && (PL$32/*expression*/["value"] == "use asm"))){
+            return true;
+          };
+          ;
+        };
+        ;
+        return false;
         ;});
       ;});
-    PL$22/*f*/["apply"](PL$20/*parInstance*/, [PL$21/*par*/]);
+    PL$24/*f*/["apply"](PL$22/*parInstance*/, [PL$23/*par*/]);
     ;})); return;
   PL$1.resolve(); return;}), PL$4);
+;}), PL$4);
 ;})();
 return PL$1;
 })();

@@ -4,6 +4,8 @@ var errorMsg = basics.errorMsg;
 var _stringEncodeStr = basics._stringEncodeStr;
 var stringEncodeStr = basics.stringEncodeStr;
 
+
+
 /* ----------------------------------------------------------------------------------------------
     
        Result

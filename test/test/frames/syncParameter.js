@@ -67,17 +67,14 @@ var PL$4/*C1*/;
 var PL$10/*local*/;
 var _TPL$10/*local*/;
 var PL$11/*init*/;
-var PL$18/*extraFun*/;
-var PL$23/*x*/;
-var PL$28/*getLocalB*/;
 var PL$31/*temp*/;
 var _TPL$31/*temp*/;
 var PL$3/*type:C1*/ = classSystem._createProvisionalClass();
 PL$4/*C1*/ = PL$3/*type:C1*/;
-var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});var PL$18/*extraFun*/ = function(PL$17/*par1*/){
-var _TPL$17/*par1*/;
-if(PL$17/*par1*/){ _TPL$17/*par1*/ = PL$17/*par1*/[1];
-PL$17/*par1*/ = PL$17/*par1*/[0];}
+var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});function PL$17/*extraFun*/(PL$18/*par1*/){
+var _TPL$18/*par1*/;
+if(PL$18/*par1*/){ _TPL$18/*par1*/ = PL$18/*par1*/[1];
+PL$18/*par1*/ = PL$18/*par1*/[0];}
 
   try{;
   /*tracked assign*/(function(v){
@@ -89,26 +86,26 @@ _TPL$10/*local*/ = v[2]();
 _TPL$10/*local*/ = undefined;
 };
 return v;
-})(PL$17/*par1*/)/*end assign*/
+})(PL$18/*par1*/)/*end assign*/
 ;
-  if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};}catch(e){if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};throw e};;};
-var PL$23/*x*/ = (function(f){
-promiseland.registerRemote("server", "da40cc33921b9c46c8c6f40737bb3c21", "PL$22", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$3/*type:C1*/]})));
+  if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};}catch(e){if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};throw e};;};
+var PL$19/*x*/ = (function(f){
+promiseland.registerRemote("server", "da40cc33921b9c46c8c6f40737bb3c21", "PL$23", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$3/*type:C1*/]})));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("da40cc33921b9c46c8c6f40737bb3c21", "PL$22", arguments);
+return promiseland.remoteExec("da40cc33921b9c46c8c6f40737bb3c21", "PL$23", arguments);
 }
 };
-})(function(PL$17/*par1*/){
-var PL$19 = new __Promise();
-var PL$20 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};PL$19.reject(e); }; }; };
-var PL$21 = function(e){ if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};PL$19.reject(e); };
-var _TPL$17/*par1*/;
-if(PL$17/*par1*/){ _TPL$17/*par1*/ = PL$17/*par1*/[1];
-PL$17/*par1*/ = PL$17/*par1*/[0];}
-PL$20(function(){
+})(function (PL$18/*par1*/){
+var PL$20 = new __Promise();
+var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$20.reject(e); }; }; };
+var PL$22 = function(e){ if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$20.reject(e); };
+var _TPL$18/*par1*/;
+if(PL$18/*par1*/){ _TPL$18/*par1*/ = PL$18/*par1*/[1];
+PL$18/*par1*/ = PL$18/*par1*/[0];}
+PL$21(function(){
 
   ;
   /*tracked assign*/(function(v){
@@ -120,31 +117,31 @@ _TPL$10/*local*/ = v[2]();
 _TPL$10/*local*/ = undefined;
 };
 return v;
-})(PL$17/*par1*/)/*end assign*/
+})(PL$18/*par1*/)/*end assign*/
 ;
-  PL$19.resolve((function(ret){ if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};return ret; })(PL$10/*local*/[9])); return;;
-  if (_TPL$17/*par1*/){ _TPL$17/*par1*/();};PL$19.resolve(); return;;})();
-return PL$19;
+  PL$20.resolve((function(ret){ if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};return ret; })(PL$10/*local*/[9])); return;;
+  if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$20.resolve(); return;;})();
+return PL$20;
 });
-var PL$28/*getLocalB*/ = (function(f){
-promiseland.registerRemote("server", "da40cc33921b9c46c8c6f40737bb3c21", "PL$27", f, classSystem.getBuiltinType("var"));
+var PL$24/*getLocalB*/ = (function(f){
+promiseland.registerRemote("server", "da40cc33921b9c46c8c6f40737bb3c21", "PL$28", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("da40cc33921b9c46c8c6f40737bb3c21", "PL$27", arguments);
+return promiseland.remoteExec("da40cc33921b9c46c8c6f40737bb3c21", "PL$28", arguments);
 }
 };
-})(function(){
-var PL$24 = new __Promise();
-var PL$25 = function(code){ return function(res){ try{code(res);}catch(e){ PL$24.reject(e); }; }; };
-var PL$26 = function(e){ PL$24.reject(e); };
-PL$25(function(){
+})(function (){
+var PL$25 = new __Promise();
+var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$25.reject(e); }; }; };
+var PL$27 = function(e){ PL$25.reject(e); };
+PL$26(function(){
 
   ;
-  PL$24.resolve(PL$10/*local*/[9]); return;
-  PL$24.resolve(); return;})();
-return PL$24;
+  PL$25.resolve(PL$10/*local*/[9]); return;
+  PL$25.resolve(); return;})();
+return PL$25;
 });
 PL$6(function(){
 
@@ -192,18 +189,18 @@ return;
     PL$12.resolve(); return;})();
 return PL$12;
 }));
-  PL$18/*extraFun*/;
+  PL$17/*extraFun*/;
   ;
-  PL$23/*x*/;
+  PL$19/*x*/;
   ;
-  PL$28/*getLocalB*/;
+  PL$24/*getLocalB*/;
   ;
   if(! PL$9/*isClient*/){
     PL$1.resolve({"success": true}); return;
   };
   ;
   PL$11/*init*/().then(PL$6(function(PL$29){PL$29;
-  PL$28/*getLocalB*/().then(PL$6(function(PL$30){if((PL$30 !== 2)){
+  PL$24/*getLocalB*/().then(PL$6(function(PL$30){if((PL$30 !== 2)){
     PL$1.resolve({"success": false}); return;
   };
   ;
@@ -223,8 +220,8 @@ return;
     (function(s, v){ v = s[10](v); s[9] = v; return v; })(PL$31/*temp*/, 4);
   };
   ;
-  PL$23/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$31/*temp*/)).then(PL$6(function(PL$32){PL$32;
-  PL$28/*getLocalB*/().then(PL$6(function(PL$33){if((PL$33 !== 4)){
+  PL$19/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$31/*temp*/)).then(PL$6(function(PL$32){PL$32;
+  PL$24/*getLocalB*/().then(PL$6(function(PL$33){if((PL$33 !== 4)){
     PL$1.resolve({"success": false}); return;
   };
   ;
@@ -232,7 +229,7 @@ return;
     (function(s, v){ v = s[10](v); s[9] = v; return v; })(PL$31/*temp*/, 5);
   };
   ;
-  PL$28/*getLocalB*/().then(PL$6(function(PL$34){if((PL$34 !== 5)){
+  PL$24/*getLocalB*/().then(PL$6(function(PL$34){if((PL$34 !== 5)){
     PL$1.resolve({"success": false}); return;
   };
   ;

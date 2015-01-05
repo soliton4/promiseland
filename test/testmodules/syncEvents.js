@@ -66,14 +66,11 @@ var PL$9/*checkVar*/;
 var PL$4/*C2*/;
 var PL$10/*local*/;
 var _TPL$10/*local*/;
-var PL$11/*doInit*/;
 var PL$12/*init*/;
-var PL$23/*x*/;
-var PL$28/*getCheck*/;
 var PL$31/*tempRes*/;
 var PL$3/*type:C2*/ = classSystem._createProvisionalClass();
 PL$4/*C2*/ = PL$3/*type:C2*/;
-var PL$5/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C2*/).then(function(parType){PL$3/*type:C2*/ = parType;PL$5/*C2-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C2*/);});var PL$11/*doInit*/ = function(){
+var PL$5/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C2*/).then(function(parType){PL$3/*type:C2*/ = parType;PL$5/*C2-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C2*/);});function PL$11/*doInit*/(){
 
   ;
   /*temp tracked assign*/(function(vAr){
@@ -90,23 +87,23 @@ return;
 ;
   PL$9/*checkVar*/ = false;
   ;};
-var PL$23/*x*/ = (function(f){
-promiseland.registerRemote("server", "c0b973334fc8122b7b901d826d12edec", "PL$22", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$3/*type:C2*/]})));
+var PL$18/*x*/ = (function(f){
+promiseland.registerRemote("server", "c0b973334fc8122b7b901d826d12edec", "PL$23", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$3/*type:C2*/]})));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("c0b973334fc8122b7b901d826d12edec", "PL$22", arguments);
+return promiseland.remoteExec("c0b973334fc8122b7b901d826d12edec", "PL$23", arguments);
 }
 };
-})(function(PL$18/*par1*/){
-var PL$19 = new __Promise();
-var PL$20 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$19.reject(e); }; }; };
-var PL$21 = function(e){ if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$19.reject(e); };
-var _TPL$18/*par1*/;
-if(PL$18/*par1*/){ _TPL$18/*par1*/ = PL$18/*par1*/[1];
-PL$18/*par1*/ = PL$18/*par1*/[0];}
-PL$20(function(){
+})(function (PL$19/*par1*/){
+var PL$20 = new __Promise();
+var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.reject(e); }; }; };
+var PL$22 = function(e){ if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.reject(e); };
+var _TPL$19/*par1*/;
+if(PL$19/*par1*/){ _TPL$19/*par1*/ = PL$19/*par1*/[1];
+PL$19/*par1*/ = PL$19/*par1*/[0];}
+PL$21(function(){
 
   ;
   /*tracked assign*/(function(v){
@@ -118,30 +115,30 @@ _TPL$10/*local*/ = v[2]();
 _TPL$10/*local*/ = undefined;
 };
 return v;
-})(PL$18/*par1*/)/*end assign*/
+})(PL$19/*par1*/)/*end assign*/
 ;
-  if (_TPL$18/*par1*/){ _TPL$18/*par1*/();};PL$19.resolve(); return;;})();
-return PL$19;
+  if (_TPL$19/*par1*/){ _TPL$19/*par1*/();};PL$20.resolve(); return;;})();
+return PL$20;
 });
-var PL$28/*getCheck*/ = (function(f){
-promiseland.registerRemote("server", "c0b973334fc8122b7b901d826d12edec", "PL$27", f, classSystem.getBuiltinType("var"));
+var PL$24/*getCheck*/ = (function(f){
+promiseland.registerRemote("server", "c0b973334fc8122b7b901d826d12edec", "PL$28", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("c0b973334fc8122b7b901d826d12edec", "PL$27", arguments);
+return promiseland.remoteExec("c0b973334fc8122b7b901d826d12edec", "PL$28", arguments);
 }
 };
-})(function(){
-var PL$24 = new __Promise();
-var PL$25 = function(code){ return function(res){ try{code(res);}catch(e){ PL$24.reject(e); }; }; };
-var PL$26 = function(e){ PL$24.reject(e); };
-PL$25(function(){
+})(function (){
+var PL$25 = new __Promise();
+var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$25.reject(e); }; }; };
+var PL$27 = function(e){ PL$25.reject(e); };
+PL$26(function(){
 
   ;
-  PL$24.resolve(PL$9/*checkVar*/); return;
-  PL$24.resolve(); return;})();
-return PL$24;
+  PL$25.resolve(PL$9/*checkVar*/); return;
+  PL$25.resolve(); return;})();
+return PL$25;
 });
 PL$6(function(){
 
@@ -184,9 +181,9 @@ PL$15(function(){
     PL$13.resolve(); return;})();
 return PL$13;
 }));
-  PL$23/*x*/;
+  PL$18/*x*/;
   ;
-  PL$28/*getCheck*/;
+  PL$24/*getCheck*/;
   ;
   if(! PL$8/*isClient*/){
     PL$1.resolve({"success": true}); return;
@@ -194,17 +191,17 @@ return PL$13;
   ;
   PL$12/*init*/().then(PL$6(function(PL$29){PL$29;
   PL$11/*doInit*/();
-  PL$28/*getCheck*/().then(PL$6(function(PL$30){if(PL$30){
+  PL$24/*getCheck*/().then(PL$6(function(PL$30){if(PL$30){
     PL$1.resolve({"success": false}); return;
   };
   ;
-  PL$23/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$10/*local*/)).then(PL$6(function(PL$32){PL$31/*tempRes*/ = PL$32;
-  PL$28/*getCheck*/().then(PL$6(function(PL$33){if(PL$33){
+  PL$18/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$10/*local*/)).then(PL$6(function(PL$32){PL$31/*tempRes*/ = PL$32;
+  PL$24/*getCheck*/().then(PL$6(function(PL$33){if(PL$33){
     PL$1.resolve({"success": false}); return;
   };
   ;
   PL$10/*local*/[11]();
-  PL$28/*getCheck*/().then(PL$6(function(PL$34){if(! PL$34){
+  PL$24/*getCheck*/().then(PL$6(function(PL$34){if(! PL$34){
     debugger;
     PL$1.resolve({"success": false}); return;
   };

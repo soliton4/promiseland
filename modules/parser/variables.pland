@@ -52,6 +52,10 @@ return (parInstance, par){
           
         };
         
+        if (par.declaration){
+          this.localVariables.get(name).declaration = par.declaration;
+        };
+        
         if (par.localFunction){
           this.localVariables.get(name).localFunction = par.localFunction;
         };
@@ -165,17 +169,22 @@ return (parInstance, par){
           return;
         };
         if (par.type == "VariableDeclaration"){
-          this.addLocalVariable({name: identifierName(par.id), typename: identifierName(par.typename)}, par);
+          this.addLocalVariable({name: identifierName(par.id), typename: identifierName(par.typename), declaration: true}, par);
         }else if (par.type == "Class"){
           var ci = self.identifyClass(par);
           if (ci.hasName){
-            this.addLocalVariable({name: identifierName(par.name), typename: "var"}, par);
+            this.addLocalVariable({name: identifierName(par.name), typename: "var", declaration: true}, par);
           };
           return;
+          
         }else if (checkIsFunction(par)){
-          if (par.id && par.type != "MemberFunction"){
-            this.addLocalVariable({name: identifierName(par.id), isFunction: true}, par);
+          
+          var functionInfo = this.functionInfo(par);
+          
+          if (functionInfo.hasExternalName /*&& par.type != "MemberFunction"*/){
+            this.addLocalVariable({name: functionInfo.nameStr, isFunction: true}, par);
           };
+          
           return;
         };
         var i;
@@ -200,6 +209,63 @@ return (parInstance, par){
         
         return res;
       };
+    
+    
+      /*
+        (typename | var) name [= value];
+      */
+        this.expVariableStatement = function(par){
+          var res = this.newResult();
+          var declarations = par.declarations;
+          if (!declarations){
+            this.error(par, errorMsg.missingDeclarations);
+            return "";
+          };
+
+          var i = 0;
+          var l = declarations.length;
+          var usedType = this.getType(identifierName(par.typename), par);
+          for (i; i < l; ++i){
+            if (i > 0){
+              res.push(", ");
+            };
+            if (declarations[i].type == "VariableDeclaration"){
+              var r = this.parseExpression(declarations[i]);
+              /*if (!this.canSetisSameType(r.getType(), usedType)){
+              this.error(par, errorMsg.differentTypesInVariableDeclaration);
+            };*/
+              res.push(r);
+            }else{
+              this.error(declarations[i], errorMsg.unknownType);
+            };
+          };
+          res.setType(usedType);
+          return res;
+
+        };
+        
+        
+      //Object {type: "VariableDeclaration", name: "i", value: null}
+      
+      this.expVariableDeclaration = function(par){
+        var res = this.newResult();
+        
+        if (par.init){
+          res.pushType(this.getSetVariableCode({
+            instance: this.getVariable(identifierName(par.id)),
+            assignmentType: par.id.type, //Identifier
+            value: this.parseExpression(par.init),
+            operator: "="
+            , errorFun: this.getWarningFun(par)
+          }));
+        }else{
+          res.pushType(this.getVariable(identifierName(par.id)));
+        };
+        return res;
+        
+      };
+        
+    
 
 
     

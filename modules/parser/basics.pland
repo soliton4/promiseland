@@ -290,6 +290,11 @@ var checkPromising = function(par){
         , msg: "type info confusion"
         , additional: "pls provide this error in a github issue"
         
+      },
+      
+      asmValidationFailed: {
+        id: 2001
+        , msg: "asm.js validation failed"
       }
       
     };

@@ -31,7 +31,7 @@ return (parInstance, par){
       // extra syntax check for asm js
       if (this.isAsmFun(parsed)){
         var asmRes = this.newResult();
-        asmRes.push(res);
+        asmRes.pushType(res);
         asmRes.checkasm = true;
         asmRes.setParsed(parsed);
         return asmRes;
@@ -75,6 +75,13 @@ return (parInstance, par){
       
       if (!res.hasReturnType){
         res.returnType = this.getType("var");
+      };
+      
+      if (parsed.type == "FunctionDeclaration"){
+        res.declaration = true;
+        if (res.hasName){
+          res.hasExternalName = true;
+        };
       };
       
       return res;
@@ -233,12 +240,15 @@ return (parInstance, par){
       // function keyword and parameters
       i = 0;
       funDecl.push("function");
+      var nameRes;
       if (hasName){
         this.functionName = nameStr; //this.getVariableName(nameStr);
-        if (parParsed.useLocalVariableName){
-          funDecl.push(" ");
-          funDecl.push(this.getVariableName(nameStr));
-        };
+        //if (parParsed.useLocalVariableName){
+        funDecl.push(" ");
+        nameRes = this.newResult();
+        nameRes.push(this.getVariableName(nameStr));
+        funDecl.push(nameRes);
+        //};
       };
 
       // parameters
@@ -255,6 +265,11 @@ return (parInstance, par){
         };
       };
       funDecl.push("){");
+      if (this.isAsmFun(parParsed)){
+        funDecl.push(this.newLine());
+        funDecl.push("\"use asm\";");
+        funDecl.push(this.newLine());
+      };
 
       // indent here
       funRes.push(this.newLine());
@@ -346,14 +361,18 @@ return (parInstance, par){
             parsed: par
           }));
 
-        }else{
+        }else if (localVariablesAr[i].value.declaration){
           funRes.push(this.getDeclareVariableCode({
             name: this.getVariableName(varname),
             "type": type,
             errorFun: this.getWarningFun(par),
             parsed: par
           }));
-        };
+          
+        }else{
+          // what is this?
+          debugger;
+        }
 
         // untrack tracked variables
         if (!noUntrack){
@@ -377,9 +396,10 @@ return (parInstance, par){
       funRes.push(classesRes);
 
       for(i = 0; i < this.functionsAr.length; ++i){
-        funRes.push("var " + this.getVariableName(this.functionsAr[i].name) + " = ");
+        //funRes.push("var " + this.getVariableName(this.functionsAr[i].name) + " = ");
         funRes.push(this.functionsAr[i].res);
-        funRes.push(";\n");
+        funRes.push(";");
+        funRes.push(this.newLine());
       };
 
 
@@ -413,6 +433,7 @@ return (parInstance, par){
       };
 
       var completeFun = this.makeCompleteStatement(funDecl);
+      var funNameScrewUp = false;
 
       if (this.promising && hasReturnTypeName){
         var returnTypePromiseCheck = this.newResult();
@@ -426,6 +447,7 @@ return (parInstance, par){
         returnTypePromiseCheck.push(completeFun);
         returnTypePromiseCheck.push(")");
         completeFun = returnTypePromiseCheck;
+        funNameScrewUp = true;
       };
 
       if (funClosure){
@@ -451,6 +473,7 @@ return (parInstance, par){
         });
         funClosure.push(";\"); return communicator.fun; })()");
         completeFun = this.makeCompleteStatement(funClosure);
+        funNameScrewUp = true;
       };
 
 
@@ -475,23 +498,7 @@ return (parInstance, par){
         remoteClosure.push("return function(){\n");
 
 
-        //var tempReturnPromise = this.getUniqueName("temp returnpromise");
-        /*remoteClosure.push(this.declareReturnPromiseCode({
-            type: this._returnType,
-            name: tempReturnPromise,
-            constructorName: this.getConstructorName(this.getTypeName(this._returnType, parParsed)),
-            parsed: parParsed,
-            errorFun: this.getWarningFun(parParsed)
-          }));*/
-        //remoteClosure.push("\n");
-        //remoteClosure.push(tempReturnPromise);
         remoteClosure.push("return promiseland.remoteExec(" + stringEncodeStr(this.getModuleHashStr()) + ", " + stringEncodeStr(uniqueNameStr) + ", arguments);\n");
-        /*remoteClosure.push(this.returnReturnPromiseCode({
-            type: this._returnType,
-            name: tempReturnPromise,
-            parsed: parParsed,
-            errorFun: this.getWarningFun(parParsed)
-          }));*/
         remoteClosure.push("}\n");
 
         remoteClosure.push("};\n");
@@ -501,7 +508,8 @@ return (parInstance, par){
         remoteClosure.push(")");
 
         res.push(remoteClosure);
-
+        funNameScrewUp = true;
+        
       }else{
         res.push(completeFun);
       };
@@ -513,24 +521,20 @@ return (parInstance, par){
       this.unstack("thisType");
 
       var finalResult = this.newResult();
-      //finalResult.push("/*functionresultstart*/");
+      
+      if (funNameScrewUp && hasName && functionInfo.declaration){
+        // it used to be a function declaration but now we need to make it a var fun = ....
+        finalResult.push("var ");
+        finalResult.push(this.getVariableName(nameStr));
+        finalResult.push(" = ");
+        nameRes.replace("");
+      };
       finalResult.push(this.makeCompleteStatement(res));
-      //finalResult.push("/*functionresultend*/");
+      
       finalResult.setType(thisFunType);
       return finalResult;
     };
     
-    this.isAsmFun = (parsed){
-      if (!parsed || !parsed.body || !parsed.body.length){
-        return false;
-      };
-      
-      var first = parsed.body[0];
-      if (first.type == "Literal" && typeof first.value == "string" && first.value == "use asm"){
-        return true;
-      };
-      return false;
-    };
     
     
     

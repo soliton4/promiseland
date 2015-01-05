@@ -193,7 +193,8 @@
   *createTest("for/forNoParam", successFun);
   *createTest("while/doWhile", successFun);
   *createTest("while/doWhileP", successFun);
-//*createTest("while/doWhileP", successFun);
+  *createTest("var/varList", successFun);
+//*createTest("var/varList", successFun);
 
   
     var c = 0;

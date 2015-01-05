@@ -44,7 +44,7 @@ return (parInstance, par){
           entry.type = par.type;
           this.resolveProvisional(t, par.type);
         }else{
-          this.addLocalVariable({name: par.name, type: par.type}, parsed);
+          this.addLocalVariable({name: par.name, type: par.type, declaration: true}, parsed);
         };
       };
       
@@ -84,7 +84,8 @@ return (parInstance, par){
           var i;
           var typesAr = self.types.getArray();
           for (i = 0; i < typesAr.length; ++i){
-            if (typesAr[i].value["type"] === parType1 || typesAr[i].value["type"] === parType2){
+            if (self.isSameType(typesAr[i].value["type"], parType1) || self.isSameType(typesAr[i].value["type"], parType2)){
+            //if (typesAr[i].value["type"] === parType1 || typesAr[i].value["type"] === parType2){
               if (self.isVar(typesAr[i].value["type"])){
                 self.common.useClassSystem = true;
                 return "classSystem.getBuiltinType(\"var\")";
@@ -101,7 +102,9 @@ return (parInstance, par){
         };
         
         if (typeof parType == "function"){ // || parType.isDynamic || parType.provisional){
-          var errPs = this.addError(parParsed, errorMsg.internalMissingType);
+          var errPs = this.addError(parParsed, errorMsg.internalMissingType, (){
+            debugger;
+          });
           //res.push(errRes);
           
           classSystem.readyPromise(parType).then(function(resolvedType){
@@ -137,6 +140,12 @@ return (parInstance, par){
               return;
             };
             
+            debugger;
+            
+            catch(e){
+              debugger;
+            };
+            
           });
           return res;
           
@@ -145,7 +154,9 @@ return (parInstance, par){
           if (typeExpression){
             res.push(typeExpression);
           }else{
-            res.push(this.addError(parParsed, errorMsg.internalMissingType));
+            res.push(this.addError(parParsed, errorMsg.internalMissingType, (){
+              debugger;
+            }));
           };
           
         }else{
@@ -156,7 +167,9 @@ return (parInstance, par){
           if (typeExpression){
             res.push(typeExpression);
           }else{
-            res.push(this.addError(parParsed, errorMsg.internalMissingType));
+            res.push(this.addError(parParsed, errorMsg.internalMissingType, (){
+              debugger;
+            }));
           };
           
         };
@@ -359,7 +372,11 @@ return (parInstance, par){
     
     
       this.isSameType = function(type1, type2){
-        return classSystem.isSameType(type1, type2);
+        if (this.isDynamicType(type1) || this.isDynamicType(type2)){
+          return type1 === type2;
+        }else{
+          return classSystem.isSameType(type1, type2);
+        };
       };
     
     

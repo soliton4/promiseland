@@ -51,35 +51,29 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-var __Promise = promiseland.Promise;
-var Promise = promiseland.Promise;
-var classSystem = promiseland.classSystem;
-if (promiseland._hasModule({ hashStr: "25de7adaa1494a8c3cd1a849bde67c15" })){ return promiseland._getModule("25de7adaa1494a8c3cd1a849bde67c15"); };
+if (promiseland._hasModule({ hashStr: "36fd2cecbc7c12901444ff42e0149fc5" })){ return promiseland._getModule("36fd2cecbc7c12901444ff42e0149fc5"); };
 var PL$1 = (function(){
 "use strict";
-var PL$2/*test*/ = (function(f){
-promiseland.registerRemote("server", "25de7adaa1494a8c3cd1a849bde67c15", "PL$7", f, classSystem.getBuiltinType("var"));
-if (promiseland.profileHas("server")){
-return f;
-}else{
-return function(){
-return promiseland.remoteExec("25de7adaa1494a8c3cd1a849bde67c15", "PL$7", arguments);
-}
-};
-})(function (){
-var PL$3 = new __Promise();
-var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
-var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){
+var PL$2/*x*/;
 
   ;
-  PL$3.resolve(1); return;
-  PL$3.resolve(); return;})();
-return PL$3;
-});
+  PL$2/*x*/ = (function PL$3/*f*/(PL$4/*stdlib*/, PL$5/*foreign*/, PL$6/*heap*/){
+  "use asm";
+  
+  function PL$3/*f*/(){
+  var PL$2/*x*/;
+var PL$7/*y*/;
 
-  ;
-  PL$2/*test*/;
+    ;
+    PL$2/*x*/ = 0, PL$7/*y*/ = 0;
+    PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
+    ;};
+  
+    ;
+    "use asm";
+    PL$3/*f*/;
+    return {};
+    ;});
   ;})();
 ;return PL$1;
 });

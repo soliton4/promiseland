@@ -714,57 +714,6 @@ return (parInstance, par){
       };
 
 
-      /*
-        (typename | var) name [= value];
-      */
-        this.expVariableStatement = function(par){
-          var res = this.newResult();
-          var declarations = par.declarations;
-          if (!declarations){
-            this.error(par, errorMsg.missingDeclarations);
-            return "";
-          };
-
-          var i = 0;
-          var l = declarations.length;
-          var usedType = this.getType(identifierName(par.typename), par);
-          for (i; i < l; ++i){
-            if (declarations[i].type == "VariableDeclaration"){
-              var r = this.parseExpression(declarations[i]);
-              /*if (!this.canSetisSameType(r.getType(), usedType)){
-              this.error(par, errorMsg.differentTypesInVariableDeclaration);
-            };*/
-              res.push(r);
-            }else{
-              this.error(declarations[i], errorMsg.unknownType);
-            };
-          };
-          res.setType(usedType);
-          return res;
-
-        };
-        
-        
-      //Object {type: "VariableDeclaration", name: "i", value: null}
-      
-      this.expVariableDeclaration = function(par){
-        var res = this.newResult();
-        
-        if (par.init){
-          res.pushType(this.getSetVariableCode({
-            instance: this.getVariable(identifierName(par.id)),
-            assignmentType: par.id.type, //Identifier
-            value: this.parseExpression(par.init),
-            operator: "="
-            , errorFun: this.getWarningFun(par)
-          }));
-        }else{
-          res.pushType(this.getVariable(identifierName(par.id)));
-        };
-        return res;
-        
-      };
-        
         
        /*
         something = value

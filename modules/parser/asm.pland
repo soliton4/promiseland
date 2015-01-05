@@ -15,6 +15,8 @@ var statementType = basics.statementType;
 var checkPromising = basics.checkPromising;
 
 
+var asm = require "./amdbr6";
+
 
 
 return (parInstance, par){
@@ -27,9 +29,37 @@ return (parInstance, par){
         return;
       };
       
-      
+      try{
+        var validation = asm.validate(parStr);
+      }catch(e){
+        this.warning(parResult.getParsed(), errorMsg.asmValidationFailed);
+      };
       
     };
+    
+    this.isAsmFun = (parsed){
+      if (!parsed || !parsed.body){
+        return false;
+      };
+      
+      var body = parsed.body;
+      if (body.body){
+        body = body.body;
+      };
+      if (!body.length){
+        return false;
+      };
+      
+      var first = body[0];
+      if (first.type == "ExpressionStatement"){
+        var expression = first.expression;
+        if (expression && expression.type == "Literal" && typeof expression.value == "string" && expression.value == "use asm"){
+          return true;
+        };
+      };
+      return false;
+    };
+    
 
   };
   f.apply(parInstance, [par]);

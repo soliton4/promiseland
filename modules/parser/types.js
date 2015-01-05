@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "fed639458506b8b3d7e44cd0b4d1254b" })){ return promiseland._getModule("fed639458506b8b3d7e44cd0b4d1254b"); };
+    if (promiseland._hasModule({ hashStr: "46eab35f423b8d73e7cd9e4b7b847f85" })){ return promiseland._getModule("46eab35f423b8d73e7cd9e4b7b847f85"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "fed639458506b8b3d7e44cd0b4d1254b", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "46eab35f423b8d73e7cd9e4b7b847f85", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -131,7 +131,8 @@ var PL$27/*t*/;
           this["resolveProvisional"](PL$27/*t*/, PL$20/*par*/["type"]);
         }else{
         this["addLocalVariable"]({"name": PL$20/*par*/["name"],
-"type": PL$20/*par*/["type"]}, PL$24/*parsed*/);
+"type": PL$20/*par*/["type"],
+"declaration": true}, PL$24/*parsed*/);
         };
         ;
         ;});
@@ -191,7 +192,7 @@ var PL$25/*name*/;
           PL$40/*i*/;
           PL$41/*typesAr*/ = PL$35/*self*/["types"]["getArray"]();
           for(PL$40/*i*/ = 0;(PL$40/*i*/ < PL$41/*typesAr*/["length"]);++PL$40/*i*/){{
-            if(((PL$41/*typesAr*/[PL$40/*i*/]["value"]["type"] === PL$38/*parType1*/) || (PL$41/*typesAr*/[PL$40/*i*/]["value"]["type"] === PL$39/*parType2*/))){
+            if((PL$35/*self*/["isSameType"](PL$41/*typesAr*/[PL$40/*i*/]["value"]["type"], PL$38/*parType1*/) || PL$35/*self*/["isSameType"](PL$41/*typesAr*/[PL$40/*i*/]["value"]["type"], PL$39/*parType2*/))){
               if(PL$35/*self*/["isVar"](PL$41/*typesAr*/[PL$40/*i*/]["value"]["type"])){
                 PL$35/*self*/["common"]["useClassSystem"] = true;
                 return "classSystem.getBuiltinType(\"var\")";
@@ -208,7 +209,11 @@ var PL$25/*name*/;
           ;
           ;});
         if((typeof PL$31/*parType*/ == "function")){
-          PL$42/*errPs*/ = this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"]);
+          PL$42/*errPs*/ = this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"], (function(){
+          
+            ;
+            debugger;
+            ;}));
           PL$7/*classSystem*/["readyPromise"](PL$31/*parType*/)["then"]((function(PL$43/*resolvedType*/){
           var PL$44/*replace*/;
 var PL$36/*typeExpression*/;
@@ -216,34 +221,39 @@ var PL$40/*i*/;
 var PL$45/*l*/;
 
             ;
-            PL$44/*replace*/ = PL$35/*self*/["newResult"]();
-            PL$36/*typeExpression*/ = PL$37/*renderTypeName*/(PL$31/*parType*/, PL$43/*resolvedType*/);
-            if(PL$36/*typeExpression*/){
-              PL$44/*replace*/["push"](PL$36/*typeExpression*/);
-              PL$34/*res*/["push"](PL$44/*replace*/);
-              PL$42/*errPs*/["resolve"]();
-              return;
-            };
-            ;
-            if(PL$7/*classSystem*/["isFunctionType"](PL$43/*resolvedType*/)){
-              PL$40/*i*/;
-              PL$35/*self*/["common"]["useClassSystem"] = true;
-              PL$44/*replace*/["push"]("(classSystem.createFunctionType({ \"return\": ");
-              PL$44/*replace*/["push"](PL$35/*self*/["renderType"](PL$35/*self*/["getClassFromTemporaryTracked"](PL$35/*self*/["getFunctionReturnType"](PL$43/*resolvedType*/, PL$28/*parParsed*/), PL$28/*parParsed*/), PL$28/*parParsed*/));
-              PL$44/*replace*/["push"](", arguments: [");
-              PL$45/*l*/ = PL$35/*self*/["getFunctionArgumentCount"](PL$43/*resolvedType*/);
-              for(PL$40/*i*/ = 0;(PL$40/*i*/ < PL$45/*l*/);++PL$40/*i*/){{
-                if(PL$40/*i*/){
-                  PL$44/*replace*/["push"](", ");
-                };
-                ;
-                PL$44/*replace*/["push"](PL$35/*self*/["renderType"](PL$35/*self*/["getClassFromTemporaryTracked"](PL$35/*self*/["getFunctionArgumentType"](PL$43/*resolvedType*/, PL$40/*i*/, PL$28/*parParsed*/), PL$28/*parParsed*/), PL$28/*parParsed*/));}};
+            try
+{
+              PL$44/*replace*/ = PL$35/*self*/["newResult"]();
+              PL$36/*typeExpression*/ = PL$37/*renderTypeName*/(PL$31/*parType*/, PL$43/*resolvedType*/);
+              if(PL$36/*typeExpression*/){
+                PL$44/*replace*/["push"](PL$36/*typeExpression*/);
+                PL$34/*res*/["push"](PL$44/*replace*/);
+                PL$42/*errPs*/["resolve"]();
+                return;
+              };
               ;
-              PL$44/*replace*/["push"]("]}))");
-              PL$34/*res*/["push"](PL$44/*replace*/);
-              PL$42/*errPs*/["resolve"]();
-              return;
-            };
+              if(PL$7/*classSystem*/["isFunctionType"](PL$43/*resolvedType*/)){
+                PL$40/*i*/;
+                PL$35/*self*/["common"]["useClassSystem"] = true;
+                PL$44/*replace*/["push"]("(classSystem.createFunctionType({ \"return\": ");
+                PL$44/*replace*/["push"](PL$35/*self*/["renderType"](PL$35/*self*/["getClassFromTemporaryTracked"](PL$35/*self*/["getFunctionReturnType"](PL$43/*resolvedType*/, PL$28/*parParsed*/), PL$28/*parParsed*/), PL$28/*parParsed*/));
+                PL$44/*replace*/["push"](", arguments: [");
+                PL$45/*l*/ = PL$35/*self*/["getFunctionArgumentCount"](PL$43/*resolvedType*/);
+                for(PL$40/*i*/ = 0;(PL$40/*i*/ < PL$45/*l*/);++PL$40/*i*/){{
+                  if(PL$40/*i*/){
+                    PL$44/*replace*/["push"](", ");
+                  };
+                  ;
+                  PL$44/*replace*/["push"](PL$35/*self*/["renderType"](PL$35/*self*/["getClassFromTemporaryTracked"](PL$35/*self*/["getFunctionArgumentType"](PL$43/*resolvedType*/, PL$40/*i*/, PL$28/*parParsed*/), PL$28/*parParsed*/), PL$28/*parParsed*/));}};
+                ;
+                PL$44/*replace*/["push"]("]}))");
+                PL$34/*res*/["push"](PL$44/*replace*/);
+                PL$42/*errPs*/["resolve"]();
+                return;
+              };
+              ;
+              debugger;}catch(PL$46/*e*/){
+              debugger;};
             ;
             ;}));
           return PL$34/*res*/;
@@ -253,7 +263,11 @@ var PL$45/*l*/;
           if(PL$36/*typeExpression*/){
             PL$34/*res*/["push"](PL$36/*typeExpression*/);
           }else{
-          PL$34/*res*/["push"](this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"]));
+          PL$34/*res*/["push"](this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"], (function(){
+          
+            ;
+            debugger;
+            ;})));
           };
           ;
         }else{
@@ -263,7 +277,11 @@ var PL$45/*l*/;
         if(PL$36/*typeExpression*/){
           PL$34/*res*/["push"](PL$36/*typeExpression*/);
         }else{
-        PL$34/*res*/["push"](this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"]));
+        PL$34/*res*/["push"](this["addError"](PL$28/*parParsed*/, PL$11/*errorMsg*/["internalMissingType"], (function(){
+        
+          ;
+          debugger;
+          ;})));
         };
         ;
         };
@@ -272,60 +290,60 @@ var PL$45/*l*/;
         return PL$34/*res*/;
         ;});
       this["getFunctionType"] = (function(PL$20/*par*/){
-      var PL$46/*isTyped*/;
-var PL$47/*functionTypeParam*/;
-var PL$48/*functionInfo*/;
+      var PL$47/*isTyped*/;
+var PL$48/*functionTypeParam*/;
+var PL$49/*functionInfo*/;
 var PL$40/*i*/;
 var PL$45/*l*/;
-var PL$49/*tempTypename*/;
+var PL$50/*tempTypename*/;
 
         ;
-        PL$46/*isTyped*/ = false;
-        PL$47/*functionTypeParam*/ = {"return": this["getType"]("var"),
+        PL$47/*isTyped*/ = false;
+        PL$48/*functionTypeParam*/ = {"return": this["getType"]("var"),
 "arguments": []};
-        PL$48/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
-        if(PL$48/*functionInfo*/["hasReturnType"]){
-          PL$46/*isTyped*/ = true;
-          PL$47/*functionTypeParam*/["return"] = PL$48/*functionInfo*/["returnType"];
+        PL$49/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
+        if(PL$49/*functionInfo*/["hasReturnType"]){
+          PL$47/*isTyped*/ = true;
+          PL$48/*functionTypeParam*/["return"] = PL$49/*functionInfo*/["returnType"];
         };
         ;
         if((PL$20/*par*/["params"] && PL$20/*par*/["params"]["length"])){
           PL$40/*i*/ = 0;
           PL$45/*l*/ = PL$20/*par*/["params"]["length"];
           for(PL$40/*i*/;(PL$40/*i*/ < PL$45/*l*/);++PL$40/*i*/){{
-            PL$49/*tempTypename*/ = PL$16/*identifierName*/((PL$20/*par*/["params"][PL$40/*i*/]["typename"] || "var"));
-            PL$47/*functionTypeParam*/["arguments"]["push"](this["getType"](PL$49/*tempTypename*/, PL$20/*par*/));
-            if((PL$49/*tempTypename*/ != "var")){
-              PL$46/*isTyped*/ = true;
+            PL$50/*tempTypename*/ = PL$16/*identifierName*/((PL$20/*par*/["params"][PL$40/*i*/]["typename"] || "var"));
+            PL$48/*functionTypeParam*/["arguments"]["push"](this["getType"](PL$50/*tempTypename*/, PL$20/*par*/));
+            if((PL$50/*tempTypename*/ != "var")){
+              PL$47/*isTyped*/ = true;
             };
             ;}};
           ;
         };
         ;
-        if(PL$46/*isTyped*/){
-          return this["createFunctionType"](PL$47/*functionTypeParam*/);
+        if(PL$47/*isTyped*/){
+          return this["createFunctionType"](PL$48/*functionTypeParam*/);
         };
         ;
         return this["getType"]("var");
         ;});
       this["createFunctionType"] = (function(PL$20/*par*/){
-      var PL$50/*isDynamic*/;
+      var PL$51/*isDynamic*/;
 var PL$40/*i*/;
 
         ;
-        PL$50/*isDynamic*/ = false;
+        PL$51/*isDynamic*/ = false;
         if(PL$20/*par*/["return"]["isDynamic"]){
-          PL$50/*isDynamic*/ = true;
+          PL$51/*isDynamic*/ = true;
         };
         ;
         PL$40/*i*/ = 0;
         for(PL$40/*i*/ = 0;(PL$40/*i*/ < PL$20/*par*/["arguments"]["length"]);++PL$40/*i*/){{
           if(PL$20/*par*/["arguments"][PL$40/*i*/]["isDynamic"]){
-            PL$50/*isDynamic*/ = true;
+            PL$51/*isDynamic*/ = true;
           };
           ;}};
         ;
-        if(PL$50/*isDynamic*/){
+        if(PL$51/*isDynamic*/){
           debugger;
         }else{
         return PL$7/*classSystem*/["createFunctionType"](PL$20/*par*/);
@@ -377,7 +395,7 @@ var PL$40/*i*/;
       var PL$25/*name*/;
 var PL$26/*entry*/;
 var PL$29/*type*/;
-var PL$51/*provisional*/;
+var PL$52/*provisional*/;
 
         ;
         PL$25/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
@@ -391,11 +409,11 @@ var PL$51/*provisional*/;
         };
         ;
         PL$29/*type*/ = PL$7/*classSystem*/["createClass"](PL$20/*par*/["literal"], {});
-        PL$51/*provisional*/ = PL$26/*entry*/["type"];
+        PL$52/*provisional*/ = PL$26/*entry*/["type"];
         PL$26/*entry*/["type"] = PL$29/*type*/;
         try
 {
-          this["resolveProvisional"](PL$51/*provisional*/, PL$29/*type*/);}catch(PL$52/*e*/){
+          this["resolveProvisional"](PL$52/*provisional*/, PL$29/*type*/);}catch(PL$46/*e*/){
           this["error"](PL$20/*par*/["par"], PL$11/*errorMsg*/["typeRedefinition"]);};
         ;
         PL$26/*entry*/["isDefined"] = true;
@@ -471,7 +489,7 @@ var PL$57/*extraRes*/;
         ;});
       this["expectTypeVar"] = (function(PL$20/*par*/){
       var PL$35/*self*/;
-var PL$52/*e*/;
+var PL$46/*e*/;
 
         ;
         if((PL$20/*par*/["getType"]() === this["getType"]("var"))){
@@ -479,12 +497,12 @@ var PL$52/*e*/;
         };
         ;
         PL$35/*self*/ = this;
-        PL$52/*e*/ = this["addError"](PL$20/*par*/["getParsed"](), PL$11/*errorMsg*/["expectedVar"]);
+        PL$46/*e*/ = this["addError"](PL$20/*par*/["getParsed"](), PL$11/*errorMsg*/["expectedVar"]);
         PL$7/*classSystem*/["definitionPromise"](PL$20/*par*/["getType"]())["then"]((function(PL$27/*t*/){
         
           ;
           if((PL$27/*t*/ === PL$35/*self*/["getType"]("var"))){
-            PL$52/*e*/["resolve"]();
+            PL$46/*e*/["resolve"]();
           };
           ;
           ;}));
@@ -493,7 +511,12 @@ var PL$52/*e*/;
       this["isSameType"] = (function(PL$58/*type1*/, PL$59/*type2*/){
       
         ;
+        if((this["isDynamicType"](PL$58/*type1*/) || this["isDynamicType"](PL$59/*type2*/))){
+          return (PL$58/*type1*/ === PL$59/*type2*/);
+        }else{
         return PL$7/*classSystem*/["isSameType"](PL$58/*type1*/, PL$59/*type2*/);
+        };
+        ;
         ;});
       this["getResultType"] = (function(PL$20/*par*/){
       var PL$27/*t*/;

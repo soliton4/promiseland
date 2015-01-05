@@ -51,7 +51,7 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "1ca154f10e4629e29249f1beaf80f14e" })){ return promiseland._getModule("1ca154f10e4629e29249f1beaf80f14e"); };
+if (promiseland._hasModule({ hashStr: "ef7cb29818d87ff1bf02a9a84c53416e" })){ return promiseland._getModule("ef7cb29818d87ff1bf02a9a84c53416e"); };
 var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$7/*RegExp*/;try{PL$7/*RegExp*/ = RegExp;}catch(e){};
 var PL$1 = (function(){
@@ -282,7 +282,9 @@ var PL$20/*arguments*/ = arguments;
 "additional": "pls provide this error in a github issue"},
 "internalTypeInfoConfusion": {"id": 1013,
 "msg": "type info confusion",
-"additional": "pls provide this error in a github issue"}};
+"additional": "pls provide this error in a github issue"},
+"asmValidationFailed": {"id": 2001,
+"msg": "asm.js validation failed"}};
   return {"errorFun": PL$9/*errorFun*/,
 "errorMsg": PL$11/*errorMsg*/,
 "_stringEncodeStr": PL$4/*_stringEncodeStr*/,

@@ -29,6 +29,14 @@ return (parInstance, par){
   var f = (par){
     
     
+    this.isDynamicType = (parType){
+      if (parType.isDynamic){
+        return true;
+      };
+      return false;
+    };
+    
+    
           /*
         
         class system code generation 

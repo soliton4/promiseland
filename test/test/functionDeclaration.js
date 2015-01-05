@@ -60,26 +60,22 @@ var PL$2 = (function(){
 "use strict";
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$4 = function(e){ PL$1.reject(e); };
-var PL$5/*fmain*/;
-var PL$5/*fmain*/ = function(){
+function PL$5/*fmain*/(){
 var PL$7 = new __Promise();
 var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
 var PL$10 = function(e){ PL$7.reject(e); };
-var PL$11/*fa*/;
 var PL$12/*res*/;
-var PL$13/*fb*/;
-var PL$14/*fc*/;
-var PL$11/*fa*/ = function(){
+function PL$11/*fa*/(){
 
   ;
   return 1;
   ;};
-var PL$13/*fb*/ = function(){
+function PL$13/*fb*/(){
 
   ;
   return 2;
   ;};
-var PL$14/*fc*/ = function(){
+function PL$14/*fc*/(){
 
   ;
   return 3;

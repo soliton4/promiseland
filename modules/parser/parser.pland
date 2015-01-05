@@ -201,6 +201,11 @@ var _Result = require "./Result";
         var i = 0;
         for (i = 0; i < this.errors.length; ++i){
           if (this.errors[i].valid){
+            if (this.errors[i].dbgFun){
+              try{
+                this.errors[i].dbgFun();
+              };
+            };
             if (parWarning ? this.errors[i].warning : !this.errors[i].warning){
               a.push(this.errors[i]);
             };
@@ -208,6 +213,7 @@ var _Result = require "./Result";
         };
         return a;
       };
+      
       this.getWarnings = function(){
         return this._getErrors(true);
       };
@@ -233,20 +239,21 @@ var _Result = require "./Result";
         this._addError(par, err);
         errorFun(par, err);
       };
-      this.addError = function(par, err){
-        return this._addError(par, err);
+      this.addError = function(par, err, dbgFun){
+        return this._addError(par, err, false, dbgFun);
       };
       this.addWarning = function(par, err){
         return this._addError(par, err, true);
       };
-      this._addError = function(par, err, warning){
+      this._addError = function(par, err, warning, dbgFun){
         var entry = {
           par: par,
           line: par.line,
           column: par.column,
           msg: err.id + ": " + err.msg,
           valid: true,
-          warning: warning
+          warning: warning,
+          dbgFun: dbgFun
         };
         this.errors.push(entry);
         var ps = new Promise();
