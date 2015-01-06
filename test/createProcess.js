@@ -84,16 +84,13 @@ PL$3(function(){
   PL$7/*spawn*/ = PL$5/*child_process*/["spawn"];
   PL$8/*fork*/ = PL$5/*child_process*/["fork"];
   PL$1.resolve((function(PL$9/*cmdStr*/, PL$10/*parAr*/, PL$11/*options*/){
-  var PL$12/*child*/;
-var PL$16/*cb*/;
-var PL$18/*result*/;
-
+  
     ;
     if(! PL$10/*parAr*/){
       PL$10/*parAr*/ = [];
     };
     ;
-    PL$12/*child*/;
+    var PL$12/*child*/;
     if((PL$11/*options*/ && PL$11/*options*/["fork"])){
       PL$12/*child*/ = PL$8/*fork*/(PL$9/*cmdStr*/, PL$10/*parAr*/, PL$11/*options*/);
     }else{
@@ -127,9 +124,9 @@ var PL$18/*result*/;
         ;}));
     };
     ;
-    PL$16/*cb*/ = new PL$17/*Callback*/();
+    var PL$16/*cb*/ = new PL$17/*Callback*/();
     PL$12/*child*/["on"]("close", PL$16/*cb*/);
-    PL$18/*result*/ = (function(){
+    var PL$18/*result*/ = (function(){
     var PL$19 = new __Promise();
 var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.reject(e); }; }; };
 var PL$22 = function(e){ PL$19.reject(e); };

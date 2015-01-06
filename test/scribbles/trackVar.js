@@ -56,10 +56,9 @@ var PL$3/*trackRet*/;try{PL$3/*trackRet*/ = trackRet;}catch(e){};
 var PL$4/*track2Ret*/;try{PL$4/*track2Ret*/ = track2Ret;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*a*/;
 
   ;
-  PL$2/*a*/;
+  var PL$2/*a*/;
   PL$2/*a*/ = PL$3/*trackRet*/();
   PL$2/*a*/ = (PL$3/*trackRet*/() || PL$4/*track2Ret*/());
   ;})();

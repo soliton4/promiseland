@@ -173,18 +173,6 @@ var _Result = require "./Result";
         
       };
       
-      this.makeCompleteStatementDynamic = function(par){
-        var r = this.newResult();
-        var d = this.newResult();
-        
-        d.push(this.makeCompleteStatement(par), undefined, {
-          stringEncode: true
-        });
-        r.push("\"");
-        r.push(d);
-        r.push("\"");
-        return r;
-      };
       
         
       variablesModule(this, par);
@@ -857,14 +845,6 @@ var _Result = require "./Result";
       this.getFunctionArgumentCount = function(parType, parsed){
         return classSystem.getFunctionArgumentCount(parType);
       };
-      
-      this.isVar = function(parType){
-        if (typeof parType == "function"){
-          return classSystem.isVar(parType);
-        };
-        return false;
-      };
-      
       
       
       asmModule(this, par);

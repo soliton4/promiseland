@@ -54,16 +54,14 @@ var __require = requireFun;
 if (promiseland._hasModule({ hashStr: "ee5b5da42a294a2f1d77d2f4f93f0add" })){ return promiseland._getModule("ee5b5da42a294a2f1d77d2f4f93f0add"); };
 var PL$1 = (function(){
 "use strict";
-var PL$2/*T*/;
-var PL$4/*t*/;
 
   ;
-  PL$2/*T*/ = (function(PL$3/*par*/){
+  var PL$2/*T*/ = (function(PL$3/*par*/){
   
     ;
     this["par"] = PL$3/*par*/;
     ;});
-  PL$4/*t*/ = new PL$2/*T*/({"id": 4});
+  var PL$4/*t*/ = new PL$2/*T*/({"id": 4});
   if((PL$4/*t*/["par"] && (PL$4/*t*/["par"]["id"] == 4))){
     return {"success": true};
   };

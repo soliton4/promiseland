@@ -366,7 +366,8 @@ return (parInstance, par){
             name: this.getVariableName(varname),
             "type": type,
             errorFun: this.getWarningFun(par),
-            parsed: par
+            parsed: par,
+            declaration: localVariablesAr[i].value.needsDeclaration
           }));
           
         }else{

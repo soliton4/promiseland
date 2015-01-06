@@ -56,10 +56,9 @@ if (promiseland._hasModule({ hashStr: "ff23c7ac67b3e8242608f22ed8949a2e" })){ re
 var PL$3/*Map*/;try{PL$3/*Map*/ = Map;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*m*/;
 
   ;
-  PL$2/*m*/ = new PL$3/*Map*/();
+  var PL$2/*m*/ = new PL$3/*Map*/();
   if(PL$2/*m*/){
     return {"success": true};
   };

@@ -97,15 +97,14 @@ PL$3(function(){
     ;
     PL$16/*res*/["setHeader"]("Content-Type", "text/html");
     PL$9/*fs*/["readFile"]("./testConsole/testConsole.html", (function(PL$17/*err*/, PL$18/*data*/){
-    var PL$19/*s*/;
-
+    
       ;
       if(PL$17/*err*/){
         PL$16/*res*/["end"](PL$17/*err*/);
         return;
       };
       ;
-      PL$19/*s*/ = PL$18/*data*/["toString"]();
+      var PL$19/*s*/ = PL$18/*data*/["toString"]();
       PL$16/*res*/["end"](PL$19/*s*/);
       ;}));
     ;}));
@@ -121,8 +120,7 @@ PL$3(function(){
   PL$14/*server*/["listen"](3007);
   PL$21/*promiseland*/["set"]("profile", "server");
   PL$22/*ClientProfile*/ = (function(){
-  var PL$24/*nextid*/;
-
+  
     ;
     this["name"] = (function(){
     
@@ -135,12 +133,11 @@ PL$3(function(){
       ;
       return this["connections"][PL$23/*parId*/];
       ;});
-    PL$24/*nextid*/ = 1;
+    var PL$24/*nextid*/ = 1;
     this["addConnection"] = (function(PL$25/*connection*/){
-    var PL$26/*id*/;
-
+    
       ;
-      PL$26/*id*/ = PL$24/*nextid*/;
+      var PL$26/*id*/ = PL$24/*nextid*/;
       PL$24/*nextid*/++;
       this["connections"][PL$26/*id*/] = PL$25/*connection*/;
       this["emit"]("connection", PL$25/*connection*/);
@@ -151,11 +148,10 @@ PL$3(function(){
   PL$21/*promiseland*/["addProfile"](PL$27/*clientProfile*/);
   PL$28/*mainio*/ = PL$11/*socketIo*/["listen"](PL$14/*server*/);
   PL$28/*mainio*/["on"]("connection", (function(PL$29/*socket*/){
-  var PL$25/*connection*/;
-
+  
     ;
     PL$30/*console*/["log"]("got connected");
-    PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
+    var PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
     PL$25/*connection*/["socket"] = PL$29/*socket*/;
     PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
     

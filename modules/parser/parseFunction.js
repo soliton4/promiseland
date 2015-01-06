@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "ad22e18590b5f1b947065d8c164ea65e" })){ return promiseland._getModule("ad22e18590b5f1b947065d8c164ea65e"); };
+    if (promiseland._hasModule({ hashStr: "ac48678633390dbdb31404302e64e19a" })){ return promiseland._getModule("ac48678633390dbdb31404302e64e19a"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "ad22e18590b5f1b947065d8c164ea65e", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "ac48678633390dbdb31404302e64e19a", "module": PL$1, promising: true });
 var PL$40/*Promise*/;try{PL$40/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -418,7 +418,8 @@ var PL$64/*finalResult*/;
             PL$47/*funRes*/["push"](this["getDeclareVariableCode"]({"name": this["getVariableName"](PL$56/*varname*/),
 "type": PL$23/*type*/,
 "errorFun": this["getWarningFun"](PL$17/*par*/),
-"parsed": PL$17/*par*/}));
+"parsed": PL$17/*par*/,
+"declaration": PL$55/*localVariablesAr*/[PL$30/*i*/]["value"]["needsDeclaration"]}));
           }else{
           debugger;
           };

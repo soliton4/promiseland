@@ -59,10 +59,9 @@ var PL$9/*Callback*/;try{PL$9/*Callback*/ = Callback;}catch(e){};
 var PL$10/*setTimeout*/;try{PL$10/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*somefun*/;
 
   ;
-  PL$2/*somefun*/ = (function(PL$3/*par*/){
+  var PL$2/*somefun*/ = (function(PL$3/*par*/){
   var PL$4 = new __Promise();
 var PL$6 = function(code){ return function(res){ try{code(res);}catch(e){ PL$4.reject(e); }; }; };
 var PL$7 = function(e){ PL$4.reject(e); };

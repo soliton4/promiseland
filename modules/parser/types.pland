@@ -414,7 +414,21 @@ return (parInstance, par){
         });
         return t;
       };
+    
+    
+    this.isSimpleType = (parType){
+      if (this.isVar(parType)){
+        return true;
+      };
+      return false;
+    };
 
+    this.isVar = function(parType){
+      if (typeof parType == "function"){
+        return classSystem.isVar(parType);
+      };
+      return false;
+    };
 
 
     

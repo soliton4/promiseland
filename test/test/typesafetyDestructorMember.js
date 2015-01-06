@@ -55,7 +55,6 @@ var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "575c4be1e0319423fd58de62903afcaf" })){ return promiseland._getModule("575c4be1e0319423fd58de62903afcaf"); };
 var PL$1 = (function(){
 "use strict";
-var PL$8/*i*/;
 var PL$3/*C1*/;
 var PL$6/*C2*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
@@ -64,7 +63,7 @@ var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/)
 PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});
   ;
-  PL$8/*i*/ = 2;
+  var PL$8/*i*/ = 2;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "575c4be1e0319423fd58de62903afcaf", "name": "C1"}, {"destroy": (function(){
   
     ;

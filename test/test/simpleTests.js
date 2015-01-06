@@ -153,10 +153,9 @@ PL$18.then(PL$16(function(){;
 return PL$14;
 });
   PL$29/*funReturning4*/ = (function(PL$8/*mod*/, PL$9/*success*/){
-  var PL$30/*p*/;
-
+  
     ;
-    PL$30/*p*/ = new PL$31/*Promise*/();
+    var PL$30/*p*/ = new PL$31/*Promise*/();
     try
 {
       PL$8/*mod*/["fun"]()["then"]((function(PL$32/*value*/){

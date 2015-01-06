@@ -123,7 +123,13 @@ return (parInstance, par){
                 res.push(self.renderType(par[p], parsed));
               }else{
                 addProperty(p);
-                res.push(self.makeCompleteStatementDynamic(par[p]));
+                if (typeof par[p] == "boolean"){
+                  var tempStr = "";
+                  tempStr += par[p];
+                  res.push(tempStr);
+                }else{
+                  res.push(self.makeCompleteStatementDynamic(par[p]));
+                };
               };
             };
             res.push("})");
@@ -334,7 +340,8 @@ return (parInstance, par){
           "type": par.type,
           name: par.name,
           errorFun: par.errorFun,
-          parsed: par.parsed
+          parsed: par.parsed,
+          declaration: par.declaration
         }));
         
         res.setType(statementType);
@@ -344,7 +351,7 @@ return (parInstance, par){
     
     
     
-          this.getProcessParameterCode = function(par){
+      this.getProcessParameterCode = function(par){
         var res = this.newResult();
         
         res.push(this.callClassSystem("getProcessParameterCode", {
@@ -527,6 +534,18 @@ return (parInstance, par){
         return res;
       };
 
+    this.makeCompleteStatementDynamic = function(par){
+      var r = this.newResult();
+      var d = this.newResult();
+
+      d.push(this.makeCompleteStatement(par), undefined, {
+        stringEncode: true
+      });
+      r.push("\"");
+      r.push(d);
+      r.push("\"");
+      return r;
+    };
 
 
     

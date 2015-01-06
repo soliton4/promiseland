@@ -55,18 +55,15 @@ if (promiseland._hasModule({ hashStr: "6b462038a9171eb6ac94e6b855660e0f" })){ re
 var PL$5/*dostuff*/;try{PL$5/*dostuff*/ = dostuff;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*result*/;
-var PL$3/*dootherStuff*/;
-var PL$4/*x*/;
 
   ;
-  PL$2/*result*/ = {"res": 1};
-  PL$3/*dootherStuff*/ = (function(){
+  var PL$2/*result*/ = {"res": 1};
+  var PL$3/*dootherStuff*/ = (function(){
   
     ;
     PL$2/*result*/["res"] = 4;
     ;});
-  PL$4/*x*/ = (function(){
+  var PL$4/*x*/ = (function(){
   
     ;
     try

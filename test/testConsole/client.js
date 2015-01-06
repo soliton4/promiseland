@@ -105,11 +105,10 @@ PL$3(function(){
     ;});
   PL$6/*ServerProfile*/["prototype"] = new PL$5/*promiseland*/["ProfileBaseClass"]();
   PL$7/*ServerConnection*/ = (function(PL$8/*socket*/){
-  var PL$9/*self*/;
-
+  
     ;
     this["socket"] = PL$8/*socket*/;
-    PL$9/*self*/ = this;
+    var PL$9/*self*/ = this;
     PL$8/*socket*/["on"]("pl", (function(PL$10/*data*/){
     
       ;
@@ -126,10 +125,9 @@ PL$3(function(){
   PL$5/*promiseland*/["addProfile"](PL$11/*serverProfile*/);
   PL$8/*socket*/ = PL$12/*io*/["connect"]();
   PL$8/*socket*/["on"]("connect", (function(){
-  var PL$13/*connection*/;
-
+  
     ;
-    PL$13/*connection*/ = new PL$7/*ServerConnection*/(PL$8/*socket*/);
+    var PL$13/*connection*/ = new PL$7/*ServerConnection*/(PL$8/*socket*/);
     PL$11/*serverProfile*/["connection"] = PL$13/*connection*/;
     PL$11/*serverProfile*/["emit"]("connection", PL$13/*connection*/);
     ;}));

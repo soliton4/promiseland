@@ -56,12 +56,11 @@ var PL$4/*console*/;try{PL$4/*console*/ = console;}catch(e){};
 var PL$3/*y*/;try{PL$3/*y*/ = y;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*x*/;
 
   ;
   try
 {
-    PL$2/*x*/ = (function PL$3/*y*/(){
+    var PL$2/*x*/ = (function PL$3/*y*/(){
     
       ;
       PL$4/*console*/["log"]("exec");

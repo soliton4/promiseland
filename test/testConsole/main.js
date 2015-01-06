@@ -72,11 +72,9 @@ var PL$13/*__dirname*/;try{PL$13/*__dirname*/ = __dirname;}catch(e){};
 var PL$24/*Callback*/;try{PL$24/*Callback*/ = Callback;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*cp*/;
-var PL$9/*runTests*/;
 
   ;
-  PL$2/*cp*/;
+  var PL$2/*cp*/;
   (function(){
   if (!promiseland.profileHas("server")){
   var p = new __Promise();
@@ -95,7 +93,7 @@ PL$5(function(){
 return PL$3;
 })();
   PL$8/*console*/["log"]("loaded");
-  PL$9/*runTests*/ = ((function(f){
+  var PL$9/*runTests*/ = ((function(f){
 promiseland.registerRemote("server", "120e06c54cdf04aabe8fa91a75678f0e", "PL$27", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;

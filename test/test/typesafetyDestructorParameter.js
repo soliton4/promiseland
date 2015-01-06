@@ -56,10 +56,7 @@ if (promiseland._hasModule({ hashStr: "1c27915421db6c724a7af79a2c806394" })){ re
 var PL$12/*console*/;try{PL$12/*console*/ = console;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$5/*failed*/;
-var PL$6/*cnt*/;
 var PL$3/*C1*/;
-var PL$7/*cntSupposed*/;
 var PL$11/*a*/;
 var _TPL$11/*a*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
@@ -74,14 +71,14 @@ PL$10/*p1*/ = PL$10/*p1*/[0];}
   if (_TPL$10/*p1*/){ _TPL$10/*p1*/();};}catch(e){if (_TPL$10/*p1*/){ _TPL$10/*p1*/();};throw e};;};
 
   ;
-  PL$5/*failed*/ = false;
-  PL$6/*cnt*/ = 0;
+  var PL$5/*failed*/ = false;
+  var PL$6/*cnt*/ = 0;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "1c27915421db6c724a7af79a2c806394", "name": "C1"}, {"destroy": (function(){
   
     ;
     PL$6/*cnt*/++;
     ;})}));PL$3/*C1*/;
-  PL$7/*cntSupposed*/ = (function(PL$8/*s*/){
+  var PL$7/*cntSupposed*/ = (function(PL$8/*s*/){
   
     ;
     if((PL$6/*cnt*/ == PL$8/*s*/)){

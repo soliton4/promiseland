@@ -55,21 +55,16 @@ if (promiseland._hasModule({ hashStr: "45793d21303f9b6bf6d65e96e3d6b248" })){ re
 var PL$3/*__dirname*/;try{PL$3/*__dirname*/ = __dirname;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*isServer*/;
-var PL$4/*serverRun*/;
-var PL$5/*clientRun*/;
-var PL$6/*exs*/;
-var PL$7/*exc*/;
 
   ;
-  PL$2/*isServer*/ = false;
+  var PL$2/*isServer*/ = false;
   if(PL$3/*__dirname*/){
     PL$2/*isServer*/ = true;
   };
   ;
-  PL$4/*serverRun*/ = false;
-  PL$5/*clientRun*/ = false;
-  PL$6/*exs*/ = (function(){
+  var PL$4/*serverRun*/ = false;
+  var PL$5/*clientRun*/ = false;
+  var PL$6/*exs*/ = (function(){
   if (!promiseland.profileHas("server")){
   return;
 };
@@ -77,7 +72,7 @@ var PL$7/*exc*/;
     ;
     PL$4/*serverRun*/ = true;
     ;});
-  PL$7/*exc*/ = (function(){
+  var PL$7/*exc*/ = (function(){
   if (!promiseland.profileHas("client")){
   return;
 };

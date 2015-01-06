@@ -69,15 +69,11 @@ var PL$2/*promiseland*/;try{PL$2/*promiseland*/ = promiseland;}catch(e){};
 var PL$9/*io*/;try{PL$9/*io*/ = io;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$3/*ServerProfile*/;
-var PL$4/*ServerConnection*/;
-var PL$8/*serverProfile*/;
-var PL$5/*socket*/;
 var PL$11/*runTests*/;
 
   ;
   PL$2/*promiseland*/["set"]("profile", "client");
-  PL$3/*ServerProfile*/ = (function(){
+  var PL$3/*ServerProfile*/ = (function(){
   
     ;
     this["name"] = (function(){
@@ -92,12 +88,11 @@ var PL$11/*runTests*/;
       ;});
     ;});
   PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();
-  PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
-  var PL$6/*self*/;
-
+  var PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
+  
     ;
     this["socket"] = PL$5/*socket*/;
-    PL$6/*self*/ = this;
+    var PL$6/*self*/ = this;
     PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
     
       ;
@@ -110,14 +105,13 @@ var PL$11/*runTests*/;
       ;});
     ;});
   PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();
-  PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
+  var PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
   PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);
-  PL$5/*socket*/ = PL$9/*io*/["connect"]();
+  var PL$5/*socket*/ = PL$9/*io*/["connect"]();
   PL$5/*socket*/["on"]("connect", (function(){
-  var PL$10/*connection*/;
-
+  
     ;
-    PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
+    var PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
     PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;
     PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);
     PL$11/*runTests*/();

@@ -54,18 +54,15 @@ var __require = requireFun;
 if (promiseland._hasModule({ hashStr: "36fd2cecbc7c12901444ff42e0149fc5" })){ return promiseland._getModule("36fd2cecbc7c12901444ff42e0149fc5"); };
 var PL$1 = (function(){
 "use strict";
-var PL$2/*x*/;
 
   ;
-  PL$2/*x*/ = (function PL$3/*f*/(PL$4/*stdlib*/, PL$5/*foreign*/, PL$6/*heap*/){
+  var PL$2/*x*/ = (function PL$3/*f*/(PL$4/*stdlib*/, PL$5/*foreign*/, PL$6/*heap*/){
   "use asm";
   
   function PL$3/*f*/(){
-  var PL$2/*x*/;
-var PL$7/*y*/;
-
+  
     ;
-    PL$2/*x*/ = 0, PL$7/*y*/ = 0;
+    var PL$2/*x*/ = 0, PL$7/*y*/ = 0;
     PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
     ;};
   

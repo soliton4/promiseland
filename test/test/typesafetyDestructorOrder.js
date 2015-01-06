@@ -55,29 +55,25 @@ var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "9d4c45c6545311d7a14ef435c0a3d1c0" })){ return promiseland._getModule("9d4c45c6545311d7a14ef435c0a3d1c0"); };
 var PL$1 = (function(){
 "use strict";
-var PL$8/*failed*/;
-var PL$9/*cnt*/;
 var PL$3/*C1*/;
 var PL$6/*C2*/;
-var PL$10/*cntSupposed*/;
 var PL$12/*c2*/;
 var _TPL$12/*c2*/;
-var PL$13/*fun*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
 PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});var PL$5/*type:C2*/ = classSystem._createProvisionalClass();
 PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});
   ;
-  PL$8/*failed*/ = false;
-  PL$9/*cnt*/ = 0;
+  var PL$8/*failed*/ = false;
+  var PL$9/*cnt*/ = 0;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "9d4c45c6545311d7a14ef435c0a3d1c0", "name": "C1"}, {"destroy": (function(){
   
     ;
     PL$9/*cnt*/++;
     ;})}));PL$3/*C1*/;
   classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "9d4c45c6545311d7a14ef435c0a3d1c0", "name": "C2"}, {"m1": undefined}));PL$6/*C2*/;
-  PL$10/*cntSupposed*/ = (function(PL$11/*s*/){
+  var PL$10/*cntSupposed*/ = (function(PL$11/*s*/){
   
     ;
     if((PL$9/*cnt*/ == PL$11/*s*/)){
@@ -100,7 +96,7 @@ return;
 }; })(new PL$7/*C2-constructor*/())/*end temp assign*/
 ;
   PL$10/*cntSupposed*/(0);
-  PL$13/*fun*/ = (function(){
+  var PL$13/*fun*/ = (function(){
   var PL$14/*v1*/;
 var _TPL$14/*v1*/;
 var PL$15/*v2*/;

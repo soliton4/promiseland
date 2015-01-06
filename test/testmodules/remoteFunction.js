@@ -59,12 +59,10 @@ var PL$10/*doSome*/;try{PL$10/*doSome*/ = doSome;}catch(e){};
 var PL$3/*context*/;try{PL$3/*context*/ = context;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*z*/;
-var PL$11/*y*/;
 var PL$8/*x*/;
 
   ;
-  PL$2/*z*/ = (function(PL$3/*context*/){
+  var PL$2/*z*/ = (function(PL$3/*context*/){
   var PL$4 = new __Promise();
 var PL$6 = function(code){ return function(res){ try{code(res);}catch(e){ PL$4.reject(e); }; }; };
 var PL$7 = function(e){ PL$4.reject(e); };
@@ -79,7 +77,7 @@ PL$6(function(){
 ;})();
 return PL$4;
 });
-  PL$11/*y*/ = ((function(f){
+  var PL$11/*y*/ = ((function(f){
 promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "PL$16", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;

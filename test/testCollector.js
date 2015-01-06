@@ -58,18 +58,11 @@ if (promiseland._hasModule({ hashStr: "2c4ae3017f175bf1f7b91699d6625b7e" })){ re
 var PL$6/*Promise*/;try{PL$6/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*results*/;
-var PL$3/*finishObj*/;
-var PL$4/*getResultPromise*/;
-var PL$7/*getFinishPromise*/;
-var PL$8/*postResult*/;
-var PL$15/*finish*/;
-var PL$16/*waitForFinish*/;
 
   ;
-  PL$2/*results*/ = {};
-  PL$3/*finishObj*/ = {};
-  PL$4/*getResultPromise*/ = (function(PL$5/*type*/){
+  var PL$2/*results*/ = {};
+  var PL$3/*finishObj*/ = {};
+  var PL$4/*getResultPromise*/ = (function(PL$5/*type*/){
   
     ;
     if(PL$2/*results*/[PL$5/*type*/]){
@@ -79,7 +72,7 @@ var PL$16/*waitForFinish*/;
     PL$2/*results*/[PL$5/*type*/] = new PL$6/*Promise*/();
     return PL$2/*results*/[PL$5/*type*/];
     ;});
-  PL$7/*getFinishPromise*/ = (function(PL$5/*type*/){
+  var PL$7/*getFinishPromise*/ = (function(PL$5/*type*/){
   
     ;
     if(! PL$3/*finishObj*/[PL$5/*type*/]){
@@ -88,7 +81,7 @@ var PL$16/*waitForFinish*/;
     ;
     return PL$3/*finishObj*/[PL$5/*type*/];
     ;});
-  PL$8/*postResult*/ = ((function(f){
+  var PL$8/*postResult*/ = ((function(f){
 promiseland.registerRemote("server", "2c4ae3017f175bf1f7b91699d6625b7e", "PL$14", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
@@ -108,12 +101,12 @@ PL$12(function(){
     PL$10.resolve(); return;})();
 return PL$10;
 }));
-  PL$15/*finish*/ = (function(PL$5/*type*/){
+  var PL$15/*finish*/ = (function(PL$5/*type*/){
   
     ;
     PL$7/*getFinishPromise*/(PL$5/*type*/)["resolve"]();
     ;});
-  PL$16/*waitForFinish*/ = ((function(f){
+  var PL$16/*waitForFinish*/ = ((function(f){
 promiseland.registerRemote("server", "2c4ae3017f175bf1f7b91699d6625b7e", "PL$21", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;

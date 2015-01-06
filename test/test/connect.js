@@ -59,7 +59,6 @@ var PL$3/*Emitter*/;
 var PL$6/*Reciever*/;
 var PL$9/*e*/;
 var PL$10/*r*/;
-var PL$11/*c*/;
 var PL$2/*type:Emitter*/ = classSystem._createProvisionalClass();
 PL$3/*Emitter*/ = PL$2/*type:Emitter*/;
 var PL$4/*Emitter-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Emitter*/).then(function(parType){PL$2/*type:Emitter*/ = parType;PL$4/*Emitter-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Emitter*/);});var PL$5/*type:Reciever*/ = classSystem._createProvisionalClass();
@@ -77,7 +76,7 @@ var PL$7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type
     ;}), "amount": 1}));PL$6/*Reciever*/;
   PL$9/*e*/ = new PL$4/*Emitter-constructor*/();
   PL$10/*r*/ = new PL$7/*Reciever-constructor*/();
-  PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
+  var PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
   PL$9/*e*/[3](2);
   if((PL$10/*r*/[4] == 3)){
     return {"success": true};

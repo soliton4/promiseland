@@ -119,11 +119,10 @@ return PL$22;
       ;
       (function(s, v){ v = s[10](v); s[9] = v; return v; })(this, PL$30/*nextId*/++);
       ;}), "id": 0, "destroy": (function(){
-    var PL$32/*p*/;
-
+    
       ;
       PL$31/*console*/["log"](("destroying" + this[9]));
-      PL$32/*p*/ = PL$33/*pos*/[7];
+      var PL$32/*p*/ = PL$33/*pos*/[7];
       PL$31/*console*/["log"](PL$32/*p*/);
       delete PL$32/*p*/[this[9]];
       PL$31/*console*/["log"](PL$32/*p*/);
@@ -258,14 +257,11 @@ return PL$49;
         ;});
       PL$62/*wgts*/ = {};
       PL$63/*setInterval*/((function(){
-      var PL$32/*p*/;
-var PL$64/*i*/;
-var PL$65/*n*/;
-
+      
         ;
-        PL$32/*p*/ = PL$33/*pos*/[7];
-        PL$64/*i*/;
-        PL$65/*n*/;
+        var PL$32/*p*/ = PL$33/*pos*/[7];
+        var PL$64/*i*/;
+        var PL$65/*n*/;
         for(PL$64/*i*/ in PL$32/*p*/){
           if((PL$64/*i*/ != PL$53/*s*/[9])){
             if(PL$62/*wgts*/[PL$64/*i*/]){

@@ -55,28 +55,24 @@ var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "d5c4130fe09db261b4e797ff99b23065" })){ return promiseland._getModule("d5c4130fe09db261b4e797ff99b23065"); };
 var PL$1 = (function(){
 "use strict";
-var PL$8/*failed*/;
-var PL$9/*cnt*/;
 var PL$3/*C1*/;
 var PL$6/*C2*/;
 var PL$11/*v1*/;
 var _TPL$11/*v1*/;
 var PL$12/*v2*/;
 var _TPL$12/*v2*/;
-var PL$13/*cntSupposed*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
 PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});var PL$5/*type:C2*/ = classSystem._createProvisionalClass();
 PL$6/*C2*/ = PL$5/*type:C2*/;
 var PL$7/*C2-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){PL$5/*type:C2*/ = parType;PL$7/*C2-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:C2*/);});
   ;
-  PL$8/*failed*/ = false;
-  PL$9/*cnt*/ = 0;
+  var PL$8/*failed*/ = false;
+  var PL$9/*cnt*/ = 0;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"circ","type":PL$2/*type:C1*/},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "d5c4130fe09db261b4e797ff99b23065", "name": "C1"}, {"circ": undefined, "id": 0, "destroy": (function(){
-  var PL$10/*checkid*/;
-
+  
     ;
-    PL$10/*checkid*/ = this[8];
+    var PL$10/*checkid*/ = this[8];
     PL$9/*cnt*/++;
     ;})}));PL$3/*C1*/;
   classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "d5c4130fe09db261b4e797ff99b23065", "name": "C2"}, {"m1": undefined}));PL$6/*C2*/;
@@ -104,7 +100,7 @@ PL$12/*v2*/ = undefined; _TPL$12/*v2*/ = undefined;
 return;
 }; })(new PL$7/*C2-constructor*/())/*end temp assign*/
 ;
-  PL$13/*cntSupposed*/ = (function(PL$14/*s*/){
+  var PL$13/*cntSupposed*/ = (function(PL$14/*s*/){
   
     ;
     if((PL$9/*cnt*/ == PL$14/*s*/)){

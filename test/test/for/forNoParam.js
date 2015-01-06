@@ -54,10 +54,9 @@ var __require = requireFun;
 if (promiseland._hasModule({ hashStr: "9f9fc216ab0b9e4a870d3a4f159ec37d" })){ return promiseland._getModule("9f9fc216ab0b9e4a870d3a4f159ec37d"); };
 var PL$1 = (function(){
 "use strict";
-var PL$2/*a*/;
 
   ;
-  PL$2/*a*/ = 0;
+  var PL$2/*a*/ = 0;
   for(;;){{
     PL$2/*a*/ = 1;
     break;;}};

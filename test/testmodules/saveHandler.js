@@ -59,14 +59,13 @@ var PL$12/*console*/;try{PL$12/*console*/ = console;}catch(e){};
 var PL$14/*promiseland*/;try{PL$14/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$5/*properties*/;
 var PL$26/*SaveHandler*/;
 var PL$3/*C1*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
 PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});
   ;
-  PL$5/*properties*/;
+  var PL$5/*properties*/;
   PL$26/*SaveHandler*/ = (function(){var PL$6/*inherited*/ = {};
 var res = promiseland.createClass({"registerClass": (function(PL$7/*par*/){
   var PL$8 = new __Promise();

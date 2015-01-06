@@ -228,7 +228,38 @@ return (parInstance, par){
           var i = 0;
           var l = declarations.length;
           var usedType = this.getType(identifierName(par.typename), par);
-          for (i; i < l; ++i){
+          
+          var addVar = false;
+          if (!this.promising && l > 0){
+            // to be compatible with asm.js 
+            // we need to initialize the variables at declaration time
+            // so when its a non promising function and the variable has not been used before we can add a "var"
+            var addVar = true;
+            for (i = 0; i < l; ++i){
+              var varName = identifierName(declarations[i].id);
+              if (this.usedVariablesMap.get(varName)){
+                addVar = false;
+              };
+              if (!this.localVariables.get(varName).needsDeclaration){
+                addVar = false;
+              };
+            };
+          };
+          
+          if (!this.isSimpleType(usedType)){
+            // sorry for this mess but we need to make exceptions for asm.js here
+            addVar = false;
+          };
+          
+          if (addVar){
+            res.push("var ");
+            for (i = 0; i < l; ++i){
+              var varName = identifierName(declarations[i].id);
+              this.localVariables.get(varName).needsDeclaration = false;
+            };
+          };
+          
+          for (i = 0; i < l; ++i){
             if (i > 0){
               res.push(", ");
             };

@@ -59,11 +59,9 @@ function PL$2/*f*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$5/*heap*/){
 "use asm";
 
 function PL$2/*f*/(){
-var PL$6/*x*/;
-var PL$7/*y*/;
 
   ;
-  PL$6/*x*/ = 0, PL$7/*y*/ = 0;
+  var PL$6/*x*/ = 0, PL$7/*y*/ = 0;
   PL$6/*x*/ = (((PL$6/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
   ;};
 
@@ -76,11 +74,9 @@ function PL$2/*f*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$5/*heap*/){
 "use asm";
 
 function PL$2/*f*/(){
-var PL$6/*x*/;
-var PL$7/*y*/;
 
   ;
-  PL$6/*x*/ = 0, PL$7/*y*/ = 0;
+  var PL$6/*x*/ = 0, PL$7/*y*/ = 0;
   PL$6/*x*/ = (((PL$6/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
   ;};
 

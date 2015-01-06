@@ -51,33 +51,17 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "95cdb6b721e461f5c0ac0b3b37c4f61b" })){ return promiseland._getModule("95cdb6b721e461f5c0ac0b3b37c4f61b"); };
-var PL$4/*funName*/;try{PL$4/*funName*/ = funName;}catch(e){};
+if (promiseland._hasModule({ hashStr: "0eb2a4e84ab4b20cf9edbd44a3e0955d" })){ return promiseland._getModule("0eb2a4e84ab4b20cf9edbd44a3e0955d"); };
 var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*calledCnt*/ = 0;
-  var PL$3/*x*/ = (function PL$4/*funName*/(PL$5/*par*/){
-  
+  (function(){
+  var PL$2/*a*/;
+
     ;
-    PL$2/*calledCnt*/ += 1;
-    if(PL$5/*par*/){
-      return;
-    };
-    ;
-    PL$4/*funName*/(true);
+    PL$2/*a*/ = 1;
     ;});
-  PL$3/*x*/();
-  try
-{
-    PL$4/*funName*/();}catch(PL$6/*e*/){};
-  ;
-  if((PL$2/*calledCnt*/ == 2)){
-    return {"success": true};
-  };
-  ;
-  return {"success": false};
   ;})();
 ;return PL$1;
 });

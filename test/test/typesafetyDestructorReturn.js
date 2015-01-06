@@ -55,10 +55,7 @@ var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "95e1f6e92615bcdaf9c56a0938f3df32" })){ return promiseland._getModule("95e1f6e92615bcdaf9c56a0938f3df32"); };
 var PL$1 = (function(){
 "use strict";
-var PL$5/*failed*/;
-var PL$6/*cnt*/;
 var PL$3/*C1*/;
-var PL$7/*cntSupposed*/;
 var PL$11/*b*/;
 var _TPL$11/*b*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
@@ -84,14 +81,14 @@ return;
   if (_TPL$10/*a*/){ _TPL$10/*a*/();};}catch(e){if (_TPL$10/*a*/){ _TPL$10/*a*/();};throw e};;};
 
   ;
-  PL$5/*failed*/ = false;
-  PL$6/*cnt*/ = 0;
+  var PL$5/*failed*/ = false;
+  var PL$6/*cnt*/ = 0;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "95e1f6e92615bcdaf9c56a0938f3df32", "name": "C1"}, {"destroy": (function(){
   
     ;
     PL$6/*cnt*/++;
     ;})}));PL$3/*C1*/;
-  PL$7/*cntSupposed*/ = (function(PL$8/*s*/){
+  var PL$7/*cntSupposed*/ = (function(PL$8/*s*/){
   
     ;
     if((PL$6/*cnt*/ == PL$8/*s*/)){

@@ -51,7 +51,7 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "ee25a5392b36af4c3daa720febbd30ec" })){ return promiseland._getModule("ee25a5392b36af4c3daa720febbd30ec"); };
+if (promiseland._hasModule({ hashStr: "fc4bc2e27b068fcc44e89fbfde5a31fc" })){ return promiseland._getModule("fc4bc2e27b068fcc44e89fbfde5a31fc"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$1 = (function(){
 "use strict";
@@ -379,7 +379,13 @@ var PL$29/*assemblyAr*/;
 
       ;
       PL$15/*cDef*/ = PL$8/*getClass*/(PL$13/*par*/["type"]);
-      PL$29/*assemblyAr*/ = ["var ", PL$13/*par*/["name"], ";\n"];
+      PL$29/*assemblyAr*/ = [];
+      if(PL$13/*par*/["declaration"]){
+        PL$29/*assemblyAr*/["push"]("var ");
+        PL$29/*assemblyAr*/["push"](PL$13/*par*/["name"]);
+        PL$29/*assemblyAr*/["push"](";\n");
+      };
+      ;
       if(PL$15/*cDef*/["track"]){
         PL$29/*assemblyAr*/["push"]("var _T");
         PL$29/*assemblyAr*/["push"](PL$13/*par*/["name"]);

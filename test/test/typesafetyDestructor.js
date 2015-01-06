@@ -55,13 +55,12 @@ var classSystem = promiseland.classSystem;
 if (promiseland._hasModule({ hashStr: "54c5b667b0d94bacc1162b8a20e2c8f4" })){ return promiseland._getModule("54c5b667b0d94bacc1162b8a20e2c8f4"); };
 var PL$1 = (function(){
 "use strict";
-var PL$5/*i*/;
 var PL$3/*C1*/;
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
 PL$3/*C1*/ = PL$2/*type:C1*/;
 var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});
   ;
-  PL$5/*i*/ = 1;
+  var PL$5/*i*/ = 1;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "54c5b667b0d94bacc1162b8a20e2c8f4", "name": "C1"}, {"destroy": (function(){
   
     ;

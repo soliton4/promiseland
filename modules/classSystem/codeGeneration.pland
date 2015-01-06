@@ -273,7 +273,12 @@ return (classSystem, internals){
   cs.getDeclareVariableCode = function(par){
     var cDef = getClass(par["type"]);
 
-    var assemblyAr = ["var ", par.name, ";\n"];
+    var assemblyAr = [];
+    if (par.declaration){
+      assemblyAr.push("var ");
+      assemblyAr.push(par.name);
+      assemblyAr.push(";\n");
+    };
     if (cDef.track){
       assemblyAr.push("var _T");
       assemblyAr.push(par.name);
