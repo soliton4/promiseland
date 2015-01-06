@@ -54,6 +54,7 @@ return (parInstance, par){
         
         if (par.declaration){
           this.localVariables.get(name).declaration = par.declaration;
+          this.localVariables.get(name).needsDeclaration = true;
         };
         
         if (par.localFunction){
@@ -68,6 +69,8 @@ return (parInstance, par){
         };
         this.variables.set(name, this.localVariables.get(name));
       };
+      
+      
       
       
       this.addLocalVariableTemporary = function(par, parParsed){
@@ -133,8 +136,7 @@ return (parInstance, par){
     
     
       /* keeping track of declarations */
-      this.usedVariables = {
-      };
+      this.usedVariablesMap = new Map();
       
       this._addUsedVariable = function(par){
         var name = identifierName(par);
@@ -147,11 +149,11 @@ return (parInstance, par){
             return;
           };
         };
-        this.usedVariables[name] = true;
+        this.usedVariablesMap.set(name, true);
       };
       
-      this._getUsedVairables = function(){
-        return this.usedVariables;
+      this._getUsedVairablesMap = function(){
+        return this.usedVariablesMap;
       };
     
       this.getVariableName = function(name){
@@ -170,6 +172,7 @@ return (parInstance, par){
         };
         if (par.type == "VariableDeclaration"){
           this.addLocalVariable({name: identifierName(par.id), typename: identifierName(par.typename), declaration: true}, par);
+          
         }else if (par.type == "Class"){
           var ci = self.identifyClass(par);
           if (ci.hasName){
@@ -231,9 +234,6 @@ return (parInstance, par){
             };
             if (declarations[i].type == "VariableDeclaration"){
               var r = this.parseExpression(declarations[i]);
-              /*if (!this.canSetisSameType(r.getType(), usedType)){
-              this.error(par, errorMsg.differentTypesInVariableDeclaration);
-            };*/
               res.push(r);
             }else{
               this.error(declarations[i], errorMsg.unknownType);

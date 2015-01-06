@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "c053a9781754879c3157cb23369fc7f8" })){ return promiseland._getModule("c053a9781754879c3157cb23369fc7f8"); };
+    if (promiseland._hasModule({ hashStr: "a121c46cb9d8597cab42940cfa2d8702" })){ return promiseland._getModule("a121c46cb9d8597cab42940cfa2d8702"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "c053a9781754879c3157cb23369fc7f8", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "a121c46cb9d8597cab42940cfa2d8702", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$32/*Promise*/;try{PL$32/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -150,6 +150,7 @@ var PL$26/*existing*/;
         ;
         if(PL$20/*par*/["declaration"]){
           this["localVariables"]["get"](PL$24/*name*/)["declaration"] = PL$20/*par*/["declaration"];
+          this["localVariables"]["get"](PL$24/*name*/)["needsDeclaration"] = true;
         };
         ;
         if(PL$20/*par*/["localFunction"]){
@@ -243,7 +244,7 @@ var PL$30/*entry*/;
         ;
         return this["getType"]("var");
         ;});
-      this["usedVariables"] = {};
+      this["usedVariablesMap"] = new PL$5/*Map*/();
       this["_addUsedVariable"] = (function(PL$20/*par*/){
       var PL$24/*name*/;
 
@@ -260,12 +261,12 @@ var PL$30/*entry*/;
           ;
         };
         ;
-        this["usedVariables"][PL$24/*name*/] = true;
+        this["usedVariablesMap"]["set"](PL$24/*name*/, true);
         ;});
-      this["_getUsedVairables"] = (function(){
+      this["_getUsedVairablesMap"] = (function(){
       
         ;
-        return this["usedVariables"];
+        return this["usedVariablesMap"];
         ;});
       this["getVariableName"] = (function(PL$24/*name*/){
       

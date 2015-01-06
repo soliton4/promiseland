@@ -384,12 +384,13 @@ return (parInstance, par){
           }), this.isTrackedClassConRes(type, par));
         };
 
-        this.usedVariables[varname] = false;
+        //this.usedVariables[varname] = false;
+        this.usedVariablesMap.set(varname, false);
       };
 
-      if (this.usedVariables["arguments"]){
+      if (this.usedVariablesMap.get("arguments")){
         funRes.push("var " + this.getVariableName("arguments") + " = arguments;\n");
-        this.usedVariables["arguments"] = false;
+        this.usedVariablesMap.set("arguments", false);
       };
 
       // defined types
@@ -550,14 +551,14 @@ return (parInstance, par){
       var funRes = cp.getFunctionRes();
 
       // collect used variables from parsed function
-      var uv = cp._getUsedVairables();
+      var uv = cp._getUsedVairablesMap();
       var name;
-      for (name in uv){
-        if (uv[name] === true){
+      uv.forEach((value, name){
+        if (value === true){
           this._addUsedVariable(name);
         };
-      };
-
+      }, this);
+      
       var res;
 
       if (funName && funRes && declaration){

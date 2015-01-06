@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "f606f44b641ca6e7e64d4046bc6bf305" })){ return promiseland._getModule("f606f44b641ca6e7e64d4046bc6bf305"); };
+    if (promiseland._hasModule({ hashStr: "ad22e18590b5f1b947065d8c164ea65e" })){ return promiseland._getModule("ad22e18590b5f1b947065d8c164ea65e"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "f606f44b641ca6e7e64d4046bc6bf305", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "ad22e18590b5f1b947065d8c164ea65e", "module": PL$1, promising: true });
 var PL$40/*Promise*/;try{PL$40/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -431,11 +431,11 @@ var PL$64/*finalResult*/;
 "parsed": PL$17/*par*/}), this["isTrackedClassConRes"](PL$23/*type*/, PL$17/*par*/));
           };
           ;
-          this["usedVariables"][PL$56/*varname*/] = false;}};
+          this["usedVariablesMap"]["set"](PL$56/*varname*/, false);}};
         ;
-        if(this["usedVariables"]["arguments"]){
+        if(this["usedVariablesMap"]["get"]("arguments")){
           PL$47/*funRes*/["push"]((("var " + this["getVariableName"]("arguments")) + " = arguments;\n"));
-          this["usedVariables"]["arguments"] = false;
+          this["usedVariablesMap"]["set"]("arguments", false);
         };
         ;
         PL$47/*funRes*/["push"](PL$50/*classesRes*/);
@@ -562,14 +562,16 @@ var PL$20/*res*/;
         PL$67/*cp*/ = this["newInstance"](PL$65/*value*/, {"dynamicCode": (this["dynamicCode"] || this["isFunction"])});
         PL$68/*funName*/ = PL$67/*cp*/["getFunctionName"]();
         PL$47/*funRes*/ = PL$67/*cp*/["getFunctionRes"]();
-        PL$69/*uv*/ = PL$67/*cp*/["_getUsedVairables"]();
+        PL$69/*uv*/ = PL$67/*cp*/["_getUsedVairablesMap"]();
         PL$70/*name*/;
-        for(PL$70/*name*/ in PL$69/*uv*/){
-          if((PL$69/*uv*/[PL$70/*name*/] === true)){
+        PL$69/*uv*/["forEach"]((function(PL$65/*value*/, PL$70/*name*/){
+        
+          ;
+          if((PL$65/*value*/ === true)){
             this["_addUsedVariable"](PL$70/*name*/);
           };
-          ;};
-        ;
+          ;
+          ;}), this);
         PL$20/*res*/;
         if(((PL$68/*funName*/ && PL$47/*funRes*/) && PL$66/*declaration*/)){
           this["addFunction"](PL$47/*funRes*/, PL$68/*funName*/);

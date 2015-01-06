@@ -389,8 +389,8 @@ var _Result = require "./Result";
         var functionStatement = this._parseFunction(par, { promiseName: this.programPromiseStr, noUntrack: true });
         
         var name;
-        for (name in this.usedVariables){
-          if (this.usedVariables[name] === true){
+        this.usedVariablesMap.forEach((value, name){
+          if (value === true){
             if (name == "Promise"){
               this.common.usePromise = true;
             };
@@ -401,7 +401,7 @@ var _Result = require "./Result";
               this.common.useMap = true;
             };
             if (extraModules.get(name)){
-              continue;
+              return;
             };
             res.push("var " + this.getVariableName(name) + ";");
             res.push("try{");
@@ -410,7 +410,7 @@ var _Result = require "./Result";
             res.push(name);
             res.push(";}catch(e){};\n");
           };
-        };
+        }, this);
         
         //res.push("var ");
         //res.push(this.renderType("var"));
