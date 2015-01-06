@@ -53,6 +53,7 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
+var Map = promiseland.Map;
 if (promiseland._hasModule({ hashStr: "5b5c0aafecf90fd91292cee25caedd38" })){ return promiseland._getModule("5b5c0aafecf90fd91292cee25caedd38"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$32/*JSON*/;try{PL$32/*JSON*/ = JSON;}catch(e){};

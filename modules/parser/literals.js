@@ -86,28 +86,32 @@ var PL$17/*checkIsFunction*/;
 var PL$18/*getExtraFromPar*/;
 var PL$19/*statementType*/;
 var PL$20/*checkPromising*/;
-PL$3(function(){;
-PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
-PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-__requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
-PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
-PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
-PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
-PL$13/*stringEncodeStr*/ = PL$8/*basics*/["stringEncodeStr"];
-PL$14/*VariableNames*/ = PL$8/*basics*/["VariableNames"];
-PL$15/*mixin*/ = PL$8/*basics*/["mixin"];
-PL$16/*identifierName*/ = PL$8/*basics*/["identifierName"];
-PL$17/*checkIsFunction*/ = PL$8/*basics*/["checkIsFunction"];
-PL$18/*getExtraFromPar*/ = PL$8/*basics*/["getExtraFromPar"];
-PL$19/*statementType*/ = PL$8/*basics*/["statementType"];
-PL$20/*checkPromising*/ = PL$8/*basics*/["checkPromising"];
-PL$1.resolve((function(PL$21/*parInstance*/, PL$22/*par*/){
-var PL$23/*f*/;
-;
-PL$23/*f*/ = (function(PL$22/*par*/){
-;
-this["expObjectExpression"] = (function(PL$22/*par*/){
-var PL$24/*res*/;
+PL$3(function(){
+
+  ;
+  PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
+  PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
+  __requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
+  PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
+  PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
+  PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
+  PL$13/*stringEncodeStr*/ = PL$8/*basics*/["stringEncodeStr"];
+  PL$14/*VariableNames*/ = PL$8/*basics*/["VariableNames"];
+  PL$15/*mixin*/ = PL$8/*basics*/["mixin"];
+  PL$16/*identifierName*/ = PL$8/*basics*/["identifierName"];
+  PL$17/*checkIsFunction*/ = PL$8/*basics*/["checkIsFunction"];
+  PL$18/*getExtraFromPar*/ = PL$8/*basics*/["getExtraFromPar"];
+  PL$19/*statementType*/ = PL$8/*basics*/["statementType"];
+  PL$20/*checkPromising*/ = PL$8/*basics*/["checkPromising"];
+  PL$1.resolve((function(PL$21/*parInstance*/, PL$22/*par*/){
+  var PL$23/*f*/;
+
+    ;
+    PL$23/*f*/ = (function(PL$22/*par*/){
+    
+      ;
+      this["expObjectExpression"] = (function(PL$22/*par*/){
+      var PL$24/*res*/;
 var PL$25/*isClassObject*/;
 var PL$26/*i*/;
 var PL$27/*l*/;
@@ -116,106 +120,100 @@ var PL$29/*prop*/;
 var PL$30/*v*/;
 var PL$31/*name*/;
 var PL$32/*functionRes*/;
-;
-PL$24/*res*/ = this["newResult"]();
-PL$25/*isClassObject*/ = this["isClassObject"];
-this["stack"]("isClassObject");;
-this["isClassObject"] = false;;
-PL$24/*res*/["push"]("{");;
-PL$26/*i*/ = 0;
-PL$27/*l*/ = ((PL$22/*par*/["properties"] && PL$22/*par*/["properties"]["length"]) || 0);
-for(PL$26/*i*/;(PL$26/*i*/ < PL$27/*l*/);++PL$26/*i*/){{this["isClassObject"] = false;;
-PL$28/*currentMember*/;
-if(PL$26/*i*/){
-PL$24/*res*/["push"](",\n");;
-};
-;
-PL$29/*prop*/ = PL$22/*par*/["properties"][PL$26/*i*/];
-if((PL$29/*prop*/["kind"] == "init")){
-PL$28/*currentMember*/ = PL$16/*identifierName*/(PL$29/*prop*/["key"]);;
-if(this["inheritedSystem"]){
-this["inheritedSystem"]["setCurrent"](PL$28/*currentMember*/);;
-};
-;
-PL$24/*res*/["push"]((PL$13/*stringEncodeStr*/(PL$16/*identifierName*/(PL$29/*prop*/["key"])) + ": "));;
-if(PL$29/*prop*/["value"]){
-if(PL$17/*checkIsFunction*/(PL$29/*prop*/["value"])){
-if(PL$25/*isClassObject*/){
-this["isClassObject"] = true;;
-};
-;
-};
-;
-PL$30/*v*/ = this["parseExpression"](PL$29/*prop*/["value"]);
-PL$24/*res*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({"value": PL$30/*v*/,
+
+        ;
+        PL$24/*res*/ = this["newResult"]();
+        PL$25/*isClassObject*/ = this["isClassObject"];
+        this["stack"]("isClassObject");
+        this["isClassObject"] = false;
+        PL$24/*res*/["push"]("{");
+        PL$26/*i*/ = 0;
+        PL$27/*l*/ = ((PL$22/*par*/["properties"] && PL$22/*par*/["properties"]["length"]) || 0);
+        for(PL$26/*i*/;(PL$26/*i*/ < PL$27/*l*/);++PL$26/*i*/){{
+          this["isClassObject"] = false;
+          PL$28/*currentMember*/;
+          if(PL$26/*i*/){
+            PL$24/*res*/["push"](",\n");
+          };
+          ;
+          PL$29/*prop*/ = PL$22/*par*/["properties"][PL$26/*i*/];
+          if((PL$29/*prop*/["kind"] == "init")){
+            PL$28/*currentMember*/ = PL$16/*identifierName*/(PL$29/*prop*/["key"]);
+            if(this["inheritedSystem"]){
+              this["inheritedSystem"]["setCurrent"](PL$28/*currentMember*/);
+            };
+            ;
+            PL$24/*res*/["push"]((PL$13/*stringEncodeStr*/(PL$16/*identifierName*/(PL$29/*prop*/["key"])) + ": "));
+            if(PL$29/*prop*/["value"]){
+              if(PL$17/*checkIsFunction*/(PL$29/*prop*/["value"])){
+                if(PL$25/*isClassObject*/){
+                  this["isClassObject"] = true;
+                };
+                ;
+              };
+              ;
+              PL$30/*v*/ = this["parseExpression"](PL$29/*prop*/["value"]);
+              PL$24/*res*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({"value": PL$30/*v*/,
 "valueType": PL$30/*v*/["getType"](),
 "type": this["getType"]((PL$29/*prop*/["typename"] || "var"), PL$22/*par*/),
-"errorFun": this["getWarningFun"](PL$22/*par*/)})));;
-};
-;
-
-}else{
-if((PL$29/*prop*/["kind"] == "function")){
-if(PL$25/*isClassObject*/){
-this["isClassObject"] = true;;
-};
-;
-PL$31/*name*/ = PL$16/*identifierName*/(PL$29/*prop*/["id"]);
-PL$28/*currentMember*/ = PL$31/*name*/;;
-if(this["inheritedSystem"]){
-this["inheritedSystem"]["setCurrent"](PL$28/*currentMember*/);;
-};
-;
-PL$29/*prop*/["id"] = undefined;;
-PL$24/*res*/["push"]((PL$13/*stringEncodeStr*/(PL$31/*name*/) + ": "));;
-PL$32/*functionRes*/ = this["expectTypeVar"](this["parseExpression"](PL$29/*prop*/));
-PL$24/*res*/["push"](PL$32/*functionRes*/);;
-
-}else{
-if((PL$29/*prop*/["kind"] == "block")){
-
-}else{
-this["error"](PL$22/*par*/, PL$11/*errorMsg*/["unknownPropertyAssignmentType"]);;
-};
-};
-};
-;
-}};
-;
-PL$24/*res*/["push"]("}");;
-PL$24/*res*/["setType"]("var");;
-this["unstack"]("isClassObject");;
-return PL$24/*res*/;;
-;
-});;
-this["expArrayExpression"] = (function(PL$22/*par*/){
-var PL$24/*res*/;
+"errorFun": this["getWarningFun"](PL$22/*par*/)})));
+            };
+            ;
+          }else{
+          if((PL$29/*prop*/["kind"] == "function")){
+            if(PL$25/*isClassObject*/){
+              this["isClassObject"] = true;
+            };
+            ;
+            PL$31/*name*/ = PL$16/*identifierName*/(PL$29/*prop*/["id"]);
+            PL$28/*currentMember*/ = PL$31/*name*/;
+            if(this["inheritedSystem"]){
+              this["inheritedSystem"]["setCurrent"](PL$28/*currentMember*/);
+            };
+            ;
+            PL$29/*prop*/["id"] = undefined;
+            PL$24/*res*/["push"]((PL$13/*stringEncodeStr*/(PL$31/*name*/) + ": "));
+            PL$32/*functionRes*/ = this["expectTypeVar"](this["parseExpression"](PL$29/*prop*/));
+            PL$24/*res*/["push"](PL$32/*functionRes*/);
+          }else{
+          if((PL$29/*prop*/["kind"] == "block")){
+          }else{
+          this["error"](PL$22/*par*/, PL$11/*errorMsg*/["unknownPropertyAssignmentType"]);
+          };
+          };
+          };
+          ;}};
+        ;
+        PL$24/*res*/["push"]("}");
+        PL$24/*res*/["setType"]("var");
+        this["unstack"]("isClassObject");
+        return PL$24/*res*/;
+        ;});
+      this["expArrayExpression"] = (function(PL$22/*par*/){
+      var PL$24/*res*/;
 var PL$26/*i*/;
 var PL$27/*l*/;
-;
-PL$24/*res*/ = this["newResult"]();
-PL$24/*res*/["push"]("[");;
-PL$26/*i*/ = 0;
-PL$27/*l*/ = ((PL$22/*par*/["elements"] && PL$22/*par*/["elements"]["length"]) || 0);
-for(PL$26/*i*/;(PL$26/*i*/ < PL$27/*l*/);++PL$26/*i*/){{if(PL$26/*i*/){
-PL$24/*res*/["push"](", ");;
-};
-;
-PL$24/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$22/*par*/["elements"][PL$26/*i*/])));;
-}};
-;
-PL$24/*res*/["push"]("]");;
-PL$24/*res*/["setType"]("var");;
-return PL$24/*res*/;;
-;
-});;
-;
-});
-PL$23/*f*/["apply"](PL$21/*parInstance*/, [PL$22/*par*/]);;
-;
-})); return;;
-PL$1.resolve(); return;;
-}), PL$4);
+
+        ;
+        PL$24/*res*/ = this["newResult"]();
+        PL$24/*res*/["push"]("[");
+        PL$26/*i*/ = 0;
+        PL$27/*l*/ = ((PL$22/*par*/["elements"] && PL$22/*par*/["elements"]["length"]) || 0);
+        for(PL$26/*i*/;(PL$26/*i*/ < PL$27/*l*/);++PL$26/*i*/){{
+          if(PL$26/*i*/){
+            PL$24/*res*/["push"](", ");
+          };
+          ;
+          PL$24/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$22/*par*/["elements"][PL$26/*i*/])));}};
+        ;
+        PL$24/*res*/["push"]("]");
+        PL$24/*res*/["setType"]("var");
+        return PL$24/*res*/;
+        ;});
+      ;});
+    PL$23/*f*/["apply"](PL$21/*parInstance*/, [PL$22/*par*/]);
+    ;})); return;
+  PL$1.resolve(); return;}), PL$4);
 ;})();
 return PL$1;
 })();

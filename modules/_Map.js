@@ -56,44 +56,44 @@ var PL$5/*Object*/;try{PL$5/*Object*/ = Object;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$8/*Map*/;
-;
-;
-PL$8/*Map*/ = (function(){var PL$2/*inherited*/ = {};
+
+  ;
+  ;
+  PL$8/*Map*/ = (function(){var PL$2/*inherited*/ = {};
 var res = promiseland.createClass({"constructor": (function(){
-;
-this["map"] = {};;
-;
-}),
+  
+    ;
+    this["map"] = {};
+    ;}),
 "set": (function(PL$3/*key*/, PL$4/*value*/){
-;
-this["map"][PL$3/*key*/] = PL$4/*value*/;;
-;
-}),
+  
+    ;
+    this["map"][PL$3/*key*/] = PL$4/*value*/;
+    ;}),
 "get": (function(PL$3/*key*/){
-;
-if(PL$5/*Object*/["prototype"]["hasOwnProperty"]["call"](this["map"], PL$3/*key*/)){
-return this["map"][PL$3/*key*/];;
-};
-;
-;
-}),
+  
+    ;
+    if(PL$5/*Object*/["prototype"]["hasOwnProperty"]["call"](this["map"], PL$3/*key*/)){
+      return this["map"][PL$3/*key*/];
+    };
+    ;
+    ;}),
 "getArray": (function(){
-var PL$6/*res*/;
+  var PL$6/*res*/;
 var PL$7/*n*/;
-;
-PL$6/*res*/ = [];
-PL$7/*n*/;
-for(PL$7/*n*/ in this["map"]){PL$6/*res*/["push"]({"key": PL$7/*n*/,
-"value": this["map"][PL$7/*n*/]});;
-};
-;
-return PL$6/*res*/;;
-;
-})}, [], PL$2/*inherited*/);
-return res; })();PL$8/*Map*/;;
-return PL$8/*Map*/;;
-;
-})();
+
+    ;
+    PL$6/*res*/ = [];
+    PL$7/*n*/;
+    for(PL$7/*n*/ in this["map"]){
+      PL$6/*res*/["push"]({"key": PL$7/*n*/,
+"value": this["map"][PL$7/*n*/]});};
+    ;
+    return PL$6/*res*/;
+    ;})}, [], PL$2/*inherited*/);
+return res; })();PL$8/*Map*/;
+  return PL$8/*Map*/;
+  ;})();
 ;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

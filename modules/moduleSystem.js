@@ -56,50 +56,50 @@ var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$2/*modules*/;
-;
-;
-PL$2/*modules*/ = {};
-PL$3/*promiseland*/["_registerModule"] = (function(PL$4/*par*/){
-;
-if(this["_hasModule"](PL$4/*par*/["hashStr"])){
-return false;;
-};
-;
-PL$2/*modules*/[PL$4/*par*/["hashStr"]] = {"promising": PL$4/*par*/["promising"],
-"module": PL$4/*par*/["module"]};;
-return true;;
-;
-});;
-PL$3/*promiseland*/["_getModule"] = (function(PL$5/*parHashStr*/){
-;
-return PL$2/*modules*/[PL$5/*parHashStr*/]["module"];;
-;
-});;
-PL$3/*promiseland*/["_hasModule"] = (function(PL$5/*parHashStr*/){
-;
-if(PL$2/*modules*/[PL$5/*parHashStr*/]){
-return true;;
-};
-;
-return false;;
-;
-});;
-PL$3/*promiseland*/["isPromiseLandPromisingModule"] = (function(PL$6/*parM*/){
-var PL$7/*i*/;
-;
-PL$7/*i*/;
-for(PL$7/*i*/ in PL$2/*modules*/){if((PL$2/*modules*/[PL$7/*i*/] && (PL$2/*modules*/[PL$7/*i*/]["module"] === PL$6/*parM*/))){
-return PL$2/*modules*/[PL$7/*i*/]["promising"];;
-};
-;
-};
-;
-return false;;
-;
-});;
-return PL$2/*modules*/;;
-;
-})();
+
+  ;
+  ;
+  PL$2/*modules*/ = {};
+  PL$3/*promiseland*/["_registerModule"] = (function(PL$4/*par*/){
+  
+    ;
+    if(this["_hasModule"](PL$4/*par*/["hashStr"])){
+      return false;
+    };
+    ;
+    PL$2/*modules*/[PL$4/*par*/["hashStr"]] = {"promising": PL$4/*par*/["promising"],
+"module": PL$4/*par*/["module"]};
+    return true;
+    ;});
+  PL$3/*promiseland*/["_getModule"] = (function(PL$5/*parHashStr*/){
+  
+    ;
+    return PL$2/*modules*/[PL$5/*parHashStr*/]["module"];
+    ;});
+  PL$3/*promiseland*/["_hasModule"] = (function(PL$5/*parHashStr*/){
+  
+    ;
+    if(PL$2/*modules*/[PL$5/*parHashStr*/]){
+      return true;
+    };
+    ;
+    return false;
+    ;});
+  PL$3/*promiseland*/["isPromiseLandPromisingModule"] = (function(PL$6/*parM*/){
+  var PL$7/*i*/;
+
+    ;
+    PL$7/*i*/;
+    for(PL$7/*i*/ in PL$2/*modules*/){
+      if((PL$2/*modules*/[PL$7/*i*/] && (PL$2/*modules*/[PL$7/*i*/]["module"] === PL$6/*parM*/))){
+        return PL$2/*modules*/[PL$7/*i*/]["promising"];
+      };
+      ;};
+    ;
+    return false;
+    ;});
+  return PL$2/*modules*/;
+  ;})();
 ;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

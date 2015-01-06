@@ -55,41 +55,37 @@ var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "5d83e52141e93312abd3a27ea214726f" })){ return promiseland._getModule("5d83e52141e93312abd3a27ea214726f"); };
 var PL$3/*Object*/;try{PL$3/*Object*/ = Object;}catch(e){};
-var PL$12/*TypeError*/;try{PL$12/*TypeError*/ = TypeError;}catch(e){};
+var PL$13/*TypeError*/;try{PL$13/*TypeError*/ = TypeError;}catch(e){};
 var PL$42/*promiseland*/;try{PL$42/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$2/*hasOwnProperty*/;
 var PL$4/*MANGLE_STRING*/;
-var PL$6/*mangle*/;
-var PL$7/*unmangle*/;
-var PL$11/*methods*/;
-var PL$13/*assertString*/;
 var PL$14/*Map*/;
-var PL$6/*mangle*/ = function(PL$5/*key*/){
+function PL$5/*mangle*/(PL$6/*key*/){
 
   ;
-  return (PL$4/*MANGLE_STRING*/ + PL$5/*key*/);
+  return (PL$4/*MANGLE_STRING*/ + PL$6/*key*/);
   ;};
-var PL$7/*unmangle*/ = function(PL$5/*key*/){
+function PL$7/*unmangle*/(PL$6/*key*/){
 
   ;
-  return PL$5/*key*/["substring"](PL$4/*MANGLE_STRING*/["length"]);
+  return PL$6/*key*/["substring"](PL$4/*MANGLE_STRING*/["length"]);
   ;};
-var PL$11/*methods*/ = function(PL$8/*obj*/, PL$9/*methodHash*/){
-var PL$10/*methodName*/;
+function PL$8/*methods*/(PL$9/*obj*/, PL$10/*methodHash*/){
+var PL$11/*methodName*/;
 
   ;
-  for(PL$10/*methodName*/ in PL$9/*methodHash*/){
-    PL$3/*Object*/["defineProperty"](PL$8/*obj*/, PL$10/*methodName*/, {"value": PL$9/*methodHash*/[PL$10/*methodName*/],
+  for(PL$11/*methodName*/ in PL$10/*methodHash*/){
+    PL$3/*Object*/["defineProperty"](PL$9/*obj*/, PL$11/*methodName*/, {"value": PL$10/*methodHash*/[PL$11/*methodName*/],
 "configurable": true,
 "writable": true});};
   ;};
-var PL$13/*assertString*/ = function(PL$5/*key*/){
+function PL$12/*assertString*/(PL$6/*key*/){
 
   ;
-  if((typeof PL$5/*key*/ !== "string")){
-    throw new PL$12/*TypeError*/("key must be a string.");
+  if((typeof PL$6/*key*/ !== "string")){
+    throw new PL$13/*TypeError*/("key must be a string.");
   };
   ;};
 
@@ -97,10 +93,10 @@ var PL$13/*assertString*/ = function(PL$5/*key*/){
   ;
   PL$2/*hasOwnProperty*/ = PL$3/*Object*/["prototype"]["hasOwnProperty"];
   PL$4/*MANGLE_STRING*/ = "~";
-  PL$6/*mangle*/;
+  PL$5/*mangle*/;
   PL$7/*unmangle*/;
-  PL$11/*methods*/;
-  PL$13/*assertString*/;
+  PL$8/*methods*/;
+  PL$12/*assertString*/;
   PL$14/*Map*/ = (function(PL$15/*initializer*/){
   var PL$16/*store*/;
 var PL$17/*size*/;
@@ -110,37 +106,37 @@ var PL$18/*dict*/;
     PL$16/*store*/ = PL$3/*Object*/["create"](null);
     PL$17/*size*/ = 0;
     PL$18/*dict*/ = {};
-    PL$11/*methods*/(PL$18/*dict*/, {"get": (function(PL$5/*key*/, PL$19/*defaultValue*/){
+    PL$8/*methods*/(PL$18/*dict*/, {"get": (function(PL$6/*key*/, PL$19/*defaultValue*/){
     var PL$20/*mangled*/;
 
       ;
-      PL$13/*assertString*/(PL$5/*key*/);
-      PL$20/*mangled*/ = PL$6/*mangle*/(PL$5/*key*/);
+      PL$12/*assertString*/(PL$6/*key*/);
+      PL$20/*mangled*/ = PL$5/*mangle*/(PL$6/*key*/);
       return ((PL$20/*mangled*/ in PL$16/*store*/) ? PL$16/*store*/[PL$20/*mangled*/] : PL$19/*defaultValue*/);
       ;}),
-"set": (function(PL$5/*key*/, PL$21/*value*/){
+"set": (function(PL$6/*key*/, PL$21/*value*/){
     var PL$20/*mangled*/;
 
       ;
-      PL$13/*assertString*/(PL$5/*key*/);
-      PL$20/*mangled*/ = PL$6/*mangle*/(PL$5/*key*/);
+      PL$12/*assertString*/(PL$6/*key*/);
+      PL$20/*mangled*/ = PL$5/*mangle*/(PL$6/*key*/);
       if(! (PL$20/*mangled*/ in PL$16/*store*/)){
         ++PL$17/*size*/;
       };
       return PL$16/*store*/[PL$20/*mangled*/] = PL$21/*value*/;
       ;}),
-"has": (function(PL$5/*key*/){
+"has": (function(PL$6/*key*/){
     
       ;
-      PL$13/*assertString*/(PL$5/*key*/);
-      return (PL$6/*mangle*/(PL$5/*key*/) in PL$16/*store*/);
+      PL$12/*assertString*/(PL$6/*key*/);
+      return (PL$5/*mangle*/(PL$6/*key*/) in PL$16/*store*/);
       ;}),
-"delete": (function(PL$5/*key*/){
+"delete": (function(PL$6/*key*/){
     var PL$20/*mangled*/;
 
       ;
-      PL$13/*assertString*/(PL$5/*key*/);
-      PL$20/*mangled*/ = PL$6/*mangle*/(PL$5/*key*/);
+      PL$12/*assertString*/(PL$6/*key*/);
+      PL$20/*mangled*/ = PL$5/*mangle*/(PL$6/*key*/);
       if((PL$20/*mangled*/ in PL$16/*store*/)){
         --PL$17/*size*/;
         delete PL$16/*store*/[PL$20/*mangled*/];
@@ -156,18 +152,18 @@ var PL$18/*dict*/;
       ;}),
 "forEach": (function(PL$22/*callback*/, PL$23/*thisArg*/){
     var PL$24/*mangledKey*/;
-var PL$5/*key*/;
+var PL$6/*key*/;
 var PL$21/*value*/;
 
       ;
       if((typeof PL$22/*callback*/ !== "function")){
-        throw new PL$12/*TypeError*/("`callback` must be a function");
+        throw new PL$13/*TypeError*/("`callback` must be a function");
       };
       for(PL$24/*mangledKey*/ in PL$16/*store*/){
         if(PL$2/*hasOwnProperty*/["call"](PL$16/*store*/, PL$24/*mangledKey*/)){
-          PL$5/*key*/ = PL$7/*unmangle*/(PL$24/*mangledKey*/);
+          PL$6/*key*/ = PL$7/*unmangle*/(PL$24/*mangledKey*/);
           PL$21/*value*/ = PL$16/*store*/[PL$24/*mangledKey*/];
-          PL$22/*callback*/["call"](PL$23/*thisArg*/, PL$21/*value*/, PL$5/*key*/, PL$18/*dict*/);
+          PL$22/*callback*/["call"](PL$23/*thisArg*/, PL$21/*value*/, PL$6/*key*/, PL$18/*dict*/);
         };};
       ;}),
 "forEachP": (function(PL$22/*callback*/, PL$23/*thisArg*/){
@@ -175,22 +171,22 @@ var PL$21/*value*/;
 var PL$27 = function(code){ return function(res){ try{code(res);}catch(e){ PL$25.reject(e); }; }; };
 var PL$28 = function(e){ PL$25.reject(e); };
 var PL$24/*mangledKey*/;
-var PL$5/*key*/;
+var PL$6/*key*/;
 var PL$21/*value*/;
 PL$27(function(){
     
       ;
       if((typeof PL$22/*callback*/ !== "function")){
-        throw new PL$12/*TypeError*/("`callback` must be a function");
+        throw new PL$13/*TypeError*/("`callback` must be a function");
       };
       var PL$29 = [];for(PL$24/*mangledKey*/ in PL$16/*store*/){PL$29.push(PL$24/*mangledKey*/);};PL$24/*mangledKey*/ = PL$29[0];var PL$30 = 0;var PL$32 = new __Promise();
 var PL$31 = function(){var PL$33 = new __Promise();
 if(PL$30 < PL$29.length){
       
       var PL$34 = new __Promise();if(PL$2/*hasOwnProperty*/["call"](PL$16/*store*/, PL$24/*mangledKey*/)){
-        PL$5/*key*/ = PL$7/*unmangle*/(PL$24/*mangledKey*/);
+        PL$6/*key*/ = PL$7/*unmangle*/(PL$24/*mangledKey*/);
         PL$21/*value*/ = PL$16/*store*/[PL$24/*mangledKey*/];
-        PL$22/*callback*/["call"](PL$23/*thisArg*/, PL$21/*value*/, PL$5/*key*/, PL$18/*dict*/).then(PL$27(function(PL$35){PL$35;
+        PL$22/*callback*/["call"](PL$23/*thisArg*/, PL$21/*value*/, PL$6/*key*/, PL$18/*dict*/).then(PL$27(function(PL$35){PL$35;
         PL$34.resolve();;}), PL$28);
 ;
       }else{PL$34.resolve();
@@ -217,10 +213,10 @@ return PL$25;
 
       ;
       PL$38/*res*/ = [];
-      this["forEach"]((function(PL$21/*value*/, PL$5/*key*/){
+      this["forEach"]((function(PL$21/*value*/, PL$6/*key*/){
       
         ;
-        PL$38/*res*/["push"]({"key": PL$5/*key*/,
+        PL$38/*res*/["push"]({"key": PL$6/*key*/,
 "value": PL$21/*value*/});
         ;}));
       return PL$38/*res*/;
@@ -248,10 +244,10 @@ var PL$41/*i*/;
       ;}),
 "configurable": true});
     if(((typeof PL$15/*initializer*/ === "object") && (PL$15/*initializer*/ !== null))){
-      PL$3/*Object*/["keys"](PL$15/*initializer*/)["forEach"]((function(PL$5/*key*/){
+      PL$3/*Object*/["keys"](PL$15/*initializer*/)["forEach"]((function(PL$6/*key*/){
       
         ;
-        PL$18/*dict*/["set"](PL$5/*key*/, PL$15/*initializer*/[PL$5/*key*/]);
+        PL$18/*dict*/["set"](PL$6/*key*/, PL$15/*initializer*/[PL$6/*key*/]);
         ;}));
     };
     return PL$18/*dict*/;

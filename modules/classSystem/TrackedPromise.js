@@ -60,23 +60,25 @@ var PL$1 = (function(){
 var PL$2/*errorMsg*/;
 var PL$4/*Tracker*/;
 var PL$10/*TrackedPromise*/;
-;
-;
-PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
-PL$4/*Tracker*/;
-(function(){
-var PL$5 = new __Promise();
+
+  ;
+  ;
+  PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  PL$4/*Tracker*/;
+  (function(){
+  var PL$5 = new __Promise();
 var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
 var PL$8 = function(e){ PL$5.reject(e); };
-PL$7(function(){;
-PL$3/*extra*/["TrackerPs"].then(PL$7(function(PL$9){PL$4/*Tracker*/ = PL$9["Tracker"];;
-PL$5.resolve(); return;;
-}), PL$8);
+PL$7(function(){
+  
+    ;
+    PL$3/*extra*/["TrackerPs"].then(PL$7(function(PL$9){PL$4/*Tracker*/ = PL$9["Tracker"];
+    PL$5.resolve(); return;}), PL$8);
 ;})();
 return PL$5;
-})();;
-PL$10/*TrackedPromise*/ = (function(PL$11/*parTrackFun*/){
-var PL$12/*self*/;
+})();
+  PL$10/*TrackedPromise*/ = (function(PL$11/*parTrackFun*/){
+  var PL$12/*self*/;
 var PL$13/*lifeLine*/;
 var PL$14/*destroyFun*/;
 var PL$15/*t*/;
@@ -86,179 +88,175 @@ var PL$18/*thenAr*/;
 var PL$19/*elseAr*/;
 var PL$20/*thenFun*/;
 var PL$23/*thenReuseFun*/;
-;
-PL$12/*self*/ = this;
-PL$13/*lifeLine*/;
-PL$14/*destroyFun*/ = (function(){
-;
-if(PL$13/*lifeLine*/){
-PL$13/*lifeLine*/();;
-PL$13/*lifeLine*/ = undefined;;
 
-}else{
-PL$12/*self*/["then"]((function(){
-;
-if(PL$13/*lifeLine*/){
-PL$13/*lifeLine*/();;
-PL$13/*lifeLine*/ = undefined;;
-};
-;
-;
-}));;
-};
-;
-;
-});
-PL$15/*t*/ = PL$4/*Tracker*/(PL$14/*destroyFun*/);
-PL$16/*tracker*/ = PL$15/*t*/[0];
-this["rootTrack"] = PL$15/*t*/[1];;
-this["memberTrack"] = PL$15/*t*/[2];;
-PL$17/*rootTrack*/ = this["rootTrack"];
-PL$18/*thenAr*/ = [];
-PL$19/*elseAr*/ = [];
-PL$20/*thenFun*/ = (function(PL$21/*parThenFun*/, PL$22/*parElseFun*/){
-;
-if(PL$21/*parThenFun*/){
-PL$18/*thenAr*/["push"]([PL$21/*parThenFun*/, PL$17/*rootTrack*/()]);;
-};
-;
-if(PL$22/*parElseFun*/){
-PL$19/*elseAr*/["push"](PL$22/*parElseFun*/);;
-};
-;
-;
-});
-PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$21/*parThenFun*/, PL$22/*parElseFun*/){
-;
-if(PL$21/*parThenFun*/){
-PL$18/*thenAr*/["push"]([PL$21/*parThenFun*/, PL$24/*parReuse*/]);;
-
-}else{
-PL$24/*parReuse*/();;
-};
-;
-if(PL$22/*parElseFun*/){
-PL$19/*elseAr*/["push"](PL$22/*parElseFun*/);;
-};
-;
-;
-});
-this["resolve"] = (function(PL$25/*value*/){
-var PL$26/*realValue*/;
+    ;
+    PL$12/*self*/ = this;
+    PL$13/*lifeLine*/;
+    PL$14/*destroyFun*/ = (function(){
+    
+      ;
+      if(PL$13/*lifeLine*/){
+        PL$13/*lifeLine*/();
+        PL$13/*lifeLine*/ = undefined;
+      }else{
+      PL$12/*self*/["then"]((function(){
+      
+        ;
+        if(PL$13/*lifeLine*/){
+          PL$13/*lifeLine*/();
+          PL$13/*lifeLine*/ = undefined;
+        };
+        ;
+        ;}));
+      };
+      ;
+      ;});
+    PL$15/*t*/ = PL$4/*Tracker*/(PL$14/*destroyFun*/);
+    PL$16/*tracker*/ = PL$15/*t*/[0];
+    this["rootTrack"] = PL$15/*t*/[1];
+    this["memberTrack"] = PL$15/*t*/[2];
+    PL$17/*rootTrack*/ = this["rootTrack"];
+    PL$18/*thenAr*/ = [];
+    PL$19/*elseAr*/ = [];
+    PL$20/*thenFun*/ = (function(PL$21/*parThenFun*/, PL$22/*parElseFun*/){
+    
+      ;
+      if(PL$21/*parThenFun*/){
+        PL$18/*thenAr*/["push"]([PL$21/*parThenFun*/, PL$17/*rootTrack*/()]);
+      };
+      ;
+      if(PL$22/*parElseFun*/){
+        PL$19/*elseAr*/["push"](PL$22/*parElseFun*/);
+      };
+      ;
+      ;});
+    PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$21/*parThenFun*/, PL$22/*parElseFun*/){
+    
+      ;
+      if(PL$21/*parThenFun*/){
+        PL$18/*thenAr*/["push"]([PL$21/*parThenFun*/, PL$24/*parReuse*/]);
+      }else{
+      PL$24/*parReuse*/();
+      };
+      ;
+      if(PL$22/*parElseFun*/){
+        PL$19/*elseAr*/["push"](PL$22/*parElseFun*/);
+      };
+      ;
+      ;});
+    this["resolve"] = (function(PL$25/*value*/){
+    var PL$26/*realValue*/;
 var PL$28/*i*/;
 var PL$29/*l*/;
 var PL$30/*entryAr*/;
-;
-if(PL$25/*value*/){
-PL$26/*realValue*/ = PL$25/*value*/[0];
-PL$13/*lifeLine*/ = PL$11/*parTrackFun*/(PL$25/*value*/, PL$16/*tracker*/);;
-PL$25/*value*/ = PL$26/*realValue*/;;
-};
-;
-PL$20/*thenFun*/ = (function(PL$21/*parThenFun*/){
-;
-if(PL$21/*parThenFun*/){
-try
-{PL$21/*parThenFun*/([PL$25/*value*/, PL$17/*rootTrack*/()]);;
-}catch(PL$27/*e*/){};
-;
-};
-;
-;
-});;
-PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$21/*parThenFun*/){
-;
-if(PL$21/*parThenFun*/){
-try
-{PL$21/*parThenFun*/([PL$25/*value*/, PL$24/*parReuse*/]);;
-}catch(PL$27/*e*/){};
-;
 
-}else{
-PL$24/*parReuse*/();;
-};
-;
-;
-});;
-if(! PL$18/*thenAr*/){
-return;;
-};
-PL$28/*i*/ = 0;
-PL$29/*l*/ = PL$18/*thenAr*/["length"];
-for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{try
-{PL$30/*entryAr*/ = PL$18/*thenAr*/[PL$28/*i*/];
-PL$30/*entryAr*/[0]([PL$25/*value*/, PL$30/*entryAr*/[1]]);;
-}catch(PL$27/*e*/){};
-;
-}};
-;
-PL$18/*thenAr*/ = undefined;;
-PL$19/*elseAr*/ = undefined;;
-this["resolve"] = undefined;;
-this["reject"] = undefined;;
-;
-});;
-this["reject"] = (function(PL$25/*value*/){
-var PL$28/*i*/;
+      ;
+      if(PL$25/*value*/){
+        PL$26/*realValue*/ = PL$25/*value*/[0];
+        PL$13/*lifeLine*/ = PL$11/*parTrackFun*/(PL$25/*value*/, PL$16/*tracker*/);
+        PL$25/*value*/ = PL$26/*realValue*/;
+      };
+      ;
+      PL$20/*thenFun*/ = (function(PL$21/*parThenFun*/){
+      
+        ;
+        if(PL$21/*parThenFun*/){
+          try
+{
+            PL$21/*parThenFun*/([PL$25/*value*/, PL$17/*rootTrack*/()]);}catch(PL$27/*e*/){};
+          ;
+        };
+        ;
+        ;});
+      PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$21/*parThenFun*/){
+      
+        ;
+        if(PL$21/*parThenFun*/){
+          try
+{
+            PL$21/*parThenFun*/([PL$25/*value*/, PL$24/*parReuse*/]);}catch(PL$27/*e*/){};
+          ;
+        }else{
+        PL$24/*parReuse*/();
+        };
+        ;
+        ;});
+      if(! PL$18/*thenAr*/){
+        return;
+      };
+      PL$28/*i*/ = 0;
+      PL$29/*l*/ = PL$18/*thenAr*/["length"];
+      for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{
+        try
+{
+          PL$30/*entryAr*/ = PL$18/*thenAr*/[PL$28/*i*/];
+          PL$30/*entryAr*/[0]([PL$25/*value*/, PL$30/*entryAr*/[1]]);}catch(PL$27/*e*/){};
+        ;}};
+      ;
+      PL$18/*thenAr*/ = undefined;
+      PL$19/*elseAr*/ = undefined;
+      this["resolve"] = undefined;
+      this["reject"] = undefined;
+      ;});
+    this["reject"] = (function(PL$25/*value*/){
+    var PL$28/*i*/;
 var PL$29/*l*/;
-;
-PL$20/*thenFun*/ = (function(PL$31/*u*/, PL$22/*parElseFun*/){
-;
-if(PL$22/*parElseFun*/){
-try
-{PL$22/*parElseFun*/(PL$25/*value*/);;
-}catch(PL$27/*e*/){};
-;
-};
-;
-;
-});;
-PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$31/*u*/, PL$22/*parElseFun*/){
-;
-PL$24/*parReuse*/();;
-if(PL$22/*parElseFun*/){
-try
-{PL$22/*parElseFun*/(PL$25/*value*/);;
-}catch(PL$27/*e*/){};
-;
-};
-;
-;
-});;
-if(! PL$19/*elseAr*/){
-return;;
-};
-PL$28/*i*/ = 0;
-PL$29/*l*/ = PL$19/*elseAr*/["length"];
-for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{try
-{PL$19/*elseAr*/[PL$28/*i*/](PL$25/*value*/);;
-}catch(PL$27/*e*/){};
-}};
-;
-PL$18/*thenAr*/ = undefined;;
-PL$19/*elseAr*/ = undefined;;
-this["resolve"] = undefined;;
-this["reject"] = undefined;;
-;
-});;
-this["then"] = (function(PL$32/*par1*/, PL$33/*par2*/){
-;
-PL$20/*thenFun*/(PL$32/*par1*/, PL$33/*par2*/);;
-;
-});;
-this["thenReuse"] = (function(PL$24/*parReuse*/, PL$32/*par1*/, PL$33/*par2*/){
-;
-PL$23/*thenReuseFun*/(PL$24/*parReuse*/, PL$32/*par1*/, PL$33/*par2*/);;
-;
-});;
-this["promise"] = this["then"];;
-this["then"]["then"] = this["then"];;
-this["then"]["thenReuse"] = this["thenReuse"];;
-;
-});
-return PL$10/*TrackedPromise*/;;
-;
-})();
+
+      ;
+      PL$20/*thenFun*/ = (function(PL$31/*u*/, PL$22/*parElseFun*/){
+      
+        ;
+        if(PL$22/*parElseFun*/){
+          try
+{
+            PL$22/*parElseFun*/(PL$25/*value*/);}catch(PL$27/*e*/){};
+          ;
+        };
+        ;
+        ;});
+      PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$31/*u*/, PL$22/*parElseFun*/){
+      
+        ;
+        PL$24/*parReuse*/();
+        if(PL$22/*parElseFun*/){
+          try
+{
+            PL$22/*parElseFun*/(PL$25/*value*/);}catch(PL$27/*e*/){};
+          ;
+        };
+        ;
+        ;});
+      if(! PL$19/*elseAr*/){
+        return;
+      };
+      PL$28/*i*/ = 0;
+      PL$29/*l*/ = PL$19/*elseAr*/["length"];
+      for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{
+        try
+{
+          PL$19/*elseAr*/[PL$28/*i*/](PL$25/*value*/);}catch(PL$27/*e*/){};}};
+      ;
+      PL$18/*thenAr*/ = undefined;
+      PL$19/*elseAr*/ = undefined;
+      this["resolve"] = undefined;
+      this["reject"] = undefined;
+      ;});
+    this["then"] = (function(PL$32/*par1*/, PL$33/*par2*/){
+    
+      ;
+      PL$20/*thenFun*/(PL$32/*par1*/, PL$33/*par2*/);
+      ;});
+    this["thenReuse"] = (function(PL$24/*parReuse*/, PL$32/*par1*/, PL$33/*par2*/){
+    
+      ;
+      PL$23/*thenReuseFun*/(PL$24/*parReuse*/, PL$32/*par1*/, PL$33/*par2*/);
+      ;});
+    this["promise"] = this["then"];
+    this["then"]["then"] = this["then"];
+    this["then"]["thenReuse"] = this["thenReuse"];
+    ;});
+  return PL$10/*TrackedPromise*/;
+  ;})();
 ;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });
 })();

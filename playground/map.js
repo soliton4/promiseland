@@ -51,6 +51,7 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
+var Map = promiseland.Map;
 if (promiseland._hasModule({ hashStr: "2167d6b78835db6256dd6005c4441cdc" })){ return promiseland._getModule("2167d6b78835db6256dd6005c4441cdc"); };
 var PL$3/*Map*/;try{PL$3/*Map*/ = Map;}catch(e){};
 var PL$1 = (function(){
