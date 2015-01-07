@@ -257,11 +257,11 @@ Literal
   / RegularExpressionLiteral
 
 NullLiteral
-  = NullToken { return posRes({ type: "Literal", value: null }); }
+  = NullToken { return posRes({ type: "Literal", value: null, originalText: "null" }); }
 
 BooleanLiteral
-  = TrueToken  { return posRes({ type: "Literal", value: true  }); }
-  / FalseToken { return posRes({ type: "Literal", value: false }); }
+  = TrueToken  { return posRes({ type: "Literal", value: true, originalText: "true"  }); }
+  / FalseToken { return posRes({ type: "Literal", value: false, originalText: "false" }); }
 
 /*
  * The "!(IdentifierStart / DecimalDigit)" predicate is not part of the official
@@ -277,13 +277,13 @@ NumericLiteral "number"
 
 DecimalLiteral
   = DecimalIntegerLiteral "." DecimalDigit* ExponentPart? {
-      return posRes({ type: "Literal", value: parseFloat(text()) });
+      return posRes({ type: "Literal", value: parseFloat(text()), originalText: text() });
     }
   / "." DecimalDigit+ ExponentPart? {
-      return posRes({ type: "Literal", value: parseFloat(text()) });
+      return posRes({ type: "Literal", value: parseFloat(text()), originalText: text() });
     }
   / DecimalIntegerLiteral ExponentPart? {
-      return posRes({ type: "Literal", value: parseFloat(text()) });
+      return posRes({ type: "Literal", value: parseFloat(text()), originalText: text() });
     }
 
 DecimalIntegerLiteral
@@ -307,7 +307,7 @@ SignedInteger
 
 HexIntegerLiteral
   = "0x"i digits:$HexDigit+ {
-      return posRes({ type: "Literal", value: parseInt(digits, 16) });
+      return posRes({ type: "Literal", value: parseInt(digits, 16), originalText: text() });
      }
 
 HexDigit
@@ -315,10 +315,10 @@ HexDigit
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {
-      return posRes({ type: "Literal", value: chars.join("") });
+      return posRes({ type: "Literal", value: chars.join(""), originalText: text() });
     }
   / "'" chars:SingleStringCharacter* "'" {
-      return posRes({ type: "Literal", value: chars.join("") });
+      return posRes({ type: "Literal", value: chars.join(""), originalText: text() });
     }
 
 DoubleStringCharacter
@@ -386,7 +386,7 @@ RegularExpressionLiteral "regular expression"
         error(e.message);
       }
 
-      return posRes({ type: "Literal", value: value });
+      return posRes({ type: "Literal", value: value, originalText: text() });
     }
 
 RegularExpressionBody

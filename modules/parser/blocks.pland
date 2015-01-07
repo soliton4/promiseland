@@ -86,6 +86,9 @@ return (parInstance, par){
         l = sAr.length;
         
         for (i; i < l; ++i){
+          if (sAr[i].asmIgnore){
+            continue;
+          };
           blockRes.push(this.newLine());
           blockRes.push(this.makeStatement(this.parseExpression(sAr[i])));
         };

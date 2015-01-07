@@ -51,7 +51,7 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "fc4bc2e27b068fcc44e89fbfde5a31fc" })){ return promiseland._getModule("fc4bc2e27b068fcc44e89fbfde5a31fc"); };
+if (promiseland._hasModule({ hashStr: "75c9acad51dcd46e2fe68f8f3e59e9cb" })){ return promiseland._getModule("75c9acad51dcd46e2fe68f8f3e59e9cb"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$1 = (function(){
 "use strict";
@@ -108,6 +108,10 @@ var PL$19/*map*/;
       ;
       PL$15/*cDef*/ = PL$8/*getClass*/(PL$13/*par*/["type"]);
       if(PL$15/*cDef*/["isVar"]){
+        if((PL$13/*par*/["asmMode"] && ! PL$13/*par*/["propertyValue"])){
+          return PL$16/*assembleCode*/([PL$17/*MAKRO_SELF*/, ".", PL$13/*par*/["property"]], PL$13/*par*/);
+        };
+        ;
         return PL$16/*assembleCode*/([PL$17/*MAKRO_SELF*/, "[", PL$18/*MAKRO_PROPERTYVALUE*/, "]"], PL$13/*par*/);
       };
       ;

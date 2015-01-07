@@ -137,9 +137,9 @@ return (function() {
         peg$c49 = { type: "literal", value: "\u200C", description: "\"\\u200C\"" },
         peg$c50 = "\u200D",
         peg$c51 = { type: "literal", value: "\u200D", description: "\"\\u200D\"" },
-        peg$c52 = function() { return posRes({ type: "Literal", value: null }); },
-        peg$c53 = function() { return posRes({ type: "Literal", value: true  }); },
-        peg$c54 = function() { return posRes({ type: "Literal", value: false }); },
+        peg$c52 = function() { return posRes({ type: "Literal", value: null, originalText: "null" }); },
+        peg$c53 = function() { return posRes({ type: "Literal", value: true, originalText: "true"  }); },
+        peg$c54 = function() { return posRes({ type: "Literal", value: false, originalText: "false" }); },
         peg$c55 = { type: "other", description: "number" },
         peg$c56 = function(literal) {
               return literal;
@@ -148,7 +148,7 @@ return (function() {
         peg$c58 = { type: "literal", value: ".", description: "\".\"" },
         peg$c59 = null,
         peg$c60 = function() {
-              return posRes({ type: "Literal", value: parseFloat(text()) });
+              return posRes({ type: "Literal", value: parseFloat(text()), originalText: text() });
             },
         peg$c61 = "0",
         peg$c62 = { type: "literal", value: "0", description: "\"0\"" },
@@ -163,7 +163,7 @@ return (function() {
         peg$c71 = "0x",
         peg$c72 = { type: "literal", value: "0x", description: "\"0x\"" },
         peg$c73 = function(digits) {
-              return posRes({ type: "Literal", value: parseInt(digits, 16) });
+              return posRes({ type: "Literal", value: parseInt(digits, 16), originalText: text() });
              },
         peg$c74 = /^[0-9a-f]/i,
         peg$c75 = { type: "class", value: "[0-9a-f]i", description: "[0-9a-f]i" },
@@ -171,7 +171,7 @@ return (function() {
         peg$c77 = "\"",
         peg$c78 = { type: "literal", value: "\"", description: "\"\\\"\"" },
         peg$c79 = function(chars) {
-              return posRes({ type: "Literal", value: chars.join("") });
+              return posRes({ type: "Literal", value: chars.join(""), originalText: text() });
             },
         peg$c80 = "'",
         peg$c81 = { type: "literal", value: "'", description: "\"'\"" },
@@ -215,7 +215,7 @@ return (function() {
                 error(e.message);
               }
 
-              return posRes({ type: "Literal", value: value });
+              return posRes({ type: "Literal", value: value, originalText: text() });
             },
         peg$c112 = /^[*\\\/[]/,
         peg$c113 = { type: "class", value: "[*\\\\\\/[]", description: "[*\\\\\\/[]" },

@@ -23,6 +23,10 @@ return (classSystem, internals){
 
     var cDef = getClass(par["type"]);
     if (cDef.isVar){
+      if (par.asmMode && !par.propertyValue){
+        // shortcut implementation for asm.js functions
+        return assembleCode([MAKRO_SELF, ".", par.property], par);
+      };
       return assembleCode([MAKRO_SELF, "[", MAKRO_PROPERTYVALUE, "]"], par);
     };
 

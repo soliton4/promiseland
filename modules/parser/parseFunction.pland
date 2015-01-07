@@ -11,6 +11,8 @@ var identifierName = basics.identifierName;
 var checkIsFunction = basics.checkIsFunction;
 var getExtraFromPar = basics.getExtraFromPar;
 
+var statementType = basics.statementType;
+
 return (parInstance, par){
   
   var f = (par){
@@ -269,6 +271,7 @@ return (parInstance, par){
         funDecl.push(this.newLine());
         funDecl.push("\"use asm\";");
         funDecl.push(this.newLine());
+        this.asmMode = true;
       };
 
       // indent here
@@ -540,14 +543,17 @@ return (parInstance, par){
     
     
     
-    // the function statement
+    // the function expression
     this.expFunctionExpression = function(value, declaration){
       
       if (!declaration){
         value.useLocalVariableName = true;
       };
       
-      var cp = this.newInstance(value, {dynamicCode: this.dynamicCode || this.isFunction});
+      var cp = this.newInstance(value, {
+        dynamicCode: this.dynamicCode || this.isFunction,
+        asmMode: this.asmMode
+      });
       var funName = cp.getFunctionName();
       var funRes = cp.getFunctionRes();
 
@@ -563,11 +569,26 @@ return (parInstance, par){
       var res;
 
       if (funName && funRes && declaration){
-
-        this.addFunction(funRes, funName);
-        res = this.newResult(this.getVariableName(funName));
-        res.setType(funRes.getType());
-        return res;
+        if (this.asmMode){
+          // asm.js special case
+          value.hoist = false;
+          this.addFunction(funRes, funName, value);
+          
+        }else{
+          
+          value.hoist = true;
+          this.addFunction(funRes, funName, value);
+          
+          if (declaration){
+            res = this.newResult("/* function " + funName + " (){} - hoisted */");
+            res.setType(statementType);
+          }else{
+            // for future concern
+            res = this.newResult(this.getVariableName(funName));
+            res.setType(funRes.getType());
+          };
+          return res;
+        };
       };
 
       res = this.newResult();
@@ -582,6 +603,7 @@ return (parInstance, par){
       return res;
 
     };
+    // the function statement
     this.expFunctionDeclaration = function(value){
       return this.expFunctionExpression(value, true);
     };
@@ -591,9 +613,11 @@ return (parInstance, par){
     };
     
     this.functionsAr = [];
-    this.addFunction = (res, name, par){
-      this.resolveFunctionType({name: identifierName(name), type: res.getType()}, par);
-      this.functionsAr.push({res: res, name: name});
+    this.addFunction = (res, name, parsed){
+      this.resolveFunctionType({name: identifierName(name), type: res.getType()}, parsed);
+      if (parsed.hoist){
+        this.functionsAr.push({res: res, name: name});
+      };
     };
     
   };

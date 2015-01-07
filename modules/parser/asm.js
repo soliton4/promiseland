@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "df96e7a5ae5add4c4beaf9e49ad7b636" })){ return promiseland._getModule("df96e7a5ae5add4c4beaf9e49ad7b636"); };
+    if (promiseland._hasModule({ hashStr: "a7f21cff842ef0738460b4c5faebce7d" })){ return promiseland._getModule("a7f21cff842ef0738460b4c5faebce7d"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "df96e7a5ae5add4c4beaf9e49ad7b636", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "a7f21cff842ef0738460b4c5faebce7d", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -102,7 +102,7 @@ PL$3(function(){
   PL$17/*getExtraFromPar*/ = PL$7/*basics*/["getExtraFromPar"];
   PL$18/*statementType*/ = PL$7/*basics*/["statementType"];
   PL$19/*checkPromising*/ = PL$7/*basics*/["checkPromising"];
-  __requireFun("./amdbr6").then(PL$3(function(PL$21){PL$20/*asm*/ = PL$21;
+  __requireFun("./imported/asm").then(PL$3(function(PL$21){PL$20/*asm*/ = PL$21;
   PL$1.resolve((function(PL$22/*parInstance*/, PL$23/*par*/){
   var PL$24/*f*/;
 
@@ -147,6 +147,7 @@ var PL$32/*expression*/;
         if((PL$31/*first*/["type"] == "ExpressionStatement")){
           PL$32/*expression*/ = PL$31/*first*/["expression"];
           if((((PL$32/*expression*/ && (PL$32/*expression*/["type"] == "Literal")) && (typeof PL$32/*expression*/["value"] == "string")) && (PL$32/*expression*/["value"] == "use asm"))){
+            PL$31/*first*/["asmIgnore"] = true;
             return true;
           };
           ;

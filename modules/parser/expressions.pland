@@ -376,12 +376,19 @@ return (parInstance, par){
       
       this.expLiteral = function(par){
         var res = this.newResult();
+        if (!par.originalText){
+          this.error(par, errorMsg.internalOriginalTextMissing)
+        };
         switch (typeof par.value){
           case "string":
             res.push(stringEncodeStr(par.value));
             break;
             
           case "number":
+            if (this.asmMode){
+              res.push("" + par.originalText);
+              break;
+            };
             res.push("" + par.value);
             break;
             
@@ -416,6 +423,9 @@ return (parInstance, par){
       };
         
       this.dereference = (parRes){
+        if (this.asmMode){
+          this.error(parRes, errorMsg.notPossibleWithinAsm);
+        };
         var res = this.newResult();
         
         var expressionRes = parRes;

@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "510b9aac5b4e280e383b4637e8deab24" })){ return promiseland._getModule("510b9aac5b4e280e383b4637e8deab24"); };
+    if (promiseland._hasModule({ hashStr: "7ef274c2885e2e04d9643c7d9c3a0d6d" })){ return promiseland._getModule("7ef274c2885e2e04d9643c7d9c3a0d6d"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "510b9aac5b4e280e383b4637e8deab24", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "7ef274c2885e2e04d9643c7d9c3a0d6d", "module": PL$1, promising: true });
 var PL$39/*promiseland*/;try{PL$39/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -189,6 +189,7 @@ var PL$99/*InheritedSystem*/;
     this["toParse"] = PL$45/*par*/["toParse"];
     this["dynamicCode"] = PL$45/*par*/["dynamicCode"];
     this["hashStr"] = PL$45/*par*/["hashStr"];
+    this["asmMode"] = (PL$45/*par*/["asmMode"] || false);
     if(PL$45/*par*/["_locals"]){
       for(PL$46/*i*/ in PL$45/*par*/["_locals"]){
         this[PL$46/*i*/] = PL$45/*par*/["_locals"][PL$46/*i*/];};

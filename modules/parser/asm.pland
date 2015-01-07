@@ -15,7 +15,7 @@ var statementType = basics.statementType;
 var checkPromising = basics.checkPromising;
 
 
-var asm = require "./amdbr6";
+var asm = require "./imported/asm";
 
 
 
@@ -54,6 +54,7 @@ return (parInstance, par){
       if (first.type == "ExpressionStatement"){
         var expression = first.expression;
         if (expression && expression.type == "Literal" && typeof expression.value == "string" && expression.value == "use asm"){
+          first.asmIgnore = true;
           return true;
         };
       };

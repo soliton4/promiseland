@@ -51,7 +51,7 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "ef7cb29818d87ff1bf02a9a84c53416e" })){ return promiseland._getModule("ef7cb29818d87ff1bf02a9a84c53416e"); };
+if (promiseland._hasModule({ hashStr: "bb138f3e42aade36c95e0eb49f94b52d" })){ return promiseland._getModule("bb138f3e42aade36c95e0eb49f94b52d"); };
 var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$7/*RegExp*/;try{PL$7/*RegExp*/ = RegExp;}catch(e){};
 var PL$1 = (function(){
@@ -281,10 +281,15 @@ var PL$20/*arguments*/ = arguments;
 "msg": "internal: missing parser info",
 "additional": "pls provide this error in a github issue"},
 "internalTypeInfoConfusion": {"id": 1013,
-"msg": "type info confusion",
+"msg": "internal: type info confusion",
+"additional": "pls provide this error in a github issue"},
+"internalOriginalTextMissing": {"id": 1014,
+"msg": "internal: origninalText missing",
 "additional": "pls provide this error in a github issue"},
 "asmValidationFailed": {"id": 2001,
-"msg": "asm.js validation failed"}};
+"msg": "asm.js validation failed"},
+"notPossibleWithinAsm": {"id": 2002,
+"msg": "not possible within asm.js functions"}};
   return {"errorFun": PL$9/*errorFun*/,
 "errorMsg": PL$11/*errorMsg*/,
 "_stringEncodeStr": PL$4/*_stringEncodeStr*/,

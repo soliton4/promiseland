@@ -287,14 +287,22 @@ var checkPromising = function(par){
       },
       internalTypeInfoConfusion: {
         id: 1013
-        , msg: "type info confusion"
+        , msg: "internal: type info confusion"
         , additional: "pls provide this error in a github issue"
-        
       },
+      internalOriginalTextMissing:{
+        id: 1014
+        , msg: "internal: origninalText missing"
+        , additional: "pls provide this error in a github issue"
+      }
       
       asmValidationFailed: {
         id: 2001
         , msg: "asm.js validation failed"
+      },
+      notPossibleWithinAsm: {
+        id: 2002
+        , msg: "not possible within asm.js functions"
       }
       
     };

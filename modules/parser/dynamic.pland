@@ -502,7 +502,8 @@ return (parInstance, par){
           "type": this.getResultType(par.instance),
           property: par.property,
           propertyValue: par.propertyValue,
-          errorFun: par.errorFun
+          errorFun: par.errorFun,
+          asmMode: this.asmMode || false
         }));
         
         if (par.property){

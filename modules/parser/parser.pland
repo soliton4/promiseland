@@ -95,6 +95,8 @@ var _Result = require "./Result";
       this.dynamicCode = par.dynamicCode;
       this.hashStr = par.hashStr;
       
+      this.asmMode = par.asmMode || false;
+      
       // initialization
       if (par._locals){
         for (var i in par._locals){

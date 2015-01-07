@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "01c6c748b5943bdb99c293d13cdf093b" })){ return promiseland._getModule("01c6c748b5943bdb99c293d13cdf093b"); };
+    if (promiseland._hasModule({ hashStr: "c979e331e05000237b541795ddee48d0" })){ return promiseland._getModule("c979e331e05000237b541795ddee48d0"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "01c6c748b5943bdb99c293d13cdf093b", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "c979e331e05000237b541795ddee48d0", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -423,12 +423,21 @@ var PL$42/*temporaryPs*/;
 
         ;
         PL$34/*res*/ = this["newResult"]();
+        if(! PL$32/*par*/["originalText"]){
+          this["error"](PL$32/*par*/, PL$11/*errorMsg*/["internalOriginalTextMissing"]);
+        };
+        ;
         switch (typeof PL$32/*par*/["value"]){
 case "string":
 
         PL$34/*res*/["push"](PL$13/*stringEncodeStr*/(PL$32/*par*/["value"]));
         break;;case "number":
 
+        if(this["asmMode"]){
+          PL$34/*res*/["push"](("" + PL$32/*par*/["originalText"]));
+          break;;
+        };
+        ;
         PL$34/*res*/["push"](("" + PL$32/*par*/["value"]));
         break;;case "boolean":
 
@@ -470,6 +479,10 @@ var PL$49/*dereferencePost*/;
 var PL$50/*postRes*/;
 var PL$51/*promiseType*/;
 
+        ;
+        if(this["asmMode"]){
+          this["error"](PL$44/*parRes*/, PL$11/*errorMsg*/["notPossibleWithinAsm"]);
+        };
         ;
         PL$34/*res*/ = this["newResult"]();
         PL$45/*expressionRes*/ = PL$44/*parRes*/;

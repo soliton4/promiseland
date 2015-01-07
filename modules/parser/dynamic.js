@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "d6b6d34c572c14d646b128655aff6643" })){ return promiseland._getModule("d6b6d34c572c14d646b128655aff6643"); };
+    if (promiseland._hasModule({ hashStr: "75f6b01d3024493790d7cffea00c2f28" })){ return promiseland._getModule("75f6b01d3024493790d7cffea00c2f28"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "d6b6d34c572c14d646b128655aff6643", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "75f6b01d3024493790d7cffea00c2f28", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$50/*Promise*/;try{PL$50/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -592,7 +592,8 @@ var PL$63/*r*/;
 "type": this["getResultType"](PL$32/*par*/["instance"]),
 "property": PL$32/*par*/["property"],
 "propertyValue": PL$32/*par*/["propertyValue"],
-"errorFun": PL$32/*par*/["errorFun"]}));
+"errorFun": PL$32/*par*/["errorFun"],
+"asmMode": (this["asmMode"] || false)}));
         if(PL$32/*par*/["property"]){
           PL$49/*res*/["setType"](this["getPropertyType"]({"type": this["getResultType"](PL$32/*par*/["instance"]),
 "property": PL$32/*par*/["property"]}, PL$32/*par*/["instance"]));
