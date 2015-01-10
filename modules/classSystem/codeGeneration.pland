@@ -409,6 +409,7 @@ return (classSystem, internals){
   var MAKRO_REJECTFUN = 10;
   var MAKRO_TYPEVALUE = 11;
   var MAKRO_CONSTRUCTOR = 12;
+  var MAKRO_NEWLINE = 13;
   
   
   var presets = {
@@ -447,13 +448,13 @@ return (classSystem, internals){
         };
       }else{
         switch(ar[i]){
-          case MAKRO_SELF:
+        case MAKRO_SELF:
           res.push(par.instance);
           break;
-          case MAKRO_PROPERTY:
+        case MAKRO_PROPERTY:
           res.push(par.property);
           break;
-          case MAKRO_PROPERTYSTRING:
+        case MAKRO_PROPERTYSTRING:
           res.push(stringEncodeStr(par.property));
           break;
           case MAKRO_PROPERTYVALUE:
@@ -481,15 +482,17 @@ return (classSystem, internals){
           case MAKRO_RESOLVEFUN:
           res.push(par.resolveFun || "undefined");
           break;
-          case MAKRO_REJECTFUN:
+        case MAKRO_REJECTFUN:
           res.push(par.rejectFun || "undefined");
           break;
-          case MAKRO_TYPEVALUE:
+        case MAKRO_TYPEVALUE:
           res.push(par.typeValue);
           break;
-          case MAKRO_CONSTRUCTOR:
+        case MAKRO_CONSTRUCTOR:
           res.push(par.constructorName);
           break;
+        case MAKRO_NEWLINE:
+          res.push(par.newLine || "\n");
         };
       };
     };
