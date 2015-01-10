@@ -11,6 +11,7 @@
     savable: "./classSystem/savable",
     codeGeneration: "./classSystem/codeGeneration",
     Map: "./Map",
+    makroModule: "./classSystem/makro"
   }
 }>;
 
@@ -23,8 +24,11 @@ temporary = extra.getModule(temporary);
 promiseOf = extra.getModule(promiseOf);
 sync = extra.getModule(sync);
 savable = extra.getModule(savable);
+makroModule = extra.getModule(makroModule);
 codeGeneration = extra.getModule(codeGeneration);
 Map = extra.getModule(Map);
+
+
 
 /* 
   class system
@@ -96,20 +100,20 @@ var stringifyInstance = (parType, parInstance){
 */
 
 
-var MAKRO_SELF = 0;
-var MAKRO_PROPERTY = 1;
-var MAKRO_PROPERTYSTRING = 2;
-var MAKRO_PROPERTYVALUE = 3;
-var MAKRO_VALUE = 4;
-var MAKRO_LEFT = 5;
-var MAKRO_OPERATOR = 6;
-var MAKRO_RIGHT = 7;
-var MAKRO_VALUEPROPERTY = 8;
-var MAKRO_RESOLVEFUN = 9;
-var MAKRO_REJECTFUN = 10;
-var MAKRO_TYPEVALUE = 11;
-var MAKRO_CONSTRUCTOR = 12;
-
+/*var makro.SELF = 0;
+var makro.PROPERTY = 1;
+var makro.PROPERTYSTRING = 2;
+var makro.PROPERTYVALUE = 3;
+var makro.VALUE = 4;
+var makro.LEFT = 5;
+var makro.OPERATOR = 6;
+var makro.RIGHT = 7;
+var makro.VALUEPROPERTY = 8;
+var makro.RESOLVEFUN = 9;
+var makro.REJECTFUN = 10;
+var makro.TYPEVALUE = 11;
+var makro.CONSTRUCTOR = 12;
+*/
 
 // unhide class types    
 
@@ -554,13 +558,13 @@ var classSystem = {
         destroyFun = def;
       };
 
-      mDef.getCode = [MAKRO_SELF, "[" + mDef.index + "]"];
+      mDef.getCode = [makro.SELF, "[" + mDef.index + "]"];
       if (mDef.hasSetter){
         // call setter before assigning
-        mDef.setCode = ["(function(s, v){ v = s[" + mDef.setterIdx + "](v); s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+        mDef.setCode = ["(function(s, v){ v = s[" + mDef.setterIdx + "](v); s[" + mDef.index + "] ", makro.OPERATOR, " v; return v; })(", makro.SELF, ", ", makro.VALUE, ")"];
 
       }else{
-        mDef.setCode = [MAKRO_SELF, "[" + mDef.index + "] ", MAKRO_OPERATOR, " " , MAKRO_VALUE];
+        mDef.setCode = [makro.SELF, "[" + mDef.index + "] ", makro.OPERATOR, " " , makro.VALUE];
 
       };
       if (isTrackedMember){
@@ -574,13 +578,13 @@ var classSystem = {
         
         if (cDef.track){
           if (mDef.hasSetter){
-            mDef.setCode              = ["(function(s, v){ var vAr = [v, v[" + memberTrackRootIdx + "]()]; vAr = s[" + mDef.setterIdx + "](vAr); s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
-            mDef.setCodeFromTemporary = ["(function(s, vAr){ vAr = s[" + mDef.setterIdx + "](vAr); var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+            mDef.setCode              = ["(function(s, v){ var vAr = [v, v[" + memberTrackRootIdx + "]()]; vAr = s[" + mDef.setterIdx + "](vAr); s[" + mDef.index + "] ", makro.OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", makro.SELF, ", ", makro.VALUE, ")"];
+            mDef.setCodeFromTemporary = ["(function(s, vAr){ vAr = s[" + mDef.setterIdx + "](vAr); var v = vAr[0]; s[" + mDef.index + "] ", makro.OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", makro.SELF, ", ", makro.VALUE, ")"];
 
           }else{
             //mDef.setCode = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)]; // setters are allways called as temporary
-            mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
-            mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", MAKRO_OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", MAKRO_SELF, ", ", MAKRO_VALUE, ")"];
+            mDef.setCode = ["(function(s, v){ s[" + mDef.index + "] ", makro.OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); return v; })(", makro.SELF, ", ", makro.VALUE, ")"];
+            mDef.setCodeFromTemporary = ["(function(s, vAr){ var v = vAr[0]; s[" + mDef.index + "] ", makro.OPERATOR, " v; if(s[" + mDef.trackIndex + "]){ s[" + mDef.trackIndex + "](); }; s[" + mDef.trackIndex + "] = v[" + memberTrackMemberIdx + "](s[" + trackerIdx + "]); vAr[1](); return v; })(", makro.SELF, ", ", makro.VALUE, ")"];
 
           };
         }else{
@@ -588,8 +592,8 @@ var classSystem = {
           mDef.setCodeFromTemporary = [runtimeError(errorMsg.onlyTrackedClassesCanContainTrackedMembers)];
         };
       };
-      mDef.connectFunCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, ")"];
-      mDef.connectSlotCode = [MAKRO_SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", MAKRO_VALUE, "[", MAKRO_VALUEPROPERTY, "], ", MAKRO_VALUE, ")"];
+      mDef.connectFunCode = [makro.SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", makro.VALUE, ")"];
+      mDef.connectSlotCode = [makro.SELF, "[" + map.connectIdx + "](" + mDef.index + ", ", makro.VALUE, "[", makro.VALUEPROPERTY, "], ", makro.VALUE, ")"];
       
     };
     
@@ -1460,6 +1464,10 @@ var internalObjects = internals.internalObjects;
 var getNewInternalId = internals.getNewInternalId;
 
 savable(classSystem, internals);
+
+
+makroModule(classSystem, internals);
+var makro = internals.makro;
 
 codeGeneration(classSystem, internals);
 var runtimeError = internals.runtimeError;

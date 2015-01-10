@@ -143,6 +143,7 @@ return (parInstance, par){
           }else{
             var tempRes = self.newResult();
             par.result = tempRes;
+            par.newLine = par.newLine || self.newLine();
             errRes.resolve(promiseland.classSystem[parFun](par));
           };
 
