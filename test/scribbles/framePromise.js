@@ -79,7 +79,7 @@ return PL$3;
 });
 
   ;
-  PL$2/*test*/;
+  /* function test (){} - hoisted */;
   ;})();
 ;return PL$1;
 });

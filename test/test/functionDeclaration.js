@@ -83,10 +83,10 @@ function PL$14/*fc*/(){
 PL$9(function(){
 
   ;
-  PL$11/*fa*/;
+  /* function fa (){} - hoisted */;
   ;
   PL$12/*res*/ = ((PL$11/*fa*/() + PL$13/*fb*/()) + PL$14/*fc*/());
-  PL$13/*fb*/;
+  /* function fb (){} - hoisted */;
   ;
   PL$7.resolve(PL$12/*res*/); return;
   
@@ -97,7 +97,7 @@ PL$9(function(){
   }else{PL$15.resolve();
   };PL$15.then(PL$9(function(PL$17){PL$17;;
   ;
-  PL$14/*fc*/;
+  /* function fc (){} - hoisted */;
   ;
   PL$7.resolve(); return;}), PL$10);
 ;})();
@@ -111,7 +111,7 @@ PL$3(function(){
   };
   ;
   PL$1.resolve({"success": false}); return;
-  PL$5/*fmain*/;
+  /* function fmain (){} - hoisted */;
   ;
   PL$1.resolve(); return;}), PL$4);
 ;})();

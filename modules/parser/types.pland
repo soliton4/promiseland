@@ -18,14 +18,50 @@ return (parInstance, par){
   var f = (par){
     
       /* initializing type identifiers */
+    
+    var self = this;
+    
+    this.isSimpleType = (parType){
+      if (this.isVar(parType)){
+        return true;
+      };
+      return false;
+    };
+
+    this.isVar = function(parType){
+      if (typeof parType == "function"){
+        return classSystem.isVar(parType);
+      };
+      return false;
+    };
+    
+
+    this.typeIsAvailableByName = function(parType){
+      if (typeof parType == "function"){
+        return classSystem.isAvailableByName(parType);
+      };
+      return false;
+    };
       
-      this.types = (new Map).mixin(par.types);
-      if (!this.types.get("var")){
+    this.types = (new Map).mixin(par.types);
+    classSystem.getBuiltinTypesMap().forEach((type, key){
+      if (!self.typeIsAvailableByName(type)){
+        return;
+      };
+      self.types.set(key, {
+        name: key,
+        "type": type
+      });
+    });
+    
+    
+    //this.types.mixin(classSystem.getBuiltinTypesMap());
+    /*  if (!this.types.get("var")){
         this.types.set("var", {
           name: "var",
           "type": classSystem.getBuiltinType("var")
         });
-      }
+      }*/
 
     
       this.compareTypes = function(par1, par2){
@@ -292,60 +328,61 @@ return (parInstance, par){
         entry.isDefined = true;
       };
       
-      this._getTypeEntry = function(parName, parParsed, par){
-        var name = identifierName(parName);
-        
-        var throwError = true;
-        if (par && par.dontThrow){
-          throwError = false;
-        };
-        if (this.types.has(name)){
+    this._getTypeEntry = function(parName, parParsed, par){
+      var name = identifierName(parName);
+
+      var throwError = true;
+      if (par && par.dontThrow){
+        throwError = false;
+      };
+      if (this.types.has(name)){
+        return this.types.get(name);
+      };
+
+      if (name[name.length - 1] == "*"){
+        // promisetype
+        var typename = name.substr(0, name.length - 1);
+        var typeEntry = this._getTypeEntry(typename, parParsed, par);
+        if (typeEntry){
+          var extraRes = typeEntry.extraRes;
+          this.types.set(name, {
+            name: name,
+            "type": classSystem._createPromiseOfClass(typeEntry.type),
+            isDynamic: false,
+            extraRes: extraRes
+          });
+
+          extraRes.push("var ");
+          extraRes.push(this.renderType(name));
+          this.common.useClassSystem = true;
+          extraRes.push(" = classSystem._createPromiseOfClass(");
+          extraRes.push(this.renderType(typename));
+          extraRes.push(");\nvar ");
+          extraRes.push(this.getVariableName(name) + " = ");
+          extraRes.push(this.renderType(name));
+          extraRes.push(";\n");
+          extraRes.push("var " + this.getConstructorName(name) + " = undefined;");
+
+          extraRes.push(this._typeReadyCode({typename: name, noConstructor: false}));
+
           return this.types.get(name);
         };
-        
-        if (name[name.length - 1] == "*"){
-          // promisetype
-          var typename = name.substr(0, name.length - 1);
-          var typeEntry = this._getTypeEntry(typename, parParsed, par);
-          if (typeEntry){
-            var extraRes = typeEntry.extraRes;
-            this.types.set(name, {
-              name: name,
-              "type": classSystem._createPromiseOfClass(typeEntry.type),
-              isDynamic: false,
-              extraRes: extraRes
-            });
-            
-            extraRes.push("var ");
-            extraRes.push(this.renderType(name));
-            this.common.useClassSystem = true;
-            extraRes.push(" = classSystem._createPromiseOfClass(");
-            extraRes.push(this.renderType(typename));
-            extraRes.push(");\nvar ");
-            extraRes.push(this.getVariableName(name) + " = ");
-            extraRes.push(this.renderType(name));
-            extraRes.push(";\n");
-            extraRes.push("var " + this.getConstructorName(name) + " = undefined;");
-            
-            extraRes.push(this._typeReadyCode({typename: name, noConstructor: false}));
-            
-            return this.types.get(name);
-          };
-        };
-        
-        if (!throwError){
-          return;
-        };
-        this.error(parParsed, errorMsg.typeUndeclared, {
-          name: name
-        });
       };
-      this.getType = function(parName, parParsed, par){
-        var entry = this._getTypeEntry(parName, parParsed, par);
-        if (entry){
-          return entry["type"];
-        };
+
+      if (!throwError){
+        return;
       };
+      this.error(parParsed, errorMsg.typeUndeclared, {
+        name: name
+      });
+    };
+
+    this.getType = function(parName, parParsed, par){
+      var entry = this._getTypeEntry(parName, parParsed, par);
+      if (entry){
+        return entry["type"];
+      };
+    };
       
       this.getReturnType = function(){
         if (this._returnType){
@@ -416,20 +453,6 @@ return (parInstance, par){
       };
     
     
-    this.isSimpleType = (parType){
-      if (this.isVar(parType)){
-        return true;
-      };
-      return false;
-    };
-
-    this.isVar = function(parType){
-      if (typeof parType == "function"){
-        return classSystem.isVar(parType);
-      };
-      return false;
-    };
-
 
     
   };

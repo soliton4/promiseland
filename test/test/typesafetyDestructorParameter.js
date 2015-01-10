@@ -88,7 +88,7 @@ PL$10/*p1*/ = PL$10/*p1*/[0];}
     PL$5/*failed*/ = true;
     ;});
   PL$7/*cntSupposed*/(0);
-  PL$9/*f1*/;
+  /* function f1 (){} - hoisted */;
   ;
   PL$7/*cntSupposed*/(0);
   /*temp tracked assign*/(function(vAr){

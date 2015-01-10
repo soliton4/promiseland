@@ -79,34 +79,34 @@ return PL$4;
 });
   return {"fun": (function(){
   var PL$12 = new __Promise();
-var PL$13 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
-var PL$14 = function(e){ PL$12.reject(e); };
-var PL$15/*a*/;
-var PL$16/*i*/;
-PL$13(function(){
+var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
+var PL$15 = function(e){ PL$12.reject(e); };
+var PL$16/*a*/;
+var PL$17/*i*/;
+PL$14(function(){
   
     ;
-    PL$15/*a*/ = 1;
-    PL$16/*i*/ = 0;
-    var PL$18 = new __Promise();
-var PL$17 = function(){var PL$19 = new __Promise();
-if((PL$16/*i*/ < 4)){
-    PL$2/*somefun*/(PL$16/*i*/).then(PL$13(function(PL$20){PL$16/*i*/ = PL$20;
-    PL$15/*a*/ = (PL$15/*a*/ + 1);
-    PL$19.resolve(true); return PL$19;
-;}), PL$14);
-;}else{PL$19.resolve(false); return PL$19;
+    PL$16/*a*/ = 1;
+    PL$17/*i*/ = 0;
+    var PL$19 = new __Promise();
+var PL$18 = function(){var PL$20 = new __Promise();
+if((PL$17/*i*/ < 4)){
+    PL$2/*somefun*/(PL$17/*i*/).then(PL$14(function(PL$21){PL$17/*i*/ = PL$21;
+    PL$16/*a*/ = (PL$16/*a*/ + 1);
+    PL$20.resolve(true); return PL$20;
+;}), PL$15);
+;}else{PL$20.resolve(false); return PL$20;
 };
-PL$19;return PL$19;
+PL$20;return PL$20;
 };
-var PL$21 = function(){PL$17().then(function(contLoop){
-if (contLoop){PL$21();}else{PL$18.resolve();};
+var PL$22 = function(){PL$18().then(function(contLoop){
+if (contLoop){PL$22();}else{PL$19.resolve();};
 });
 };
-PL$21();
-PL$18.then(function(){;
+PL$22();
+PL$19.then(function(){;
     ;
-    if((PL$15/*a*/ == 5)){
+    if((PL$16/*a*/ == 5)){
       PL$12.resolve(4); return;
     };
     ;

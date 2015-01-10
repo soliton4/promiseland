@@ -71,19 +71,19 @@ return PL$4;
 });
   return {"fun": (function(){
   var PL$8 = new __Promise();
-var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$8.reject(e); }; }; };
-var PL$10 = function(e){ PL$8.reject(e); };
-var PL$11/*a*/;
-PL$9(function(){
+var PL$10 = function(code){ return function(res){ try{code(res);}catch(e){ PL$8.reject(e); }; }; };
+var PL$11 = function(e){ PL$8.reject(e); };
+var PL$12/*a*/;
+PL$10(function(){
   
     ;
-    PL$11/*a*/ = 1;
-    PL$2/*somefun*/(PL$11/*a*/).then(PL$9(function(PL$12){if((PL$12 == 2)){
+    PL$12/*a*/ = 1;
+    PL$2/*somefun*/(PL$12/*a*/).then(PL$10(function(PL$13){if((PL$13 == 2)){
       PL$8.resolve(4); return;
     };
     ;
     PL$8.resolve(0); return;
-    PL$8.resolve(); return;}), PL$10);
+    PL$8.resolve(); return;}), PL$11);
 ;})();
 return PL$8;
 })};

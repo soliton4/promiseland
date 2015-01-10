@@ -80,19 +80,19 @@ return PL$4;
 });
   return {"fun": (function(){
   var PL$13 = new __Promise();
-var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$13.reject(e); }; }; };
-var PL$15 = function(e){ PL$13.reject(e); };
-var PL$16/*a*/;
-PL$14(function(){
+var PL$15 = function(code){ return function(res){ try{code(res);}catch(e){ PL$13.reject(e); }; }; };
+var PL$16 = function(e){ PL$13.reject(e); };
+var PL$17/*a*/;
+PL$15(function(){
   
     ;
-    PL$16/*a*/ = 1;
-    PL$2/*somefun*/(PL$16/*a*/).then(PL$14(function(PL$17){if((PL$17 == 2)){
+    PL$17/*a*/ = 1;
+    PL$2/*somefun*/(PL$17/*a*/).then(PL$15(function(PL$18){if((PL$18 == 2)){
       PL$13.resolve(4); return;
     };
     ;
     PL$13.resolve(0); return;
-    PL$13.resolve(); return;}), PL$15);
+    PL$13.resolve(); return;}), PL$16);
 ;})();
 return PL$13;
 })};

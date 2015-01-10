@@ -51,43 +51,14 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-var __Promise = promiseland.Promise;
-var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "7e2ff512946bcef40a808431919fd11a" })){ return promiseland._getModule("7e2ff512946bcef40a808431919fd11a"); };
+if (promiseland._hasModule({ hashStr: "be3d2116a18078b43727a7503dd2142a" })){ return promiseland._getModule("be3d2116a18078b43727a7503dd2142a"); };
 var PL$1 = (function(){
 "use strict";
+var PL$2/*a*/;
 
   ;
-  var PL$2/*b*/ = (function(){
-  var PL$3 = new __Promise();
-var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
-var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){
-  
-    ;
-    PL$3.resolve(); return;})();
-return PL$3;
-});
-  return {"fun": (function(){
-  var PL$7 = new __Promise();
-var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
-var PL$10 = function(e){ PL$7.reject(e); };
-PL$9(function(){
-  
-    ;
-    
-    var PL$11 = new __Promise();if((1 < 0)){
-      PL$2/*b*/.then(PL$9(function(PL$12){PL$12;
-      PL$11.resolve();;}), PL$10);
-;
-    }else{PL$11.resolve();
-    };PL$11.then(PL$9(function(PL$13){PL$13;;
-    ;
-    PL$7.resolve(4); return;
-    PL$7.resolve(); return;}), PL$10);
-;})();
-return PL$7;
-})};
+  PL$2/*a*/;
+  return {"success": true};
   ;})();
 ;return PL$1;
 });

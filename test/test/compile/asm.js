@@ -59,16 +59,14 @@ var PL$1 = (function(){
   var PL$2/*x*/ = (function PL$3/*f*/(PL$4/*stdlib*/, PL$5/*foreign*/, PL$6/*heap*/){
   "use asm";
   
-  function PL$3/*f*/(){
   
     ;
-    var PL$2/*x*/ = 0, PL$7/*y*/ = 0;
-    PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
-    ;};
-  
-    ;
-    "use asm";
-    PL$3/*f*/;
+    function PL$3/*f*/(){
+    
+      ;
+      var PL$2/*x*/ = 0, PL$7/*y*/ = 0;
+      PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
+      ;};
     return {};
     ;});
   ;})();

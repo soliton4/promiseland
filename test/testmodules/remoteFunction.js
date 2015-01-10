@@ -78,45 +78,45 @@ PL$6(function(){
 return PL$4;
 });
   var PL$11/*y*/ = ((function(f){
-promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "PL$16", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "PL$17", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "PL$16", arguments);
+return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "PL$17", arguments);
 }
 };
 })(function(){
   var PL$12 = new __Promise();
-var PL$13 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
-var PL$14 = function(e){ PL$12.reject(e); };
-PL$13(function(){
+var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
+var PL$15 = function(e){ PL$12.reject(e); };
+PL$14(function(){
   
     ;
-    PL$2/*z*/(PL$3/*context*/).then(PL$13(function(PL$15){PL$15;
-    PL$12.resolve(); return;}), PL$14);
+    PL$2/*z*/(PL$3/*context*/).then(PL$14(function(PL$16){PL$16;
+    PL$12.resolve(); return;}), PL$15);
 ;})();
 return PL$12;
 }));
   PL$8/*x*/ = ((function(f){
-promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "PL$20", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "PL$22", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("client")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "PL$20", arguments);
+return promiseland.remoteExec("52359e7398cbfbfaf29d768d9b7a668b", "PL$22", arguments);
 }
 };
 })(function(){
-  var PL$17 = new __Promise();
-var PL$18 = function(code){ return function(res){ try{code(res);}catch(e){ PL$17.reject(e); }; }; };
-var PL$19 = function(e){ PL$17.reject(e); };
-PL$18(function(){
+  var PL$18 = new __Promise();
+var PL$20 = function(code){ return function(res){ try{code(res);}catch(e){ PL$18.reject(e); }; }; };
+var PL$21 = function(e){ PL$18.reject(e); };
+PL$20(function(){
   
     ;
-    PL$17.resolve("x"); return;
-    PL$17.resolve(); return;})();
-return PL$17;
+    PL$18.resolve("x"); return;
+    PL$18.resolve(); return;})();
+return PL$18;
 }));
   ;})();
 ;return PL$1;

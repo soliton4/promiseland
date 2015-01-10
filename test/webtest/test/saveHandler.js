@@ -58,15 +58,15 @@ if (promiseland._hasModule({ hashStr: "eae93c49cf65b200dc7532ca35899b2d" })){ re
 var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "eae93c49cf65b200dc7532ca35899b2d", "module": PL$1, promising: true });
 var PL$19/*promiseland*/;try{PL$19/*promiseland*/ = promiseland;}catch(e){};
-var PL$36/*console*/;try{PL$36/*console*/ = console;}catch(e){};
+var PL$39/*console*/;try{PL$39/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
 var PL$6 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$7 = function(e){ PL$1.reject(e); };
-var PL$31/*SaveHandler*/;
+var PL$34/*SaveHandler*/;
 var PL$4/*C1*/;
-var PL$32/*a*/;
-var _TPL$32/*a*/;
+var PL$35/*a*/;
+var _TPL$35/*a*/;
 var PL$3/*type:C1*/ = classSystem._createProvisionalClass();
 PL$4/*C1*/ = PL$3/*type:C1*/;
 var PL$5/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:C1*/).then(function(parType){PL$3/*type:C1*/ = parType;PL$5/*C1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:C1*/);});PL$6(function(){
@@ -77,7 +77,7 @@ var PL$9 = new __Promise();
 var PL$10/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$9.resolve(e); }; }; };
 var PL$11 = function(e){ PL$9.resolve(e); };
 PL$10/*try catch*/(function(){
-    PL$31/*SaveHandler*/ = (function(){var PL$12/*inherited*/ = {};
+    PL$34/*SaveHandler*/ = (function(){var PL$12/*inherited*/ = {};
 var res = promiseland.createClass({"registerClass": (function(PL$13/*par*/){
     var PL$14 = new __Promise();
 var PL$16 = function(code){ return function(res){ try{code(res);}catch(e){ PL$14.reject(e); }; }; };
@@ -89,96 +89,96 @@ PL$16(function(){
       PL$18/*map*/ = new PL$19/*promiseland*/["Map"]();
       PL$14.resolve({"save": (function(PL$13/*par*/){
       var PL$20 = new __Promise();
-var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ PL$20.reject(e); }; }; };
-var PL$22 = function(e){ PL$20.reject(e); };
-var PL$23/*i*/;
-var PL$24/*o*/;
-PL$21(function(){
+var PL$22 = function(code){ return function(res){ try{code(res);}catch(e){ PL$20.reject(e); }; }; };
+var PL$23 = function(e){ PL$20.reject(e); };
+var PL$24/*i*/;
+var PL$25/*o*/;
+PL$22(function(){
       
         ;
-        PL$23/*i*/ = 0;
-        PL$24/*o*/ = {};
-        for(PL$23/*i*/ = 0;(PL$23/*i*/ < PL$13/*par*/["propertiesAr"]["length"]);++PL$23/*i*/){{
-          if((PL$13/*par*/["propertiesAr"][PL$23/*i*/]["name"] == "id")){
+        PL$24/*i*/ = 0;
+        PL$25/*o*/ = {};
+        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$13/*par*/["propertiesAr"]["length"]);++PL$24/*i*/){{
+          if((PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"] == "id")){
             continue;;
           };
           ;
-          PL$24/*o*/[PL$13/*par*/["propertiesAr"][PL$23/*i*/]["name"]] = PL$13/*par*/["propertiesAr"][PL$23/*i*/]["value"];}};
+          PL$25/*o*/[PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"]] = PL$13/*par*/["propertiesAr"][PL$24/*i*/]["value"];}};
         ;
-        PL$18/*map*/["set"](PL$13/*par*/["properties"]["id"]["value"], PL$24/*o*/);
+        PL$18/*map*/["set"](PL$13/*par*/["properties"]["id"]["value"], PL$25/*o*/);
         PL$20.resolve(); return;})();
 return PL$20;
 }),
 "load": (function(PL$13/*par*/){
-      var PL$25 = new __Promise();
-var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$25.reject(e); }; }; };
-var PL$27 = function(e){ PL$25.reject(e); };
-PL$26(function(){
+      var PL$26 = new __Promise();
+var PL$28 = function(code){ return function(res){ try{code(res);}catch(e){ PL$26.reject(e); }; }; };
+var PL$29 = function(e){ PL$26.reject(e); };
+PL$28(function(){
       
         ;
-        PL$25.resolve(PL$18/*map*/["get"](PL$13/*par*/["properties"]["id"]["value"])); return;
-        PL$25.resolve(); return;})();
-return PL$25;
+        PL$26.resolve(PL$18/*map*/["get"](PL$13/*par*/["properties"]["id"]["value"])); return;
+        PL$26.resolve(); return;})();
+return PL$26;
 }),
 "delete": (function(PL$13/*par*/){
-      var PL$28 = new __Promise();
-var PL$29 = function(code){ return function(res){ try{code(res);}catch(e){ PL$28.reject(e); }; }; };
-var PL$30 = function(e){ PL$28.reject(e); };
-PL$29(function(){
+      var PL$30 = new __Promise();
+var PL$32 = function(code){ return function(res){ try{code(res);}catch(e){ PL$30.reject(e); }; }; };
+var PL$33 = function(e){ PL$30.reject(e); };
+PL$32(function(){
       
         ;
-        PL$28.resolve(PL$18/*map*/["delete"](PL$13/*par*/["properties"]["id"]["value"])); return;
-        PL$28.resolve(); return;})();
-return PL$28;
+        PL$30.resolve(PL$18/*map*/["delete"](PL$13/*par*/["properties"]["id"]["value"])); return;
+        PL$30.resolve(); return;})();
+return PL$30;
 })}); return;
       PL$14.resolve(); return;})();
 return PL$14;
 })}, [], PL$12/*inherited*/);
-return res; })();PL$31/*SaveHandler*/;
-    PL$19/*promiseland*/["classSystem"]["setSaveHandler"](new PL$31/*SaveHandler*/());
+return res; })();PL$34/*SaveHandler*/;
+    PL$19/*promiseland*/["classSystem"]["setSaveHandler"](new PL$34/*SaveHandler*/());
     classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "eae93c49cf65b200dc7532ca35899b2d", "name": "C1", "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;
     /*temptracked promise*/(function(vAr){
-var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$33){/*temp tracked assign*/(function(vAr){
-if (_TPL$32/*a*/){ _TPL$32/*a*/(); };
+var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$36){/*temp tracked assign*/(function(vAr){
+if (_TPL$35/*a*/){ _TPL$35/*a*/(); };
 if(vAr){
 var v = vAr[0];
-PL$32/*a*/ = v;
-_TPL$32/*a*/ = vAr[1];
+PL$35/*a*/ = v;
+_TPL$35/*a*/ = vAr[1];
 return v;
 }else{
-PL$32/*a*/ = undefined; _TPL$32/*a*/ = undefined;
+PL$35/*a*/ = undefined; _TPL$35/*a*/ = undefined;
 return;
-}; })(PL$33)/*end temp assign*/
+}; })(PL$36)/*end temp assign*/
 ;
-    PL$32/*a*/[9] = 4;
-    PL$32/*a*/[7]();
+    PL$35/*a*/[9] = 4;
+    PL$35/*a*/[7]();
     /*temptracked promise*/(function(vAr){
-var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$34){/*temp tracked assign*/(function(vAr){
-if (_TPL$32/*a*/){ _TPL$32/*a*/(); };
+var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$37){/*temp tracked assign*/(function(vAr){
+if (_TPL$35/*a*/){ _TPL$35/*a*/(); };
 if(vAr){
 var v = vAr[0];
-PL$32/*a*/ = v;
-_TPL$32/*a*/ = vAr[1];
+PL$35/*a*/ = v;
+_TPL$35/*a*/ = vAr[1];
 return v;
 }else{
-PL$32/*a*/ = undefined; _TPL$32/*a*/ = undefined;
+PL$35/*a*/ = undefined; _TPL$35/*a*/ = undefined;
 return;
-}; })(PL$34)/*end temp assign*/
+}; })(PL$37)/*end temp assign*/
 ;
     /*temptracked promise*/(function(vAr){
-var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$35){/*temp tracked assign*/(function(vAr){
-if (_TPL$32/*a*/){ _TPL$32/*a*/(); };
+var r = vAr[0].thenReuse(vAr[1], PL$10/*try catch*/(function(PL$38){/*temp tracked assign*/(function(vAr){
+if (_TPL$35/*a*/){ _TPL$35/*a*/(); };
 if(vAr){
 var v = vAr[0];
-PL$32/*a*/ = v;
-_TPL$32/*a*/ = vAr[1];
+PL$35/*a*/ = v;
+_TPL$35/*a*/ = vAr[1];
 return v;
 }else{
-PL$32/*a*/ = undefined; _TPL$32/*a*/ = undefined;
+PL$35/*a*/ = undefined; _TPL$35/*a*/ = undefined;
 return;
-}; })(PL$35)/*end temp assign*/
+}; })(PL$38)/*end temp assign*/
 ;
-    PL$36/*console*/["log"](PL$32/*a*/[9]);
+    PL$39/*console*/["log"](PL$35/*a*/[9]);
     PL$8.resolve();}), PL$11);
 return r;
 })(new PL$5/*C1-constructor*/("x"));/*temptracked promise end*/
@@ -189,9 +189,9 @@ return r;
 return r;
 })(new PL$5/*C1-constructor*/("x"));/*temptracked promise end*/
 ;})();
-PL$9.then(PL$6(function(PL$37/*e*/){
-    PL$36/*console*/["log"]("err:");
-    PL$36/*console*/["log"](PL$37/*e*/);
+PL$9.then(PL$6(function(PL$40/*e*/){
+    PL$39/*console*/["log"]("err:");
+    PL$39/*console*/["log"](PL$40/*e*/);
     PL$8.resolve();;}));
 PL$8.then(PL$6(function(){;
   PL$1.resolve(); return;}), PL$7)})();

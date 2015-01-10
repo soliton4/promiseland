@@ -55,75 +55,62 @@ if (promiseland._hasModule({ hashStr: "2347250c129bed5f2bc0767c8d18b8be" })){ re
 var PL$1 = (function(){
 "use strict";
 function PL$2/*f*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$5/*heap*/){
-var PL$6/*exp*/;
 function PL$2/*f*/(){
-var PL$7/*x*/;
-var PL$8/*y*/;
 
   ;
-  PL$7/*x*/ = 0, PL$8/*y*/ = 0;
+  var PL$7/*x*/ = 0, PL$8/*y*/ = 0;
   PL$7/*x*/ = (((PL$7/*x*/ | 0) % (PL$8/*y*/ | 0)) | 0);
   ;};
 function PL$9/*f2*/(){
-var PL$10/*a*/;
 
   ;
-  PL$10/*a*/ = 0;
+  var PL$10/*a*/ = 0;
   ;};
 
   ;
   "use axsxxxxxxxm";
-  PL$6/*exp*/ = PL$3/*stdlib*/["Math"]["exp"];
-  PL$2/*f*/;
+  var PL$6/*exp*/ = PL$3/*stdlib*/["Math"]["exp"];
+  /* function f (){} - hoisted */;
   ;
-  PL$9/*f2*/;
+  /* function f2 (){} - hoisted */;
   ;
   return {};
   ;};
 function PL$11/*GeometricMean*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$12/*buffer*/){
 "use asm";
 
-var PL$6/*exp*/;
-var PL$13/*log*/;
-var PL$14/*values*/;
-function PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/){
-var PL$18/*sum*/;
-var PL$19/*p*/;
-var PL$20/*q*/;
 
   ;
-  PL$16/*start*/ = (PL$16/*start*/ | 0);
-  PL$17/*end*/ = (PL$17/*end*/ | 0);
-  PL$18/*sum*/ = 0, PL$19/*p*/ = 0, PL$20/*q*/ = 0;
-  for(PL$19/*p*/ = (PL$16/*start*/ << 3),PL$20/*q*/ = (PL$17/*end*/ << 3);((PL$19/*p*/ | 0) < (PL$20/*q*/ | 0));PL$19/*p*/ = ((PL$19/*p*/ + 8) | 0)){{
-    PL$18/*sum*/ = (PL$18/*sum*/ + + PL$13/*log*/(PL$14/*values*/[(PL$19/*p*/ >> 3)]));}};
-  if((PL$19/*p*/ | 0)){
-    PL$19/*p*/ = (3 | 0);
-  };
-  ;
-  return + PL$18/*sum*/;
-  ;};
-function PL$21/*geometricMean*/(PL$16/*start*/, PL$17/*end*/){
-
-  ;
-  PL$16/*start*/ = (PL$16/*start*/ | 0);
-  PL$17/*end*/ = (PL$17/*end*/ | 0);
-  return + PL$6/*exp*/((+ PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/) / + ((PL$17/*end*/ - PL$16/*start*/) | 0)));
-  ;};
-
-  ;
-  "use asm";
-  PL$6/*exp*/ = PL$3/*stdlib*/["Math"]["exp"];
-  PL$13/*log*/ = PL$3/*stdlib*/["Math"]["log"];
-  PL$14/*values*/ = new PL$3/*stdlib*/["Float64Array"](PL$12/*buffer*/);
-  PL$15/*logSum*/;
-  PL$21/*geometricMean*/;
+  var PL$6/*exp*/ = PL$3/*stdlib*/.Math.exp;
+  var PL$13/*log*/ = PL$3/*stdlib*/.Math.log;
+  var PL$14/*values*/ = new PL$3/*stdlib*/.Float64Array(PL$12/*buffer*/);
+  function PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/){
+  
+    ;
+    PL$16/*start*/ = (PL$16/*start*/ | 0);
+    PL$17/*end*/ = (PL$17/*end*/ | 0);
+    var PL$18/*sum*/ = 0.0, PL$19/*p*/ = 0, PL$20/*q*/ = 0;
+    for(PL$19/*p*/ = (PL$16/*start*/ << 3),PL$20/*q*/ = (PL$17/*end*/ << 3);((PL$19/*p*/ | 0) < (PL$20/*q*/ | 0));PL$19/*p*/ = ((PL$19/*p*/ + 8) | 0)){{
+      PL$18/*sum*/ = (PL$18/*sum*/ + + PL$13/*log*/(PL$14/*values*/[(PL$19/*p*/ >> 3)]));}};
+    if((PL$19/*p*/ | 0)){
+      PL$19/*p*/ = (3 | 0);
+    };
+    ;
+    return + PL$18/*sum*/;
+    ;};
+  function PL$21/*geometricMean*/(PL$16/*start*/, PL$17/*end*/){
+  
+    ;
+    PL$16/*start*/ = (PL$16/*start*/ | 0);
+    PL$17/*end*/ = (PL$17/*end*/ | 0);
+    return + PL$6/*exp*/((+ PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/) / + ((PL$17/*end*/ - PL$16/*start*/) | 0)));
+    ;};
   return {"geometricMean": PL$21/*geometricMean*/};
   ;};
 
   ;
-  PL$2/*f*/;
-  PL$11/*GeometricMean*/;
+  /* function f (){} - hoisted */;
+  /* function GeometricMean (){} - hoisted */;
   ;})();
 ;return PL$1;
 });

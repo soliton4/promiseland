@@ -90,7 +90,7 @@ PL$9(function(){
 
   ;
   classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "9e8ad0e066a50a20708e703896d17dc0", "name": "C1"}, {"a": 1, "b": 2}));PL$4/*C1*/;
-  PL$11/*f1*/;
+  /* function f1 (){} - hoisted */;
   PL$19/*a*/;
   PL$11/*f1*/().then(PL$9(function(PL$20){PL$19/*a*/ = PL$20;
   if((PL$19/*a*/[4] == 2)){

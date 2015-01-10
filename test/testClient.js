@@ -140,7 +140,7 @@ function PL$12/*querySt*/(PL$13/*Key*/){
     PL$8/*serverProfile*/["connection"]["emit"]("disconnect");
     PL$8/*serverProfile*/["connection"] = undefined;
     ;}));
-  PL$12/*querySt*/;
+  /* function querySt (){} - hoisted */;
   ;
   PL$11/*runTests*/ = (function(){
   var PL$19 = new __Promise();

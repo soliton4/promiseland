@@ -71,7 +71,7 @@ var PL$7/*c*/;
   ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "0c11ca25206ec42f77a70d97f2323884", "name": "C1"}, {"a": 1}));PL$3/*C1*/;
   PL$5/*b*/ = new PL$4/*C1-constructor*/();
-  PL$6/*fun1*/;
+  /* function fun1 (){} - hoisted */;
   ;
   PL$5/*b*/ = PL$6/*fun1*/();
   if((PL$5/*b*/[3] == 2)){

@@ -83,7 +83,7 @@ return PL$6;
 PL$3(function(){
 
   ;
-  PL$5/*test*/;
+  /* function test (){} - hoisted */;
   ;
   PL$5/*test*/().then(PL$3(function(PL$11){PL$11;
   PL$1.resolve({"success": true}); return;

@@ -170,6 +170,12 @@ var Map = function (initializer) {
             this.set(a[i].key, a[i].value);
           };
           return this;
+        },
+          
+        clone: (){
+          var m = new Map();
+          m.mixin(this);
+          return m;
         }
           
     });

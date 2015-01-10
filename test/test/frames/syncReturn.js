@@ -113,7 +113,7 @@ PL$9(function(){
   classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":1,"column":12,"offset":11}, "hashStr": "a46d1b70d8e7becaa21a64131b960210", "name": "C1"}, {"a": 1}));PL$4/*C1*/;
   PL$11/*a*/;
   PL$12/*serverInit*/ = false;
-  PL$13/*x*/;
+  /* function x (){} - hoisted */;
   ;
   /*temptracked promise*/(function(vAr){
 var r = vAr[0].thenReuse(vAr[1], PL$9(function(PL$19){/*temp tracked assign*/(function(vAr){

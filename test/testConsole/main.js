@@ -68,8 +68,8 @@ var __requireFun = function(parModule){
     var Callback = promiseland.Callback;
 if (promiseland._hasModule({ hashStr: "120e06c54cdf04aabe8fa91a75678f0e" })){ return promiseland._getModule("120e06c54cdf04aabe8fa91a75678f0e"); };
 var PL$8/*console*/;try{PL$8/*console*/ = console;}catch(e){};
-var PL$13/*__dirname*/;try{PL$13/*__dirname*/ = __dirname;}catch(e){};
-var PL$24/*Callback*/;try{PL$24/*Callback*/ = Callback;}catch(e){};
+var PL$14/*__dirname*/;try{PL$14/*__dirname*/ = __dirname;}catch(e){};
+var PL$25/*Callback*/;try{PL$25/*Callback*/ = Callback;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 
@@ -94,53 +94,53 @@ return PL$3;
 })();
   PL$8/*console*/["log"]("loaded");
   var PL$9/*runTests*/ = ((function(f){
-promiseland.registerRemote("server", "120e06c54cdf04aabe8fa91a75678f0e", "PL$27", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("server", "120e06c54cdf04aabe8fa91a75678f0e", "PL$28", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("120e06c54cdf04aabe8fa91a75678f0e", "PL$27", arguments);
+return promiseland.remoteExec("120e06c54cdf04aabe8fa91a75678f0e", "PL$28", arguments);
 }
 };
 })(function(){
   var PL$10 = new __Promise();
-var PL$11 = function(code){ return function(res){ try{code(res);}catch(e){ PL$10.reject(e); }; }; };
-var PL$12 = function(e){ PL$10.reject(e); };
-var PL$22/*ts*/;
-var PL$23/*cb*/;
-PL$11(function(){
+var PL$12 = function(code){ return function(res){ try{code(res);}catch(e){ PL$10.reject(e); }; }; };
+var PL$13 = function(e){ PL$10.reject(e); };
+var PL$23/*ts*/;
+var PL$24/*cb*/;
+PL$12(function(){
   
     ;
     PL$8/*console*/["log"]("running tests");
     PL$8/*console*/["log"]("copy promiseland");
-    PL$2/*cp*/("cp", [(PL$13/*__dirname*/ + "/../../../promiseland/promiseland.js"), (PL$13/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$11(function(PL$14){PL$8/*console*/["log"](PL$14);
-    PL$2/*cp*/("cp", [(PL$13/*__dirname*/ + "/../../../promiseland/package.json"), (PL$13/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$11(function(PL$15){PL$8/*console*/["log"](PL$15);
-    PL$2/*cp*/("cp", [(PL$13/*__dirname*/ + "/../../../promiseland/modules"), (PL$13/*__dirname*/ + "/../node_modules/promiseland/"), "-R"])["result"].then(PL$11(function(PL$16){PL$8/*console*/["log"](PL$16);
+    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/promiseland.js"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$12(function(PL$15){PL$8/*console*/["log"](PL$15);
+    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/package.json"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$12(function(PL$16){PL$8/*console*/["log"](PL$16);
+    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/modules"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/"), "-R"])["result"].then(PL$12(function(PL$17){PL$8/*console*/["log"](PL$17);
     PL$8/*console*/["log"]("running compileall");
-    PL$2/*cp*/("node", ["compileAll.js"])["result"].then(PL$11(function(PL$17){PL$8/*console*/["log"](PL$17);
+    PL$2/*cp*/("node", ["compileAll.js"])["result"].then(PL$12(function(PL$18){PL$8/*console*/["log"](PL$18);
     PL$8/*console*/["log"]("starting tests");
-    var PL$18 = new __Promise();
-var PL$19 = new __Promise();
-var PL$20/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.resolve(e); }; }; };
-var PL$21 = function(e){ PL$19.resolve(e); };
-PL$20/*try catch*/(function(){
-      PL$22/*ts*/ = PL$2/*cp*/("./testServer", [], {"fork": true});
-      PL$23/*cb*/ = new PL$24/*Callback*/();
-      PL$22/*ts*/["child"]["on"]("message", PL$23/*cb*/);
-      PL$23/*cb*/["promise"].then(PL$20/*try catch*/(function(PL$25){PL$10.resolve(PL$25[0]); return;
-      PL$18.resolve();}), PL$21);
+    var PL$19 = new __Promise();
+var PL$20 = new __Promise();
+var PL$21/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$20.resolve(e); }; }; };
+var PL$22 = function(e){ PL$20.resolve(e); };
+PL$21/*try catch*/(function(){
+      PL$23/*ts*/ = PL$2/*cp*/("./testServer", [], {"fork": true});
+      PL$24/*cb*/ = new PL$25/*Callback*/();
+      PL$23/*ts*/["child"]["on"]("message", PL$24/*cb*/);
+      PL$24/*cb*/["promise"].then(PL$21/*try catch*/(function(PL$26){PL$10.resolve(PL$26[0]); return;
+      PL$19.resolve();}), PL$22);
 ;})();
-PL$19.then(PL$11(function(PL$26/*e*/){
+PL$20.then(PL$12(function(PL$27/*e*/){
       PL$8/*console*/["log"]("error");
-      PL$8/*console*/["log"](PL$26/*e*/);
+      PL$8/*console*/["log"](PL$27/*e*/);
       PL$10.resolve({"failed": true}); return;
-      PL$18.resolve();;}));
-PL$18.then(PL$11(function(){;
+      PL$19.resolve();;}));
+PL$19.then(PL$12(function(){;
     ;
-    PL$10.resolve(); return;}), PL$12)}), PL$12);
-;}), PL$12);
-;}), PL$12);
-;}), PL$12);
+    PL$10.resolve(); return;}), PL$13)}), PL$13);
+;}), PL$13);
+;}), PL$13);
+;}), PL$13);
 ;})();
 return PL$10;
 }));

@@ -129,16 +129,26 @@ var classHider = function(toHide){
 
 // buildins
 
-var builtinTypes = {
-  "var": classHider({
-    isVar: true,
-    isReady: true
-  }),
-  "statement": classHider({
-    isStatement: true,
-    isReady: true
-  })
-};
+var buildInTypesMap = new Map();
+buildInTypesMap.set("var", classHider({
+  isVar: true,
+  isReady: true,
+  availableByName: true,
+  builtin: true
+}));
+buildInTypesMap.set("statement", classHider({
+  isStatement: true,
+  isReady: true,
+  availableByName: false,
+  builtin: true
+}));
+buildInTypesMap.set("int", classHider({
+  isInt: true,
+  isReady: true,
+  availableByName: true,
+  builtin: true
+}));
+
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -1137,6 +1147,21 @@ var classSystem = {
     };
     return false;
   },
+  isStatementType: (parType){
+    var cDef = getClass(parType);
+    if (cDef.isStatement){
+      return true;
+    };
+    return false;
+  },
+  
+  isAvailableByName: (parType){
+    var cDef = getClass(parType);
+    if (cDef.availableByName){
+      return true;
+    };
+    return false;
+  },
 
   getFunctionReturnType: function(parType){
     var cDef = getClass(parType);
@@ -1182,7 +1207,10 @@ var classSystem = {
   },
 
   getBuiltinType: function(parName){
-    return builtinTypes[parName];
+    return buildInTypesMap.get(parName);
+  },
+  getBuiltinTypesMap: function(parName){
+    return buildInTypesMap.clone();
   },
 
 

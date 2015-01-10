@@ -69,15 +69,15 @@ var __requireFun = function(parModule){
 if (promiseland._hasModule({ hashStr: "305873103956dbcac355c242894d9641" })){ return promiseland._getModule("305873103956dbcac355c242894d9641"); };
 var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "305873103956dbcac355c242894d9641", "module": PL$1, promising: true });
-var PL$16/*Callback*/;try{PL$16/*Callback*/ = Callback;}catch(e){};
-var PL$18/*__dirname*/;try{PL$18/*__dirname*/ = __dirname;}catch(e){};
+var PL$17/*Callback*/;try{PL$17/*Callback*/ = Callback;}catch(e){};
+var PL$19/*__dirname*/;try{PL$19/*__dirname*/ = __dirname;}catch(e){};
 var PL$2 = (function(){
 "use strict";
 var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$5/*fs*/;
 var PL$11/*x*/;
-var PL$21/*res*/;
+var PL$22/*res*/;
 PL$3(function(){
 
   ;
@@ -100,33 +100,33 @@ PL$8(function(){
 return PL$6;
 })();
   PL$11/*x*/ = ((function(f){
-promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$20", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$21", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
 return f;
 }else{
 return function(){
-return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$20", arguments);
+return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$21", arguments);
 }
 };
 })(function(){
   var PL$12 = new __Promise();
-var PL$13 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
-var PL$14 = function(e){ PL$12.reject(e); };
-var PL$15/*cb*/;
-var PL$17/*filenameStr*/;
-PL$13(function(){
+var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
+var PL$15 = function(e){ PL$12.reject(e); };
+var PL$16/*cb*/;
+var PL$18/*filenameStr*/;
+PL$14(function(){
   
     ;
-    PL$15/*cb*/ = new PL$16/*Callback*/();
-    PL$17/*filenameStr*/ = (PL$18/*__dirname*/ + "/clientServer.txt");
-    PL$5/*fs*/["readFile"](PL$17/*filenameStr*/, {"encoding": "utf8"}, PL$15/*cb*/);
-    PL$15/*cb*/["promise"].then(PL$13(function(PL$19){PL$12.resolve(PL$19[1]); return;
-    PL$12.resolve(); return;}), PL$14);
+    PL$16/*cb*/ = new PL$17/*Callback*/();
+    PL$18/*filenameStr*/ = (PL$19/*__dirname*/ + "/clientServer.txt");
+    PL$5/*fs*/["readFile"](PL$18/*filenameStr*/, {"encoding": "utf8"}, PL$16/*cb*/);
+    PL$16/*cb*/["promise"].then(PL$14(function(PL$20){PL$12.resolve(PL$20[1]); return;
+    PL$12.resolve(); return;}), PL$15);
 ;})();
 return PL$12;
 }));
-  PL$11/*x*/().then(PL$3(function(PL$22){PL$21/*res*/ = PL$22;
-  if((PL$21/*res*/ == "the test content")){
+  PL$11/*x*/().then(PL$3(function(PL$23){PL$22/*res*/ = PL$23;
+  if((PL$22/*res*/ == "the test content")){
     PL$1.resolve({"success": true}); return;
   };
   ;

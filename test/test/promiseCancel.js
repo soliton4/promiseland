@@ -65,7 +65,7 @@ var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.r
 var PL$4 = function(e){ PL$1.reject(e); };
 var PL$14/*cancelReason*/;
 var PL$15/*runThrough*/;
-var PL$25/*res*/;
+var PL$26/*res*/;
 function PL$5/*wait*/(){
 var PL$6 = new __Promise();
 var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
@@ -83,39 +83,39 @@ return PL$6;
 };
 function PL$16/*f*/(){
 var PL$17 = new __Promise();
-var PL$18 = function(code){ return function(res){ try{code(res);}catch(e){ PL$17.reject(e); }; }; };
-var PL$19 = function(e){ PL$17.reject(e); };
-PL$18(function(){
+var PL$19 = function(code){ return function(res){ try{code(res);}catch(e){ PL$17.reject(e); }; }; };
+var PL$20 = function(e){ PL$17.reject(e); };
+PL$19(function(){
 
   ;
-  var PL$20 = new __Promise();
-var PL$21 = new __Promise();
-var PL$22/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$21.resolve(e); }; }; };
-var PL$23 = function(e){ PL$21.resolve(e); };
-PL$22/*try catch*/(function(){
-    PL$5/*wait*/().then(PL$22/*try catch*/(function(PL$24){PL$24;
+  var PL$21 = new __Promise();
+var PL$22 = new __Promise();
+var PL$23/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$22.resolve(e); }; }; };
+var PL$24 = function(e){ PL$22.resolve(e); };
+PL$23/*try catch*/(function(){
+    PL$5/*wait*/().then(PL$23/*try catch*/(function(PL$25){PL$25;
     PL$17.resolve(); return;
-    PL$20.resolve();}), PL$23);
+    PL$21.resolve();}), PL$24);
 ;})();
-PL$21.then(PL$18(function(__dummy){PL$20.resolve();}));
-PL$20.then(PL$18(function(){;
+PL$22.then(PL$19(function(__dummy){PL$21.resolve();}));
+PL$21.then(PL$19(function(){;
   ;
   PL$15/*runThrough*/ = true;
-  PL$17.resolve(); return;}), PL$19)})();
+  PL$17.resolve(); return;}), PL$20)})();
 return PL$17;
 };
 PL$3(function(){
 
   ;
-  PL$5/*wait*/;
+  /* function wait (){} - hoisted */;
   PL$14/*cancelReason*/;
   PL$15/*runThrough*/;
-  PL$16/*f*/;
+  /* function f (){} - hoisted */;
   ;
-  PL$25/*res*/ = PL$16/*f*/();
-  PL$25/*res*/["cancel"](4);
-  PL$5/*wait*/().then(PL$3(function(PL$26){PL$26;
+  PL$26/*res*/ = PL$16/*f*/();
+  PL$26/*res*/["cancel"](4);
   PL$5/*wait*/().then(PL$3(function(PL$27){PL$27;
+  PL$5/*wait*/().then(PL$3(function(PL$28){PL$28;
   if((PL$14/*cancelReason*/ != 4)){
     PL$1.resolve({"success": false}); return;
   };

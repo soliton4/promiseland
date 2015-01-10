@@ -98,7 +98,7 @@ return;
     PL$5/*failed*/ = true;
     ;});
   PL$7/*cntSupposed*/(0);
-  PL$9/*f1*/;
+  /* function f1 (){} - hoisted */;
   ;
   /*temp tracked assign*/(function(vAr){
 if (_TPL$11/*b*/){ _TPL$11/*b*/(); };

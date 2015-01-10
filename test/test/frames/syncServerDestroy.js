@@ -138,9 +138,9 @@ PL$9(function(){
     PL$11/*destroyed*/ = true;
     ;})}));PL$4/*C1*/;
   PL$12/*serverInit*/ = false;
-  PL$13/*x*/;
+  /* function x (){} - hoisted */;
   ;
-  PL$20/*check*/;
+  /* function check (){} - hoisted */;
   ;
   PL$26/*tempres*/;
   PL$27/*isClient*/ = false;
@@ -154,42 +154,42 @@ PL$9(function(){
     ;})();
   PL$28/*f*/ = (function(){
   var PL$29 = new __Promise();
-var PL$30 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$32/*t*/){ _TPL$32/*t*/();};PL$29.reject(e); }; }; };
-var PL$31 = function(e){ if (_TPL$32/*t*/){ _TPL$32/*t*/();};PL$29.reject(e); };
-var PL$32/*t*/;
-var _TPL$32/*t*/;
-PL$30(function(){
+var PL$31 = function(code){ return function(res){ try{code(res);}catch(e){ if (_TPL$33/*t*/){ _TPL$33/*t*/();};PL$29.reject(e); }; }; };
+var PL$32 = function(e){ if (_TPL$33/*t*/){ _TPL$33/*t*/();};PL$29.reject(e); };
+var PL$33/*t*/;
+var _TPL$33/*t*/;
+PL$31(function(){
   
     ;
     /*temptracked promise*/(function(vAr){
-var r = vAr[0].thenReuse(vAr[1], PL$30(function(PL$33){/*temp tracked assign*/(function(vAr){
-if (_TPL$32/*t*/){ _TPL$32/*t*/(); };
+var r = vAr[0].thenReuse(vAr[1], PL$31(function(PL$34){/*temp tracked assign*/(function(vAr){
+if (_TPL$33/*t*/){ _TPL$33/*t*/(); };
 if(vAr){
 var v = vAr[0];
-PL$32/*t*/ = v;
-_TPL$32/*t*/ = vAr[1];
+PL$33/*t*/ = v;
+_TPL$33/*t*/ = vAr[1];
 return v;
 }else{
-PL$32/*t*/ = undefined; _TPL$32/*t*/ = undefined;
+PL$33/*t*/ = undefined; _TPL$33/*t*/ = undefined;
 return;
-}; })(PL$33)/*end temp assign*/
+}; })(PL$34)/*end temp assign*/
 ;
-    PL$26/*tempres*/ = PL$32/*t*/[7];
-    if (_TPL$32/*t*/){ _TPL$32/*t*/();};PL$29.resolve(); return;;}), PL$31);
+    PL$26/*tempres*/ = PL$33/*t*/[7];
+    if (_TPL$33/*t*/){ _TPL$33/*t*/();};PL$29.resolve(); return;;}), PL$32);
 return r;
 })(PL$13/*x*/());/*temptracked promise end*/
 ;})();
 return PL$29;
 });
   
-  var PL$34 = new __Promise();if(PL$27/*isClient*/){
-    PL$28/*f*/().then(PL$9(function(PL$35){PL$35;
-    PL$34.resolve();;}), PL$10);
+  var PL$35 = new __Promise();if(PL$27/*isClient*/){
+    PL$28/*f*/().then(PL$9(function(PL$36){PL$36;
+    PL$35.resolve();;}), PL$10);
 ;
   }else{
   PL$1.resolve({"success": true}); return;
-  PL$34.resolve();;
-  };PL$34.then(PL$9(function(PL$36){PL$36;;
+  PL$35.resolve();;
+  };PL$35.then(PL$9(function(PL$37){PL$37;;
   ;
   if((PL$26/*tempres*/ != 2)){
     PL$1.resolve({"success": false}); return;
@@ -199,7 +199,7 @@ return PL$29;
     PL$1.resolve({"success": false}); return;
   };
   ;
-  PL$20/*check*/().then(PL$9(function(PL$37){if(PL$37){
+  PL$20/*check*/().then(PL$9(function(PL$38){if(PL$38){
     PL$1.resolve({"success": true}); return;
   };
   ;
