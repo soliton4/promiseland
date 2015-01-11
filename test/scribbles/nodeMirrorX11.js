@@ -227,7 +227,7 @@ function PL$2/*asmFactory*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$5/*heap*/){
     ;};
   ;
   return {"init": PL$25/*init*/,
-"doit": PL$30/*doit*/};
+  "doit": PL$30/*doit*/};
   ;};
 
   ;

@@ -252,25 +252,30 @@ return (parInstance, par){
          var continuePromise;
         
          if (checkPromising(par)){
-          this.stack("tryCatchFunctionStr");
-          this.stack("catchFunctionStr");
-          
-          continuePromise = this.getUniqueName();
-          res.addPre("var " + continuePromise + " = " + this.newPromiseStr() + ";\n");
-          
-          catchPromise = this.getUniqueName();
-          res.addPre("var " + catchPromise + " = " + this.newPromiseStr() + ";\n");
-          
-          this.tryCatchFunctionStr = this.getUniqueName() + "/*try catch*/";
-          res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".resolve(e); }; }; };\n");
-          
-          this.catchFunctionStr = this.getUniqueName();
-          res.addPre("var " + this.catchFunctionStr + " = function(e){ " + catchPromise + ".resolve(e); };\n");
-          
-          res.push(this.tryCatchFunctionStr + "(function()");
-          
+           this.stack("tryCatchFunctionStr");
+           this.stack("catchFunctionStr");
+
+           continuePromise = this.getUniqueName();
+           res.addPre("var " + continuePromise + " = " + this.newPromiseStr() + ";");
+           res.addPre(this.newLine());
+
+           catchPromise = this.getUniqueName();
+           res.addPre("var " + catchPromise + " = " + this.newPromiseStr() + ";");
+           res.addPre(this.newLine());
+
+           this.tryCatchFunctionStr = this.getUniqueName() + "/*try catch*/";
+           res.addPre("var " + this.tryCatchFunctionStr + " = function(code){ return function(res){ try{code(res);}catch(e){ " + catchPromise + ".resolve(e); }; }; };");
+           res.addPre(this.newLine());
+
+           this.catchFunctionStr = this.getUniqueName();
+           res.addPre("var " + this.catchFunctionStr + " = function(e){ " + catchPromise + ".resolve(e); };");
+           res.addPre(this.newLine());
+
+           res.push(this.tryCatchFunctionStr + "(function()");
+
          }else{
-           res.push("try\n");
+           res.push("try");
+           res.push(this.newLine());
          };
         
          var b = par.block;
@@ -285,7 +290,8 @@ return (parInstance, par){
         if (checkPromising(par)){
           this.unstack("tryCatchFunctionStr");
           this.unstack("catchFunctionStr");
-          res.push(")();\n");
+          res.push(")();");
+          res.push(this.newLine());
           res.push(catchPromise + ".then(" + this.tryCatchFunctionStr + "(function(");
         }else{
           
@@ -323,7 +329,8 @@ return (parInstance, par){
         };
         
         if (checkPromising(par)){
-          res.push("));\n");
+          res.push("));");
+          res.push(this.newLine());
           
           res.push(continuePromise);
           res.push(".then(" + this.tryCatchFunctionStr + "(function(){");
@@ -667,12 +674,14 @@ return (parInstance, par){
           var tempValue = this.getUniqueName();
           res.addPre("var ");
           res.addPre(tempPromise);
-          res.addPre(" = " + this.newPromiseStr() + ";\n");
+          res.addPre(" = " + this.newPromiseStr() + ";");
+          res.addPre(this.newLine());
           res.addPre("var ");
           res.addPre(tempValue);
           res.addPre(" = ");
           res.addPre(left);
-          res.addPre(";\n");
+          res.addPre(";");
+          res.addPre(this.newLine());
           res.addPre("if (");
           res.addPre(tempValue);
           res.addPre("){ ");
@@ -684,9 +693,11 @@ return (parInstance, par){
           rightExtraCode.push(tempPromise);
           rightExtraCode.push(".resolve(");
           rightExtraCode.push(right);
-          rightExtraCode.push(");\n");
+          rightExtraCode.push(");");
+          rightExtraCode.push(this.newLine());
           res.addPre(this.makeCompleteStatement(rightExtraCode));
-          res.addPre("};\n");
+          res.addPre("};");
+          res.addPre(this.newLine());
           res.addPre(tempPromise);
           res.addPre(".then(");
           res.setPromiseName(this.getUniqueName());

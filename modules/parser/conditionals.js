@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "9ac11548f684327d25c302e9a967570d" })){ return promiseland._getModule("9ac11548f684327d25c302e9a967570d"); };
+    if (promiseland._hasModule({ hashStr: "69f8da673cdee0897d138b0bd2799707" })){ return promiseland._getModule("69f8da673cdee0897d138b0bd2799707"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "9ac11548f684327d25c302e9a967570d", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "69f8da673cdee0897d138b0bd2799707", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -106,28 +106,20 @@ PL$3(function(){
   PL$20/*checkPromising*/ = PL$8/*basics*/["checkPromising"];
   __requireFun("./blocks").then(PL$3(function(PL$22){PL$21/*blocksModule*/ = PL$22;
   PL$1.resolve((function(PL$23/*parInstance*/, PL$24/*par*/){
-  var PL$25/*f*/;
-
+  
     ;
-    PL$25/*f*/ = (function(PL$24/*par*/){
+    var PL$25/*f*/ = (function(PL$24/*par*/){
     
       ;
       this["expIfStatement"] = (function(PL$24/*par*/){
-      var PL$26/*res*/;
-var PL$27/*promising*/;
-var PL$28/*continuePromise*/;
-var PL$29/*continueCode*/;
-var PL$30/*statement*/;
-var PL$31/*b*/;
-var PL$32/*extraPar*/;
-
+      
         ;
         this["stack"]("conditionalCode");
         this["conditionalCode"] = true;
         this["stack"]("algorithmicCode");
         this["algorithmicCode"] = true;
-        PL$26/*res*/ = this["newResult"]();
-        PL$27/*promising*/ = false;
+        var PL$26/*res*/ = this["newResult"]();
+        var PL$27/*promising*/ = false;
         if((PL$24/*par*/["consequent"] && PL$20/*checkPromising*/(PL$24/*par*/["consequent"]))){
           PL$27/*promising*/ = true;
         };
@@ -136,8 +128,8 @@ var PL$32/*extraPar*/;
           PL$27/*promising*/ = true;
         };
         ;
-        PL$28/*continuePromise*/;
-        PL$29/*continueCode*/;
+        var PL$28/*continuePromise*/;
+        var PL$29/*continueCode*/;
         if(PL$27/*promising*/){
           PL$28/*continuePromise*/ = this["newResult"](this["getUniqueName"]());
           PL$28/*continuePromise*/["setParsed"](PL$24/*par*/);
@@ -158,8 +150,8 @@ var PL$32/*extraPar*/;
           this["error"](PL$24/*par*/, PL$11/*errorMsg*/["unknownIfStatement"]);
         };
         ;
-        PL$30/*statement*/ = this["newResult"]();
-        PL$31/*b*/;
+        var PL$30/*statement*/ = this["newResult"]();
+        var PL$31/*b*/;
         if((PL$24/*par*/["consequent"]["type"] == "BlockStatement")){
           PL$31/*b*/ = PL$24/*par*/["consequent"]["body"];
         }else{
@@ -167,7 +159,7 @@ var PL$32/*extraPar*/;
         };
         ;
         PL$31/*b*/["brackets"] = false;
-        PL$32/*extraPar*/ = {};
+        var PL$32/*extraPar*/ = {};
         if(PL$27/*promising*/){
           PL$32/*extraPar*/["postCode"] = this["newResult"](PL$29/*continueCode*/);
         };
@@ -215,40 +207,39 @@ var PL$32/*extraPar*/;
         return PL$26/*res*/;
         ;});
       this["conditionalExpression"] = (function(PL$24/*par*/){
-      var PL$26/*res*/;
-var PL$33/*tempPromise*/;
-var PL$34/*tempValue*/;
-var PL$35/*trueExtraCode*/;
-var PL$36/*falseExtraCode*/;
-
+      
         ;
-        PL$26/*res*/ = this["newResult"]();
+        var PL$26/*res*/ = this["newResult"]();
         if((PL$24/*par*/["consequent"]["promising"] || PL$24/*par*/["alternate"]["promising"])){
           PL$26/*res*/["makePromising"]();
-          PL$33/*tempPromise*/ = this["getUniqueName"]();
-          PL$34/*tempValue*/ = this["getUniqueName"]();
+          var PL$33/*tempPromise*/ = this["getUniqueName"]();
+          var PL$34/*tempValue*/ = this["getUniqueName"]();
           PL$26/*res*/["addPre"]("var ");
           PL$26/*res*/["addPre"](PL$33/*tempPromise*/);
-          PL$26/*res*/["addPre"](((" = " + this["newPromiseStr"]()) + ";\n"));
+          PL$26/*res*/["addPre"](((" = " + this["newPromiseStr"]()) + ";"));
+          PL$26/*res*/["push"](this["newLine"]());
           PL$26/*res*/["addPre"]("if(");
           PL$26/*res*/["addPre"](this["parseExpression"](PL$24/*par*/["test"]));
           PL$26/*res*/["addPre"]("){");
           this["stack"]("conditionalCode");
           this["conditionalCode"] = true;
-          PL$35/*trueExtraCode*/ = this["newResult"]();
+          var PL$35/*trueExtraCode*/ = this["newResult"]();
           PL$35/*trueExtraCode*/["push"](PL$33/*tempPromise*/);
           PL$35/*trueExtraCode*/["push"](".resolve(");
           PL$35/*trueExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["consequent"]));
-          PL$35/*trueExtraCode*/["push"](");\n");
+          PL$35/*trueExtraCode*/["push"](");");
+          PL$35/*trueExtraCode*/["push"](this["newLine"]());
           PL$26/*res*/["addPre"](this["makeCompleteStatement"](PL$35/*trueExtraCode*/));
           PL$26/*res*/["addPre"]("}else{");
-          PL$36/*falseExtraCode*/ = this["newResult"]();
+          var PL$36/*falseExtraCode*/ = this["newResult"]();
           PL$36/*falseExtraCode*/["push"](PL$33/*tempPromise*/);
           PL$36/*falseExtraCode*/["push"](".resolve(");
           PL$36/*falseExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["alternate"]));
-          PL$36/*falseExtraCode*/["push"](");\n");
+          PL$36/*falseExtraCode*/["push"](");");
+          PL$36/*falseExtraCode*/["push"](this["newLine"]());
           PL$26/*res*/["addPre"](this["makeCompleteStatement"](PL$36/*falseExtraCode*/));
-          PL$26/*res*/["addPre"]("};\n");
+          PL$26/*res*/["addPre"]("};");
+          PL$26/*res*/["addPre"](this["newLine"]());
           PL$26/*res*/["addPre"](PL$33/*tempPromise*/);
           PL$26/*res*/["addPre"](".then(");
           PL$26/*res*/["setPromiseName"](this["getUniqueName"]());
@@ -273,59 +264,39 @@ var PL$36/*falseExtraCode*/;
         return PL$26/*res*/;
         ;});
       this["expSwitchStatement"] = (function(PL$24/*par*/){
-      var PL$26/*res*/;
-var PL$27/*promising*/;
-var PL$28/*continuePromise*/;
-var PL$29/*continueCode*/;
-var PL$37/*discriminant*/;
-var PL$38/*cases*/;
-var PL$30/*statement*/;
-var PL$39/*hasDefault*/;
-var PL$40/*defaultCase*/;
-var PL$42/*isDefault*/;
-var PL$43/*defaultCheck*/;
-var PL$44/*firstCheck*/;
-var PL$45/*hasFirstCheck*/;
-var PL$46/*currentCase*/;
-var PL$47/*caseFun*/;
-var PL$48/*checkFun*/;
-var PL$49/*nextCheckCode*/;
-var PL$50/*j*/;
-var PL$51/*nextCaseCode*/;
-var PL$52/*checkCode*/;
-var PL$31/*b*/;
-var PL$32/*extraPar*/;
-var PL$41/*i*/;
+      var PL$41/*i*/;
 
         ;
         this["stack"]("conditionalCode");
         this["conditionalCode"] = true;
         this["stack"]("algorithmicCode");
         this["algorithmicCode"] = true;
-        PL$26/*res*/ = this["newResult"]();
-        PL$27/*promising*/ = false;
+        var PL$26/*res*/ = this["newResult"]();
+        var PL$27/*promising*/ = false;
         if((PL$24/*par*/["cases"] && PL$20/*checkPromising*/(PL$24/*par*/["cases"]))){
           PL$27/*promising*/ = true;
         };
         ;
-        PL$28/*continuePromise*/;
-        PL$29/*continueCode*/;
+        var PL$28/*continuePromise*/;
+        var PL$29/*continueCode*/;
         if(PL$27/*promising*/){
           PL$28/*continuePromise*/ = this["getUniqueName"]();
-          PL$26/*res*/["push"]((((("var " + PL$28/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";\n"));
+          PL$26/*res*/["push"]((((("var " + PL$28/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";"));
+          PL$26/*res*/["push"](this["newLine"]());
           PL$29/*continueCode*/ = (PL$28/*continuePromise*/ + ".resolve(); return;");
           this["stack"]("breakCode");
           this["breakCode"] = PL$29/*continueCode*/;
-          PL$37/*discriminant*/ = this["getUniqueName"]("discriminant");
+          var PL$37/*discriminant*/ = this["getUniqueName"]("discriminant");
           PL$26/*res*/["push"]((("var " + PL$37/*discriminant*/) + " = "));
           PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));
-          PL$26/*res*/["push"](";\n");
-          PL$38/*cases*/ = [];
-          PL$30/*statement*/;
-          PL$39/*hasDefault*/ = false;
-          PL$40/*defaultCase*/;
+          PL$26/*res*/["push"](";");
+          PL$26/*res*/["push"](this["newLine"]());
+          var PL$38/*cases*/ = [];
+          var PL$30/*statement*/;
+          var PL$39/*hasDefault*/ = false;
+          var PL$40/*defaultCase*/;
           for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$41/*i*/){{
-            PL$42/*isDefault*/ = false;
+            var PL$42/*isDefault*/ = false;
             if(! PL$24/*par*/["cases"][PL$41/*i*/]["test"]){
               PL$42/*isDefault*/ = true;
               if(! PL$39/*hasDefault*/){
@@ -340,49 +311,51 @@ var PL$41/*i*/;
 "checkFun": this["getUniqueName"](),
 "isDefault": PL$42/*isDefault*/});}};
           ;
-          PL$43/*defaultCheck*/ = PL$29/*continueCode*/;
+          var PL$43/*defaultCheck*/ = PL$29/*continueCode*/;
           if(PL$39/*hasDefault*/){
             PL$43/*defaultCheck*/ = (PL$40/*defaultCase*/["checkFun"] + "();");
           };
           ;
-          PL$44/*firstCheck*/ = PL$29/*continueCode*/;
-          PL$45/*hasFirstCheck*/ = false;
+          var PL$44/*firstCheck*/ = PL$29/*continueCode*/;
+          var PL$45/*hasFirstCheck*/ = false;
           for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$38/*cases*/["length"]);++PL$41/*i*/){{
-            PL$46/*currentCase*/ = PL$38/*cases*/[PL$41/*i*/]["theCase"];
-            PL$47/*caseFun*/ = PL$38/*cases*/[PL$41/*i*/]["caseFun"];
-            PL$48/*checkFun*/ = PL$38/*cases*/[PL$41/*i*/]["checkFun"];
+            var PL$46/*currentCase*/ = PL$38/*cases*/[PL$41/*i*/]["theCase"];
+            var PL$47/*caseFun*/ = PL$38/*cases*/[PL$41/*i*/]["caseFun"];
+            var PL$48/*checkFun*/ = PL$38/*cases*/[PL$41/*i*/]["checkFun"];
             if(! PL$45/*hasFirstCheck*/){
               PL$45/*hasFirstCheck*/ = true;
               PL$44/*firstCheck*/ = (PL$48/*checkFun*/ + "()");
             };
             ;
-            PL$49/*nextCheckCode*/ = PL$43/*defaultCheck*/;
-            for(PL$50/*j*/ = (PL$41/*i*/ + 1);(PL$50/*j*/ < PL$38/*cases*/["length"]);++PL$50/*j*/){{
+            var PL$49/*nextCheckCode*/ = PL$43/*defaultCheck*/;
+            for(var PL$50/*j*/ = (PL$41/*i*/ + 1);(PL$50/*j*/ < PL$38/*cases*/["length"]);++PL$50/*j*/){{
               if(! PL$38/*cases*/[PL$50/*j*/]["isDefault"]){
                 PL$49/*nextCheckCode*/ = (PL$38/*cases*/[PL$50/*j*/]["checkFun"] + "()");
                 break;;
               };
               ;}};
             ;
-            PL$51/*nextCaseCode*/ = PL$29/*continueCode*/;
+            var PL$51/*nextCaseCode*/ = PL$29/*continueCode*/;
             if(PL$38/*cases*/[(PL$41/*i*/ + 1)]){
               PL$51/*nextCaseCode*/ = (PL$38/*cases*/[(PL$41/*i*/ + 1)]["caseFun"] + "(); return;");
             };
             ;
             PL$26/*res*/["push"]((("var " + PL$48/*checkFun*/) + " = function(){"));
-            PL$52/*checkCode*/ = this["newResult"]();
+            var PL$52/*checkCode*/ = this["newResult"]();
             PL$52/*checkCode*/["push"]((("if(" + PL$37/*discriminant*/) + " === "));
             PL$52/*checkCode*/["push"](this["expectTypeVar"](this["parseExpression"](PL$46/*currentCase*/["test"])));
             PL$52/*checkCode*/["push"]("){");
             PL$52/*checkCode*/["push"](PL$47/*caseFun*/);
-            PL$52/*checkCode*/["push"]("(); return; };\n");
+            PL$52/*checkCode*/["push"]("(); return; };");
+            PL$52/*checkCode*/["push"](this["newLine"]());
             PL$52/*checkCode*/["push"](PL$49/*nextCheckCode*/);
             PL$26/*res*/["push"](this["makeCompleteStatement"](PL$52/*checkCode*/));
-            PL$26/*res*/["push"]("};\n");
+            PL$26/*res*/["push"]("};");
+            PL$26/*res*/["push"](this["newLine"]());
             PL$26/*res*/["push"]((("var " + PL$47/*caseFun*/) + " = function(){"));
             PL$30/*statement*/ = this["newResult"]();
-            PL$31/*b*/ = PL$46/*currentCase*/["consequent"];
-            PL$32/*extraPar*/ = {};
+            var PL$31/*b*/ = PL$46/*currentCase*/["consequent"];
+            var PL$32/*extraPar*/ = {};
             if(PL$27/*promising*/){
               PL$32/*extraPar*/["postCode"] = this["newResult"]();
               PL$32/*extraPar*/["postCode"]["push"](PL$51/*nextCaseCode*/);
@@ -390,7 +363,8 @@ var PL$41/*i*/;
             ;
             PL$30/*statement*/["push"](this["blockCreator"](PL$31/*b*/, PL$32/*extraPar*/));
             PL$26/*res*/["push"](this["makeCompleteStatement"](PL$30/*statement*/));
-            PL$26/*res*/["push"]("};\n");}};
+            PL$26/*res*/["push"]("};");
+            PL$26/*res*/["push"](this["newLine"]());}};
           ;
           PL$26/*res*/["push"](PL$44/*firstCheck*/);
           PL$26/*res*/["push"]((("; " + PL$28/*continuePromise*/) + ".then(function(){"));
@@ -401,7 +375,8 @@ var PL$41/*i*/;
         this["breakCode"] = "break;";
         PL$26/*res*/["push"]("switch (");
         PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));
-        PL$26/*res*/["push"]("){\n");
+        PL$26/*res*/["push"]("){");
+        PL$26/*res*/["push"](this["newLine"]());
         PL$41/*i*/ = 0;
         for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$41/*i*/){{
           PL$46/*currentCase*/ = PL$24/*par*/["cases"][PL$41/*i*/];
@@ -412,15 +387,18 @@ var PL$41/*i*/;
           if(PL$46/*currentCase*/["test"]){
             PL$26/*res*/["push"]("case ");
             PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$46/*currentCase*/["test"])));
-            PL$26/*res*/["push"](":\n");
+            PL$26/*res*/["push"](":");
+            PL$26/*res*/["push"](this["newLine"]());
           }else{
           PL$26/*res*/["push"]("default");
-          PL$26/*res*/["push"](":\n");
+          PL$26/*res*/["push"](":");
+          PL$26/*res*/["push"](this["newLine"]());
           };
           ;
           PL$26/*res*/["push"](this["blockCreator"](PL$46/*currentCase*/["consequent"]));}};
         ;
-        PL$26/*res*/["push"]("}\n");
+        PL$26/*res*/["push"]("}");
+        PL$26/*res*/["push"](this["newLine"]());
         this["unstack"]("breakCode");
         };
         ;

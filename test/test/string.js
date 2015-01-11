@@ -57,7 +57,7 @@ var PL$1 = (function(){
 
   ;
   return {"a": "\n\r\u2028\u2029\"'",
-"b": "xxx\n  xxx"};
+  "b": "xxx\n  xxx"};
   ;})();
 ;return PL$1;
 });

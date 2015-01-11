@@ -72,15 +72,23 @@ var PL$14/*console*/;try{PL$14/*console*/ = console;}catch(e){};
 var PL$17/*Callback*/;try{PL$17/*Callback*/ = Callback;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*child_process*/;
 var PL$7/*spawn*/;
 var PL$8/*fork*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("child_process").then(PL$3(function(PL$6){PL$5/*child_process*/ = PL$6;
+  __requireFun("child_process").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*child_process*/ = PL$6;
   PL$7/*spawn*/ = PL$5/*child_process*/["spawn"];
   PL$8/*fork*/ = PL$5/*child_process*/["fork"];
   PL$1.resolve((function(PL$9/*cmdStr*/, PL$10/*parAr*/, PL$11/*options*/){
@@ -128,22 +136,30 @@ PL$3(function(){
     PL$12/*child*/["on"]("close", PL$16/*cb*/);
     var PL$18/*result*/ = (function(){
     var PL$19 = new __Promise();
-var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.reject(e); }; }; };
-var PL$22 = function(e){ PL$19.reject(e); };
-PL$21(function(){
+    var PL$21/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$19.reject(e);
+        };
+      };
+    };
+    var PL$22/*catch rejected*/ = function(e){
+      PL$19.reject(e);
+    };
+    PL$21/*promiseland exception catcher*/(function(){
     
       ;
-      PL$16/*cb*/["promise"].then(PL$21(function(PL$23){PL$19.resolve(PL$23[0]); return;
-      PL$19.resolve(); return;}), PL$22);
-;})();
-return PL$19;
-});
+      PL$16/*cb*/["promise"].then(PL$21/*promiseland exception catcher*/(function(PL$23){PL$19.resolve(PL$23[0]); return;
+      PL$19.resolve(); return;}), PL$22/*catch rejected*/);
+      ;
+    })();return PL$19;
+    });
     return {"child": PL$12/*child*/,
-"result": PL$18/*result*/()};
+    "result": PL$18/*result*/()};
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

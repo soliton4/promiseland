@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "b0da7c0951bba5ab23a7fd87e42641de" })){ return promiseland._getModule("b0da7c0951bba5ab23a7fd87e42641de"); };
+    if (promiseland._hasModule({ hashStr: "80fc8d4a22bea37b25b129e607b8f433" })){ return promiseland._getModule("80fc8d4a22bea37b25b129e607b8f433"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "b0da7c0951bba5ab23a7fd87e42641de", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "80fc8d4a22bea37b25b129e607b8f433", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -191,7 +191,7 @@ PL$3(function(){
       
         ;
         var PL$35/*uniqueStr*/ = this["getUniqueName"]();
-        var PL$36/*res*/ = (((("/*\n'''\"\"\" " + PL$35/*uniqueStr*/) + " ") + (PL$29/*name*/ || "")) + " start */");
+        var PL$36/*res*/ = (((("/* " + PL$35/*uniqueStr*/) + " ") + (PL$29/*name*/ || "")) + " start */");
         PL$36/*res*/ += this["runtimeErrorNoWarning"](PL$11/*errorMsg*/["failedToDetermineType"]);
         PL$36/*res*/ += (((("/* " + PL$35/*uniqueStr*/) + " ") + (PL$29/*name*/ || "")) + " end */");
         return PL$36/*res*/;
@@ -441,10 +441,13 @@ PL$3(function(){
             this["common"]["useClassSystem"] = true;
             PL$58/*extraRes*/["push"](" = classSystem._createPromiseOfClass(");
             PL$58/*extraRes*/["push"](this["renderType"](PL$56/*typename*/));
-            PL$58/*extraRes*/["push"](");\nvar ");
+            PL$58/*extraRes*/["push"](");");
+            PL$58/*extraRes*/["push"](this["newLine"]());
+            PL$58/*extraRes*/["push"]("var ");
             PL$58/*extraRes*/["push"]((this["getVariableName"](PL$29/*name*/) + " = "));
             PL$58/*extraRes*/["push"](this["renderType"](PL$29/*name*/));
-            PL$58/*extraRes*/["push"](";\n");
+            PL$58/*extraRes*/["push"](";");
+            PL$58/*extraRes*/["push"](this["newLine"]());
             PL$58/*extraRes*/["push"]((("var " + this["getConstructorName"](PL$29/*name*/)) + " = undefined;"));
             PL$58/*extraRes*/["push"](this["_typeReadyCode"]({"typename": PL$29/*name*/,
 "noConstructor": false}));

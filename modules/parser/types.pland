@@ -103,7 +103,7 @@ return (parInstance, par){
     
       this.getUniqueTypeMacro = function(name){
         var uniqueStr = this.getUniqueName();
-        var res = "/*\n'''\"\"\" " + uniqueStr + " " + (name || "") + " start */";
+        var res = "/* " + uniqueStr + " " + (name || "") + " start */";
         res += this.runtimeErrorNoWarning(errorMsg.failedToDetermineType);
         res += "/* " + uniqueStr + " " + (name || "") + " end */";
         return res;
@@ -357,10 +357,13 @@ return (parInstance, par){
           this.common.useClassSystem = true;
           extraRes.push(" = classSystem._createPromiseOfClass(");
           extraRes.push(this.renderType(typename));
-          extraRes.push(");\nvar ");
+          extraRes.push(");");
+          extraRes.push(this.newLine());
+          extraRes.push("var ");
           extraRes.push(this.getVariableName(name) + " = ");
           extraRes.push(this.renderType(name));
-          extraRes.push(";\n");
+          extraRes.push(";");
+          extraRes.push(this.newLine());
           extraRes.push("var " + this.getConstructorName(name) + " = undefined;");
 
           extraRes.push(this._typeReadyCode({typename: name, noConstructor: false}));

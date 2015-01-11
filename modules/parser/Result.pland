@@ -125,13 +125,23 @@ var stringEncodeStr = basics.stringEncodeStr;
         if (parReference && typeof parReference == "boolean"){
           errorFun(undefined, errorMsg.internalWrongUseOfReference);
         };
-        parCode = this._prepCode(parCode, parReference, par);
         
-        if (!this.codeAr){
-          this.error(parReference || this.reference, errorMsg.internalCantAddToStringResult);
+        if (Array.isArray(parCode)){
+          
+          var i = 0;
+          for (i = 0; i < parCode.length; ++i){
+            this.push(parCode[i]);
+          };
+          
+        }else{
+          parCode = this._prepCode(parCode, parReference, par);
+
+          if (!this.codeAr){
+            this.error(parReference || this.reference, errorMsg.internalCantAddToStringResult);
+          };
+
+          this.codeAr.push(parCode); // simple
         };
-        
-        this.codeAr.push(parCode); // simple
         
         if (parCode.promising){
           this.makePromising();
@@ -254,15 +264,19 @@ var stringEncodeStr = basics.stringEncodeStr;
         par = this._iterPar(par);
         
         var resStr = "";
-        /*if (this._newLine){
-          // implementation of newline
-          // there may be other newlines in the result that are not covered by this
-          resStr += "\n";
-          resStr += par.indent.getStr();
-        };*/
         
+        var indentDst;
         if (this._indent){
-          var indentDst = par.indent.inc();
+          indentDst = par.indent.inc();
+        };
+        
+        if (this._indentPair){
+          if (this._isIndentStart){
+            indentDst = par.indent.inc();
+            this._end._indentDst = indentDst;
+          }else{
+            this._indentDst();
+          };
         };
         
         var i;

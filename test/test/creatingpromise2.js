@@ -60,15 +60,23 @@ var PL$1 = (function(){
   ;
   return {"fun": (function(){
   var PL$2 = new __Promise();
-var PL$4 = function(code){ return function(res){ try{code(res);}catch(e){ PL$2.reject(e); }; }; };
-var PL$5 = function(e){ PL$2.reject(e); };
-PL$4(function(){
+  var PL$4/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$2.reject(e);
+      };
+    };
+  };
+  var PL$5/*catch rejected*/ = function(e){
+    PL$2.reject(e);
+  };
+  PL$4/*promiseland exception catcher*/(function(){
   
     ;
     PL$2.resolve(4); return;
-    PL$2.resolve(); return;})();
-return PL$2;
-})};
+    PL$2.resolve(); return;
+  })();return PL$2;
+  })};
   ;})();
 ;return PL$1;
 });

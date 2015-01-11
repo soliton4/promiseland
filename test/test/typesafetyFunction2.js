@@ -57,9 +57,19 @@ var PL$1 = (function(){
 "use strict";
 var PL$3/*C1*/;
 var PL$5/*b*/;
+
+/* ---------------------------- */
+/* type C1 */
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
-PL$3/*C1*/ = PL$2/*type:C1*/;
-var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});function PL$6/*fun1*/(){
+PL$3/*C1*/ = PL$2/*type:C1*/
+var PL$4/*C1-constructor*/ = undefined;
+classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
+  PL$2/*type:C1*/ = parType;
+  PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);
+});
+/* ---------------------------- */
+
+function PL$6/*fun1*/(){
 var PL$7/*c*/;
 
   ;

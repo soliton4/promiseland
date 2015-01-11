@@ -58,9 +58,19 @@ var PL$1 = (function(){
 var PL$3/*C1*/;
 var PL$5/*v1*/;
 var PL$6/*v2*/;
+
+/* ---------------------------- */
+/* type C1 */
 var PL$2/*type:C1*/ = classSystem._createProvisionalClass();
-PL$3/*C1*/ = PL$2/*type:C1*/;
-var PL$4/*C1-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){PL$2/*type:C1*/ = parType;PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);});
+PL$3/*C1*/ = PL$2/*type:C1*/
+var PL$4/*C1-constructor*/ = undefined;
+classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
+  PL$2/*type:C1*/ = parType;
+  PL$4/*C1-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:C1*/);
+});
+/* ---------------------------- */
+
+
   ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")},{"name":"c","type":(classSystem.createFunctionType({ "return": PL$2/*type:C1*/, arguments: []}))}], "extends": [], "hasFreePart": true, "hashStr": "0ed06f66d2783c4b7f338ed58b63db59", "name": "C1"}, {"a": 1, "b": (function(){
   

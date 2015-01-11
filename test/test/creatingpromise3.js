@@ -58,37 +58,61 @@ var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "bd9d6daff691126a54d403e075368a5e", "module": PL$1, promising: true });
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*x*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*x*/ = (function(){
   var PL$6 = new __Promise();
-var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
-var PL$9 = function(e){ PL$6.reject(e); };
-PL$8(function(){
+  var PL$8/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$6.reject(e);
+      };
+    };
+  };
+  var PL$9/*catch rejected*/ = function(e){
+    PL$6.reject(e);
+  };
+  PL$8/*promiseland exception catcher*/(function(){
   
     ;
     PL$6.resolve({"fun": (function(){
     var PL$10 = new __Promise();
-var PL$12 = function(code){ return function(res){ try{code(res);}catch(e){ PL$10.reject(e); }; }; };
-var PL$13 = function(e){ PL$10.reject(e); };
-PL$12(function(){
+    var PL$12/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$10.reject(e);
+        };
+      };
+    };
+    var PL$13/*catch rejected*/ = function(e){
+      PL$10.reject(e);
+    };
+    PL$12/*promiseland exception catcher*/(function(){
     
       ;
       PL$10.resolve(4); return;
-      PL$10.resolve(); return;})();
-return PL$10;
-})}); return;
-    PL$6.resolve(); return;})();
-return PL$6;
-});
-  PL$5/*x*/().then(PL$3(function(PL$14){PL$1.resolve(PL$14); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+      PL$10.resolve(); return;
+    })();return PL$10;
+    })}); return;
+    PL$6.resolve(); return;
+  })();return PL$6;
+  });
+  PL$5/*x*/().then(PL$3/*promiseland exception catcher*/(function(PL$14){PL$1.resolve(PL$14); return;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

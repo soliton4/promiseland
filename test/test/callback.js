@@ -63,39 +63,55 @@ var PL$1 = (function(){
   ;
   var PL$2/*somefun*/ = (function(PL$3/*par*/){
   var PL$4 = new __Promise();
-var PL$6 = function(code){ return function(res){ try{code(res);}catch(e){ PL$4.reject(e); }; }; };
-var PL$7 = function(e){ PL$4.reject(e); };
-var PL$8/*c*/;
-var PL$11/*x*/;
-PL$6(function(){
+  var PL$6/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$4.reject(e);
+      };
+    };
+  };
+  var PL$7/*catch rejected*/ = function(e){
+    PL$4.reject(e);
+  };
+  var PL$8/*c*/;
+  var PL$11/*x*/;
+  PL$6/*promiseland exception catcher*/(function(){
   
     ;
     PL$8/*c*/ = new PL$9/*Callback*/();
     PL$10/*setTimeout*/(PL$8/*c*/["callback"], 100);
-    PL$8/*c*/["promise"].then(PL$6(function(PL$12){PL$11/*x*/ = PL$12;
+    PL$8/*c*/["promise"].then(PL$6/*promiseland exception catcher*/(function(PL$12){PL$11/*x*/ = PL$12;
     PL$4.resolve((PL$3/*par*/ + 1)); return;
-    PL$4.resolve(); return;}), PL$7);
-;})();
-return PL$4;
-});
+    PL$4.resolve(); return;}), PL$7/*catch rejected*/);
+    ;
+  })();return PL$4;
+  });
   return {"fun": (function(){
   var PL$13 = new __Promise();
-var PL$15 = function(code){ return function(res){ try{code(res);}catch(e){ PL$13.reject(e); }; }; };
-var PL$16 = function(e){ PL$13.reject(e); };
-var PL$17/*a*/;
-PL$15(function(){
+  var PL$15/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$13.reject(e);
+      };
+    };
+  };
+  var PL$16/*catch rejected*/ = function(e){
+    PL$13.reject(e);
+  };
+  var PL$17/*a*/;
+  PL$15/*promiseland exception catcher*/(function(){
   
     ;
     PL$17/*a*/ = 1;
-    PL$2/*somefun*/(PL$17/*a*/).then(PL$15(function(PL$18){if((PL$18 == 2)){
+    PL$2/*somefun*/(PL$17/*a*/).then(PL$15/*promiseland exception catcher*/(function(PL$18){if((PL$18 == 2)){
       PL$13.resolve(4); return;
     };
     ;
     PL$13.resolve(0); return;
-    PL$13.resolve(); return;}), PL$16);
-;})();
-return PL$13;
-})};
+    PL$13.resolve(); return;}), PL$16/*catch rejected*/);
+    ;
+  })();return PL$13;
+  })};
   ;})();
 ;return PL$1;
 });

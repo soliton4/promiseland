@@ -58,7 +58,7 @@ var PL$1 = (function(){
 
   ;
   try
-{
+  {
     PL$2/*a*/["error"]();}catch(__dummy){};
   ;
   return {"success": true};

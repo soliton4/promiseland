@@ -65,61 +65,92 @@ var PL$32/*console*/;try{PL$32/*console*/ = console;}catch(e){};
 var PL$28/*x*/;try{PL$28/*x*/ = x;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$10 = function(e){ PL$1.reject(e); };
+var PL$9/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$10/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$15/*waitFun*/;
 var PL$4/*Cs1*/;
 var PL$24/*a*/;
 var _TPL$24/*a*/;
 var PL$25/*gotit*/;
+
+/* ---------------------------- */
+/* type Cs1 */
 var PL$3/*type:Cs1*/ = classSystem._createProvisionalClass();
-PL$4/*Cs1*/ = PL$3/*type:Cs1*/;
-var PL$5/*Cs1-constructor*/ = undefined;classSystem.readyPromise(PL$3/*type:Cs1*/).then(function(parType){PL$3/*type:Cs1*/ = parType;PL$5/*Cs1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:Cs1*/);});var PL$6/*type:Cs1**/ = classSystem._createPromiseOfClass(PL$3/*type:Cs1*/);
+PL$4/*Cs1*/ = PL$3/*type:Cs1*/
+var PL$5/*Cs1-constructor*/ = undefined;
+classSystem.readyPromise(PL$3/*type:Cs1*/).then(function(parType){
+  PL$3/*type:Cs1*/ = parType;
+  PL$5/*Cs1-constructor*/ = classSystem.getTypeConstructor(PL$3/*type:Cs1*/);
+});
+var PL$6/*type:Cs1**/ = classSystem._createPromiseOfClass(PL$3/*type:Cs1*/);
 var PL$7/*Cs1**/ = PL$6/*type:Cs1**/;
-var PL$8/*Cs1*-constructor*/ = undefined;classSystem.readyPromise(PL$6/*type:Cs1**/).then(function(parType){PL$6/*type:Cs1**/ = parType;PL$8/*Cs1*-constructor*/ = classSystem.getTypeConstructor(PL$6/*type:Cs1**/);});PL$9(function(){
+var PL$8/*Cs1*-constructor*/ = undefined;classSystem.readyPromise(PL$6/*type:Cs1**/).then(function(parType){
+  PL$6/*type:Cs1**/ = parType;
+  PL$8/*Cs1*-constructor*/ = classSystem.getTypeConstructor(PL$6/*type:Cs1**/);
+});
+/* ---------------------------- */
+
+PL$9/*promiseland exception catcher*/(function(){
 
   ;
   var PL$11 = new __Promise();
-var PL$12 = new __Promise();
-var PL$13/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.resolve(e); }; }; };
-var PL$14 = function(e){ PL$12.resolve(e); };
-PL$13/*try catch*/(function(){
+  var PL$12 = new __Promise();
+  var PL$13/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.resolve(e); }; }; };
+  var PL$14 = function(e){ PL$12.resolve(e); };
+  PL$13/*try catch*/(function(){
     PL$15/*waitFun*/ = (function(){
     var PL$16 = new __Promise();
-var PL$18 = function(code){ return function(res){ try{code(res);}catch(e){ PL$16.reject(e); }; }; };
-var PL$19 = function(e){ PL$16.reject(e); };
-var PL$20/*cb*/;
-PL$18(function(){
+    var PL$18/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$16.reject(e);
+        };
+      };
+    };
+    var PL$19/*catch rejected*/ = function(e){
+      PL$16.reject(e);
+    };
+    var PL$20/*cb*/;
+    PL$18/*promiseland exception catcher*/(function(){
     
       ;
       PL$20/*cb*/ = new PL$21/*Callback*/();
       PL$22/*setTimeout*/(PL$20/*cb*/, 2000);
-      PL$20/*cb*/["promise"].then(PL$18(function(PL$23){PL$23;
-      PL$16.resolve(); return;}), PL$19);
-;})();
-return PL$16;
-});
+      PL$20/*cb*/["promise"].then(PL$18/*promiseland exception catcher*/(function(PL$23){PL$23;
+      PL$16.resolve(); return;}), PL$19/*catch rejected*/);
+      ;
+    })();return PL$16;
+    });
     classSystem._resolveProvisional(PL$3/*type:Cs1*/, classSystem.createClass({className: "Cs1",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "sync": {"type":"sync","all":1,"line":10,"column":12,"offset":126}, "hashStr": "526adb710b3b5518eafd3ced0386c4bc", "name": "Cs1"}, {"a": 1, "b": 4}));PL$4/*Cs1*/;
     PL$24/*a*/;
     PL$25/*gotit*/ = false;
     (function(){
     if (!promiseland.profileHas("server")){
     return;
-};
-
+    };
+    
       ;
       /*temp tracked assign*/(function(vAr){
-if (_TPL$24/*a*/){ _TPL$24/*a*/(); };
-if(vAr){
-var v = vAr[0];
-PL$24/*a*/ = v;
-_TPL$24/*a*/ = vAr[1];
-return v;
-}else{
-PL$24/*a*/ = undefined; _TPL$24/*a*/ = undefined;
-return;
-}; })(new PL$5/*Cs1-constructor*/())/*end temp assign*/
-;
+        if (_TPL$24/*a*/){ _TPL$24/*a*/(); };
+        if(vAr){
+          var v = vAr[0];
+          PL$24/*a*/ = v;
+          _TPL$24/*a*/ = vAr[1];
+          return v;
+        }else{
+          PL$24/*a*/ = undefined; 
+          _TPL$24/*a*/ = undefined;
+          return;
+        };
+      })(new PL$5/*Cs1-constructor*/())/*end temp assign*/;
       (function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$24/*a*/, 3);
       PL$25/*gotit*/ = true;
       var PL$26/*next*/ = 10;
@@ -130,27 +161,35 @@ return;
         ;}), 1000);
       ;})();
     ((function(f){
-promiseland.registerRemote("server", "526adb710b3b5518eafd3ced0386c4bc", "PL$33", f, (classSystem.createFunctionType({ "return": PL$6/*type:Cs1**/, arguments: []})));
-if (promiseland.profileHas("server")){
-return f;
-}else{
-return function(){
-return promiseland.remoteExec("526adb710b3b5518eafd3ced0386c4bc", "PL$33", arguments);
-}
-};
-})((function(t){return t;})(function PL$28/*x*/(){
+    promiseland.registerRemote("server", "526adb710b3b5518eafd3ced0386c4bc", "PL$33", f, (classSystem.createFunctionType({ "return": PL$6/*type:Cs1**/, arguments: []})));
+    if (promiseland.profileHas("server")){
+    return f;
+    }else{
+    return function(){
+    return promiseland.remoteExec("526adb710b3b5518eafd3ced0386c4bc", "PL$33", arguments);
+    }
+    };
+    })((function(t){return t;})(function PL$28/*x*/(){
     var PL$29;
-var _TPL$29;
-(function(){ var vAr = new PL$8/*Cs1*-constructor*/(); PL$29 = vAr[0]; _TPL$29 = vAr[1]; })();var PL$30 = function(code){ return function(res){ try{code(res);}catch(e){ PL$29.reject(e); }; }; };
-var PL$31 = function(e){ PL$29.reject(e); };
-PL$30(function(){
+    var _TPL$29;
+    (function(){ var vAr = new PL$8/*Cs1*-constructor*/(); PL$29 = vAr[0]; _TPL$29 = vAr[1]; })();var PL$30/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$29.reject(e);
+        };
+      };
+    };
+    var PL$31/*catch rejected*/ = function(e){
+      PL$29.reject(e);
+    };
+    PL$30/*promiseland exception catcher*/(function(){
     
       ;
       PL$32/*console*/["log"]("doing the sync request");
       PL$29.resolve((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$24/*a*/)); return;
-      PL$29.resolve(); return;})();
-return [PL$29, _TPL$29];
-})));
+      PL$29.resolve(); return;
+    })();return [PL$29, _TPL$29];
+    })));
     PL$15/*waitFun*/().then(PL$13/*try catch*/(function(PL$34){PL$34;
     
     var PL$35 = new __Promise();if(! PL$25/*gotit*/){
@@ -167,15 +206,15 @@ return [PL$29, _TPL$29];
     };PL$35.then(PL$13/*try catch*/(function(PL$37){PL$37;;
     ;
     PL$11.resolve();}), PL$14);
-;}), PL$14);
-;})();
-PL$12.then(PL$9(function(PL$38/*e*/){
+  ;}), PL$14);
+  ;})();
+  PL$12.then(PL$9/*promiseland exception catcher*/(function(PL$38/*e*/){
     PL$32/*console*/["log"]("error:");
     PL$32/*console*/["log"](PL$38/*e*/);
     PL$11.resolve();;}));
-PL$11.then(PL$9(function(){;
-  PL$1.resolve(); return;}), PL$10)})();
-return PL$1;
+  PL$11.then(PL$9/*promiseland exception catcher*/(function(){;
+  PL$1.resolve(); return;}), PL$10/*catch rejected*/)
+})();return PL$1;
 })();
 ;;
 return PL$1});

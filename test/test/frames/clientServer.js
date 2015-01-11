@@ -73,67 +73,91 @@ var PL$17/*Callback*/;try{PL$17/*Callback*/ = Callback;}catch(e){};
 var PL$19/*__dirname*/;try{PL$19/*__dirname*/ = __dirname;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*fs*/;
 var PL$11/*x*/;
 var PL$22/*res*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*fs*/;
   (function(){
   if (!promiseland.profileHas("server")){
   var p = new __Promise();
-p.reject({id: 14, msg: "function does not execute in this frame."});
-return p;
-};
-var PL$6 = new __Promise();
-var PL$8 = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.reject(e); }; }; };
-var PL$9 = function(e){ PL$6.reject(e); };
-PL$8(function(){
+  p.reject({id: 14, msg: "function does not execute in this frame."});
+  return p;
+  };
+  var PL$6 = new __Promise();
+  var PL$8/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$6.reject(e);
+      };
+    };
+  };
+  var PL$9/*catch rejected*/ = function(e){
+    PL$6.reject(e);
+  };
+  PL$8/*promiseland exception catcher*/(function(){
   
     ;
-    __requireFun("fs").then(PL$8(function(PL$10){PL$5/*fs*/ = PL$10;
-    PL$6.resolve(); return;}), PL$9);
-;})();
-return PL$6;
-})();
+    __requireFun("fs").then(PL$8/*promiseland exception catcher*/(function(PL$10){PL$5/*fs*/ = PL$10;
+    PL$6.resolve(); return;}), PL$9/*catch rejected*/);
+    ;
+  })();return PL$6;
+  })();
   PL$11/*x*/ = ((function(f){
-promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$21", f, classSystem.getBuiltinType("var"));
-if (promiseland.profileHas("server")){
-return f;
-}else{
-return function(){
-return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$21", arguments);
-}
-};
-})(function(){
+  promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$21", f, classSystem.getBuiltinType("var"));
+  if (promiseland.profileHas("server")){
+  return f;
+  }else{
+  return function(){
+  return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$21", arguments);
+  }
+  };
+  })(function(){
   var PL$12 = new __Promise();
-var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
-var PL$15 = function(e){ PL$12.reject(e); };
-var PL$16/*cb*/;
-var PL$18/*filenameStr*/;
-PL$14(function(){
+  var PL$14/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$12.reject(e);
+      };
+    };
+  };
+  var PL$15/*catch rejected*/ = function(e){
+    PL$12.reject(e);
+  };
+  var PL$16/*cb*/;
+  var PL$18/*filenameStr*/;
+  PL$14/*promiseland exception catcher*/(function(){
   
     ;
     PL$16/*cb*/ = new PL$17/*Callback*/();
     PL$18/*filenameStr*/ = (PL$19/*__dirname*/ + "/clientServer.txt");
     PL$5/*fs*/["readFile"](PL$18/*filenameStr*/, {"encoding": "utf8"}, PL$16/*cb*/);
-    PL$16/*cb*/["promise"].then(PL$14(function(PL$20){PL$12.resolve(PL$20[1]); return;
-    PL$12.resolve(); return;}), PL$15);
-;})();
-return PL$12;
-}));
-  PL$11/*x*/().then(PL$3(function(PL$23){PL$22/*res*/ = PL$23;
+    PL$16/*cb*/["promise"].then(PL$14/*promiseland exception catcher*/(function(PL$20){PL$12.resolve(PL$20[1]); return;
+    PL$12.resolve(); return;}), PL$15/*catch rejected*/);
+    ;
+  })();return PL$12;
+  }));
+  PL$11/*x*/().then(PL$3/*promiseland exception catcher*/(function(PL$23){PL$22/*res*/ = PL$23;
   if((PL$22/*res*/ == "the test content")){
     PL$1.resolve({"success": true}); return;
   };
   ;
   PL$1.resolve({"success": false}); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

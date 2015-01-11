@@ -66,6 +66,7 @@ return (parInstance, par){
         };
         if (par.isFunction){
           this.localVariables.get(name).function = par.function;
+          this.localVariables.get(name).isFunction = true;
         };
         this.variables.set(name, this.localVariables.get(name));
       };

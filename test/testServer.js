@@ -73,8 +73,16 @@ var PL$30/*console*/;try{PL$30/*console*/ = console;}catch(e){};
 var PL$46/*process*/;try{PL$46/*process*/ = process;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*express*/;
 var PL$7/*http*/;
 var PL$9/*fs*/;
@@ -89,13 +97,13 @@ var PL$33/*collector*/;
 var PL$35/*cp*/;
 var PL$37/*chromeChild*/;
 var PL$38/*chromePs*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
-  __requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
-  __requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
-  __requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
+  __requireFun("express").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*express*/ = PL$6;
+  __requireFun("http").then(PL$3/*promiseland exception catcher*/(function(PL$8){PL$7/*http*/ = PL$8;
+  __requireFun("fs").then(PL$3/*promiseland exception catcher*/(function(PL$10){PL$9/*fs*/ = PL$10;
+  __requireFun("socket.io").then(PL$3/*promiseland exception catcher*/(function(PL$12){PL$11/*socketIo*/ = PL$12;
   PL$13/*app*/ = PL$5/*express*/();
   PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
   PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
@@ -174,44 +182,44 @@ PL$3(function(){
       ;}));
     return;
     ;}));
-  __requireFun("./test/frameTests").then(PL$3(function(PL$31){PL$31;
+  __requireFun("./test/frameTests").then(PL$3/*promiseland exception catcher*/(function(PL$31){PL$31;
   PL$32/*tests*/ = {};
-  __requireFun("./testCollector").then(PL$3(function(PL$34){PL$33/*collector*/ = PL$34;
-  __requireFun("./createProcess").then(PL$3(function(PL$36){PL$35/*cp*/ = PL$36;
+  __requireFun("./testCollector").then(PL$3/*promiseland exception catcher*/(function(PL$34){PL$33/*collector*/ = PL$34;
+  __requireFun("./createProcess").then(PL$3/*promiseland exception catcher*/(function(PL$36){PL$35/*cp*/ = PL$36;
   PL$37/*chromeChild*/ = PL$35/*cp*/("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"])["child"];
   PL$38/*chromePs*/ = PL$33/*collector*/["getResultPromise"]("chrome");
-  PL$38/*chromePs*/.then(PL$3(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;
+  PL$38/*chromePs*/.then(PL$3/*promiseland exception catcher*/(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;
   PL$33/*collector*/["finish"]("chrome");
   PL$14/*server*/["close"]();
   PL$30/*console*/["log"]("starting node tests");
   var PL$40 = new __Promise();
-var PL$41 = new __Promise();
-var PL$42/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$41.resolve(e); }; }; };
-var PL$43 = function(e){ PL$41.resolve(e); };
-PL$42/*try catch*/(function(){
+  var PL$41 = new __Promise();
+  var PL$42/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$41.resolve(e); }; }; };
+  var PL$43 = function(e){ PL$41.resolve(e); };
+  PL$42/*try catch*/(function(){
     __requireFun("./test/simpleTests").then(PL$42/*try catch*/(function(PL$44){PL$32/*tests*/["node"] = PL$44;
     PL$40.resolve();}), PL$43);
-;})();
-PL$41.then(PL$3(function(PL$45/*e*/){
+  ;})();
+  PL$41.then(PL$3/*promiseland exception catcher*/(function(PL$45/*e*/){
     PL$30/*console*/["log"](PL$45/*e*/);
     PL$40.resolve();;}));
-PL$40.then(PL$3(function(){;
+  PL$40.then(PL$3/*promiseland exception catcher*/(function(){;
   ;
   try
-{
+  {
     PL$46/*process*/["send"](PL$32/*tests*/);}catch(PL$45/*e*/){};
   ;
   PL$46/*process*/["exit"](0);
-  PL$1.resolve(); return;}), PL$4)}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/)}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

@@ -67,8 +67,8 @@ var PL$1 = (function(){
     ;})};
   var PL$3/*makeClass*/ = (function(PL$4/*destroyFun*/){
   var PL$22/*checkFun*/;
-var PL$23/*getBest*/;
-
+  var PL$23/*getBest*/;
+  
     ;
     var PL$5/*curToken*/;
     var PL$6/*bestLen*/ = 0;
@@ -86,7 +86,7 @@ var PL$23/*getBest*/;
       ;});
     var PL$13/*con*/ = (function(PL$14/*t*/){
     var PL$20/*cut*/;
-
+    
       ;
       var PL$15/*next*/;
       var PL$16/*prev*/;
@@ -101,7 +101,7 @@ var PL$23/*getBest*/;
         };
         ;
         ;}),
-"newPrev": (function(PL$18/*parPrev*/){
+      "newPrev": (function(PL$18/*parPrev*/){
       
         ;
         if(PL$18/*parPrev*/){
@@ -112,17 +112,17 @@ var PL$23/*getBest*/;
         };
         ;
         ;}),
-"getNext": (function(){
+      "getNext": (function(){
       
         ;
         return PL$15/*next*/;
         ;}),
-"getCon": (function(PL$19/*token*/){
+      "getCon": (function(PL$19/*token*/){
       
         ;
         return PL$14/*t*/["getCon"](PL$19/*token*/);
         ;}),
-"cut": PL$20/*cut*/};
+      "cut": PL$20/*cut*/};
       PL$20/*cut*/ = (function(){
       
         ;
@@ -204,7 +204,7 @@ var PL$23/*getBest*/;
         var PL$26/*tempBestLen*/ = 0;
         var PL$27/*tempBest*/;
         while(PL$25/*iterator*/){
-{
+        {
           PL$24/*b*/ = PL$25/*iterator*/["getCon"](PL$5/*curToken*/);
           if(((PL$24/*b*/ && (PL$24/*b*/ < PL$26/*tempBestLen*/)) || ! PL$26/*tempBestLen*/)){
             PL$26/*tempBestLen*/ = PL$24/*b*/;
@@ -235,7 +235,7 @@ var PL$23/*getBest*/;
       ;
       return PL$23/*getBest*/(PL$19/*token*/);
       ;}),
-"quickCon": (function(){
+    "quickCon": (function(){
     
       ;
       if(PL$10/*rootCnt*/){

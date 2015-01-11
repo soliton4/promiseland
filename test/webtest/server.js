@@ -70,21 +70,29 @@ promiseland._registerModule({ hashStr: "7465e5682226caa19d28872c5c9d7950", "modu
 var PL$8/*__dirname*/;try{PL$8/*__dirname*/ = __dirname;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*Fw*/;
 var PL$7/*fw*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("promiseland-webframework").then(PL$3(function(PL$6){PL$5/*Fw*/ = PL$6;
+  __requireFun("promiseland-webframework").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*Fw*/ = PL$6;
   PL$7/*fw*/ = new PL$5/*Fw*/({"load": "test/saveHandler",
-"dirs": [{"client": "/test",
-"server": (PL$8/*__dirname*/ + "/test/")}]});
+  "dirs": [{"client": "/test",
+  "server": (PL$8/*__dirname*/ + "/test/")}]});
   PL$7/*fw*/["listen"](4000);
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

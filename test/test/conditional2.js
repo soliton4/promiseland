@@ -60,41 +60,57 @@ var PL$1 = (function(){
   ;
   var PL$2/*somefun*/ = (function(){
   var PL$3 = new __Promise();
-var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
-var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){
+  var PL$5/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$3.reject(e);
+      };
+    };
+  };
+  var PL$6/*catch rejected*/ = function(e){
+    PL$3.reject(e);
+  };
+  PL$5/*promiseland exception catcher*/(function(){
   
     ;
     PL$3.resolve(1); return;
-    PL$3.resolve(); return;})();
-return PL$3;
-});
+    PL$3.resolve(); return;
+  })();return PL$3;
+  });
   return {"fun": (function(){
   var PL$7 = new __Promise();
-var PL$9 = function(code){ return function(res){ try{code(res);}catch(e){ PL$7.reject(e); }; }; };
-var PL$10 = function(e){ PL$7.reject(e); };
-var PL$11/*a*/;
-PL$9(function(){
+  var PL$9/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$7.reject(e);
+      };
+    };
+  };
+  var PL$10/*catch rejected*/ = function(e){
+    PL$7.reject(e);
+  };
+  var PL$11/*a*/;
+  PL$9/*promiseland exception catcher*/(function(){
   
     ;
     PL$11/*a*/ = 1;
     
     var PL$12 = new __Promise();if(((PL$11/*a*/ + 1) == 2)){
-      PL$2/*somefun*/().then(PL$9(function(PL$13){PL$11/*a*/ = (PL$11/*a*/ + PL$13);
-      PL$12.resolve();;}), PL$10);
-;
+      PL$2/*somefun*/().then(PL$9/*promiseland exception catcher*/(function(PL$13){PL$11/*a*/ = (PL$11/*a*/ + PL$13);
+      PL$12.resolve();;}), PL$10/*catch rejected*/);
+      ;
     }else{PL$12.resolve();
-    };PL$12.then(PL$9(function(PL$14){PL$14;;
+    };PL$12.then(PL$9/*promiseland exception catcher*/(function(PL$14){PL$14;;
     ;
     if((PL$11/*a*/ == 2)){
       PL$7.resolve(4); return;
     };
     ;
     PL$7.resolve(0); return;
-    PL$7.resolve(); return;}), PL$10);
-;})();
-return PL$7;
-})};
+    PL$7.resolve(); return;}), PL$10/*catch rejected*/);
+    ;
+  })();return PL$7;
+  })};
   ;})();
 ;return PL$1;
 });

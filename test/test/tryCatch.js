@@ -67,7 +67,7 @@ var PL$1 = (function(){
   
     ;
     try
-{
+    {
       PL$5/*dostuff*/();}catch(PL$6/*e*/){
       PL$3/*dootherStuff*/();};
     ;

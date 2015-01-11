@@ -144,30 +144,38 @@ function PL$12/*querySt*/(PL$13/*Key*/){
   ;
   PL$11/*runTests*/ = (function(){
   var PL$19 = new __Promise();
-var PL$21 = function(code){ return function(res){ try{code(res);}catch(e){ PL$19.reject(e); }; }; };
-var PL$22 = function(e){ PL$19.reject(e); };
-var PL$24/*testObj*/;
-var PL$27/*collector*/;
-var PL$29/*type*/;
-PL$21(function(){
+  var PL$21/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$19.reject(e);
+      };
+    };
+  };
+  var PL$22/*catch rejected*/ = function(e){
+    PL$19.reject(e);
+  };
+  var PL$24/*testObj*/;
+  var PL$27/*collector*/;
+  var PL$29/*type*/;
+  PL$21/*promiseland exception catcher*/(function(){
   
     ;
     PL$23/*console*/["log"]("running tests");
-    __requireFun("test/simpleTests").then(PL$21(function(PL$25){PL$24/*testObj*/ = PL$25;
-    __requireFun("test/frameTests").then(PL$21(function(PL$26){PL$26;
-    __requireFun("./testCollector").then(PL$21(function(PL$28){PL$27/*collector*/ = PL$28;
+    __requireFun("test/simpleTests").then(PL$21/*promiseland exception catcher*/(function(PL$25){PL$24/*testObj*/ = PL$25;
+    __requireFun("test/frameTests").then(PL$21/*promiseland exception catcher*/(function(PL$26){PL$26;
+    __requireFun("./testCollector").then(PL$21/*promiseland exception catcher*/(function(PL$28){PL$27/*collector*/ = PL$28;
     debugger;
     PL$29/*type*/ = (PL$12/*querySt*/("type") || "unknown");
     PL$27/*collector*/["postResult"](PL$29/*type*/, PL$24/*testObj*/);
-    PL$27/*collector*/["waitForFinish"](PL$29/*type*/).then(PL$21(function(PL$30){PL$30;
+    PL$27/*collector*/["waitForFinish"](PL$29/*type*/).then(PL$21/*promiseland exception catcher*/(function(PL$30){PL$30;
     PL$15/*window*/["close"]();
-    PL$19.resolve(); return;}), PL$22);
-;}), PL$22);
-;}), PL$22);
-;}), PL$22);
-;})();
-return PL$19;
-});
+    PL$19.resolve(); return;}), PL$22/*catch rejected*/);
+    ;}), PL$22/*catch rejected*/);
+    ;}), PL$22/*catch rejected*/);
+    ;}), PL$22/*catch rejected*/);
+    ;
+  })();return PL$19;
+  });
   ;})();
 ;return PL$1;
 });

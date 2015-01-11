@@ -72,8 +72,16 @@ var PL$12/*io*/;try{PL$12/*io*/ = io;}catch(e){};
 var PL$30/*document*/;try{PL$30/*document*/ = document;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$6/*ServerProfile*/;
 var PL$7/*ServerConnection*/;
 var PL$11/*serverProfile*/;
@@ -85,7 +93,7 @@ var PL$20/*main*/;
 var PL$22/*tc*/;
 var PL$23/*runTests*/;
 var PL$40/*b*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*promiseland*/["set"]("profile", "client");
@@ -137,29 +145,37 @@ PL$3(function(){
     PL$11/*serverProfile*/["connection"]["emit"]("disconnect");
     PL$11/*serverProfile*/["connection"] = undefined;
     ;}));
-  __requireFun("dijit/form/Button").then(PL$3(function(PL$15){PL$14/*Button*/ = PL$15;
-  __requireFun("dojox/layout/TableContainer").then(PL$3(function(PL$17){PL$16/*TableContainer*/ = PL$17;
-  __requireFun("./Text").then(PL$3(function(PL$19){PL$18/*Text*/ = PL$19;
-  __requireFun("testConsole/main").then(PL$3(function(PL$21){PL$20/*main*/ = PL$21;
+  __requireFun("dijit/form/Button").then(PL$3/*promiseland exception catcher*/(function(PL$15){PL$14/*Button*/ = PL$15;
+  __requireFun("dojox/layout/TableContainer").then(PL$3/*promiseland exception catcher*/(function(PL$17){PL$16/*TableContainer*/ = PL$17;
+  __requireFun("./Text").then(PL$3/*promiseland exception catcher*/(function(PL$19){PL$18/*Text*/ = PL$19;
+  __requireFun("testConsole/main").then(PL$3/*promiseland exception catcher*/(function(PL$21){PL$20/*main*/ = PL$21;
   PL$22/*tc*/;
   PL$23/*runTests*/ = (function(){
   var PL$24 = new __Promise();
-var PL$26 = function(code){ return function(res){ try{code(res);}catch(e){ PL$24.reject(e); }; }; };
-var PL$27 = function(e){ PL$24.reject(e); };
-var PL$28/*results*/;
-var PL$31/*f*/;
-var PL$32/*t*/;
-var PL$33/*testRes*/;
-var PL$34/*cnt*/;
-var PL$35/*successCnt*/;
-var PL$36/*testName*/;
-var PL$37/*errorStr*/;
-var PL$38/*textStr*/;
-var PL$39/*w*/;
-PL$26(function(){
+  var PL$26/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$24.reject(e);
+      };
+    };
+  };
+  var PL$27/*catch rejected*/ = function(e){
+    PL$24.reject(e);
+  };
+  var PL$28/*results*/;
+  var PL$31/*f*/;
+  var PL$32/*t*/;
+  var PL$33/*testRes*/;
+  var PL$34/*cnt*/;
+  var PL$35/*successCnt*/;
+  var PL$36/*testName*/;
+  var PL$37/*errorStr*/;
+  var PL$38/*textStr*/;
+  var PL$39/*w*/;
+  PL$26/*promiseland exception catcher*/(function(){
   
     ;
-    PL$20/*main*/["runTests"]().then(PL$26(function(PL$29){PL$28/*results*/ = PL$29;
+    PL$20/*main*/["runTests"]().then(PL$26/*promiseland exception catcher*/(function(PL$29){PL$28/*results*/ = PL$29;
     if(PL$22/*tc*/){
       PL$22/*tc*/["destroy"]();
     };
@@ -168,7 +184,7 @@ PL$26(function(){
     PL$22/*tc*/["placeAt"](PL$30/*document*/["body"]);
     if(PL$28/*results*/["failed"]){
       PL$31/*f*/ = new PL$18/*Text*/({"label": "failed",
-"text": "-"});
+      "text": "-"});
       PL$22/*tc*/["addChild"](PL$31/*f*/);
     }else{
     PL$32/*t*/;
@@ -191,25 +207,25 @@ PL$26(function(){
       PL$38/*textStr*/ += ((PL$34/*cnt*/ - PL$35/*successCnt*/) + " failed. \n");
       PL$38/*textStr*/ += PL$37/*errorStr*/;
       PL$39/*w*/ = new PL$18/*Text*/({"label": PL$32/*t*/,
-"text": PL$38/*textStr*/});
+      "text": PL$38/*textStr*/});
       PL$22/*tc*/["addChild"](PL$39/*w*/);};
     ;
     };
     ;
     PL$22/*tc*/["startup"]();
-    PL$24.resolve(); return;}), PL$27);
-;})();
-return PL$24;
-});
+    PL$24.resolve(); return;}), PL$27/*catch rejected*/);
+    ;
+  })();return PL$24;
+  });
   PL$40/*b*/ = new PL$14/*Button*/({"label": "test",
-"onClick": PL$23/*runTests*/});
+  "onClick": PL$23/*runTests*/});
   PL$40/*b*/["placeAt"](PL$30/*document*/["body"]);
-  PL$1.resolve(); return;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

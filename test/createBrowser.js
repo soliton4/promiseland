@@ -71,19 +71,27 @@ var PL$7/*res*/;try{PL$7/*res*/ = res;}catch(e){};
 var PL$8/*console*/;try{PL$8/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*cp*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("./createProcess").then(PL$3(function(PL$6){PL$5/*cp*/ = PL$6;
+  __requireFun("./createProcess").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*cp*/ = PL$6;
   PL$7/*res*/ = PL$5/*cp*/("google-chrome", ["http://localhost:3008/"]);
-  PL$7/*res*/.then(PL$3(function(PL$9){PL$8/*console*/["log"](PL$9);
-  PL$1.resolve(); return;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  PL$7/*res*/.then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*console*/["log"](PL$9);
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

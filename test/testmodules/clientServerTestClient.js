@@ -124,16 +124,24 @@ var PL$11/*runTests*/;
     ;}));
   PL$11/*runTests*/ = (function(){
   var PL$12 = new __Promise();
-var PL$14 = function(code){ return function(res){ try{code(res);}catch(e){ PL$12.reject(e); }; }; };
-var PL$15 = function(e){ PL$12.reject(e); };
-PL$14(function(){
+  var PL$14/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$12.reject(e);
+      };
+    };
+  };
+  var PL$15/*catch rejected*/ = function(e){
+    PL$12.reject(e);
+  };
+  PL$14/*promiseland exception catcher*/(function(){
   
     ;
-    __requireFun("testmodules/syncEvents").then(PL$14(function(PL$16){PL$16;
-    PL$12.resolve(); return;}), PL$15);
-;})();
-return PL$12;
-});
+    __requireFun("testmodules/syncEvents").then(PL$14/*promiseland exception catcher*/(function(PL$16){PL$16;
+    PL$12.resolve(); return;}), PL$15/*catch rejected*/);
+    ;
+  })();return PL$12;
+  });
   ;})();
 ;return PL$1;
 });

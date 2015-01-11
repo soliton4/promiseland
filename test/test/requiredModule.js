@@ -69,18 +69,26 @@ var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "c2cf6b49d20a8613fe0e4ebd2001cd57", "module": PL$1, promising: true });
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*mod*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("./requiredModule2").then(PL$3(function(PL$6){PL$5/*mod*/ = PL$6;
+  __requireFun("./requiredModule2").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*mod*/ = PL$6;
   PL$1.resolve({"msg": "this is the message",
-"id": PL$5/*mod*/["id"]}); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  "id": PL$5/*mod*/["id"]}); return;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

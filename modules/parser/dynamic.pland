@@ -144,6 +144,9 @@ return (parInstance, par){
             var tempRes = self.newResult();
             par.result = tempRes;
             par.newLine = par.newLine || self.newLine();
+            par.getIndentRes = (){
+              return self.indent();
+            };
             errRes.resolve(promiseland.classSystem[parFun](par));
           };
 
@@ -548,6 +551,93 @@ return (parInstance, par){
       r.push("\"");
       return r;
     };
+    
+    
+    
+          this.createExtraDynamicType = function(parType, par, parParsed){
+        var name;
+        if (par.property){
+          name = this.getTypeName(parType, parParsed) + "::property::" + par.property;
+          
+        }else if (par.temporaryTracked){
+          name = this.getTypeName(parType, parParsed) + "::temporaryTracked";
+          
+        }else if (par.temporaryTrackedResolved){
+          name = this.getTypeName(parType, parParsed) + "::temporaryTrackedResolved";
+          
+        }else if (par.constructorReturn){
+          name = this.getTypeName(parType, parParsed) + "::constructorReturn";
+          
+        }else{
+          this.error(errorMsg.internalMissingTypeProperty);
+        };
+        
+        
+        if (!parType.extraTypes){
+          parType.extraTypes = [];
+        };
+        if (!parType.extraTypeMap){
+          parType.extraTypeMap = new Map();
+        };
+        
+        
+        if (parType.extraTypeMap.has(name)){
+          return parType.extraTypeMap.get(name);
+        };
+        
+        var entry = {
+          res: this.newResult()
+        };
+        parType.extraTypes.push(entry);
+        var res = entry.res;
+        
+        this.addType({name: name, dynamic: true}, parParsed);
+        
+        res.push("var /*extratyperender*/ ");
+        res.push(this.renderType(name));
+        res.push(" = ");
+        
+        this.common.useClassSystem = true;
+        
+        if (par.property){
+          if (par.property == "constructor"){
+            res.push("classSystem.getConstructorType({\"type\":");
+          }else{
+            res.push("classSystem.getPropertyType({\"type\":");
+          };
+          res.push(this.renderType(parType));
+          res.push(", property: " + stringEncodeStr(par.property));
+          res.push("});");
+          res.push(this.newLine());
+          
+        }else if (par.temporaryTracked){
+          res.push("classSystem._createTemporaryTrackedClass(");
+          res.push(this.renderType(parType));
+          res.push(");");
+          res.push(this.newLine());
+          
+        }else if (par.temporaryTrackedResolved){
+          res.push("classSystem.getClassFromTemporaryTracked(");
+          res.push(this.renderType(parType));
+          res.push(");");
+          res.push(this.newLine());
+          
+        }else if (par.constructorReturn){
+          res.push("classSystem.getConstructorReturnType(");
+          res.push(this.renderType(parType));
+          res.push(");");
+          res.push(this.newLine());
+          
+        };
+        
+        var newType = this.getType(name, parParsed);
+        entry.type = newType;
+        parType.extraTypeMap.set(name, newType);
+        return newType;
+        
+      };
+      
+
 
 
     

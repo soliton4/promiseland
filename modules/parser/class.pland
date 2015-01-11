@@ -71,6 +71,29 @@ return (parInstance, par){
 
     };
 
+    this.newInherited = function(){
+      return new InheritedSystem(this);
+    };
+
+    var InheritedSystem = function(par){
+      this.instance = par;
+      this.used = {};
+    };
+    InheritedSystem.prototype = {
+      setCurrent: function(par){
+        this.currentMember = par;
+      },
+      getCurrent: function(){
+        if (!this.used[this.currentMember]){
+          this.used[this.currentMember] = this.instance.getUniqueName("inherited " + this.currentMember);
+        };
+        return this.used[this.currentMember];
+      }
+    };
+
+
+    
+
     
     /* 
 
@@ -158,7 +181,8 @@ return (parInstance, par){
           this.unstack("preventreturn");
         };
 
-        classRes.push("var " + inheritedObjName + " = {};\n");
+        classRes.push("var " + inheritedObjName + " = {};");
+        classRes.push(this.newLine());
 
         var tempRes = this.newResult();
 
@@ -185,12 +209,13 @@ return (parInstance, par){
 
 
         classRes.push(tempRes);
-        classRes.push("\n");
+        classRes.push(this.newLine());
 
         var used = this.inheritedSystem.used;
         var u;
         for (u in used){
-          classRes.push("var " + used[u] + " = " + inheritedObjName + "[" + stringEncodeStr(u) + "];\n");
+          classRes.push("var " + used[u] + " = " + inheritedObjName + "[" + stringEncodeStr(u) + "];");
+          classRes.push(this.newLine());
         };
 
         classRes.push("return res; })()");
@@ -496,19 +521,32 @@ return (parInstance, par){
             if (par.body.literal){
               if (ci.hasName){
                 var name = identifierName(par.name);
+                
+                res.push(this.newLine());
+                res.push("/* ---------------------------- */");
+                res.push(this.newLine());
+                res.push("/* type " + name + " */");
+                res.push(this.newLine());
+                
                 var extraRes = this.newResult();
                 this.addType({name: name, extraRes: extraRes}, par);
                 res.push("var ");
                 res.push(this.renderType(name));
-                res.push(" = classSystem._createProvisionalClass();\n");
+                res.push(" = classSystem._createProvisionalClass();");
+                res.push(this.newLine());
                 this.common.useClassSystem = true;
                 res.push(this.getVariableName(name) + " = ");
                 res.push(this.renderType(name));
-                res.push(";\n");
+                res.push(this.newLine());
                 res.push("var " + this.getConstructorName(name) + " = undefined;");
+                res.push(this.newLine());
                 
                 res.push(this._typeReadyCode({typename: name}));
                 res.push(extraRes);
+                
+                res.push("/* ---------------------------- */");
+                res.push(this.newLine());
+                res.push(this.newLine());
                 
               };
             };
@@ -526,17 +564,28 @@ return (parInstance, par){
 
         var res = this.newResult();
         this.common.useClassSystem = true;
-        res.push("classSystem.readyPromise(");
-        res.push(this.renderType(par.typename));
-        res.push(").then(function(parType){");
-        res.push(this.renderType(par.typename));
-        res.push(" = parType;");
+        res.push([
+          "classSystem.readyPromise(",
+          this.renderType(par.typename),
+          ").then(function(parType){"
+        ]);
+        
+        var tempAr = [
+          this.renderType(par.typename),
+          " = parType;"
+        ];
         if (!par.noConstructor){
-          res.push(this.getConstructorName(par.typename) + " = classSystem.getTypeConstructor(");
-          res.push(this.renderType(par.typename));
-          res.push(");");
+          tempAr.push(this.newLine());
+          tempAr.push(this.getConstructorName(par.typename) + " = classSystem.getTypeConstructor(");
+          tempAr.push(this.renderType(par.typename));
+          tempAr.push(");");
         };
-        res.push("});");
+        res.push(this.indentNewLine(tempAr));
+        
+        res.push([
+          "});",
+          this.newLine()
+        ]);
         
         return res;
       };

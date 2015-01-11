@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "ba8ff640cdaf47a36302517eda6a91df" })){ return promiseland._getModule("ba8ff640cdaf47a36302517eda6a91df"); };
+    if (promiseland._hasModule({ hashStr: "a6b0c9dbbd01c36f71ddc60f443028dc" })){ return promiseland._getModule("a6b0c9dbbd01c36f71ddc60f443028dc"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "ba8ff640cdaf47a36302517eda6a91df", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "a6b0c9dbbd01c36f71ddc60f443028dc", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$32/*Promise*/;try{PL$32/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -101,28 +101,23 @@ PL$3(function(){
   PL$17/*checkIsFunction*/ = PL$8/*basics*/["checkIsFunction"];
   PL$18/*getExtraFromPar*/ = PL$8/*basics*/["getExtraFromPar"];
   PL$1.resolve((function(PL$19/*parInstance*/, PL$20/*par*/){
-  var PL$21/*f*/;
-
+  
     ;
-    PL$21/*f*/ = (function(PL$20/*par*/){
+    var PL$21/*f*/ = (function(PL$20/*par*/){
     
       ;
       this["variables"] = new PL$5/*Map*/()["mixin"](PL$20/*par*/["variables"]);
       this["localVariables"] = new PL$5/*Map*/();
       this["addLocalVariable"] = (function(PL$20/*par*/, PL$22/*parParsed*/){
-      var PL$23/*self*/;
-var PL$24/*name*/;
-var PL$25/*newType*/;
-var PL$26/*existing*/;
-
+      
         ;
-        PL$23/*self*/ = this;
-        PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
+        var PL$23/*self*/ = this;
+        var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
         if(this["localVariables"]["has"](PL$24/*name*/)){
           if((! PL$20/*par*/["type"] && ! PL$20/*par*/["typename"])){
           }else{
-          PL$25/*newType*/ = (PL$20/*par*/["type"] || this["getType"](PL$20/*par*/["typename"], PL$22/*parParsed*/));
-          PL$26/*existing*/ = this["_getVariableType"](this["localVariables"]["get"](PL$24/*name*/));
+          var PL$25/*newType*/ = (PL$20/*par*/["type"] || this["getType"](PL$20/*par*/["typename"], PL$22/*parParsed*/));
+          var PL$26/*existing*/ = this["_getVariableType"](this["localVariables"]["get"](PL$24/*name*/));
           PL$7/*classSystem*/["definitionPromise"](PL$25/*newType*/)["then"]((function(PL$27/*type1*/){
           
             ;
@@ -163,26 +158,22 @@ var PL$26/*existing*/;
         ;
         if(PL$20/*par*/["isFunction"]){
           this["localVariables"]["get"](PL$24/*name*/)["function"] = PL$20/*par*/["function"];
+          this["localVariables"]["get"](PL$24/*name*/)["isFunction"] = true;
         };
         ;
         this["variables"]["set"](PL$24/*name*/, this["localVariables"]["get"](PL$24/*name*/));
         ;});
       this["addLocalVariableTemporary"] = (function(PL$20/*par*/, PL$22/*parParsed*/){
-      var PL$23/*self*/;
-var PL$24/*name*/;
-var PL$29/*originalEntry*/;
-var PL$30/*entry*/;
-var PL$31/*resPs*/;
-
+      
         ;
-        PL$23/*self*/ = this;
-        PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
-        PL$29/*originalEntry*/;
+        var PL$23/*self*/ = this;
+        var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
+        var PL$29/*originalEntry*/;
         if(this["variables"]["has"](PL$24/*name*/)){
           PL$29/*originalEntry*/ = this["variables"]["get"](PL$24/*name*/);
         };
         ;
-        PL$30/*entry*/ = {"typename": PL$20/*par*/["typename"],
+        var PL$30/*entry*/ = {"typename": PL$20/*par*/["typename"],
 "type": PL$20/*par*/["type"],
 "name": PL$24/*name*/};
         if((! PL$20/*par*/["typename"] && ! PL$20/*par*/["type"])){
@@ -200,7 +191,7 @@ var PL$31/*resPs*/;
         ;
         PL$30/*entry*/["temporary"] = true;
         this["variables"]["set"](PL$24/*name*/, PL$30/*entry*/);
-        PL$31/*resPs*/ = new PL$32/*Promise*/();
+        var PL$31/*resPs*/ = new PL$32/*Promise*/();
         (function(){
         var PL$33 = new __Promise();
 var PL$35 = function(code){ return function(res){ try{code(res);}catch(e){ PL$33.reject(e); }; }; };
@@ -231,14 +222,12 @@ return PL$33;
         return this["getType"](PL$38/*parEntry*/["typename"]);
         ;});
       this["getVariableType"] = (function(PL$39/*parName*/, PL$20/*par*/){
-      var PL$24/*name*/;
-var PL$30/*entry*/;
-
+      
         ;
-        PL$24/*name*/ = PL$16/*identifierName*/(PL$39/*parName*/);
+        var PL$24/*name*/ = PL$16/*identifierName*/(PL$39/*parName*/);
         this["_addUsedVariable"](PL$24/*name*/);
         if(this["variables"]["has"](PL$24/*name*/)){
-          PL$30/*entry*/ = this["variables"]["get"](PL$24/*name*/);
+          var PL$30/*entry*/ = this["variables"]["get"](PL$24/*name*/);
           return this["_getVariableType"](PL$30/*entry*/);
         };
         ;
@@ -246,10 +235,9 @@ var PL$30/*entry*/;
         ;});
       this["usedVariablesMap"] = new PL$5/*Map*/();
       this["_addUsedVariable"] = (function(PL$20/*par*/){
-      var PL$24/*name*/;
-
+      
         ;
-        PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/);
+        var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/);
         if((PL$24/*name*/ === "undefined")){
           return;
         };
@@ -274,13 +262,9 @@ var PL$30/*entry*/;
         return this["common"]["variableNames"]["get"](PL$24/*name*/);
         ;});
       this["findVariables"] = (function(PL$20/*par*/){
-      var PL$23/*self*/;
-var PL$40/*ci*/;
-var PL$41/*functionInfo*/;
-var PL$42/*i*/;
-
+      
         ;
-        PL$23/*self*/ = this;
+        var PL$23/*self*/ = this;
         if((! PL$20/*par*/ || (typeof PL$20/*par*/ == "string"))){
           return;
         };
@@ -291,7 +275,7 @@ var PL$42/*i*/;
 "declaration": true}, PL$20/*par*/);
         }else{
         if((PL$20/*par*/["type"] == "Class")){
-          PL$40/*ci*/ = PL$23/*self*/["identifyClass"](PL$20/*par*/);
+          var PL$40/*ci*/ = PL$23/*self*/["identifyClass"](PL$20/*par*/);
           if(PL$40/*ci*/["hasName"]){
             this["addLocalVariable"]({"name": PL$16/*identifierName*/(PL$20/*par*/["name"]),
 "typename": "var",
@@ -301,7 +285,7 @@ var PL$42/*i*/;
           return;
         }else{
         if(PL$17/*checkIsFunction*/(PL$20/*par*/)){
-          PL$41/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
+          var PL$41/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
           if(PL$41/*functionInfo*/["hasExternalName"]){
             this["addLocalVariable"]({"name": PL$41/*functionInfo*/["nameStr"],
 "isFunction": true}, PL$20/*par*/);
@@ -312,7 +296,7 @@ var PL$42/*i*/;
         };
         };
         ;
-        PL$42/*i*/;
+        var PL$42/*i*/;
         for(PL$42/*i*/ in PL$20/*par*/){
           if((PL$42/*i*/ == "_extrainfo")){
             continue;;
@@ -322,41 +306,32 @@ var PL$42/*i*/;
         ;
         ;});
       this["getVariable"] = (function(PL$20/*par*/){
-      var PL$43/*res*/;
-
+      
         ;
-        PL$43/*res*/ = this["newResult"]();
+        var PL$43/*res*/ = this["newResult"]();
         this["_addUsedVariable"](PL$20/*par*/);
         PL$43/*res*/["push"](this["getVariableName"](PL$20/*par*/));
         PL$43/*res*/["setType"](this["getVariableType"](PL$20/*par*/));
         return PL$43/*res*/;
         ;});
       this["expVariableStatement"] = (function(PL$20/*par*/){
-      var PL$43/*res*/;
-var PL$44/*declarations*/;
-var PL$42/*i*/;
-var PL$45/*l*/;
-var PL$46/*usedType*/;
-var PL$47/*addVar*/;
-var PL$48/*varName*/;
-var PL$49/*r*/;
-
+      
         ;
-        PL$43/*res*/ = this["newResult"]();
-        PL$44/*declarations*/ = PL$20/*par*/["declarations"];
+        var PL$43/*res*/ = this["newResult"]();
+        var PL$44/*declarations*/ = PL$20/*par*/["declarations"];
         if(! PL$44/*declarations*/){
           this["error"](PL$20/*par*/, PL$11/*errorMsg*/["missingDeclarations"]);
           return "";
         };
         ;
-        PL$42/*i*/ = 0;
-        PL$45/*l*/ = PL$44/*declarations*/["length"];
-        PL$46/*usedType*/ = this["getType"](PL$16/*identifierName*/(PL$20/*par*/["typename"]), PL$20/*par*/);
-        PL$47/*addVar*/ = false;
+        var PL$42/*i*/ = 0;
+        var PL$45/*l*/ = PL$44/*declarations*/["length"];
+        var PL$46/*usedType*/ = this["getType"](PL$16/*identifierName*/(PL$20/*par*/["typename"]), PL$20/*par*/);
+        var PL$47/*addVar*/ = false;
         if((! this["promising"] && (PL$45/*l*/ > 0))){
           PL$47/*addVar*/ = true;
           for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$45/*l*/);++PL$42/*i*/){{
-            PL$48/*varName*/ = PL$16/*identifierName*/(PL$44/*declarations*/[PL$42/*i*/]["id"]);
+            var PL$48/*varName*/ = PL$16/*identifierName*/(PL$44/*declarations*/[PL$42/*i*/]["id"]);
             if(this["usedVariablesMap"]["get"](PL$48/*varName*/)){
               PL$47/*addVar*/ = false;
             };
@@ -386,7 +361,7 @@ var PL$49/*r*/;
           };
           ;
           if((PL$44/*declarations*/[PL$42/*i*/]["type"] == "VariableDeclaration")){
-            PL$49/*r*/ = this["parseExpression"](PL$44/*declarations*/[PL$42/*i*/]);
+            var PL$49/*r*/ = this["parseExpression"](PL$44/*declarations*/[PL$42/*i*/]);
             PL$43/*res*/["push"](PL$49/*r*/);
           }else{
           this["error"](PL$44/*declarations*/[PL$42/*i*/], PL$11/*errorMsg*/["unknownType"]);
@@ -397,10 +372,9 @@ var PL$49/*r*/;
         return PL$43/*res*/;
         ;});
       this["expVariableDeclaration"] = (function(PL$20/*par*/){
-      var PL$43/*res*/;
-
+      
         ;
-        PL$43/*res*/ = this["newResult"]();
+        var PL$43/*res*/ = this["newResult"]();
         if(PL$20/*par*/["init"]){
           PL$43/*res*/["pushType"](this["getSetVariableCode"]({"instance": this["getVariable"](PL$16/*identifierName*/(PL$20/*par*/["id"])),
 "assignmentType": PL$20/*par*/["id"]["type"],

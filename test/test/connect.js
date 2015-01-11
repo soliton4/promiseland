@@ -59,11 +59,31 @@ var PL$3/*Emitter*/;
 var PL$6/*Reciever*/;
 var PL$9/*e*/;
 var PL$10/*r*/;
+
+/* ---------------------------- */
+/* type Emitter */
 var PL$2/*type:Emitter*/ = classSystem._createProvisionalClass();
-PL$3/*Emitter*/ = PL$2/*type:Emitter*/;
-var PL$4/*Emitter-constructor*/ = undefined;classSystem.readyPromise(PL$2/*type:Emitter*/).then(function(parType){PL$2/*type:Emitter*/ = parType;PL$4/*Emitter-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Emitter*/);});var PL$5/*type:Reciever*/ = classSystem._createProvisionalClass();
-PL$6/*Reciever*/ = PL$5/*type:Reciever*/;
-var PL$7/*Reciever-constructor*/ = undefined;classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){PL$5/*type:Reciever*/ = parType;PL$7/*Reciever-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Reciever*/);});
+PL$3/*Emitter*/ = PL$2/*type:Emitter*/
+var PL$4/*Emitter-constructor*/ = undefined;
+classSystem.readyPromise(PL$2/*type:Emitter*/).then(function(parType){
+  PL$2/*type:Emitter*/ = parType;
+  PL$4/*Emitter-constructor*/ = classSystem.getTypeConstructor(PL$2/*type:Emitter*/);
+});
+/* ---------------------------- */
+
+
+/* ---------------------------- */
+/* type Reciever */
+var PL$5/*type:Reciever*/ = classSystem._createProvisionalClass();
+PL$6/*Reciever*/ = PL$5/*type:Reciever*/
+var PL$7/*Reciever-constructor*/ = undefined;
+classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){
+  PL$5/*type:Reciever*/ = parType;
+  PL$7/*Reciever-constructor*/ = classSystem.getTypeConstructor(PL$5/*type:Reciever*/);
+});
+/* ---------------------------- */
+
+
   ;
   classSystem._resolveProvisional(PL$2/*type:Emitter*/, classSystem.createClass({className: "Emitter",members: [{"name":"event","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "e643581b5bf99c16f02e46ed934f17d4", "name": "Emitter"}, {"event": (function(PL$8/*amount*/){
   

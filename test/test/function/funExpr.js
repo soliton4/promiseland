@@ -70,7 +70,7 @@ var PL$1 = (function(){
     ;});
   PL$3/*x*/();
   try
-{
+  {
     PL$4/*funName*/();}catch(PL$6/*e*/){};
   ;
   if((PL$2/*calledCnt*/ == 2)){

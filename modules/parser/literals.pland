@@ -46,7 +46,8 @@ return (parInstance, par){
           var currentMember;
           //this.inheritedSystem
           if (i){
-            res.push(",\n");
+            res.push(",");
+            res.push(this.newLine());
           };
           var prop = par.properties[i];
           if (prop.kind == "init"){

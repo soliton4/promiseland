@@ -135,7 +135,8 @@ return (parInstance, par){
         var tempValue = this.getUniqueName();
         res.addPre("var ");
         res.addPre(tempPromise);
-        res.addPre(" = " + this.newPromiseStr() + ";\n");
+        res.addPre(" = " + this.newPromiseStr() + ";");
+        res.push(this.newLine());
         res.addPre("if(");
         res.addPre(this.parseExpression(par.test));
         res.addPre("){");
@@ -146,41 +147,45 @@ return (parInstance, par){
         var trueExtraCode = this.newResult();
         trueExtraCode.push(tempPromise);
         trueExtraCode.push(".resolve(");
-          trueExtraCode.push(this.parseExpression(par.consequent));
-          trueExtraCode.push(");\n");
-          res.addPre(this.makeCompleteStatement(trueExtraCode));
-          res.addPre("}else{");
-          var falseExtraCode = this.newResult();
-          falseExtraCode.push(tempPromise);
-          falseExtraCode.push(".resolve(");
-          falseExtraCode.push(this.parseExpression(par.alternate));
-          falseExtraCode.push(");\n");
-          res.addPre(this.makeCompleteStatement(falseExtraCode));
-          res.addPre("};\n");
-          res.addPre(tempPromise);
-          res.addPre(".then(");
-          res.setPromiseName(this.getUniqueName());
-          res.addPre(res.getPromiseName());
-          res.addPre("){");
-          res.addPost("});");
-          
-          this.unstack("conditionalCode");
-          
-        }else{
-          res.push("(");
-          res.push(this.parseExpression(par.test));
-          res.push(" ? ");
-          this.stack("conditionalCode");
-          this.conditionalCode = true;
-          res.push(this.parseExpression(par.consequent));
-          res.push(" : ");
-          res.push(this.parseExpression(par.alternate));
-          res.push(")");
-          this.unstack("conditionalCode");
-          
-        };
-        res.setType("var");
-        return res;
+        trueExtraCode.push(this.parseExpression(par.consequent));
+        trueExtraCode.push(");");
+        trueExtraCode.push(this.newLine());
+
+        res.addPre(this.makeCompleteStatement(trueExtraCode));
+        res.addPre("}else{");
+        var falseExtraCode = this.newResult();
+        falseExtraCode.push(tempPromise);
+        falseExtraCode.push(".resolve(");
+        falseExtraCode.push(this.parseExpression(par.alternate));
+        falseExtraCode.push(");");
+        falseExtraCode.push(this.newLine());
+        res.addPre(this.makeCompleteStatement(falseExtraCode));
+        res.addPre("};");
+        res.addPre(this.newLine());
+        res.addPre(tempPromise);
+        res.addPre(".then(");
+        res.setPromiseName(this.getUniqueName());
+        res.addPre(res.getPromiseName());
+        res.addPre("){");
+        res.addPost("});");
+
+        this.unstack("conditionalCode");
+
+      }else{
+        res.push("(");
+        res.push(this.parseExpression(par.test));
+        res.push(" ? ");
+        this.stack("conditionalCode");
+        this.conditionalCode = true;
+        res.push(this.parseExpression(par.consequent));
+        res.push(" : ");
+        res.push(this.parseExpression(par.alternate));
+        res.push(")");
+        this.unstack("conditionalCode");
+
+      };
+      res.setType("var");
+      return res;
         
       };
       
@@ -206,7 +211,8 @@ return (parInstance, par){
         var continueCode;
         if (promising) {
           continuePromise = this.getUniqueName();
-          res.push("var " + continuePromise + " = " + this.newPromiseStr() + ";\n");
+          res.push("var " + continuePromise + " = " + this.newPromiseStr() + ";");
+          res.push(this.newLine());
           continueCode = continuePromise + ".resolve(); return;";
           
           this.stack("breakCode");
@@ -215,7 +221,8 @@ return (parInstance, par){
           var discriminant = this.getUniqueName("discriminant");
           res.push("var " + discriminant + " = ");
           res.push(this.expectTypeVar(this.parseExpression(par.discriminant)));
-          res.push(";\n");
+          res.push(";");
+          res.push(this.newLine());
           
           var cases = [];
           var statement;
@@ -280,10 +287,12 @@ return (parInstance, par){
             checkCode.push(this.expectTypeVar(this.parseExpression(currentCase.test)));
             checkCode.push("){");
             checkCode.push(caseFun);
-            checkCode.push("(); return; };\n");
+            checkCode.push("(); return; };");
+            checkCode.push(this.newLine());
             checkCode.push(nextCheckCode);
             res.push(this.makeCompleteStatement(checkCode));
-            res.push("};\n");
+            res.push("};");
+            res.push(this.newLine());
             
             
             res.push("var " + caseFun + " = function(){");
@@ -298,7 +307,8 @@ return (parInstance, par){
             statement.push(this.blockCreator(b, extraPar));
             res.push(this.makeCompleteStatement(statement));
             
-            res.push("};\n");
+            res.push("};");
+            res.push(this.newLine());
           };
           
           res.push(firstCheck);
@@ -315,7 +325,8 @@ return (parInstance, par){
 
           res.push("switch (");
           res.push(this.expectTypeVar(this.parseExpression(par.discriminant)));
-          res.push("){\n");
+          res.push("){");
+          res.push(this.newLine());
 
           var i = 0;
           for (i = 0; i < par.cases.length; ++i){
@@ -327,15 +338,18 @@ return (parInstance, par){
             if (currentCase.test){
               res.push("case ");
               res.push(this.expectTypeVar(this.parseExpression(currentCase.test)));
-              res.push(":\n");
+              res.push(":");
+              res.push(this.newLine());
             }else{
               res.push("default");
-              res.push(":\n");
+              res.push(":");
+              res.push(this.newLine());
             };
             res.push(this.blockCreator(currentCase.consequent));
 
           };
-          res.push("}\n");
+          res.push("}");
+          res.push(this.newLine());
 
           this.unstack("breakCode");
         };

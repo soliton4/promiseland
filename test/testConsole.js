@@ -72,8 +72,16 @@ var PL$21/*promiseland*/;try{PL$21/*promiseland*/ = promiseland;}catch(e){};
 var PL$30/*console*/;try{PL$30/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*express*/;
 var PL$7/*http*/;
 var PL$9/*fs*/;
@@ -83,13 +91,13 @@ var PL$14/*server*/;
 var PL$22/*ClientProfile*/;
 var PL$27/*clientProfile*/;
 var PL$28/*mainio*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  __requireFun("express").then(PL$3(function(PL$6){PL$5/*express*/ = PL$6;
-  __requireFun("http").then(PL$3(function(PL$8){PL$7/*http*/ = PL$8;
-  __requireFun("fs").then(PL$3(function(PL$10){PL$9/*fs*/ = PL$10;
-  __requireFun("socket.io").then(PL$3(function(PL$12){PL$11/*socketIo*/ = PL$12;
+  __requireFun("express").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*express*/ = PL$6;
+  __requireFun("http").then(PL$3/*promiseland exception catcher*/(function(PL$8){PL$7/*http*/ = PL$8;
+  __requireFun("fs").then(PL$3/*promiseland exception catcher*/(function(PL$10){PL$9/*fs*/ = PL$10;
+  __requireFun("socket.io").then(PL$3/*promiseland exception catcher*/(function(PL$12){PL$11/*socketIo*/ = PL$12;
   PL$13/*app*/ = PL$5/*express*/();
   PL$14/*server*/ = PL$7/*http*/["createServer"](PL$13/*app*/);
   PL$13/*app*/["get"]("/", (function(PL$15/*req*/, PL$16/*res*/){
@@ -171,14 +179,14 @@ PL$3(function(){
       ;}));
     return;
     ;}));
-  __requireFun("./testConsole/main").then(PL$3(function(PL$31){PL$31;
-  PL$1.resolve(); return;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  __requireFun("./testConsole/main").then(PL$3/*promiseland exception catcher*/(function(PL$31){PL$31;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

@@ -58,47 +58,55 @@ var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "6b8ec887e2e2ef75dc50107c1d6615af", "module": PL$1, promising: true });
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*p*/;
 var PL$6/*i*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*p*/;
   PL$6/*i*/ = 0;
   var PL$8 = new __Promise();
-var PL$7 = function(){var PL$9 = new __Promise();
-
+  var PL$7 = function(){var PL$9 = new __Promise();
+  
   PL$6/*i*/ += 1;
   
   var PL$10 = new __Promise();if(false){
-    PL$5/*p*/.then(PL$3(function(PL$11){PL$11;
-    PL$10.resolve();;}), PL$4);
-;
+    PL$5/*p*/.then(PL$3/*promiseland exception catcher*/(function(PL$11){PL$11;
+    PL$10.resolve();;}), PL$4/*catch rejected*/);
+    ;
   }else{PL$10.resolve();
-  };PL$10.then(PL$3(function(PL$12){PL$12;;
+  };PL$10.then(PL$3/*promiseland exception catcher*/(function(PL$12){PL$12;;
   ;
-  if((PL$6/*i*/ < 4)){PL$9.resolve(true); return PL$9;
-}else{
-PL$9.resolve(false); return PL$9;
-};
-;}), PL$4);
-;PL$9;return PL$9;
-};
-var PL$13 = function(){PL$7().then(function(contLoop){
-if (contLoop){PL$13();}else{PL$8.resolve();};
-});
-};
-PL$13();
-PL$8.then(function(){;
+  if((PL$6/*i*/ < 4)){PL$9.resolve(true); return PL$9; /* continue */
+  }else{
+  PL$9.resolve(false); return PL$9; /* break */
+  };
+  ;}), PL$4/*catch rejected*/);
+  ;PL$9;return PL$9;
+  };
+  var PL$13 = function(){PL$7().then(function(contLoop){
+  if (contLoop){PL$13();}else{PL$8.resolve();};
+  });
+  };
+  PL$13();
+  PL$8.then(function(){;
   if((PL$6/*i*/ == 4)){
     PL$1.resolve({"success": true}); return;
   };
   ;
   PL$1.resolve({"success": false}); return;
-  PL$1.resolve(); return;});})();
-return PL$1;
+  PL$1.resolve(); return;});
+})();return PL$1;
 })();
 ;;
 return PL$1});

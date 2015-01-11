@@ -57,8 +57,8 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*a*/ = {"a": 1,
-"b": 2,
-"c": 3};
+  "b": 2,
+  "c": 3};
   var PL$3/*namesStr*/ = "";
   var PL$4/*cnt*/ = 0;
   for(var PL$5/*i*/ in PL$2/*a*/){

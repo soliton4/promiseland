@@ -33,10 +33,17 @@ return (parInstance, par){
         
         this.stack("breakCode");
         this.stack("continueCode");
-        this.breakCode = promiseName + ".resolve(false); return " + promiseName + ";\n";
-        this.continueCode = promiseName + ".resolve(true); return " + promiseName + ";\n";
         
-        res.push("var " + promiseName + " = " + this.newPromiseStr() + ";\n");
+        this.breakCode = this.newResult();
+        this.breakCode.push(promiseName + ".resolve(false); return " + promiseName + "; /* break */");
+        this.breakCode.push(this.newLine());
+        
+        this.continueCode = this.newResult();
+        this.continueCode.push(promiseName + ".resolve(true); return " + promiseName + "; /* continue */");
+        this.continueCode.push(this.newLine());
+        
+        res.push("var " + promiseName + " = " + this.newPromiseStr() + ";");
+        res.push(this.newLine());
         
         var outerBlock = this.newResult();
         
@@ -53,9 +60,11 @@ return (parInstance, par){
           postCheck.push(par.postCondition);
           postCheck.push("){");
           postCheck.push(this.continueCode);
-          postCheck.push("}else{\n");
+          postCheck.push("}else{");
+          postCheck.push(this.newLine());
           postCheck.push(this.breakCode);
-          postCheck.push("};\n");
+          postCheck.push("};");
+          postCheck.push(this.newLine());
           postCode.push(this.makeCompleteStatement(postCheck));
           
         }else{
@@ -74,8 +83,11 @@ return (parInstance, par){
         
         if (par.preCondition){
           outerBlock.push("}else{");
+          outerBlock.push(this.newLine());
           outerBlock.push(this.breakCode);
-          outerBlock.push("};\n");
+          outerBlock.push(this.newLine());
+          outerBlock.push("};");
+          outerBlock.push(this.newLine());
         };
         
         res.push(this.makeCompleteStatement(outerBlock));
@@ -92,7 +104,8 @@ return (parInstance, par){
         var loopFun = this.getUniqueName();
         var loopEndPromise = this.getUniqueName();
         
-        res.push("var " + loopEndPromise + " = " + this.newPromiseStr() + ";\n");
+        res.push("var " + loopEndPromise + " = " + this.newPromiseStr() + ";");
+        res.push(this.newLine());
         
         res.push("var " + loopFun + " = function(){");
         
@@ -106,15 +119,18 @@ return (parInstance, par){
         
         res.push("return ");
         res.push(loopCode.getPromiseName());
-        res.push(";\n");
+        res.push(";");
+        res.push(this.newLine());
         
-        res.push("};\n");
+        res.push("};");
+        res.push(this.newLine());
         
         var doFun = this.getUniqueName();
         
         res.push("var " + doFun + " = function(){");
         res.push(loopFun);
-        res.push("().then(function(contLoop){\n");
+        res.push("().then(function(contLoop){");
+        res.push(this.newLine());
         res.push("if (contLoop){");
         
         var doFunStatement = this.newResult();
@@ -126,10 +142,14 @@ return (parInstance, par){
         
         res.push("}else{");
         res.push(loopEndPromise + ".resolve();");
-        res.push("};\n"); // if / else
-        res.push("});\n"); // promise then fun
-        res.push("};\n"); // doFun
-        res.push(doFun + "();\n");
+        res.push("};"); // if / else
+        res.push(this.newLine());
+        res.push("});"); // promise then fun
+        res.push(this.newLine());
+        res.push("};"); // doFun
+        res.push(this.newLine());
+        res.push(doFun + "();");
+        res.push(this.newLine());
 
         res.push(loopEndPromise);
         res.push(".then(function(){");
@@ -322,7 +342,8 @@ return (parInstance, par){
         }else{
           res.push("while(");
           res.push(condition);
-          res.push("){\n");
+          res.push("){");
+          res.push(this.newLine());
           
           this.stack("breakCode");
           this.breakCode = "break;";
@@ -366,7 +387,8 @@ return (parInstance, par){
           
         }else{
           res.push("do");
-          res.push("{\n");
+          res.push("{");
+          res.push(this.newLine());
           
           this.stack("breakCode");
           this.breakCode = "break;";

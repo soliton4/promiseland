@@ -68,14 +68,22 @@ return promiseland.remoteExec("25de7adaa1494a8c3cd1a849bde67c15", "PL$7", argume
 };
 })(function (){
 var PL$3 = new __Promise();
-var PL$5 = function(code){ return function(res){ try{code(res);}catch(e){ PL$3.reject(e); }; }; };
-var PL$6 = function(e){ PL$3.reject(e); };
-PL$5(function(){
+var PL$5/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$3.reject(e);
+    };
+  };
+};
+var PL$6/*catch rejected*/ = function(e){
+  PL$3.reject(e);
+};
+PL$5/*promiseland exception catcher*/(function(){
 
   ;
   PL$3.resolve(1); return;
-  PL$3.resolve(); return;})();
-return PL$3;
+  PL$3.resolve(); return;
+})();return PL$3;
 });
 
   ;
