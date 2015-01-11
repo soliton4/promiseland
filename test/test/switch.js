@@ -62,26 +62,35 @@ var PL$1 = (function(){
   var PL$5/*f1*/;
   var PL$6/*f2*/;
   switch (PL$2/*a*/){
-  case 2:
-  
-  PL$5/*f1*/ = true;case 1:
-  
-  PL$3/*c1*/ = true;case 3:
-  
-  PL$4/*c2*/ = true;
-  break;;case 4:
-  
-  PL$6/*f2*/ = true;}
+    case 2:
+      
+      PL$5/*f1*/ = true;
+    case 1:
+      
+      PL$3/*c1*/ = true;
+    case 3:
+      
+      PL$4/*c2*/ = true;
+      break;;
+    case 4:
+      
+      PL$6/*f2*/ = true;
+    
+  }
   ;
   ;
   if((PL$3/*c1*/ && PL$4/*c2*/)){
     if((! PL$5/*f1*/ && ! PL$6/*f2*/)){
-      return {"success": true};
+      return {
+        "success": true
+      };
     };
     ;
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

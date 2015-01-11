@@ -56,7 +56,9 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  return {"member": 4};
+  return {
+    "member": 4
+  };
   ;})();
 ;return PL$1;
 });

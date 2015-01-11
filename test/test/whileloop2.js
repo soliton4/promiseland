@@ -104,54 +104,56 @@ var PL$1 = (function(){
     PL$13.resolve(); return;
   })();return PL$13;
   });
-  return {"fun": (function(){
-  var PL$17 = new __Promise();
-  var PL$19/*promiseland exception catcher*/ = function(code){
-    return function(res){
-      try{ code(res); }catch(e){
-        PL$17.reject(e);
+  return {
+    "fun": (function(){
+    var PL$17 = new __Promise();
+    var PL$19/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$17.reject(e);
+        };
       };
     };
-  };
-  var PL$20/*catch rejected*/ = function(e){
-    PL$17.reject(e);
-  };
-  var PL$21/*a*/;
-  var PL$22/*i*/;
-  PL$19/*promiseland exception catcher*/(function(){
-  
-    ;
-    PL$21/*a*/ = 1;
-    PL$22/*i*/ = 0;
-    var PL$25 = new __Promise();
-    var PL$24 = function(){var PL$26 = new __Promise();
-    PL$12/*fourfun*/().then(PL$19/*promiseland exception catcher*/(function(PL$23){if((PL$22/*i*/ < PL$23)){
-    PL$2/*somefun*/(PL$22/*i*/).then(PL$19/*promiseland exception catcher*/(function(PL$27){PL$22/*i*/ = PL$27;
-    PL$21/*a*/ = (PL$21/*a*/ + 1);
-    PL$26.resolve(true); return PL$26; /* continue */
-    ;}), PL$20/*catch rejected*/);
-    ;}else{
-    PL$26.resolve(false); return PL$26; /* break */
+    var PL$20/*catch rejected*/ = function(e){
+      PL$17.reject(e);
+    };
+    var PL$21/*a*/;
+    var PL$22/*i*/;
+    PL$19/*promiseland exception catcher*/(function(){
     
-    };
-    }), PL$20/*catch rejected*/);
-    ;PL$26;return PL$26;
-    };
-    var PL$28 = function(){PL$24().then(function(contLoop){
-    if (contLoop){PL$28();}else{PL$25.resolve();};
-    });
-    };
-    PL$28();
-    PL$25.then(function(){;
-    ;
-    if((PL$21/*a*/ == 5)){
-      PL$17.resolve(4); return;
-    };
-    ;
-    PL$17.resolve(0); return;
-    PL$17.resolve(); return;});
-  })();return PL$17;
-  })};
+      ;
+      PL$21/*a*/ = 1;
+      PL$22/*i*/ = 0;
+      var PL$25 = new __Promise();
+      var PL$24 = function(){var PL$26 = new __Promise();
+      PL$12/*fourfun*/().then(PL$19/*promiseland exception catcher*/(function(PL$23){if((PL$22/*i*/ < PL$23)){
+      PL$2/*somefun*/(PL$22/*i*/).then(PL$19/*promiseland exception catcher*/(function(PL$27){PL$22/*i*/ = PL$27;
+      PL$21/*a*/ = (PL$21/*a*/ + 1);
+      PL$26.resolve(true); return PL$26; /* continue */
+      ;}), PL$20/*catch rejected*/);
+      ;}else{
+      PL$26.resolve(false); return PL$26; /* break */
+      
+      };
+      }), PL$20/*catch rejected*/);
+      ;PL$26;return PL$26;
+      };
+      var PL$28 = function(){PL$24().then(function(contLoop){
+      if (contLoop){PL$28();}else{PL$25.resolve();};
+      });
+      };
+      PL$28();
+      PL$25.then(function(){;
+      ;
+      if((PL$21/*a*/ == 5)){
+        PL$17.resolve(4); return;
+      };
+      ;
+      PL$17.resolve(0); return;
+      PL$17.resolve(); return;});
+    })();return PL$17;
+    })
+  };
   ;})();
 ;return PL$1;
 });

@@ -57,24 +57,30 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*C1*/ = (function(){var PL$3/*inherited*/ = {};
-  var res = promiseland.createClass({"constructor": (function(){
-  
-    ;
-    this["a"] = 1;
-    ;}),
-  "b": 1,
-  "doSomething": (function(){
-  
-    ;
-    return (this["a"] + this["b"]);
-    ;})}, [], PL$3/*inherited*/);
+  var res = promiseland.createClass({
+    "constructor": (function(){
+    
+      ;
+      this["a"] = 1;
+      ;}),
+    "b": 1,
+    "doSomething": (function(){
+    
+      ;
+      return (this["a"] + this["b"]);
+      ;})
+  }, [], PL$3/*inherited*/);
   return res; })();
   var PL$4/*c*/ = new PL$2/*C1*/();
   if((((PL$4/*c*/["a"] == 1) && (PL$4/*c*/["b"] == 1)) && (PL$4/*c*/["doSomething"]() == 2))){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

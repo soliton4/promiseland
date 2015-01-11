@@ -132,7 +132,9 @@ var PL$1 = (function(){
     PL$18/*filenameStr*/ = (PL$19/*__dirname*/ + "/test.txt");
     PL$15/*console*/["log"](PL$9/*par1*/);
     PL$15/*console*/["log"](PL$10/*par2*/);
-    PL$2/*fs*/["readFile"](PL$18/*filenameStr*/, {"encoding": "utf8"}, PL$16/*cb*/);
+    PL$2/*fs*/["readFile"](PL$18/*filenameStr*/, {
+      "encoding": "utf8"
+    }, PL$16/*cb*/);
     PL$16/*cb*/["promise"].then(PL$13/*promiseland exception catcher*/(function(PL$20){PL$11.resolve(PL$20[1]); return;
     PL$11.resolve(); return;}), PL$14/*catch rejected*/);
     ;
@@ -153,7 +155,9 @@ var PL$1 = (function(){
   PL$25/*promiseland exception catcher*/(function(){
   
     ;
-    PL$8/*x*/("par1", {"par": "2"}).then(PL$25/*promiseland exception catcher*/(function(PL$27){PL$15/*console*/["log"](PL$27);
+    PL$8/*x*/("par1", {
+      "par": "2"
+    }).then(PL$25/*promiseland exception catcher*/(function(PL$27){PL$15/*console*/["log"](PL$27);
     PL$23.resolve(); return;}), PL$26/*catch rejected*/);
     ;
   })();return PL$23;

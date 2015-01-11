@@ -60,8 +60,12 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*results*/ = {};
-  var PL$3/*finishObj*/ = {};
+  var PL$2/*results*/ = {
+    
+  };
+  var PL$3/*finishObj*/ = {
+    
+  };
   var PL$4/*getResultPromise*/ = (function(PL$5/*type*/){
   
     ;
@@ -144,10 +148,12 @@ var PL$1 = (function(){
     ;
   })();return PL$17;
   }));
-  return {"getResultPromise": PL$4/*getResultPromise*/,
-  "postResult": PL$8/*postResult*/,
-  "finish": PL$15/*finish*/,
-  "waitForFinish": PL$16/*waitForFinish*/};
+  return {
+    "getResultPromise": PL$4/*getResultPromise*/,
+    "postResult": PL$8/*postResult*/,
+    "finish": PL$15/*finish*/,
+    "waitForFinish": PL$16/*waitForFinish*/
+  };
   ;})();
 ;return PL$1;
 });

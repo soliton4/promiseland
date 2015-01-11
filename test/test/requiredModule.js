@@ -84,8 +84,10 @@ PL$3/*promiseland exception catcher*/(function(){
 
   ;
   __requireFun("./requiredModule2").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*mod*/ = PL$6;
-  PL$1.resolve({"msg": "this is the message",
-  "id": PL$5/*mod*/["id"]}); return;
+  PL$1.resolve({
+    "msg": "this is the message",
+    "id": PL$5/*mod*/["id"]
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;
 })();return PL$1;

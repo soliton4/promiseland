@@ -91,10 +91,14 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
   PL$9/*v2*/ = new PL$7/*C2-constructor*/();
   PL$8/*v1*/[3] = PL$9/*v2*/;
   if((PL$8/*v1*/[3][4] == 1)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

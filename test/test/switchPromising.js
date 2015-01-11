@@ -161,12 +161,16 @@ PL$3/*promiseland exception catcher*/(function(){
   ;
   if((PL$21/*c1*/ && PL$22/*c2*/)){
     if((! PL$23/*f1*/ && ! PL$24/*f2*/)){
-      PL$1.resolve({"success": true}); return;
+      PL$1.resolve({
+        "success": true
+      }); return;
     };
     ;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;});
 })();return PL$1;
 })();

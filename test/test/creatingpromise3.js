@@ -87,25 +87,27 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$8/*promiseland exception catcher*/(function(){
   
     ;
-    PL$6.resolve({"fun": (function(){
-    var PL$10 = new __Promise();
-    var PL$12/*promiseland exception catcher*/ = function(code){
-      return function(res){
-        try{ code(res); }catch(e){
-          PL$10.reject(e);
+    PL$6.resolve({
+      "fun": (function(){
+      var PL$10 = new __Promise();
+      var PL$12/*promiseland exception catcher*/ = function(code){
+        return function(res){
+          try{ code(res); }catch(e){
+            PL$10.reject(e);
+          };
         };
       };
-    };
-    var PL$13/*catch rejected*/ = function(e){
-      PL$10.reject(e);
-    };
-    PL$12/*promiseland exception catcher*/(function(){
-    
-      ;
-      PL$10.resolve(4); return;
-      PL$10.resolve(); return;
-    })();return PL$10;
-    })}); return;
+      var PL$13/*catch rejected*/ = function(e){
+        PL$10.reject(e);
+      };
+      PL$12/*promiseland exception catcher*/(function(){
+      
+        ;
+        PL$10.resolve(4); return;
+        PL$10.resolve(); return;
+      })();return PL$10;
+      })
+    }); return;
     PL$6.resolve(); return;
   })();return PL$6;
   });

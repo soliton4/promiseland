@@ -92,10 +92,16 @@ classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){
     PL$8/*a*/ = new PL$4/*Type1-constructor*/();
     PL$9/*b*/ = new PL$7/*Type2-constructor*/();
     if(((PL$8/*a*/[3] == 1) && (PL$9/*b*/[4] == 4))){
-      return {"success": true};
+      return {
+        "success": true
+      };
     };}catch(PL$10/*e*/){
-    return {"success": false};};
-  return {"success": false};
+    return {
+      "success": false
+    };};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

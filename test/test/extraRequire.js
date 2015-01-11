@@ -58,10 +58,14 @@ var PL$1 = (function(){
   ;
   ;
   if((PL$2/*extraModule*/["value"] == 4)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

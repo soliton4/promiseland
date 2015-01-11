@@ -237,19 +237,27 @@ PL$9/*promiseland exception catcher*/(function(){
     ;}), PL$10/*catch rejected*/);
     ;
   }else{
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$35.resolve();;
   };PL$35.then(PL$9/*promiseland exception catcher*/(function(PL$38){PL$38;;
   ;
   if((PL$26/*tempres*/ != 2)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   if(! PL$27/*serverDestroyed*/){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$10/*catch rejected*/);
   ;
 })();return PL$1;

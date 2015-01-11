@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "69f8da673cdee0897d138b0bd2799707" })){ return promiseland._getModule("69f8da673cdee0897d138b0bd2799707"); };
+    if (promiseland._hasModule({ hashStr: "e58da28ab9adb71f0bf28b3746df7fbd" })){ return promiseland._getModule("e58da28ab9adb71f0bf28b3746df7fbd"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "69f8da673cdee0897d138b0bd2799707", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "e58da28ab9adb71f0bf28b3746df7fbd", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -374,9 +374,9 @@ PL$3(function(){
         this["stack"]("breakCode");
         this["breakCode"] = "break;";
         PL$26/*res*/["push"]("switch (");
-        PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));
+        PL$26/*res*/["push"](this["indent"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"]))));
         PL$26/*res*/["push"]("){");
-        PL$26/*res*/["push"](this["newLine"]());
+        var PL$53/*indentRes*/ = this["newResult"]();
         PL$41/*i*/ = 0;
         for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$41/*i*/){{
           PL$46/*currentCase*/ = PL$24/*par*/["cases"][PL$41/*i*/];
@@ -385,20 +385,18 @@ PL$3(function(){
           };
           ;
           if(PL$46/*currentCase*/["test"]){
-            PL$26/*res*/["push"]("case ");
-            PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$46/*currentCase*/["test"])));
-            PL$26/*res*/["push"](":");
-            PL$26/*res*/["push"](this["newLine"]());
+            PL$53/*indentRes*/["push"]("case ");
+            PL$53/*indentRes*/["push"](this["expectTypeVar"](this["parseExpression"](PL$46/*currentCase*/["test"])));
+            PL$53/*indentRes*/["push"](":");
           }else{
-          PL$26/*res*/["push"]("default");
-          PL$26/*res*/["push"](":");
-          PL$26/*res*/["push"](this["newLine"]());
+          PL$53/*indentRes*/["push"]("default");
+          PL$53/*indentRes*/["push"](":");
           };
           ;
-          PL$26/*res*/["push"](this["blockCreator"](PL$46/*currentCase*/["consequent"]));}};
+          PL$53/*indentRes*/["push"](this["indentNewLine"](this["blockCreator"](PL$46/*currentCase*/["consequent"])));}};
         ;
+        PL$26/*res*/["push"](this["indentNewLine"](PL$53/*indentRes*/));
         PL$26/*res*/["push"]("}");
-        PL$26/*res*/["push"](this["newLine"]());
         this["unstack"]("breakCode");
         };
         ;

@@ -133,10 +133,14 @@ PL$10/*p1*/ = PL$10/*p1*/[0];}
   PL$7/*cntSupposed*/(1);
   if(PL$5/*failed*/){
     PL$12/*console*/["log"]("failed");
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

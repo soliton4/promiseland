@@ -61,7 +61,9 @@ var PL$1 = (function(){
   {
     PL$2/*a*/["error"]();}catch(__dummy){};
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

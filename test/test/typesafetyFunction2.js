@@ -85,10 +85,14 @@ var PL$7/*c*/;
   ;
   PL$5/*b*/ = PL$6/*fun1*/();
   if((PL$5/*b*/[3] == 2)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

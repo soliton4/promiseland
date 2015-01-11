@@ -99,21 +99,29 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$13/*promiseland exception catcher*/(function(){
   
     ;
-    PL$11.resolve({"par1": PL$6/*par1*/,
-    "par2": PL$7/*par2*/,
-    "par3": PL$8/*par3*/,
-    "par4": PL$9/*par4*/,
-    "par5": PL$10/*par5*/}); return;
+    PL$11.resolve({
+      "par1": PL$6/*par1*/,
+      "par2": PL$7/*par2*/,
+      "par3": PL$8/*par3*/,
+      "par4": PL$9/*par4*/,
+      "par5": PL$10/*par5*/
+    }); return;
     PL$11.resolve(); return;
   })();return PL$11;
   }));
-  PL$16/*resPs*/ = PL$5/*x*/(1, {"a": "b"}, null, undefined);
+  PL$16/*resPs*/ = PL$5/*x*/(1, {
+    "a": "b"
+  }, null, undefined);
   PL$16/*resPs*/.then(PL$3/*promiseland exception catcher*/(function(PL$18){PL$17/*res*/ = PL$18;
   if(((((PL$17/*res*/["par1"] == 1) && (PL$17/*res*/["par2"]["a"] == "b")) && (PL$17/*res*/["par3"] === null)) && ! PL$17/*res*/["par4"])){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;
 })();return PL$1;

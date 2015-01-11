@@ -123,10 +123,14 @@ PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*fmain*/().then(PL$3/*promiseland exception catcher*/(function(PL$6){if((PL$6 == 6)){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   /* function fmain (){} - hoisted */;
   ;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);

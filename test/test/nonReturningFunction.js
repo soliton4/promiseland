@@ -74,7 +74,9 @@ var PL$11/*x*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  PL$5/*result*/ = {"res": 1};
+  PL$5/*result*/ = {
+    "res": 1
+  };
   PL$6/*dostuff*/ = (function(){
   var PL$7 = new __Promise();
   var PL$9/*promiseland exception catcher*/ = function(code){

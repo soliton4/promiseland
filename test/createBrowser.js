@@ -86,7 +86,9 @@ PL$3/*promiseland exception catcher*/(function(){
 
   ;
   __requireFun("./createProcess").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*cp*/ = PL$6;
-  PL$7/*res*/ = PL$5/*cp*/("google-chrome", ["http://localhost:3008/"]);
+  PL$7/*res*/ = PL$5/*cp*/("google-chrome", [
+    "http://localhost:3008/"
+  ]);
   PL$7/*res*/.then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*console*/["log"](PL$9);
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);

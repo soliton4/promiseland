@@ -237,27 +237,37 @@ PL$9/*promiseland exception catcher*/(function(){
   /* function getLocalTB (){} - hoisted */;
   ;
   if(! PL$11/*isClient*/){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
   PL$14/*init*/().then(PL$9/*promiseland exception catcher*/(function(PL$33){PL$33;
   PL$13/*doInit*/();
   PL$27/*getLocalTB*/().then(PL$9/*promiseland exception catcher*/(function(PL$34){if((PL$34 !== 2)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   (function(s, v){ v = s[10](v); s[9] = v; return v; })(PL$12/*local*/[11], 6);
   PL$20/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$12/*local*/)).then(PL$9/*promiseland exception catcher*/(function(PL$36){PL$35/*tempRes*/ = PL$36;
   PL$27/*getLocalTB*/().then(PL$9/*promiseland exception catcher*/(function(PL$37){if((PL$37 !== 6)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   (function(s, v){ v = s[10](v); s[9] = v; return v; })(PL$12/*local*/[11], 5);
   PL$27/*getLocalTB*/().then(PL$9/*promiseland exception catcher*/(function(PL$38){if((PL$38 !== 5)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$10/*catch rejected*/);
   ;}), PL$10/*catch rejected*/);
   ;}), PL$10/*catch rejected*/);

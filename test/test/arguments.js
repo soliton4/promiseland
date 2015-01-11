@@ -101,7 +101,9 @@ PL$3/*promiseland exception catcher*/(function(){
     ;
   })();return PL$6;
   });
-  PL$14/*res*/ = {};
+  PL$14/*res*/ = {
+    
+  };
   PL$15/*x*/ = (function(PL$16/*para*/, PL$17/*parb*/){
   var PL$18 = new __Promise();
   var PL$20/*promiseland exception catcher*/ = function(code){

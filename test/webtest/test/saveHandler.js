@@ -96,94 +96,100 @@ PL$6/*promiseland exception catcher*/(function(){
   var PL$11 = function(e){ PL$9.resolve(e); };
   PL$10/*try catch*/(function(){
     PL$34/*SaveHandler*/ = (function(){var PL$12/*inherited*/ = {};
-    var res = promiseland.createClass({"registerClass": (function(PL$13/*par*/){
-    var PL$14 = new __Promise();
-    var PL$16/*promiseland exception catcher*/ = function(code){
-      return function(res){
-        try{ code(res); }catch(e){
-          PL$14.reject(e);
-        };
-      };
-    };
-    var PL$17/*catch rejected*/ = function(e){
-      PL$14.reject(e);
-    };
-    var PL$18/*map*/;
-    PL$16/*promiseland exception catcher*/(function(){
-    
-      ;
-      PL$18/*map*/ = new PL$19/*promiseland*/["Map"]();
-      PL$14.resolve({"save": (function(PL$13/*par*/){
-      var PL$20 = new __Promise();
-      var PL$22/*promiseland exception catcher*/ = function(code){
+    var res = promiseland.createClass({
+      "registerClass": (function(PL$13/*par*/){
+      var PL$14 = new __Promise();
+      var PL$16/*promiseland exception catcher*/ = function(code){
         return function(res){
           try{ code(res); }catch(e){
+            PL$14.reject(e);
+          };
+        };
+      };
+      var PL$17/*catch rejected*/ = function(e){
+        PL$14.reject(e);
+      };
+      var PL$18/*map*/;
+      PL$16/*promiseland exception catcher*/(function(){
+      
+        ;
+        PL$18/*map*/ = new PL$19/*promiseland*/["Map"]();
+        PL$14.resolve({
+          "save": (function(PL$13/*par*/){
+          var PL$20 = new __Promise();
+          var PL$22/*promiseland exception catcher*/ = function(code){
+            return function(res){
+              try{ code(res); }catch(e){
+                PL$20.reject(e);
+              };
+            };
+          };
+          var PL$23/*catch rejected*/ = function(e){
             PL$20.reject(e);
           };
-        };
-      };
-      var PL$23/*catch rejected*/ = function(e){
-        PL$20.reject(e);
-      };
-      var PL$24/*i*/;
-      var PL$25/*o*/;
-      PL$22/*promiseland exception catcher*/(function(){
-      
-        ;
-        PL$24/*i*/ = 0;
-        PL$25/*o*/ = {};
-        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$13/*par*/["propertiesAr"]["length"]);++PL$24/*i*/){{
-          if((PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"] == "id")){
-            continue;;
+          var PL$24/*i*/;
+          var PL$25/*o*/;
+          PL$22/*promiseland exception catcher*/(function(){
+          
+            ;
+            PL$24/*i*/ = 0;
+            PL$25/*o*/ = {
+              
+            };
+            for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$13/*par*/["propertiesAr"]["length"]);++PL$24/*i*/){{
+              if((PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"] == "id")){
+                continue;;
+              };
+              ;
+              PL$25/*o*/[PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"]] = PL$13/*par*/["propertiesAr"][PL$24/*i*/]["value"];}};
+            ;
+            PL$18/*map*/["set"](PL$13/*par*/["properties"]["id"]["value"], PL$25/*o*/);
+            PL$20.resolve(); return;
+          })();return PL$20;
+          }),
+          "load": (function(PL$13/*par*/){
+          var PL$26 = new __Promise();
+          var PL$28/*promiseland exception catcher*/ = function(code){
+            return function(res){
+              try{ code(res); }catch(e){
+                PL$26.reject(e);
+              };
+            };
           };
-          ;
-          PL$25/*o*/[PL$13/*par*/["propertiesAr"][PL$24/*i*/]["name"]] = PL$13/*par*/["propertiesAr"][PL$24/*i*/]["value"];}};
-        ;
-        PL$18/*map*/["set"](PL$13/*par*/["properties"]["id"]["value"], PL$25/*o*/);
-        PL$20.resolve(); return;
-      })();return PL$20;
-      }),
-      "load": (function(PL$13/*par*/){
-      var PL$26 = new __Promise();
-      var PL$28/*promiseland exception catcher*/ = function(code){
-        return function(res){
-          try{ code(res); }catch(e){
+          var PL$29/*catch rejected*/ = function(e){
             PL$26.reject(e);
           };
-        };
-      };
-      var PL$29/*catch rejected*/ = function(e){
-        PL$26.reject(e);
-      };
-      PL$28/*promiseland exception catcher*/(function(){
-      
-        ;
-        PL$26.resolve(PL$18/*map*/["get"](PL$13/*par*/["properties"]["id"]["value"])); return;
-        PL$26.resolve(); return;
-      })();return PL$26;
-      }),
-      "delete": (function(PL$13/*par*/){
-      var PL$30 = new __Promise();
-      var PL$32/*promiseland exception catcher*/ = function(code){
-        return function(res){
-          try{ code(res); }catch(e){
+          PL$28/*promiseland exception catcher*/(function(){
+          
+            ;
+            PL$26.resolve(PL$18/*map*/["get"](PL$13/*par*/["properties"]["id"]["value"])); return;
+            PL$26.resolve(); return;
+          })();return PL$26;
+          }),
+          "delete": (function(PL$13/*par*/){
+          var PL$30 = new __Promise();
+          var PL$32/*promiseland exception catcher*/ = function(code){
+            return function(res){
+              try{ code(res); }catch(e){
+                PL$30.reject(e);
+              };
+            };
+          };
+          var PL$33/*catch rejected*/ = function(e){
             PL$30.reject(e);
           };
-        };
-      };
-      var PL$33/*catch rejected*/ = function(e){
-        PL$30.reject(e);
-      };
-      PL$32/*promiseland exception catcher*/(function(){
-      
-        ;
-        PL$30.resolve(PL$18/*map*/["delete"](PL$13/*par*/["properties"]["id"]["value"])); return;
-        PL$30.resolve(); return;
-      })();return PL$30;
-      })}); return;
-      PL$14.resolve(); return;
-    })();return PL$14;
-    })}, [], PL$12/*inherited*/);
+          PL$32/*promiseland exception catcher*/(function(){
+          
+            ;
+            PL$30.resolve(PL$18/*map*/["delete"](PL$13/*par*/["properties"]["id"]["value"])); return;
+            PL$30.resolve(); return;
+          })();return PL$30;
+          })
+        }); return;
+        PL$14.resolve(); return;
+      })();return PL$14;
+      })
+    }, [], PL$12/*inherited*/);
     return res; })();PL$34/*SaveHandler*/;
     PL$19/*promiseland*/["classSystem"]["setSaveHandler"](new PL$34/*SaveHandler*/());
     classSystem._resolveProvisional(PL$3/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"x","type":classSystem.getBuiltinType("var")},{"name":"y","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "eae93c49cf65b200dc7532ca35899b2d", "name": "C1", "savable": true}, {"x": 1, "y": 2}));PL$4/*C1*/;

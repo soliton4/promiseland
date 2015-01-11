@@ -142,10 +142,14 @@ var _TPL$10/*a*/;
   })(new PL$4/*C1-constructor*/())/*end temp assign*/;
   PL$7/*cntSupposed*/(2);
   if(PL$5/*failed*/){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

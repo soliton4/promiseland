@@ -56,8 +56,10 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  return {"a": "\n\r\u2028\u2029\"'",
-  "b": "xxx\n  xxx"};
+  return {
+    "a": "\n\r\u2028\u2029\"'",
+    "b": "xxx\n  xxx"
+  };
   ;})();
 ;return PL$1;
 });

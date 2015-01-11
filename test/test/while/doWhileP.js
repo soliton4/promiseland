@@ -101,10 +101,14 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$13();
   PL$8.then(function(){;
   if((PL$6/*i*/ == 4)){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;});
 })();return PL$1;
 })();

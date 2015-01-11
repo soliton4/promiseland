@@ -76,7 +76,9 @@ var PL$13/*x*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  PL$5/*result*/ = {"res": 1};
+  PL$5/*result*/ = {
+    "res": 1
+  };
   PL$6/*dootherStuff*/ = (function(){
   
     ;

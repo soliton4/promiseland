@@ -324,9 +324,10 @@ return (parInstance, par){
           this.breakCode = "break;";
 
           res.push("switch (");
-          res.push(this.expectTypeVar(this.parseExpression(par.discriminant)));
+          res.push(this.indent(this.expectTypeVar(this.parseExpression(par.discriminant))));
           res.push("){");
-          res.push(this.newLine());
+          
+          var indentRes = this.newResult();
 
           var i = 0;
           for (i = 0; i < par.cases.length; ++i){
@@ -336,20 +337,20 @@ return (parInstance, par){
               this.error(par, errorMsg.unknownCase);
             };
             if (currentCase.test){
-              res.push("case ");
-              res.push(this.expectTypeVar(this.parseExpression(currentCase.test)));
-              res.push(":");
-              res.push(this.newLine());
+              indentRes.push("case ");
+              indentRes.push(this.expectTypeVar(this.parseExpression(currentCase.test)));
+              indentRes.push(":");
             }else{
-              res.push("default");
-              res.push(":");
-              res.push(this.newLine());
+              indentRes.push("default");
+              indentRes.push(":");
             };
-            res.push(this.blockCreator(currentCase.consequent));
+            indentRes.push(this.indentNewLine(this.blockCreator(currentCase.consequent)));
 
           };
+          
+          res.push(this.indentNewLine(indentRes));
+          
           res.push("}");
-          res.push(this.newLine());
 
           this.unstack("breakCode");
         };

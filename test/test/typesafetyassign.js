@@ -94,14 +94,20 @@ classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){
     PL$8/*a*/;
     PL$9/*b*/;
     PL$8/*a*/ = PL$9/*b*/;}catch(PL$10/*e*/){
-    return {"success": false};};
+    return {
+      "success": false
+    };};
   try
   {
     PL$11/*c*/;
     PL$12/*d*/;
     (function(){ throw { id:201, msg: "type missmatch" } })();}catch(PL$10/*e*/){
-    return {"success": true};};
-  return {"success": false};
+    return {
+      "success": true
+    };};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

@@ -108,10 +108,14 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$13.then(PL$3/*promiseland exception catcher*/(function(){;
   ;
   if((PL$12/*res*/ == 1)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/)
 })();return PL$1;
 })();

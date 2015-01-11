@@ -58,10 +58,14 @@ var PL$1 = (function(){
   ;
   var PL$2/*a*/ = 1, PL$3/*b*/ = 2;
   if(((PL$2/*a*/ == 1) && (PL$3/*b*/ == 2))){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

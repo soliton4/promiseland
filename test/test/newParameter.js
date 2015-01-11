@@ -61,11 +61,17 @@ var PL$1 = (function(){
     ;
     this["par"] = PL$3/*par*/;
     ;});
-  var PL$4/*t*/ = new PL$2/*T*/({"id": 4});
+  var PL$4/*t*/ = new PL$2/*T*/({
+    "id": 4
+  });
   if((PL$4/*t*/["par"] && (PL$4/*t*/["par"]["id"] == 4))){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

@@ -116,12 +116,16 @@ PL$6/*promiseland exception catcher*/(function(){
     };
   })(PL$11)/*end temp assign*/;
   if((PL$10/*a*/[9] != 1)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   PL$10/*a*/[9] = 3;
   if((PL$10/*a*/[9] != 3)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   /*temptracked promise*/(function(vAr){
@@ -153,7 +157,9 @@ PL$6/*promiseland exception catcher*/(function(){
     };
   })(PL$13)/*end temp assign*/;
   if((PL$10/*a*/[9] != 1)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   PL$10/*a*/[9] = 4;
@@ -187,10 +193,14 @@ PL$6/*promiseland exception catcher*/(function(){
     };
   })(PL$16)/*end temp assign*/;
   if((PL$10/*a*/[9] != 4)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$7/*catch rejected*/);
   return r;
   })(new PL$5/*C1-constructor*/("id1"));/*temptracked promise end*/

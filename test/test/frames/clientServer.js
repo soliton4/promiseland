@@ -143,7 +143,9 @@ PL$3/*promiseland exception catcher*/(function(){
     ;
     PL$16/*cb*/ = new PL$17/*Callback*/();
     PL$18/*filenameStr*/ = (PL$19/*__dirname*/ + "/clientServer.txt");
-    PL$5/*fs*/["readFile"](PL$18/*filenameStr*/, {"encoding": "utf8"}, PL$16/*cb*/);
+    PL$5/*fs*/["readFile"](PL$18/*filenameStr*/, {
+      "encoding": "utf8"
+    }, PL$16/*cb*/);
     PL$16/*cb*/["promise"].then(PL$14/*promiseland exception catcher*/(function(PL$20){PL$12.resolve(PL$20[1]); return;
     PL$12.resolve(); return;}), PL$15/*catch rejected*/);
     ;
@@ -151,10 +153,14 @@ PL$3/*promiseland exception catcher*/(function(){
   }));
   PL$11/*x*/().then(PL$3/*promiseland exception catcher*/(function(PL$23){PL$22/*res*/ = PL$23;
   if((PL$22/*res*/ == "the test content")){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;
 })();return PL$1;

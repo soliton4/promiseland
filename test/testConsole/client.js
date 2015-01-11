@@ -180,11 +180,15 @@ PL$3/*promiseland exception catcher*/(function(){
       PL$22/*tc*/["destroy"]();
     };
     ;
-    PL$22/*tc*/ = new PL$16/*TableContainer*/({});
+    PL$22/*tc*/ = new PL$16/*TableContainer*/({
+      
+    });
     PL$22/*tc*/["placeAt"](PL$30/*document*/["body"]);
     if(PL$28/*results*/["failed"]){
-      PL$31/*f*/ = new PL$18/*Text*/({"label": "failed",
-      "text": "-"});
+      PL$31/*f*/ = new PL$18/*Text*/({
+        "label": "failed",
+        "text": "-"
+      });
       PL$22/*tc*/["addChild"](PL$31/*f*/);
     }else{
     PL$32/*t*/;
@@ -206,8 +210,10 @@ PL$3/*promiseland exception catcher*/(function(){
       PL$38/*textStr*/ = (("run " + PL$34/*cnt*/) + " tests. \n");
       PL$38/*textStr*/ += ((PL$34/*cnt*/ - PL$35/*successCnt*/) + " failed. \n");
       PL$38/*textStr*/ += PL$37/*errorStr*/;
-      PL$39/*w*/ = new PL$18/*Text*/({"label": PL$32/*t*/,
-      "text": PL$38/*textStr*/});
+      PL$39/*w*/ = new PL$18/*Text*/({
+        "label": PL$32/*t*/,
+        "text": PL$38/*textStr*/
+      });
       PL$22/*tc*/["addChild"](PL$39/*w*/);};
     ;
     };
@@ -217,8 +223,10 @@ PL$3/*promiseland exception catcher*/(function(){
     ;
   })();return PL$24;
   });
-  PL$40/*b*/ = new PL$14/*Button*/({"label": "test",
-  "onClick": PL$23/*runTests*/});
+  PL$40/*b*/ = new PL$14/*Button*/({
+    "label": "test",
+    "onClick": PL$23/*runTests*/
+  });
   PL$40/*b*/["placeAt"](PL$30/*document*/["body"]);
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);

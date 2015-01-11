@@ -58,7 +58,9 @@ var PL$2/*a*/;
 
   ;
   PL$2/*a*/;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

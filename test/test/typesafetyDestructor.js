@@ -96,10 +96,14 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
     })(new PL$4/*C1-constructor*/())/*end temp assign*/;
     if (_TPL$6/*v*/){ _TPL$6/*v*/();};}catch(e){if (_TPL$6/*v*/){ _TPL$6/*v*/();};throw e};;})();
   if((PL$5/*i*/ == 1)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

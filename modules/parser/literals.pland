@@ -39,6 +39,9 @@ return (parInstance, par){
         this.isClassObject = false;
 
         res.push("{");
+        
+        var indentRes = this.newResult();
+        
         var i = 0;
         var l = (par.properties && par.properties.length) || 0;
         for (i; i < l; ++i){
@@ -46,8 +49,8 @@ return (parInstance, par){
           var currentMember;
           //this.inheritedSystem
           if (i){
-            res.push(",");
-            res.push(this.newLine());
+            indentRes.push(",");
+            indentRes.push(this.newLine());
           };
           var prop = par.properties[i];
           if (prop.kind == "init"){
@@ -55,7 +58,7 @@ return (parInstance, par){
             if (this.inheritedSystem){
               this.inheritedSystem.setCurrent(currentMember);
             };
-            res.push(stringEncodeStr(identifierName(prop.key)) + ": ");
+            indentRes.push(stringEncodeStr(identifierName(prop.key)) + ": ");
             if (prop.value){
               if (checkIsFunction(prop.value)){
                 if (isClassObject){
@@ -64,7 +67,7 @@ return (parInstance, par){
               };
               var v = this.parseExpression(prop.value);
               
-              res.push(this.expectTypeVar(this.getPassAsTypeCode({ // only var type is allowed in regular object literal
+              indentRes.push(this.expectTypeVar(this.getPassAsTypeCode({ // only var type is allowed in regular object literal
                 value: v,
                 valueType: v.getType(),
                 "type": this.getType(prop.typename || "var", par)
@@ -82,10 +85,10 @@ return (parInstance, par){
               this.inheritedSystem.setCurrent(currentMember);
             };
             prop.id = undefined; // remove id
-            res.push(stringEncodeStr(name) + ": ");
+            indentRes.push(stringEncodeStr(name) + ": ");
             
             var functionRes = this.expectTypeVar(this.parseExpression(prop));
-            res.push(functionRes);
+            indentRes.push(functionRes);
             
           }else if (prop.kind == "block"){
             // handled in class expression
@@ -95,6 +98,9 @@ return (parInstance, par){
           };
           
         };
+        
+        res.push(this.indentNewLine(indentRes));
+        
         res.push("}");
         res.setType("var");
         this.unstack("isClassObject");
@@ -109,14 +115,20 @@ return (parInstance, par){
       this.expArrayExpression = function(par){
         var res = this.newResult();
         res.push("[");
+        
+        var indentRes = this.newResult();
+        
         var i = 0;
         var l = (par.elements && par.elements.length) || 0;
         for (i; i < l; ++i){
           if (i){
-            res.push(", ");
+            indentRes.push(", ");
+            indentRes.push(this.newLine());
           };
-          res.push(this.expectTypeVar(this.parseExpression(par.elements[i])));
+          indentRes.push(this.expectTypeVar(this.parseExpression(par.elements[i])));
         };
+        res.push(this.indentNewLine(indentRes));
+        
         res.push("]");
         res.setType("var");
         return res;

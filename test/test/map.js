@@ -60,10 +60,14 @@ var PL$1 = (function(){
   ;
   var PL$2/*m*/ = new PL$3/*Map*/();
   if(PL$2/*m*/){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

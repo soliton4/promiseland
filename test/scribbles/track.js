@@ -60,11 +60,13 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*root*/ = {"getCon": (function(){
-  
-    ;
-    return 1;
-    ;})};
+  var PL$2/*root*/ = {
+    "getCon": (function(){
+    
+      ;
+      return 1;
+      ;})
+  };
   var PL$3/*makeClass*/ = (function(PL$4/*destroyFun*/){
   var PL$22/*checkFun*/;
   var PL$23/*getBest*/;
@@ -90,39 +92,41 @@ var PL$1 = (function(){
       ;
       var PL$15/*next*/;
       var PL$16/*prev*/;
-      var PL$12/*entry*/ = {"newNext": (function(PL$17/*parNext*/){
-      
-        ;
-        if(PL$17/*parNext*/){
-          PL$15/*next*/ = PL$17/*parNext*/;
-        }else{
-        PL$9/*last*/ = PL$12/*entry*/;
-        PL$15/*next*/ = undefined;
-        };
-        ;
-        ;}),
-      "newPrev": (function(PL$18/*parPrev*/){
-      
-        ;
-        if(PL$18/*parPrev*/){
-          PL$16/*prev*/ = PL$18/*parPrev*/;
-        }else{
-        PL$8/*first*/ = PL$12/*entry*/;
-        PL$16/*prev*/ = undefined;
-        };
-        ;
-        ;}),
-      "getNext": (function(){
-      
-        ;
-        return PL$15/*next*/;
-        ;}),
-      "getCon": (function(PL$19/*token*/){
-      
-        ;
-        return PL$14/*t*/["getCon"](PL$19/*token*/);
-        ;}),
-      "cut": PL$20/*cut*/};
+      var PL$12/*entry*/ = {
+        "newNext": (function(PL$17/*parNext*/){
+        
+          ;
+          if(PL$17/*parNext*/){
+            PL$15/*next*/ = PL$17/*parNext*/;
+          }else{
+          PL$9/*last*/ = PL$12/*entry*/;
+          PL$15/*next*/ = undefined;
+          };
+          ;
+          ;}),
+        "newPrev": (function(PL$18/*parPrev*/){
+        
+          ;
+          if(PL$18/*parPrev*/){
+            PL$16/*prev*/ = PL$18/*parPrev*/;
+          }else{
+          PL$8/*first*/ = PL$12/*entry*/;
+          PL$16/*prev*/ = undefined;
+          };
+          ;
+          ;}),
+        "getNext": (function(){
+        
+          ;
+          return PL$15/*next*/;
+          ;}),
+        "getCon": (function(PL$19/*token*/){
+        
+          ;
+          return PL$14/*t*/["getCon"](PL$19/*token*/);
+          ;}),
+        "cut": PL$20/*cut*/
+      };
       PL$20/*cut*/ = (function(){
       
         ;
@@ -187,7 +191,9 @@ var PL$1 = (function(){
       if(PL$19/*token*/){
         PL$5/*curToken*/ = PL$19/*token*/;
       }else{
-      PL$5/*curToken*/ = {};
+      PL$5/*curToken*/ = {
+        
+      };
       };
       ;
       if(PL$8/*first*/){
@@ -226,24 +232,26 @@ var PL$1 = (function(){
       ;
       return 0;
       ;});
-    var PL$28/*tracker*/ = {"getCon": (function(PL$19/*token*/){
-    
-      ;
-      if((PL$5/*curToken*/ === PL$19/*token*/)){
-        return 0;
-      };
-      ;
-      return PL$23/*getBest*/(PL$19/*token*/);
-      ;}),
-    "quickCon": (function(){
-    
-      ;
-      if(PL$10/*rootCnt*/){
-        return 2;
-      };
-      ;
-      return (PL$6/*bestLen*/ + 1);
-      ;})};
+    var PL$28/*tracker*/ = {
+      "getCon": (function(PL$19/*token*/){
+      
+        ;
+        if((PL$5/*curToken*/ === PL$19/*token*/)){
+          return 0;
+        };
+        ;
+        return PL$23/*getBest*/(PL$19/*token*/);
+        ;}),
+      "quickCon": (function(){
+      
+        ;
+        if(PL$10/*rootCnt*/){
+          return 2;
+        };
+        ;
+        return (PL$6/*bestLen*/ + 1);
+        ;})
+    };
     var PL$29/*check*/ = (function(PL$30/*parTocken*/){
     
       ;
@@ -275,23 +283,28 @@ var PL$1 = (function(){
         ;
         ;}));
       ;});
-    return [(function(){
-    
-      ;
-      ++PL$10/*rootCnt*/;
-      return (function(){
+    return [
+      (function(){
       
         ;
-        if(! --PL$10/*rootCnt*/){
-          PL$29/*check*/({});
-        };
+        ++PL$10/*rootCnt*/;
+        return (function(){
+        
+          ;
+          if(! --PL$10/*rootCnt*/){
+            PL$29/*check*/({
+              
+            });
+          };
+          ;
+          ;});
+        ;}), 
+      (function(PL$14/*t*/){
+      
         ;
-        ;});
-      ;}), (function(PL$14/*t*/){
-    
-      ;
-      return PL$13/*con*/(PL$14/*t*/);
-      ;})];
+        return PL$13/*con*/(PL$14/*t*/);
+        ;})
+    ];
     ;});
   ;})();
 ;return PL$1;

@@ -74,10 +74,14 @@ var PL$1 = (function(){
     PL$4/*funName*/();}catch(PL$6/*e*/){};
   ;
   if((PL$2/*calledCnt*/ == 2)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

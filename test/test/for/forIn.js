@@ -56,9 +56,11 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*a*/ = {"a": 1,
-  "b": 2,
-  "c": 3};
+  var PL$2/*a*/ = {
+    "a": 1,
+    "b": 2,
+    "c": 3
+  };
   var PL$3/*namesStr*/ = "";
   var PL$4/*cnt*/ = 0;
   for(var PL$5/*i*/ in PL$2/*a*/){
@@ -66,14 +68,20 @@ var PL$1 = (function(){
     PL$4/*cnt*/ += PL$2/*a*/[PL$5/*i*/];};
   ;
   if((PL$3/*namesStr*/["length"] != 3)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   if((PL$4/*cnt*/ != 6)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

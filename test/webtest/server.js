@@ -86,9 +86,15 @@ PL$3/*promiseland exception catcher*/(function(){
 
   ;
   __requireFun("promiseland-webframework").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*Fw*/ = PL$6;
-  PL$7/*fw*/ = new PL$5/*Fw*/({"load": "test/saveHandler",
-  "dirs": [{"client": "/test",
-  "server": (PL$8/*__dirname*/ + "/test/")}]});
+  PL$7/*fw*/ = new PL$5/*Fw*/({
+    "load": "test/saveHandler",
+    "dirs": [
+      {
+        "client": "/test",
+        "server": (PL$8/*__dirname*/ + "/test/")
+      }
+    ]
+  });
   PL$7/*fw*/["listen"](4000);
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;

@@ -57,7 +57,9 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*result*/ = {"res": 1};
+  var PL$2/*result*/ = {
+    "res": 1
+  };
   var PL$3/*dootherStuff*/ = (function(){
   
     ;

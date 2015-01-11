@@ -59,7 +59,9 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  PL$2/*fs*/["readFile"](PL$3/*filename*/, {"encoding": "utf8"}, PL$4/*callback*/["callback"]);
+  PL$2/*fs*/["readFile"](PL$3/*filename*/, {
+    "encoding": "utf8"
+  }, PL$4/*callback*/["callback"]);
   ;})();
 ;return PL$1;
 });

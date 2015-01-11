@@ -83,22 +83,32 @@ var PL$1 = (function(){
   PL$6/*exs*/();
   PL$7/*exc*/();
   if((PL$2/*isServer*/ && PL$5/*clientRun*/)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   if((PL$2/*isServer*/ && ! PL$4/*serverRun*/)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   if((! PL$2/*isServer*/ && PL$4/*serverRun*/)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   if((! PL$2/*isServer*/ && ! PL$5/*clientRun*/)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

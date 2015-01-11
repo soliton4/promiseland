@@ -64,10 +64,14 @@ var PL$1 = (function(){
     PL$2/*catched*/ = true;};
   ;
   if(! PL$2/*catched*/){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

@@ -85,9 +85,13 @@ PL$3/*promiseland exception catcher*/(function(){
   ;
   __requireFun("./requiredModule").then(PL$3/*promiseland exception catcher*/(function(PL$6){PL$5/*y*/ = PL$6;
   if((PL$5/*y*/["id"] == 4)){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;
 })();return PL$1;

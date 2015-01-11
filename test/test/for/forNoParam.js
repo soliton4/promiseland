@@ -62,10 +62,14 @@ var PL$1 = (function(){
     break;;}};
   ;
   if((PL$2/*a*/ == 1)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

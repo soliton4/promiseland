@@ -194,10 +194,14 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
   PL$13/*fun*/();
   PL$10/*cntSupposed*/(5);
   if(PL$8/*failed*/){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

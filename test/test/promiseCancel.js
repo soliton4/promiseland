@@ -141,14 +141,20 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$5/*wait*/().then(PL$3/*promiseland exception catcher*/(function(PL$27){PL$27;
   PL$5/*wait*/().then(PL$3/*promiseland exception catcher*/(function(PL$28){PL$28;
   if((PL$14/*cancelReason*/ != 4)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   if(PL$15/*runThrough*/){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;

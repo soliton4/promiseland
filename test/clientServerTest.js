@@ -132,7 +132,9 @@ PL$3/*promiseland exception catcher*/(function(){
       ;
       return "client";
       ;});
-    this["connections"] = {};
+    this["connections"] = {
+      
+    };
     this["find"] = (function(PL$23/*parId*/){
     
       ;

@@ -95,7 +95,9 @@ PL$3/*promiseland exception catcher*/(function(){
   
     ;
     if(! PL$10/*parAr*/){
-      PL$10/*parAr*/ = [];
+      PL$10/*parAr*/ = [
+        
+      ];
     };
     ;
     var PL$12/*child*/;
@@ -154,8 +156,10 @@ PL$3/*promiseland exception catcher*/(function(){
       ;
     })();return PL$19;
     });
-    return {"child": PL$12/*child*/,
-    "result": PL$18/*result*/()};
+    return {
+      "child": PL$12/*child*/,
+      "result": PL$18/*result*/()
+    };
     ;})); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;

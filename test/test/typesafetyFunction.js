@@ -95,8 +95,12 @@ classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){
   try
   {
     PL$8/*f1*/();}catch(PL$10/*e*/){
-    return {"success": true};};
-  return {"success": false};
+    return {
+      "success": true
+    };};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

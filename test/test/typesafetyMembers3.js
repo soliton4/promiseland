@@ -111,13 +111,21 @@ classSystem.readyPromise(PL$8/*type:Type2*/).then(function(parType){
     PL$11/*a*/[5][3] = 40;
     PL$12/*b*/[5] = PL$11/*a*/[5];
     if((PL$12/*b*/[5] !== PL$11/*a*/[5])){
-      return {"success": false};
+      return {
+        "success": false
+      };
     };
     if((PL$12/*b*/[5][3] == 40)){
-      return {"success": true};
+      return {
+        "success": true
+      };
     };}catch(PL$13/*e*/){
-    return {"success": false};};
-  return {"success": false};
+    return {
+      "success": false
+    };};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

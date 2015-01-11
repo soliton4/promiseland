@@ -138,7 +138,9 @@ PL$3/*promiseland exception catcher*/(function(){
       ;
       return "client";
       ;});
-    this["connections"] = {};
+    this["connections"] = {
+      
+    };
     this["find"] = (function(PL$23/*parId*/){
     
       ;
@@ -183,10 +185,15 @@ PL$3/*promiseland exception catcher*/(function(){
     return;
     ;}));
   __requireFun("./test/frameTests").then(PL$3/*promiseland exception catcher*/(function(PL$31){PL$31;
-  PL$32/*tests*/ = {};
+  PL$32/*tests*/ = {
+    
+  };
   __requireFun("./testCollector").then(PL$3/*promiseland exception catcher*/(function(PL$34){PL$33/*collector*/ = PL$34;
   __requireFun("./createProcess").then(PL$3/*promiseland exception catcher*/(function(PL$36){PL$35/*cp*/ = PL$36;
-  PL$37/*chromeChild*/ = PL$35/*cp*/("google-chrome", ["--new-window", "http://localhost:3008/?type=chrome"])["child"];
+  PL$37/*chromeChild*/ = PL$35/*cp*/("google-chrome", [
+    "--new-window", 
+    "http://localhost:3008/?type=chrome"
+  ])["child"];
   PL$38/*chromePs*/ = PL$33/*collector*/["getResultPromise"]("chrome");
   PL$38/*chromePs*/.then(PL$3/*promiseland exception catcher*/(function(PL$39){PL$32/*tests*/["chrome"] = PL$39;
   PL$33/*collector*/["finish"]("chrome");

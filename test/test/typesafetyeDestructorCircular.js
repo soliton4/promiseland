@@ -147,10 +147,14 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
   PL$12/*v2*/[6][8] = 4;
   PL$13/*cntSupposed*/(3);
   if(PL$8/*failed*/){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

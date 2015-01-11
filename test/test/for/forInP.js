@@ -76,9 +76,11 @@ var PL$9/*i*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
-  PL$5/*a*/ = {"a": 1,
-  "b": 2,
-  "c": 3};
+  PL$5/*a*/ = {
+    "a": 1,
+    "b": 2,
+    "c": 3
+  };
   PL$6/*namesStr*/ = "";
   PL$7/*cnt*/ = 0;
   PL$8/*p*/;
@@ -111,14 +113,20 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$13.then(function(){;
   ;
   if((PL$6/*namesStr*/["length"] != 3)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   if((PL$7/*cnt*/ != 6)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;});
 })();return PL$1;
 })();

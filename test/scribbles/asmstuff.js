@@ -74,7 +74,9 @@ function PL$9/*f2*/(){
   ;
   /* function f2 (){} - hoisted */;
   ;
-  return {};
+  return {
+    
+  };
   ;};
 function PL$11/*GeometricMean*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$12/*buffer*/){
 "use asm";
@@ -105,7 +107,9 @@ function PL$11/*GeometricMean*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$12/*buffer*/
     PL$17/*end*/ = (PL$17/*end*/ | 0);
     return + PL$6/*exp*/((+ PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/) / + ((PL$17/*end*/ - PL$16/*start*/) | 0)));
     ;};
-  return {"geometricMean": PL$21/*geometricMean*/};
+  return {
+    "geometricMean": PL$21/*geometricMean*/
+  };
   ;};
 
   ;

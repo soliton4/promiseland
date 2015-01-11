@@ -108,7 +108,13 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
     PL$13/*D1-constructor*/ = classSystem.getTypeConstructor(PL$11/*type:D1*/);
   });
   var communicator = {fun: undefined};
-  eval("communicator.fun = function(){\n  \n    ;\n    ;};"); return communicator.fun; })()) < {"types": {"D1": PL$3/*C1*/}}) > {});
+  eval("communicator.fun = function(){\n  \n    ;\n    ;};"); return communicator.fun; })()) < {
+    "types": {
+      "D1": PL$3/*C1*/
+    }
+  }) > {
+    
+  });
   ;})();
 ;return PL$1;
 });

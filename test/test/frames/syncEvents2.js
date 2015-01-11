@@ -229,26 +229,36 @@ PL$6/*promiseland exception catcher*/(function(){
   /* function getCheck (){} - hoisted */;
   ;
   if(! PL$8/*isClient*/){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
   PL$13/*init*/().then(PL$6/*promiseland exception catcher*/(function(PL$32){PL$32;
   PL$12/*doInit*/();
   PL$26/*getCheck*/().then(PL$6/*promiseland exception catcher*/(function(PL$33){if((PL$33 !== 1)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   PL$19/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$11/*local*/)).then(PL$6/*promiseland exception catcher*/(function(PL$35){PL$34/*tempRes*/ = PL$35;
   PL$26/*getCheck*/().then(PL$6/*promiseland exception catcher*/(function(PL$36){if((PL$36 !== 1)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   PL$11/*local*/[11](2);
   PL$26/*getCheck*/().then(PL$6/*promiseland exception catcher*/(function(PL$37){if((PL$37 !== 2)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$7/*catch rejected*/);
   ;}), PL$7/*catch rejected*/);
   ;}), PL$7/*catch rejected*/);

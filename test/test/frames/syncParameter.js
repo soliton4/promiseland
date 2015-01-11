@@ -239,12 +239,16 @@ PL$6/*promiseland exception catcher*/(function(){
   /* function getLocalB (){} - hoisted */;
   ;
   if(! PL$9/*isClient*/){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
   PL$11/*init*/().then(PL$6/*promiseland exception catcher*/(function(PL$31){PL$31;
   PL$25/*getLocalB*/().then(PL$6/*promiseland exception catcher*/(function(PL$32){if((PL$32 !== 2)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   /*temp tracked assign*/(function(vAr){
@@ -266,7 +270,9 @@ PL$6/*promiseland exception catcher*/(function(){
   ;
   PL$19/*x*/((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$33/*temp*/)).then(PL$6/*promiseland exception catcher*/(function(PL$34){PL$34;
   PL$25/*getLocalB*/().then(PL$6/*promiseland exception catcher*/(function(PL$35){if((PL$35 !== 4)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
   if(PL$9/*isClient*/){
@@ -274,10 +280,14 @@ PL$6/*promiseland exception catcher*/(function(){
   };
   ;
   PL$25/*getLocalB*/().then(PL$6/*promiseland exception catcher*/(function(PL$36){if((PL$36 !== 5)){
-    PL$1.resolve({"success": false}); return;
+    PL$1.resolve({
+      "success": false
+    }); return;
   };
   ;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$7/*catch rejected*/);
   ;}), PL$7/*catch rejected*/);
   ;}), PL$7/*catch rejected*/);

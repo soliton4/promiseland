@@ -135,7 +135,9 @@ PL$3/*promiseland exception catcher*/(function(){
         var PL$29/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$28.resolve(e); }; }; };
         var PL$30 = function(e){ PL$28.resolve(e); };
         PL$29/*try catch*/(function(){
-          PL$5/*fs*/["readFile"](PL$23/*completeFilename*/, {"encoding": "utf8"}, PL$13/*callback*/["callback"]);
+          PL$5/*fs*/["readFile"](PL$23/*completeFilename*/, {
+            "encoding": "utf8"
+          }, PL$13/*callback*/["callback"]);
           PL$13/*callback*/["promise"].then(PL$29/*try catch*/(function(PL$32){PL$31/*codeStr*/ = PL$32[1];
           PL$33/*parser*/ = new PL$34/*promiseland*/["Parser"]();
           PL$33/*parser*/["parse"](PL$31/*codeStr*/).then(PL$29/*try catch*/(function(PL$36){PL$35/*res*/ = PL$36;

@@ -61,10 +61,14 @@ var PL$1 = (function(){
   {
     PL$2/*i*/ += 1;}} while ((PL$2/*i*/ < 4));
   if((PL$2/*i*/ == 4)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

@@ -102,7 +102,9 @@ PL$3/*promiseland exception catcher*/(function(){
   /* function test (){} - hoisted */;
   ;
   PL$5/*test*/().then(PL$3/*promiseland exception catcher*/(function(PL$11){PL$11;
-  PL$1.resolve({"success": true}); return;
+  PL$1.resolve({
+    "success": true
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;
 })();return PL$1;

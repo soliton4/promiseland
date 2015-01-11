@@ -139,14 +139,20 @@ classSystem.readyPromise(PL$5/*type:T2*/).then(function(parType){
     PL$8/*a*/();}catch(PL$29/*e*/){
     PL$28/*catched*/ = true;};
   if(! PL$28/*catched*/){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   try
   {
     PL$25/*b*/();}catch(PL$29/*e*/){
-    return {"success": false};};
-  return {"success": true};
+    return {
+      "success": false
+    };};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

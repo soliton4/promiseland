@@ -91,11 +91,15 @@ PL$3/*promiseland exception catcher*/(function(){
     PL$5.resolve();}), PL$8);
   ;})();
   PL$6.then(PL$3/*promiseland exception catcher*/(function(PL$10/*e*/){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
     PL$5.resolve();;}));
   PL$5.then(PL$3/*promiseland exception catcher*/(function(){;
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/)
 })();return PL$1;
 })();

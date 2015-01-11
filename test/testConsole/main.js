@@ -129,18 +129,34 @@ var PL$1 = (function(){
     ;
     PL$8/*console*/["log"]("running tests");
     PL$8/*console*/["log"]("copy promiseland");
-    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/promiseland.js"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$15){PL$8/*console*/["log"](PL$15);
-    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/package.json"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/")])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$16){PL$8/*console*/["log"](PL$16);
-    PL$2/*cp*/("cp", [(PL$14/*__dirname*/ + "/../../../promiseland/modules"), (PL$14/*__dirname*/ + "/../node_modules/promiseland/"), "-R"])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$17){PL$8/*console*/["log"](PL$17);
+    PL$2/*cp*/("cp", [
+      (PL$14/*__dirname*/ + "/../../../promiseland/promiseland.js"), 
+      (PL$14/*__dirname*/ + "/../node_modules/promiseland/")
+    ])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$15){PL$8/*console*/["log"](PL$15);
+    PL$2/*cp*/("cp", [
+      (PL$14/*__dirname*/ + "/../../../promiseland/package.json"), 
+      (PL$14/*__dirname*/ + "/../node_modules/promiseland/")
+    ])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$16){PL$8/*console*/["log"](PL$16);
+    PL$2/*cp*/("cp", [
+      (PL$14/*__dirname*/ + "/../../../promiseland/modules"), 
+      (PL$14/*__dirname*/ + "/../node_modules/promiseland/"), 
+      "-R"
+    ])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$17){PL$8/*console*/["log"](PL$17);
     PL$8/*console*/["log"]("running compileall");
-    PL$2/*cp*/("node", ["compileAll.js"])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$18){PL$8/*console*/["log"](PL$18);
+    PL$2/*cp*/("node", [
+      "compileAll.js"
+    ])["result"].then(PL$12/*promiseland exception catcher*/(function(PL$18){PL$8/*console*/["log"](PL$18);
     PL$8/*console*/["log"]("starting tests");
     var PL$19 = new __Promise();
     var PL$20 = new __Promise();
     var PL$21/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$20.resolve(e); }; }; };
     var PL$22 = function(e){ PL$20.resolve(e); };
     PL$21/*try catch*/(function(){
-      PL$23/*ts*/ = PL$2/*cp*/("./testServer", [], {"fork": true});
+      PL$23/*ts*/ = PL$2/*cp*/("./testServer", [
+        
+      ], {
+        "fork": true
+      });
       PL$24/*cb*/ = new PL$25/*Callback*/();
       PL$23/*ts*/["child"]["on"]("message", PL$24/*cb*/);
       PL$24/*cb*/["promise"].then(PL$21/*try catch*/(function(PL$26){PL$10.resolve(PL$26[0]); return;
@@ -149,7 +165,9 @@ var PL$1 = (function(){
     PL$20.then(PL$12/*promiseland exception catcher*/(function(PL$27/*e*/){
       PL$8/*console*/["log"]("error");
       PL$8/*console*/["log"](PL$27/*e*/);
-      PL$10.resolve({"failed": true}); return;
+      PL$10.resolve({
+        "failed": true
+      }); return;
       PL$19.resolve();;}));
     PL$19.then(PL$12/*promiseland exception catcher*/(function(){;
     ;
@@ -160,7 +178,9 @@ var PL$1 = (function(){
     ;
   })();return PL$10;
   }));
-  return {"runTests": PL$9/*runTests*/};
+  return {
+    "runTests": PL$9/*runTests*/
+  };
   ;})();
 ;return PL$1;
 });

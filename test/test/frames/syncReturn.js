@@ -161,10 +161,14 @@ PL$9/*promiseland exception catcher*/(function(){
     };
   })(PL$19)/*end temp assign*/;
   if((PL$11/*a*/[7] == 2)){
-    PL$1.resolve({"success": true}); return;
+    PL$1.resolve({
+      "success": true
+    }); return;
   };
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$10/*catch rejected*/);
   return r;
   })(PL$13/*x*/());/*temptracked promise end*/

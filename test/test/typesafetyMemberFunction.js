@@ -85,10 +85,14 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
   PL$6/*v2*/ = PL$5/*v1*/[5]();
   PL$5/*v1*/[4]();
   if((PL$6/*v2*/[3] == 2)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

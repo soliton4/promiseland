@@ -86,18 +86,24 @@ PL$3/*promiseland exception catcher*/(function(){
     }else{PL$10.resolve();
     };PL$10.then(PL$8/*try catch*/(function(PL$12){PL$12;;
     ;
-    throw {"n": 1};
+    throw {
+      "n": 1
+    };
     PL$6.resolve();}), PL$9);
   ;})();
   PL$7.then(PL$3/*promiseland exception catcher*/(function(PL$13/*err*/){
     if((PL$13/*err*/["n"] == 1)){
-      PL$1.resolve({"success": true}); return;
+      PL$1.resolve({
+        "success": true
+      }); return;
     };
     ;
     PL$6.resolve();;}));
   PL$6.then(PL$3/*promiseland exception catcher*/(function(){;
   ;
-  PL$1.resolve({"success": false}); return;
+  PL$1.resolve({
+    "success": false
+  }); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/)
 })();return PL$1;
 })();

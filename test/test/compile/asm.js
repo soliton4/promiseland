@@ -67,7 +67,9 @@ var PL$1 = (function(){
       var PL$2/*x*/ = 0, PL$7/*y*/ = 0;
       PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
       ;};
-    return {};
+    return {
+      
+    };
     ;});
   ;})();
 ;return PL$1;

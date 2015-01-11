@@ -94,10 +94,16 @@ classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){
     PL$9/*b*/[4] = 10;
     PL$9/*b*/[3] = PL$8/*a*/[3];
     if((((PL$9/*b*/[4] == 10) && (PL$9/*b*/[3] == 1)) && (PL$8/*a*/[3] == PL$9/*b*/[3]))){
-      return {"success": true};
+      return {
+        "success": true
+      };
     };}catch(PL$10/*e*/){
-    return {"success": false};};
-  return {"success": false};
+    return {
+      "success": false
+    };};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });

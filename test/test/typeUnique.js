@@ -75,20 +75,28 @@ classSystem.readyPromise(PL$2/*type:T1*/).then(function(parType){
   classSystem._resolveProvisional(PL$2/*type:T1*/, classSystem.createClass({className: "T1",members: [{"name":"a","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "41d20fb8ec4dd0fce6452dc354f70d0d", "name": "T1", "unique": true}, {"a": 1}));PL$3/*T1*/;
   PL$5/*v1*/ = new PL$4/*T1-constructor*/("x");
   if((PL$5/*v1*/[4] !== 1)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   PL$5/*v1*/[4] = 2;
   PL$6/*v2*/ = new PL$4/*T1-constructor*/("x");
   if((PL$6/*v2*/[4] === 1)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
   if((PL$6/*v2*/[4] !== 2)){
-    return {"success": false};
+    return {
+      "success": false
+    };
   };
   ;
-  return {"success": true};
+  return {
+    "success": true
+  };
   ;})();
 ;return PL$1;
 });

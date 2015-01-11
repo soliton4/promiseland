@@ -99,10 +99,14 @@ classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){
   var PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
   PL$9/*e*/[3](2);
   if((PL$10/*r*/[4] == 3)){
-    return {"success": true};
+    return {
+      "success": true
+    };
   };
   ;
-  return {"success": false};
+  return {
+    "success": false
+  };
   ;})();
 ;return PL$1;
 });
