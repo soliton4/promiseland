@@ -57,10 +57,9 @@ var PL$1 = (function(){
 
   ;
   (function(){
-  var PL$2/*a*/;
-
+  
     ;
-    PL$2/*a*/ = 1;
+    var PL$2/*a*/ = 1;
     ;});
   ;})();
 ;return PL$1;

@@ -55,277 +55,336 @@ var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 if (promiseland._hasModule({ hashStr: "6bd61b76756d51bc6ec2dc7c5402904d" })){ return promiseland._getModule("6bd61b76756d51bc6ec2dc7c5402904d"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
-var PL$26/*Promise*/;try{PL$26/*Promise*/ = Promise;}catch(e){};
+var PL$27/*Promise*/;try{PL$27/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*errorMsg*/;
-var PL$4/*getModuleData*/;
-var PL$10/*frames*/;
-var PL$11/*getInstanceFromTransportData*/;
-var PL$12/*getInstanceTransportData*/;
-var PL$13/*getEffectiveFunctionResultType*/;
 
   ;
   ;
-  PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
-  PL$4/*getModuleData*/;
+  var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  var PL$4/*getModuleData*/;
   (function(){
   var PL$5 = new __Promise();
-var PL$7 = function(code){ return function(res){ try{code(res);}catch(e){ PL$5.reject(e); }; }; };
-var PL$8 = function(e){ PL$5.reject(e); };
-PL$7(function(){
+  var PL$7/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$5.reject(e);
+      };
+    };
+  };
+  var PL$8/*catch rejected*/ = function(e){
+    PL$5.reject(e);
+  };
+  PL$7/*promiseland exception catcher*/(function(){
   
     ;
-    PL$3/*extra*/["moduleSystemPs"].then(PL$7(function(PL$9){PL$4/*getModuleData*/ = PL$9["getModuleData"];
-    PL$5.resolve(); return;}), PL$8);
-;})();
-return PL$5;
-})();
-  PL$10/*frames*/;
-  PL$11/*getInstanceFromTransportData*/;
-  PL$12/*getInstanceTransportData*/;
-  PL$13/*getEffectiveFunctionResultType*/;
-  return (function(PL$14/*classSystem*/, PL$15/*internals*/){
-  var PL$16/*privateClassSystem*/;
-var PL$21/*cs*/;
-var PL$22/*pcs*/;
-var PL$23/*getClass*/;
-var PL$24/*DynInstance*/;
-var PL$25/*storageEnginePs*/;
-
+    PL$3/*extra*/["moduleSystemPs"].then(PL$7/*promiseland exception catcher*/(function(PL$9){PL$4/*getModuleData*/ = PL$9["getModuleData"];
+    PL$5.resolve(); return;}), PL$8/*catch rejected*/);
     ;
-    PL$16/*privateClassSystem*/ = PL$15/*internals*/["privateClassSystem"];
+  })();return PL$5;
+  })();
+  var PL$10/*frames*/;
+  var PL$11/*getInstanceFromTransportData*/;
+  var PL$12/*getInstanceTransportData*/;
+  var PL$13/*getEffectiveFunctionResultType*/;
+  return (function(PL$14/*classSystem*/, PL$15/*internals*/){
+  
+    ;
+    var PL$16/*privateClassSystem*/ = PL$15/*internals*/["privateClassSystem"];
     (function(){
     var PL$17 = new __Promise();
-var PL$18 = function(code){ return function(res){ try{code(res);}catch(e){ PL$17.reject(e); }; }; };
-var PL$19 = function(e){ PL$17.reject(e); };
-PL$18(function(){
+    var PL$19/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$17.reject(e);
+        };
+      };
+    };
+    var PL$20/*catch rejected*/ = function(e){
+      PL$17.reject(e);
+    };
+    PL$19/*promiseland exception catcher*/(function(){
     
       ;
-      PL$3/*extra*/["framesPs"].then(PL$18(function(PL$20){PL$10/*frames*/ = PL$20;
-      PL$17.resolve(); return;}), PL$19);
-;})();
-return PL$17;
-})();
-    PL$21/*cs*/ = PL$14/*classSystem*/;
-    PL$22/*pcs*/ = PL$16/*privateClassSystem*/;
-    PL$23/*getClass*/ = PL$15/*internals*/["getClass"];
-    PL$24/*DynInstance*/ = PL$15/*internals*/["DynInstance"];
-    PL$25/*storageEnginePs*/ = new PL$26/*Promise*/();
-    PL$22/*pcs*/["isSavableType"] = (function(PL$27/*parType*/){
-    var PL$28/*cDef*/;
-
+      PL$3/*extra*/["framesPs"].then(PL$19/*promiseland exception catcher*/(function(PL$21){PL$10/*frames*/ = PL$21;
+      PL$17.resolve(); return;}), PL$20/*catch rejected*/);
       ;
-      if(PL$21/*cs*/["isVar"](PL$27/*parType*/)){
+    })();return PL$17;
+    })();
+    var PL$22/*cs*/ = PL$14/*classSystem*/;
+    var PL$23/*pcs*/ = PL$16/*privateClassSystem*/;
+    var PL$24/*getClass*/ = PL$15/*internals*/["getClass"];
+    var PL$25/*DynInstance*/ = PL$15/*internals*/["DynInstance"];
+    var PL$26/*storageEnginePs*/ = new PL$27/*Promise*/();
+    PL$23/*pcs*/["isSavableType"] = (function(PL$28/*parType*/){
+    
+      ;
+      if(PL$22/*cs*/["isVar"](PL$28/*parType*/)){
         return true;
       };
       ;
-      PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      if(PL$28/*cDef*/["savable"]){
+      var PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      if(PL$29/*cDef*/["savable"]){
         return true;
       };
       ;
       return false;
       ;});
-    PL$22/*pcs*/["registerSavableClass"] = (function(PL$27/*parType*/){
-    var PL$29 = new __Promise();
-var PL$30 = function(code){ return function(res){ try{code(res);}catch(e){ PL$29.reject(e); }; }; };
-var PL$31 = function(e){ PL$29.reject(e); };
-var PL$28/*cDef*/;
-var PL$33/*engine*/;
-var PL$36/*propertiesAr*/;
-var PL$37/*properties*/;
-var PL$38/*map*/;
-var PL$39/*i*/;
-var PL$40/*mDef*/;
-var PL$41/*p*/;
-PL$30(function(){
+    PL$23/*pcs*/["registerSavableClass"] = (function(PL$28/*parType*/){
+    var PL$30 = new __Promise();
+    var PL$32/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$30.reject(e);
+        };
+      };
+    };
+    var PL$33/*catch rejected*/ = function(e){
+      PL$30.reject(e);
+    };
+    var PL$29/*cDef*/;
+    var PL$35/*engine*/;
+    var PL$38/*propertiesAr*/;
+    var PL$39/*properties*/;
+    var PL$40/*map*/;
+    var PL$41/*i*/;
+    var PL$42/*mDef*/;
+    var PL$43/*p*/;
+    PL$32/*promiseland exception catcher*/(function(){
     
       ;
-      PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
+      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
       
-      var PL$32 = new __Promise();if(PL$28/*cDef*/["storageEngine"]){
-        PL$33/*engine*/ = PL$28/*cDef*/["storageEngine"];
-        PL$32.resolve();;
+      var PL$34 = new __Promise();if(PL$29/*cDef*/["storageEngine"]){
+        PL$35/*engine*/ = PL$29/*cDef*/["storageEngine"];
+        PL$34.resolve();;
       }else{
-      PL$25/*storageEnginePs*/.then(PL$30(function(PL$34){PL$33/*engine*/ = PL$34;
-      PL$32.resolve();;}), PL$31);
-;
-      };PL$32.then(PL$30(function(PL$35){PL$35;;
+      PL$26/*storageEnginePs*/.then(PL$32/*promiseland exception catcher*/(function(PL$36){PL$35/*engine*/ = PL$36;
+      PL$34.resolve();;}), PL$33/*catch rejected*/);
       ;
-      PL$36/*propertiesAr*/ = [];
-      PL$37/*properties*/ = {};
-      PL$38/*map*/ = PL$28/*cDef*/["map"];
-      PL$39/*i*/ = 0;
-      for(PL$39/*i*/ = 0;(PL$39/*i*/ < PL$38/*map*/["membersAr"]["length"]);++PL$39/*i*/){{
-        PL$40/*mDef*/ = PL$38/*map*/["membersAr"][PL$39/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$40/*mDef*/["type"]) || PL$40/*mDef*/["noSave"])){
+      };PL$34.then(PL$32/*promiseland exception catcher*/(function(PL$37){PL$37;;
+      ;
+      PL$38/*propertiesAr*/ = [
+        
+      ];
+      PL$39/*properties*/ = {
+        
+      };
+      PL$40/*map*/ = PL$29/*cDef*/["map"];
+      PL$41/*i*/ = 0;
+      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
+        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$41/*p*/ = {"name": PL$40/*mDef*/["name"],
-"type": PL$40/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"]),
-"defaultValue": (PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"]) ? PL$40/*mDef*/["defaultValue"] : PL$22/*pcs*/["stringifyInstance"](PL$40/*mDef*/["type"], PL$40/*mDef*/["defaultValue"]))};
-        if(PL$40/*mDef*/["meta"]){
-          PL$41/*p*/["meta"] = PL$40/*mDef*/["meta"];
+        PL$43/*p*/ = {
+          "name": PL$42/*mDef*/["name"],
+          "type": PL$42/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]),
+          "defaultValue": (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$42/*mDef*/["defaultValue"] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$42/*mDef*/["defaultValue"]))
+        };
+        if(PL$42/*mDef*/["meta"]){
+          PL$43/*p*/["meta"] = PL$42/*mDef*/["meta"];
         };
         ;
-        PL$36/*propertiesAr*/["push"](PL$41/*p*/);
-        PL$37/*properties*/[PL$40/*mDef*/["name"]] = PL$41/*p*/;}};
+        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
+        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
       ;
       try
-{
-        if(PL$33/*engine*/["registerClass"]){
-          PL$28/*cDef*/["storageHandler"] = PL$33/*engine*/["registerClass"]({"idType": PL$28/*cDef*/["idType"],
-"properties": PL$37/*properties*/,
-"propertiesAr": PL$36/*propertiesAr*/,
-"moduleName": PL$28/*cDef*/["moduleName"],
-"className": PL$28/*cDef*/["className"],
-"moduleHash": PL$28/*cDef*/["moduleHash"]});
+      {
+        if(PL$35/*engine*/["registerClass"]){
+          PL$29/*cDef*/["storageHandler"] = PL$35/*engine*/["registerClass"]({
+            "idType": PL$29/*cDef*/["idType"],
+            "properties": PL$39/*properties*/,
+            "propertiesAr": PL$38/*propertiesAr*/,
+            "moduleName": PL$29/*cDef*/["moduleName"],
+            "className": PL$29/*cDef*/["className"],
+            "moduleHash": PL$29/*cDef*/["moduleHash"]
+          });
         };
-        ;}catch(PL$42/*e*/){};
+        ;}catch(PL$44/*e*/){};
       ;
-      PL$29.resolve(); return;}), PL$31);
-;})();
-return PL$29;
-});
-    PL$22/*pcs*/["saveInstance"] = (function(PL$27/*parType*/, PL$43/*parInstance*/){
-    var PL$44 = new __Promise();
-var PL$45 = function(code){ return function(res){ try{code(res);}catch(e){ PL$44.reject(e); }; }; };
-var PL$46 = function(e){ PL$44.reject(e); };
-var PL$28/*cDef*/;
-var PL$47/*h*/;
-var PL$36/*propertiesAr*/;
-var PL$37/*properties*/;
-var PL$38/*map*/;
-var PL$39/*i*/;
-var PL$40/*mDef*/;
-var PL$41/*p*/;
-PL$45(function(){
+      PL$30.resolve(); return;}), PL$33/*catch rejected*/);
+      ;
+    })();return PL$30;
+    });
+    PL$23/*pcs*/["saveInstance"] = (function(PL$28/*parType*/, PL$45/*parInstance*/){
+    var PL$46 = new __Promise();
+    var PL$48/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$46.reject(e);
+        };
+      };
+    };
+    var PL$49/*catch rejected*/ = function(e){
+      PL$46.reject(e);
+    };
+    var PL$29/*cDef*/;
+    var PL$50/*h*/;
+    var PL$38/*propertiesAr*/;
+    var PL$39/*properties*/;
+    var PL$40/*map*/;
+    var PL$41/*i*/;
+    var PL$42/*mDef*/;
+    var PL$43/*p*/;
+    PL$48/*promiseland exception catcher*/(function(){
     
       ;
-      PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      PL$28/*cDef*/["storageHandler"].then(PL$45(function(PL$48){PL$47/*h*/ = PL$48;
-      PL$36/*propertiesAr*/ = [];
-      PL$37/*properties*/ = {};
-      PL$38/*map*/ = PL$28/*cDef*/["map"];
-      PL$39/*i*/ = 0;
-      for(PL$39/*i*/ = 0;(PL$39/*i*/ < PL$38/*map*/["membersAr"]["length"]);++PL$39/*i*/){{
-        PL$40/*mDef*/ = PL$38/*map*/["membersAr"][PL$39/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$40/*mDef*/["type"]) || PL$40/*mDef*/["noSave"])){
+      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      PL$29/*cDef*/["storageHandler"].then(PL$48/*promiseland exception catcher*/(function(PL$51){PL$50/*h*/ = PL$51;
+      PL$38/*propertiesAr*/ = [
+        
+      ];
+      PL$39/*properties*/ = {
+        
+      };
+      PL$40/*map*/ = PL$29/*cDef*/["map"];
+      PL$41/*i*/ = 0;
+      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
+        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$41/*p*/ = {"name": PL$40/*mDef*/["name"],
-"type": PL$40/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"]),
-"value": (PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"]) ? PL$43/*parInstance*/[PL$40/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$40/*mDef*/["type"], PL$43/*parInstance*/[PL$40/*mDef*/["index"]]))};
-        PL$36/*propertiesAr*/["push"](PL$41/*p*/);
-        PL$37/*properties*/[PL$40/*mDef*/["name"]] = PL$41/*p*/;}};
+        PL$43/*p*/ = {
+          "name": PL$42/*mDef*/["name"],
+          "type": PL$42/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]),
+          "value": (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$45/*parInstance*/[PL$42/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$45/*parInstance*/[PL$42/*mDef*/["index"]]))
+        };
+        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
+        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
       ;
-      PL$47/*h*/["save"]({"properties": PL$37/*properties*/,
-"propertiesAr": PL$36/*propertiesAr*/}).then(PL$45(function(PL$49){PL$44.resolve(PL$49); return;
-      PL$44.resolve(); return;}), PL$46);
-;}), PL$46);
-;})();
-return PL$44;
-});
-    PL$22/*pcs*/["loadInstance"] = (function(PL$27/*parType*/, PL$43/*parInstance*/){
-    var PL$50 = new __Promise();
-var PL$51 = function(code){ return function(res){ try{code(res);}catch(e){ PL$50.reject(e); }; }; };
-var PL$52 = function(e){ PL$50.reject(e); };
-var PL$28/*cDef*/;
-var PL$47/*h*/;
-var PL$36/*propertiesAr*/;
-var PL$37/*properties*/;
-var PL$38/*map*/;
-var PL$39/*i*/;
-var PL$40/*mDef*/;
-var PL$41/*p*/;
-var PL$54/*loadVar*/;
-PL$51(function(){
+      PL$50/*h*/["save"]({
+        "properties": PL$39/*properties*/,
+        "propertiesAr": PL$38/*propertiesAr*/
+      }).then(PL$48/*promiseland exception catcher*/(function(PL$52){PL$46.resolve(PL$52); return;
+      PL$46.resolve(); return;}), PL$49/*catch rejected*/);
+      ;}), PL$49/*catch rejected*/);
+      ;
+    })();return PL$46;
+    });
+    PL$23/*pcs*/["loadInstance"] = (function(PL$28/*parType*/, PL$45/*parInstance*/){
+    var PL$53 = new __Promise();
+    var PL$55/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$53.reject(e);
+        };
+      };
+    };
+    var PL$56/*catch rejected*/ = function(e){
+      PL$53.reject(e);
+    };
+    var PL$29/*cDef*/;
+    var PL$50/*h*/;
+    var PL$38/*propertiesAr*/;
+    var PL$39/*properties*/;
+    var PL$40/*map*/;
+    var PL$41/*i*/;
+    var PL$42/*mDef*/;
+    var PL$43/*p*/;
+    var PL$58/*loadVar*/;
+    PL$55/*promiseland exception catcher*/(function(){
     
       ;
-      PL$28/*cDef*/ = PL$23/*getClass*/(PL$27/*parType*/);
-      PL$28/*cDef*/["storageHandler"].then(PL$51(function(PL$53){PL$47/*h*/ = PL$53;
-      PL$36/*propertiesAr*/ = [];
-      PL$37/*properties*/ = {};
-      PL$38/*map*/ = PL$28/*cDef*/["map"];
-      PL$39/*i*/ = 0;
-      for(PL$39/*i*/ = 0;(PL$39/*i*/ < PL$38/*map*/["membersAr"]["length"]);++PL$39/*i*/){{
-        PL$40/*mDef*/ = PL$38/*map*/["membersAr"][PL$39/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$40/*mDef*/["type"]) || PL$40/*mDef*/["noSave"])){
+      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      PL$29/*cDef*/["storageHandler"].then(PL$55/*promiseland exception catcher*/(function(PL$57){PL$50/*h*/ = PL$57;
+      PL$38/*propertiesAr*/ = [
+        
+      ];
+      PL$39/*properties*/ = {
+        
+      };
+      PL$40/*map*/ = PL$29/*cDef*/["map"];
+      PL$41/*i*/ = 0;
+      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
+        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$41/*p*/ = {"name": PL$40/*mDef*/["name"],
-"type": PL$40/*mDef*/["type"],
-"isVar": PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"])};
-        if((PL$40/*mDef*/["name"] == "id")){
-          PL$41/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"]) ? PL$43/*parInstance*/[PL$40/*mDef*/["index"]] : PL$22/*pcs*/["stringifyInstance"](PL$40/*mDef*/["type"], PL$43/*parInstance*/[PL$40/*mDef*/["index"]]));
+        PL$43/*p*/ = {
+          "name": PL$42/*mDef*/["name"],
+          "type": PL$42/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"])
+        };
+        if((PL$42/*mDef*/["name"] == "id")){
+          PL$43/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$45/*parInstance*/[PL$42/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$45/*parInstance*/[PL$42/*mDef*/["index"]]));
         };
         ;
-        PL$36/*propertiesAr*/["push"](PL$41/*p*/);
-        PL$37/*properties*/[PL$40/*mDef*/["name"]] = PL$41/*p*/;}};
+        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
+        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
       ;
-      PL$47/*h*/["load"]({"properties": PL$37/*properties*/,
-"propertiesAr": PL$36/*propertiesAr*/}).then(PL$51(function(PL$55){PL$54/*loadVar*/ = PL$55;
-      if(! PL$54/*loadVar*/){
-        PL$50.resolve(); return;
+      PL$50/*h*/["load"]({
+        "properties": PL$39/*properties*/,
+        "propertiesAr": PL$38/*propertiesAr*/
+      }).then(PL$55/*promiseland exception catcher*/(function(PL$59){PL$58/*loadVar*/ = PL$59;
+      if(! PL$58/*loadVar*/){
+        PL$53.resolve(); return;
       };
       ;
-      for(PL$39/*i*/ = 0;(PL$39/*i*/ < PL$38/*map*/["membersAr"]["length"]);++PL$39/*i*/){{
-        PL$40/*mDef*/ = PL$38/*map*/["membersAr"][PL$39/*i*/];
-        if((! PL$22/*pcs*/["isSavableType"](PL$40/*mDef*/["type"]) || PL$40/*mDef*/["noSave"])){
+      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
+        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        if(PL$22/*pcs*/["hasOwnProperty"](PL$54/*loadVar*/, PL$40/*mDef*/["name"])){
-          if(PL$14/*classSystem*/["isVar"](PL$40/*mDef*/["type"])){
-            PL$22/*pcs*/["setMemberByDefFromInstance"](PL$27/*parType*/, PL$43/*parInstance*/, PL$40/*mDef*/, PL$54/*loadVar*/[PL$40/*mDef*/["name"]]);
+        if(PL$23/*pcs*/["hasOwnProperty"](PL$58/*loadVar*/, PL$42/*mDef*/["name"])){
+          if(PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"])){
+            PL$23/*pcs*/["setMemberByDefFromInstance"](PL$28/*parType*/, PL$45/*parInstance*/, PL$42/*mDef*/, PL$58/*loadVar*/[PL$42/*mDef*/["name"]]);
           }else{
           };
           ;
         };
         ;}};
       ;
-      PL$50.resolve(); return;}), PL$52);
-;}), PL$52);
-;})();
-return PL$50;
-});
-    PL$21/*cs*/["setStorageEngine"] = (function(PL$56/*parStorageEngine*/, PL$27/*parType*/){
-    var PL$57 = new __Promise();
-var PL$58 = function(code){ return function(res){ try{code(res);}catch(e){ PL$57.reject(e); }; }; };
-var PL$59 = function(e){ PL$57.reject(e); };
-var PL$61/*type*/;
-var PL$28/*cDef*/;
-PL$58(function(){
+      PL$53.resolve(); return;}), PL$56/*catch rejected*/);
+      ;}), PL$56/*catch rejected*/);
+      ;
+    })();return PL$53;
+    });
+    PL$22/*cs*/["setStorageEngine"] = (function(PL$60/*parStorageEngine*/, PL$28/*parType*/){
+    var PL$61 = new __Promise();
+    var PL$63/*promiseland exception catcher*/ = function(code){
+      return function(res){
+        try{ code(res); }catch(e){
+          PL$61.reject(e);
+        };
+      };
+    };
+    var PL$64/*catch rejected*/ = function(e){
+      PL$61.reject(e);
+    };
+    var PL$66/*type*/;
+    var PL$29/*cDef*/;
+    PL$63/*promiseland exception catcher*/(function(){
     
       ;
       
-      var PL$60 = new __Promise();if(PL$27/*parType*/){
-        PL$21/*cs*/["readyPromise"](PL$27/*parType*/).then(PL$58(function(PL$62){PL$61/*type*/ = PL$62;
-        PL$28/*cDef*/ = PL$23/*getClass*/(PL$61/*type*/);
-        PL$28/*cDef*/["storageEngine"] = PL$56/*parStorageEngine*/;
-        PL$22/*pcs*/["registerSavableClass"](PL$61/*type*/);
-        PL$57.resolve(); return;
-        PL$60.resolve();;}), PL$59);
-;
-      }else{PL$60.resolve();
-      };PL$60.then(PL$58(function(PL$63){PL$63;;
+      var PL$65 = new __Promise();if(PL$28/*parType*/){
+        PL$22/*cs*/["readyPromise"](PL$28/*parType*/).then(PL$63/*promiseland exception catcher*/(function(PL$67){PL$66/*type*/ = PL$67;
+        PL$29/*cDef*/ = PL$24/*getClass*/(PL$66/*type*/);
+        PL$29/*cDef*/["storageEngine"] = PL$60/*parStorageEngine*/;
+        PL$23/*pcs*/["registerSavableClass"](PL$66/*type*/);
+        PL$61.resolve(); return;
+        PL$65.resolve();;}), PL$64/*catch rejected*/);
+        ;
+      }else{PL$65.resolve();
+      };PL$65.then(PL$63/*promiseland exception catcher*/(function(PL$68){PL$68;;
       ;
       try
-{
-        PL$25/*storageEnginePs*/["resolve"](PL$56/*parStorageEngine*/);}catch(__dummy){};
+      {
+        PL$26/*storageEnginePs*/["resolve"](PL$60/*parStorageEngine*/);}catch(__dummy){};
       ;
-      PL$25/*storageEnginePs*/ = new PL$26/*Promise*/();
-      PL$25/*storageEnginePs*/["resolve"](PL$56/*parStorageEngine*/);
-      PL$57.resolve(); return;}), PL$59);
-;})();
-return PL$57;
-});
+      PL$26/*storageEnginePs*/ = new PL$27/*Promise*/();
+      PL$26/*storageEnginePs*/["resolve"](PL$60/*parStorageEngine*/);
+      PL$61.resolve(); return;}), PL$64/*catch rejected*/);
+      ;
+    })();return PL$61;
+    });
     ;});
   ;})();
 ;return PL$1;

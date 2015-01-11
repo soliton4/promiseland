@@ -55,27 +55,24 @@ if (promiseland._hasModule({ hashStr: "4a01c4f3b4388a1628a72080d91dbb50" })){ re
 var PL$18/*Array*/;try{PL$18/*Array*/ = Array;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*mixinPrototype*/;
-var PL$9/*getProperty*/;
-var PL$13/*createClass*/;
 
   ;
   ;
-  PL$2/*mixinPrototype*/ = (function(PL$3/*parProto*/, PL$4/*parMixin*/, PL$5/*inheritedObject*/, PL$6/*gotit*/){
-  var PL$7/*i*/;
-var PL$8/*proto*/;
-
+  var PL$2/*mixinPrototype*/ = (function(PL$3/*parProto*/, PL$4/*parMixin*/, PL$5/*inheritedObject*/, PL$6/*gotit*/){
+  
     ;
     if((! PL$4/*parMixin*/ || ! PL$4/*parMixin*/["prototype"])){
       return;
     };
     ;
     if(! PL$6/*gotit*/){
-      PL$6/*gotit*/ = {};
+      PL$6/*gotit*/ = {
+        
+      };
     };
     ;
-    PL$7/*i*/;
-    PL$8/*proto*/ = PL$4/*parMixin*/["prototype"];
+    var PL$7/*i*/;
+    var PL$8/*proto*/ = PL$4/*parMixin*/["prototype"];
     for(PL$7/*i*/ in PL$8/*proto*/){
       if(((PL$7/*i*/ === "prototype") || PL$6/*gotit*/[PL$7/*i*/])){
         continue;;
@@ -90,7 +87,7 @@ var PL$8/*proto*/;
     };
     ;
     ;});
-  PL$9/*getProperty*/ = (function(PL$10/*par*/, PL$11/*parProperty*/, PL$12/*parDefault*/){
+  var PL$9/*getProperty*/ = (function(PL$10/*par*/, PL$11/*parProperty*/, PL$12/*parDefault*/){
   
     ;
     if(PL$10/*par*/["hasOwnProperty"](PL$11/*parProperty*/)){
@@ -99,28 +96,25 @@ var PL$8/*proto*/;
     ;
     return PL$12/*parDefault*/;
     ;});
-  PL$13/*createClass*/ = (function(PL$10/*par*/, PL$14/*parExtends*/, PL$5/*inheritedObject*/){
-  var PL$15/*constructorFun*/;
-var PL$8/*proto*/;
-var PL$7/*i*/;
-var PL$16/*l*/;
-var PL$17/*realConstructorFun*/;
-var PL$19/*extendConstructors*/;
-var PL$20/*cl*/;
-
+  var PL$13/*createClass*/ = (function(PL$10/*par*/, PL$14/*parExtends*/, PL$5/*inheritedObject*/){
+  
     ;
-    PL$15/*constructorFun*/ = PL$9/*getProperty*/(PL$10/*par*/, "constructor", (function(){
+    var PL$15/*constructorFun*/ = PL$9/*getProperty*/(PL$10/*par*/, "constructor", (function(){
     
       ;
       ;}));
-    PL$8/*proto*/ = {};
-    PL$7/*i*/;
-    PL$16/*l*/;
+    var PL$8/*proto*/ = {
+      
+    };
+    var PL$7/*i*/;
+    var PL$16/*l*/;
     if(PL$14/*parExtends*/){
-      PL$17/*realConstructorFun*/ = PL$15/*constructorFun*/;
+      var PL$17/*realConstructorFun*/ = PL$15/*constructorFun*/;
       if((PL$14/*parExtends*/ instanceof PL$18/*Array*/)){
         PL$16/*l*/ = PL$14/*parExtends*/["length"];
-        PL$19/*extendConstructors*/ = [];
+        var PL$19/*extendConstructors*/ = [
+          
+        ];
         for(PL$7/*i*/ = 0;(PL$7/*i*/ < PL$16/*l*/);++PL$7/*i*/){{
           PL$2/*mixinPrototype*/(PL$8/*proto*/, PL$14/*parExtends*/[PL$7/*i*/], PL$5/*inheritedObject*/);
           if((typeof PL$14/*parExtends*/[PL$7/*i*/] === "function")){
@@ -128,14 +122,13 @@ var PL$20/*cl*/;
           };
           ;}};
         ;
-        PL$20/*cl*/ = PL$19/*extendConstructors*/["length"];
+        var PL$20/*cl*/ = PL$19/*extendConstructors*/["length"];
         if(PL$20/*cl*/){
           PL$15/*constructorFun*/ = (function(){
-          var PL$7/*i*/;
-var PL$21/*arguments*/ = arguments;
-
+          var PL$21/*arguments*/ = arguments;
+          
             ;
-            PL$7/*i*/;
+            var PL$7/*i*/;
             for(PL$7/*i*/ = 0;(PL$7/*i*/ < PL$20/*cl*/);++PL$7/*i*/){{
               PL$19/*extendConstructors*/[PL$7/*i*/]["apply"](this, PL$21/*arguments*/);}};
             ;
@@ -148,7 +141,7 @@ var PL$21/*arguments*/ = arguments;
       if((typeof PL$14/*parExtends*/ === "function")){
         PL$15/*constructorFun*/ = (function(){
         var PL$21/*arguments*/ = arguments;
-
+        
           ;
           PL$14/*parExtends*/["apply"](this, PL$21/*arguments*/);
           return PL$17/*realConstructorFun*/["apply"](this, PL$21/*arguments*/);

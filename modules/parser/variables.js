@@ -71,8 +71,16 @@ var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$32/*Promise*/;try{PL$32/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*Map*/;
 var PL$7/*classSystem*/;
 var PL$8/*basics*/;
@@ -85,12 +93,12 @@ var PL$15/*mixin*/;
 var PL$16/*identifierName*/;
 var PL$17/*checkIsFunction*/;
 var PL$18/*getExtraFromPar*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
   PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-  __requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
+  __requireFun("./basics").then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*basics*/ = PL$9;
   PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
   PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
   PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
@@ -133,9 +141,11 @@ PL$3(function(){
           };
           ;
         }else{
-        this["localVariables"]["set"](PL$24/*name*/, {"typename": PL$20/*par*/["typename"],
-"type": PL$20/*par*/["type"],
-"name": PL$24/*name*/});
+        this["localVariables"]["set"](PL$24/*name*/, {
+          "typename": PL$20/*par*/["typename"],
+          "type": PL$20/*par*/["type"],
+          "name": PL$24/*name*/
+        });
         if((! PL$20/*par*/["typename"] && ! PL$20/*par*/["type"])){
           this["localVariables"]["get"](PL$24/*name*/)["type"] = this["getProvisionalType"](PL$22/*parParsed*/);
           this["localVariables"]["get"](PL$24/*name*/)["needsResolving"] = true;
@@ -173,9 +183,11 @@ PL$3(function(){
           PL$29/*originalEntry*/ = this["variables"]["get"](PL$24/*name*/);
         };
         ;
-        var PL$30/*entry*/ = {"typename": PL$20/*par*/["typename"],
-"type": PL$20/*par*/["type"],
-"name": PL$24/*name*/};
+        var PL$30/*entry*/ = {
+          "typename": PL$20/*par*/["typename"],
+          "type": PL$20/*par*/["type"],
+          "name": PL$24/*name*/
+        };
         if((! PL$20/*par*/["typename"] && ! PL$20/*par*/["type"])){
           PL$30/*entry*/["type"] = this["getProvisionalType"](PL$22/*parParsed*/);
           PL$30/*entry*/["needsResolving"] = true;
@@ -194,22 +206,30 @@ PL$3(function(){
         var PL$31/*resPs*/ = new PL$32/*Promise*/();
         (function(){
         var PL$33 = new __Promise();
-var PL$35 = function(code){ return function(res){ try{code(res);}catch(e){ PL$33.reject(e); }; }; };
-var PL$36 = function(e){ PL$33.reject(e); };
-PL$35(function(){
+        var PL$35/*promiseland exception catcher*/ = function(code){
+          return function(res){
+            try{ code(res); }catch(e){
+              PL$33.reject(e);
+            };
+          };
+        };
+        var PL$36/*catch rejected*/ = function(e){
+          PL$33.reject(e);
+        };
+        PL$35/*promiseland exception catcher*/(function(){
         
           ;
-          PL$31/*resPs*/.then(PL$35(function(PL$37){PL$37;
+          PL$31/*resPs*/.then(PL$35/*promiseland exception catcher*/(function(PL$37){PL$37;
           if(PL$29/*originalEntry*/){
             PL$23/*self*/["variables"]["set"](PL$24/*name*/, PL$29/*originalEntry*/);
           }else{
           PL$23/*self*/["variables"]["delete"](PL$24/*name*/);
           };
           ;
-          PL$33.resolve(); return;}), PL$36);
-;})();
-return PL$33;
-})();
+          PL$33.resolve(); return;}), PL$36/*catch rejected*/);
+          ;
+        })();return PL$33;
+        })();
         return PL$31/*resPs*/;
         ;});
       this["_getVariableType"] = (function(PL$38/*parEntry*/){
@@ -270,16 +290,20 @@ return PL$33;
         };
         ;
         if((PL$20/*par*/["type"] == "VariableDeclaration")){
-          this["addLocalVariable"]({"name": PL$16/*identifierName*/(PL$20/*par*/["id"]),
-"typename": PL$16/*identifierName*/(PL$20/*par*/["typename"]),
-"declaration": true}, PL$20/*par*/);
+          this["addLocalVariable"]({
+            "name": PL$16/*identifierName*/(PL$20/*par*/["id"]),
+            "typename": PL$16/*identifierName*/(PL$20/*par*/["typename"]),
+            "declaration": true
+          }, PL$20/*par*/);
         }else{
         if((PL$20/*par*/["type"] == "Class")){
           var PL$40/*ci*/ = PL$23/*self*/["identifyClass"](PL$20/*par*/);
           if(PL$40/*ci*/["hasName"]){
-            this["addLocalVariable"]({"name": PL$16/*identifierName*/(PL$20/*par*/["name"]),
-"typename": "var",
-"declaration": true}, PL$20/*par*/);
+            this["addLocalVariable"]({
+              "name": PL$16/*identifierName*/(PL$20/*par*/["name"]),
+              "typename": "var",
+              "declaration": true
+            }, PL$20/*par*/);
           };
           ;
           return;
@@ -287,8 +311,10 @@ return PL$33;
         if(PL$17/*checkIsFunction*/(PL$20/*par*/)){
           var PL$41/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
           if(PL$41/*functionInfo*/["hasExternalName"]){
-            this["addLocalVariable"]({"name": PL$41/*functionInfo*/["nameStr"],
-"isFunction": true}, PL$20/*par*/);
+            this["addLocalVariable"]({
+              "name": PL$41/*functionInfo*/["nameStr"],
+              "isFunction": true
+            }, PL$20/*par*/);
           };
           ;
           return;
@@ -376,11 +402,13 @@ return PL$33;
         ;
         var PL$43/*res*/ = this["newResult"]();
         if(PL$20/*par*/["init"]){
-          PL$43/*res*/["pushType"](this["getSetVariableCode"]({"instance": this["getVariable"](PL$16/*identifierName*/(PL$20/*par*/["id"])),
-"assignmentType": PL$20/*par*/["id"]["type"],
-"value": this["parseExpression"](PL$20/*par*/["init"]),
-"operator": "=",
-"errorFun": this["getWarningFun"](PL$20/*par*/)}));
+          PL$43/*res*/["pushType"](this["getSetVariableCode"]({
+            "instance": this["getVariable"](PL$16/*identifierName*/(PL$20/*par*/["id"])),
+            "assignmentType": PL$20/*par*/["id"]["type"],
+            "value": this["parseExpression"](PL$20/*par*/["init"]),
+            "operator": "=",
+            "errorFun": this["getWarningFun"](PL$20/*par*/)
+          }));
         }else{
         PL$43/*res*/["pushType"](this["getVariable"](PL$16/*identifierName*/(PL$20/*par*/["id"])));
         };
@@ -388,11 +416,13 @@ return PL$33;
         return PL$43/*res*/;
         ;});
       ;});
-    PL$21/*f*/["apply"](PL$19/*parInstance*/, [PL$20/*par*/]);
+    PL$21/*f*/["apply"](PL$19/*parInstance*/, [
+      PL$20/*par*/
+    ]);
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

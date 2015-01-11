@@ -57,7 +57,6 @@ var PL$5/*xxx*/;try{PL$5/*xxx*/ = xxx;}catch(e){};
 var PL$6/*y*/;try{PL$6/*y*/ = y;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$4/*b*/;
 function PL$3/*a*/(){
 
   ;
@@ -65,9 +64,9 @@ function PL$3/*a*/(){
 
   ;
   PL$2/*x*/ = 1;
-  PL$3/*a*/;
+  /* function a (){} - hoisted */;
   ;
-  PL$4/*b*/ = (function(){
+  var PL$4/*b*/ = (function(){
   
     ;
     PL$5/*xxx*/();

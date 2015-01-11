@@ -58,45 +58,38 @@ var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$10/*Promise*/;try{PL$10/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*errorMsg*/;
 
   ;
   ;
-  PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
-  var PL$6/*cs*/;
-var PL$7/*classHider*/;
-var PL$8/*getClass*/;
-
+  
     ;
-    PL$6/*cs*/ = PL$4/*classSystem*/;
-    PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
-    PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
+    var PL$6/*cs*/ = PL$4/*classSystem*/;
+    var PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
+    var PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
     PL$6/*cs*/["_createProvisionalClass"] = (function(){
-    var PL$9/*cDef*/;
-var PL$12/*cf*/;
-
+    
       ;
-      PL$9/*cDef*/ = {"provisional": true,
-"promise": new PL$10/*Promise*/(),
-"type": undefined};
+      var PL$9/*cDef*/ = {
+        "provisional": true,
+        "promise": new PL$10/*Promise*/(),
+        "type": undefined
+      };
       PL$9/*cDef*/["promise"]["then"]((function(PL$11/*type*/){
       
         ;
         PL$9/*cDef*/["type"] = PL$11/*type*/;
         ;}));
-      PL$12/*cf*/ = PL$7/*classHider*/(PL$9/*cDef*/);
+      var PL$12/*cf*/ = PL$7/*classHider*/(PL$9/*cDef*/);
       return PL$12/*cf*/;
       ;});
     PL$6/*cs*/["_resolveProvisional"] = (function(PL$13/*parType*/, PL$14/*parResult*/){
-    var PL$15/*self*/;
-var PL$16/*typeDef*/;
-var PL$17/*resultDef*/;
-
+    
       ;
-      PL$15/*self*/ = this;
-      PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
-      PL$17/*resultDef*/ = PL$8/*getClass*/(PL$14/*parResult*/);
+      var PL$15/*self*/ = this;
+      var PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
+      var PL$17/*resultDef*/ = PL$8/*getClass*/(PL$14/*parResult*/);
       if(PL$17/*resultDef*/["provisional"]){
         PL$17/*resultDef*/["promise"]["then"]((function(PL$18/*result*/){
         
@@ -109,10 +102,9 @@ var PL$17/*resultDef*/;
       ;
       ;});
     PL$6/*cs*/["isProvisional"] = (function(PL$13/*parType*/){
-    var PL$16/*typeDef*/;
-
+    
       ;
-      PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
+      var PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
       if(PL$16/*typeDef*/["provisional"]){
         return true;
       };
@@ -120,29 +112,25 @@ var PL$17/*resultDef*/;
       return false;
       ;});
     PL$6/*cs*/["definitionPromise"] = (function(PL$13/*parType*/){
-    var PL$16/*typeDef*/;
-var PL$19/*p*/;
-
+    
       ;
-      PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
+      var PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
       if(PL$16/*typeDef*/["provisional"]){
         return PL$16/*typeDef*/["promise"];
       };
       ;
-      PL$19/*p*/ = new PL$10/*Promise*/();
+      var PL$19/*p*/ = new PL$10/*Promise*/();
       PL$19/*p*/["resolve"](PL$13/*parType*/);
       return PL$19/*p*/;
       ;});
     PL$6/*cs*/["readyPromise"] = (function(PL$20/*_parType*/){
-    var PL$19/*p*/;
-
+    
       ;
-      PL$19/*p*/ = new PL$10/*Promise*/();
+      var PL$19/*p*/ = new PL$10/*Promise*/();
       this["definitionPromise"](PL$20/*_parType*/)["then"]((function(PL$13/*parType*/){
-      var PL$16/*typeDef*/;
-
+      
         ;
-        PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
+        var PL$16/*typeDef*/ = PL$8/*getClass*/(PL$13/*parType*/);
         if(PL$16/*typeDef*/["isReady"]){
           PL$19/*p*/["resolve"](PL$13/*parType*/);
           return;

@@ -55,22 +55,19 @@ if (promiseland._hasModule({ hashStr: "a5c0dd7062bad82c74b4862cc85c54ff" })){ re
 var PL$17/*promiseland*/;try{PL$17/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*Promise*/;
-var PL$18/*all*/;
-var PL$26/*Callback*/;
-var PL$30/*CallbackErrorFirst*/;
 
   ;
   ;
-  PL$2/*Promise*/ = (function(PL$3/*parCancelCallback*/){
-  var PL$4/*thenAr*/;
-var PL$5/*elseAr*/;
-var PL$6/*thenFun*/;
-
+  var PL$2/*Promise*/ = (function(PL$3/*parCancelCallback*/){
+  
     ;
-    PL$4/*thenAr*/ = [];
-    PL$5/*elseAr*/ = [];
-    PL$6/*thenFun*/ = (function(PL$7/*parThenFun*/, PL$8/*parElseFun*/){
+    var PL$4/*thenAr*/ = [
+      
+    ];
+    var PL$5/*elseAr*/ = [
+      
+    ];
+    var PL$6/*thenFun*/ = (function(PL$7/*parThenFun*/, PL$8/*parElseFun*/){
     
       ;
       if(PL$7/*parThenFun*/){
@@ -83,42 +80,38 @@ var PL$6/*thenFun*/;
       ;
       ;});
     this["resolve"] = (function(PL$9/*value*/){
-    var PL$11/*i*/;
-var PL$12/*l*/;
-
+    
       ;
       PL$6/*thenFun*/ = (function(PL$7/*parThenFun*/){
       
         ;
         try
-{
+        {
           PL$7/*parThenFun*/(PL$9/*value*/);}catch(PL$10/*e*/){};
         ;
         ;});
       if(! PL$4/*thenAr*/){
         return;
       };
-      PL$11/*i*/ = 0;
-      PL$12/*l*/ = PL$4/*thenAr*/["length"];
+      var PL$11/*i*/ = 0;
+      var PL$12/*l*/ = PL$4/*thenAr*/["length"];
       for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
         try
-{
+        {
           PL$4/*thenAr*/[PL$11/*i*/](PL$9/*value*/);}catch(PL$10/*e*/){};}};
       ;
       PL$4/*thenAr*/ = undefined;
       PL$5/*elseAr*/ = undefined;
       ;});
     this["reject"] = (function(PL$9/*value*/){
-    var PL$11/*i*/;
-var PL$12/*l*/;
-
+    
       ;
       PL$6/*thenFun*/ = (function(PL$13/*u*/, PL$8/*parElseFun*/){
       
         ;
         if(PL$8/*parElseFun*/){
           try
-{
+          {
             PL$8/*parElseFun*/(PL$9/*value*/);}catch(PL$10/*e*/){};
           ;
         };
@@ -127,11 +120,11 @@ var PL$12/*l*/;
       if(! PL$5/*elseAr*/){
         return;
       };
-      PL$11/*i*/ = 0;
-      PL$12/*l*/ = PL$5/*elseAr*/["length"];
+      var PL$11/*i*/ = 0;
+      var PL$12/*l*/ = PL$5/*elseAr*/["length"];
       for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
         try
-{
+        {
           PL$5/*elseAr*/[PL$11/*i*/](PL$9/*value*/);}catch(PL$10/*e*/){};}};
       ;
       PL$4/*thenAr*/ = undefined;
@@ -162,19 +155,15 @@ var PL$12/*l*/;
     this["then"]["then"] = this["then"];
     ;});
   PL$17/*promiseland*/["Promise"] = PL$2/*Promise*/;
-  PL$18/*all*/ = (function(PL$19/*promisesAr*/){
-  var PL$20/*res*/;
-var PL$21/*resAr*/;
-var PL$22/*check*/;
-var PL$23/*cnt*/;
-var PL$6/*thenFun*/;
-var PL$11/*i*/;
-var PL$12/*l*/;
-
+  var PL$18/*all*/ = (function(PL$19/*promisesAr*/){
+  var PL$23/*cnt*/;
+  
     ;
-    PL$20/*res*/ = new PL$2/*Promise*/();
-    PL$21/*resAr*/ = (PL$19/*promisesAr*/ ? PL$19/*promisesAr*/["slice"]() : []);
-    PL$22/*check*/ = (function(){
+    var PL$20/*res*/ = new PL$2/*Promise*/();
+    var PL$21/*resAr*/ = (PL$19/*promisesAr*/ ? PL$19/*promisesAr*/["slice"]() : [
+      
+    ]);
+    var PL$22/*check*/ = (function(){
     
       ;
       if(PL$23/*cnt*/){
@@ -184,7 +173,7 @@ var PL$12/*l*/;
       PL$20/*res*/["resolve"](PL$21/*resAr*/);
       ;});
     PL$23/*cnt*/ = 1;
-    PL$6/*thenFun*/ = (function(PL$24/*parI*/){
+    var PL$6/*thenFun*/ = (function(PL$24/*parI*/){
     
       ;
       return (function(PL$25/*r*/){
@@ -195,8 +184,8 @@ var PL$12/*l*/;
         PL$22/*check*/();
         ;});
       ;});
-    PL$11/*i*/ = 0;
-    PL$12/*l*/ = PL$21/*resAr*/["length"];
+    var PL$11/*i*/ = 0;
+    var PL$12/*l*/ = PL$21/*resAr*/["length"];
     for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
       ++PL$23/*cnt*/;
       PL$21/*resAr*/[PL$11/*i*/]["then"](PL$6/*thenFun*/(PL$11/*i*/));}};
@@ -206,15 +195,13 @@ var PL$12/*l*/;
     return PL$20/*res*/;
     ;});
   PL$17/*promiseland*/["all"] = PL$18/*all*/;
-  PL$26/*Callback*/ = (function(){
-  var PL$27/*promise*/;
-var PL$28/*callback*/;
-
+  var PL$26/*Callback*/ = (function(){
+  
     ;
-    PL$27/*promise*/ = new PL$2/*Promise*/();
-    PL$28/*callback*/ = (function(){
+    var PL$27/*promise*/ = new PL$2/*Promise*/();
+    var PL$28/*callback*/ = (function(){
     var PL$29/*arguments*/ = arguments;
-
+    
       ;
       PL$27/*promise*/["resolve"](PL$29/*arguments*/);
       ;});
@@ -223,13 +210,11 @@ var PL$28/*callback*/;
     return PL$28/*callback*/;
     ;});
   PL$17/*promiseland*/["Callback"] = PL$26/*Callback*/;
-  PL$30/*CallbackErrorFirst*/ = (function(){
-  var PL$27/*promise*/;
-var PL$28/*callback*/;
-
+  var PL$30/*CallbackErrorFirst*/ = (function(){
+  
     ;
-    PL$27/*promise*/ = new PL$2/*Promise*/();
-    PL$28/*callback*/ = (function(PL$31/*err*/, PL$20/*res*/){
+    var PL$27/*promise*/ = new PL$2/*Promise*/();
+    var PL$28/*callback*/ = (function(PL$31/*err*/, PL$20/*res*/){
     
       ;
       if(PL$31/*err*/){
@@ -250,10 +235,9 @@ var PL$28/*callback*/;
     return PL$32/*par*/;
     ;});
   PL$17/*promiseland*/["importPromise"] = (function(PL$32/*par*/){
-  var PL$33/*p*/;
-
+  
     ;
-    PL$33/*p*/ = new PL$2/*Promise*/();
+    var PL$33/*p*/ = new PL$2/*Promise*/();
     PL$32/*par*/["then"]((function(PL$20/*res*/){
     
       ;

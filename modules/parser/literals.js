@@ -70,8 +70,16 @@ promiseland._registerModule({ hashStr: "bf7893d2ec7eb1ff2308d14e0078a753", "modu
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*Map*/;
 var PL$7/*classSystem*/;
 var PL$8/*basics*/;
@@ -86,12 +94,12 @@ var PL$17/*checkIsFunction*/;
 var PL$18/*getExtraFromPar*/;
 var PL$19/*statementType*/;
 var PL$20/*checkPromising*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
   PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-  __requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
+  __requireFun("./basics").then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*basics*/ = PL$9;
   PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
   PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
   PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
@@ -145,10 +153,12 @@ PL$3(function(){
               };
               ;
               var PL$31/*v*/ = this["parseExpression"](PL$30/*prop*/["value"]);
-              PL$26/*indentRes*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({"value": PL$31/*v*/,
-"valueType": PL$31/*v*/["getType"](),
-"type": this["getType"]((PL$30/*prop*/["typename"] || "var"), PL$22/*par*/),
-"errorFun": this["getWarningFun"](PL$22/*par*/)})));
+              PL$26/*indentRes*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({
+                "value": PL$31/*v*/,
+                "valueType": PL$31/*v*/["getType"](),
+                "type": this["getType"]((PL$30/*prop*/["typename"] || "var"), PL$22/*par*/),
+                "errorFun": this["getWarningFun"](PL$22/*par*/)
+              })));
             };
             ;
           }else{
@@ -204,11 +214,13 @@ PL$3(function(){
         return PL$24/*res*/;
         ;});
       ;});
-    PL$23/*f*/["apply"](PL$21/*parInstance*/, [PL$22/*par*/]);
+    PL$23/*f*/["apply"](PL$21/*parInstance*/, [
+      PL$22/*par*/
+    ]);
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

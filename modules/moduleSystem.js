@@ -55,11 +55,12 @@ if (promiseland._hasModule({ hashStr: "b4d87d3050f4ff97d753b76790f08b0f" })){ re
 var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*modules*/;
 
   ;
   ;
-  PL$2/*modules*/ = {};
+  var PL$2/*modules*/ = {
+    
+  };
   PL$3/*promiseland*/["_registerModule"] = (function(PL$4/*par*/){
   
     ;
@@ -67,8 +68,10 @@ var PL$2/*modules*/;
       return false;
     };
     ;
-    PL$2/*modules*/[PL$4/*par*/["hashStr"]] = {"promising": PL$4/*par*/["promising"],
-"module": PL$4/*par*/["module"]};
+    PL$2/*modules*/[PL$4/*par*/["hashStr"]] = {
+      "promising": PL$4/*par*/["promising"],
+      "module": PL$4/*par*/["module"]
+    };
     return true;
     ;});
   PL$3/*promiseland*/["_getModule"] = (function(PL$5/*parHashStr*/){
@@ -86,10 +89,9 @@ var PL$2/*modules*/;
     return false;
     ;});
   PL$3/*promiseland*/["isPromiseLandPromisingModule"] = (function(PL$6/*parM*/){
-  var PL$7/*i*/;
-
+  
     ;
-    PL$7/*i*/;
+    var PL$7/*i*/;
     for(PL$7/*i*/ in PL$2/*modules*/){
       if((PL$2/*modules*/[PL$7/*i*/] && (PL$2/*modules*/[PL$7/*i*/]["module"] === PL$6/*parM*/))){
         return PL$2/*modules*/[PL$7/*i*/]["promising"];

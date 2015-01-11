@@ -70,8 +70,16 @@ promiseland._registerModule({ hashStr: "a7f21cff842ef0738460b4c5faebce7d", "modu
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*classSystem*/;
 var PL$7/*basics*/;
 var PL$9/*errorFun*/;
@@ -86,11 +94,11 @@ var PL$17/*getExtraFromPar*/;
 var PL$18/*statementType*/;
 var PL$19/*checkPromising*/;
 var PL$20/*asm*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-  __requireFun("./basics").then(PL$3(function(PL$8){PL$7/*basics*/ = PL$8;
+  __requireFun("./basics").then(PL$3/*promiseland exception catcher*/(function(PL$8){PL$7/*basics*/ = PL$8;
   PL$9/*errorFun*/ = PL$7/*basics*/["errorFun"];
   PL$10/*errorMsg*/ = PL$7/*basics*/["errorMsg"];
   PL$11/*_stringEncodeStr*/ = PL$7/*basics*/["_stringEncodeStr"];
@@ -102,39 +110,34 @@ PL$3(function(){
   PL$17/*getExtraFromPar*/ = PL$7/*basics*/["getExtraFromPar"];
   PL$18/*statementType*/ = PL$7/*basics*/["statementType"];
   PL$19/*checkPromising*/ = PL$7/*basics*/["checkPromising"];
-  __requireFun("./imported/asm").then(PL$3(function(PL$21){PL$20/*asm*/ = PL$21;
+  __requireFun("./imported/asm").then(PL$3/*promiseland exception catcher*/(function(PL$21){PL$20/*asm*/ = PL$21;
   PL$1.resolve((function(PL$22/*parInstance*/, PL$23/*par*/){
-  var PL$24/*f*/;
-
+  
     ;
-    PL$24/*f*/ = (function(PL$23/*par*/){
+    var PL$24/*f*/ = (function(PL$23/*par*/){
     
       ;
       this["checkAsm"] = (function(PL$25/*parResult*/, PL$26/*parStr*/){
-      var PL$27/*validation*/;
-
+      
         ;
         if(! PL$26/*parStr*/){
           return;
         };
         ;
         try
-{
-          PL$27/*validation*/ = PL$20/*asm*/["validate"](PL$26/*parStr*/);}catch(PL$28/*e*/){
+        {
+          var PL$27/*validation*/ = PL$20/*asm*/["validate"](PL$26/*parStr*/);}catch(PL$28/*e*/){
           this["warning"](PL$25/*parResult*/["getParsed"](), PL$10/*errorMsg*/["asmValidationFailed"]);};
         ;
         ;});
       this["isAsmFun"] = (function(PL$29/*parsed*/){
-      var PL$30/*body*/;
-var PL$31/*first*/;
-var PL$32/*expression*/;
-
+      
         ;
         if((! PL$29/*parsed*/ || ! PL$29/*parsed*/["body"])){
           return false;
         };
         ;
-        PL$30/*body*/ = PL$29/*parsed*/["body"];
+        var PL$30/*body*/ = PL$29/*parsed*/["body"];
         if(PL$30/*body*/["body"]){
           PL$30/*body*/ = PL$30/*body*/["body"];
         };
@@ -143,9 +146,9 @@ var PL$32/*expression*/;
           return false;
         };
         ;
-        PL$31/*first*/ = PL$30/*body*/[0];
+        var PL$31/*first*/ = PL$30/*body*/[0];
         if((PL$31/*first*/["type"] == "ExpressionStatement")){
-          PL$32/*expression*/ = PL$31/*first*/["expression"];
+          var PL$32/*expression*/ = PL$31/*first*/["expression"];
           if((((PL$32/*expression*/ && (PL$32/*expression*/["type"] == "Literal")) && (typeof PL$32/*expression*/["value"] == "string")) && (PL$32/*expression*/["value"] == "use asm"))){
             PL$31/*first*/["asmIgnore"] = true;
             return true;
@@ -156,12 +159,14 @@ var PL$32/*expression*/;
         return false;
         ;});
       ;});
-    PL$24/*f*/["apply"](PL$22/*parInstance*/, [PL$23/*par*/]);
+    PL$24/*f*/["apply"](PL$22/*parInstance*/, [
+      PL$23/*par*/
+    ]);
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

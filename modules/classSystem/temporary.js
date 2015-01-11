@@ -58,30 +58,22 @@ var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$14/*Promise*/;try{PL$14/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-var PL$2/*errorMsg*/;
 
   ;
   ;
-  PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
-  var PL$6/*cs*/;
-var PL$7/*classHider*/;
-var PL$8/*getClass*/;
-
+  
     ;
-    PL$6/*cs*/ = PL$4/*classSystem*/;
-    PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
-    PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
+    var PL$6/*cs*/ = PL$4/*classSystem*/;
+    var PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
+    var PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
     PL$6/*cs*/["_createTemporaryTrackedClass"] = (function(PL$9/*parType*/){
-    var PL$10/*self*/;
-var PL$11/*pr*/;
-var PL$13/*cDef*/;
-var PL$15/*cf*/;
-
+    
       ;
-      PL$10/*self*/ = this;
+      var PL$10/*self*/ = this;
       if(this["isProvisional"](PL$9/*parType*/)){
-        PL$11/*pr*/ = this["_createProvisionalClass"]();
+        var PL$11/*pr*/ = this["_createProvisionalClass"]();
         this["definitionPromise"](PL$9/*parType*/)["then"]((function(PL$12/*parDefinedClass*/){
         
           ;
@@ -98,11 +90,13 @@ var PL$15/*cf*/;
         return PL$9/*parType*/;
       };
       ;
-      PL$13/*cDef*/ = {"temporaryTracked": true,
-"type": PL$9/*parType*/,
-"isReady": false,
-"readyPromise": new PL$14/*Promise*/()};
-      PL$15/*cf*/ = PL$7/*classHider*/(PL$13/*cDef*/);
+      var PL$13/*cDef*/ = {
+        "temporaryTracked": true,
+        "type": PL$9/*parType*/,
+        "isReady": false,
+        "readyPromise": new PL$14/*Promise*/()
+      };
+      var PL$15/*cf*/ = PL$7/*classHider*/(PL$13/*cDef*/);
       PL$10/*self*/["readyPromise"](PL$9/*parType*/)["then"]((function(){
       
         ;
@@ -112,10 +106,9 @@ var PL$15/*cf*/;
       return PL$15/*cf*/;
       ;});
     PL$6/*cs*/["isTemporaryTrackedClass"] = (function(PL$9/*parType*/){
-    var PL$13/*cDef*/;
-
+    
       ;
-      PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
+      var PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
       if(PL$13/*cDef*/["temporaryTracked"]){
         return true;
       };
@@ -123,11 +116,10 @@ var PL$15/*cf*/;
       return false;
       ;});
     PL$6/*cs*/["getClassFromTemporaryTracked"] = (function(PL$9/*parType*/){
-    var PL$13/*cDef*/;
-
+    
       ;
       if(this["isTemporaryTrackedClass"](PL$9/*parType*/)){
-        PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
+        var PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
         return PL$13/*cDef*/["type"];
       };
       ;

@@ -76,8 +76,7 @@ var PL$1 = (function(){
       
       PL$6/*f2*/ = true;
     
-  }
-  ;
+  };
   ;
   if((PL$3/*c1*/ && PL$4/*c2*/)){
     if((! PL$5/*f1*/ && ! PL$6/*f2*/)){

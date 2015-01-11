@@ -294,7 +294,7 @@ var checkPromising = function(par){
         id: 1014
         , msg: "internal: origninalText missing"
         , additional: "pls provide this error in a github issue"
-      }
+      },
       
       asmValidationFailed: {
         id: 2001

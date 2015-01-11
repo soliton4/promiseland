@@ -70,8 +70,16 @@ promiseland._registerModule({ hashStr: "c674b8a4cb08e513b5ebcbb15c353468", "modu
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*Map*/;
 var PL$7/*classSystem*/;
 var PL$8/*basics*/;
@@ -91,12 +99,12 @@ var PL$23/*loopsModule*/;
 var PL$25/*conditionalsModule*/;
 var PL$27/*literalsModule*/;
 var PL$29/*classModule*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
   PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-  __requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
+  __requireFun("./basics").then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*basics*/ = PL$9;
   PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
   PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
   PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
@@ -108,11 +116,11 @@ PL$3(function(){
   PL$18/*getExtraFromPar*/ = PL$8/*basics*/["getExtraFromPar"];
   PL$19/*statementType*/ = PL$8/*basics*/["statementType"];
   PL$20/*checkPromising*/ = PL$8/*basics*/["checkPromising"];
-  __requireFun("./blocks").then(PL$3(function(PL$22){PL$21/*blocksModule*/ = PL$22;
-  __requireFun("./loops").then(PL$3(function(PL$24){PL$23/*loopsModule*/ = PL$24;
-  __requireFun("./conditionals").then(PL$3(function(PL$26){PL$25/*conditionalsModule*/ = PL$26;
-  __requireFun("./literals").then(PL$3(function(PL$28){PL$27/*literalsModule*/ = PL$28;
-  __requireFun("./class").then(PL$3(function(PL$30){PL$29/*classModule*/ = PL$30;
+  __requireFun("./blocks").then(PL$3/*promiseland exception catcher*/(function(PL$22){PL$21/*blocksModule*/ = PL$22;
+  __requireFun("./loops").then(PL$3/*promiseland exception catcher*/(function(PL$24){PL$23/*loopsModule*/ = PL$24;
+  __requireFun("./conditionals").then(PL$3/*promiseland exception catcher*/(function(PL$26){PL$25/*conditionalsModule*/ = PL$26;
+  __requireFun("./literals").then(PL$3/*promiseland exception catcher*/(function(PL$28){PL$27/*literalsModule*/ = PL$28;
+  __requireFun("./class").then(PL$3/*promiseland exception catcher*/(function(PL$30){PL$29/*classModule*/ = PL$30;
   PL$1.resolve((function(PL$31/*parInstance*/, PL$32/*par*/){
   
     ;
@@ -140,104 +148,145 @@ PL$3(function(){
         ;
         var PL$34/*res*/;
         switch (PL$35/*value*/["type"]){
-case "ArrayExpression":
-
-        return this["expArrayExpression"](PL$35/*value*/);case "AssignmentExpression":
-
-        return this["expAssignmentExpression"](PL$35/*value*/);case "BinaryExpression":
-
-        return this["expBinaryExpression"](PL$35/*value*/);case "BlockStatement":
-
-        return this["expBlockStatement"](PL$35/*value*/);case "BreakStatement":
-
-        return this["expBreakStatement"](PL$35/*value*/);case "CallExpression":
-
-        return this["expCallExpression"](PL$35/*value*/);case "Class":
-
-        return this["expClassStatement"](PL$35/*value*/);case "ClassObjectExpression":
-
-        return this["expClassObjectExpression"](PL$35/*value*/);case "ConditionalExpression":
-
-        return this["conditionalExpression"](PL$35/*value*/);case "ConnectExpression":
-
-        return this["connectExpression"](PL$35/*value*/);case "ContinueStatement":
-
-        return this["expContinueStatement"](PL$35/*value*/);case "DebuggerStatement":
-
-        return this["expDebuggerStatement"](PL$35/*value*/);case "DoWhileStatement":
-
-        return this["expDoWhileStatement"](PL$35/*value*/);case "EmptyStatement":
-
-        PL$34/*res*/ = this["newResult"]();
-        PL$34/*res*/["setType"]("var");
-        return PL$34/*res*/;case "ExpressionStatement":
-
-        return this["expExpressionStatement"](PL$35/*value*/);case "ForInStatement":
-
-        return this["expForInStatement"](PL$35/*value*/);case "ForStatement":
-
-        return this["expForStatement"](PL$35/*value*/);case "FunctionExpression":
-
-        return this["expFunctionExpression"](PL$35/*value*/);case "FunctionDeclaration":
-
-        return this["expFunctionDeclaration"](PL$35/*value*/);case "MemberFunction":
-
-        return this["expMemberFunction"](PL$35/*value*/);case "Identifier":
-
-        return this["expIdentifier"](PL$35/*value*/);case "IfStatement":
-
-        return this["expIfStatement"](PL$35/*value*/);case "InheritedExpression":
-
-        return this["expInheritedExpression"](PL$35/*value*/);case "Literal":
-
-        return this["expLiteral"](PL$35/*value*/);case "MemberExpression":
-
-        return this["expMemberExpression"](PL$35/*value*/);case "NewExpression":
-
-        return this["expNewExpression"](PL$35/*value*/);case "ObjectExpression":
-
-        return this["expObjectExpression"](PL$35/*value*/);case "ReturnStatement":
-
-        return this["expReturnStatement"](PL$35/*value*/);case "SequenceExpression":
-
-        return this["expSequenceExpression"](PL$35/*value*/);case "SwitchStatement":
-
-        return this["expSwitchStatement"](PL$35/*value*/);case "ThisExpression":
-
-        return this["expThisExpression"](PL$35/*value*/);case "ThrowStatement":
-
-        return this["expThrowStatement"](PL$35/*value*/);case "TryStatement":
-
-        return this["expTryStatement"](PL$35/*value*/);case "UnaryExpression":
-
-        if((PL$35/*value*/["operator"] == "*")){
-          return this["expPromiseExpression"](PL$35/*value*/["argument"]);
+          case "ArrayExpression":
+            
+            return this["expArrayExpression"](PL$35/*value*/);
+          case "AssignmentExpression":
+            
+            return this["expAssignmentExpression"](PL$35/*value*/);
+          case "BinaryExpression":
+            
+            return this["expBinaryExpression"](PL$35/*value*/);
+          case "BlockStatement":
+            
+            return this["expBlockStatement"](PL$35/*value*/);
+          case "BreakStatement":
+            
+            return this["expBreakStatement"](PL$35/*value*/);
+          case "CallExpression":
+            
+            return this["expCallExpression"](PL$35/*value*/);
+          case "Class":
+            
+            return this["expClassStatement"](PL$35/*value*/);
+          case "ClassObjectExpression":
+            
+            return this["expClassObjectExpression"](PL$35/*value*/);
+          case "ConditionalExpression":
+            
+            return this["conditionalExpression"](PL$35/*value*/);
+          case "ConnectExpression":
+            
+            return this["connectExpression"](PL$35/*value*/);
+          case "ContinueStatement":
+            
+            return this["expContinueStatement"](PL$35/*value*/);
+          case "DebuggerStatement":
+            
+            return this["expDebuggerStatement"](PL$35/*value*/);
+          case "DoWhileStatement":
+            
+            return this["expDoWhileStatement"](PL$35/*value*/);
+          case "EmptyStatement":
+            
+            PL$34/*res*/ = this["newResult"]();
+            PL$34/*res*/["setType"]("var");
+            return PL$34/*res*/;
+          case "ExpressionStatement":
+            
+            return this["expExpressionStatement"](PL$35/*value*/);
+          case "ForInStatement":
+            
+            return this["expForInStatement"](PL$35/*value*/);
+          case "ForStatement":
+            
+            return this["expForStatement"](PL$35/*value*/);
+          case "FunctionExpression":
+            
+            return this["expFunctionExpression"](PL$35/*value*/);
+          case "FunctionDeclaration":
+            
+            return this["expFunctionDeclaration"](PL$35/*value*/);
+          case "MemberFunction":
+            
+            return this["expMemberFunction"](PL$35/*value*/);
+          case "Identifier":
+            
+            return this["expIdentifier"](PL$35/*value*/);
+          case "IfStatement":
+            
+            return this["expIfStatement"](PL$35/*value*/);
+          case "InheritedExpression":
+            
+            return this["expInheritedExpression"](PL$35/*value*/);
+          case "Literal":
+            
+            return this["expLiteral"](PL$35/*value*/);
+          case "MemberExpression":
+            
+            return this["expMemberExpression"](PL$35/*value*/);
+          case "NewExpression":
+            
+            return this["expNewExpression"](PL$35/*value*/);
+          case "ObjectExpression":
+            
+            return this["expObjectExpression"](PL$35/*value*/);
+          case "ReturnStatement":
+            
+            return this["expReturnStatement"](PL$35/*value*/);
+          case "SequenceExpression":
+            
+            return this["expSequenceExpression"](PL$35/*value*/);
+          case "SwitchStatement":
+            
+            return this["expSwitchStatement"](PL$35/*value*/);
+          case "ThisExpression":
+            
+            return this["expThisExpression"](PL$35/*value*/);
+          case "ThrowStatement":
+            
+            return this["expThrowStatement"](PL$35/*value*/);
+          case "TryStatement":
+            
+            return this["expTryStatement"](PL$35/*value*/);
+          case "UnaryExpression":
+            
+            if((PL$35/*value*/["operator"] == "*")){
+              return this["expPromiseExpression"](PL$35/*value*/["argument"]);
+            };
+            ;
+            if((PL$35/*value*/["operator"] == "require")){
+              return this["expRequireExpression"](PL$35/*value*/["argument"]);
+            };
+            ;
+            return this["expUnaryExpression"](PL$35/*value*/);
+          case "UpdateExpression":
+            
+            return this["expUpdateExpression"](PL$35/*value*/);
+          case "VariableStatement":
+            
+            return this["expVariableStatement"](PL$35/*value*/);
+          case "VariableDeclaration":
+            
+            return this["expVariableDeclaration"](PL$35/*value*/);
+          case "WhileStatement":
+            
+            return this["whileStatement"](PL$35/*value*/);
+          default:
+            
+            debugger;
+            this["error"](PL$35/*value*/, PL$11/*errorMsg*/["unknownType"]);
+          
         };
-        ;
-        if((PL$35/*value*/["operator"] == "require")){
-          return this["expRequireExpression"](PL$35/*value*/["argument"]);
-        };
-        ;
-        return this["expUnaryExpression"](PL$35/*value*/);case "UpdateExpression":
-
-        return this["expUpdateExpression"](PL$35/*value*/);case "VariableStatement":
-
-        return this["expVariableStatement"](PL$35/*value*/);case "VariableDeclaration":
-
-        return this["expVariableDeclaration"](PL$35/*value*/);case "WhileStatement":
-
-        return this["whileStatement"](PL$35/*value*/);default:
-
-        debugger;
-        this["error"](PL$35/*value*/, PL$11/*errorMsg*/["unknownType"]);}
-;
         ;
         return "/*this should not happen*/";
         ;});
       this["expExpressionStatement"] = (function(PL$36/*parParsed*/){
       
         ;
-        var PL$34/*res*/ = this["getDestroyTemporaryClassCode"]({"value": this["parseExpression"](PL$36/*parParsed*/["expression"])});
+        var PL$34/*res*/ = this["getDestroyTemporaryClassCode"]({
+          "value": this["parseExpression"](PL$36/*parParsed*/["expression"])
+        });
         return PL$34/*res*/;
         ;});
       this["expThisExpression"] = (function(PL$32/*par*/){
@@ -313,7 +362,9 @@ case "ArrayExpression":
         };
         ;
         var PL$40/*b*/ = PL$32/*par*/["block"];
-        var PL$41/*extraPar*/ = {};
+        var PL$41/*extraPar*/ = {
+          
+        };
         PL$40/*b*/["brackets"] = true;
         if(PL$20/*checkPromising*/(PL$32/*par*/)){
           PL$41/*extraPar*/["postCode"] = this["newResult"]((PL$39/*continuePromise*/ + ".resolve()"));
@@ -333,9 +384,11 @@ case "ArrayExpression":
         var PL$42/*temporaryPs*/;
         if((PL$32/*par*/["handler"] && PL$32/*par*/["handler"]["param"])){
           PL$34/*res*/["push"](this["getVariableName"](PL$16/*identifierName*/(PL$32/*par*/["handler"]["param"])));
-          PL$42/*temporaryPs*/ = this["addLocalVariableTemporary"]({"name": PL$16/*identifierName*/(PL$32/*par*/["handler"]["param"]),
-"typename": "var",
-"parameter": true}, PL$32/*par*/["handler"]);
+          PL$42/*temporaryPs*/ = this["addLocalVariableTemporary"]({
+            "name": PL$16/*identifierName*/(PL$32/*par*/["handler"]["param"]),
+            "typename": "var",
+            "parameter": true
+          }, PL$32/*par*/["handler"]);
         }else{
         PL$34/*res*/["push"]("__dummy");
         };
@@ -343,7 +396,9 @@ case "ArrayExpression":
         PL$34/*res*/["push"](")");
         if(PL$32/*par*/["handler"]){
           PL$40/*b*/ = PL$32/*par*/["handler"]["body"];
-          PL$41/*extraPar*/ = {};
+          PL$41/*extraPar*/ = {
+            
+          };
           PL$40/*b*/["brackets"] = true;
           if(PL$20/*checkPromising*/(PL$32/*par*/)){
             PL$41/*extraPar*/["postCode"] = this["newResult"]((PL$39/*continuePromise*/ + ".resolve();"));
@@ -418,38 +473,42 @@ case "ArrayExpression":
         };
         ;
         switch (typeof PL$32/*par*/["value"]){
-case "string":
-
-        PL$34/*res*/["push"](PL$13/*stringEncodeStr*/(PL$32/*par*/["value"]));
-        break;;case "number":
-
-        if(this["asmMode"]){
-          PL$34/*res*/["push"](("" + PL$32/*par*/["originalText"]));
-          break;;
+          case "string":
+            
+            PL$34/*res*/["push"](PL$13/*stringEncodeStr*/(PL$32/*par*/["value"]));
+            break;;
+          case "number":
+            
+            if(this["asmMode"]){
+              PL$34/*res*/["push"](("" + PL$32/*par*/["originalText"]));
+              break;;
+            };
+            ;
+            PL$34/*res*/["push"](("" + PL$32/*par*/["value"]));
+            break;;
+          case "boolean":
+            
+            if(PL$32/*par*/["value"]){
+              PL$34/*res*/["push"]("true");
+            }else{
+            PL$34/*res*/["push"]("false");
+            };
+            ;
+            break;;
+          default:
+            
+            if((PL$32/*par*/["value"] === null)){
+              PL$34/*res*/["push"]("null");
+            }else{
+            if((PL$32/*par*/["value"] && PL$32/*par*/["value"]["exec"])){
+              PL$34/*res*/["push"](("" + PL$32/*par*/["value"]));
+            }else{
+            this["error"](PL$32/*par*/, PL$11/*errorMsg*/["internalUnknownLiteralType"]);
+            };
+            };
+            ;
+          
         };
-        ;
-        PL$34/*res*/["push"](("" + PL$32/*par*/["value"]));
-        break;;case "boolean":
-
-        if(PL$32/*par*/["value"]){
-          PL$34/*res*/["push"]("true");
-        }else{
-        PL$34/*res*/["push"]("false");
-        };
-        ;
-        break;;default:
-
-        if((PL$32/*par*/["value"] === null)){
-          PL$34/*res*/["push"]("null");
-        }else{
-        if((PL$32/*par*/["value"] && PL$32/*par*/["value"]["exec"])){
-          PL$34/*res*/["push"](("" + PL$32/*par*/["value"]));
-        }else{
-        this["error"](PL$32/*par*/, PL$11/*errorMsg*/["internalUnknownLiteralType"]);
-        };
-        };
-        ;}
-;
         ;
         PL$34/*res*/["setType"](this["getType"]("var"));
         return PL$34/*res*/;
@@ -476,14 +535,18 @@ case "string":
         var PL$46/*promiseNameStr*/ = this["getUniqueName"]();
         PL$34/*res*/["makePromising"]();
         PL$34/*res*/["setPromiseName"](PL$46/*promiseNameStr*/);
-        var PL$47/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$45/*expressionRes*/});
+        var PL$47/*dereferencePre*/ = this["dereferencePromisePreCode"]({
+          "value": PL$45/*expressionRes*/
+        });
         var PL$48/*preRes*/ = this["newResult"]();
         PL$48/*preRes*/["push"](PL$47/*dereferencePre*/);
         PL$48/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));
         PL$48/*preRes*/["push"](PL$46/*promiseNameStr*/);
         PL$48/*preRes*/["push"]("){");
         PL$34/*res*/["addPre"](PL$48/*preRes*/);
-        var PL$49/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$45/*expressionRes*/});
+        var PL$49/*dereferencePost*/ = this["dereferencePromisePostCode"]({
+          "value": PL$45/*expressionRes*/
+        });
         var PL$50/*postRes*/ = this["newResult"]();
         PL$50/*postRes*/["push"](("}), " + this["catchFunctionStr"]));
         PL$50/*postRes*/["push"](PL$49/*dereferencePost*/);
@@ -520,14 +583,18 @@ case "string":
         var PL$46/*promiseNameStr*/ = this["getUniqueName"]();
         PL$34/*res*/["makePromising"]();
         PL$34/*res*/["setPromiseName"](PL$46/*promiseNameStr*/);
-        var PL$47/*dereferencePre*/ = this["dereferencePromisePreCode"]({"value": PL$45/*expressionRes*/});
+        var PL$47/*dereferencePre*/ = this["dereferencePromisePreCode"]({
+          "value": PL$45/*expressionRes*/
+        });
         var PL$48/*preRes*/ = this["newResult"]();
         PL$48/*preRes*/["push"](PL$47/*dereferencePre*/);
         PL$48/*preRes*/["push"]((this["tryCatchFunctionStr"] + "(function("));
         PL$48/*preRes*/["push"](PL$46/*promiseNameStr*/);
         PL$48/*preRes*/["push"]("){");
         PL$34/*res*/["addPre"](PL$48/*preRes*/);
-        var PL$49/*dereferencePost*/ = this["dereferencePromisePostCode"]({"value": PL$45/*expressionRes*/});
+        var PL$49/*dereferencePost*/ = this["dereferencePromisePostCode"]({
+          "value": PL$45/*expressionRes*/
+        });
         var PL$50/*postRes*/ = this["newResult"]();
         PL$50/*postRes*/["push"](("}), " + this["catchFunctionStr"]));
         PL$50/*postRes*/["push"](PL$49/*dereferencePost*/);
@@ -543,7 +610,9 @@ case "string":
         var PL$52/*typed*/ = false;
         var PL$53/*type*/ = "var";
         if((PL$32/*par*/["callee"] && (PL$32/*par*/["callee"]["type"] == "Identifier"))){
-          PL$53/*type*/ = this["getType"](PL$16/*identifierName*/(PL$32/*par*/["callee"]), PL$32/*par*/, {"dontThrow": true});
+          PL$53/*type*/ = this["getType"](PL$16/*identifierName*/(PL$32/*par*/["callee"]), PL$32/*par*/, {
+            "dontThrow": true
+          });
           if(PL$53/*type*/){
             PL$34/*res*/["push"]("new ");
             PL$34/*res*/["push"](this["getConstructorName"](PL$32/*par*/["callee"]));
@@ -563,7 +632,9 @@ case "string":
         var PL$37/*i*/ = 0;
         var PL$54/*constructorType*/;
         if(PL$52/*typed*/){
-          PL$54/*constructorType*/ = this["getConstructorType"]({"type": PL$53/*type*/}, PL$32/*par*/);
+          PL$54/*constructorType*/ = this["getConstructorType"]({
+            "type": PL$53/*type*/
+          }, PL$32/*par*/);
         };
         ;
         for(PL$37/*i*/;(PL$37/*i*/ < PL$32/*par*/["arguments"]["length"]);++PL$37/*i*/){{
@@ -573,10 +644,12 @@ case "string":
           ;
           var PL$55/*expression*/ = this["parseExpression"](PL$32/*par*/["arguments"][PL$37/*i*/]);
           if(PL$52/*typed*/){
-            PL$34/*res*/["push"](this["getPassAsTypeCode"]({"value": PL$55/*expression*/,
-"valueType": PL$55/*expression*/["getType"](),
-"type": this["getFunctionArgumentType"](PL$54/*constructorType*/, PL$37/*i*/, PL$32/*par*/),
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+            PL$34/*res*/["push"](this["getPassAsTypeCode"]({
+              "value": PL$55/*expression*/,
+              "valueType": PL$55/*expression*/["getType"](),
+              "type": this["getFunctionArgumentType"](PL$54/*constructorType*/, PL$37/*i*/, PL$32/*par*/),
+              "errorFun": this["getWarningFun"](PL$32/*par*/)
+            }));
           }else{
           PL$34/*res*/["push"](this["expectTypeVar"](PL$55/*expression*/));
           };
@@ -614,18 +687,22 @@ case "string":
           ;
           var PL$58/*slotObject*/ = this["parseExpression"](PL$36/*parParsed*/["slot"]["object"]);
           var PL$59/*slotProperty*/ = PL$16/*identifierName*/(PL$36/*parParsed*/["slot"]["property"]);
-          PL$34/*res*/["push"](this["connectSlotCode"]({"signalObject": PL$56/*signalObject*/,
-"signalProperty": PL$57/*signalProperty*/,
-"slotObject": PL$58/*slotObject*/,
-"slotProperty": PL$59/*slotProperty*/,
-"errorFun": this["getWarningFun"](PL$36/*parParsed*/)}));
+          PL$34/*res*/["push"](this["connectSlotCode"]({
+            "signalObject": PL$56/*signalObject*/,
+            "signalProperty": PL$57/*signalProperty*/,
+            "slotObject": PL$58/*slotObject*/,
+            "slotProperty": PL$59/*slotProperty*/,
+            "errorFun": this["getWarningFun"](PL$36/*parParsed*/)
+          }));
         }else{
         if(PL$36/*parParsed*/["fun"]){
           var PL$60/*fun*/ = this["parseExpression"](PL$36/*parParsed*/["fun"]);
-          PL$34/*res*/["push"](this["connectFunCode"]({"signalObject": PL$56/*signalObject*/,
-"signalProperty": PL$57/*signalProperty*/,
-"fun": PL$60/*fun*/,
-"errorFun": this["getWarningFun"](PL$36/*parParsed*/)}));
+          PL$34/*res*/["push"](this["connectFunCode"]({
+            "signalObject": PL$56/*signalObject*/,
+            "signalProperty": PL$57/*signalProperty*/,
+            "fun": PL$60/*fun*/,
+            "errorFun": this["getWarningFun"](PL$36/*parParsed*/)
+          }));
         }else{
         this["error"](PL$36/*parParsed*/, PL$11/*errorMsg*/["unknownConnect"]);
         };
@@ -684,10 +761,12 @@ case "string":
           PL$34/*res*/["addPre"]("){");
           PL$34/*res*/["addPost"]("});");
         }else{
-        PL$34/*res*/["push"](this["getBinaryExpressionCode"]({"left": PL$61/*left*/,
-"right": PL$62/*right*/,
-"operator": PL$32/*par*/["operator"],
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+        PL$34/*res*/["push"](this["getBinaryExpressionCode"]({
+          "left": PL$61/*left*/,
+          "right": PL$62/*right*/,
+          "operator": PL$32/*par*/["operator"],
+          "errorFun": this["getWarningFun"](PL$32/*par*/)
+        }));
         };
         ;
         return PL$34/*res*/;
@@ -697,10 +776,12 @@ case "string":
         ;
         var PL$34/*res*/ = this["newResult"]();
         var PL$68/*base*/ = this["parseExpression"](PL$32/*par*/["object"]);
-        PL$34/*res*/["pushType"](this["getGetPropertyCode"]({"instance": PL$68/*base*/,
-"property": (PL$32/*par*/["computed"] ? undefined : PL$16/*identifierName*/(PL$32/*par*/["property"])),
-"propertyValue": (PL$32/*par*/["computed"] ? this["expectTypeVar"](this["parseExpression"](PL$32/*par*/["property"])) : undefined),
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+        PL$34/*res*/["pushType"](this["getGetPropertyCode"]({
+          "instance": PL$68/*base*/,
+          "property": (PL$32/*par*/["computed"] ? undefined : PL$16/*identifierName*/(PL$32/*par*/["property"])),
+          "propertyValue": (PL$32/*par*/["computed"] ? this["expectTypeVar"](this["parseExpression"](PL$32/*par*/["property"])) : undefined),
+          "errorFun": this["getWarningFun"](PL$32/*par*/)
+        }));
         return PL$34/*res*/;
         ;});
       this["expAssignmentExpression"] = (function(PL$32/*par*/){
@@ -717,19 +798,23 @@ case "string":
           PL$69/*property*/ = PL$16/*identifierName*/(PL$32/*par*/["left"]["property"]);
           };
           ;
-          PL$34/*res*/["pushType"](this["getSetPropertyCode"]({"instance": PL$68/*base*/,
-"propertyValue": PL$70/*propertyValue*/,
-"property": PL$69/*property*/,
-"computed": PL$32/*par*/["left"]["computed"],
-"value": this["parseExpression"](PL$32/*par*/["right"]),
-"operator": PL$32/*par*/["operator"],
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+          PL$34/*res*/["pushType"](this["getSetPropertyCode"]({
+            "instance": PL$68/*base*/,
+            "propertyValue": PL$70/*propertyValue*/,
+            "property": PL$69/*property*/,
+            "computed": PL$32/*par*/["left"]["computed"],
+            "value": this["parseExpression"](PL$32/*par*/["right"]),
+            "operator": PL$32/*par*/["operator"],
+            "errorFun": this["getWarningFun"](PL$32/*par*/)
+          }));
         }else{
-        PL$34/*res*/["pushType"](this["getSetVariableCode"]({"instance": this["parseExpression"](PL$32/*par*/["left"]),
-"assignmentType": PL$32/*par*/["left"]["type"],
-"value": this["parseExpression"](PL$32/*par*/["right"]),
-"operator": PL$32/*par*/["operator"],
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+        PL$34/*res*/["pushType"](this["getSetVariableCode"]({
+          "instance": this["parseExpression"](PL$32/*par*/["left"]),
+          "assignmentType": PL$32/*par*/["left"]["type"],
+          "value": this["parseExpression"](PL$32/*par*/["right"]),
+          "operator": PL$32/*par*/["operator"],
+          "errorFun": this["getWarningFun"](PL$32/*par*/)
+        }));
         };
         ;
         return PL$34/*res*/;
@@ -741,24 +826,32 @@ case "string":
         var PL$37/*i*/ = 0;
         var PL$71/*l*/;
         var PL$72/*calleeRes*/ = this["parseExpression"](PL$32/*par*/["callee"]);
-        var PL$73/*args*/ = [];
+        var PL$73/*args*/ = [
+          
+        ];
         if(PL$32/*par*/["arguments"]){
           PL$71/*l*/ = PL$32/*par*/["arguments"]["length"];
           for(PL$37/*i*/ = 0;(PL$37/*i*/ < PL$71/*l*/);++PL$37/*i*/){{
             var PL$74/*argType*/ = this["getFunctionArgumentType"](PL$72/*calleeRes*/["getType"](), PL$37/*i*/, PL$32/*par*/["arguments"][PL$37/*i*/]);
             var PL$75/*argRes*/ = this["parseExpression"](PL$32/*par*/["arguments"][PL$37/*i*/]);
-            PL$75/*argRes*/ = this["getPassAsTypeCode"]({"value": PL$75/*argRes*/,
-"valueType": PL$75/*argRes*/["getType"](),
-"type": PL$74/*argType*/,
-"errorFun": this["getWarningFun"](PL$32/*par*/)});
-            PL$73/*args*/["push"]({"type": PL$75/*argRes*/["getType"](),
-"value": PL$75/*argRes*/});}};
+            PL$75/*argRes*/ = this["getPassAsTypeCode"]({
+              "value": PL$75/*argRes*/,
+              "valueType": PL$75/*argRes*/["getType"](),
+              "type": PL$74/*argType*/,
+              "errorFun": this["getWarningFun"](PL$32/*par*/)
+            });
+            PL$73/*args*/["push"]({
+              "type": PL$75/*argRes*/["getType"](),
+              "value": PL$75/*argRes*/
+            });}};
           ;
         };
         ;
-        PL$34/*res*/["push"](this["callClassSystem"]("getCallCode", {"type": PL$72/*calleeRes*/["getType"](),
-"instance": PL$72/*calleeRes*/,
-"arguments": PL$73/*args*/}));
+        PL$34/*res*/["push"](this["callClassSystem"]("getCallCode", {
+          "type": PL$72/*calleeRes*/["getType"](),
+          "instance": PL$72/*calleeRes*/,
+          "arguments": PL$73/*args*/
+        }));
         PL$34/*res*/["setType"](this["getFunctionReturnType"](PL$72/*calleeRes*/["getType"](), PL$32/*par*/));
         return PL$34/*res*/;
         ;});
@@ -780,28 +873,34 @@ case "string":
           ;
           PL$78/*passAsType*/ = this["createTemporaryTrackedClass"](PL$78/*passAsType*/);
           var PL$79/*v*/ = this["parseExpression"](PL$32/*par*/["argument"]);
-          PL$77/*valueRes*/["push"](this["getPassAsTypeCode"]({"value": PL$79/*v*/,
-"valueType": PL$79/*v*/["getType"](),
-"type": PL$78/*passAsType*/,
-"errorFun": this["getWarningFun"](PL$32/*par*/)}));
+          PL$77/*valueRes*/["push"](this["getPassAsTypeCode"]({
+            "value": PL$79/*v*/,
+            "valueType": PL$79/*v*/["getType"](),
+            "type": PL$78/*passAsType*/,
+            "errorFun": this["getWarningFun"](PL$32/*par*/)
+          }));
         };
         ;
-        PL$34/*res*/["push"](this["getReturnCode"]({"return": true,
-"value": PL$77/*valueRes*/}));
+        PL$34/*res*/["push"](this["getReturnCode"]({
+          "return": true,
+          "value": PL$77/*valueRes*/
+        }));
         PL$34/*res*/["setType"](PL$19/*statementType*/);
         return PL$34/*res*/;
         ;});
       ;});
-    PL$33/*f*/["apply"](PL$31/*parInstance*/, [PL$32/*par*/]);
+    PL$33/*f*/["apply"](PL$31/*parInstance*/, [
+      PL$32/*par*/
+    ]);
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

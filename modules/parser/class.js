@@ -71,8 +71,16 @@ var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$56/*JSON*/;try{PL$56/*JSON*/ = JSON;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$5/*Map*/;
 var PL$7/*classSystem*/;
 var PL$8/*basics*/;
@@ -87,12 +95,12 @@ var PL$17/*checkIsFunction*/;
 var PL$18/*getExtraFromPar*/;
 var PL$19/*statementType*/;
 var PL$20/*checkPromising*/;
-PL$3(function(){
+PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*Map*/ = PL$6/*promiseland*/["Map"];
   PL$7/*classSystem*/ = PL$6/*promiseland*/["classSystem"];
-  __requireFun("./basics").then(PL$3(function(PL$9){PL$8/*basics*/ = PL$9;
+  __requireFun("./basics").then(PL$3/*promiseland exception catcher*/(function(PL$9){PL$8/*basics*/ = PL$9;
   PL$10/*errorFun*/ = PL$8/*basics*/["errorFun"];
   PL$11/*errorMsg*/ = PL$8/*basics*/["errorMsg"];
   PL$12/*_stringEncodeStr*/ = PL$8/*basics*/["_stringEncodeStr"];
@@ -109,7 +117,7 @@ PL$3(function(){
     ;
     var PL$23/*f*/ = (function(PL$22/*par*/){
     var PL$29/*InheritedSystem*/;
-
+    
       ;
       this["expClassObjectExpression"] = (function(PL$22/*par*/){
       
@@ -133,7 +141,9 @@ PL$3(function(){
         var PL$26/*l*/;
         PL$24/*res*/["push"](this["inheritedSystem"]["getCurrent"]());
         PL$24/*res*/["push"](".apply(this");
-        var PL$27/*args*/ = [];
+        var PL$27/*args*/ = [
+          
+        ];
         if(PL$22/*par*/["arguments"]){
           PL$24/*res*/["push"](", [");
           PL$26/*l*/ = PL$22/*par*/["arguments"]["length"];
@@ -166,25 +176,29 @@ PL$3(function(){
       
         ;
         this["instance"] = PL$22/*par*/;
-        this["used"] = {};
-        ;});
-      PL$29/*InheritedSystem*/["prototype"] = {"setCurrent": (function(PL$22/*par*/){
-      
-        ;
-        this["currentMember"] = PL$22/*par*/;
-        ;}),
-"getCurrent": (function(){
-      
-        ;
-        if(! this["used"][this["currentMember"]]){
-          this["used"][this["currentMember"]] = this["instance"]["getUniqueName"](("inherited " + this["currentMember"]));
+        this["used"] = {
+          
         };
-        ;
-        return this["used"][this["currentMember"]];
-        ;})};
+        ;});
+      PL$29/*InheritedSystem*/["prototype"] = {
+        "setCurrent": (function(PL$22/*par*/){
+        
+          ;
+          this["currentMember"] = PL$22/*par*/;
+          ;}),
+        "getCurrent": (function(){
+        
+          ;
+          if(! this["used"][this["currentMember"]]){
+            this["used"][this["currentMember"]] = this["instance"]["getUniqueName"](("inherited " + this["currentMember"]));
+          };
+          ;
+          return this["used"][this["currentMember"]];
+          ;})
+      };
       this["expClassStatement"] = (function(PL$22/*par*/){
       var PL$25/*i*/;
-
+      
         ;
         var PL$24/*res*/ = this["newResult"]();
         var PL$30/*classRes*/ = this["newResult"]();
@@ -218,9 +232,11 @@ PL$3(function(){
             PL$30/*classRes*/["push"](this["createClassDefaults"](PL$22/*par*/["body"]["literal"]));
             this["unstack"]("isClassObject");
             if(PL$32/*hasName*/){
-              var PL$40/*type*/ = this["createType"]({"name": PL$33/*name*/,
-"literal": PL$39/*literal*/,
-"par": PL$22/*par*/});
+              var PL$40/*type*/ = this["createType"]({
+                "name": PL$33/*name*/,
+                "literal": PL$39/*literal*/,
+                "par": PL$22/*par*/
+              });
             };
             ;
           }else{
@@ -258,7 +274,9 @@ PL$3(function(){
         };
         ;
         PL$44/*tempRes*/["push"](", [");
-        var PL$45/*baseClasses*/ = ((PL$35/*extendsClause*/ && PL$35/*extendsClause*/["baseClasses"]) || []);
+        var PL$45/*baseClasses*/ = ((PL$35/*extendsClause*/ && PL$35/*extendsClause*/["baseClasses"]) || [
+          
+        ]);
         PL$25/*i*/ = 0;
         for(PL$25/*i*/ = 0;(PL$25/*i*/ < PL$45/*baseClasses*/["length"]);++PL$25/*i*/){{
           if(PL$25/*i*/){
@@ -283,9 +301,11 @@ PL$3(function(){
         ;
         if(PL$32/*hasName*/){
           if(PL$34/*isTyped*/){
-            PL$24/*res*/["addPre"](this["_resolveClassCode"]({"name": PL$22/*par*/["name"],
-"classRes": PL$30/*classRes*/,
-"parsed": PL$22/*par*/}));
+            PL$24/*res*/["addPre"](this["_resolveClassCode"]({
+              "name": PL$22/*par*/["name"],
+              "classRes": PL$30/*classRes*/,
+              "parsed": PL$22/*par*/
+            }));
           }else{
           PL$24/*res*/["addPre"]((this["getVariableName"](PL$22/*par*/["name"]) + " = "));
           PL$24/*res*/["addPre"](PL$30/*classRes*/);
@@ -317,16 +337,22 @@ PL$3(function(){
       this["createClassLiteral"] = (function(PL$22/*par*/, PL$31/*ci*/, PL$49/*parName*/){
       
         ;
-        var PL$50/*ret*/ = {"members": [],
-"extends": [],
-"hasFreePart": true,
-"parsed": PL$22/*par*/,
-"track": (PL$31/*ci*/["trackClause"] ? true : false),
-"sync": PL$31/*ci*/["syncClause"],
-"unique": PL$31/*ci*/["uniqueClause"],
-"savable": PL$31/*ci*/["savableClause"],
-"name": PL$49/*parName*/,
-"hashStr": this["getModuleHashStr"]()};
+        var PL$50/*ret*/ = {
+          "members": [
+            
+          ],
+          "extends": [
+            
+          ],
+          "hasFreePart": true,
+          "parsed": PL$22/*par*/,
+          "track": (PL$31/*ci*/["trackClause"] ? true : false),
+          "sync": PL$31/*ci*/["syncClause"],
+          "unique": PL$31/*ci*/["uniqueClause"],
+          "savable": PL$31/*ci*/["savableClause"],
+          "name": PL$49/*parName*/,
+          "hashStr": this["getModuleHashStr"]()
+        };
         var PL$25/*i*/ = 0;
         var PL$26/*l*/ = ((PL$22/*par*/["properties"] && PL$22/*par*/["properties"]["length"]) || 0);
         for(PL$25/*i*/;(PL$25/*i*/ < PL$26/*l*/);++PL$25/*i*/){{
@@ -349,25 +375,30 @@ PL$3(function(){
               PL$40/*type*/ = this["getType"]("var");
             };
             ;
-            var PL$52/*m*/ = {"name": PL$16/*identifierName*/(PL$43/*prop*/["key"]),
-"type": PL$40/*type*/,
-"defaultValue": PL$51/*defaultValue*/};
+            var PL$52/*m*/ = {
+              "name": PL$16/*identifierName*/(PL$43/*prop*/["key"]),
+              "type": PL$40/*type*/,
+              "defaultValue": PL$51/*defaultValue*/
+            };
             var PL$53/*keywords*/ = PL$43/*prop*/["keywords"];
             if((PL$53/*keywords*/ && PL$53/*keywords*/["length"])){
               var PL$54/*k*/;
               for(PL$54/*k*/ = 0;(PL$54/*k*/ < PL$53/*keywords*/["length"]);++PL$54/*k*/){{
                 switch (PL$53/*keywords*/[PL$54/*k*/]["type"]){
-case "const":
-
-                PL$52/*m*/["const"] = true;
-                break;;case "meta":
-
-                PL$52/*m*/["meta"] = PL$53/*keywords*/[PL$54/*k*/];
-                break;;case "sync":
-
-                PL$52/*m*/["sync"] = true;
-                break;;}
-;
+                  case "const":
+                    
+                    PL$52/*m*/["const"] = true;
+                    break;;
+                  case "meta":
+                    
+                    PL$52/*m*/["meta"] = PL$53/*keywords*/[PL$54/*k*/];
+                    break;;
+                  case "sync":
+                    
+                    PL$52/*m*/["sync"] = true;
+                    break;;
+                  
+                };
                 ;}};
               ;
             };
@@ -379,9 +410,11 @@ case "const":
             PL$43/*prop*/["id"] = undefined;
             PL$51/*defaultValue*/ = this["parseExpression"](PL$43/*prop*/["value"]);
             PL$40/*type*/ = PL$51/*defaultValue*/["getType"]();
-            PL$50/*ret*/["members"]["push"]({"name": PL$33/*name*/,
-"type": PL$40/*type*/,
-"defaultValue": PL$51/*defaultValue*/});
+            PL$50/*ret*/["members"]["push"]({
+              "name": PL$33/*name*/,
+              "type": PL$40/*type*/,
+              "defaultValue": PL$51/*defaultValue*/
+            });
           }else{
           this["error"](PL$43/*prop*/, PL$11/*errorMsg*/["unknownPropertyAssignmentType"]);
           };
@@ -477,7 +510,9 @@ case "const":
         PL$24/*res*/["push"]("}");
         return PL$24/*res*/;
         ;});
-      this["localClassConstructors"] = {};
+      this["localClassConstructors"] = {
+        
+      };
       this["getConstructorName"] = (function(PL$49/*parName*/){
       
         ;
@@ -495,12 +530,16 @@ case "const":
           return PL$58/*t*/["constructorName"];
         };
         ;
-        this["error"](PL$49/*parName*/, PL$11/*errorMsg*/["typeUndeclared"], {"name": PL$33/*name*/});
+        this["error"](PL$49/*parName*/, PL$11/*errorMsg*/["typeUndeclared"], {
+          "name": PL$33/*name*/
+        });
         ;});
       this["identifyClass"] = (function(PL$22/*par*/){
       
         ;
-        var PL$59/*r*/ = {};
+        var PL$59/*r*/ = {
+          
+        };
         var PL$33/*name*/;
         if(PL$22/*par*/["name"]){
           PL$33/*name*/ = PL$16/*identifierName*/(PL$22/*par*/["name"]);
@@ -511,26 +550,32 @@ case "const":
           var PL$25/*i*/;
           for(PL$25/*i*/ = 0;(PL$25/*i*/ < PL$53/*keywords*/["length"]);++PL$25/*i*/){{
             switch (PL$53/*keywords*/[PL$25/*i*/]["type"]){
-case "type":
-
-            PL$59/*r*/["isTyped"] = true;
-            break;;case "extends":
-
-            PL$59/*r*/["extendsClause"] = PL$53/*keywords*/[PL$25/*i*/];
-            break;;case "sync":
-
-            PL$59/*r*/["syncClause"] = PL$53/*keywords*/[PL$25/*i*/];
-            break;;case "track":
-
-            PL$59/*r*/["trackClause"] = PL$53/*keywords*/[PL$25/*i*/];
-            break;;case "unique":
-
-            PL$59/*r*/["uniqueClause"] = PL$53/*keywords*/[PL$25/*i*/];
-            break;;case "savable":
-
-            PL$59/*r*/["savableClause"] = PL$53/*keywords*/[PL$25/*i*/];
-            break;;}
-;
+              case "type":
+                
+                PL$59/*r*/["isTyped"] = true;
+                break;;
+              case "extends":
+                
+                PL$59/*r*/["extendsClause"] = PL$53/*keywords*/[PL$25/*i*/];
+                break;;
+              case "sync":
+                
+                PL$59/*r*/["syncClause"] = PL$53/*keywords*/[PL$25/*i*/];
+                break;;
+              case "track":
+                
+                PL$59/*r*/["trackClause"] = PL$53/*keywords*/[PL$25/*i*/];
+                break;;
+              case "unique":
+                
+                PL$59/*r*/["uniqueClause"] = PL$53/*keywords*/[PL$25/*i*/];
+                break;;
+              case "savable":
+                
+                PL$59/*r*/["savableClause"] = PL$53/*keywords*/[PL$25/*i*/];
+                break;;
+              
+            };
             ;}};
           ;
         };
@@ -564,8 +609,10 @@ case "type":
                 PL$24/*res*/["push"]((("/* type " + PL$33/*name*/) + " */"));
                 PL$24/*res*/["push"](this["newLine"]());
                 var PL$60/*extraRes*/ = this["newResult"]();
-                this["addType"]({"name": PL$33/*name*/,
-"extraRes": PL$60/*extraRes*/}, PL$22/*par*/);
+                this["addType"]({
+                  "name": PL$33/*name*/,
+                  "extraRes": PL$60/*extraRes*/
+                }, PL$22/*par*/);
                 PL$24/*res*/["push"]("var ");
                 PL$24/*res*/["push"](this["renderType"](PL$33/*name*/));
                 PL$24/*res*/["push"](" = classSystem._createProvisionalClass();");
@@ -576,7 +623,9 @@ case "type":
                 PL$24/*res*/["push"](this["newLine"]());
                 PL$24/*res*/["push"]((("var " + this["getConstructorName"](PL$33/*name*/)) + " = undefined;"));
                 PL$24/*res*/["push"](this["newLine"]());
-                PL$24/*res*/["push"](this["_typeReadyCode"]({"typename": PL$33/*name*/}));
+                PL$24/*res*/["push"](this["_typeReadyCode"]({
+                  "typename": PL$33/*name*/
+                }));
                 PL$24/*res*/["push"](PL$60/*extraRes*/);
                 PL$24/*res*/["push"]("/* ---------------------------- */");
                 PL$24/*res*/["push"](this["newLine"]());
@@ -601,8 +650,15 @@ case "type":
         ;
         var PL$24/*res*/ = this["newResult"]();
         this["common"]["useClassSystem"] = true;
-        PL$24/*res*/["push"](["classSystem.readyPromise(", this["renderType"](PL$22/*par*/["typename"]), ").then(function(parType){"]);
-        var PL$61/*tempAr*/ = [this["renderType"](PL$22/*par*/["typename"]), " = parType;"];
+        PL$24/*res*/["push"]([
+          "classSystem.readyPromise(", 
+          this["renderType"](PL$22/*par*/["typename"]), 
+          ").then(function(parType){"
+        ]);
+        var PL$61/*tempAr*/ = [
+          this["renderType"](PL$22/*par*/["typename"]), 
+          " = parType;"
+        ];
         if(! PL$22/*par*/["noConstructor"]){
           PL$61/*tempAr*/["push"](this["newLine"]());
           PL$61/*tempAr*/["push"]((this["getConstructorName"](PL$22/*par*/["typename"]) + " = classSystem.getTypeConstructor("));
@@ -611,15 +667,20 @@ case "type":
         };
         ;
         PL$24/*res*/["push"](this["indentNewLine"](PL$61/*tempAr*/));
-        PL$24/*res*/["push"](["});", this["newLine"]()]);
+        PL$24/*res*/["push"]([
+          "});", 
+          this["newLine"]()
+        ]);
         return PL$24/*res*/;
         ;});
       ;});
-    PL$23/*f*/["apply"](PL$21/*parInstance*/, [PL$22/*par*/]);
+    PL$23/*f*/["apply"](PL$21/*parInstance*/, [
+      PL$22/*par*/
+    ]);
     ;})); return;
-  PL$1.resolve(); return;}), PL$4);
-;})();
-return PL$1;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;
+})();return PL$1;
 })();
 ;;
 return PL$1});

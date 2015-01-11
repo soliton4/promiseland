@@ -62,20 +62,22 @@ var PL$1 = (function(){
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
   
     ;
-    var PL$6/*makro*/ = {"SELF": 0,
-"PROPERTY": 1,
-"PROPERTYSTRING": 2,
-"PROPERTYVALUE": 3,
-"VALUE": 4,
-"LEFT": 5,
-"OPERATOR": 6,
-"RIGHT": 7,
-"VALUEPROPERTY": 8,
-"RESOLVEFUN": 9,
-"REJECTFUN": 10,
-"TYPEVALUE": 11,
-"CONSTRUCTOR": 12,
-"NEWLINE": 13};
+    var PL$6/*makro*/ = {
+      "SELF": 0,
+      "PROPERTY": 1,
+      "PROPERTYSTRING": 2,
+      "PROPERTYVALUE": 3,
+      "VALUE": 4,
+      "LEFT": 5,
+      "OPERATOR": 6,
+      "RIGHT": 7,
+      "VALUEPROPERTY": 8,
+      "RESOLVEFUN": 9,
+      "REJECTFUN": 10,
+      "TYPEVALUE": 11,
+      "CONSTRUCTOR": 12,
+      "NEWLINE": 13
+    };
     PL$5/*internals*/["makro"] = PL$6/*makro*/;
     PL$5/*internals*/["xxx1"] = PL$6/*makro*/;
     return PL$6/*makro*/;
