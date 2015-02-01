@@ -56,7 +56,10 @@ var PL$1 = (function(){
 "use strict";
 
   ;
-  var PL$2/*a*/ = 1, PL$3/*b*/ = 2;
+  var PL$2/*a*/ = 1;
+  ;
+  var PL$3/*b*/ = 2;
+  ;
   if(((PL$2/*a*/ == 1) && (PL$3/*b*/ == 2))){
     return {
       "success": true

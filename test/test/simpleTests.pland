@@ -194,7 +194,11 @@
   *createTest("while/doWhile", successFun);
   *createTest("while/doWhileP", successFun);
   *createTest("var/varList", successFun);
-//*createTest("var/varList", successFun);
+
+  *createTest("int/declaration", successFun);
+  *createTest("int/initialization", successFun);
+
+//*createTest("int/initialization", successFun);
 
   
     var c = 0;

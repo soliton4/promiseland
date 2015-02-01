@@ -57,6 +57,7 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*a*/ = 0;
+  ;
   for(;;){{
     PL$2/*a*/ = 1;
     break;;}};

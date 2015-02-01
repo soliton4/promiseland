@@ -60,11 +60,13 @@ var PL$1 = (function(){
   var PL$2/*result*/ = {
     "res": 1
   };
+  ;
   var PL$3/*dootherStuff*/ = (function(){
   
     ;
     PL$2/*result*/["res"] = 4;
     ;});
+  ;
   var PL$4/*x*/ = (function(){
   
     ;
@@ -74,6 +76,7 @@ var PL$1 = (function(){
       PL$3/*dootherStuff*/();};
     ;
     ;});
+  ;
   PL$4/*x*/();
   return PL$2/*result*/;
   ;})();

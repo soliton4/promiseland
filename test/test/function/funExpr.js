@@ -58,6 +58,7 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*calledCnt*/ = 0;
+  ;
   var PL$3/*x*/ = (function PL$4/*funName*/(PL$5/*par*/){
   
     ;
@@ -68,6 +69,7 @@ var PL$1 = (function(){
     ;
     PL$4/*funName*/(true);
     ;});
+  ;
   PL$3/*x*/();
   try
   {

@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "b5e331ed8fe0b314faa462727b112ee6" })){ return promiseland._getModule("b5e331ed8fe0b314faa462727b112ee6"); };
+    if (promiseland._hasModule({ hashStr: "c04a0f0825f123bb9f5091a1d2637ebb" })){ return promiseland._getModule("c04a0f0825f123bb9f5091a1d2637ebb"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "b5e331ed8fe0b314faa462727b112ee6", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "c04a0f0825f123bb9f5091a1d2637ebb", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$28/*Array*/;try{PL$28/*Array*/ = Array;}catch(e){};
 var PL$2 = (function(){
@@ -179,6 +179,7 @@ PL$3/*promiseland exception catcher*/(function(){
           };
           ;
           PL$26/*blockRes*/["push"](this["newLine"]());
+          PL$27/*sAr*/[PL$29/*i*/]["isRegularStatement"] = true;
           PL$26/*blockRes*/["push"](this["makeStatement"](this["parseExpression"](PL$27/*sAr*/[PL$29/*i*/])));}};
         ;
         if(PL$25/*parExtra*/["postCode"]){

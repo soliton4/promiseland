@@ -82,7 +82,9 @@ PL$10/*p1*/ = PL$10/*p1*/[0];}
 
   ;
   var PL$5/*failed*/ = false;
+  ;
   var PL$6/*cnt*/ = 0;
+  ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "1c27915421db6c724a7af79a2c806394", "name": "C1"}, {"destroy": (function(){
   
     ;
@@ -97,6 +99,7 @@ PL$10/*p1*/ = PL$10/*p1*/[0];}
     ;
     PL$5/*failed*/ = true;
     ;});
+  ;
   PL$7/*cntSupposed*/(0);
   /* function f1 (){} - hoisted */;
   ;

@@ -101,6 +101,7 @@ PL$3/*promiseland exception catcher*/(function(){
     };
     ;
     var PL$12/*child*/;
+    ;
     if((PL$11/*options*/ && PL$11/*options*/["fork"])){
       PL$12/*child*/ = PL$8/*fork*/(PL$9/*cmdStr*/, PL$10/*parAr*/, PL$11/*options*/);
     }else{
@@ -135,6 +136,7 @@ PL$3/*promiseland exception catcher*/(function(){
     };
     ;
     var PL$16/*cb*/ = new PL$17/*Callback*/();
+    ;
     PL$12/*child*/["on"]("close", PL$16/*cb*/);
     var PL$18/*result*/ = (function(){
     var PL$19 = new __Promise();
@@ -156,6 +158,7 @@ PL$3/*promiseland exception catcher*/(function(){
       ;
     })();return PL$19;
     });
+    ;
     return {
       "child": PL$12/*child*/,
       "result": PL$18/*result*/()

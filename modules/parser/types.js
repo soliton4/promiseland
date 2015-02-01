@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "80fc8d4a22bea37b25b129e607b8f433" })){ return promiseland._getModule("80fc8d4a22bea37b25b129e607b8f433"); };
+    if (promiseland._hasModule({ hashStr: "9c28a3d13cffaca00438e2c7a2ff6b35" })){ return promiseland._getModule("9c28a3d13cffaca00438e2c7a2ff6b35"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "80fc8d4a22bea37b25b129e607b8f433", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "9c28a3d13cffaca00438e2c7a2ff6b35", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -128,6 +128,15 @@ PL$3/*promiseland exception catcher*/(function(){
         ;
         if((typeof PL$23/*parType*/ == "function")){
           return PL$7/*classSystem*/["isVar"](PL$23/*parType*/);
+        };
+        ;
+        return false;
+        ;});
+      this["canSkipVarHeusting"] = (function(PL$23/*parType*/){
+      
+        ;
+        if(this["isVar"](PL$23/*parType*/)){
+          return true;
         };
         ;
         return false;

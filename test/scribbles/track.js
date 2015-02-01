@@ -67,17 +67,22 @@ var PL$1 = (function(){
       return 1;
       ;})
   };
+  ;
   var PL$3/*makeClass*/ = (function(PL$4/*destroyFun*/){
   var PL$22/*checkFun*/;
   var PL$23/*getBest*/;
   
     ;
     var PL$5/*curToken*/;
+    ;
     var PL$6/*bestLen*/ = 0;
+    ;
     var PL$7/*best*/;
+    ;
     PL$8/*first*/;
     PL$9/*last*/;
     var PL$10/*rootCnt*/ = 0;
+    ;
     var PL$11/*bringFront*/ = (function(PL$12/*entry*/){
     
       ;
@@ -86,12 +91,15 @@ var PL$1 = (function(){
       PL$8/*first*/["newPrev"](PL$12/*entry*/);
       PL$8/*first*/ = PL$12/*entry*/;
       ;});
+    ;
     var PL$13/*con*/ = (function(PL$14/*t*/){
     var PL$20/*cut*/;
     
       ;
       var PL$15/*next*/;
+      ;
       var PL$16/*prev*/;
+      ;
       var PL$12/*entry*/ = {
         "newNext": (function(PL$17/*parNext*/){
         
@@ -127,6 +135,7 @@ var PL$1 = (function(){
           ;}),
         "cut": PL$20/*cut*/
       };
+      ;
       PL$20/*cut*/ = (function(){
       
         ;
@@ -140,6 +149,7 @@ var PL$1 = (function(){
         ;
         ;});
       var PL$21/*len*/ = PL$14/*t*/["quickCon"]();
+      ;
       if(PL$8/*first*/){
         if(((PL$21/*len*/ && (PL$21/*len*/ < PL$6/*bestLen*/)) || ! PL$6/*bestLen*/)){
           PL$6/*bestLen*/ = PL$21/*len*/;
@@ -173,6 +183,7 @@ var PL$1 = (function(){
         PL$22/*checkFun*/();
         ;});
       ;});
+    ;
     PL$22/*checkFun*/ = (function(){
     
       ;
@@ -198,6 +209,7 @@ var PL$1 = (function(){
       ;
       if(PL$8/*first*/){
         var PL$24/*b*/ = PL$8/*first*/["getCon"](PL$5/*curToken*/);
+        ;
         if(PL$24/*b*/){
           if(! PL$19/*token*/){
             PL$6/*bestLen*/ = PL$24/*b*/;
@@ -207,8 +219,11 @@ var PL$1 = (function(){
         };
         ;
         var PL$25/*iterator*/ = PL$8/*first*/["getNext"]();
+        ;
         var PL$26/*tempBestLen*/ = 0;
+        ;
         var PL$27/*tempBest*/;
+        ;
         while(PL$25/*iterator*/){
         {
           PL$24/*b*/ = PL$25/*iterator*/["getCon"](PL$5/*curToken*/);
@@ -252,6 +267,7 @@ var PL$1 = (function(){
         return (PL$6/*bestLen*/ + 1);
         ;})
     };
+    ;
     var PL$29/*check*/ = (function(PL$30/*parTocken*/){
     
       ;
@@ -261,11 +277,14 @@ var PL$1 = (function(){
       ;
       PL$31/*tocken*/ = PL$30/*parTocken*/;
       var PL$7/*best*/;
+      ;
       var PL$32/*bestL*/;
+      ;
       PL$33/*list*/["runThrough"]((function(PL$28/*tracker*/){
       
         ;
         var PL$34/*l*/ = PL$28/*tracker*/["getCon"](PL$31/*tocken*/);
+        ;
         if(! PL$34/*l*/){
           return;
         };
@@ -283,6 +302,7 @@ var PL$1 = (function(){
         ;
         ;}));
       ;});
+    ;
     return [
       (function(){
       
@@ -306,6 +326,7 @@ var PL$1 = (function(){
         ;})
     ];
     ;});
+  ;
   ;})();
 ;return PL$1;
 });

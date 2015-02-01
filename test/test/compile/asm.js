@@ -64,13 +64,17 @@ var PL$1 = (function(){
     function PL$3/*f*/(){
     
       ;
-      var PL$2/*x*/ = 0, PL$7/*y*/ = 0;
+      var PL$2/*x*/ = 0;
+      ;
+      var PL$7/*y*/ = 0;
+      ;
       PL$2/*x*/ = (((PL$2/*x*/ | 0) % (PL$7/*y*/ | 0)) | 0);
       ;};
     return {
       
     };
     ;});
+  ;
   ;})();
 ;return PL$1;
 });

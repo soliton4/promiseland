@@ -86,7 +86,9 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
 
   ;
   var PL$8/*failed*/ = false;
+  ;
   var PL$9/*cnt*/ = 0;
+  ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "9d4c45c6545311d7a14ef435c0a3d1c0", "name": "C1"}, {"destroy": (function(){
   
     ;
@@ -102,6 +104,7 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
     ;
     PL$8/*failed*/ = true;
     ;});
+  ;
   PL$10/*cntSupposed*/(0);
   /*temp tracked assign*/(function(vAr){
     if (_TPL$12/*c2*/){ _TPL$12/*c2*/(); };
@@ -191,6 +194,7 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
     (function(s, v){ s[6] = v; if(s[7]){ s[7](); }; s[7] = v[3](s[1]); return v; })(PL$12/*c2*/, PL$16/*v3*/);
     PL$10/*cntSupposed*/(3);
     if (_TPL$14/*v1*/){ _TPL$14/*v1*/();};if (_TPL$15/*v2*/){ _TPL$15/*v2*/();};if (_TPL$16/*v3*/){ _TPL$16/*v3*/();};}catch(e){if (_TPL$14/*v1*/){ _TPL$14/*v1*/();};if (_TPL$15/*v2*/){ _TPL$15/*v2*/();};if (_TPL$16/*v3*/){ _TPL$16/*v3*/();};throw e};;});
+  ;
   PL$13/*fun*/();
   PL$10/*cntSupposed*/(5);
   if(PL$8/*failed*/){

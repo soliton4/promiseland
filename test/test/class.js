@@ -71,7 +71,9 @@ var PL$1 = (function(){
       ;})
   }, [], PL$3/*inherited*/);
   return res; })();
+  ;
   var PL$4/*c*/ = new PL$2/*C1*/();
+  ;
   if((((PL$4/*c*/["a"] == 1) && (PL$4/*c*/["b"] == 1)) && (PL$4/*c*/["doSomething"]() == 2))){
     return {
       "success": true

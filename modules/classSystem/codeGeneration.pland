@@ -16,6 +16,8 @@ return (classSystem, internals){
   
   var makro = internals.makro;
   
+  var pcs = internals.privateClassSystem;
+  
   
   var runtimeError = function(par, par2){
     if (par2 && par2.errorFun){
@@ -120,20 +122,39 @@ return (classSystem, internals){
     var vcDef = getClass(par["valueType"]);
 
     if (par.value){
-      if (!this.canSet(par["type"], par.valueType)){
+      par.instance = par.value;
+      return assembleCode(pcs.getCasting(par["type"], par["valueType"], par.errorFun), par);
+      //return assembleCode([makro.VALUE], par);
+      
+      /*if (!this.canSet(par["type"], par.valueType)){
         return runtimeError(errorMsg.typeMissmatch, par);
       };
       if (this.isTemporaryTrackedClass(par["type"])){
         return this.getCreateTemporaryClassCode(par);
       };
-      return assembleCode([makro.VALUE], par);
+      return assembleCode([makro.VALUE], par);*/
     };
     return runtimeError(errorMsg.missingVariable, par);
 
   };
+  
+  pcs.createTemporaryClassMakro = (parType, parValue){
+    if (cs.isTemporaryTrackedClass(parType)){
+      return [makro.VALUE];
+    };
+    if (!cs.isTrackedClass(parType)){
+      return [makro.VALUE];
+    };
+    
+    //console.log("------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, the code")
+    var cDef = getClass(parType);
+    var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", parValue || makro.VALUE, ")"];
+    return codeAr;
+    
+  };
 
   cs.getCreateTemporaryClassCode = function(par){
-    if (this.isTemporaryTrackedClass(par["valueType"])){
+    /*if (this.isTemporaryTrackedClass(par["valueType"])){
       return assembleCode([makro.VALUE], par);
     };
     if (!this.isTrackedClass(par["valueType"])){
@@ -141,8 +162,8 @@ return (classSystem, internals){
     };
     var cDef = getClass(par["valueType"]);
 
-    var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", makro.VALUE, ")"];
-    return assembleCode(codeAr, par);
+    var codeAr = ["(function(v){ if(!v){ return; }; return [v, v[" + cDef.map.trackRootIdx + "]()];})(", makro.VALUE, ")"];*/
+    return assembleCode(pcs.createTemporaryClassMakro(par.valueType), par);
 
   };
   
@@ -296,9 +317,28 @@ return (classSystem, internals){
     var cDef = getClass(par["type"]);
 
     var assemblyAr = [];
-    if (par.declaration){
+    
+    if (par.declaration || cDef.needsInitialization){
       assemblyAr.push("var ");
       assemblyAr.push(par.name);
+      
+      if (par.value){
+        assemblyAr.push(" = ");
+        assemblyAr.push({
+          _internFun: "getPassAsTypeCode",
+          type: par.type,
+          value: par.value,
+          valueType: par.valueType
+        });
+        
+      }else if(cDef.initializationValue){
+        assemblyAr.push(" = ");
+        var i = 0;
+        for (i = 0; i < cDef.initializationValue.length; ++i){
+          assemblyAr.push(cDef.initializationValue[i]);
+        };
+      };
+      
       assemblyAr.push(";");
       assemblyAr.push(makro.NEWLINE);
     };
@@ -357,24 +397,24 @@ return (classSystem, internals){
     var i;
     var l;
     var args;
-    var assembly;
+    var assemblyAr;
     if (cDef.isVar){
       args = par["arguments"];
       l = args.length;
-      assembly = [makro.SELF, "("];
+      assemblyAr = [makro.SELF, "("];
       for (i = 0; i < l; ++i){
         if (i > 0){
-          assembly.push(", ");
+          assemblyAr.push(", ");
         };
-        assembly.push({
+        assemblyAr.push({
           _internFun: "getPassAsTypeCode",
           "type": this.getBuiltinType("var"),
           "value": args[i].value,
           "valueType": args[i]["type"]
         });
       };
-      assembly.push(")");
-      return assembleCode(assembly, par);
+      assemblyAr.push(")");
+      return assembleCode(assemblyAr, par);
     };
     if (!cDef.isFunction){
       return runtimeError(errorMsg.expectedCallable, par);
@@ -382,20 +422,20 @@ return (classSystem, internals){
 
     args = par["arguments"];
     l = args.length;
-    assembly = [makro.SELF, "("];
+    assemblyAr = [makro.SELF, "("];
     for (i = 0; i < l; ++i){
       if (i > 0){
-        assembly.push(", ");
+        assemblyAr.push(", ");
       };
-      assembly.push({
+      assemblyAr.push({
         _internFun: "getPassAsTypeCode",
         "type": cDef.arguments[i] || this.getBuiltinType("var"),
         "value": args[i].value,
         "valueType": args[i]["type"]
       });
     };
-    assembly.push(")");
-    return assembleCode(assembly, par);
+    assemblyAr.push(")");
+    return assembleCode(assemblyAr, par);
   };
 
   cs.getBinaryExpressionCode = function(par){
@@ -468,6 +508,12 @@ return (classSystem, internals){
       }
     };
   };
+    
+    var _newResult = (par){
+      if (par.newResult){
+        return par.newResult();
+      };
+    }
   
   
   var assembleResult = function(ar, par, res){
@@ -477,14 +523,17 @@ return (classSystem, internals){
       if (typeof ar[i] == "string"){
         res.push(ar[i]);
         
+      }else if (Array.isArray(ar[i])){
+        assembleResult(ar[i], par, res);
+        
       }else if(ar[i]._indentAssembly){
         ar[i].fun(par, res);
         
       }else if(ar[i]._internFun){
         var tempPar = ar[i];
-        tempPar.result = res;
+        tempPar.result = _newResult(par);
         tempPar.errorFun = par.errorFun;
-        var tempRes = classSystem[ar[i]._internFun](tempPar);
+        res.push( classSystem[ar[i]._internFun](tempPar) );
         
       }else{
         switch(ar[i]){

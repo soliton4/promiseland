@@ -35,6 +35,13 @@ return (parInstance, par){
       return false;
     };
     
+    this.canSkipVarHeusting = (parType){
+      if (this.isVar(parType)){
+        return true;
+      };
+      return false
+    };
+    
 
     this.typeIsAvailableByName = function(parType){
       if (typeof parType == "function"){

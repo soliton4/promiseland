@@ -57,6 +57,7 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*i*/ = 0;
+  ;
   do{
   {
     PL$2/*i*/ += 1;}} while ((PL$2/*i*/ < 4));

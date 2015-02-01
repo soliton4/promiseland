@@ -58,18 +58,23 @@ function PL$2/*f*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$5/*heap*/){
 function PL$2/*f*/(){
 
   ;
-  var PL$7/*x*/ = 0, PL$8/*y*/ = 0;
+  var PL$7/*x*/ = 0;
+  ;
+  var PL$8/*y*/ = 0;
+  ;
   PL$7/*x*/ = (((PL$7/*x*/ | 0) % (PL$8/*y*/ | 0)) | 0);
   ;};
 function PL$9/*f2*/(){
 
   ;
   var PL$10/*a*/ = 0;
+  ;
   ;};
 
   ;
   "use axsxxxxxxxm";
   var PL$6/*exp*/ = PL$3/*stdlib*/["Math"]["exp"];
+  ;
   /* function f (){} - hoisted */;
   ;
   /* function f2 (){} - hoisted */;
@@ -84,14 +89,22 @@ function PL$11/*GeometricMean*/(PL$3/*stdlib*/, PL$4/*foreign*/, PL$12/*buffer*/
 
   ;
   var PL$6/*exp*/ = PL$3/*stdlib*/.Math.exp;
+  ;
   var PL$13/*log*/ = PL$3/*stdlib*/.Math.log;
+  ;
   var PL$14/*values*/ = new PL$3/*stdlib*/.Float64Array(PL$12/*buffer*/);
+  ;
   function PL$15/*logSum*/(PL$16/*start*/, PL$17/*end*/){
   
     ;
     PL$16/*start*/ = (PL$16/*start*/ | 0);
     PL$17/*end*/ = (PL$17/*end*/ | 0);
-    var PL$18/*sum*/ = 0.0, PL$19/*p*/ = 0, PL$20/*q*/ = 0;
+    var PL$18/*sum*/ = 0.0;
+    ;
+    var PL$19/*p*/ = 0;
+    ;
+    var PL$20/*q*/ = 0;
+    ;
     for(PL$19/*p*/ = (PL$16/*start*/ << 3),PL$20/*q*/ = (PL$17/*end*/ << 3);((PL$19/*p*/ | 0) < (PL$20/*q*/ | 0));PL$19/*p*/ = ((PL$19/*p*/ + 8) | 0)){{
       PL$18/*sum*/ = (PL$18/*sum*/ + + PL$13/*log*/(PL$14/*values*/[(PL$19/*p*/ >> 3)]));}};
     if((PL$19/*p*/ | 0)){

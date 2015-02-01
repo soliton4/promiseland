@@ -154,6 +154,7 @@ PL$9/*promiseland exception catcher*/(function(){
       (function(s, v){ v = s[8](v); s[7] = v; return v; })(PL$24/*a*/, 3);
       PL$25/*gotit*/ = true;
       var PL$26/*next*/ = 10;
+      ;
       PL$27/*setInterval*/((function(){
       
         ;

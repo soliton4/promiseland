@@ -65,6 +65,7 @@ var PL$1 = (function(){
       ;
       PL$4/*console*/["log"]("exec");
       ;});
+    ;
     PL$2/*x*/();
     PL$3/*y*/();}catch(PL$5/*e*/){
     PL$4/*console*/["log"](PL$5/*e*/);};

@@ -113,6 +113,7 @@ PL$3/*promiseland exception catcher*/(function(){
       };
       ;
       var PL$19/*s*/ = PL$18/*data*/["toString"]();
+      ;
       PL$16/*res*/["end"](PL$19/*s*/);
       ;}));
     ;}));
@@ -144,10 +145,12 @@ PL$3/*promiseland exception catcher*/(function(){
       return this["connections"][PL$23/*parId*/];
       ;});
     var PL$24/*nextid*/ = 1;
+    ;
     this["addConnection"] = (function(PL$25/*connection*/){
     
       ;
       var PL$26/*id*/ = PL$24/*nextid*/;
+      ;
       PL$24/*nextid*/++;
       this["connections"][PL$26/*id*/] = PL$25/*connection*/;
       this["emit"]("connection", PL$25/*connection*/);
@@ -162,6 +165,7 @@ PL$3/*promiseland exception catcher*/(function(){
     ;
     PL$30/*console*/["log"]("got connected");
     var PL$25/*connection*/ = new PL$21/*promiseland*/["ConnectionBaseClass"]();
+    ;
     PL$25/*connection*/["socket"] = PL$29/*socket*/;
     PL$29/*socket*/["on"]("pl", (function(PL$18/*data*/){
     

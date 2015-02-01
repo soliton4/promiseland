@@ -76,6 +76,7 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
 
   ;
   var PL$5/*properties*/;
+  ;
   PL$29/*SaveHandler*/ = (function(){var PL$6/*inherited*/ = {};
   var res = promiseland.createClass({
     "registerClass": (function(PL$7/*par*/){

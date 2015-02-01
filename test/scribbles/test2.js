@@ -88,6 +88,7 @@ classSystem.readyPromise(PL$5/*type:ClassB*/).then(function(parType){
   classSystem._resolveProvisional(PL$2/*type:ClassA*/, classSystem.createClass({className: "ClassA",members: [{"name":"a","type":classSystem.getBuiltinType("var")},{"name":"b","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "2812593f22c416e2891c0ded059eb5fe", "name": "ClassA"}, {"a": 1, "b": 2}));PL$3/*ClassA*/;
   classSystem._resolveProvisional(PL$5/*type:ClassB*/, classSystem.createClass({className: "ClassB",members: [{"name":"c","type":classSystem.getBuiltinType("var")},{"name":"d","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "hashStr": "2812593f22c416e2891c0ded059eb5fe", "name": "ClassB"}, {"c": 3, "d": 4}));PL$6/*ClassB*/;
   var PL$8/*var1*/ = 1;
+  ;
   PL$9/*varA*/ = new PL$4/*ClassA-constructor*/();
   PL$10/*varB*/ = new PL$4/*ClassA-constructor*/();
   PL$9/*varA*/ = PL$10/*varB*/;

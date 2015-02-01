@@ -61,7 +61,6 @@ return (parInstance, par){
           if(par["type"] == "BlockStatement"){
             sAr = par.body;
           }else{
-            //console.log("here <------------------------");
             sAr.push(this.parseExpression(par));
           };
         };
@@ -90,6 +89,7 @@ return (parInstance, par){
             continue;
           };
           blockRes.push(this.newLine());
+          sAr[i].isRegularStatement = true;
           blockRes.push(this.makeStatement(this.parseExpression(sAr[i])));
         };
         

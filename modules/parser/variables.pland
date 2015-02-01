@@ -246,14 +246,20 @@ return (parInstance, par){
               };
             };
           };
+          if (!par.isRegularStatement){
+            addVar = false;
+          };
           
           if (!this.isSimpleType(usedType)){
             // sorry for this mess but we need to make exceptions for asm.js here
             addVar = false;
           };
+          if (!this.canSkipVarHeusting(usedType)){
+            // sorry for this mess but we need to make exceptions for asm.js here
+            addVar = false;
+          };
           
           if (addVar){
-            res.push("var ");
             for (i = 0; i < l; ++i){
               var varName = identifierName(declarations[i].id);
               this.localVariables.get(varName).needsDeclaration = false;
@@ -262,11 +268,31 @@ return (parInstance, par){
           
           for (i = 0; i < l; ++i){
             if (i > 0){
-              res.push(", ");
+              if (addVar){
+                res.push(";");
+                res.push(this.newLine());
+              }else{
+                res.push(", ");
+              };
             };
             if (declarations[i].type == "VariableDeclaration"){
-              var r = this.parseExpression(declarations[i]);
-              res.push(r);
+              
+              if (addVar){
+                varName = identifierName(declarations[i].id);
+                res.push(this.getDeclareVariableCode({
+                  name: this.getVariableName(varName),
+                  "type": usedType,
+                  errorFun: this.getWarningFun(par),
+                  parsed: par,
+                  declaration: true,
+                  value: declarations[i].init ? this.parseExpression(declarations[i].init) : undefined,
+                }));
+                
+              }else{
+                res.push(this.parseExpression(declarations[i]));
+                
+              };
+              
             }else{
               this.error(declarations[i], errorMsg.unknownType);
             };

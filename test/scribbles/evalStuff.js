@@ -61,6 +61,7 @@ var PL$1 = (function(){
   var PL$2/*o*/ = {
     "x": 1
   };
+  ;
   PL$3/*console*/["log"](PL$4/*promiseland*/["javascriptEval"]("x", PL$2/*o*/));
   ;})();
 ;return PL$1;

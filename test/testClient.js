@@ -79,6 +79,7 @@ function PL$12/*querySt*/(PL$13/*Key*/){
 
   ;
   var PL$14/*url*/ = PL$15/*window*/["location"]["href"];
+  ;
   PL$16/*KeysValues*/ = PL$14/*url*/["split"](/[\?&]+/);
   for(PL$17/*i*/ = 0;(PL$17/*i*/ < PL$16/*KeysValues*/["length"]);PL$17/*i*/++){{
     PL$18/*KeyValue*/ = PL$16/*KeysValues*/[PL$17/*i*/]["split"]("=");
@@ -105,12 +106,14 @@ function PL$12/*querySt*/(PL$13/*Key*/){
       return this["connection"];
       ;});
     ;});
+  ;
   PL$3/*ServerProfile*/["prototype"] = new PL$2/*promiseland*/["ProfileBaseClass"]();
   var PL$4/*ServerConnection*/ = (function(PL$5/*socket*/){
   
     ;
     this["socket"] = PL$5/*socket*/;
     var PL$6/*self*/ = this;
+    ;
     PL$5/*socket*/["on"]("pl", (function(PL$7/*data*/){
     
       ;
@@ -122,14 +125,18 @@ function PL$12/*querySt*/(PL$13/*Key*/){
       PL$5/*socket*/["emit"]("pl", PL$7/*data*/);
       ;});
     ;});
+  ;
   PL$4/*ServerConnection*/["prototype"] = new PL$2/*promiseland*/["ConnectionBaseClass"]();
   var PL$8/*serverProfile*/ = new PL$3/*ServerProfile*/();
+  ;
   PL$2/*promiseland*/["addProfile"](PL$8/*serverProfile*/);
   var PL$5/*socket*/ = PL$9/*io*/["connect"]();
+  ;
   PL$5/*socket*/["on"]("connect", (function(){
   
     ;
     var PL$10/*connection*/ = new PL$4/*ServerConnection*/(PL$5/*socket*/);
+    ;
     PL$8/*serverProfile*/["connection"] = PL$10/*connection*/;
     PL$8/*serverProfile*/["emit"]("connection", PL$10/*connection*/);
     PL$11/*runTests*/();

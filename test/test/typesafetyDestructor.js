@@ -71,6 +71,7 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
 
   ;
   var PL$5/*i*/ = 1;
+  ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "54c5b667b0d94bacc1162b8a20e2c8f4", "name": "C1"}, {"destroy": (function(){
   
     ;

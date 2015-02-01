@@ -57,10 +57,12 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*a*/ = 1;
+  ;
   PL$2/*a*/ += 2;
   var PL$3/*b*/ = {
     "x": 1
   };
+  ;
   PL$3/*b*/["x"] += 2;
   ;})();
 ;return PL$1;

@@ -85,6 +85,7 @@ var PL$8/*x*/;
     ;
   })();return PL$4;
   });
+  ;
   var PL$11/*y*/ = ((function(f){
   promiseland.registerRemote("server", "52359e7398cbfbfaf29d768d9b7a668b", "PL$17", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("server")){
@@ -114,6 +115,7 @@ var PL$8/*x*/;
     ;
   })();return PL$12;
   }));
+  ;
   PL$8/*x*/ = ((function(f){
   promiseland.registerRemote("client", "52359e7398cbfbfaf29d768d9b7a668b", "PL$22", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("client")){

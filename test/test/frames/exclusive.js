@@ -58,12 +58,15 @@ var PL$1 = (function(){
 
   ;
   var PL$2/*isServer*/ = false;
+  ;
   if(PL$3/*__dirname*/){
     PL$2/*isServer*/ = true;
   };
   ;
   var PL$4/*serverRun*/ = false;
+  ;
   var PL$5/*clientRun*/ = false;
+  ;
   var PL$6/*exs*/ = (function(){
   if (!promiseland.profileHas("server")){
   return;
@@ -72,6 +75,7 @@ var PL$1 = (function(){
     ;
     PL$4/*serverRun*/ = true;
     ;});
+  ;
   var PL$7/*exc*/ = (function(){
   if (!promiseland.profileHas("client")){
   return;
@@ -80,6 +84,7 @@ var PL$1 = (function(){
     ;
     PL$5/*clientRun*/ = true;
     ;});
+  ;
   PL$6/*exs*/();
   PL$7/*exc*/();
   if((PL$2/*isServer*/ && PL$5/*clientRun*/)){

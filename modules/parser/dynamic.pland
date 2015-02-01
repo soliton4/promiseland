@@ -147,6 +147,9 @@ return (parInstance, par){
             par.getIndentRes = (){
               return self.indent();
             };
+            par.newResult = (){
+              return self.newResult();
+            };
             errRes.resolve(promiseland.classSystem[parFun](par));
           };
 
@@ -345,7 +348,9 @@ return (parInstance, par){
           name: par.name,
           errorFun: par.errorFun,
           parsed: par.parsed,
-          declaration: par.declaration
+          declaration: par.declaration,
+          value: par.value,
+          valueType: this.getResultType(par.value)
         }));
         
         res.setType(statementType);

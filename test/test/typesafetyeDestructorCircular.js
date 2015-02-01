@@ -88,11 +88,14 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
 
   ;
   var PL$8/*failed*/ = false;
+  ;
   var PL$9/*cnt*/ = 0;
+  ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [{"name":"circ","type":PL$2/*type:C1*/},{"name":"id","type":classSystem.getBuiltinType("var")},{"name":"destroy","type":classSystem.getBuiltinType("var")}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "d5c4130fe09db261b4e797ff99b23065", "name": "C1"}, {"circ": undefined, "id": 0, "destroy": (function(){
   
     ;
     var PL$10/*checkid*/ = this[8];
+    ;
     PL$9/*cnt*/++;
     ;})}));PL$3/*C1*/;
   classSystem._resolveProvisional(PL$5/*type:C2*/, classSystem.createClass({className: "C2",members: [{"name":"m1","type":PL$2/*type:C1*/}], "extends": [], "hasFreePart": true, "track": true, "hashStr": "d5c4130fe09db261b4e797ff99b23065", "name": "C2"}, {"m1": undefined}));PL$6/*C2*/;
@@ -131,6 +134,7 @@ classSystem.readyPromise(PL$5/*type:C2*/).then(function(parType){
     ;
     PL$8/*failed*/ = true;
     ;});
+  ;
   PL$13/*cntSupposed*/(0);
   (function(s, vAr){ var v = vAr[0]; s[6] = v; if(s[7]){ s[7](); }; s[7] = v[3](s[1]); vAr[1](); return v; })(PL$11/*v1*/, new PL$4/*C1-constructor*/());
   PL$11/*v1*/[6][8] = 1;

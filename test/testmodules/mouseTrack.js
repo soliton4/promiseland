@@ -167,6 +167,7 @@ PL$15/*promiseland exception catcher*/(function(){
       ;
       PL$31/*console*/["log"](("destroying" + this[9]));
       var PL$32/*p*/ = PL$33/*pos*/[7];
+      ;
       PL$31/*console*/["log"](PL$32/*p*/);
       delete PL$32/*p*/[this[9]];
       PL$31/*console*/["log"](PL$32/*p*/);
@@ -335,8 +336,11 @@ PL$15/*promiseland exception catcher*/(function(){
       
         ;
         var PL$32/*p*/ = PL$33/*pos*/[7];
+        ;
         var PL$65/*i*/;
+        ;
         var PL$66/*n*/;
+        ;
         for(PL$65/*i*/ in PL$32/*p*/){
           if((PL$65/*i*/ != PL$54/*s*/[9])){
             if(PL$63/*wgts*/[PL$65/*i*/]){

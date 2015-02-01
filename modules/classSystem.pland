@@ -150,8 +150,54 @@ buildInTypesMap.set("int", classHider({
   isInt: true,
   isReady: true,
   availableByName: true,
-  builtin: true
+  builtin: true,
+  needsInitialization: true,
+  initializationValue: ["0"]
 }));
+buildInTypesMap.set("double", classHider({
+  isDouble: true,
+  isReady: true,
+  availableByName: true,
+  builtin: true,
+  needsInitialization: true,
+  initializationValue: ["0.0"]
+}));
+
+// helper function to add cast routines
+var addCast = (parToType, parCast){
+  var cDef = getClass(parToType);
+  if (!cDef.cast){
+    cDef.cast = [];
+  };
+  cDef.cast.push(parCast);
+};
+
+// delay execution till makro is defined
+var createCastings = (){
+
+  // int -> var
+  addCast(buildInTypesMap.get("var"), {
+    type: buildInTypesMap.get("int")
+  });
+
+  // var -> int
+  addCast(buildInTypesMap.get("int"), {
+    type: buildInTypesMap.get("var"),
+    makro: ["((", makro.SELF, ")|0)"]
+  });
+
+  // double -> var
+  addCast(buildInTypesMap.get("var"), {
+    type: buildInTypesMap.get("double")
+  });
+
+  // var -> double
+  addCast(buildInTypesMap.get("double"), {
+    type: buildInTypesMap.get("var"),
+    makro: ["(+(", makro.SELF, "))"]
+  });
+  
+};
 
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -175,6 +221,74 @@ var privateClassSystem = {
     };
     return;
   },
+  
+  
+  getCasting: function(parToType, parFromType, parErrorFun){
+    var fromCDef = getClass(parFromType);
+    var toCDef = getClass(parToType);
+    
+    if (fromCDef === toCDef || cs.isSameType(parFromType, parToType)){
+      return [makro.SELF];
+    };
+    
+    if (toCDef.cast){
+      var casts = toCDef.cast;
+      var i = 0;
+      for (i = 0; i < casts.length; ++i){
+        if (casts[i].type === parFromType){
+          if (casts[i].makro){
+            return casts[i].makro;
+          }else{
+            return [makro.SELF];
+          };
+        };
+      };
+    };
+
+    // temporary check
+    /*if (this.isTemporaryTrackedClass(parFromType)){
+      // temporary sourcetype can only pass as temporary target
+      if (this.isTemporaryTrackedClass(parToType)){
+        return this.getCasting(this.getClassFromTemporaryTracked(parToType), this.getClassFromTemporaryTracked(parFromType), parErrorFun);
+      };
+      return false;
+    };*/
+    if (cs.isTemporaryTrackedClass(parToType)){
+      if (cs.isTemporaryTrackedClass(parFromType)){
+        // both are temporary
+        return this.getCasting(cs.getClassFromTemporaryTracked(parToType), cs.getClassFromTemporaryTracked(parFromType), parErrorFun);
+      };
+      // temporary target is allways possible
+      // code is generated in getPassAsTypeCode
+      return pcs.createTemporaryClassMakro(cs.getClassFromTemporaryTracked(parToType), this.getCasting(cs.getClassFromTemporaryTracked(parToType), parFromType));
+    };
+
+
+    if (
+      cs.isFunctionType(parToType) && cs.isFunctionType(parFromType)
+      && cs.canSet(cs.getFunctionReturnType(parToType), cs.getFunctionReturnType(parFromType))
+      && toCDef.parameters.length == fromCDef.parameters.length
+    ){
+      var allOk = true;
+      var i = 0;
+      var l = toCDef.parameters.length;
+      for (i; i < l; ++i){
+        var tp = toCDef.parameters[i];
+        var sp = fromCDef.parameters[i];
+        if (!cs.canSet(sp, tp)){
+          allOk = false;
+        };
+      };
+      if (allOk){
+        return [makro.SELF];
+      };
+    };
+    debugger;
+    return [internals.runtimeError(errorMsg.typeMissmatch, {errorFun: parErrorFun})];
+    
+  },
+  
+  
   
   
   getTrackerFromInstance: (parType, parInstance){
@@ -1299,48 +1413,48 @@ var classSystem = {
     if (parTargetType === undefined && parSourceType === undefined){
       return true;
     };
-      if (parTargetType === undefined || parSourceType === undefined){
-        return false;
-      };
-      if (parTargetType === parSourceType){
-        return true;
-      };
+    if (parTargetType === undefined || parSourceType === undefined){
+      return false;
+    };
+    if (parTargetType === parSourceType){
+      return true;
+    };
 
-      // temporary check
-      if (this.isTemporaryTrackedClass(parSourceType)){
-        // temporary sourcetype can only pass as temporary target
-        if (this.isTemporaryTrackedClass(parTargetType)){
-          return this.canSet(this.getClassFromTemporaryTracked(parTargetType), this.getClassFromTemporaryTracked(parSourceType));
-        };
-        return false;
-      };
+    // temporary check
+    if (this.isTemporaryTrackedClass(parSourceType)){
+      // temporary sourcetype can only pass as temporary target
       if (this.isTemporaryTrackedClass(parTargetType)){
-        // temporary target is allways possible
-        // code is generated in getPassAsTypeCode
-        return this.canSet(this.getClassFromTemporaryTracked(parTargetType), parSourceType);
-      };
-
-
-      if (
-        parTargetType.isFunction && parSourceType.isFunction
-        && this.canSet(parTargetType.returnType, parSourceType.returnType)
-        && parTargetType.parameters.length == parSourceType.parameters.length
-      ){
-        var allOk = true;
-        var i = 0;
-        var l = parTargetType.parameters.length;
-        for (i; i < l; ++i){
-          var tp = parTargetType.parameters[i];
-          var sp = parSourceType.parameters[i];
-          if (!this.canSet(sp, tp)){
-            allOk = false;
-          };
-        };
-        if (allOk){
-          return true;
-        };
+        return this.canSet(this.getClassFromTemporaryTracked(parTargetType), this.getClassFromTemporaryTracked(parSourceType));
       };
       return false;
+    };
+    if (this.isTemporaryTrackedClass(parTargetType)){
+      // temporary target is allways possible
+      // code is generated in getPassAsTypeCode
+      return this.canSet(this.getClassFromTemporaryTracked(parTargetType), parSourceType);
+    };
+
+
+    if (
+      parTargetType.isFunction && parSourceType.isFunction
+      && this.canSet(parTargetType.returnType, parSourceType.returnType)
+      && parTargetType.parameters.length == parSourceType.parameters.length
+    ){
+      var allOk = true;
+      var i = 0;
+      var l = parTargetType.parameters.length;
+      for (i; i < l; ++i){
+        var tp = parTargetType.parameters[i];
+        var sp = parSourceType.parameters[i];
+        if (!this.canSet(sp, tp)){
+          allOk = false;
+        };
+      };
+      if (allOk){
+        return true;
+      };
+    };
+    return false;
   },
 
   canConnect: function(parType, parProperty, parFunType){
@@ -1468,6 +1582,9 @@ savable(classSystem, internals);
 
 makroModule(classSystem, internals);
 var makro = internals.makro;
+
+createCastings(); // waited for makro to be defined
+
 
 codeGeneration(classSystem, internals);
 var runtimeError = internals.runtimeError;

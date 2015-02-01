@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "26a59745417a99085789de9c1aae17c4" })){ return promiseland._getModule("26a59745417a99085789de9c1aae17c4"); };
+    if (promiseland._hasModule({ hashStr: "ed73882bcafd492071159f4fa7e7ae26" })){ return promiseland._getModule("ed73882bcafd492071159f4fa7e7ae26"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "26a59745417a99085789de9c1aae17c4", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "ed73882bcafd492071159f4fa7e7ae26", "module": PL$1, promising: true });
 var PL$28/*console*/;try{PL$28/*console*/ = console;}catch(e){};
 var PL$31/*Promise*/;try{PL$31/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -89,10 +89,10 @@ var PL$29/*funReturning4*/;
 var PL$33/*funReturning4debug*/;
 var PL$34/*returning4*/;
 var PL$58/*modRes4*/;
-var PL$104/*c*/;
-var PL$105/*s*/;
-var PL$106/*f*/;
-var PL$107/*m*/;
+var PL$106/*c*/;
+var PL$107/*s*/;
+var PL$108/*f*/;
+var PL$109/*m*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
@@ -172,6 +172,7 @@ PL$3/*promiseland exception catcher*/(function(){
   
     ;
     var PL$30/*p*/ = new PL$31/*Promise*/();
+    ;
     try
     {
       PL$8/*mod*/["fun"]()["then"]((function(PL$32/*value*/){
@@ -310,22 +311,26 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$11/*createTest*/("while/doWhile", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$101){PL$101;
   PL$11/*createTest*/("while/doWhileP", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$102){PL$102;
   PL$11/*createTest*/("var/varList", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$103){PL$103;
-  PL$104/*c*/ = 0;
-  PL$105/*s*/ = 0;
-  PL$106/*f*/ = 0;
-  for(PL$107/*m*/ in PL$5/*testObj*/){
-    PL$104/*c*/++;
-    if(PL$5/*testObj*/[PL$107/*m*/]){
-      PL$105/*s*/++;
+  PL$11/*createTest*/("int/declaration", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$104){PL$104;
+  PL$11/*createTest*/("int/initialization", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$105){PL$105;
+  PL$106/*c*/ = 0;
+  PL$107/*s*/ = 0;
+  PL$108/*f*/ = 0;
+  for(PL$109/*m*/ in PL$5/*testObj*/){
+    PL$106/*c*/++;
+    if(PL$5/*testObj*/[PL$109/*m*/]){
+      PL$107/*s*/++;
     }else{
-    PL$28/*console*/["log"]((PL$107/*m*/ + " failed!"));
-    PL$106/*f*/++;
+    PL$28/*console*/["log"]((PL$109/*m*/ + " failed!"));
+    PL$108/*f*/++;
     };
     ;};
   ;
-  PL$28/*console*/["log"]((((((("run " + PL$104/*c*/) + " tests. ") + PL$105/*s*/) + " successful, ") + PL$106/*f*/) + " failed"));
+  PL$28/*console*/["log"]((((((("run " + PL$106/*c*/) + " tests. ") + PL$107/*s*/) + " successful, ") + PL$108/*f*/) + " failed"));
   PL$1.resolve(PL$5/*testObj*/); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);

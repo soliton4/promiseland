@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "a6b0c9dbbd01c36f71ddc60f443028dc" })){ return promiseland._getModule("a6b0c9dbbd01c36f71ddc60f443028dc"); };
+    if (promiseland._hasModule({ hashStr: "6a9c18560997faa13ad3f8a76025888e" })){ return promiseland._getModule("6a9c18560997faa13ad3f8a76025888e"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "a6b0c9dbbd01c36f71ddc60f443028dc", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "6a9c18560997faa13ad3f8a76025888e", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$32/*Promise*/;try{PL$32/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -369,12 +369,19 @@ PL$3/*promiseland exception catcher*/(function(){
           ;
         };
         ;
+        if(! PL$20/*par*/["isRegularStatement"]){
+          PL$47/*addVar*/ = false;
+        };
+        ;
         if(! this["isSimpleType"](PL$46/*usedType*/)){
           PL$47/*addVar*/ = false;
         };
         ;
+        if(! this["canSkipVarHeusting"](PL$46/*usedType*/)){
+          PL$47/*addVar*/ = false;
+        };
+        ;
         if(PL$47/*addVar*/){
-          PL$43/*res*/["push"]("var ");
           for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$45/*l*/);++PL$42/*i*/){{
             PL$48/*varName*/ = PL$16/*identifierName*/(PL$44/*declarations*/[PL$42/*i*/]["id"]);
             this["localVariables"]["get"](PL$48/*varName*/)["needsDeclaration"] = false;}};
@@ -383,12 +390,30 @@ PL$3/*promiseland exception catcher*/(function(){
         ;
         for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$45/*l*/);++PL$42/*i*/){{
           if((PL$42/*i*/ > 0)){
+            if(PL$47/*addVar*/){
+              PL$43/*res*/["push"](";");
+              PL$43/*res*/["push"](this["newLine"]());
+            }else{
             PL$43/*res*/["push"](", ");
+            };
+            ;
           };
           ;
           if((PL$44/*declarations*/[PL$42/*i*/]["type"] == "VariableDeclaration")){
-            var PL$49/*r*/ = this["parseExpression"](PL$44/*declarations*/[PL$42/*i*/]);
-            PL$43/*res*/["push"](PL$49/*r*/);
+            if(PL$47/*addVar*/){
+              PL$48/*varName*/ = PL$16/*identifierName*/(PL$44/*declarations*/[PL$42/*i*/]["id"]);
+              PL$43/*res*/["push"](this["getDeclareVariableCode"]({
+                "name": this["getVariableName"](PL$48/*varName*/),
+                "type": PL$46/*usedType*/,
+                "errorFun": this["getWarningFun"](PL$20/*par*/),
+                "parsed": PL$20/*par*/,
+                "declaration": true,
+                "value": (PL$44/*declarations*/[PL$42/*i*/]["init"] ? this["parseExpression"](PL$44/*declarations*/[PL$42/*i*/]["init"]) : undefined)
+              }));
+            }else{
+            PL$43/*res*/["push"](this["parseExpression"](PL$44/*declarations*/[PL$42/*i*/]));
+            };
+            ;
           }else{
           this["error"](PL$44/*declarations*/[PL$42/*i*/], PL$11/*errorMsg*/["unknownType"]);
           };

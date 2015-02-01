@@ -63,9 +63,11 @@ var PL$1 = (function(){
   var PL$2/*results*/ = {
     
   };
+  ;
   var PL$3/*finishObj*/ = {
     
   };
+  ;
   var PL$4/*getResultPromise*/ = (function(PL$5/*type*/){
   
     ;
@@ -76,6 +78,7 @@ var PL$1 = (function(){
     PL$2/*results*/[PL$5/*type*/] = new PL$6/*Promise*/();
     return PL$2/*results*/[PL$5/*type*/];
     ;});
+  ;
   var PL$7/*getFinishPromise*/ = (function(PL$5/*type*/){
   
     ;
@@ -85,6 +88,7 @@ var PL$1 = (function(){
     ;
     return PL$3/*finishObj*/[PL$5/*type*/];
     ;});
+  ;
   var PL$8/*postResult*/ = ((function(f){
   promiseland.registerRemote("server", "2c4ae3017f175bf1f7b91699d6625b7e", "PL$14", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("server")){
@@ -113,11 +117,13 @@ var PL$1 = (function(){
     PL$10.resolve(); return;
   })();return PL$10;
   }));
+  ;
   var PL$15/*finish*/ = (function(PL$5/*type*/){
   
     ;
     PL$7/*getFinishPromise*/(PL$5/*type*/)["resolve"]();
     ;});
+  ;
   var PL$16/*waitForFinish*/ = ((function(f){
   promiseland.registerRemote("server", "2c4ae3017f175bf1f7b91699d6625b7e", "PL$22", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("server")){
@@ -148,6 +154,7 @@ var PL$1 = (function(){
     ;
   })();return PL$17;
   }));
+  ;
   return {
     "getResultPromise": PL$4/*getResultPromise*/,
     "postResult": PL$8/*postResult*/,

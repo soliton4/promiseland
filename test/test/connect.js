@@ -97,6 +97,7 @@ classSystem.readyPromise(PL$5/*type:Reciever*/).then(function(parType){
   PL$9/*e*/ = new PL$4/*Emitter-constructor*/();
   PL$10/*r*/ = new PL$7/*Reciever-constructor*/();
   var PL$11/*c*/ = PL$9/*e*/[2](3, PL$10/*r*/[3], PL$10/*r*/);
+  ;
   PL$9/*e*/[3](2);
   if((PL$10/*r*/[4] == 3)){
     return {

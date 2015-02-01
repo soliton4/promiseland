@@ -60,7 +60,9 @@ var PL$1 = (function(){
   try
   {
     var PL$2/*catched*/;
-    var PL$3/*res*/ = PL$4/*some*/["error"]();}catch(PL$5/*e*/){
+    ;
+    var PL$3/*res*/ = PL$4/*some*/["error"]();
+    ;}catch(PL$5/*e*/){
     PL$2/*catched*/ = true;};
   ;
   if(! PL$2/*catched*/){

@@ -92,6 +92,7 @@ classSystem.readyPromise(PL$5/*type:Type2*/).then(function(parType){
     PL$9/*a*/ = new PL$4/*Type1-constructor*/();
     return (function(){ throw { id:201, msg: "type missmatch" } })();
     ;});
+  ;
   try
   {
     PL$8/*f1*/();}catch(PL$10/*e*/){
