@@ -51,7 +51,7 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "5fe985bf988e3526f769b7a8aa05b0a5" })){ return promiseland._getModule("5fe985bf988e3526f769b7a8aa05b0a5"); };
+if (promiseland._hasModule({ hashStr: "757012e88c172983336904631adc49f4" })){ return promiseland._getModule("757012e88c172983336904631adc49f4"); };
 var PL$1 = (function(){
 "use strict";
 
@@ -154,6 +154,18 @@ var PL$1 = (function(){
     "missingImplementation": {
       "id": 810,
       "msg": "internal: missing implementation"
+    },
+    "frameExists": {
+      "id": 811,
+      "msg": "a frame with this name already exists"
+    },
+    "toManyConnections": {
+      "id": 812,
+      "msg": "to many connections"
+    },
+    "noConnectionAvailable": {
+      "id": 813,
+      "msg": "no connection available"
     }
   };
   ;})();

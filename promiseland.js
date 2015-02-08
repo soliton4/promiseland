@@ -127,7 +127,7 @@
       var s = "";
       var n;
       for (n in __parObj){
-        s += "var " + n + " = __parObj." + n + ";"
+        s += "var " + n + " = __parObj." + n + ";";
       };
       
       //s = "(function(){" + s;
@@ -152,6 +152,9 @@
           return;
         };
         config[parWhat] = parValue;
+        if (parWhat == "profile"){
+          this.addLocalFrameName(parValue);
+        };
       },
       
       javascriptEval: specialEval,

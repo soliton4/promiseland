@@ -104,5 +104,17 @@ return {
       missingImplementation: {
         id: 810,
         msg: "internal: missing implementation"
-      }
+      },
+  frameExists: {
+    id: 811,
+    msg: "a frame with this name already exists"
+  },
+  toManyConnections: {
+    id: 812,
+    msg: "to many connections"
+  },
+  noConnectionAvailable: {
+    id: 813,
+    msg: "no connection available"
+  }
 };

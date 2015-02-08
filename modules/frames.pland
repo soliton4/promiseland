@@ -47,6 +47,35 @@ var _onFun = function(parEventStr, parFun){
   };
 };
 
+
+/*class EventEntry{
+  first: (){
+    return this._first;
+  },
+  add: (fun){
+    
+  }
+}
+
+var getEventEntry = (parMap, parName){
+  var entry = parMap.get(parName);
+  if (!entry){
+    entry = new EventEntry();
+  };
+}
+
+var EventsMixin = class {
+  constructor: (){
+    this._onMap = new promiseland.Map();
+  },
+  on: (parEventName, parCallback){
+    
+  }
+};
+*/
+
+
+
 // base classes
 var Profile = function(){
   this._on = {
@@ -541,6 +570,17 @@ class Transport {
       delete this.instanceTracks[parInternalId];
       track();
     };
+  },
+  
+  removeAllInstances: (){
+    var i;
+    var all = [];
+    for (i in this.instances){
+      all.push(i);
+    };
+    for (i = 1; i < all.length; ++i){
+      this.removeInstance(all[i], true);
+    };
   }
   
 };  
@@ -574,6 +614,35 @@ class Transport {
       };
 
     };
+    
+    
+    var prepConnectionNew = (connection, frame){
+      
+      var transport = new Transport();
+      transport.sendString = (s){
+        connection.send(s);
+      };
+      
+      connection.data = (dataStr){
+        transport.stringData(dataStr);
+      };
+
+      connection._transportDisconnect = (){
+        transport.removeAllInstances();
+      };
+
+      connection.createRequest = (data){
+        return transport.newRequest();
+      };
+
+      connection.createMsg = (data){
+        var msg = transport.newMessage();
+        msg.setData(data);
+        msg.send();
+      };
+
+    };
+    
 
 handlers.remove = (parContent, parPackage){
   //console.log("calling remove");
@@ -1050,9 +1119,137 @@ var getModuleData = function(parHash){
     
 
 
+    
+    
+    
+    
+    // new frame api
+    
+    
+    
+    // represents a session
+    class Session{
+      constructor: (parConnection){
+        this.connection = parConnection;
+
+      }
+    }
+    
+    // represents a point to point connection
+    var FrameConnection = class {
+      
+      constructor: (){
+        this.session = new this.SessionBaseClass(this);
+      },
+      
+      SessionBaseClass: Session,
+      
+      // override
+      send: (parStr){
+
+      },
+        
+      // call this member when string data arrives
+      data: (parStr){
+        
+      },
+      // call this member function when the connection terminates
+      disconnect: (){
+        this.frame.removeConnection(this);
+        if (this._transportDisconnect){
+          this._transportDisconnect();
+        };
+      }
+    };
+
+    
+    
+/*
+  the Frame class represents the a existence of one or several other promiseLand runtime environments,
+  that are addressed by a specific name
+*/
+var Frame = class {
+  constructor: (){
+    this.connections = [];
+  },
+  name: undefined, // give your the frame a name
+    
+  ConnectionBaseClass: FrameConnection,
+    
+  newConnection: (parConnection){ // call this member function with a new connection
+    parConnection.frame = this;
+    parConnection.session = new Session(parConnection);
+    this.connections.push(parConnection);
+    prepConnectionNew(parConnection, this);
+  },
+    
+  removeConnection: (parConnection){
+    var i = 0;
+    for (i = 0; i < this.connections.length; ++i){
+      if (this.connections[i] === parConnection){
+        this.connections.splice(i, 1);
+        return;
+      };
+    };
+  },
+    
+  // this function is called when a remote function is being called
+  // it will throw an error when the number of connections does not equal 1
+  getConnection: (){
+    if (this.connections.length === 1){
+      return this.connections[0];
+    };
+    if (this.connections.length > 1){
+      throw errorMsg.toManyConnections;
+    };
+    throw errorMsg.noConnectionAvailable;
+  }
+};
+
+    
+    
+promiseland.FrameBaseClass = Frame;
+
+var frames = new promiseland.Map();
+    
+promiseland.addFrame = (parFrame){
+  var entry = frames.get(parFrame.name);
+  if (!entry){
+    entry = [];
+    frames.get(parFrame.name);
+  };
+  entry.push(parFrame);
+};
+    
+localFrameMap = new promiseland.Map();
+
+promiseland.isFrameLocal = (parFrameName){
+  if (localFrameMap.has(parFrameName)){
+    return true;
+  };
+  return false;
+};
+
+promiseland.addLocalFrameName = (parFrameName){
+  localFrameMap.set(parFrameName, true);
+};
+    
+promiseland.removeLocalFrameName = (parFrameName){
+  localFrameMap.delete(parFrameName);
+};
+    
+
+
+    
+    
+    
+
+    // old frame api
+    
+    
 promiseland.ProfileBaseClass = Profile;
 promiseland.ConnectionBaseClass = Connection;
-
+    
 
 promiseland.addProfile = function(parProfile){
   if (!parProfile){
@@ -1069,13 +1266,17 @@ promiseland.addProfile = function(parProfile){
     prepConnection(connection, parProfile);
   });
 };
+    
+    // depricated
+    // use isFrameLocal
 promiseland.profileHas = function(profileNameStr){
-  if (config.profile === profileNameStr){
-    return true;
-  };
-  return false;
+  return promiseland.isFrameLocal(profileNameStr);
 };
 
+    
+
+
+    
 
 promiseland.registerRemote = function(profileNameStr, hashStr, nameStr, fun, funType){
   var moduleData = getModuleData(hashStr);
