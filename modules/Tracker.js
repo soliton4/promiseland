@@ -63,11 +63,17 @@ var PL$1 = (function(){
   
     ;
     var PL$3/*curToken*/;
+    ;
     var PL$4/*bestLen*/ = 0;
+    ;
     var PL$5/*best*/;
+    ;
     var PL$6/*first*/;
+    ;
     var PL$7/*last*/;
+    ;
     var PL$8/*rootCnt*/ = 0;
+    ;
     var PL$9/*bringFront*/ = (function(PL$10/*entry*/){
     
       ;
@@ -76,12 +82,15 @@ var PL$1 = (function(){
       PL$6/*first*/["newPrev"](PL$10/*entry*/);
       PL$6/*first*/ = PL$10/*entry*/;
       ;});
+    ;
     var PL$11/*con*/ = (function(PL$12/*t*/){
     var PL$18/*cut*/;
     
       ;
       var PL$13/*next*/;
+      ;
       var PL$14/*prev*/;
+      ;
       var PL$10/*entry*/ = {
         "newNext": (function(PL$15/*parNext*/){
         
@@ -117,6 +126,7 @@ var PL$1 = (function(){
           ;}),
         "cut": PL$18/*cut*/
       };
+      ;
       PL$18/*cut*/ = (function(){
       
         ;
@@ -130,6 +140,7 @@ var PL$1 = (function(){
         ;
         ;});
       var PL$19/*len*/ = PL$12/*t*/["quickCon"]();
+      ;
       if(PL$6/*first*/){
         if(((PL$19/*len*/ && (PL$19/*len*/ < PL$4/*bestLen*/)) || ! PL$4/*bestLen*/)){
           PL$4/*bestLen*/ = PL$19/*len*/;
@@ -149,6 +160,7 @@ var PL$1 = (function(){
       };
       ;
       var PL$20/*done*/ = false;
+      ;
       return (function(){
       
         ;
@@ -169,11 +181,13 @@ var PL$1 = (function(){
         PL$21/*checkFun*/();
         ;});
       ;});
+    ;
     PL$21/*checkFun*/ = (function(){
     
       ;
       if(! PL$22/*getBest*/()){
         var PL$23/*f*/ = PL$2/*destroyFun*/;
+        ;
         PL$2/*destroyFun*/ = (function(){
         
           ;
@@ -199,6 +213,7 @@ var PL$1 = (function(){
       ;
       if(PL$6/*first*/){
         var PL$24/*b*/ = PL$6/*first*/["getCon"](PL$3/*curToken*/);
+        ;
         if(PL$24/*b*/){
           if(! PL$17/*token*/){
             PL$4/*bestLen*/ = PL$24/*b*/;
@@ -208,8 +223,11 @@ var PL$1 = (function(){
         };
         ;
         var PL$25/*iterator*/ = PL$6/*first*/["getNext"]();
+        ;
         var PL$26/*tempBestLen*/ = 0;
+        ;
         var PL$27/*tempBest*/;
+        ;
         while(PL$25/*iterator*/){
         {
           PL$24/*b*/ = PL$25/*iterator*/["getCon"](PL$3/*curToken*/);
@@ -253,6 +271,7 @@ var PL$1 = (function(){
         return (PL$4/*bestLen*/ + 1);
         ;})
     };
+    ;
     return [
       PL$28/*tracker*/, 
       (function(){
@@ -260,6 +279,7 @@ var PL$1 = (function(){
         ;
         ++PL$8/*rootCnt*/;
         var PL$20/*done*/ = false;
+        ;
         return (function(){
         
           ;

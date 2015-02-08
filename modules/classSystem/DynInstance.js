@@ -62,7 +62,9 @@ var PL$17/*DynInstance*/;
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   var PL$4/*classSystem*/;
+  ;
   (function(){
   var PL$5 = new __Promise();
   var PL$7/*promiseland exception catcher*/ = function(code){
@@ -106,6 +108,7 @@ var PL$17/*DynInstance*/;
       };
       ;
       var PL$13/*passedType*/ = PL$4/*classSystem*/["getTypeFromInstance"](PL$12/*parInstance*/);
+      ;
       if(PL$4/*classSystem*/["isTemporaryTrackedClass"](PL$13/*passedType*/)){
         this["instance"] = PL$12/*parInstance*/[0];
         this["track"] = PL$12/*parInstance*/[1];
@@ -160,6 +163,7 @@ var PL$17/*DynInstance*/;
       ;
       if(PL$4/*classSystem*/["isTemporaryTrackedClass"](PL$11/*parType*/)){
         var PL$14/*track*/ = this["getTrack"]();
+        ;
         this["extraTracks"]["push"](PL$14/*track*/);
         return [
           this["instance"], 
@@ -173,6 +177,7 @@ var PL$17/*DynInstance*/;
     
       ;
       var PL$15/*i*/ = 0;
+      ;
       for(PL$15/*i*/ = 0;(PL$15/*i*/ < this["extraTracks"]["length"]);++PL$15/*i*/){{
         try
         {

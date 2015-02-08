@@ -121,22 +121,29 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$24/*res*/ = this["newResult"]();
+        ;
         var PL$25/*isClassObject*/ = this["isClassObject"];
+        ;
         this["stack"]("isClassObject");
         this["isClassObject"] = false;
         PL$24/*res*/["push"]("{");
         var PL$26/*indentRes*/ = this["newResult"]();
+        ;
         var PL$27/*i*/ = 0;
+        ;
         var PL$28/*l*/ = ((PL$22/*par*/["properties"] && PL$22/*par*/["properties"]["length"]) || 0);
+        ;
         for(PL$27/*i*/;(PL$27/*i*/ < PL$28/*l*/);++PL$27/*i*/){{
           this["isClassObject"] = false;
           var PL$29/*currentMember*/;
+          ;
           if(PL$27/*i*/){
             PL$26/*indentRes*/["push"](",");
             PL$26/*indentRes*/["push"](this["newLine"]());
           };
           ;
           var PL$30/*prop*/ = PL$22/*par*/["properties"][PL$27/*i*/];
+          ;
           if((PL$30/*prop*/["kind"] == "init")){
             PL$29/*currentMember*/ = PL$16/*identifierName*/(PL$30/*prop*/["key"]);
             if(this["inheritedSystem"]){
@@ -153,6 +160,7 @@ PL$3/*promiseland exception catcher*/(function(){
               };
               ;
               var PL$31/*v*/ = this["parseExpression"](PL$30/*prop*/["value"]);
+              ;
               PL$26/*indentRes*/["push"](this["expectTypeVar"](this["getPassAsTypeCode"]({
                 "value": PL$31/*v*/,
                 "valueType": PL$31/*v*/["getType"](),
@@ -168,6 +176,7 @@ PL$3/*promiseland exception catcher*/(function(){
             };
             ;
             var PL$32/*name*/ = PL$16/*identifierName*/(PL$30/*prop*/["id"]);
+            ;
             PL$29/*currentMember*/ = PL$32/*name*/;
             if(this["inheritedSystem"]){
               this["inheritedSystem"]["setCurrent"](PL$29/*currentMember*/);
@@ -176,6 +185,7 @@ PL$3/*promiseland exception catcher*/(function(){
             PL$30/*prop*/["id"] = undefined;
             PL$26/*indentRes*/["push"]((PL$13/*stringEncodeStr*/(PL$32/*name*/) + ": "));
             var PL$33/*functionRes*/ = this["expectTypeVar"](this["parseExpression"](PL$30/*prop*/));
+            ;
             PL$26/*indentRes*/["push"](PL$33/*functionRes*/);
           }else{
           if((PL$30/*prop*/["kind"] == "block")){
@@ -196,10 +206,14 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$24/*res*/ = this["newResult"]();
+        ;
         PL$24/*res*/["push"]("[");
         var PL$26/*indentRes*/ = this["newResult"]();
+        ;
         var PL$27/*i*/ = 0;
+        ;
         var PL$28/*l*/ = ((PL$22/*par*/["elements"] && PL$22/*par*/["elements"]["length"]) || 0);
+        ;
         for(PL$27/*i*/;(PL$27/*i*/ < PL$28/*l*/);++PL$27/*i*/){{
           if(PL$27/*i*/){
             PL$26/*indentRes*/["push"](", ");
@@ -214,6 +228,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return PL$24/*res*/;
         ;});
       ;});
+    ;
     PL$23/*f*/["apply"](PL$21/*parInstance*/, [
       PL$22/*par*/
     ]);

@@ -62,7 +62,9 @@ var PL$1 = (function(){
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   var PL$4/*getModuleData*/;
+  ;
   (function(){
   var PL$5 = new __Promise();
   var PL$7/*promiseland exception catcher*/ = function(code){
@@ -84,13 +86,18 @@ var PL$1 = (function(){
   })();return PL$5;
   })();
   var PL$10/*frames*/;
+  ;
   var PL$11/*getInstanceFromTransportData*/;
+  ;
   var PL$12/*getInstanceTransportData*/;
+  ;
   var PL$13/*getEffectiveFunctionResultType*/;
+  ;
   return (function(PL$14/*classSystem*/, PL$15/*internals*/){
   
     ;
     var PL$16/*privateClassSystem*/ = PL$15/*internals*/["privateClassSystem"];
+    ;
     (function(){
     var PL$17 = new __Promise();
     var PL$19/*promiseland exception catcher*/ = function(code){
@@ -112,10 +119,15 @@ var PL$1 = (function(){
     })();return PL$17;
     })();
     var PL$22/*cs*/ = PL$14/*classSystem*/;
+    ;
     var PL$23/*pcs*/ = PL$16/*privateClassSystem*/;
+    ;
     var PL$24/*getClass*/ = PL$15/*internals*/["getClass"];
+    ;
     var PL$25/*DynInstance*/ = PL$15/*internals*/["DynInstance"];
+    ;
     var PL$26/*storageEnginePs*/ = new PL$27/*Promise*/();
+    ;
     PL$23/*pcs*/["isSavableType"] = (function(PL$28/*parType*/){
     
       ;
@@ -124,6 +136,7 @@ var PL$1 = (function(){
       };
       ;
       var PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      ;
       if(PL$29/*cDef*/["savable"]){
         return true;
       };

@@ -71,6 +71,7 @@ function PL$3/*a*/(){
     ;
     PL$5/*xxx*/();
     ;});
+  ;
   PL$6/*y*/ = 2;
   ;})();
 ;return PL$1;

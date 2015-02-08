@@ -6,6 +6,7 @@
   inter communication between frames
   frame base classes
 */
+  
 
 
 var classSystem;
@@ -20,6 +21,7 @@ var getEffectiveFunctionResultType;
   DynInstance = (*extra.classSystemPs).DynInstance;
   getEffectiveFunctionResultType = (*extra.classSystemPs).getEffectiveFunctionResultType;
 })();
+
 
 var config = extra.config;
 
@@ -47,32 +49,6 @@ var _onFun = function(parEventStr, parFun){
   };
 };
 
-
-/*class EventEntry{
-  first: (){
-    return this._first;
-  },
-  add: (fun){
-    
-  }
-}
-
-var getEventEntry = (parMap, parName){
-  var entry = parMap.get(parName);
-  if (!entry){
-    entry = new EventEntry();
-  };
-}
-
-var EventsMixin = class {
-  constructor: (){
-    this._onMap = new promiseland.Map();
-  },
-  on: (parEventName, parCallback){
-    
-  }
-};
-*/
 
 
 
@@ -623,6 +599,20 @@ class Transport {
         connection.send(s);
       };
       
+      transport.canAccessFrame = (parFrameName){
+        if (!connection.restrictLocalFrames){
+          return true;
+        };
+        console.log("checking frame access:");
+        console.log(parFrameName);
+        console.log(connection.localFrames.get(parFrameName));
+        return connection.localFrames.get(parFrameName);
+      };
+      
+      transport.getSession = (){
+        return connection.session;
+      };
+      
       connection.data = (dataStr){
         console.log("string data:");
         console.log(dataStr);
@@ -668,7 +658,12 @@ handlers.remoteexec = (parContent, parPackage){
   var track = (){};
   var err;
   var args = [];
-  var realArgs = [];
+  var transport = parPackage.getTransport();
+  var session;
+  if (transport.getSession){
+    session = transport.getSession();
+  };
+  var realArgs = [session];
   var cleanUpArgs = (){
     var i;
     for (i = 0; i < args.length; ++i){
@@ -695,8 +690,8 @@ handlers.remoteexec = (parContent, parPackage){
     var moduleData = getModuleData(data.hashStr);
 
     var funEntry = moduleData.functions[data.nameStr];
-
-    if (promiseland.profileHas(funEntry.profile)){
+    
+    if (promiseland.isFrameLocal(funEntry.profile) && ((!transport.canAccessFrame) || (transport.canAccessFrame(funEntry.profile)))){
 
       var funType = funEntry.funType;
       var resultTypes = getEffectiveFunctionResultType(funType);
@@ -1142,6 +1137,16 @@ var getModuleData = function(parHash){
       
       constructor: (){
         this.session = new this.SessionBaseClass(this);
+        this.localFrames = new promiseland.Map();
+      },
+        
+      restrictLocalFrames: false, // set to true if you need authentification
+        
+      addLocalFrameAccess: (parName){
+        this.localFrames.set(parName, true);
+      },
+      removeLocalFrameAccess: (parName){
+        this.localFrames.set(parName, false);
       },
       
       SessionBaseClass: Session,
@@ -1177,10 +1182,10 @@ var Frame = class {
   name: undefined, // give your the frame a name
     
   ConnectionBaseClass: FrameConnection,
+  SessionBaseClass: Session,
     
   newConnection: (parConnection){ // call this member function with a new connection
     parConnection.frame = this;
-    parConnection.session = new Session(parConnection);
     this.connections.push(parConnection);
     prepConnectionNew(parConnection, this);
   },

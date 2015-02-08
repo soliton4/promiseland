@@ -62,19 +62,26 @@ var PL$1 = (function(){
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
   
     ;
     var PL$6/*cs*/ = PL$4/*classSystem*/;
+    ;
     var PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
+    ;
     var PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
+    ;
     var PL$9/*TrackedPromise*/ = PL$5/*internals*/["TrackedPromise"];
+    ;
     PL$6/*cs*/["_createPromiseOfClass"] = (function(PL$10/*parType*/){
     
       ;
       var PL$11/*self*/ = this;
+      ;
       if(this["isProvisional"](PL$10/*parType*/)){
         var PL$12/*pr*/ = this["_createProvisionalClass"]();
+        ;
         this["definitionPromise"](PL$10/*parType*/)["then"]((function(PL$13/*parDefinedClass*/){
         
           ;
@@ -88,6 +95,7 @@ var PL$1 = (function(){
       };
       ;
       var PL$14/*track*/ = false;
+      ;
       if(this["isTrackedClass"](PL$10/*parType*/)){
         PL$14/*track*/ = true;
       };
@@ -95,6 +103,7 @@ var PL$1 = (function(){
       var PL$15/*map*/ = {
         
       };
+      ;
       var PL$16/*cDef*/ = {
         "promiseOf": true,
         "type": PL$10/*parType*/,
@@ -103,12 +112,16 @@ var PL$1 = (function(){
         "track": PL$14/*track*/,
         "map": PL$15/*map*/
       };
+      ;
       var PL$18/*cf*/ = PL$7/*classHider*/(PL$16/*cDef*/);
+      ;
       if(PL$14/*track*/){
         PL$16/*cDef*/["map"]["trackRootIdx"] = "rootTrack";
         PL$16/*cDef*/["map"]["trackMemberIdx"] = "memberTrack";
         var PL$19/*pcDef*/ = PL$8/*getClass*/(PL$10/*parType*/);
+        ;
         var PL$20/*memberTrackMemberIdx*/ = PL$19/*pcDef*/["map"]["trackMemberIdx"];
+        ;
         PL$16/*cDef*/["constructor"] = (function(){
         
           ;
@@ -116,10 +129,13 @@ var PL$1 = (function(){
           
             ;
             var PL$24/*v*/ = PL$22/*parTempValue*/[0];
+            ;
             var PL$25/*l*/ = PL$24/*v*/[PL$20/*memberTrackMemberIdx*/](PL$23/*parTracker*/);
+            ;
             PL$22/*parTempValue*/[1]();
             return PL$25/*l*/;
             ;}));
+          ;
           return [
             PL$21/*r*/, 
             PL$21/*r*/["rootTrack"]()
@@ -136,6 +152,7 @@ var PL$1 = (function(){
     
       ;
       var PL$16/*cDef*/ = PL$8/*getClass*/(PL$10/*parType*/);
+      ;
       if(PL$16/*cDef*/["promiseOf"]){
         return true;
       };
@@ -146,8 +163,10 @@ var PL$1 = (function(){
     
       ;
       var PL$11/*self*/ = this;
+      ;
       if(this["isProvisional"](PL$10/*parType*/)){
         var PL$12/*pr*/ = this["_createProvisionalClass"]();
+        ;
         this["definitionPromise"](PL$10/*parType*/)["then"]((function(PL$13/*parDefinedClass*/){
         
           ;
@@ -162,6 +181,7 @@ var PL$1 = (function(){
       ;
       if(this["isPromiseOfClass"](PL$10/*parType*/)){
         var PL$16/*cDef*/ = PL$8/*getClass*/(PL$10/*parType*/);
+        ;
         return this["_createTemporaryTrackedClass"](PL$16/*cDef*/["type"]);
       };
       ;

@@ -30,21 +30,6 @@
           };
           throw e;
         };
-        /*
-        var p = new Promise();
-        _getParser().then(function(parser){
-          try{
-            parser.parse(parStr).then(function(res){
-              p.resolve(res);
-            });
-          }catch(e){
-            if (!e.msg){
-              e.msg = e.message;
-            };
-            p.reject(e);
-          };
-        });
-        return p.promise;*/
       };
     };
 

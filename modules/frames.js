@@ -53,14 +53,14 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "4e390ff33faa3bd728eea2b3609b801f" })){ return promiseland._getModule("4e390ff33faa3bd728eea2b3609b801f"); };
+if (promiseland._hasModule({ hashStr: "0aed023e945d4e514c61d0877dab61d2" })){ return promiseland._getModule("0aed023e945d4e514c61d0877dab61d2"); };
 var PL$11/*extra*/;try{PL$11/*extra*/ = extra;}catch(e){};
 var PL$40/*Promise*/;try{PL$40/*Promise*/ = Promise;}catch(e){};
 var PL$52/*console*/;try{PL$52/*console*/ = console;}catch(e){};
 var PL$102/*JSON*/;try{PL$102/*JSON*/ = JSON;}catch(e){};
-var PL$150/*promiseland*/;try{PL$150/*promiseland*/ = promiseland;}catch(e){};
-var PL$255/*findFrame*/;try{PL$255/*findFrame*/ = findFrame;}catch(e){};
-var PL$257/*localFrameMap*/;try{PL$257/*localFrameMap*/ = localFrameMap;}catch(e){};
+var PL$152/*promiseland*/;try{PL$152/*promiseland*/ = promiseland;}catch(e){};
+var PL$258/*findFrame*/;try{PL$258/*findFrame*/ = findFrame;}catch(e){};
+var PL$259/*localFrameMap*/;try{PL$259/*localFrameMap*/ = localFrameMap;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$41/*ContentBase*/;
@@ -69,12 +69,12 @@ var PL$46/*Answer*/;
 var PL$48/*Message*/;
 var PL$65/*Package*/;
 var PL$121/*Transport*/;
-var PL$166/*getInstanceTransportData*/;
-var PL$158/*getInstanceFromTransportData*/;
-var PL$172/*getTypeTransportData*/;
-var PL$204/*getTypeFromTransportData*/;
-var PL$147/*getModuleData*/;
-var PL$248/*Session*/;
+var PL$168/*getInstanceTransportData*/;
+var PL$160/*getInstanceFromTransportData*/;
+var PL$174/*getTypeTransportData*/;
+var PL$206/*getTypeFromTransportData*/;
+var PL$149/*getModuleData*/;
+var PL$250/*Session*/;
 
   ;
   ;
@@ -944,6 +944,23 @@ var PL$248/*Session*/;
       ;
       PL$123/*connection*/["send"](PL$126/*s*/);
       ;});
+    PL$125/*transport*/["canAccessFrame"] = (function(PL$131/*parFrameName*/){
+    
+      ;
+      if(! PL$123/*connection*/["restrictLocalFrames"]){
+        return true;
+      };
+      ;
+      PL$52/*console*/["log"]("checking frame access:");
+      PL$52/*console*/["log"](PL$131/*parFrameName*/);
+      PL$52/*console*/["log"](PL$123/*connection*/["localFrames"]["get"](PL$131/*parFrameName*/));
+      return PL$123/*connection*/["localFrames"]["get"](PL$131/*parFrameName*/);
+      ;});
+    PL$125/*transport*/["getSession"] = (function(){
+    
+      ;
+      return PL$123/*connection*/["session"];
+      ;});
     PL$123/*connection*/["data"] = (function(PL$127/*dataStr*/){
     
       ;
@@ -971,187 +988,195 @@ var PL$248/*Session*/;
       ;});
     ;});
   ;
-  PL$37/*handlers*/["remove"] = (function(PL$131/*parContent*/, PL$78/*parPackage*/){
+  PL$37/*handlers*/["remove"] = (function(PL$132/*parContent*/, PL$78/*parPackage*/){
   
     ;
     try
     {
-      var PL$89/*data*/ = PL$131/*parContent*/["getData"]();
+      var PL$89/*data*/ = PL$132/*parContent*/["getData"]();
       ;
-      var PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
+      var PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
       ;
-      PL$132/*t*/["removeInstance"](PL$89/*data*/["remoteId"], true);}catch(PL$26/*e*/){
+      PL$133/*t*/["removeInstance"](PL$89/*data*/["remoteId"], true);}catch(PL$26/*e*/){
       PL$52/*console*/["log"]("sync error");
       PL$52/*console*/["log"](PL$26/*e*/);};
     ;
     ;});
-  PL$37/*handlers*/["remoteexec"] = (function(PL$131/*parContent*/, PL$78/*parPackage*/){
-  var PL$133 = new __Promise();
-  var PL$135/*promiseland exception catcher*/ = function(code){
+  PL$37/*handlers*/["remoteexec"] = (function(PL$132/*parContent*/, PL$78/*parPackage*/){
+  var PL$134 = new __Promise();
+  var PL$136/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$133.reject(e);
+        PL$134.reject(e);
       };
     };
   };
-  var PL$136/*catch rejected*/ = function(e){
-    PL$133.reject(e);
+  var PL$137/*catch rejected*/ = function(e){
+    PL$134.reject(e);
   };
   var PL$119/*track*/;
-  var PL$137/*err*/;
-  var PL$138/*args*/;
-  var PL$139/*realArgs*/;
-  var PL$140/*cleanUpArgs*/;
-  var PL$141/*clearExtraTracks*/;
+  var PL$138/*err*/;
+  var PL$139/*args*/;
+  var PL$125/*transport*/;
+  var PL$140/*session*/;
+  var PL$141/*realArgs*/;
+  var PL$142/*cleanUpArgs*/;
+  var PL$143/*clearExtraTracks*/;
   var PL$24/*i*/;
-  var PL$142/*answer*/;
+  var PL$144/*answer*/;
   var PL$89/*data*/;
   var PL$19/*moduleData*/;
-  var PL$148/*funEntry*/;
-  var PL$151/*funType*/;
-  var PL$152/*resultTypes*/;
-  var PL$153/*isVar*/;
-  var PL$157/*instance*/;
-  var PL$161/*funResult*/;
-  PL$135/*promiseland exception catcher*/(function(){
+  var PL$150/*funEntry*/;
+  var PL$153/*funType*/;
+  var PL$154/*resultTypes*/;
+  var PL$155/*isVar*/;
+  var PL$159/*instance*/;
+  var PL$163/*funResult*/;
+  PL$136/*promiseland exception catcher*/(function(){
   
     ;
     PL$119/*track*/ = (function(){
     
       ;
       ;});
-    PL$137/*err*/;
-    PL$138/*args*/ = [
+    PL$138/*err*/;
+    PL$139/*args*/ = [
       
     ];
-    PL$139/*realArgs*/ = [
-      
+    PL$125/*transport*/ = PL$78/*parPackage*/["getTransport"]();
+    PL$140/*session*/;
+    if(PL$125/*transport*/["getSession"]){
+      PL$140/*session*/ = PL$125/*transport*/["getSession"]();
+    };
+    ;
+    PL$141/*realArgs*/ = [
+      PL$140/*session*/
     ];
-    PL$140/*cleanUpArgs*/ = (function(){
+    PL$142/*cleanUpArgs*/ = (function(){
     
       ;
       var PL$24/*i*/;
       ;
-      for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$138/*args*/["length"]);++PL$24/*i*/){{
+      for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$139/*args*/["length"]);++PL$24/*i*/){{
         try
         {
-          PL$138/*args*/[PL$24/*i*/]["track"]();}catch(PL$26/*e*/){};
+          PL$139/*args*/[PL$24/*i*/]["track"]();}catch(PL$26/*e*/){};
         ;}};
       ;
       ;});
-    PL$141/*clearExtraTracks*/ = (function(){
+    PL$143/*clearExtraTracks*/ = (function(){
     
       ;
       var PL$24/*i*/;
       ;
-      for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$138/*args*/["length"]);++PL$24/*i*/){{
+      for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$139/*args*/["length"]);++PL$24/*i*/){{
         try
         {
-          PL$138/*args*/[PL$24/*i*/]["clearExtraTracks"]();}catch(PL$26/*e*/){};
+          PL$139/*args*/[PL$24/*i*/]["clearExtraTracks"]();}catch(PL$26/*e*/){};
         ;}};
       ;
       ;});
     PL$24/*i*/;
-    PL$142/*answer*/ = PL$131/*parContent*/["createAnswer"]();
-    var PL$143 = new __Promise();
-    var PL$144 = new __Promise();
-    var PL$145/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$144.resolve(e); }; }; };
-    var PL$146 = function(e){ PL$144.resolve(e); };
-    PL$145/*try catch*/(function(){
-      PL$89/*data*/ = PL$131/*parContent*/["getData"]();
-      PL$19/*moduleData*/ = PL$147/*getModuleData*/(PL$89/*data*/["hashStr"]);
-      PL$148/*funEntry*/ = PL$19/*moduleData*/["functions"][PL$89/*data*/["nameStr"]];
+    PL$144/*answer*/ = PL$132/*parContent*/["createAnswer"]();
+    var PL$145 = new __Promise();
+    var PL$146 = new __Promise();
+    var PL$147/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$146.resolve(e); }; }; };
+    var PL$148 = function(e){ PL$146.resolve(e); };
+    PL$147/*try catch*/(function(){
+      PL$89/*data*/ = PL$132/*parContent*/["getData"]();
+      PL$19/*moduleData*/ = PL$149/*getModuleData*/(PL$89/*data*/["hashStr"]);
+      PL$150/*funEntry*/ = PL$19/*moduleData*/["functions"][PL$89/*data*/["nameStr"]];
       
-      var PL$149 = new __Promise();if(PL$150/*promiseland*/["profileHas"](PL$148/*funEntry*/["profile"])){
-        PL$151/*funType*/ = PL$148/*funEntry*/["funType"];
-        PL$152/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$151/*funType*/);
-        PL$153/*isVar*/ = true;
-        if(! PL$2/*classSystem*/["isVar"](PL$152/*resultTypes*/["promiseResolveType"])){
-          PL$153/*isVar*/ = false;
+      var PL$151 = new __Promise();if((PL$152/*promiseland*/["isFrameLocal"](PL$150/*funEntry*/["profile"]) && (! PL$125/*transport*/["canAccessFrame"] || PL$125/*transport*/["canAccessFrame"](PL$150/*funEntry*/["profile"])))){
+        PL$153/*funType*/ = PL$150/*funEntry*/["funType"];
+        PL$154/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$153/*funType*/);
+        PL$155/*isVar*/ = true;
+        if(! PL$2/*classSystem*/["isVar"](PL$154/*resultTypes*/["promiseResolveType"])){
+          PL$155/*isVar*/ = false;
         };
         ;
-        PL$24/*i*/ = 0;var PL$155 = new __Promise();
-        var PL$154 = function(){var PL$156 = new __Promise();
+        PL$24/*i*/ = 0;var PL$157 = new __Promise();
+        var PL$156 = function(){var PL$158 = new __Promise();
         if((PL$24/*i*/ < PL$89/*data*/["args"]["length"])){
-        PL$158/*getInstanceFromTransportData*/(PL$89/*data*/["args"][PL$24/*i*/], PL$131/*parContent*/).then(PL$145/*try catch*/(function(PL$159){PL$157/*instance*/ = PL$159;
-        PL$138/*args*/["push"](PL$157/*instance*/);
-        PL$156.resolve(true); return PL$156; /* continue */
-        ;}), PL$146);
+        PL$160/*getInstanceFromTransportData*/(PL$89/*data*/["args"][PL$24/*i*/], PL$132/*parContent*/).then(PL$147/*try catch*/(function(PL$161){PL$159/*instance*/ = PL$161;
+        PL$139/*args*/["push"](PL$159/*instance*/);
+        PL$158.resolve(true); return PL$158; /* continue */
+        ;}), PL$148);
         ;}else{
-        PL$156.resolve(false); return PL$156; /* break */
+        PL$158.resolve(false); return PL$158; /* break */
         
         };
-        PL$156;return PL$156;
+        PL$158;return PL$158;
         };
-        var PL$160 = function(){PL$154().then(function(contLoop){
-        if (contLoop){++PL$24/*i*/;PL$160();}else{PL$155.resolve();};
+        var PL$162 = function(){PL$156().then(function(contLoop){
+        if (contLoop){++PL$24/*i*/;PL$162();}else{PL$157.resolve();};
         });
         };
-        PL$160();
-        PL$155.then(function(){;
+        PL$162();
+        PL$157.then(function(){;
         ;
-        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$138/*args*/["length"]);++PL$24/*i*/){{
-          PL$139/*realArgs*/["push"](PL$138/*args*/[PL$24/*i*/]["getInstanceAsType"](PL$2/*classSystem*/["getFunctionArgumentType"](PL$151/*funType*/, PL$24/*i*/)));}};
+        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$139/*args*/["length"]);++PL$24/*i*/){{
+          PL$141/*realArgs*/["push"](PL$139/*args*/[PL$24/*i*/]["getInstanceAsType"](PL$2/*classSystem*/["getFunctionArgumentType"](PL$153/*funType*/, PL$24/*i*/)));}};
         ;
-        PL$140/*cleanUpArgs*/();
-        PL$161/*funResult*/ = PL$148/*funEntry*/["fun"]["apply"](undefined, PL$139/*realArgs*/);
-        if(PL$152/*resultTypes*/["isTemporary"]){
-          PL$119/*track*/ = PL$161/*funResult*/[1];
-          PL$161/*funResult*/ = PL$161/*funResult*/[0];
+        PL$142/*cleanUpArgs*/();
+        PL$163/*funResult*/ = PL$150/*funEntry*/["fun"]["apply"](undefined, PL$141/*realArgs*/);
+        if(PL$154/*resultTypes*/["isTemporary"]){
+          PL$119/*track*/ = PL$163/*funResult*/[1];
+          PL$163/*funResult*/ = PL$163/*funResult*/[0];
         };
         ;
-        var PL$162 = new __Promise();
-        var PL$163 = new __Promise();
-        var PL$164/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$163.resolve(e); }; }; };
-        var PL$165 = function(e){ PL$163.resolve(e); };
-        PL$164/*try catch*/(function(){
-          PL$161/*funResult*/.then(PL$164/*try catch*/(function(PL$167){PL$142/*answer*/["setData"]({
-            "data": PL$166/*getInstanceTransportData*/(PL$152/*resultTypes*/["promiseResolveType"], PL$167, PL$142/*answer*/)
+        var PL$164 = new __Promise();
+        var PL$165 = new __Promise();
+        var PL$166/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$165.resolve(e); }; }; };
+        var PL$167 = function(e){ PL$165.resolve(e); };
+        PL$166/*try catch*/(function(){
+          PL$163/*funResult*/.then(PL$166/*try catch*/(function(PL$169){PL$144/*answer*/["setData"]({
+            "data": PL$168/*getInstanceTransportData*/(PL$154/*resultTypes*/["promiseResolveType"], PL$169, PL$144/*answer*/)
           });
-          PL$162.resolve();}), PL$165);
+          PL$164.resolve();}), PL$167);
         ;})();
-        PL$163.then(PL$145/*try catch*/(function(PL$26/*e*/){
+        PL$165.then(PL$147/*try catch*/(function(PL$26/*e*/){
           PL$52/*console*/["log"]("answer error");
           PL$52/*console*/["log"](PL$26/*e*/);
-          PL$142/*answer*/["setData"]({
+          PL$144/*answer*/["setData"]({
             "err": PL$26/*e*/
           });
-          PL$162.resolve();;}));
-        PL$162.then(PL$145/*try catch*/(function(){;
+          PL$164.resolve();;}));
+        PL$164.then(PL$147/*try catch*/(function(){;
         ;
         PL$52/*console*/["log"]("send answer:");
-        PL$52/*console*/["log"](PL$142/*answer*/["getData"]());
-        PL$142/*answer*/["send"]();
+        PL$52/*console*/["log"](PL$144/*answer*/["getData"]());
+        PL$144/*answer*/["send"]();
         PL$119/*track*/();
-        PL$133.resolve(); return;
-        PL$149.resolve();;}), PL$146)});
-      }else{PL$149.resolve();
-      };PL$149.then(PL$145/*try catch*/(function(PL$168){PL$168;;
+        PL$134.resolve(); return;
+        PL$151.resolve();;}), PL$148)});
+      }else{PL$151.resolve();
+      };PL$151.then(PL$147/*try catch*/(function(PL$170){PL$170;;
       ;
-      PL$143.resolve();}), PL$146);
+      PL$145.resolve();}), PL$148);
     ;})();
-    PL$144.then(PL$135/*promiseland exception catcher*/(function(PL$26/*e*/){
-      PL$137/*err*/ = PL$26/*e*/;
+    PL$146.then(PL$136/*promiseland exception catcher*/(function(PL$26/*e*/){
+      PL$138/*err*/ = PL$26/*e*/;
       PL$52/*console*/["log"]("remoteexec error");
       PL$52/*console*/["log"](PL$26/*e*/);
-      PL$140/*cleanUpArgs*/();
-      PL$141/*clearExtraTracks*/();
-      PL$143.resolve();;}));
-    PL$143.then(PL$135/*promiseland exception catcher*/(function(){;
+      PL$142/*cleanUpArgs*/();
+      PL$143/*clearExtraTracks*/();
+      PL$145.resolve();;}));
+    PL$145.then(PL$136/*promiseland exception catcher*/(function(){;
     ;
-    PL$142/*answer*/["setData"]({
-      "err": (PL$137/*err*/ || PL$18/*errorMsg*/["canNotExecute"])
+    PL$144/*answer*/["setData"]({
+      "err": (PL$138/*err*/ || PL$18/*errorMsg*/["canNotExecute"])
     });
-    PL$142/*answer*/["send"]();
+    PL$144/*answer*/["send"]();
     PL$52/*console*/["log"]("error answer send");
     PL$119/*track*/();
-    PL$140/*cleanUpArgs*/();
+    PL$142/*cleanUpArgs*/();
     PL$52/*console*/["log"]("remote exec fail end");
-    PL$133.resolve(); return;
-    PL$133.resolve(); return;}), PL$136/*catch rejected*/)
-  })();return PL$133;
+    PL$134.resolve(); return;
+    PL$134.resolve(); return;}), PL$137/*catch rejected*/)
+  })();return PL$134;
   });
-  PL$166/*getInstanceTransportData*/ = (function(PL$104/*parType*/, PL$23/*parData*/, PL$131/*parContent*/){
+  PL$168/*getInstanceTransportData*/ = (function(PL$104/*parType*/, PL$23/*parData*/, PL$132/*parContent*/){
   
     ;
     if((PL$23/*parData*/ === undefined)){
@@ -1164,88 +1189,88 @@ var PL$248/*Session*/;
       ];
     };
     ;
-    var PL$157/*instance*/ = new PL$5/*DynInstance*/(PL$104/*parType*/, PL$23/*parData*/);
+    var PL$159/*instance*/ = new PL$5/*DynInstance*/(PL$104/*parType*/, PL$23/*parData*/);
     ;
     try
     {
-      var PL$169/*getInstanceFun*/ = (function(PL$104/*parType*/, PL$170/*_parData*/){
+      var PL$171/*getInstanceFun*/ = (function(PL$104/*parType*/, PL$172/*_parData*/){
       
         ;
-        return PL$166/*getInstanceTransportData*/(PL$104/*parType*/, PL$170/*_parData*/, PL$131/*parContent*/);
+        return PL$168/*getInstanceTransportData*/(PL$104/*parType*/, PL$172/*_parData*/, PL$132/*parContent*/);
         ;});
       ;
-      var PL$171/*getTypeFun*/ = (function(PL$104/*parType*/){
+      var PL$173/*getTypeFun*/ = (function(PL$104/*parType*/){
       
         ;
-        return PL$172/*getTypeTransportData*/(PL$104/*parType*/, PL$131/*parContent*/);
+        return PL$174/*getTypeTransportData*/(PL$104/*parType*/, PL$132/*parContent*/);
         ;});
       ;
-      var PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
+      var PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
       ;
-      var PL$111/*internalId*/ = PL$157/*instance*/["getInternalId"]();
+      var PL$111/*internalId*/ = PL$159/*instance*/["getInternalId"]();
       ;
-      var PL$115/*remoteId*/ = PL$132/*t*/["getInstanceRemoteId"](PL$157/*instance*/["instance"]);
+      var PL$115/*remoteId*/ = PL$133/*t*/["getInstanceRemoteId"](PL$159/*instance*/["instance"]);
       ;
-      var PL$173/*request*/ = PL$131/*parContent*/["newRequest"]();
+      var PL$175/*request*/ = PL$132/*parContent*/["newRequest"]();
       ;
       if((PL$115/*remoteId*/ !== undefined)){
-        PL$173/*request*/["setData"]({
+        PL$175/*request*/["setData"]({
           "type": "instance",
           "remoteId": PL$115/*remoteId*/
         });
       }else{
-      PL$173/*request*/["setData"]({
+      PL$175/*request*/["setData"]({
         "type": "addInstance",
         "id": PL$111/*internalId*/,
-        "data": PL$2/*classSystem*/["getInstanceSyncData"](PL$157/*instance*/, PL$169/*getInstanceFun*/, PL$171/*getTypeFun*/)
+        "data": PL$2/*classSystem*/["getInstanceSyncData"](PL$159/*instance*/, PL$171/*getInstanceFun*/, PL$173/*getTypeFun*/)
       });
       };
       ;
-      PL$173/*request*/["send"]();
+      PL$175/*request*/["send"]();
       (function(){
-      var PL$174 = new __Promise();
-      var PL$176/*promiseland exception catcher*/ = function(code){
+      var PL$176 = new __Promise();
+      var PL$178/*promiseland exception catcher*/ = function(code){
         return function(res){
           try{ code(res); }catch(e){
-            PL$174.reject(e);
+            PL$176.reject(e);
           };
         };
       };
-      var PL$177/*catch rejected*/ = function(e){
-        PL$174.reject(e);
+      var PL$179/*catch rejected*/ = function(e){
+        PL$176.reject(e);
       };
-      var PL$142/*answer*/;
-      var PL$183/*answerData*/;
-      PL$176/*promiseland exception catcher*/(function(){
+      var PL$144/*answer*/;
+      var PL$185/*answerData*/;
+      PL$178/*promiseland exception catcher*/(function(){
       
         ;
-        var PL$178 = new __Promise();
-        var PL$179 = new __Promise();
-        var PL$180/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$179.resolve(e); }; }; };
-        var PL$181 = function(e){ PL$179.resolve(e); };
-        PL$180/*try catch*/(function(){
-          PL$173/*request*/["answerPs"].then(PL$180/*try catch*/(function(PL$182){PL$142/*answer*/ = PL$182;
-          PL$183/*answerData*/ = PL$142/*answer*/["getData"]();
-          if((PL$183/*answerData*/["id"] !== undefined)){
-            PL$132/*t*/["addInstance"](PL$157/*instance*/, PL$183/*answerData*/["id"], (PL$157/*instance*/["isServe"]() ? PL$157/*instance*/["getTrack"]() : undefined));
+        var PL$180 = new __Promise();
+        var PL$181 = new __Promise();
+        var PL$182/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$181.resolve(e); }; }; };
+        var PL$183 = function(e){ PL$181.resolve(e); };
+        PL$182/*try catch*/(function(){
+          PL$175/*request*/["answerPs"].then(PL$182/*try catch*/(function(PL$184){PL$144/*answer*/ = PL$184;
+          PL$185/*answerData*/ = PL$144/*answer*/["getData"]();
+          if((PL$185/*answerData*/["id"] !== undefined)){
+            PL$133/*t*/["addInstance"](PL$159/*instance*/, PL$185/*answerData*/["id"], (PL$159/*instance*/["isServe"]() ? PL$159/*instance*/["getTrack"]() : undefined));
           };
           ;
-          PL$178.resolve();}), PL$181);
+          PL$180.resolve();}), PL$183);
         ;})();
-        PL$179.then(PL$176/*promiseland exception catcher*/(function(PL$26/*e*/){
-          PL$178.resolve();;}));
-        PL$178.then(PL$176/*promiseland exception catcher*/(function(){;
+        PL$181.then(PL$178/*promiseland exception catcher*/(function(PL$26/*e*/){
+          PL$180.resolve();;}));
+        PL$180.then(PL$178/*promiseland exception catcher*/(function(){;
         ;
-        PL$157/*instance*/["track"]();
-        PL$174.resolve(); return;}), PL$177/*catch rejected*/)
-      })();return PL$174;
+        PL$159/*instance*/["track"]();
+        PL$176.resolve(); return;}), PL$179/*catch rejected*/)
+      })();return PL$176;
       })();
-      var PL$94/*ret*/ = PL$173/*request*/["getId"]();
+      var PL$94/*ret*/ = PL$175/*request*/["getId"]();
       ;}catch(PL$26/*e*/){
       PL$52/*console*/["log"]("getInstanceTransportData error");
       PL$52/*console*/["log"](PL$26/*e*/);
-      if(PL$157/*instance*/){
-        PL$157/*instance*/["track"]();
+      if(PL$159/*instance*/){
+        PL$159/*instance*/["track"]();
       };
       ;
       throw {
@@ -1255,437 +1280,437 @@ var PL$248/*Session*/;
     ;
     return PL$94/*ret*/;
     ;});
-  PL$158/*getInstanceFromTransportData*/ = (function(PL$23/*parData*/, PL$131/*parContent*/){
-  var PL$184 = new __Promise();
-  var PL$186/*promiseland exception catcher*/ = function(code){
+  PL$160/*getInstanceFromTransportData*/ = (function(PL$23/*parData*/, PL$132/*parContent*/){
+  var PL$186 = new __Promise();
+  var PL$188/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$184.reject(e);
+        PL$186.reject(e);
       };
     };
   };
-  var PL$187/*catch rejected*/ = function(e){
-    PL$184.reject(e);
+  var PL$189/*catch rejected*/ = function(e){
+    PL$186.reject(e);
   };
-  var PL$188/*remoteType*/;
-  var PL$189/*remoteVar*/;
-  var PL$190/*remoteInstance*/;
-  var PL$191/*req*/;
-  PL$186/*promiseland exception catcher*/(function(){
+  var PL$190/*remoteType*/;
+  var PL$191/*remoteVar*/;
+  var PL$192/*remoteInstance*/;
+  var PL$193/*req*/;
+  PL$188/*promiseland exception catcher*/(function(){
   
     ;
     if(((PL$23/*parData*/ === undefined) || (PL$23/*parData*/ === null))){
-      PL$184.resolve(new PL$5/*DynInstance*/(PL$2/*classSystem*/["getBuiltinType"]("var"), undefined)); return;
+      PL$186.resolve(new PL$5/*DynInstance*/(PL$2/*classSystem*/["getBuiltinType"]("var"), undefined)); return;
       ;
     };
     ;
-    PL$188/*remoteType*/;
-    PL$189/*remoteVar*/ = false;
-    PL$190/*remoteInstance*/;
+    PL$190/*remoteType*/;
+    PL$191/*remoteVar*/ = false;
+    PL$192/*remoteInstance*/;
     if((PL$23/*parData*/["length"] === 1)){
-      PL$184.resolve(new PL$5/*DynInstance*/(PL$2/*classSystem*/["getBuiltinType"]("var"), PL$23/*parData*/[0])); return;
+      PL$186.resolve(new PL$5/*DynInstance*/(PL$2/*classSystem*/["getBuiltinType"]("var"), PL$23/*parData*/[0])); return;
     };
     ;
-    PL$191/*req*/ = PL$131/*parContent*/["getRequest"](PL$23/*parData*/);
-    PL$191/*req*/["localPs"].then(PL$186/*promiseland exception catcher*/(function(PL$192){PL$184.resolve(PL$192); return;
-    PL$184.resolve(); return;}), PL$187/*catch rejected*/);
+    PL$193/*req*/ = PL$132/*parContent*/["getRequest"](PL$23/*parData*/);
+    PL$193/*req*/["localPs"].then(PL$188/*promiseland exception catcher*/(function(PL$194){PL$186.resolve(PL$194); return;
+    PL$186.resolve(); return;}), PL$189/*catch rejected*/);
     ;
-  })();return PL$184;
+  })();return PL$186;
   });
-  var PL$193/*getInstanceFromSyncData*/ = (function(PL$23/*parData*/, PL$131/*parContent*/){
-  var PL$194 = new __Promise();
-  var PL$196/*promiseland exception catcher*/ = function(code){
+  var PL$195/*getInstanceFromSyncData*/ = (function(PL$23/*parData*/, PL$132/*parContent*/){
+  var PL$196 = new __Promise();
+  var PL$198/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$194.reject(e);
+        PL$196.reject(e);
       };
     };
   };
-  var PL$197/*catch rejected*/ = function(e){
-    PL$194.reject(e);
+  var PL$199/*catch rejected*/ = function(e){
+    PL$196.reject(e);
   };
-  var PL$198/*tempAr*/;
-  var PL$199/*clearTempAr*/;
-  var PL$132/*t*/;
+  var PL$200/*tempAr*/;
+  var PL$201/*clearTempAr*/;
+  var PL$133/*t*/;
   var PL$24/*i*/;
   var PL$94/*ret*/;
-  PL$196/*promiseland exception catcher*/(function(){
+  PL$198/*promiseland exception catcher*/(function(){
   
     ;
-    PL$198/*tempAr*/ = [
+    PL$200/*tempAr*/ = [
       
     ];
-    PL$199/*clearTempAr*/ = (function(){
+    PL$201/*clearTempAr*/ = (function(){
     
       ;
       var PL$24/*i*/ = 1;
       ;
-      for(PL$24/*i*/ = 1;(PL$24/*i*/ < PL$198/*tempAr*/["length"]);++PL$24/*i*/){{
+      for(PL$24/*i*/ = 1;(PL$24/*i*/ < PL$200/*tempAr*/["length"]);++PL$24/*i*/){{
         try
         {
-          PL$198/*tempAr*/[PL$24/*i*/]["track"]();}catch(PL$26/*e*/){};
+          PL$200/*tempAr*/[PL$24/*i*/]["track"]();}catch(PL$26/*e*/){};
         ;}};
       ;
       ;});
-    var PL$200 = new __Promise();
-    var PL$201 = new __Promise();
-    var PL$202/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$201.resolve(e); }; }; };
-    var PL$203 = function(e){ PL$201.resolve(e); };
-    PL$202/*try catch*/(function(){
-      PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
-      PL$204/*getTypeFromTransportData*/(PL$23/*parData*/[0], PL$131/*parContent*/).then(PL$202/*try catch*/(function(PL$205){PL$198/*tempAr*/["push"](PL$205);
+    var PL$202 = new __Promise();
+    var PL$203 = new __Promise();
+    var PL$204/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$203.resolve(e); }; }; };
+    var PL$205 = function(e){ PL$203.resolve(e); };
+    PL$204/*try catch*/(function(){
+      PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
+      PL$206/*getTypeFromTransportData*/(PL$23/*parData*/[0], PL$132/*parContent*/).then(PL$204/*try catch*/(function(PL$207){PL$200/*tempAr*/["push"](PL$207);
       PL$24/*i*/ = 1;
-      PL$24/*i*/ = 1;var PL$207 = new __Promise();
-      var PL$206 = function(){var PL$208 = new __Promise();
+      PL$24/*i*/ = 1;var PL$209 = new __Promise();
+      var PL$208 = function(){var PL$210 = new __Promise();
       if((PL$24/*i*/ < PL$23/*parData*/["length"])){
-      PL$158/*getInstanceFromTransportData*/(PL$23/*parData*/[PL$24/*i*/], PL$131/*parContent*/).then(PL$202/*try catch*/(function(PL$209){PL$198/*tempAr*/["push"](PL$209);
-      PL$208.resolve(true); return PL$208; /* continue */
-      ;}), PL$203);
+      PL$160/*getInstanceFromTransportData*/(PL$23/*parData*/[PL$24/*i*/], PL$132/*parContent*/).then(PL$204/*try catch*/(function(PL$211){PL$200/*tempAr*/["push"](PL$211);
+      PL$210.resolve(true); return PL$210; /* continue */
+      ;}), PL$205);
       ;}else{
-      PL$208.resolve(false); return PL$208; /* break */
+      PL$210.resolve(false); return PL$210; /* break */
       
       };
-      PL$208;return PL$208;
+      PL$210;return PL$210;
       };
-      var PL$210 = function(){PL$206().then(function(contLoop){
-      if (contLoop){++PL$24/*i*/;PL$210();}else{PL$207.resolve();};
+      var PL$212 = function(){PL$208().then(function(contLoop){
+      if (contLoop){++PL$24/*i*/;PL$212();}else{PL$209.resolve();};
       });
       };
-      PL$210();
-      PL$207.then(function(){;
+      PL$212();
+      PL$209.then(function(){;
       ;
-      PL$94/*ret*/ = PL$2/*classSystem*/["getInstanceFromSyncData"](PL$198/*tempAr*/);
-      PL$200.resolve();});}), PL$203);
+      PL$94/*ret*/ = PL$2/*classSystem*/["getInstanceFromSyncData"](PL$200/*tempAr*/);
+      PL$202.resolve();});}), PL$205);
     ;})();
-    PL$201.then(PL$196/*promiseland exception catcher*/(function(PL$26/*e*/){
-      PL$199/*clearTempAr*/();
+    PL$203.then(PL$198/*promiseland exception catcher*/(function(PL$26/*e*/){
+      PL$201/*clearTempAr*/();
       throw PL$26/*e*/;
-      PL$200.resolve();;}));
-    PL$200.then(PL$196/*promiseland exception catcher*/(function(){;
+      PL$202.resolve();;}));
+    PL$202.then(PL$198/*promiseland exception catcher*/(function(){;
     ;
-    PL$199/*clearTempAr*/();
-    PL$194.resolve(PL$94/*ret*/); return;
-    PL$194.resolve(); return;}), PL$197/*catch rejected*/)
-  })();return PL$194;
+    PL$201/*clearTempAr*/();
+    PL$196.resolve(PL$94/*ret*/); return;
+    PL$196.resolve(); return;}), PL$199/*catch rejected*/)
+  })();return PL$196;
   });
   ;
-  PL$37/*handlers*/["addInstance"] = (function(PL$131/*parContent*/, PL$78/*parPackage*/){
-  var PL$211 = new __Promise();
-  var PL$213/*promiseland exception catcher*/ = function(code){
+  PL$37/*handlers*/["addInstance"] = (function(PL$132/*parContent*/, PL$78/*parPackage*/){
+  var PL$213 = new __Promise();
+  var PL$215/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$211.reject(e);
+        PL$213.reject(e);
       };
     };
   };
-  var PL$214/*catch rejected*/ = function(e){
-    PL$211.reject(e);
+  var PL$216/*catch rejected*/ = function(e){
+    PL$213.reject(e);
   };
-  var PL$142/*answer*/;
-  var PL$157/*instance*/;
-  var PL$132/*t*/;
+  var PL$144/*answer*/;
+  var PL$159/*instance*/;
+  var PL$133/*t*/;
   var PL$89/*data*/;
   var PL$111/*internalId*/;
-  PL$213/*promiseland exception catcher*/(function(){
+  PL$215/*promiseland exception catcher*/(function(){
   
     ;
-    PL$142/*answer*/ = PL$131/*parContent*/["createAnswer"]();
-    PL$157/*instance*/;
-    var PL$215 = new __Promise();
-    var PL$216 = new __Promise();
-    var PL$217/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$216.resolve(e); }; }; };
-    var PL$218 = function(e){ PL$216.resolve(e); };
-    PL$217/*try catch*/(function(){
-      PL$132/*t*/ = PL$78/*parPackage*/["getTransport"]();
-      PL$89/*data*/ = PL$131/*parContent*/["getData"]();
-      PL$193/*getInstanceFromSyncData*/(PL$89/*data*/["data"], PL$131/*parContent*/).then(PL$217/*try catch*/(function(PL$219){PL$157/*instance*/ = PL$219;
-      PL$111/*internalId*/ = PL$157/*instance*/["getInternalId"]();
-      PL$132/*t*/["addInstance"](PL$157/*instance*/, PL$89/*data*/["id"]);
-      PL$142/*answer*/["setData"]({
+    PL$144/*answer*/ = PL$132/*parContent*/["createAnswer"]();
+    PL$159/*instance*/;
+    var PL$217 = new __Promise();
+    var PL$218 = new __Promise();
+    var PL$219/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$218.resolve(e); }; }; };
+    var PL$220 = function(e){ PL$218.resolve(e); };
+    PL$219/*try catch*/(function(){
+      PL$133/*t*/ = PL$78/*parPackage*/["getTransport"]();
+      PL$89/*data*/ = PL$132/*parContent*/["getData"]();
+      PL$195/*getInstanceFromSyncData*/(PL$89/*data*/["data"], PL$132/*parContent*/).then(PL$219/*try catch*/(function(PL$221){PL$159/*instance*/ = PL$221;
+      PL$111/*internalId*/ = PL$159/*instance*/["getInternalId"]();
+      PL$133/*t*/["addInstance"](PL$159/*instance*/, PL$89/*data*/["id"]);
+      PL$144/*answer*/["setData"]({
         "id": PL$111/*internalId*/
       });
-      PL$142/*answer*/["send"]();
-      PL$131/*parContent*/["localPs"]["resolve"](PL$157/*instance*/);
-      PL$211.resolve(); return;
-      PL$215.resolve();}), PL$218);
+      PL$144/*answer*/["send"]();
+      PL$132/*parContent*/["localPs"]["resolve"](PL$159/*instance*/);
+      PL$213.resolve(); return;
+      PL$217.resolve();}), PL$220);
     ;})();
-    PL$216.then(PL$213/*promiseland exception catcher*/(function(PL$26/*e*/){
-      if(PL$157/*instance*/){
-        PL$157/*instance*/["track"]();
+    PL$218.then(PL$215/*promiseland exception catcher*/(function(PL$26/*e*/){
+      if(PL$159/*instance*/){
+        PL$159/*instance*/["track"]();
       };
       ;
       PL$52/*console*/["log"]("answer error 3");
       PL$52/*console*/["log"](PL$26/*e*/);
-      PL$142/*answer*/["setData"]({
+      PL$144/*answer*/["setData"]({
         "err": PL$26/*e*/
       });
-      PL$142/*answer*/["send"]();
-      PL$131/*parContent*/["localPs"]["reject"](PL$26/*e*/);
+      PL$144/*answer*/["send"]();
+      PL$132/*parContent*/["localPs"]["reject"](PL$26/*e*/);
       throw PL$26/*e*/;
-      PL$215.resolve();;}));
-    PL$215.then(PL$213/*promiseland exception catcher*/(function(){;
+      PL$217.resolve();;}));
+    PL$217.then(PL$215/*promiseland exception catcher*/(function(){;
     ;
-    PL$211.resolve(); return;}), PL$214/*catch rejected*/)
-  })();return PL$211;
+    PL$213.resolve(); return;}), PL$216/*catch rejected*/)
+  })();return PL$213;
   });
-  PL$37/*handlers*/["instance"] = (function(PL$131/*parContent*/, PL$78/*parPackage*/){
+  PL$37/*handlers*/["instance"] = (function(PL$132/*parContent*/, PL$78/*parPackage*/){
   
     ;
-    var PL$142/*answer*/ = PL$131/*parContent*/["createAnswer"]();
+    var PL$144/*answer*/ = PL$132/*parContent*/["createAnswer"]();
     ;
-    var PL$157/*instance*/;
+    var PL$159/*instance*/;
     ;
     try
     {
-      var PL$132/*t*/ = PL$78/*parPackage*/["getTransport"]();
+      var PL$133/*t*/ = PL$78/*parPackage*/["getTransport"]();
       ;
-      var PL$89/*data*/ = PL$131/*parContent*/["getData"]();
+      var PL$89/*data*/ = PL$132/*parContent*/["getData"]();
       ;
       var PL$111/*internalId*/ = PL$89/*data*/["remoteId"];
       ;
-      var PL$220/*realInstance*/ = PL$3/*internalObjects*/[PL$111/*internalId*/];
+      var PL$222/*realInstance*/ = PL$3/*internalObjects*/[PL$111/*internalId*/];
       ;
-      if(PL$220/*realInstance*/){
-        PL$157/*instance*/ = new PL$5/*DynInstance*/(undefined, PL$220/*realInstance*/);
-        PL$142/*answer*/["setData"]({
+      if(PL$222/*realInstance*/){
+        PL$159/*instance*/ = new PL$5/*DynInstance*/(undefined, PL$222/*realInstance*/);
+        PL$144/*answer*/["setData"]({
           
         });
-        PL$142/*answer*/["send"]();
-        PL$131/*parContent*/["localPs"]["resolve"](PL$157/*instance*/);
+        PL$144/*answer*/["send"]();
+        PL$132/*parContent*/["localPs"]["resolve"](PL$159/*instance*/);
       }else{
       throw PL$18/*errorMsg*/["missingImplementation"];
       };
       ;}catch(PL$26/*e*/){
-      if(PL$157/*instance*/){
-        PL$157/*instance*/["track"]();
+      if(PL$159/*instance*/){
+        PL$159/*instance*/["track"]();
       };
       ;
       PL$52/*console*/["log"]("answer error 4");
       PL$52/*console*/["log"](PL$26/*e*/);
-      PL$142/*answer*/["setData"]({
+      PL$144/*answer*/["setData"]({
         "err": PL$26/*e*/
       });
-      PL$142/*answer*/["send"]();
-      PL$131/*parContent*/["localPs"]["reject"](PL$26/*e*/);
+      PL$144/*answer*/["send"]();
+      PL$132/*parContent*/["localPs"]["reject"](PL$26/*e*/);
       throw PL$26/*e*/;};
     ;
     ;});
-  PL$172/*getTypeTransportData*/ = (function(PL$104/*parType*/, PL$131/*parContent*/){
+  PL$174/*getTypeTransportData*/ = (function(PL$104/*parType*/, PL$132/*parContent*/){
   
     ;
     if(! PL$2/*classSystem*/["isSyncedClass"](PL$104/*parType*/)){
       throw PL$18/*errorMsg*/["noSyncableData"];
     };
     ;
-    var PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
+    var PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
     ;
-    var PL$108/*typeIds*/ = PL$132/*t*/["addType"](PL$104/*parType*/);
+    var PL$108/*typeIds*/ = PL$133/*t*/["addType"](PL$104/*parType*/);
     ;
     if((PL$108/*typeIds*/ && (PL$108/*typeIds*/["remoteId"] !== undefined))){
       return PL$108/*typeIds*/["remoteId"];
     };
     ;
-    var PL$173/*request*/ = PL$131/*parContent*/["newRequest"]();
+    var PL$175/*request*/ = PL$132/*parContent*/["newRequest"]();
     ;
-    PL$173/*request*/["setData"]({
+    PL$175/*request*/["setData"]({
       "type": "addType",
       "syncId": PL$2/*classSystem*/["getSyncId"](PL$104/*parType*/),
       "typeId": PL$108/*typeIds*/["id"]
     });
-    PL$173/*request*/["send"]();
+    PL$175/*request*/["send"]();
     (function(){
-    var PL$221 = new __Promise();
-    var PL$223/*promiseland exception catcher*/ = function(code){
+    var PL$223 = new __Promise();
+    var PL$225/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$221.reject(e);
+          PL$223.reject(e);
         };
       };
     };
-    var PL$224/*catch rejected*/ = function(e){
-      PL$221.reject(e);
+    var PL$226/*catch rejected*/ = function(e){
+      PL$223.reject(e);
     };
-    var PL$142/*answer*/;
+    var PL$144/*answer*/;
     var PL$89/*data*/;
-    PL$223/*promiseland exception catcher*/(function(){
+    PL$225/*promiseland exception catcher*/(function(){
     
       ;
-      PL$173/*request*/["answerPs"].then(PL$223/*promiseland exception catcher*/(function(PL$225){PL$142/*answer*/ = PL$225;
-      PL$89/*data*/ = PL$142/*answer*/["getData"]();
+      PL$175/*request*/["answerPs"].then(PL$225/*promiseland exception catcher*/(function(PL$227){PL$144/*answer*/ = PL$227;
+      PL$89/*data*/ = PL$144/*answer*/["getData"]();
       if(! PL$89/*data*/["err"]){
         PL$108/*typeIds*/["remoteId"] = PL$89/*data*/["id"];
       };
       ;
-      PL$221.resolve(); return;}), PL$224/*catch rejected*/);
+      PL$223.resolve(); return;}), PL$226/*catch rejected*/);
       ;
-    })();return PL$221;
+    })();return PL$223;
     })();
     return [
-      PL$173/*request*/["getId"]()
+      PL$175/*request*/["getId"]()
     ];
     ;});
-  PL$204/*getTypeFromTransportData*/ = (function(PL$23/*parData*/, PL$131/*parContent*/){
-  var PL$226 = new __Promise();
-  var PL$228/*promiseland exception catcher*/ = function(code){
+  PL$206/*getTypeFromTransportData*/ = (function(PL$23/*parData*/, PL$132/*parContent*/){
+  var PL$228 = new __Promise();
+  var PL$230/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$226.reject(e);
+        PL$228.reject(e);
       };
     };
   };
-  var PL$229/*catch rejected*/ = function(e){
-    PL$226.reject(e);
+  var PL$231/*catch rejected*/ = function(e){
+    PL$228.reject(e);
   };
-  var PL$132/*t*/;
+  var PL$133/*t*/;
   var PL$54/*type*/;
-  var PL$191/*req*/;
-  PL$228/*promiseland exception catcher*/(function(){
+  var PL$193/*req*/;
+  PL$230/*promiseland exception catcher*/(function(){
   
     ;
-    PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
+    PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
     PL$54/*type*/;
     if((typeof PL$23/*parData*/ === "number")){
-      PL$54/*type*/ = PL$132/*t*/["getTypeById"](PL$23/*parData*/);
-      PL$226.resolve(PL$54/*type*/); return;
+      PL$54/*type*/ = PL$133/*t*/["getTypeById"](PL$23/*parData*/);
+      PL$228.resolve(PL$54/*type*/); return;
     };
     ;
-    PL$191/*req*/ = PL$131/*parContent*/["getRequest"](PL$23/*parData*/[0]);
-    PL$191/*req*/["localPs"].then(PL$228/*promiseland exception catcher*/(function(PL$230){PL$226.resolve(PL$230); return;
-    PL$226.resolve(); return;}), PL$229/*catch rejected*/);
+    PL$193/*req*/ = PL$132/*parContent*/["getRequest"](PL$23/*parData*/[0]);
+    PL$193/*req*/["localPs"].then(PL$230/*promiseland exception catcher*/(function(PL$232){PL$228.resolve(PL$232); return;
+    PL$228.resolve(); return;}), PL$231/*catch rejected*/);
     ;
-  })();return PL$226;
+  })();return PL$228;
   });
-  var PL$231/*getRemoteType*/ = (function(PL$23/*parData*/, PL$131/*parContent*/){
+  var PL$233/*getRemoteType*/ = (function(PL$23/*parData*/, PL$132/*parContent*/){
   
     ;
     if((typeof PL$23/*parData*/ == "number")){
-      var PL$132/*t*/ = PL$131/*parContent*/["getTransport"]();
+      var PL$133/*t*/ = PL$132/*parContent*/["getTransport"]();
       ;
-      return PL$132/*t*/["getRemoteType"](PL$23/*parData*/);
+      return PL$133/*t*/["getRemoteType"](PL$23/*parData*/);
     };
     ;
     throw PL$18/*errorMsg*/["invalidRemoteType"];
     ;});
   ;
-  PL$37/*handlers*/["addType"] = (function(PL$131/*parContent*/, PL$78/*parPackage*/){
+  PL$37/*handlers*/["addType"] = (function(PL$132/*parContent*/, PL$78/*parPackage*/){
   
     ;
-    var PL$142/*answer*/ = PL$131/*parContent*/["createAnswer"]();
+    var PL$144/*answer*/ = PL$132/*parContent*/["createAnswer"]();
     ;
-    var PL$89/*data*/ = PL$131/*parContent*/["getData"]();
+    var PL$89/*data*/ = PL$132/*parContent*/["getData"]();
     ;
     var PL$54/*type*/ = PL$4/*getClassBySyncId*/(PL$89/*data*/["syncId"]);
     ;
     if(! PL$54/*type*/){
-      PL$131/*parContent*/["localPs"]["reject"](PL$18/*errorMsg*/["remoteTypeNotAvailable"]);
-      PL$142/*answer*/["setData"]({
+      PL$132/*parContent*/["localPs"]["reject"](PL$18/*errorMsg*/["remoteTypeNotAvailable"]);
+      PL$144/*answer*/["setData"]({
         "err": PL$18/*errorMsg*/["remoteTypeNotAvailable"]
       });
-      PL$142/*answer*/["send"]();
+      PL$144/*answer*/["send"]();
       return;
     };
     ;
     var PL$109/*typeIdInt*/ = PL$89/*data*/["typeId"];
     ;
-    var PL$132/*t*/ = PL$78/*parPackage*/["getTransport"]();
+    var PL$133/*t*/ = PL$78/*parPackage*/["getTransport"]();
     ;
-    var PL$108/*typeIds*/ = PL$132/*t*/["addType"](PL$54/*type*/, PL$109/*typeIdInt*/);
+    var PL$108/*typeIds*/ = PL$133/*t*/["addType"](PL$54/*type*/, PL$109/*typeIdInt*/);
     ;
-    PL$142/*answer*/["setData"]({
+    PL$144/*answer*/["setData"]({
       "id": PL$108/*typeIds*/["id"]
     });
-    PL$142/*answer*/["send"]();
-    PL$131/*parContent*/["localPs"]["resolve"](PL$54/*type*/);
+    PL$144/*answer*/["send"]();
+    PL$132/*parContent*/["localPs"]["resolve"](PL$54/*type*/);
     ;});
-  var PL$232/*createRemoteExecRequest*/ = (function(PL$233/*par*/){
-  var PL$234 = new __Promise();
-  var PL$236/*promiseland exception catcher*/ = function(code){
+  var PL$234/*createRemoteExecRequest*/ = (function(PL$235/*par*/){
+  var PL$236 = new __Promise();
+  var PL$238/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$234.reject(e);
+        PL$236.reject(e);
       };
     };
   };
-  var PL$237/*catch rejected*/ = function(e){
-    PL$234.reject(e);
+  var PL$239/*catch rejected*/ = function(e){
+    PL$236.reject(e);
   };
   var PL$123/*connection*/;
-  var PL$151/*funType*/;
-  var PL$152/*resultTypes*/;
-  var PL$173/*request*/;
-  var PL$138/*args*/;
+  var PL$153/*funType*/;
+  var PL$154/*resultTypes*/;
+  var PL$175/*request*/;
+  var PL$139/*args*/;
   var PL$24/*i*/;
-  var PL$142/*answer*/;
+  var PL$144/*answer*/;
   var PL$89/*data*/;
-  var PL$157/*instance*/;
+  var PL$159/*instance*/;
   var PL$94/*ret*/;
-  PL$236/*promiseland exception catcher*/(function(){
+  PL$238/*promiseland exception catcher*/(function(){
   
     ;
-    var PL$238 = new __Promise();
-    var PL$239 = new __Promise();
-    var PL$240/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$239.resolve(e); }; }; };
-    var PL$241 = function(e){ PL$239.resolve(e); };
-    PL$240/*try catch*/(function(){
-      PL$123/*connection*/ = PL$233/*par*/["connection"];
-      PL$151/*funType*/ = PL$233/*par*/["funType"];
-      PL$152/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$151/*funType*/);
-      PL$173/*request*/ = PL$123/*connection*/["createRequest"]();
-      PL$138/*args*/ = [
+    var PL$240 = new __Promise();
+    var PL$241 = new __Promise();
+    var PL$242/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$241.resolve(e); }; }; };
+    var PL$243 = function(e){ PL$241.resolve(e); };
+    PL$242/*try catch*/(function(){
+      PL$123/*connection*/ = PL$235/*par*/["connection"];
+      PL$153/*funType*/ = PL$235/*par*/["funType"];
+      PL$154/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$153/*funType*/);
+      PL$175/*request*/ = PL$123/*connection*/["createRequest"]();
+      PL$139/*args*/ = [
         
       ];
-      if((PL$233/*par*/["args"] && PL$233/*par*/["args"]["length"])){
+      if((PL$235/*par*/["args"] && PL$235/*par*/["args"]["length"])){
         PL$24/*i*/ = 0;
-        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$233/*par*/["args"]["length"]);++PL$24/*i*/){{
-          PL$138/*args*/["push"](PL$166/*getInstanceTransportData*/(PL$2/*classSystem*/["getFunctionArgumentType"](PL$151/*funType*/, PL$24/*i*/), PL$233/*par*/["args"][PL$24/*i*/], PL$173/*request*/));}};
+        for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$235/*par*/["args"]["length"]);++PL$24/*i*/){{
+          PL$139/*args*/["push"](PL$168/*getInstanceTransportData*/(PL$2/*classSystem*/["getFunctionArgumentType"](PL$153/*funType*/, PL$24/*i*/), PL$235/*par*/["args"][PL$24/*i*/], PL$175/*request*/));}};
         ;
       };
       ;
-      PL$173/*request*/["setData"]({
+      PL$175/*request*/["setData"]({
         "type": "remoteexec",
-        "hashStr": PL$233/*par*/["hashStr"],
-        "nameStr": PL$233/*par*/["nameStr"],
-        "args": PL$138/*args*/
+        "hashStr": PL$235/*par*/["hashStr"],
+        "nameStr": PL$235/*par*/["nameStr"],
+        "args": PL$139/*args*/
       });
-      PL$173/*request*/["send"]();
-      PL$173/*request*/["answerPs"].then(PL$240/*try catch*/(function(PL$242){PL$142/*answer*/ = PL$242;
-      PL$89/*data*/ = PL$142/*answer*/["getData"]();
+      PL$175/*request*/["send"]();
+      PL$175/*request*/["answerPs"].then(PL$242/*try catch*/(function(PL$244){PL$144/*answer*/ = PL$244;
+      PL$89/*data*/ = PL$144/*answer*/["getData"]();
       if(PL$89/*data*/["err"]){
         throw PL$89/*data*/["err"];
       };
       ;
-      PL$158/*getInstanceFromTransportData*/(PL$89/*data*/["data"], PL$142/*answer*/).then(PL$240/*try catch*/(function(PL$243){PL$157/*instance*/ = PL$243;
-      PL$94/*ret*/ = PL$157/*instance*/["getInstanceAsType"](PL$152/*resultTypes*/["promiseResolveType"]);
-      PL$238.resolve();}), PL$241);
-    ;}), PL$241);
+      PL$160/*getInstanceFromTransportData*/(PL$89/*data*/["data"], PL$144/*answer*/).then(PL$242/*try catch*/(function(PL$245){PL$159/*instance*/ = PL$245;
+      PL$94/*ret*/ = PL$159/*instance*/["getInstanceAsType"](PL$154/*resultTypes*/["promiseResolveType"]);
+      PL$240.resolve();}), PL$243);
+    ;}), PL$243);
     ;})();
-    PL$239.then(PL$236/*promiseland exception catcher*/(function(PL$26/*e*/){
-      if(PL$157/*instance*/){
-        PL$157/*instance*/["track"]();
+    PL$241.then(PL$238/*promiseland exception catcher*/(function(PL$26/*e*/){
+      if(PL$159/*instance*/){
+        PL$159/*instance*/["track"]();
       };
       ;
       PL$52/*console*/["log"]("createRemoteExecRequest error");
       PL$52/*console*/["log"](PL$26/*e*/);
       throw PL$26/*e*/;
-      PL$238.resolve();;}));
-    PL$238.then(PL$236/*promiseland exception catcher*/(function(){;
+      PL$240.resolve();;}));
+    PL$240.then(PL$238/*promiseland exception catcher*/(function(){;
     ;
-    if(PL$157/*instance*/){
-      PL$157/*instance*/["track"]();
+    if(PL$159/*instance*/){
+      PL$159/*instance*/["track"]();
     };
     ;
-    PL$234.resolve(PL$94/*ret*/); return;
-    PL$234.resolve(); return;}), PL$237/*catch rejected*/)
-  })();return PL$234;
+    PL$236.resolve(PL$94/*ret*/); return;
+    PL$236.resolve(); return;}), PL$239/*catch rejected*/)
+  })();return PL$236;
   });
   ;
-  var PL$244/*findProfile*/ = (function(PL$245/*profileNameStr*/){
+  var PL$246/*findProfile*/ = (function(PL$247/*profileNameStr*/){
   
     ;
-    return PL$20/*profiles*/[PL$245/*profileNameStr*/];
+    return PL$20/*profiles*/[PL$247/*profileNameStr*/];
     ;});
   ;
-  PL$147/*getModuleData*/ = (function(PL$103/*parHash*/){
+  PL$149/*getModuleData*/ = (function(PL$103/*parHash*/){
   
     ;
     if(! PL$19/*moduleData*/[PL$103/*parHash*/]){
@@ -1701,23 +1726,35 @@ var PL$248/*Session*/;
     ;
     return PL$19/*moduleData*/[PL$103/*parHash*/];
     ;});
-  PL$248/*Session*/ = (function(){var PL$246/*inherited*/ = {};
+  PL$250/*Session*/ = (function(){var PL$248/*inherited*/ = {};
   var res = promiseland.createClass({
-    "constructor": (function(PL$247/*parConnection*/){
+    "constructor": (function(PL$249/*parConnection*/){
     
       ;
-      this["connection"] = PL$247/*parConnection*/;
+      this["connection"] = PL$249/*parConnection*/;
       ;})
-  }, [], PL$246/*inherited*/);
-  return res; })();PL$248/*Session*/;
-  var PL$249/*FrameConnection*/ = (function(){var PL$250/*inherited*/ = {};
+  }, [], PL$248/*inherited*/);
+  return res; })();PL$250/*Session*/;
+  var PL$251/*FrameConnection*/ = (function(){var PL$252/*inherited*/ = {};
   var res = promiseland.createClass({
     "constructor": (function(){
     
       ;
       this["session"] = new this["SessionBaseClass"](this);
+      this["localFrames"] = new PL$152/*promiseland*/["Map"]();
       ;}),
-    "SessionBaseClass": PL$248/*Session*/,
+    "restrictLocalFrames": false,
+    "addLocalFrameAccess": (function(PL$253/*parName*/){
+    
+      ;
+      this["localFrames"]["set"](PL$253/*parName*/, true);
+      ;}),
+    "removeLocalFrameAccess": (function(PL$253/*parName*/){
+    
+      ;
+      this["localFrames"]["set"](PL$253/*parName*/, false);
+      ;}),
+    "SessionBaseClass": PL$250/*Session*/,
     "send": (function(PL$32/*parStr*/){
     
       ;
@@ -1735,10 +1772,10 @@ var PL$248/*Session*/;
       };
       ;
       ;})
-  }, [], PL$250/*inherited*/);
+  }, [], PL$252/*inherited*/);
   return res; })();
   ;
-  var PL$251/*Frame*/ = (function(){var PL$252/*inherited*/ = {};
+  var PL$254/*Frame*/ = (function(){var PL$255/*inherited*/ = {};
   var res = promiseland.createClass({
     "constructor": (function(){
     
@@ -1748,22 +1785,22 @@ var PL$248/*Session*/;
       ];
       ;}),
     "name": undefined,
-    "ConnectionBaseClass": PL$249/*FrameConnection*/,
-    "newConnection": (function(PL$247/*parConnection*/){
+    "ConnectionBaseClass": PL$251/*FrameConnection*/,
+    "SessionBaseClass": PL$250/*Session*/,
+    "newConnection": (function(PL$249/*parConnection*/){
     
       ;
-      PL$247/*parConnection*/["frame"] = this;
-      PL$247/*parConnection*/["session"] = new PL$248/*Session*/(PL$247/*parConnection*/);
-      this["connections"]["push"](PL$247/*parConnection*/);
-      PL$129/*prepConnectionNew*/(PL$247/*parConnection*/, this);
+      PL$249/*parConnection*/["frame"] = this;
+      this["connections"]["push"](PL$249/*parConnection*/);
+      PL$129/*prepConnectionNew*/(PL$249/*parConnection*/, this);
       ;}),
-    "removeConnection": (function(PL$247/*parConnection*/){
+    "removeConnection": (function(PL$249/*parConnection*/){
     
       ;
       var PL$24/*i*/ = 0;
       ;
       for(PL$24/*i*/ = 0;(PL$24/*i*/ < this["connections"]["length"]);++PL$24/*i*/){{
-        if((this["connections"][PL$24/*i*/] === PL$247/*parConnection*/)){
+        if((this["connections"][PL$24/*i*/] === PL$249/*parConnection*/)){
           this["connections"]["splice"](PL$24/*i*/, 1);
           return;
         };
@@ -1783,30 +1820,30 @@ var PL$248/*Session*/;
       ;
       throw PL$18/*errorMsg*/["noConnectionAvailable"];
       ;})
-  }, [], PL$252/*inherited*/);
+  }, [], PL$255/*inherited*/);
   return res; })();
   ;
-  PL$150/*promiseland*/["FrameBaseClass"] = PL$251/*Frame*/;
-  var PL$253/*frames*/ = new PL$150/*promiseland*/["Map"]();
+  PL$152/*promiseland*/["FrameBaseClass"] = PL$254/*Frame*/;
+  var PL$256/*frames*/ = new PL$152/*promiseland*/["Map"]();
   ;
-  PL$150/*promiseland*/["addFrame"] = (function(PL$254/*parFrame*/){
+  PL$152/*promiseland*/["addFrame"] = (function(PL$257/*parFrame*/){
   
     ;
-    var PL$107/*entry*/ = PL$253/*frames*/["get"](PL$254/*parFrame*/["name"]);
+    var PL$107/*entry*/ = PL$256/*frames*/["get"](PL$257/*parFrame*/["name"]);
     ;
     if(! PL$107/*entry*/){
       PL$107/*entry*/ = [
         
       ];
-      PL$253/*frames*/["set"](PL$254/*parFrame*/["name"], PL$107/*entry*/);
+      PL$256/*frames*/["set"](PL$257/*parFrame*/["name"], PL$107/*entry*/);
     };
     ;
-    PL$107/*entry*/["push"](PL$254/*parFrame*/);
+    PL$107/*entry*/["push"](PL$257/*parFrame*/);
     ;});
-  PL$255/*findFrame*/ = (function(PL$256/*parName*/){
+  PL$258/*findFrame*/ = (function(PL$253/*parName*/){
   
     ;
-    var PL$107/*entry*/ = PL$253/*frames*/["get"](PL$256/*parName*/);
+    var PL$107/*entry*/ = PL$256/*frames*/["get"](PL$253/*parName*/);
     ;
     if(! PL$107/*entry*/){
       return;
@@ -1814,91 +1851,91 @@ var PL$248/*Session*/;
     ;
     return PL$107/*entry*/[0];
     ;});
-  PL$257/*localFrameMap*/ = new PL$150/*promiseland*/["Map"]();
-  PL$150/*promiseland*/["isFrameLocal"] = (function(PL$258/*parFrameName*/){
+  PL$259/*localFrameMap*/ = new PL$152/*promiseland*/["Map"]();
+  PL$152/*promiseland*/["isFrameLocal"] = (function(PL$131/*parFrameName*/){
   
     ;
-    if(PL$257/*localFrameMap*/["has"](PL$258/*parFrameName*/)){
+    if(PL$259/*localFrameMap*/["has"](PL$131/*parFrameName*/)){
       return true;
     };
     ;
     return false;
     ;});
-  PL$150/*promiseland*/["addLocalFrameName"] = (function(PL$258/*parFrameName*/){
+  PL$152/*promiseland*/["addLocalFrameName"] = (function(PL$131/*parFrameName*/){
   
     ;
-    PL$257/*localFrameMap*/["set"](PL$258/*parFrameName*/, true);
+    PL$259/*localFrameMap*/["set"](PL$131/*parFrameName*/, true);
     ;});
-  PL$150/*promiseland*/["removeLocalFrameName"] = (function(PL$258/*parFrameName*/){
+  PL$152/*promiseland*/["removeLocalFrameName"] = (function(PL$131/*parFrameName*/){
   
     ;
-    PL$257/*localFrameMap*/["delete"](PL$258/*parFrameName*/);
+    PL$259/*localFrameMap*/["delete"](PL$131/*parFrameName*/);
     ;});
-  PL$150/*promiseland*/["ProfileBaseClass"] = PL$29/*Profile*/;
-  PL$150/*promiseland*/["ConnectionBaseClass"] = PL$31/*Connection*/;
-  PL$150/*promiseland*/["addProfile"] = (function(PL$259/*parProfile*/){
+  PL$152/*promiseland*/["ProfileBaseClass"] = PL$29/*Profile*/;
+  PL$152/*promiseland*/["ConnectionBaseClass"] = PL$31/*Connection*/;
+  PL$152/*promiseland*/["addProfile"] = (function(PL$260/*parProfile*/){
   
     ;
-    if(! PL$259/*parProfile*/){
+    if(! PL$260/*parProfile*/){
       return;
     };
     ;
-    if(PL$20/*profiles*/[PL$259/*parProfile*/["name"]()]){
+    if(PL$20/*profiles*/[PL$260/*parProfile*/["name"]()]){
       throw {
         "code": 4,
         "msg": "profile exists"
       };
     };
     ;
-    PL$20/*profiles*/[PL$259/*parProfile*/["name"]()] = PL$259/*parProfile*/;
-    PL$259/*parProfile*/["on"]("connection", (function(PL$123/*connection*/){
+    PL$20/*profiles*/[PL$260/*parProfile*/["name"]()] = PL$260/*parProfile*/;
+    PL$260/*parProfile*/["on"]("connection", (function(PL$123/*connection*/){
     
       ;
-      PL$122/*prepConnection*/(PL$123/*connection*/, PL$259/*parProfile*/);
+      PL$122/*prepConnection*/(PL$123/*connection*/, PL$260/*parProfile*/);
       ;}));
     ;});
-  PL$150/*promiseland*/["profileHas"] = (function(PL$245/*profileNameStr*/){
+  PL$152/*promiseland*/["profileHas"] = (function(PL$247/*profileNameStr*/){
   
     ;
-    return PL$150/*promiseland*/["isFrameLocal"](PL$245/*profileNameStr*/);
+    return PL$152/*promiseland*/["isFrameLocal"](PL$247/*profileNameStr*/);
     ;});
-  PL$150/*promiseland*/["registerRemote"] = (function(PL$245/*profileNameStr*/, PL$260/*hashStr*/, PL$261/*nameStr*/, PL$262/*fun*/, PL$151/*funType*/){
+  PL$152/*promiseland*/["registerRemote"] = (function(PL$247/*profileNameStr*/, PL$261/*hashStr*/, PL$262/*nameStr*/, PL$263/*fun*/, PL$153/*funType*/){
   
     ;
-    var PL$19/*moduleData*/ = PL$147/*getModuleData*/(PL$260/*hashStr*/);
+    var PL$19/*moduleData*/ = PL$149/*getModuleData*/(PL$261/*hashStr*/);
     ;
     var PL$107/*entry*/ = {
-      "profile": PL$245/*profileNameStr*/,
-      "fun": PL$262/*fun*/,
-      "funType": PL$151/*funType*/
+      "profile": PL$247/*profileNameStr*/,
+      "fun": PL$263/*fun*/,
+      "funType": PL$153/*funType*/
     };
     ;
-    PL$19/*moduleData*/["functions"][PL$261/*nameStr*/] = PL$107/*entry*/;
-    PL$2/*classSystem*/["definitionPromise"](PL$151/*funType*/)["then"]((function(PL$263/*definedFunType*/){
+    PL$19/*moduleData*/["functions"][PL$262/*nameStr*/] = PL$107/*entry*/;
+    PL$2/*classSystem*/["definitionPromise"](PL$153/*funType*/)["then"]((function(PL$264/*definedFunType*/){
     
       ;
-      PL$107/*entry*/["funType"] = PL$263/*definedFunType*/;
+      PL$107/*entry*/["funType"] = PL$264/*definedFunType*/;
       ;}));
     ;});
-  PL$150/*promiseland*/["remoteExec"] = (function(PL$260/*hashStr*/, PL$261/*nameStr*/, PL$138/*args*/){
+  PL$152/*promiseland*/["remoteExec"] = (function(PL$261/*hashStr*/, PL$262/*nameStr*/, PL$139/*args*/){
   
     ;
-    var PL$19/*moduleData*/ = PL$147/*getModuleData*/(PL$260/*hashStr*/);
+    var PL$19/*moduleData*/ = PL$149/*getModuleData*/(PL$261/*hashStr*/);
     ;
-    if((! PL$19/*moduleData*/ || ! PL$19/*moduleData*/["functions"][PL$261/*nameStr*/])){
+    if((! PL$19/*moduleData*/ || ! PL$19/*moduleData*/["functions"][PL$262/*nameStr*/])){
       throw PL$18/*errorMsg*/["missingRemoteFun"];
     };
     ;
-    var PL$107/*entry*/ = PL$19/*moduleData*/["functions"][PL$261/*nameStr*/];
+    var PL$107/*entry*/ = PL$19/*moduleData*/["functions"][PL$262/*nameStr*/];
     ;
-    var PL$124/*profile*/ = PL$244/*findProfile*/(PL$107/*entry*/["profile"]);
+    var PL$124/*profile*/ = PL$246/*findProfile*/(PL$107/*entry*/["profile"]);
     ;
     var PL$123/*connection*/;
     ;
     if(PL$124/*profile*/){
       PL$123/*connection*/ = PL$124/*profile*/["find"]();
     }else{
-    PL$124/*profile*/ = PL$255/*findFrame*/(PL$107/*entry*/["profile"]);
+    PL$124/*profile*/ = PL$258/*findFrame*/(PL$107/*entry*/["profile"]);
     if(PL$124/*profile*/){
       PL$123/*connection*/ = PL$124/*profile*/["getConnection"]();
     };
@@ -1916,63 +1953,63 @@ var PL$248/*Session*/;
       };
     };
     ;
-    var PL$152/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$107/*entry*/["funType"]);
+    var PL$154/*resultTypes*/ = PL$6/*getEffectiveFunctionResultType*/(PL$107/*entry*/["funType"]);
     ;
     try
     {
-      var PL$264/*resultPromise*/ = PL$152/*resultTypes*/["newPromise"]();
+      var PL$265/*resultPromise*/ = PL$154/*resultTypes*/["newPromise"]();
       ;
       (function(){
-      var PL$265 = new __Promise();
-      var PL$267/*promiseland exception catcher*/ = function(code){
+      var PL$266 = new __Promise();
+      var PL$268/*promiseland exception catcher*/ = function(code){
         return function(res){
           try{ code(res); }catch(e){
-            PL$265.reject(e);
+            PL$266.reject(e);
           };
         };
       };
-      var PL$268/*catch rejected*/ = function(e){
-        PL$265.reject(e);
+      var PL$269/*catch rejected*/ = function(e){
+        PL$266.reject(e);
       };
-      var PL$273/*tempRes*/;
-      var PL$274/*realRes*/;
-      PL$267/*promiseland exception catcher*/(function(){
+      var PL$274/*tempRes*/;
+      var PL$275/*realRes*/;
+      PL$268/*promiseland exception catcher*/(function(){
       
         ;
-        var PL$269 = new __Promise();
         var PL$270 = new __Promise();
-        var PL$271/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$270.resolve(e); }; }; };
-        var PL$272 = function(e){ PL$270.resolve(e); };
-        PL$271/*try catch*/(function(){
-          PL$273/*tempRes*/ = PL$232/*createRemoteExecRequest*/({
+        var PL$271 = new __Promise();
+        var PL$272/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$271.resolve(e); }; }; };
+        var PL$273 = function(e){ PL$271.resolve(e); };
+        PL$272/*try catch*/(function(){
+          PL$274/*tempRes*/ = PL$234/*createRemoteExecRequest*/({
             "connection": PL$123/*connection*/,
-            "hashStr": PL$260/*hashStr*/,
-            "nameStr": PL$261/*nameStr*/,
-            "args": PL$138/*args*/,
+            "hashStr": PL$261/*hashStr*/,
+            "nameStr": PL$262/*nameStr*/,
+            "args": PL$139/*args*/,
             "funType": PL$107/*entry*/["funType"]
           });
-          PL$273/*tempRes*/.then(PL$271/*try catch*/(function(PL$275){PL$274/*realRes*/ = PL$275;
-          PL$152/*resultTypes*/["resolvePromise"](PL$264/*resultPromise*/, PL$274/*realRes*/);
-          PL$269.resolve();}), PL$272);
+          PL$274/*tempRes*/.then(PL$272/*try catch*/(function(PL$276){PL$275/*realRes*/ = PL$276;
+          PL$154/*resultTypes*/["resolvePromise"](PL$265/*resultPromise*/, PL$275/*realRes*/);
+          PL$270.resolve();}), PL$273);
         ;})();
-        PL$270.then(PL$267/*promiseland exception catcher*/(function(PL$26/*e*/){
-          PL$152/*resultTypes*/["rejectPromise"](PL$264/*resultPromise*/, PL$26/*e*/);
-          PL$269.resolve();;}));
-        PL$269.then(PL$267/*promiseland exception catcher*/(function(){;
+        PL$271.then(PL$268/*promiseland exception catcher*/(function(PL$26/*e*/){
+          PL$154/*resultTypes*/["rejectPromise"](PL$265/*resultPromise*/, PL$26/*e*/);
+          PL$270.resolve();;}));
+        PL$270.then(PL$268/*promiseland exception catcher*/(function(){;
         ;
-        PL$265.resolve(); return;}), PL$268/*catch rejected*/)
-      })();return PL$265;
+        PL$266.resolve(); return;}), PL$269/*catch rejected*/)
+      })();return PL$266;
       })();}catch(PL$26/*e*/){
-      PL$152/*resultTypes*/["rejectPromise"](PL$264/*resultPromise*/, PL$26/*e*/);};
+      PL$154/*resultTypes*/["rejectPromise"](PL$265/*resultPromise*/, PL$26/*e*/);};
     ;
-    return PL$264/*resultPromise*/;
+    return PL$265/*resultPromise*/;
     ;});
   PL$11/*extra*/["moduleSystemPs"]["resolve"]({
-    "getModuleData": PL$147/*getModuleData*/
+    "getModuleData": PL$149/*getModuleData*/
   });
   PL$11/*extra*/["framesPs"]["resolve"]({
-    "getInstanceFromTransportData": PL$158/*getInstanceFromTransportData*/,
-    "getInstanceTransportData": PL$166/*getInstanceTransportData*/,
+    "getInstanceFromTransportData": PL$160/*getInstanceFromTransportData*/,
+    "getInstanceTransportData": PL$168/*getInstanceTransportData*/,
     "handlers": PL$37/*handlers*/
   });
   return;

@@ -69,8 +69,8 @@ var __requireFun = function(parModule){
 if (promiseland._hasModule({ hashStr: "305873103956dbcac355c242894d9641" })){ return promiseland._getModule("305873103956dbcac355c242894d9641"); };
 var PL$1 = new __Promise();
 promiseland._registerModule({ hashStr: "305873103956dbcac355c242894d9641", "module": PL$1, promising: true });
-var PL$17/*Callback*/;try{PL$17/*Callback*/ = Callback;}catch(e){};
-var PL$19/*__dirname*/;try{PL$19/*__dirname*/ = __dirname;}catch(e){};
+var PL$18/*Callback*/;try{PL$18/*Callback*/ = Callback;}catch(e){};
+var PL$20/*__dirname*/;try{PL$20/*__dirname*/ = __dirname;}catch(e){};
 var PL$2 = (function(){
 "use strict";
 var PL$3/*promiseland exception catcher*/ = function(code){
@@ -85,7 +85,7 @@ var PL$4/*catch rejected*/ = function(e){
 };
 var PL$5/*fs*/;
 var PL$11/*x*/;
-var PL$22/*res*/;
+var PL$23/*res*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
@@ -116,43 +116,47 @@ PL$3/*promiseland exception catcher*/(function(){
   })();return PL$6;
   })();
   PL$11/*x*/ = ((function(f){
-  promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$21", f, classSystem.getBuiltinType("var"));
+  promiseland.registerRemote("server", "305873103956dbcac355c242894d9641", "PL$22", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("server")){
-  return f;
+  return function(){
+  var i = 0; var l = arguments.length; var newArgs = [undefined];
+  for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+  return f.apply(this, newArgs);
+  };
   }else{
   return function(){
-  return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$21", arguments);
+  return promiseland.remoteExec("305873103956dbcac355c242894d9641", "PL$22", arguments);
   }
   };
-  })(function(){
-  var PL$12 = new __Promise();
-  var PL$14/*promiseland exception catcher*/ = function(code){
+  })(function(PL$12/*session*/){
+  var PL$13 = new __Promise();
+  var PL$15/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$12.reject(e);
+        PL$13.reject(e);
       };
     };
   };
-  var PL$15/*catch rejected*/ = function(e){
-    PL$12.reject(e);
+  var PL$16/*catch rejected*/ = function(e){
+    PL$13.reject(e);
   };
-  var PL$16/*cb*/;
-  var PL$18/*filenameStr*/;
-  PL$14/*promiseland exception catcher*/(function(){
+  var PL$17/*cb*/;
+  var PL$19/*filenameStr*/;
+  PL$15/*promiseland exception catcher*/(function(){
   
     ;
-    PL$16/*cb*/ = new PL$17/*Callback*/();
-    PL$18/*filenameStr*/ = (PL$19/*__dirname*/ + "/clientServer.txt");
-    PL$5/*fs*/["readFile"](PL$18/*filenameStr*/, {
+    PL$17/*cb*/ = new PL$18/*Callback*/();
+    PL$19/*filenameStr*/ = (PL$20/*__dirname*/ + "/clientServer.txt");
+    PL$5/*fs*/["readFile"](PL$19/*filenameStr*/, {
       "encoding": "utf8"
-    }, PL$16/*cb*/);
-    PL$16/*cb*/["promise"].then(PL$14/*promiseland exception catcher*/(function(PL$20){PL$12.resolve(PL$20[1]); return;
-    PL$12.resolve(); return;}), PL$15/*catch rejected*/);
+    }, PL$17/*cb*/);
+    PL$17/*cb*/["promise"].then(PL$15/*promiseland exception catcher*/(function(PL$21){PL$13.resolve(PL$21[1]); return;
+    PL$13.resolve(); return;}), PL$16/*catch rejected*/);
     ;
-  })();return PL$12;
+  })();return PL$13;
   }));
-  PL$11/*x*/().then(PL$3/*promiseland exception catcher*/(function(PL$23){PL$22/*res*/ = PL$23;
-  if((PL$22/*res*/ == "the test content")){
+  PL$11/*x*/().then(PL$3/*promiseland exception catcher*/(function(PL$24){PL$23/*res*/ = PL$24;
+  if((PL$23/*res*/ == "the test content")){
     PL$1.resolve({
       "success": true
     }); return;

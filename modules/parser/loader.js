@@ -97,11 +97,14 @@ PL$3/*promiseland exception catcher*/(function(){
   
     ;
     var PL$13/*resStr*/ = "";
+    ;
     var PL$14/*i*/;
+    ;
     PL$13/*resStr*/ += "(function(){\n  var defineFun;\n  var requireFun;\n  \n  if (typeof exports == \"object\" && typeof module == \"object\"){ // CommonJS\n    requireFun = function(modulesAr, callback, errBack){\n      try{\n        var i = 0;\n        var l = modulesAr.length;\n        var args = [];\n        for (i; i < l; ++i){\n          args.push(require(modulesAr[i]));\n        };\n      }catch(e){\n        errBack(e);\n        return;\n      };\n      callback.apply(callback, args);\n    };\n    defineFun = function(requireAr, callback){\n      requireFun(requireAr, function(){\n        module.exports = callback.apply(callback, arguments);\n      });\n    };\n    \n  }else if (typeof define == \"function\" && define.amd){ // AMD\n    var _define = define;\n    requireFun = require;\n    \n    defineFun = function(par1, par2){\n      if (par1 instanceof Array){\n        par1.unshift(\"require\");\n      }else{\n        par2 = par1;\n        par1 = [\"require\"];\n      };\n      _define(par1, function(){\n        requireFun = arguments[0];\n        var args = [];\n        for (var i = 1; i < arguments.length; ++i){\n          args.push(arguments[i]);\n        };\n        return par2.apply(par2, args);\n      });\n    };\n    \n  }else{ // Plain browser env\n    alert(\"not working out!\");\n    \n  };\n  ";
     var PL$15/*modules*/ = [
       
     ];
+    ;
     if(! PL$12/*par*/["promiseLandModule"]){
       PL$15/*modules*/["push"]({
         "varName": "promiseland",
@@ -110,8 +113,10 @@ PL$3/*promiseland exception catcher*/(function(){
     };
     ;
     var PL$16/*extraModules*/ = PL$12/*par*/["extraModules"];
+    ;
     if(PL$16/*extraModules*/){
       var PL$17/*extraModulesAr*/ = PL$16/*extraModules*/["getArray"]();
+      ;
       for(PL$14/*i*/ = 0;(PL$14/*i*/ < PL$17/*extraModulesAr*/["length"]);++PL$14/*i*/){{
         PL$15/*modules*/["push"]({
           "varName": PL$12/*par*/["variableNames"]["get"](PL$17/*extraModulesAr*/[PL$14/*i*/]["key"]),

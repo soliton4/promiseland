@@ -259,6 +259,47 @@ return (parInstance, par){
 
       // parameters
       funDecl.push("("); // function start
+      
+      
+      // if this is a frame function we need to add a session parameter
+      var params = [];
+      if (runRemote){
+        params.push({
+          name: "session",
+          typename: "var",
+          parsed: parParsed
+        });
+      };
+        
+      if (par.params && par.params.length){
+        i = 0;
+        var l = par.params.length;
+        for (i; i < l; ++i){
+          params.push({
+            name: identifierName(par.params[i].name),
+            typename: par.params[i].typename || "var",
+            parsed: par.params[i]
+          });
+        };
+      };
+      if (params.length){
+        i = 0;
+        var l = params.length;
+        for (i; i < l; ++i){
+          if (i){
+            funDecl.push(", ");
+          };
+          funDecl.push(this.getVariableName(identifierName(params[i].name)));
+          this.addLocalVariable({name: params[i].name, typename: params[i].typename || "var", parameter: true}, params[i].parsed);
+        };
+      };
+      funDecl.push("){");
+
+      
+      
+      
+      
+      /*funDecl.push("("); // function start
       if (par.params && par.params.length){
         i = 0;
         var l = par.params.length;
@@ -270,7 +311,7 @@ return (parInstance, par){
           this.addLocalVariable({name: par.params[i].name, typename: par.params[i].typename || "var", parameter: true}, par.params[i]);
         };
       };
-      funDecl.push("){");
+      funDecl.push("){");*/
       if (this.isAsmFun(parParsed)){
         funDecl.push(this.newLine());
         funDecl.push("\"use asm\";");
@@ -539,8 +580,31 @@ return (parInstance, par){
 
         remoteClosure.push("if (promiseland.profileHas(" + stringEncodeStr(par.frame.name.value) + ")){");
         remoteClosure.push(this.newLine());
-        remoteClosure.push("return f;"); // eather the function stays itself
+        //remoteClosure.push("return f;"); // eather the function stays itself
+        //remoteClosure.push(this.newLine());
+        
+        
+        remoteClosure.push("return "); // eather the function stays itself
+        // wrap another function arround that removes the first parameter
+        // when we call it localy we dont have a session and we dont pass it as parameter
+        remoteClosure.push("function(){"); // eather the function stays itself
         remoteClosure.push(this.newLine());
+        remoteClosure.push("var i = 0; var l = arguments.length; var newArgs = [undefined];")
+          remoteClosure.push(this.newLine());
+        remoteClosure.push("for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };");
+        remoteClosure.push(this.newLine());
+
+        remoteClosure.push("return f.apply(this, newArgs);");
+        remoteClosure.push(this.newLine());
+
+        remoteClosure.push("};");
+        remoteClosure.push(this.newLine());
+
+        
+        
+        
+        
+        
         remoteClosure.push("}else{");
         remoteClosure.push(this.newLine());
         // or we create a remote exec hook

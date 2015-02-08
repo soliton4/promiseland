@@ -70,38 +70,42 @@ var PL$4/*catch rejected*/ = function(e){
   PL$1.reject(e);
 };
 var PL$5/*test*/ = (function(f){
-promiseland.registerRemote("server", "773ce5585497692b2163faac5abad48a", "PL$10", f, classSystem.getBuiltinType("var"));
+promiseland.registerRemote("server", "773ce5585497692b2163faac5abad48a", "PL$11", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
-return f;
+return function(){
+var i = 0; var l = arguments.length; var newArgs = [undefined];
+for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+return f.apply(this, newArgs);
+};
 }else{
 return function(){
-return promiseland.remoteExec("773ce5585497692b2163faac5abad48a", "PL$10", arguments);
+return promiseland.remoteExec("773ce5585497692b2163faac5abad48a", "PL$11", arguments);
 }
 };
-})(function (){
-var PL$6 = new __Promise();
-var PL$8/*promiseland exception catcher*/ = function(code){
+})(function (PL$6/*session*/){
+var PL$7 = new __Promise();
+var PL$9/*promiseland exception catcher*/ = function(code){
   return function(res){
     try{ code(res); }catch(e){
-      PL$6.reject(e);
+      PL$7.reject(e);
     };
   };
 };
-var PL$9/*catch rejected*/ = function(e){
-  PL$6.reject(e);
+var PL$10/*catch rejected*/ = function(e){
+  PL$7.reject(e);
 };
-PL$8/*promiseland exception catcher*/(function(){
+PL$9/*promiseland exception catcher*/(function(){
 
   ;
-  PL$6.resolve(); return;
-})();return PL$6;
+  PL$7.resolve(); return;
+})();return PL$7;
 });
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
   /* function test (){} - hoisted */;
   ;
-  PL$5/*test*/().then(PL$3/*promiseland exception catcher*/(function(PL$11){PL$11;
+  PL$5/*test*/().then(PL$3/*promiseland exception catcher*/(function(PL$12){PL$12;
   PL$1.resolve({
     "success": true
   }); return;

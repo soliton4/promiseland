@@ -61,6 +61,7 @@ var PL$1 = (function(){
   var PL$2/*modules*/ = {
     
   };
+  ;
   PL$3/*promiseland*/["_registerModule"] = (function(PL$4/*par*/){
   
     ;
@@ -92,6 +93,7 @@ var PL$1 = (function(){
   
     ;
     var PL$7/*i*/;
+    ;
     for(PL$7/*i*/ in PL$2/*modules*/){
       if((PL$2/*modules*/[PL$7/*i*/] && (PL$2/*modules*/[PL$7/*i*/]["module"] === PL$6/*parM*/))){
         return PL$2/*modules*/[PL$7/*i*/]["promising"];

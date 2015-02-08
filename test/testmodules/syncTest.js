@@ -61,7 +61,7 @@ promiseland._registerModule({ hashStr: "526adb710b3b5518eafd3ced0386c4bc", "modu
 var PL$21/*Callback*/;try{PL$21/*Callback*/ = Callback;}catch(e){};
 var PL$22/*setTimeout*/;try{PL$22/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$27/*setInterval*/;try{PL$27/*setInterval*/ = setInterval;}catch(e){};
-var PL$32/*console*/;try{PL$32/*console*/ = console;}catch(e){};
+var PL$33/*console*/;try{PL$33/*console*/ = console;}catch(e){};
 var PL$28/*x*/;try{PL$28/*x*/ = x;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -162,56 +162,60 @@ PL$9/*promiseland exception catcher*/(function(){
         ;}), 1000);
       ;})();
     ((function(f){
-    promiseland.registerRemote("server", "526adb710b3b5518eafd3ced0386c4bc", "PL$33", f, (classSystem.createFunctionType({ "return": PL$6/*type:Cs1**/, arguments: []})));
+    promiseland.registerRemote("server", "526adb710b3b5518eafd3ced0386c4bc", "PL$34", f, (classSystem.createFunctionType({ "return": PL$6/*type:Cs1**/, arguments: []})));
     if (promiseland.profileHas("server")){
-    return f;
+    return function(){
+    var i = 0; var l = arguments.length; var newArgs = [undefined];
+    for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+    return f.apply(this, newArgs);
+    };
     }else{
     return function(){
-    return promiseland.remoteExec("526adb710b3b5518eafd3ced0386c4bc", "PL$33", arguments);
+    return promiseland.remoteExec("526adb710b3b5518eafd3ced0386c4bc", "PL$34", arguments);
     }
     };
-    })((function(t){return t;})(function PL$28/*x*/(){
-    var PL$29;
-    var _TPL$29;
-    (function(){ var vAr = new PL$8/*Cs1*-constructor*/(); PL$29 = vAr[0]; _TPL$29 = vAr[1]; })();var PL$30/*promiseland exception catcher*/ = function(code){
+    })((function(t){return t;})(function PL$28/*x*/(PL$29/*session*/){
+    var PL$30;
+    var _TPL$30;
+    (function(){ var vAr = new PL$8/*Cs1*-constructor*/(); PL$30 = vAr[0]; _TPL$30 = vAr[1]; })();var PL$31/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$29.reject(e);
+          PL$30.reject(e);
         };
       };
     };
-    var PL$31/*catch rejected*/ = function(e){
-      PL$29.reject(e);
+    var PL$32/*catch rejected*/ = function(e){
+      PL$30.reject(e);
     };
-    PL$30/*promiseland exception catcher*/(function(){
+    PL$31/*promiseland exception catcher*/(function(){
     
       ;
-      PL$32/*console*/["log"]("doing the sync request");
-      PL$29.resolve((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$24/*a*/)); return;
-      PL$29.resolve(); return;
-    })();return [PL$29, _TPL$29];
+      PL$33/*console*/["log"]("doing the sync request");
+      PL$30.resolve((function(v){ if(!v){ return; }; return [v, v[2]()];})(PL$24/*a*/)); return;
+      PL$30.resolve(); return;
+    })();return [PL$30, _TPL$30];
     })));
-    PL$15/*waitFun*/().then(PL$13/*try catch*/(function(PL$34){PL$34;
+    PL$15/*waitFun*/().then(PL$13/*try catch*/(function(PL$35){PL$35;
     
-    var PL$35 = new __Promise();if(! PL$25/*gotit*/){
-      PL$32/*console*/["log"]("step1");
+    var PL$36 = new __Promise();if(! PL$25/*gotit*/){
+      PL$33/*console*/["log"]("step1");
       (function(){ throw { id:201, msg: "type missmatch" } })();
-      PL$32/*console*/["log"]("step2");
+      PL$33/*console*/["log"]("step2");
       PL$27/*setInterval*/((function(){
       
         ;
-        PL$32/*console*/["log"](PL$24/*a*/[7]);
+        PL$33/*console*/["log"](PL$24/*a*/[7]);
         ;}), 1000);
-      PL$35.resolve();;
-    }else{PL$35.resolve();
-    };PL$35.then(PL$13/*try catch*/(function(PL$37){PL$37;;
+      PL$36.resolve();;
+    }else{PL$36.resolve();
+    };PL$36.then(PL$13/*try catch*/(function(PL$38){PL$38;;
     ;
     PL$11.resolve();}), PL$14);
   ;}), PL$14);
   ;})();
-  PL$12.then(PL$9/*promiseland exception catcher*/(function(PL$38/*e*/){
-    PL$32/*console*/["log"]("error:");
-    PL$32/*console*/["log"](PL$38/*e*/);
+  PL$12.then(PL$9/*promiseland exception catcher*/(function(PL$39/*e*/){
+    PL$33/*console*/["log"]("error:");
+    PL$33/*console*/["log"](PL$39/*e*/);
     PL$11.resolve();;}));
   PL$11.then(PL$9/*promiseland exception catcher*/(function(){;
   PL$1.resolve(); return;}), PL$10/*catch rejected*/)

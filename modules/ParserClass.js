@@ -64,7 +64,7 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "5a77e69e7bd7e39b4101f1603b840d3d" })){ return promiseland._getModule("5a77e69e7bd7e39b4101f1603b840d3d"); };
+    if (promiseland._hasModule({ hashStr: "e4c234be799fc7ee31d761315b957bf4" })){ return promiseland._getModule("e4c234be799fc7ee31d761315b957bf4"); };
 var PL$25/*promiseland*/;try{PL$25/*promiseland*/ = promiseland;}catch(e){};
 var PL$1 = (function(){
 "use strict";
@@ -73,6 +73,7 @@ var PL$4/*_getParserPromise*/;
   ;
   ;
   var PL$2/*_parserPs*/;
+  ;
   var PL$3/*_getParser*/ = (function(){
   
     ;
@@ -83,6 +84,7 @@ var PL$4/*_getParserPromise*/;
     PL$2/*_parserPs*/ = PL$4/*_getParserPromise*/();
     return PL$2/*_parserPs*/;
     ;});
+  ;
   PL$4/*_getParserPromise*/ = (function(){
   var PL$5 = new __Promise();
   var PL$7/*promiseland exception catcher*/ = function(code){
@@ -147,6 +149,7 @@ var PL$4/*_getParserPromise*/;
     })();return PL$14;
     });
     ;});
+  ;
   PL$25/*promiseland*/["Parser"] = PL$11/*ParserClass*/;
   ;})();
 ;return PL$1;

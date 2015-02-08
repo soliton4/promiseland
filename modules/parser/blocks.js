@@ -122,6 +122,7 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$24/*res*/ = this["newResult"]();
+        ;
         PL$22/*par*/["brackets"] = true;
         PL$24/*res*/["pushType"](this["blockCreator"](PL$22/*par*/));
         return PL$24/*res*/;
@@ -136,15 +137,18 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$24/*res*/ = this["newResult"]();
+        ;
         PL$24/*res*/["setType"](PL$19/*statementType*/);
         if(PL$22/*par*/["brackets"]){
           PL$24/*res*/["push"]("{");
         };
         ;
         var PL$26/*blockRes*/ = this["newResult"]();
+        ;
         var PL$27/*sAr*/ = [
           
         ];
+        ;
         if((PL$22/*par*/ instanceof PL$28/*Array*/)){
           PL$27/*sAr*/ = PL$22/*par*/;
         }else{
@@ -162,7 +166,9 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$29/*i*/ = 0;
+        ;
         var PL$30/*l*/ = PL$27/*sAr*/["length"];
+        ;
         for(PL$29/*i*/;(PL$29/*i*/ < PL$30/*l*/);++PL$29/*i*/){{
           if(((PL$27/*sAr*/[PL$29/*i*/]["type"] == "TryStatement") && ! PL$27/*sAr*/[PL$29/*i*/]["block"])){
             PL$27/*sAr*/[PL$29/*i*/]["block"] = PL$27/*sAr*/["splice"](0, PL$29/*i*/);
@@ -199,6 +205,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return PL$24/*res*/;
         ;});
       ;});
+    ;
     PL$23/*f*/["apply"](PL$21/*parInstance*/, [
       PL$22/*par*/
     ]);

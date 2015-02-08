@@ -70,50 +70,54 @@ var PL$4/*catch rejected*/ = function(e){
   PL$1.reject(e);
 };
 var PL$5/*x*/;
-var PL$16/*resPs*/;
-var PL$17/*res*/;
+var PL$17/*resPs*/;
+var PL$18/*res*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
   PL$5/*x*/ = ((function(f){
-  promiseland.registerRemote("server", "0c947407ff38e76631b10777c446fe92", "PL$15", f, classSystem.getBuiltinType("var"));
+  promiseland.registerRemote("server", "0c947407ff38e76631b10777c446fe92", "PL$16", f, classSystem.getBuiltinType("var"));
   if (promiseland.profileHas("server")){
-  return f;
+  return function(){
+  var i = 0; var l = arguments.length; var newArgs = [undefined];
+  for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+  return f.apply(this, newArgs);
+  };
   }else{
   return function(){
-  return promiseland.remoteExec("0c947407ff38e76631b10777c446fe92", "PL$15", arguments);
+  return promiseland.remoteExec("0c947407ff38e76631b10777c446fe92", "PL$16", arguments);
   }
   };
-  })(function(PL$6/*par1*/, PL$7/*par2*/, PL$8/*par3*/, PL$9/*par4*/, PL$10/*par5*/){
-  var PL$11 = new __Promise();
-  var PL$13/*promiseland exception catcher*/ = function(code){
+  })(function(PL$6/*session*/, PL$7/*par1*/, PL$8/*par2*/, PL$9/*par3*/, PL$10/*par4*/, PL$11/*par5*/){
+  var PL$12 = new __Promise();
+  var PL$14/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$11.reject(e);
+        PL$12.reject(e);
       };
     };
   };
-  var PL$14/*catch rejected*/ = function(e){
-    PL$11.reject(e);
+  var PL$15/*catch rejected*/ = function(e){
+    PL$12.reject(e);
   };
-  PL$13/*promiseland exception catcher*/(function(){
+  PL$14/*promiseland exception catcher*/(function(){
   
     ;
-    PL$11.resolve({
-      "par1": PL$6/*par1*/,
-      "par2": PL$7/*par2*/,
-      "par3": PL$8/*par3*/,
-      "par4": PL$9/*par4*/,
-      "par5": PL$10/*par5*/
+    PL$12.resolve({
+      "par1": PL$7/*par1*/,
+      "par2": PL$8/*par2*/,
+      "par3": PL$9/*par3*/,
+      "par4": PL$10/*par4*/,
+      "par5": PL$11/*par5*/
     }); return;
-    PL$11.resolve(); return;
-  })();return PL$11;
+    PL$12.resolve(); return;
+  })();return PL$12;
   }));
-  PL$16/*resPs*/ = PL$5/*x*/(1, {
+  PL$17/*resPs*/ = PL$5/*x*/(1, {
     "a": "b"
   }, null, undefined);
-  PL$16/*resPs*/.then(PL$3/*promiseland exception catcher*/(function(PL$18){PL$17/*res*/ = PL$18;
-  if(((((PL$17/*res*/["par1"] == 1) && (PL$17/*res*/["par2"]["a"] == "b")) && (PL$17/*res*/["par3"] === null)) && ! PL$17/*res*/["par4"])){
+  PL$17/*resPs*/.then(PL$3/*promiseland exception catcher*/(function(PL$19){PL$18/*res*/ = PL$19;
+  if(((((PL$18/*res*/["par1"] == 1) && (PL$18/*res*/["par2"]["a"] == "b")) && (PL$18/*res*/["par3"] === null)) && ! PL$18/*res*/["par4"])){
     PL$1.resolve({
       "success": true
     }); return;

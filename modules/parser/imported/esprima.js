@@ -220,6 +220,7 @@ function PL$39/*addComment*/(PL$40/*type*/, PL$41/*value*/, PL$42/*start*/, PL$4
 
   ;
   var PL$45/*comment*/;
+  ;
   PL$21/*assert*/((typeof PL$42/*start*/ === "number"), "Comment must have valid position");
   if((PL$18/*state*/["lastCommentStart"] >= PL$42/*start*/)){
     return;
@@ -247,7 +248,14 @@ function PL$39/*addComment*/(PL$40/*type*/, PL$41/*value*/, PL$42/*start*/, PL$4
 function PL$46/*skipSingleLineComment*/(PL$47/*offset*/){
 
   ;
-  var PL$42/*start*/, PL$44/*loc*/, PL$26/*ch*/, PL$45/*comment*/;
+  var PL$42/*start*/;
+  ;
+  var PL$44/*loc*/;
+  ;
+  var PL$26/*ch*/;
+  ;
+  var PL$45/*comment*/;
+  ;
   PL$42/*start*/ = (PL$13/*index*/ - PL$47/*offset*/);
   PL$44/*loc*/ = {
     "start": {
@@ -287,7 +295,14 @@ function PL$46/*skipSingleLineComment*/(PL$47/*offset*/){
 function PL$48/*skipMultiLineComment*/(){
 
   ;
-  var PL$42/*start*/, PL$44/*loc*/, PL$26/*ch*/, PL$45/*comment*/;
+  var PL$42/*start*/;
+  ;
+  var PL$44/*loc*/;
+  ;
+  var PL$26/*ch*/;
+  ;
+  var PL$45/*comment*/;
+  ;
   if(PL$19/*extra*/["comments"]){
     PL$42/*start*/ = (PL$13/*index*/ - 2);
     PL$44/*loc*/ = {
@@ -339,7 +354,10 @@ function PL$48/*skipMultiLineComment*/(){
 function PL$50/*skipComment*/(){
 
   ;
-  var PL$26/*ch*/, PL$42/*start*/;
+  var PL$26/*ch*/;
+  ;
+  var PL$42/*start*/;
+  ;
   PL$42/*start*/ = (PL$13/*index*/ === 0);
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
@@ -402,7 +420,14 @@ function PL$50/*skipComment*/(){
 function PL$51/*scanHexEscape*/(PL$52/*prefix*/){
 
   ;
-  var PL$53/*i*/, PL$54/*len*/, PL$26/*ch*/, PL$55/*code*/ = 0;
+  var PL$53/*i*/;
+  ;
+  var PL$54/*len*/;
+  ;
+  var PL$26/*ch*/;
+  ;
+  var PL$55/*code*/ = 0;
+  ;
   PL$54/*len*/ = ((PL$52/*prefix*/ === "u") ? 4 : 2);
   for(PL$53/*i*/ = 0;(PL$53/*i*/ < PL$54/*len*/);++PL$53/*i*/){{
     if(((PL$13/*index*/ < PL$16/*length*/) && PL$27/*isHexDigit*/(PL$11/*source*/[PL$13/*index*/]))){
@@ -416,7 +441,14 @@ function PL$51/*scanHexEscape*/(PL$52/*prefix*/){
 function PL$57/*scanUnicodeCodePointEscape*/(){
 
   ;
-  var PL$26/*ch*/, PL$55/*code*/, PL$58/*cu1*/, PL$59/*cu2*/;
+  var PL$26/*ch*/;
+  ;
+  var PL$55/*code*/;
+  ;
+  var PL$58/*cu1*/;
+  ;
+  var PL$59/*cu2*/;
+  ;
   PL$26/*ch*/ = PL$11/*source*/[PL$13/*index*/];
   PL$55/*code*/ = 0;
   if((PL$26/*ch*/ === "}")){
@@ -446,7 +478,10 @@ function PL$57/*scanUnicodeCodePointEscape*/(){
 function PL$60/*getEscapedIdentifier*/(){
 
   ;
-  var PL$26/*ch*/, PL$35/*id*/;
+  var PL$26/*ch*/;
+  ;
+  var PL$35/*id*/;
+  ;
   PL$26/*ch*/ = PL$11/*source*/["charCodeAt"](PL$13/*index*/++);
   PL$35/*id*/ = PL$32/*String*/["fromCharCode"](PL$26/*ch*/);
   if((PL$26/*ch*/ === 92)){
@@ -493,7 +528,10 @@ function PL$60/*getEscapedIdentifier*/(){
 function PL$61/*getIdentifier*/(){
 
   ;
-  var PL$42/*start*/, PL$26/*ch*/;
+  var PL$42/*start*/;
+  ;
+  var PL$26/*ch*/;
+  ;
   PL$42/*start*/ = PL$13/*index*/++;
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
@@ -512,7 +550,12 @@ function PL$61/*getIdentifier*/(){
 function PL$62/*scanIdentifier*/(){
 
   ;
-  var PL$42/*start*/, PL$35/*id*/, PL$40/*type*/;
+  var PL$42/*start*/;
+  ;
+  var PL$35/*id*/;
+  ;
+  var PL$40/*type*/;
+  ;
   PL$42/*start*/ = PL$13/*index*/;
   PL$35/*id*/ = ((PL$11/*source*/["charCodeAt"](PL$13/*index*/) === 92) ? PL$60/*getEscapedIdentifier*/() : PL$61/*getIdentifier*/());
   if((PL$35/*id*/["length"] === 1)){
@@ -544,7 +587,20 @@ function PL$62/*scanIdentifier*/(){
 function PL$63/*scanPunctuator*/(){
 
   ;
-  var PL$42/*start*/ = PL$13/*index*/, PL$55/*code*/ = PL$11/*source*/["charCodeAt"](PL$13/*index*/), PL$64/*code2*/, PL$65/*ch1*/ = PL$11/*source*/[PL$13/*index*/], PL$66/*ch2*/, PL$67/*ch3*/, PL$68/*ch4*/;
+  var PL$42/*start*/ = PL$13/*index*/;
+  ;
+  var PL$55/*code*/ = PL$11/*source*/["charCodeAt"](PL$13/*index*/);
+  ;
+  var PL$64/*code2*/;
+  ;
+  var PL$65/*ch1*/ = PL$11/*source*/[PL$13/*index*/];
+  ;
+  var PL$66/*ch2*/;
+  ;
+  var PL$67/*ch3*/;
+  ;
+  var PL$68/*ch4*/;
+  ;
   switch (PL$55/*code*/){
     case 46:
       
@@ -698,6 +754,7 @@ function PL$69/*scanHexLiteral*/(PL$42/*start*/){
 
   ;
   var PL$70/*number*/ = "";
+  ;
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
     if(! PL$27/*isHexDigit*/(PL$11/*source*/[PL$13/*index*/])){
@@ -727,6 +784,7 @@ function PL$72/*scanOctalLiteral*/(PL$42/*start*/){
 
   ;
   var PL$70/*number*/ = ("0" + PL$11/*source*/[PL$13/*index*/++]);
+  ;
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
     if(! PL$28/*isOctalDigit*/(PL$11/*source*/[PL$13/*index*/])){
@@ -751,7 +809,12 @@ function PL$72/*scanOctalLiteral*/(PL$42/*start*/){
 function PL$73/*scanNumericLiteral*/(){
 
   ;
-  var PL$70/*number*/, PL$42/*start*/, PL$26/*ch*/;
+  var PL$70/*number*/;
+  ;
+  var PL$42/*start*/;
+  ;
+  var PL$26/*ch*/;
+  ;
   PL$26/*ch*/ = PL$11/*source*/[PL$13/*index*/];
   PL$21/*assert*/((PL$25/*isDecimalDigit*/(PL$26/*ch*/["charCodeAt"](0)) || (PL$26/*ch*/ === ".")), "Numeric literal must start with a decimal digit or a decimal point");
   PL$42/*start*/ = PL$13/*index*/;
@@ -818,7 +881,26 @@ function PL$73/*scanNumericLiteral*/(){
 function PL$75/*scanStringLiteral*/(){
 
   ;
-  var PL$76/*str*/ = "", PL$77/*quote*/, PL$42/*start*/, PL$26/*ch*/, PL$55/*code*/, PL$78/*unescaped*/, PL$79/*restore*/, PL$80/*octal*/ = false, PL$81/*startLineNumber*/, PL$82/*startLineStart*/;
+  var PL$76/*str*/ = "";
+  ;
+  var PL$77/*quote*/;
+  ;
+  var PL$42/*start*/;
+  ;
+  var PL$26/*ch*/;
+  ;
+  var PL$55/*code*/;
+  ;
+  var PL$78/*unescaped*/;
+  ;
+  var PL$79/*restore*/;
+  ;
+  var PL$80/*octal*/ = false;
+  ;
+  var PL$81/*startLineNumber*/;
+  ;
+  var PL$82/*startLineStart*/;
+  ;
   PL$81/*startLineNumber*/ = PL$14/*lineNumber*/;
   PL$82/*startLineStart*/ = PL$15/*lineStart*/;
   PL$77/*quote*/ = PL$11/*source*/[PL$13/*index*/];
@@ -934,7 +1016,10 @@ function PL$75/*scanStringLiteral*/(){
 function PL$83/*testRegExp*/(PL$84/*pattern*/, PL$85/*flags*/){
 
   ;
-  var PL$86/*tmp*/ = PL$84/*pattern*/, PL$41/*value*/;
+  var PL$86/*tmp*/ = PL$84/*pattern*/;
+  ;
+  var PL$41/*value*/;
+  ;
   if((PL$85/*flags*/["indexOf"]("u") >= 0)){
     PL$86/*tmp*/ = PL$86/*tmp*/["replace"](/\\u\{([0-9a-fA-F]+)\}/g, (function(PL$87/*$0*/, PL$88/*$1*/){
     
@@ -961,7 +1046,16 @@ function PL$83/*testRegExp*/(PL$84/*pattern*/, PL$85/*flags*/){
 function PL$91/*scanRegExpBody*/(){
 
   ;
-  var PL$26/*ch*/, PL$76/*str*/, PL$92/*classMarker*/, PL$93/*terminated*/, PL$94/*body*/;
+  var PL$26/*ch*/;
+  ;
+  var PL$76/*str*/;
+  ;
+  var PL$92/*classMarker*/;
+  ;
+  var PL$93/*terminated*/;
+  ;
+  var PL$94/*body*/;
+  ;
   PL$26/*ch*/ = PL$11/*source*/[PL$13/*index*/];
   PL$21/*assert*/((PL$26/*ch*/ === "/"), "Regular expression literal must start with a slash");
   PL$76/*str*/ = PL$11/*source*/[PL$13/*index*/++];
@@ -1015,7 +1109,14 @@ function PL$91/*scanRegExpBody*/(){
 function PL$95/*scanRegExpFlags*/(){
 
   ;
-  var PL$26/*ch*/, PL$76/*str*/, PL$85/*flags*/, PL$79/*restore*/;
+  var PL$26/*ch*/;
+  ;
+  var PL$76/*str*/;
+  ;
+  var PL$85/*flags*/;
+  ;
+  var PL$79/*restore*/;
+  ;
   PL$76/*str*/ = "";
   PL$85/*flags*/ = "";
   while((PL$13/*index*/ < PL$16/*length*/)){
@@ -1061,7 +1162,14 @@ function PL$95/*scanRegExpFlags*/(){
 function PL$97/*scanRegExp*/(){
 
   ;
-  var PL$42/*start*/, PL$94/*body*/, PL$85/*flags*/, PL$41/*value*/;
+  var PL$42/*start*/;
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$85/*flags*/;
+  ;
+  var PL$41/*value*/;
+  ;
   PL$17/*lookahead*/ = null;
   PL$50/*skipComment*/();
   PL$42/*start*/ = PL$13/*index*/;
@@ -1096,7 +1204,14 @@ function PL$97/*scanRegExp*/(){
 function PL$98/*collectRegex*/(){
 
   ;
-  var PL$99/*pos*/, PL$44/*loc*/, PL$100/*regex*/, PL$101/*token*/;
+  var PL$99/*pos*/;
+  ;
+  var PL$44/*loc*/;
+  ;
+  var PL$100/*regex*/;
+  ;
+  var PL$101/*token*/;
+  ;
   PL$50/*skipComment*/();
   PL$99/*pos*/ = PL$13/*index*/;
   PL$44/*loc*/ = {
@@ -1140,7 +1255,10 @@ function PL$102/*isIdentifierName*/(PL$101/*token*/){
 function PL$103/*advanceSlash*/(){
 
   ;
-  var PL$104/*prevToken*/, PL$105/*checkToken*/;
+  var PL$104/*prevToken*/;
+  ;
+  var PL$105/*checkToken*/;
+  ;
   PL$104/*prevToken*/ = PL$19/*extra*/["tokens"][(PL$19/*extra*/["tokens"]["length"] - 1)];
   if(! PL$104/*prevToken*/){
     return PL$98/*collectRegex*/();
@@ -1188,6 +1306,7 @@ function PL$106/*advance*/(){
 
   ;
   var PL$26/*ch*/;
+  ;
   PL$50/*skipComment*/();
   if((PL$13/*index*/ >= PL$16/*length*/)){
     return {
@@ -1225,7 +1344,14 @@ function PL$106/*advance*/(){
 function PL$107/*collectToken*/(){
 
   ;
-  var PL$44/*loc*/, PL$101/*token*/, PL$41/*value*/, PL$108/*entry*/;
+  var PL$44/*loc*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$41/*value*/;
+  ;
+  var PL$108/*entry*/;
+  ;
   PL$50/*skipComment*/();
   PL$44/*loc*/ = {
     "start": {
@@ -1263,6 +1389,7 @@ function PL$109/*lex*/(){
 
   ;
   var PL$101/*token*/;
+  ;
   PL$101/*token*/ = PL$17/*lookahead*/;
   PL$13/*index*/ = PL$101/*token*/["end"];
   PL$14/*lineNumber*/ = PL$101/*token*/["lineNumber"];
@@ -1276,7 +1403,12 @@ function PL$109/*lex*/(){
 function PL$110/*peek*/(){
 
   ;
-  var PL$99/*pos*/, PL$111/*line*/, PL$42/*start*/;
+  var PL$99/*pos*/;
+  ;
+  var PL$111/*line*/;
+  ;
+  var PL$42/*start*/;
+  ;
   PL$99/*pos*/ = PL$13/*index*/;
   PL$111/*line*/ = PL$14/*lineNumber*/;
   PL$42/*start*/ = PL$15/*lineStart*/;
@@ -1350,7 +1482,14 @@ function PL$117/*WrappingNode*/(PL$115/*startToken*/){
 function PL$154/*peekLineTerminator*/(){
 
   ;
-  var PL$99/*pos*/, PL$111/*line*/, PL$42/*start*/, PL$155/*found*/;
+  var PL$99/*pos*/;
+  ;
+  var PL$111/*line*/;
+  ;
+  var PL$42/*start*/;
+  ;
+  var PL$155/*found*/;
+  ;
   PL$99/*pos*/ = PL$13/*index*/;
   PL$111/*line*/ = PL$14/*lineNumber*/;
   PL$42/*start*/ = PL$15/*lineStart*/;
@@ -1365,12 +1504,17 @@ function PL$49/*throwError*/(PL$101/*token*/, PL$156/*messageFormat*/){
 var PL$159/*arguments*/ = arguments;
 
   ;
-  var PL$157/*error*/, PL$131/*args*/ = PL$158/*Array*/["prototype"]["slice"]["call"](PL$159/*arguments*/, 2), PL$160/*msg*/ = PL$156/*messageFormat*/["replace"](/%(\d)/g, (function(PL$161/*whole*/, PL$13/*index*/){
+  var PL$157/*error*/;
+  ;
+  var PL$131/*args*/ = PL$158/*Array*/["prototype"]["slice"]["call"](PL$159/*arguments*/, 2);
+  ;
+  var PL$160/*msg*/ = PL$156/*messageFormat*/["replace"](/%(\d)/g, (function(PL$161/*whole*/, PL$13/*index*/){
   
     ;
     PL$21/*assert*/((PL$13/*index*/ < PL$131/*args*/["length"]), "Message reference must be in range");
     return PL$131/*args*/[PL$13/*index*/];
     ;}));
+  ;
   if((typeof PL$101/*token*/["lineNumber"] === "number")){
     PL$157/*error*/ = new PL$24/*Error*/(((("Line " + PL$101/*token*/["lineNumber"]) + ": ") + PL$160/*msg*/));
     PL$157/*error*/["index"] = PL$101/*token*/["start"];
@@ -1430,6 +1574,7 @@ function PL$163/*expect*/(PL$41/*value*/){
 
   ;
   var PL$101/*token*/ = PL$109/*lex*/();
+  ;
   if(((PL$101/*token*/["type"] !== PL$3/*Token*/["Punctuator"]) || (PL$101/*token*/["value"] !== PL$41/*value*/))){
     PL$162/*throwUnexpected*/(PL$101/*token*/);
   };
@@ -1439,6 +1584,7 @@ function PL$164/*expectTolerant*/(PL$41/*value*/){
   ;
   if(PL$19/*extra*/["errors"]){
     var PL$101/*token*/ = PL$17/*lookahead*/;
+    ;
     if(((PL$101/*token*/["type"] !== PL$3/*Token*/["Punctuator"]) && (PL$101/*token*/["value"] !== PL$41/*value*/))){
       PL$96/*throwErrorTolerant*/(PL$101/*token*/, PL$9/*Messages*/["UnexpectedToken"], PL$101/*token*/["value"]);
     }else{
@@ -1452,6 +1598,7 @@ function PL$165/*expectKeyword*/(PL$166/*keyword*/){
 
   ;
   var PL$101/*token*/ = PL$109/*lex*/();
+  ;
   if(((PL$101/*token*/["type"] !== PL$3/*Token*/["Keyword"]) || (PL$101/*token*/["value"] !== PL$166/*keyword*/))){
     PL$162/*throwUnexpected*/(PL$101/*token*/);
   };
@@ -1470,6 +1617,7 @@ function PL$169/*matchAssign*/(){
 
   ;
   var PL$170/*op*/;
+  ;
   if((PL$17/*lookahead*/["type"] !== PL$3/*Token*/["Punctuator"])){
     return false;
   };
@@ -1480,6 +1628,7 @@ function PL$171/*consumeSemicolon*/(){
 
   ;
   var PL$111/*line*/;
+  ;
   if(((PL$11/*source*/["charCodeAt"](PL$13/*index*/) === 59) || PL$167/*match*/(";"))){
     PL$109/*lex*/();
     return;
@@ -1503,7 +1652,10 @@ function PL$174/*parseArrayInitialiser*/(){
   ;
   var PL$122/*elements*/ = [
     
-  ], PL$175/*node*/ = new PL$116/*Node*/();
+  ];
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$163/*expect*/("[");
   while(! PL$167/*match*/("]")){
   {
@@ -1522,7 +1674,12 @@ function PL$174/*parseArrayInitialiser*/(){
 function PL$177/*parsePropertyFunction*/(PL$132/*param*/, PL$178/*first*/){
 
   ;
-  var PL$179/*previousStrict*/, PL$94/*body*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$179/*previousStrict*/;
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$179/*previousStrict*/ = PL$12/*strict*/;
   PL$94/*body*/ = PL$180/*parseFunctionSourceElements*/();
   if(((PL$178/*first*/ && PL$12/*strict*/) && PL$37/*isRestrictedWord*/(PL$132/*param*/[0]["name"]))){
@@ -1536,7 +1693,10 @@ function PL$177/*parsePropertyFunction*/(PL$132/*param*/, PL$178/*first*/){
 function PL$181/*parseObjectPropertyKey*/(){
 
   ;
-  var PL$101/*token*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$101/*token*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$101/*token*/ = PL$109/*lex*/();
   if(((PL$101/*token*/["type"] === PL$3/*Token*/["StringLiteral"]) || (PL$101/*token*/["type"] === PL$3/*Token*/["NumericLiteral"]))){
     if((PL$12/*strict*/ && PL$101/*token*/["octal"])){
@@ -1549,7 +1709,18 @@ function PL$181/*parseObjectPropertyKey*/(){
 function PL$182/*parseObjectProperty*/(){
 
   ;
-  var PL$101/*token*/, PL$145/*key*/, PL$35/*id*/, PL$41/*value*/, PL$132/*param*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$101/*token*/;
+  ;
+  var PL$145/*key*/;
+  ;
+  var PL$35/*id*/;
+  ;
+  var PL$41/*value*/;
+  ;
+  var PL$132/*param*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$101/*token*/ = PL$17/*lookahead*/;
   if((PL$101/*token*/["type"] === PL$3/*Token*/["Identifier"])){
     PL$35/*id*/ = PL$181/*parseObjectPropertyKey*/();
@@ -1599,9 +1770,26 @@ function PL$184/*parseObjectInitialiser*/(){
   ;
   var PL$142/*properties*/ = [
     
-  ], PL$101/*token*/, PL$141/*property*/, PL$138/*name*/, PL$145/*key*/, PL$144/*kind*/, PL$185/*map*/ = {
+  ];
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$141/*property*/;
+  ;
+  var PL$138/*name*/;
+  ;
+  var PL$145/*key*/;
+  ;
+  var PL$144/*kind*/;
+  ;
+  var PL$185/*map*/ = {
     
-  }, PL$186/*toString*/ = PL$32/*String*/, PL$175/*node*/ = new PL$116/*Node*/();
+  };
+  ;
+  var PL$186/*toString*/ = PL$32/*String*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$163/*expect*/("{");
   while(! PL$167/*match*/("}")){
   {
@@ -1654,6 +1842,7 @@ function PL$188/*parseGroupExpression*/(){
 
   ;
   var PL$173/*expr*/;
+  ;
   PL$163/*expect*/("(");
   if(PL$167/*match*/(")")){
     PL$109/*lex*/();
@@ -1667,7 +1856,14 @@ function PL$188/*parseGroupExpression*/(){
 function PL$190/*parsePrimaryExpression*/(){
 
   ;
-  var PL$40/*type*/, PL$101/*token*/, PL$173/*expr*/, PL$175/*node*/;
+  var PL$40/*type*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$173/*expr*/;
+  ;
+  var PL$175/*node*/;
+  ;
   if(PL$167/*match*/("(")){
     return PL$188/*parseGroupExpression*/();
   };
@@ -1732,6 +1928,7 @@ function PL$192/*parseArguments*/(){
   var PL$131/*args*/ = [
     
   ];
+  ;
   PL$163/*expect*/("(");
   if(! PL$167/*match*/(")")){
     while((PL$13/*index*/ < PL$16/*length*/)){
@@ -1748,7 +1945,10 @@ function PL$192/*parseArguments*/(){
 function PL$193/*parseNonComputedProperty*/(){
 
   ;
-  var PL$101/*token*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$101/*token*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$101/*token*/ = PL$109/*lex*/();
   if(! PL$102/*isIdentifierName*/(PL$101/*token*/)){
     PL$162/*throwUnexpected*/(PL$101/*token*/);
@@ -1765,6 +1965,7 @@ function PL$195/*parseComputedMember*/(){
 
   ;
   var PL$173/*expr*/;
+  ;
   PL$163/*expect*/("[");
   PL$173/*expr*/ = PL$189/*parseExpression*/();
   PL$163/*expect*/("]");
@@ -1773,7 +1974,12 @@ function PL$195/*parseComputedMember*/(){
 function PL$196/*parseNewExpression*/(){
 
   ;
-  var PL$130/*callee*/, PL$131/*args*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$130/*callee*/;
+  ;
+  var PL$131/*args*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$165/*expectKeyword*/("new");
   PL$130/*callee*/ = PL$197/*parseLeftHandSideExpression*/();
   PL$131/*args*/ = (PL$167/*match*/("(") ? PL$192/*parseArguments*/() : [
@@ -1784,7 +1990,16 @@ function PL$196/*parseNewExpression*/(){
 function PL$198/*parseLeftHandSideExpressionAllowCall*/(){
 
   ;
-  var PL$173/*expr*/, PL$131/*args*/, PL$141/*property*/, PL$115/*startToken*/, PL$199/*previousAllowIn*/ = PL$18/*state*/["allowIn"];
+  var PL$173/*expr*/;
+  ;
+  var PL$131/*args*/;
+  ;
+  var PL$141/*property*/;
+  ;
+  var PL$115/*startToken*/;
+  ;
+  var PL$199/*previousAllowIn*/ = PL$18/*state*/["allowIn"];
+  ;
   PL$115/*startToken*/ = PL$17/*lookahead*/;
   PL$18/*state*/["allowIn"] = true;
   PL$173/*expr*/ = (PL$168/*matchKeyword*/("new") ? PL$196/*parseNewExpression*/() : PL$190/*parsePrimaryExpression*/());
@@ -1811,7 +2026,12 @@ function PL$198/*parseLeftHandSideExpressionAllowCall*/(){
 function PL$197/*parseLeftHandSideExpression*/(){
 
   ;
-  var PL$173/*expr*/, PL$141/*property*/, PL$115/*startToken*/;
+  var PL$173/*expr*/;
+  ;
+  var PL$141/*property*/;
+  ;
+  var PL$115/*startToken*/;
+  ;
   PL$21/*assert*/(PL$18/*state*/["allowIn"], "callee of new expression always allow in keyword.");
   PL$115/*startToken*/ = PL$17/*lookahead*/;
   PL$173/*expr*/ = (PL$168/*matchKeyword*/("new") ? PL$196/*parseNewExpression*/() : PL$190/*parsePrimaryExpression*/());
@@ -1832,7 +2052,12 @@ function PL$197/*parseLeftHandSideExpression*/(){
 function PL$200/*parsePostfixExpression*/(){
 
   ;
-  var PL$173/*expr*/, PL$101/*token*/, PL$115/*startToken*/ = PL$17/*lookahead*/;
+  var PL$173/*expr*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$115/*startToken*/ = PL$17/*lookahead*/;
+  ;
   PL$173/*expr*/ = PL$198/*parseLeftHandSideExpressionAllowCall*/();
   if((PL$17/*lookahead*/["type"] === PL$3/*Token*/["Punctuator"])){
     if(((PL$167/*match*/("++") || PL$167/*match*/("--")) && ! PL$154/*peekLineTerminator*/())){
@@ -1855,7 +2080,12 @@ function PL$200/*parsePostfixExpression*/(){
 function PL$201/*parseUnaryExpression*/(){
 
   ;
-  var PL$101/*token*/, PL$173/*expr*/, PL$115/*startToken*/;
+  var PL$101/*token*/;
+  ;
+  var PL$173/*expr*/;
+  ;
+  var PL$115/*startToken*/;
+  ;
   if(((PL$17/*lookahead*/["type"] !== PL$3/*Token*/["Punctuator"]) && (PL$17/*lookahead*/["type"] !== PL$3/*Token*/["Keyword"]))){
     PL$173/*expr*/ = PL$200/*parsePostfixExpression*/();
   }else{
@@ -1903,6 +2133,7 @@ function PL$202/*binaryPrecedence*/(PL$101/*token*/, PL$203/*allowIn*/){
 
   ;
   var PL$204/*prec*/ = 0;
+  ;
   if(((PL$101/*token*/["type"] !== PL$3/*Token*/["Punctuator"]) && (PL$101/*token*/["type"] !== PL$3/*Token*/["Keyword"]))){
     return 0;
   };
@@ -1985,7 +2216,26 @@ function PL$202/*binaryPrecedence*/(PL$101/*token*/, PL$203/*allowIn*/){
 function PL$205/*parseBinaryExpression*/(){
 
   ;
-  var PL$206/*marker*/, PL$207/*markers*/, PL$173/*expr*/, PL$101/*token*/, PL$204/*prec*/, PL$208/*stack*/, PL$128/*right*/, PL$126/*operator*/, PL$127/*left*/, PL$53/*i*/;
+  var PL$206/*marker*/;
+  ;
+  var PL$207/*markers*/;
+  ;
+  var PL$173/*expr*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$204/*prec*/;
+  ;
+  var PL$208/*stack*/;
+  ;
+  var PL$128/*right*/;
+  ;
+  var PL$126/*operator*/;
+  ;
+  var PL$127/*left*/;
+  ;
+  var PL$53/*i*/;
+  ;
   PL$206/*marker*/ = PL$17/*lookahead*/;
   PL$127/*left*/ = PL$201/*parseUnaryExpression*/();
   if((PL$127/*left*/ === PL$7/*PlaceHolders*/["ArrowParameterPlaceHolder"])){
@@ -2036,7 +2286,16 @@ function PL$205/*parseBinaryExpression*/(){
 function PL$209/*parseConditionalExpression*/(){
 
   ;
-  var PL$173/*expr*/, PL$199/*previousAllowIn*/, PL$134/*consequent*/, PL$135/*alternate*/, PL$115/*startToken*/;
+  var PL$173/*expr*/;
+  ;
+  var PL$199/*previousAllowIn*/;
+  ;
+  var PL$134/*consequent*/;
+  ;
+  var PL$135/*alternate*/;
+  ;
+  var PL$115/*startToken*/;
+  ;
   PL$115/*startToken*/ = PL$17/*lookahead*/;
   PL$173/*expr*/ = PL$205/*parseBinaryExpression*/();
   if((PL$173/*expr*/ === PL$7/*PlaceHolders*/["ArrowParameterPlaceHolder"])){
@@ -2065,7 +2324,22 @@ function PL$210/*parseConciseBody*/(){
 function PL$211/*reinterpretAsCoverFormalsList*/(PL$146/*expressions*/){
 
   ;
-  var PL$53/*i*/, PL$54/*len*/, PL$132/*param*/, PL$123/*params*/, PL$124/*defaults*/, PL$212/*defaultCount*/, PL$213/*options*/, PL$214/*rest*/;
+  var PL$53/*i*/;
+  ;
+  var PL$54/*len*/;
+  ;
+  var PL$132/*param*/;
+  ;
+  var PL$123/*params*/;
+  ;
+  var PL$124/*defaults*/;
+  ;
+  var PL$212/*defaultCount*/;
+  ;
+  var PL$213/*options*/;
+  ;
+  var PL$214/*rest*/;
+  ;
   PL$123/*params*/ = [
     
   ];
@@ -2115,7 +2389,10 @@ function PL$211/*reinterpretAsCoverFormalsList*/(PL$146/*expressions*/){
 function PL$216/*parseArrowFunctionExpression*/(PL$213/*options*/, PL$175/*node*/){
 
   ;
-  var PL$179/*previousStrict*/, PL$94/*body*/;
+  var PL$179/*previousStrict*/;
+  ;
+  var PL$94/*body*/;
+  ;
   PL$163/*expect*/("=>");
   PL$179/*previousStrict*/ = PL$12/*strict*/;
   PL$94/*body*/ = PL$210/*parseConciseBody*/();
@@ -2131,7 +2408,18 @@ function PL$216/*parseArrowFunctionExpression*/(PL$213/*options*/, PL$175/*node*
 function PL$176/*parseAssignmentExpression*/(){
 
   ;
-  var PL$217/*oldParenthesisCount*/, PL$101/*token*/, PL$173/*expr*/, PL$128/*right*/, PL$218/*list*/, PL$115/*startToken*/;
+  var PL$217/*oldParenthesisCount*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$173/*expr*/;
+  ;
+  var PL$128/*right*/;
+  ;
+  var PL$218/*list*/;
+  ;
+  var PL$115/*startToken*/;
+  ;
   PL$217/*oldParenthesisCount*/ = PL$18/*state*/["parenthesisCount"];
   PL$115/*startToken*/ = PL$17/*lookahead*/;
   PL$101/*token*/ = PL$17/*lookahead*/;
@@ -2182,7 +2470,12 @@ function PL$176/*parseAssignmentExpression*/(){
 function PL$189/*parseExpression*/(){
 
   ;
-  var PL$173/*expr*/, PL$115/*startToken*/ = PL$17/*lookahead*/, PL$146/*expressions*/;
+  var PL$173/*expr*/;
+  ;
+  var PL$115/*startToken*/ = PL$17/*lookahead*/;
+  ;
+  var PL$146/*expressions*/;
+  ;
   PL$173/*expr*/ = PL$176/*parseAssignmentExpression*/();
   if(PL$167/*match*/(",")){
     PL$146/*expressions*/ = [
@@ -2204,7 +2497,10 @@ function PL$219/*parseStatementList*/(){
   ;
   var PL$218/*list*/ = [
     
-  ], PL$220/*statement*/;
+  ];
+  ;
+  var PL$220/*statement*/;
+  ;
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
     if(PL$167/*match*/("}")){
@@ -2220,7 +2516,10 @@ function PL$219/*parseStatementList*/(){
 function PL$222/*parseBlock*/(){
 
   ;
-  var PL$149/*block*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$149/*block*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$163/*expect*/("{");
   PL$149/*block*/ = PL$219/*parseStatementList*/();
   PL$163/*expect*/("}");
@@ -2229,7 +2528,10 @@ function PL$222/*parseBlock*/(){
 function PL$183/*parseVariableIdentifier*/(){
 
   ;
-  var PL$101/*token*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$101/*token*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$101/*token*/ = PL$109/*lex*/();
   if((PL$101/*token*/["type"] !== PL$3/*Token*/["Identifier"])){
     PL$162/*throwUnexpected*/(PL$101/*token*/);
@@ -2239,7 +2541,12 @@ function PL$183/*parseVariableIdentifier*/(){
 function PL$223/*parseVariableDeclaration*/(PL$144/*kind*/){
 
   ;
-  var PL$136/*init*/ = null, PL$35/*id*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$136/*init*/ = null;
+  ;
+  var PL$35/*id*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$35/*id*/ = PL$183/*parseVariableIdentifier*/();
   if((PL$12/*strict*/ && PL$37/*isRestrictedWord*/(PL$35/*id*/["name"]))){
     PL$96/*throwErrorTolerant*/({
@@ -2263,6 +2570,7 @@ function PL$224/*parseVariableDeclarationList*/(PL$144/*kind*/){
   var PL$218/*list*/ = [
     
   ];
+  ;
   do{
   {
     PL$218/*list*/["push"](PL$223/*parseVariableDeclaration*/(PL$144/*kind*/));
@@ -2276,6 +2584,7 @@ function PL$225/*parseVariableStatement*/(PL$175/*node*/){
 
   ;
   var PL$153/*declarations*/;
+  ;
   PL$165/*expectKeyword*/("var");
   PL$153/*declarations*/ = PL$224/*parseVariableDeclarationList*/();
   PL$171/*consumeSemicolon*/();
@@ -2284,7 +2593,10 @@ function PL$225/*parseVariableStatement*/(PL$175/*node*/){
 function PL$226/*parseConstLetDeclaration*/(PL$144/*kind*/){
 
   ;
-  var PL$153/*declarations*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$153/*declarations*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$165/*expectKeyword*/(PL$144/*kind*/);
   PL$153/*declarations*/ = PL$224/*parseVariableDeclarationList*/(PL$144/*kind*/);
   PL$171/*consumeSemicolon*/();
@@ -2294,6 +2606,7 @@ function PL$227/*parseEmptyStatement*/(){
 
   ;
   var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$163/*expect*/(";");
   return PL$175/*node*/["finishEmptyStatement"]();
   ;};
@@ -2301,13 +2614,19 @@ function PL$228/*parseExpressionStatement*/(PL$175/*node*/){
 
   ;
   var PL$173/*expr*/ = PL$189/*parseExpression*/();
+  ;
   PL$171/*consumeSemicolon*/();
   return PL$175/*node*/["finishExpressionStatement"](PL$173/*expr*/);
   ;};
 function PL$229/*parseIfStatement*/(PL$175/*node*/){
 
   ;
-  var PL$133/*test*/, PL$134/*consequent*/, PL$135/*alternate*/;
+  var PL$133/*test*/;
+  ;
+  var PL$134/*consequent*/;
+  ;
+  var PL$135/*alternate*/;
+  ;
   PL$165/*expectKeyword*/("if");
   PL$163/*expect*/("(");
   PL$133/*test*/ = PL$189/*parseExpression*/();
@@ -2324,7 +2643,12 @@ function PL$229/*parseIfStatement*/(PL$175/*node*/){
 function PL$231/*parseDoWhileStatement*/(PL$175/*node*/){
 
   ;
-  var PL$94/*body*/, PL$133/*test*/, PL$232/*oldInIteration*/;
+  var PL$94/*body*/;
+  ;
+  var PL$133/*test*/;
+  ;
+  var PL$232/*oldInIteration*/;
+  ;
   PL$165/*expectKeyword*/("do");
   PL$232/*oldInIteration*/ = PL$18/*state*/["inIteration"];
   PL$18/*state*/["inIteration"] = true;
@@ -2342,7 +2666,12 @@ function PL$231/*parseDoWhileStatement*/(PL$175/*node*/){
 function PL$233/*parseWhileStatement*/(PL$175/*node*/){
 
   ;
-  var PL$133/*test*/, PL$94/*body*/, PL$232/*oldInIteration*/;
+  var PL$133/*test*/;
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$232/*oldInIteration*/;
+  ;
   PL$165/*expectKeyword*/("while");
   PL$163/*expect*/("(");
   PL$133/*test*/ = PL$189/*parseExpression*/();
@@ -2356,7 +2685,12 @@ function PL$233/*parseWhileStatement*/(PL$175/*node*/){
 function PL$234/*parseForVariableDeclaration*/(){
 
   ;
-  var PL$101/*token*/, PL$153/*declarations*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$101/*token*/;
+  ;
+  var PL$153/*declarations*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$101/*token*/ = PL$109/*lex*/();
   PL$153/*declarations*/ = PL$224/*parseVariableDeclarationList*/();
   return PL$175/*node*/["finishVariableDeclaration"](PL$153/*declarations*/, PL$101/*token*/["value"]);
@@ -2364,7 +2698,22 @@ function PL$234/*parseForVariableDeclaration*/(){
 function PL$235/*parseForStatement*/(PL$175/*node*/){
 
   ;
-  var PL$136/*init*/, PL$133/*test*/, PL$137/*update*/, PL$127/*left*/, PL$128/*right*/, PL$94/*body*/, PL$232/*oldInIteration*/, PL$199/*previousAllowIn*/ = PL$18/*state*/["allowIn"];
+  var PL$136/*init*/;
+  ;
+  var PL$133/*test*/;
+  ;
+  var PL$137/*update*/;
+  ;
+  var PL$127/*left*/;
+  ;
+  var PL$128/*right*/;
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$232/*oldInIteration*/;
+  ;
+  var PL$199/*previousAllowIn*/ = PL$18/*state*/["allowIn"];
+  ;
   PL$136/*init*/ = PL$133/*test*/ = PL$137/*update*/ = null;
   PL$165/*expectKeyword*/("for");
   PL$163/*expect*/("(");
@@ -2420,7 +2769,10 @@ function PL$235/*parseForStatement*/(PL$175/*node*/){
 function PL$236/*parseContinueStatement*/(PL$175/*node*/){
 
   ;
-  var PL$129/*label*/ = null, PL$145/*key*/;
+  var PL$129/*label*/ = null;
+  ;
+  var PL$145/*key*/;
+  ;
   PL$165/*expectKeyword*/("continue");
   if((PL$11/*source*/["charCodeAt"](PL$13/*index*/) === 59)){
     PL$109/*lex*/();
@@ -2459,7 +2811,10 @@ function PL$236/*parseContinueStatement*/(PL$175/*node*/){
 function PL$237/*parseBreakStatement*/(PL$175/*node*/){
 
   ;
-  var PL$129/*label*/ = null, PL$145/*key*/;
+  var PL$129/*label*/ = null;
+  ;
+  var PL$145/*key*/;
+  ;
   PL$165/*expectKeyword*/("break");
   if((PL$11/*source*/["charCodeAt"](PL$13/*index*/) === 59)){
     PL$109/*lex*/();
@@ -2499,6 +2854,7 @@ function PL$238/*parseReturnStatement*/(PL$175/*node*/){
 
   ;
   var PL$143/*argument*/ = null;
+  ;
   PL$165/*expectKeyword*/("return");
   if(! PL$18/*state*/["inFunctionBody"]){
     PL$96/*throwErrorTolerant*/({
@@ -2526,7 +2882,10 @@ function PL$238/*parseReturnStatement*/(PL$175/*node*/){
 function PL$239/*parseWithStatement*/(PL$175/*node*/){
 
   ;
-  var PL$140/*object*/, PL$94/*body*/;
+  var PL$140/*object*/;
+  ;
+  var PL$94/*body*/;
+  ;
   if(PL$12/*strict*/){
     PL$50/*skipComment*/();
     PL$96/*throwErrorTolerant*/({
@@ -2543,9 +2902,16 @@ function PL$239/*parseWithStatement*/(PL$175/*node*/){
 function PL$240/*parseSwitchCase*/(){
 
   ;
-  var PL$133/*test*/, PL$134/*consequent*/ = [
+  var PL$133/*test*/;
+  ;
+  var PL$134/*consequent*/ = [
     
-  ], PL$220/*statement*/, PL$175/*node*/ = new PL$116/*Node*/();
+  ];
+  ;
+  var PL$220/*statement*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   if(PL$168/*matchKeyword*/("default")){
     PL$109/*lex*/();
     PL$133/*test*/ = null;
@@ -2566,7 +2932,16 @@ function PL$240/*parseSwitchCase*/(){
 function PL$241/*parseSwitchStatement*/(PL$175/*node*/){
 
   ;
-  var PL$147/*discriminant*/, PL$148/*cases*/, PL$242/*clause*/, PL$243/*oldInSwitch*/, PL$244/*defaultFound*/;
+  var PL$147/*discriminant*/;
+  ;
+  var PL$148/*cases*/;
+  ;
+  var PL$242/*clause*/;
+  ;
+  var PL$243/*oldInSwitch*/;
+  ;
+  var PL$244/*defaultFound*/;
+  ;
   PL$165/*expectKeyword*/("switch");
   PL$163/*expect*/("(");
   PL$147/*discriminant*/ = PL$189/*parseExpression*/();
@@ -2605,6 +2980,7 @@ function PL$245/*parseThrowStatement*/(PL$175/*node*/){
 
   ;
   var PL$143/*argument*/;
+  ;
   PL$165/*expectKeyword*/("throw");
   if(PL$154/*peekLineTerminator*/()){
     PL$49/*throwError*/({
@@ -2618,7 +2994,12 @@ function PL$245/*parseThrowStatement*/(PL$175/*node*/){
 function PL$246/*parseCatchClause*/(){
 
   ;
-  var PL$132/*param*/, PL$94/*body*/, PL$175/*node*/ = new PL$116/*Node*/();
+  var PL$132/*param*/;
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$165/*expectKeyword*/("catch");
   PL$163/*expect*/("(");
   if(PL$167/*match*/(")")){
@@ -2637,9 +3018,14 @@ function PL$246/*parseCatchClause*/(){
 function PL$247/*parseTryStatement*/(PL$175/*node*/){
 
   ;
-  var PL$149/*block*/, PL$151/*handlers*/ = [
+  var PL$149/*block*/;
+  ;
+  var PL$151/*handlers*/ = [
     
-  ], PL$152/*finalizer*/ = null;
+  ];
+  ;
+  var PL$152/*finalizer*/ = null;
+  ;
   PL$165/*expectKeyword*/("try");
   PL$149/*block*/ = PL$222/*parseBlock*/();
   if(PL$168/*matchKeyword*/("catch")){
@@ -2668,7 +3054,16 @@ function PL$248/*parseDebuggerStatement*/(PL$175/*node*/){
 function PL$230/*parseStatement*/(){
 
   ;
-  var PL$40/*type*/ = PL$17/*lookahead*/["type"], PL$173/*expr*/, PL$249/*labeledBody*/, PL$145/*key*/, PL$175/*node*/;
+  var PL$40/*type*/ = PL$17/*lookahead*/["type"];
+  ;
+  var PL$173/*expr*/;
+  ;
+  var PL$249/*labeledBody*/;
+  ;
+  var PL$145/*key*/;
+  ;
+  var PL$175/*node*/;
+  ;
   if((PL$40/*type*/ === PL$3/*Token*/["EOF"])){
     PL$162/*throwUnexpected*/(PL$17/*lookahead*/);
   };
@@ -2761,9 +3156,30 @@ function PL$230/*parseStatement*/(){
 function PL$180/*parseFunctionSourceElements*/(){
 
   ;
-  var PL$251/*sourceElement*/, PL$252/*sourceElements*/ = [
+  var PL$251/*sourceElement*/;
+  ;
+  var PL$252/*sourceElements*/ = [
     
-  ], PL$101/*token*/, PL$253/*directive*/, PL$254/*firstRestricted*/, PL$255/*oldLabelSet*/, PL$232/*oldInIteration*/, PL$243/*oldInSwitch*/, PL$256/*oldInFunctionBody*/, PL$217/*oldParenthesisCount*/, PL$175/*node*/ = new PL$116/*Node*/();
+  ];
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$253/*directive*/;
+  ;
+  var PL$254/*firstRestricted*/;
+  ;
+  var PL$255/*oldLabelSet*/;
+  ;
+  var PL$232/*oldInIteration*/;
+  ;
+  var PL$243/*oldInSwitch*/;
+  ;
+  var PL$256/*oldInFunctionBody*/;
+  ;
+  var PL$217/*oldParenthesisCount*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$163/*expect*/("{");
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
@@ -2821,6 +3237,7 @@ function PL$215/*validateParam*/(PL$213/*options*/, PL$132/*param*/, PL$138/*nam
 
   ;
   var PL$145/*key*/ = ("$" + PL$138/*name*/);
+  ;
   if(PL$12/*strict*/){
     if(PL$37/*isRestrictedWord*/(PL$138/*name*/)){
       PL$213/*options*/["stricted"] = PL$132/*param*/;
@@ -2853,7 +3270,12 @@ function PL$215/*validateParam*/(PL$213/*options*/, PL$132/*param*/, PL$138/*nam
 function PL$257/*parseParam*/(PL$213/*options*/){
 
   ;
-  var PL$101/*token*/, PL$132/*param*/, PL$258/*def*/;
+  var PL$101/*token*/;
+  ;
+  var PL$132/*param*/;
+  ;
+  var PL$258/*def*/;
+  ;
   PL$101/*token*/ = PL$17/*lookahead*/;
   PL$132/*param*/ = PL$183/*parseVariableIdentifier*/();
   PL$215/*validateParam*/(PL$213/*options*/, PL$101/*token*/, PL$101/*token*/["value"]);
@@ -2870,6 +3292,7 @@ function PL$259/*parseParams*/(PL$254/*firstRestricted*/){
 
   ;
   var PL$213/*options*/;
+  ;
   PL$213/*options*/ = {
     "params": [
       
@@ -2909,11 +3332,32 @@ function PL$259/*parseParams*/(PL$254/*firstRestricted*/){
 function PL$250/*parseFunctionDeclaration*/(){
 
   ;
-  var PL$35/*id*/, PL$123/*params*/ = [
+  var PL$35/*id*/;
+  ;
+  var PL$123/*params*/ = [
     
-  ], PL$124/*defaults*/ = [
+  ];
+  ;
+  var PL$124/*defaults*/ = [
     
-  ], PL$94/*body*/, PL$101/*token*/, PL$260/*stricted*/, PL$86/*tmp*/, PL$254/*firstRestricted*/, PL$23/*message*/, PL$179/*previousStrict*/, PL$175/*node*/ = new PL$116/*Node*/();
+  ];
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$260/*stricted*/;
+  ;
+  var PL$86/*tmp*/;
+  ;
+  var PL$254/*firstRestricted*/;
+  ;
+  var PL$23/*message*/;
+  ;
+  var PL$179/*previousStrict*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$165/*expectKeyword*/("function");
   PL$101/*token*/ = PL$17/*lookahead*/;
   PL$35/*id*/ = PL$183/*parseVariableIdentifier*/();
@@ -2954,11 +3398,32 @@ function PL$250/*parseFunctionDeclaration*/(){
 function PL$191/*parseFunctionExpression*/(){
 
   ;
-  var PL$101/*token*/, PL$35/*id*/ = null, PL$260/*stricted*/, PL$254/*firstRestricted*/, PL$23/*message*/, PL$86/*tmp*/, PL$123/*params*/ = [
+  var PL$101/*token*/;
+  ;
+  var PL$35/*id*/ = null;
+  ;
+  var PL$260/*stricted*/;
+  ;
+  var PL$254/*firstRestricted*/;
+  ;
+  var PL$23/*message*/;
+  ;
+  var PL$86/*tmp*/;
+  ;
+  var PL$123/*params*/ = [
     
-  ], PL$124/*defaults*/ = [
+  ];
+  ;
+  var PL$124/*defaults*/ = [
     
-  ], PL$94/*body*/, PL$179/*previousStrict*/, PL$175/*node*/ = new PL$116/*Node*/();
+  ];
+  ;
+  var PL$94/*body*/;
+  ;
+  var PL$179/*previousStrict*/;
+  ;
+  var PL$175/*node*/ = new PL$116/*Node*/();
+  ;
   PL$165/*expectKeyword*/("function");
   if(! PL$167/*match*/("(")){
     PL$101/*token*/ = PL$17/*lookahead*/;
@@ -3024,9 +3489,18 @@ function PL$221/*parseSourceElement*/(){
 function PL$261/*parseSourceElements*/(){
 
   ;
-  var PL$251/*sourceElement*/, PL$252/*sourceElements*/ = [
+  var PL$251/*sourceElement*/;
+  ;
+  var PL$252/*sourceElements*/ = [
     
-  ], PL$101/*token*/, PL$253/*directive*/, PL$254/*firstRestricted*/;
+  ];
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$253/*directive*/;
+  ;
+  var PL$254/*firstRestricted*/;
+  ;
   while((PL$13/*index*/ < PL$16/*length*/)){
   {
     PL$101/*token*/ = PL$17/*lookahead*/;
@@ -3061,7 +3535,10 @@ function PL$261/*parseSourceElements*/(){
 function PL$262/*parseProgram*/(){
 
   ;
-  var PL$94/*body*/, PL$175/*node*/;
+  var PL$94/*body*/;
+  ;
+  var PL$175/*node*/;
+  ;
   PL$50/*skipComment*/();
   PL$110/*peek*/();
   PL$175/*node*/ = new PL$116/*Node*/();
@@ -3072,9 +3549,16 @@ function PL$262/*parseProgram*/(){
 function PL$263/*filterTokenLocation*/(){
 
   ;
-  var PL$53/*i*/, PL$108/*entry*/, PL$101/*token*/, PL$264/*tokens*/ = [
+  var PL$53/*i*/;
+  ;
+  var PL$108/*entry*/;
+  ;
+  var PL$101/*token*/;
+  ;
+  var PL$264/*tokens*/ = [
     
   ];
+  ;
   for(PL$53/*i*/ = 0;(PL$53/*i*/ < PL$19/*extra*/["tokens"]["length"]);++PL$53/*i*/){{
     PL$108/*entry*/ = PL$19/*extra*/["tokens"][PL$53/*i*/];
     PL$101/*token*/ = {
@@ -3099,7 +3583,10 @@ function PL$263/*filterTokenLocation*/(){
 function PL$265/*tokenize*/(PL$55/*code*/, PL$213/*options*/){
 
   ;
-  var PL$186/*toString*/, PL$264/*tokens*/;
+  var PL$186/*toString*/;
+  ;
+  var PL$264/*tokens*/;
+  ;
   PL$186/*toString*/ = PL$32/*String*/;
   if(((typeof PL$55/*code*/ !== "string") && ! (PL$55/*code*/ instanceof PL$32/*String*/))){
     PL$55/*code*/ = PL$186/*toString*/(PL$55/*code*/);
@@ -3177,7 +3664,10 @@ function PL$265/*tokenize*/(PL$55/*code*/, PL$213/*options*/){
 function PL$267/*parse*/(PL$55/*code*/, PL$213/*options*/){
 
   ;
-  var PL$268/*program*/, PL$186/*toString*/;
+  var PL$268/*program*/;
+  ;
+  var PL$186/*toString*/;
+  ;
   PL$186/*toString*/ = PL$32/*String*/;
   if(((typeof PL$55/*code*/ !== "string") && ! (PL$55/*code*/ instanceof PL$32/*String*/))){
     PL$55/*code*/ = PL$186/*toString*/(PL$55/*code*/);
@@ -3261,7 +3751,41 @@ function PL$267/*parse*/(PL$55/*code*/, PL$213/*options*/){
   var PL$2/*exports*/ = {
     
   };
-  var PL$3/*Token*/, PL$4/*TokenName*/, PL$5/*FnExprTokens*/, PL$6/*Syntax*/, PL$7/*PlaceHolders*/, PL$8/*PropertyKind*/, PL$9/*Messages*/, PL$10/*Regex*/, PL$11/*source*/, PL$12/*strict*/, PL$13/*index*/, PL$14/*lineNumber*/, PL$15/*lineStart*/, PL$16/*length*/, PL$17/*lookahead*/, PL$18/*state*/, PL$19/*extra*/;
+  ;
+  var PL$3/*Token*/;
+  ;
+  var PL$4/*TokenName*/;
+  ;
+  var PL$5/*FnExprTokens*/;
+  ;
+  var PL$6/*Syntax*/;
+  ;
+  var PL$7/*PlaceHolders*/;
+  ;
+  var PL$8/*PropertyKind*/;
+  ;
+  var PL$9/*Messages*/;
+  ;
+  var PL$10/*Regex*/;
+  ;
+  var PL$11/*source*/;
+  ;
+  var PL$12/*strict*/;
+  ;
+  var PL$13/*index*/;
+  ;
+  var PL$14/*lineNumber*/;
+  ;
+  var PL$15/*lineStart*/;
+  ;
+  var PL$16/*length*/;
+  ;
+  var PL$17/*lookahead*/;
+  ;
+  var PL$18/*state*/;
+  ;
+  var PL$19/*extra*/;
+  ;
   PL$3/*Token*/ = {
     "BooleanLiteral": 1,
     "EOF": 2,
@@ -3477,7 +4001,14 @@ function PL$267/*parse*/(PL$55/*code*/, PL$213/*options*/){
     "processComment": (function(){
     
       ;
-      var PL$118/*lastChild*/, PL$119/*trailingComments*/, PL$120/*bottomRight*/ = PL$19/*extra*/["bottomRightStack"], PL$121/*last*/ = PL$120/*bottomRight*/[(PL$120/*bottomRight*/["length"] - 1)];
+      var PL$118/*lastChild*/;
+      ;
+      var PL$119/*trailingComments*/;
+      ;
+      var PL$120/*bottomRight*/ = PL$19/*extra*/["bottomRightStack"];
+      ;
+      var PL$121/*last*/ = PL$120/*bottomRight*/[(PL$120/*bottomRight*/["length"] - 1)];
+      ;
       if((this["type"] === PL$6/*Syntax*/["Program"])){
         if((this["body"]["length"] > 0)){
           return;
@@ -3993,9 +4524,12 @@ function PL$267/*parse*/(PL$55/*code*/, PL$213/*options*/){
   PL$2/*exports*/["Syntax"] = (function(){
   
     ;
-    var PL$138/*name*/, PL$269/*types*/ = {
+    var PL$138/*name*/;
+    ;
+    var PL$269/*types*/ = {
       
     };
+    ;
     if((typeof PL$187/*Object*/["create"] === "function")){
       PL$269/*types*/ = PL$187/*Object*/["create"](null);
     };

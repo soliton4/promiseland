@@ -61,7 +61,9 @@ var PL$1 = (function(){
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   var PL$4/*Tracker*/;
+  ;
   (function(){
   var PL$5 = new __Promise();
   var PL$7/*promiseland exception catcher*/ = function(code){
@@ -86,7 +88,9 @@ var PL$1 = (function(){
   
     ;
     var PL$12/*self*/ = this;
+    ;
     var PL$13/*lifeLine*/;
+    ;
     var PL$14/*destroyFun*/ = (function(){
     
       ;
@@ -106,17 +110,23 @@ var PL$1 = (function(){
       };
       ;
       ;});
+    ;
     var PL$15/*t*/ = PL$4/*Tracker*/(PL$14/*destroyFun*/);
+    ;
     var PL$16/*tracker*/ = PL$15/*t*/[0];
+    ;
     this["rootTrack"] = PL$15/*t*/[1];
     this["memberTrack"] = PL$15/*t*/[2];
     var PL$17/*rootTrack*/ = this["rootTrack"];
+    ;
     var PL$18/*thenAr*/ = [
       
     ];
+    ;
     var PL$19/*elseAr*/ = [
       
     ];
+    ;
     var PL$20/*thenFun*/ = (function(PL$21/*parThenFun*/, PL$22/*parElseFun*/){
     
       ;
@@ -132,6 +142,7 @@ var PL$1 = (function(){
       };
       ;
       ;});
+    ;
     var PL$23/*thenReuseFun*/ = (function(PL$24/*parReuse*/, PL$21/*parThenFun*/, PL$22/*parElseFun*/){
     
       ;
@@ -149,11 +160,13 @@ var PL$1 = (function(){
       };
       ;
       ;});
+    ;
     this["resolve"] = (function(PL$25/*value*/){
     
       ;
       if(PL$25/*value*/){
         var PL$26/*realValue*/ = PL$25/*value*/[0];
+        ;
         PL$13/*lifeLine*/ = PL$11/*parTrackFun*/(PL$25/*value*/, PL$16/*tracker*/);
         PL$25/*value*/ = PL$26/*realValue*/;
       };
@@ -192,11 +205,14 @@ var PL$1 = (function(){
         return;
       };
       var PL$28/*i*/ = 0;
+      ;
       var PL$29/*l*/ = PL$18/*thenAr*/["length"];
+      ;
       for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{
         try
         {
           var PL$30/*entryAr*/ = PL$18/*thenAr*/[PL$28/*i*/];
+          ;
           PL$30/*entryAr*/[0]([
             PL$25/*value*/, 
             PL$30/*entryAr*/[1]
@@ -238,7 +254,9 @@ var PL$1 = (function(){
         return;
       };
       var PL$28/*i*/ = 0;
+      ;
       var PL$29/*l*/ = PL$19/*elseAr*/["length"];
+      ;
       for(PL$28/*i*/;(PL$28/*i*/ < PL$29/*l*/);++PL$28/*i*/){{
         try
         {
@@ -263,6 +281,7 @@ var PL$1 = (function(){
     this["then"]["then"] = this["then"];
     this["then"]["thenReuse"] = this["thenReuse"];
     ;});
+  ;
   return PL$10/*TrackedPromise*/;
   ;})();
 ;return PL$1;

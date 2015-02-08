@@ -120,12 +120,16 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$23/*self*/ = this;
+        ;
         var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
+        ;
         if(this["localVariables"]["has"](PL$24/*name*/)){
           if((! PL$20/*par*/["type"] && ! PL$20/*par*/["typename"])){
           }else{
           var PL$25/*newType*/ = (PL$20/*par*/["type"] || this["getType"](PL$20/*par*/["typename"], PL$22/*parParsed*/));
+          ;
           var PL$26/*existing*/ = this["_getVariableType"](this["localVariables"]["get"](PL$24/*name*/));
+          ;
           PL$7/*classSystem*/["definitionPromise"](PL$25/*newType*/)["then"]((function(PL$27/*type1*/){
           
             ;
@@ -177,8 +181,11 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$23/*self*/ = this;
+        ;
         var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/["name"]);
+        ;
         var PL$29/*originalEntry*/;
+        ;
         if(this["variables"]["has"](PL$24/*name*/)){
           PL$29/*originalEntry*/ = this["variables"]["get"](PL$24/*name*/);
         };
@@ -188,6 +195,7 @@ PL$3/*promiseland exception catcher*/(function(){
           "type": PL$20/*par*/["type"],
           "name": PL$24/*name*/
         };
+        ;
         if((! PL$20/*par*/["typename"] && ! PL$20/*par*/["type"])){
           PL$30/*entry*/["type"] = this["getProvisionalType"](PL$22/*parParsed*/);
           PL$30/*entry*/["needsResolving"] = true;
@@ -204,6 +212,7 @@ PL$3/*promiseland exception catcher*/(function(){
         PL$30/*entry*/["temporary"] = true;
         this["variables"]["set"](PL$24/*name*/, PL$30/*entry*/);
         var PL$31/*resPs*/ = new PL$32/*Promise*/();
+        ;
         (function(){
         var PL$33 = new __Promise();
         var PL$35/*promiseland exception catcher*/ = function(code){
@@ -245,9 +254,11 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$24/*name*/ = PL$16/*identifierName*/(PL$39/*parName*/);
+        ;
         this["_addUsedVariable"](PL$24/*name*/);
         if(this["variables"]["has"](PL$24/*name*/)){
           var PL$30/*entry*/ = this["variables"]["get"](PL$24/*name*/);
+          ;
           return this["_getVariableType"](PL$30/*entry*/);
         };
         ;
@@ -258,6 +269,7 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$24/*name*/ = PL$16/*identifierName*/(PL$20/*par*/);
+        ;
         if((PL$24/*name*/ === "undefined")){
           return;
         };
@@ -285,6 +297,7 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$23/*self*/ = this;
+        ;
         if((! PL$20/*par*/ || (typeof PL$20/*par*/ == "string"))){
           return;
         };
@@ -298,6 +311,7 @@ PL$3/*promiseland exception catcher*/(function(){
         }else{
         if((PL$20/*par*/["type"] == "Class")){
           var PL$40/*ci*/ = PL$23/*self*/["identifyClass"](PL$20/*par*/);
+          ;
           if(PL$40/*ci*/["hasName"]){
             this["addLocalVariable"]({
               "name": PL$16/*identifierName*/(PL$20/*par*/["name"]),
@@ -310,6 +324,7 @@ PL$3/*promiseland exception catcher*/(function(){
         }else{
         if(PL$17/*checkIsFunction*/(PL$20/*par*/)){
           var PL$41/*functionInfo*/ = this["functionInfo"](PL$20/*par*/);
+          ;
           if(PL$41/*functionInfo*/["hasExternalName"]){
             this["addLocalVariable"]({
               "name": PL$41/*functionInfo*/["nameStr"],
@@ -323,6 +338,7 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$42/*i*/;
+        ;
         for(PL$42/*i*/ in PL$20/*par*/){
           if((PL$42/*i*/ == "_extrainfo")){
             continue;;
@@ -335,6 +351,7 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$43/*res*/ = this["newResult"]();
+        ;
         this["_addUsedVariable"](PL$20/*par*/);
         PL$43/*res*/["push"](this["getVariableName"](PL$20/*par*/));
         PL$43/*res*/["setType"](this["getVariableType"](PL$20/*par*/));
@@ -344,20 +361,27 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$43/*res*/ = this["newResult"]();
+        ;
         var PL$44/*declarations*/ = PL$20/*par*/["declarations"];
+        ;
         if(! PL$44/*declarations*/){
           this["error"](PL$20/*par*/, PL$11/*errorMsg*/["missingDeclarations"]);
           return "";
         };
         ;
         var PL$42/*i*/ = 0;
+        ;
         var PL$45/*l*/ = PL$44/*declarations*/["length"];
+        ;
         var PL$46/*usedType*/ = this["getType"](PL$16/*identifierName*/(PL$20/*par*/["typename"]), PL$20/*par*/);
+        ;
         var PL$47/*addVar*/ = false;
+        ;
         if((! this["promising"] && (PL$45/*l*/ > 0))){
           PL$47/*addVar*/ = true;
           for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$45/*l*/);++PL$42/*i*/){{
             var PL$48/*varName*/ = PL$16/*identifierName*/(PL$44/*declarations*/[PL$42/*i*/]["id"]);
+            ;
             if(this["usedVariablesMap"]["get"](PL$48/*varName*/)){
               PL$47/*addVar*/ = false;
             };
@@ -426,6 +450,7 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$43/*res*/ = this["newResult"]();
+        ;
         if(PL$20/*par*/["init"]){
           PL$43/*res*/["pushType"](this["getSetVariableCode"]({
             "instance": this["getVariable"](PL$16/*identifierName*/(PL$20/*par*/["id"])),
@@ -441,6 +466,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return PL$43/*res*/;
         ;});
       ;});
+    ;
     PL$21/*f*/["apply"](PL$19/*parInstance*/, [
       PL$20/*par*/
     ]);

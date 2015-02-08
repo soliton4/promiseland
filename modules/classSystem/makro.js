@@ -59,6 +59,7 @@ var PL$1 = (function(){
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
   
     ;
@@ -78,6 +79,7 @@ var PL$1 = (function(){
       "CONSTRUCTOR": 12,
       "NEWLINE": 13
     };
+    ;
     PL$5/*internals*/["makro"] = PL$6/*makro*/;
     PL$5/*internals*/["xxx1"] = PL$6/*makro*/;
     return PL$6/*makro*/;

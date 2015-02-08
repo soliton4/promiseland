@@ -64,8 +64,11 @@ var PL$1 = (function(){
     var PL$4/*path*/ = [
       
     ];
+    ;
     var PL$5/*resStr*/ = "";
+    ;
     var PL$6/*_run*/ = (function(PL$7/*o*/){
+    var PL$9/*m*/;
     
       ;
       switch (PL$7/*o*/){
@@ -95,7 +98,7 @@ var PL$1 = (function(){
             case "object":
               
               PL$5/*resStr*/ += "{";
-              for(var PL$9/*m*/ in PL$7/*o*/){
+              for(PL$9/*m*/ in PL$7/*o*/){
                 PL$5/*resStr*/ += PL$8/*stringifyStr*/(PL$9/*m*/);
                 PL$5/*resStr*/ += ":";
                 PL$6/*_run*/(PL$7/*o*/[PL$9/*m*/]);};
@@ -117,8 +120,11 @@ var PL$1 = (function(){
       PL$6/*_run*/(PL$3/*original*/);
       return PL$5/*resStr*/;
       ;});
+    ;
     var PL$10/*res*/ = PL$6/*_run*/(PL$3/*original*/);
+    ;
     ;});
+  ;
   ;})();
 ;return PL$1;
 }; return function(){ return __execute.apply(null, arguments); } });

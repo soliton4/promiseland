@@ -126,7 +126,8 @@ PL$3/*promiseland exception catcher*/(function(){
         ;
         try
         {
-          var PL$27/*validation*/ = PL$20/*asm*/["validate"](PL$26/*parStr*/);}catch(PL$28/*e*/){
+          var PL$27/*validation*/ = PL$20/*asm*/["validate"](PL$26/*parStr*/);
+          ;}catch(PL$28/*e*/){
           this["warning"](PL$25/*parResult*/["getParsed"](), PL$10/*errorMsg*/["asmValidationFailed"]);};
         ;
         ;});
@@ -138,6 +139,7 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$30/*body*/ = PL$29/*parsed*/["body"];
+        ;
         if(PL$30/*body*/["body"]){
           PL$30/*body*/ = PL$30/*body*/["body"];
         };
@@ -147,8 +149,10 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$31/*first*/ = PL$30/*body*/[0];
+        ;
         if((PL$31/*first*/["type"] == "ExpressionStatement")){
           var PL$32/*expression*/ = PL$31/*first*/["expression"];
+          ;
           if((((PL$32/*expression*/ && (PL$32/*expression*/["type"] == "Literal")) && (typeof PL$32/*expression*/["value"] == "string")) && (PL$32/*expression*/["value"] == "use asm"))){
             PL$31/*first*/["asmIgnore"] = true;
             return true;
@@ -159,6 +163,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return false;
         ;});
       ;});
+    ;
     PL$24/*f*/["apply"](PL$22/*parInstance*/, [
       PL$23/*par*/
     ]);

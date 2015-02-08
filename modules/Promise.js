@@ -64,9 +64,11 @@ var PL$1 = (function(){
     var PL$4/*thenAr*/ = [
       
     ];
+    ;
     var PL$5/*elseAr*/ = [
       
     ];
+    ;
     var PL$6/*thenFun*/ = (function(PL$7/*parThenFun*/, PL$8/*parElseFun*/){
     
       ;
@@ -79,6 +81,7 @@ var PL$1 = (function(){
       };
       ;
       ;});
+    ;
     this["resolve"] = (function(PL$9/*value*/){
     
       ;
@@ -94,7 +97,9 @@ var PL$1 = (function(){
         return;
       };
       var PL$11/*i*/ = 0;
+      ;
       var PL$12/*l*/ = PL$4/*thenAr*/["length"];
+      ;
       for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
         try
         {
@@ -121,7 +126,9 @@ var PL$1 = (function(){
         return;
       };
       var PL$11/*i*/ = 0;
+      ;
       var PL$12/*l*/ = PL$5/*elseAr*/["length"];
+      ;
       for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
         try
         {
@@ -154,15 +161,18 @@ var PL$1 = (function(){
     this["promise"] = this["then"];
     this["then"]["then"] = this["then"];
     ;});
+  ;
   PL$17/*promiseland*/["Promise"] = PL$2/*Promise*/;
   var PL$18/*all*/ = (function(PL$19/*promisesAr*/){
   var PL$23/*cnt*/;
   
     ;
     var PL$20/*res*/ = new PL$2/*Promise*/();
+    ;
     var PL$21/*resAr*/ = (PL$19/*promisesAr*/ ? PL$19/*promisesAr*/["slice"]() : [
       
     ]);
+    ;
     var PL$22/*check*/ = (function(){
     
       ;
@@ -172,6 +182,7 @@ var PL$1 = (function(){
       ;
       PL$20/*res*/["resolve"](PL$21/*resAr*/);
       ;});
+    ;
     PL$23/*cnt*/ = 1;
     var PL$6/*thenFun*/ = (function(PL$24/*parI*/){
     
@@ -184,8 +195,11 @@ var PL$1 = (function(){
         PL$22/*check*/();
         ;});
       ;});
+    ;
     var PL$11/*i*/ = 0;
+    ;
     var PL$12/*l*/ = PL$21/*resAr*/["length"];
+    ;
     for(PL$11/*i*/;(PL$11/*i*/ < PL$12/*l*/);++PL$11/*i*/){{
       ++PL$23/*cnt*/;
       PL$21/*resAr*/[PL$11/*i*/]["then"](PL$6/*thenFun*/(PL$11/*i*/));}};
@@ -194,26 +208,31 @@ var PL$1 = (function(){
     PL$22/*check*/();
     return PL$20/*res*/;
     ;});
+  ;
   PL$17/*promiseland*/["all"] = PL$18/*all*/;
   var PL$26/*Callback*/ = (function(){
   
     ;
     var PL$27/*promise*/ = new PL$2/*Promise*/();
+    ;
     var PL$28/*callback*/ = (function(){
     var PL$29/*arguments*/ = arguments;
     
       ;
       PL$27/*promise*/["resolve"](PL$29/*arguments*/);
       ;});
+    ;
     PL$28/*callback*/["promise"] = PL$27/*promise*/["promise"];
     PL$28/*callback*/["callback"] = PL$28/*callback*/;
     return PL$28/*callback*/;
     ;});
+  ;
   PL$17/*promiseland*/["Callback"] = PL$26/*Callback*/;
   var PL$30/*CallbackErrorFirst*/ = (function(){
   
     ;
     var PL$27/*promise*/ = new PL$2/*Promise*/();
+    ;
     var PL$28/*callback*/ = (function(PL$31/*err*/, PL$20/*res*/){
     
       ;
@@ -224,10 +243,12 @@ var PL$1 = (function(){
       ;
       PL$27/*promise*/["resolve"](PL$20/*res*/);
       ;});
+    ;
     PL$28/*callback*/["promise"] = PL$27/*promise*/["promise"];
     PL$28/*callback*/["callback"] = PL$28/*callback*/;
     return PL$28/*callback*/;
     ;});
+  ;
   PL$17/*promiseland*/["CallbackErrorFirst"] = PL$30/*CallbackErrorFirst*/;
   PL$17/*promiseland*/["getPromise"] = (function(PL$32/*par*/){
   
@@ -238,6 +259,7 @@ var PL$1 = (function(){
   
     ;
     var PL$33/*p*/ = new PL$2/*Promise*/();
+    ;
     PL$32/*par*/["then"]((function(PL$20/*res*/){
     
       ;

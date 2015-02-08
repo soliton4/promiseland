@@ -74,38 +74,42 @@ classSystem.readyPromise(PL$2/*type:C1*/).then(function(parType){
   ;
   classSystem._resolveProvisional(PL$2/*type:C1*/, classSystem.createClass({className: "C1",members: [], "extends": [], "hasFreePart": true, "hashStr": "b0c15cb3f9a170a2864940c37e633d4b", "name": "C1"}, {}));PL$3/*C1*/;
   ((function(f){
-  promiseland.registerRemote("server", "b0c15cb3f9a170a2864940c37e633d4b", "PL$10", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$2/*type:C1*/]})));
+  promiseland.registerRemote("server", "b0c15cb3f9a170a2864940c37e633d4b", "PL$11", f, (classSystem.createFunctionType({ "return": classSystem.getBuiltinType("var"), arguments: [PL$2/*type:C1*/]})));
   if (promiseland.profileHas("server")){
-  return f;
+  return function(){
+  var i = 0; var l = arguments.length; var newArgs = [undefined];
+  for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+  return f.apply(this, newArgs);
+  };
   }else{
   return function(){
-  return promiseland.remoteExec("b0c15cb3f9a170a2864940c37e633d4b", "PL$10", arguments);
+  return promiseland.remoteExec("b0c15cb3f9a170a2864940c37e633d4b", "PL$11", arguments);
   }
   };
-  })(function(PL$5/*p*/){
-  var PL$6 = new __Promise();
-  var PL$8/*promiseland exception catcher*/ = function(code){
+  })(function(PL$5/*session*/, PL$6/*p*/){
+  var PL$7 = new __Promise();
+  var PL$9/*promiseland exception catcher*/ = function(code){
     return function(res){
       try{ code(res); }catch(e){
-        PL$6.reject(e);
+        PL$7.reject(e);
       };
     };
   };
-  var PL$9/*catch rejected*/ = function(e){
-    PL$6.reject(e);
+  var PL$10/*catch rejected*/ = function(e){
+    PL$7.reject(e);
   };
-  PL$8/*promiseland exception catcher*/(function(){
+  PL$9/*promiseland exception catcher*/(function(){
   
     ;
-    PL$6.resolve(); return;
-  })();return PL$6;
+    PL$7.resolve(); return;
+  })();return PL$7;
   }));
-  ((((function(){var PL$11/*type:D1*/ = PL$3/*C1*/;
-  var PL$12/*D1*/ = PL$11/*type:D1*/
-  ;var PL$13/*D1-constructor*/ = undefined;
-  classSystem.readyPromise(PL$11/*type:D1*/).then(function(parType){
-    PL$11/*type:D1*/ = parType;
-    PL$13/*D1-constructor*/ = classSystem.getTypeConstructor(PL$11/*type:D1*/);
+  ((((function(){var PL$12/*type:D1*/ = PL$3/*C1*/;
+  var PL$13/*D1*/ = PL$12/*type:D1*/
+  ;var PL$14/*D1-constructor*/ = undefined;
+  classSystem.readyPromise(PL$12/*type:D1*/).then(function(parType){
+    PL$12/*type:D1*/ = parType;
+    PL$14/*D1-constructor*/ = classSystem.getTypeConstructor(PL$12/*type:D1*/);
   });
   var communicator = {fun: undefined};
   eval("communicator.fun = function(){\n  \n    ;\n    ;};"); return communicator.fun; })()) < {

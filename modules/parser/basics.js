@@ -61,10 +61,12 @@ var PL$11/*errorMsg*/;
 
   ;
   var PL$2/*Map*/ = PL$3/*promiseland*/["Map"];
+  ;
   var PL$4/*_stringEncodeStr*/ = (function(PL$5/*par*/){
   
     ;
     var PL$6/*s*/ = PL$5/*par*/["replace"](new PL$7/*RegExp*/("\\\\", "g"), "\\\\");
+    ;
     PL$6/*s*/ = PL$6/*s*/["replace"](new PL$7/*RegExp*/("\\n", "g"), "\\n");
     PL$6/*s*/ = PL$6/*s*/["replace"](new PL$7/*RegExp*/("\\r", "g"), "\\r");
     PL$6/*s*/ = PL$6/*s*/["replace"](new PL$7/*RegExp*/("\\\"", "g"), "\\\"");
@@ -72,11 +74,13 @@ var PL$11/*errorMsg*/;
     PL$6/*s*/ = PL$6/*s*/["replace"](new PL$7/*RegExp*/("\\u2029", "g"), "\\u2029");
     return PL$6/*s*/;
     ;});
+  ;
   var PL$8/*stringEncodeStr*/ = (function(PL$5/*par*/){
   
     ;
     return (("\"" + PL$4/*_stringEncodeStr*/(PL$5/*par*/)) + "\"");
     ;});
+  ;
   var PL$9/*errorFun*/ = (function(PL$5/*par*/, PL$10/*err*/){
   
     ;
@@ -88,6 +92,7 @@ var PL$11/*errorMsg*/;
     PL$10/*err*/["column"] = PL$5/*par*/["column"];
     throw PL$10/*err*/;
     ;});
+  ;
   var PL$12/*identifierName*/ = (function(PL$5/*par*/){
   
     ;
@@ -101,6 +106,7 @@ var PL$11/*errorMsg*/;
     ;
     return PL$5/*par*/["name"];
     ;});
+  ;
   var PL$13/*checkIsFunction*/ = (function(PL$5/*par*/){
   
     ;
@@ -110,6 +116,7 @@ var PL$11/*errorMsg*/;
     ;
     return false;
     ;});
+  ;
   PL$17/*VariableNames*/ = (function(){var PL$14/*inherited*/ = {};
   var res = promiseland.createClass({
     "constructor": (function(PL$5/*par*/){
@@ -122,6 +129,7 @@ var PL$11/*errorMsg*/;
     
       ;
       var PL$16/*n*/ = PL$12/*identifierName*/(PL$15/*name*/);
+      ;
       if((PL$16/*n*/ === "undefined")){
         return PL$16/*n*/;
       };
@@ -135,19 +143,24 @@ var PL$11/*errorMsg*/;
   }, [], PL$14/*inherited*/);
   return res; })();PL$17/*VariableNames*/;
   var PL$18/*mixin*/ = (function(){
+  var PL$23/*p*/;
   var PL$20/*arguments*/ = arguments;
   
     ;
     var PL$19/*t*/ = PL$20/*arguments*/[0];
+    ;
     var PL$21/*i*/ = 0;
+    ;
     for(PL$21/*i*/ = 1;(PL$21/*i*/ < PL$20/*arguments*/["length"]);++PL$21/*i*/){{
       var PL$22/*m*/ = PL$20/*arguments*/[PL$21/*i*/];
-      for(var PL$23/*p*/ in PL$22/*m*/){
+      ;
+      for(PL$23/*p*/ in PL$22/*m*/){
         PL$19/*t*/[PL$23/*p*/] = PL$22/*m*/[PL$23/*p*/];};
       ;}};
     ;
     return PL$19/*t*/;
     ;});
+  ;
   var PL$24/*addExtraToPar*/ = (function(PL$5/*par*/, PL$25/*property*/, PL$26/*obj*/){
   
     ;
@@ -159,6 +172,7 @@ var PL$11/*errorMsg*/;
     ;
     PL$5/*par*/["_extrainfo"][PL$25/*property*/] = PL$26/*obj*/;
     ;});
+  ;
   var PL$27/*getExtraFromPar*/ = (function(PL$5/*par*/, PL$25/*property*/){
   
     ;
@@ -167,10 +181,12 @@ var PL$11/*errorMsg*/;
     };
     ;
     ;});
+  ;
   var PL$28/*statementType*/ = {
     "builtin": true,
     "statement": true
   };
+  ;
   var PL$29/*checkPromising*/ = (function(PL$5/*par*/){
   
     ;
@@ -184,6 +200,7 @@ var PL$11/*errorMsg*/;
     ;
     return (PL$5/*par*/["promising"] || PL$5/*par*/["isPromising"]);
     ;});
+  ;
   PL$11/*errorMsg*/ = {
     "typeExists": {
       "id": 100,

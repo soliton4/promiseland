@@ -71,16 +71,20 @@ var PL$1 = (function(){
       ;
       ;})
   };
+  ;
   return (function(PL$3/*base*/, PL$4/*property*/){
   
     ;
     var PL$5/*orig*/ = PL$3/*base*/[PL$4/*property*/];
+    ;
     var PL$6/*last*/;
+    ;
     var PL$7/*setFun*/ = (function(PL$8/*parFun*/){
     
       ;
       PL$3/*base*/[PL$4/*property*/] = PL$8/*parFun*/;
       ;});
+    ;
     var PL$9/*first*/ = (function(){
     
       ;
@@ -90,6 +94,7 @@ var PL$1 = (function(){
           ;
           if(PL$10/*n*/){
             var PL$11/*nextFun*/ = PL$10/*n*/["fun"];
+            ;
             PL$7/*setFun*/((function(){
             var PL$12/*arguments*/ = arguments;
             
@@ -109,13 +114,17 @@ var PL$1 = (function(){
           ;})
       };
       ;})();
+    ;
     PL$6/*last*/ = PL$9/*first*/;
     return (function(PL$13/*conFun*/, PL$14/*newBase*/){
     
       ;
       var PL$15/*next*/ = PL$2/*dummy*/;
+      ;
       var PL$11/*nextFun*/ = PL$15/*next*/["fun"];
+      ;
       var PL$16/*prev*/ = PL$6/*last*/;
+      ;
       var PL$17/*s*/ = {
         "newNext": (function(PL$10/*n*/){
         
@@ -148,6 +157,7 @@ var PL$1 = (function(){
           PL$11/*nextFun*/["apply"](null, PL$12/*arguments*/);
           ;}))
       };
+      ;
       PL$6/*last*/["newNext"](PL$17/*s*/);
       PL$6/*last*/ = PL$17/*s*/;
       return (function(){

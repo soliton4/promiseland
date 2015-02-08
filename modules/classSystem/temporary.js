@@ -62,18 +62,24 @@ var PL$1 = (function(){
   ;
   ;
   var PL$2/*errorMsg*/ = PL$3/*extra*/["errorMsg"];
+  ;
   return (function(PL$4/*classSystem*/, PL$5/*internals*/){
   
     ;
     var PL$6/*cs*/ = PL$4/*classSystem*/;
+    ;
     var PL$7/*classHider*/ = PL$5/*internals*/["classHider"];
+    ;
     var PL$8/*getClass*/ = PL$5/*internals*/["getClass"];
+    ;
     PL$6/*cs*/["_createTemporaryTrackedClass"] = (function(PL$9/*parType*/){
     
       ;
       var PL$10/*self*/ = this;
+      ;
       if(this["isProvisional"](PL$9/*parType*/)){
         var PL$11/*pr*/ = this["_createProvisionalClass"]();
+        ;
         this["definitionPromise"](PL$9/*parType*/)["then"]((function(PL$12/*parDefinedClass*/){
         
           ;
@@ -96,7 +102,9 @@ var PL$1 = (function(){
         "isReady": false,
         "readyPromise": new PL$14/*Promise*/()
       };
+      ;
       var PL$15/*cf*/ = PL$7/*classHider*/(PL$13/*cDef*/);
+      ;
       PL$10/*self*/["readyPromise"](PL$9/*parType*/)["then"]((function(){
       
         ;
@@ -109,6 +117,7 @@ var PL$1 = (function(){
     
       ;
       var PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
+      ;
       if(PL$13/*cDef*/["temporaryTracked"]){
         return true;
       };
@@ -120,6 +129,7 @@ var PL$1 = (function(){
       ;
       if(this["isTemporaryTrackedClass"](PL$9/*parType*/)){
         var PL$13/*cDef*/ = PL$8/*getClass*/(PL$9/*parType*/);
+        ;
         return PL$13/*cDef*/["type"];
       };
       ;

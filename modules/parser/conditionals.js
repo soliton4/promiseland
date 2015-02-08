@@ -127,7 +127,9 @@ PL$3/*promiseland exception catcher*/(function(){
         this["stack"]("algorithmicCode");
         this["algorithmicCode"] = true;
         var PL$26/*res*/ = this["newResult"]();
+        ;
         var PL$27/*promising*/ = false;
+        ;
         if((PL$24/*par*/["consequent"] && PL$20/*checkPromising*/(PL$24/*par*/["consequent"]))){
           PL$27/*promising*/ = true;
         };
@@ -137,7 +139,9 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$28/*continuePromise*/;
+        ;
         var PL$29/*continueCode*/;
+        ;
         if(PL$27/*promising*/){
           PL$28/*continuePromise*/ = this["newResult"](this["getUniqueName"]());
           PL$28/*continuePromise*/["setParsed"](PL$24/*par*/);
@@ -159,7 +163,9 @@ PL$3/*promiseland exception catcher*/(function(){
         };
         ;
         var PL$30/*statement*/ = this["newResult"]();
+        ;
         var PL$31/*b*/;
+        ;
         if((PL$24/*par*/["consequent"]["type"] == "BlockStatement")){
           PL$31/*b*/ = PL$24/*par*/["consequent"]["body"];
         }else{
@@ -172,6 +178,7 @@ PL$3/*promiseland exception catcher*/(function(){
         var PL$32/*extraPar*/ = {
           
         };
+        ;
         if(PL$27/*promising*/){
           PL$32/*extraPar*/["postCode"] = this["newResult"](PL$29/*continueCode*/);
         };
@@ -226,10 +233,13 @@ PL$3/*promiseland exception catcher*/(function(){
       
         ;
         var PL$26/*res*/ = this["newResult"]();
+        ;
         if((PL$24/*par*/["consequent"]["promising"] || PL$24/*par*/["alternate"]["promising"])){
           PL$26/*res*/["makePromising"]();
           var PL$33/*tempPromise*/ = this["getUniqueName"]();
+          ;
           var PL$34/*tempValue*/ = this["getUniqueName"]();
+          ;
           PL$26/*res*/["addPre"]("var ");
           PL$26/*res*/["addPre"](PL$33/*tempPromise*/);
           PL$26/*res*/["addPre"](((" = " + this["newPromiseStr"]()) + ";"));
@@ -240,6 +250,7 @@ PL$3/*promiseland exception catcher*/(function(){
           this["stack"]("conditionalCode");
           this["conditionalCode"] = true;
           var PL$35/*trueExtraCode*/ = this["newResult"]();
+          ;
           PL$35/*trueExtraCode*/["push"](PL$33/*tempPromise*/);
           PL$35/*trueExtraCode*/["push"](".resolve(");
           PL$35/*trueExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["consequent"]));
@@ -248,6 +259,7 @@ PL$3/*promiseland exception catcher*/(function(){
           PL$26/*res*/["addPre"](this["makeCompleteStatement"](PL$35/*trueExtraCode*/));
           PL$26/*res*/["addPre"]("}else{");
           var PL$36/*falseExtraCode*/ = this["newResult"]();
+          ;
           PL$36/*falseExtraCode*/["push"](PL$33/*tempPromise*/);
           PL$36/*falseExtraCode*/["push"](".resolve(");
           PL$36/*falseExtraCode*/["push"](this["parseExpression"](PL$24/*par*/["alternate"]));
@@ -280,6 +292,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return PL$26/*res*/;
         ;});
       this["expSwitchStatement"] = (function(PL$24/*par*/){
+      var PL$50/*j*/;
       var PL$41/*i*/;
       
         ;
@@ -288,13 +301,17 @@ PL$3/*promiseland exception catcher*/(function(){
         this["stack"]("algorithmicCode");
         this["algorithmicCode"] = true;
         var PL$26/*res*/ = this["newResult"]();
+        ;
         var PL$27/*promising*/ = false;
+        ;
         if((PL$24/*par*/["cases"] && PL$20/*checkPromising*/(PL$24/*par*/["cases"]))){
           PL$27/*promising*/ = true;
         };
         ;
         var PL$28/*continuePromise*/;
+        ;
         var PL$29/*continueCode*/;
+        ;
         if(PL$27/*promising*/){
           PL$28/*continuePromise*/ = this["getUniqueName"]();
           PL$26/*res*/["push"]((((("var " + PL$28/*continuePromise*/) + " = ") + this["newPromiseStr"]()) + ";"));
@@ -303,6 +320,7 @@ PL$3/*promiseland exception catcher*/(function(){
           this["stack"]("breakCode");
           this["breakCode"] = PL$29/*continueCode*/;
           var PL$37/*discriminant*/ = this["getUniqueName"]("discriminant");
+          ;
           PL$26/*res*/["push"]((("var " + PL$37/*discriminant*/) + " = "));
           PL$26/*res*/["push"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"])));
           PL$26/*res*/["push"](";");
@@ -310,11 +328,16 @@ PL$3/*promiseland exception catcher*/(function(){
           var PL$38/*cases*/ = [
             
           ];
+          ;
           var PL$30/*statement*/;
+          ;
           var PL$39/*hasDefault*/ = false;
+          ;
           var PL$40/*defaultCase*/;
+          ;
           for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$41/*i*/){{
             var PL$42/*isDefault*/ = false;
+            ;
             if(! PL$24/*par*/["cases"][PL$41/*i*/]["test"]){
               PL$42/*isDefault*/ = true;
               if(! PL$39/*hasDefault*/){
@@ -332,23 +355,30 @@ PL$3/*promiseland exception catcher*/(function(){
             });}};
           ;
           var PL$43/*defaultCheck*/ = PL$29/*continueCode*/;
+          ;
           if(PL$39/*hasDefault*/){
             PL$43/*defaultCheck*/ = (PL$40/*defaultCase*/["checkFun"] + "();");
           };
           ;
           var PL$44/*firstCheck*/ = PL$29/*continueCode*/;
+          ;
           var PL$45/*hasFirstCheck*/ = false;
+          ;
           for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$38/*cases*/["length"]);++PL$41/*i*/){{
             var PL$46/*currentCase*/ = PL$38/*cases*/[PL$41/*i*/]["theCase"];
+            ;
             var PL$47/*caseFun*/ = PL$38/*cases*/[PL$41/*i*/]["caseFun"];
+            ;
             var PL$48/*checkFun*/ = PL$38/*cases*/[PL$41/*i*/]["checkFun"];
+            ;
             if(! PL$45/*hasFirstCheck*/){
               PL$45/*hasFirstCheck*/ = true;
               PL$44/*firstCheck*/ = (PL$48/*checkFun*/ + "()");
             };
             ;
             var PL$49/*nextCheckCode*/ = PL$43/*defaultCheck*/;
-            for(var PL$50/*j*/ = (PL$41/*i*/ + 1);(PL$50/*j*/ < PL$38/*cases*/["length"]);++PL$50/*j*/){{
+            ;
+            for(PL$50/*j*/ = (PL$41/*i*/ + 1);(PL$50/*j*/ < PL$38/*cases*/["length"]);++PL$50/*j*/){{
               if(! PL$38/*cases*/[PL$50/*j*/]["isDefault"]){
                 PL$49/*nextCheckCode*/ = (PL$38/*cases*/[PL$50/*j*/]["checkFun"] + "()");
                 break;;
@@ -356,12 +386,14 @@ PL$3/*promiseland exception catcher*/(function(){
               ;}};
             ;
             var PL$51/*nextCaseCode*/ = PL$29/*continueCode*/;
+            ;
             if(PL$38/*cases*/[(PL$41/*i*/ + 1)]){
               PL$51/*nextCaseCode*/ = (PL$38/*cases*/[(PL$41/*i*/ + 1)]["caseFun"] + "(); return;");
             };
             ;
             PL$26/*res*/["push"]((("var " + PL$48/*checkFun*/) + " = function(){"));
             var PL$52/*checkCode*/ = this["newResult"]();
+            ;
             PL$52/*checkCode*/["push"]((("if(" + PL$37/*discriminant*/) + " === "));
             PL$52/*checkCode*/["push"](this["expectTypeVar"](this["parseExpression"](PL$46/*currentCase*/["test"])));
             PL$52/*checkCode*/["push"]("){");
@@ -375,9 +407,11 @@ PL$3/*promiseland exception catcher*/(function(){
             PL$26/*res*/["push"]((("var " + PL$47/*caseFun*/) + " = function(){"));
             PL$30/*statement*/ = this["newResult"]();
             var PL$31/*b*/ = PL$46/*currentCase*/["consequent"];
+            ;
             var PL$32/*extraPar*/ = {
               
             };
+            ;
             if(PL$27/*promising*/){
               PL$32/*extraPar*/["postCode"] = this["newResult"]();
               PL$32/*extraPar*/["postCode"]["push"](PL$51/*nextCaseCode*/);
@@ -399,6 +433,7 @@ PL$3/*promiseland exception catcher*/(function(){
         PL$26/*res*/["push"](this["indent"](this["expectTypeVar"](this["parseExpression"](PL$24/*par*/["discriminant"]))));
         PL$26/*res*/["push"]("){");
         var PL$53/*indentRes*/ = this["newResult"]();
+        ;
         PL$41/*i*/ = 0;
         for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$24/*par*/["cases"]["length"]);++PL$41/*i*/){{
           PL$46/*currentCase*/ = PL$24/*par*/["cases"][PL$41/*i*/];
@@ -428,6 +463,7 @@ PL$3/*promiseland exception catcher*/(function(){
         return PL$26/*res*/;
         ;});
       ;});
+    ;
     PL$25/*f*/["apply"](PL$23/*parInstance*/, [
       PL$24/*par*/
     ]);
