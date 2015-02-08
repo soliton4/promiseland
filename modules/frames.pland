@@ -624,6 +624,8 @@ class Transport {
       };
       
       connection.data = (dataStr){
+        console.log("string data:");
+        console.log(dataStr);
         transport.stringData(dataStr);
       };
 
@@ -1216,9 +1218,17 @@ promiseland.addFrame = (parFrame){
   var entry = frames.get(parFrame.name);
   if (!entry){
     entry = [];
-    frames.get(parFrame.name);
+    frames.set(parFrame.name, entry);
   };
   entry.push(parFrame);
+};
+    
+findFrame = (parName){
+  var entry = frames.get(parName);
+  if (!entry){
+    return;
+  };
+  return entry[0];
 };
     
 localFrameMap = new promiseland.Map();
@@ -1300,11 +1310,19 @@ promiseland.remoteExec = function(hashStr, nameStr, args){
   };
   var entry = moduleData.functions[nameStr];
   var profile = findProfile(entry.profile);
+  var connection;
+  if (profile){
+    connection = profile.find();
+  }else{
+    profile = findFrame(entry.profile);
+    if (profile){
+      connection = profile.getConnection();
+    };
+  };
   if (!profile){
     throw errorMsg.frameNotFound;
   };
 
-  var connection = profile.find();
   if (!connection){
     throw {
       code: 3
