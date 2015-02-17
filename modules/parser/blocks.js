@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "c04a0f0825f123bb9f5091a1d2637ebb" })){ return promiseland._getModule("c04a0f0825f123bb9f5091a1d2637ebb"); };
+    if (promiseland._hasModule({ hashStr: "b5dea89b4a473183e97956a26cf37ce3" })){ return promiseland._getModule("b5dea89b4a473183e97956a26cf37ce3"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "c04a0f0825f123bb9f5091a1d2637ebb", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "b5dea89b4a473183e97956a26cf37ce3", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$28/*Array*/;try{PL$28/*Array*/ = Array;}catch(e){};
 var PL$2 = (function(){
@@ -171,7 +171,11 @@ PL$3/*promiseland exception catcher*/(function(){
         ;
         for(PL$29/*i*/;(PL$29/*i*/ < PL$30/*l*/);++PL$29/*i*/){{
           if(((PL$27/*sAr*/[PL$29/*i*/]["type"] == "TryStatement") && ! PL$27/*sAr*/[PL$29/*i*/]["block"])){
-            PL$27/*sAr*/[PL$29/*i*/]["block"] = PL$27/*sAr*/["splice"](0, PL$29/*i*/);
+            var PL$31/*temp*/ = PL$27/*sAr*/[PL$29/*i*/];
+            ;
+            PL$31/*temp*/["block"] = PL$27/*sAr*/["splice"](0, PL$29/*i*/);
+            PL$8/*basics*/["findPromises"](PL$31/*temp*/["block"]);
+            PL$8/*basics*/["findPromises"](PL$27/*sAr*/);
             PL$29/*i*/ = 0;
             PL$30/*l*/ = PL$27/*sAr*/["length"];
           };

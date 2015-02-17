@@ -51,7 +51,7 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "bb138f3e42aade36c95e0eb49f94b52d" })){ return promiseland._getModule("bb138f3e42aade36c95e0eb49f94b52d"); };
+if (promiseland._hasModule({ hashStr: "1f4386164a5899fe9f2eaa45b72938ed" })){ return promiseland._getModule("1f4386164a5899fe9f2eaa45b72938ed"); };
 var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$7/*RegExp*/;try{PL$7/*RegExp*/ = RegExp;}catch(e){};
 var PL$1 = (function(){
@@ -199,6 +199,40 @@ var PL$11/*errorMsg*/;
     };
     ;
     return (PL$5/*par*/["promising"] || PL$5/*par*/["isPromising"]);
+    ;});
+  ;
+  var PL$30/*findPromises*/ = (function(PL$5/*par*/){
+  
+    ;
+    if((! PL$5/*par*/ || (typeof PL$5/*par*/ == "string"))){
+      return false;
+    };
+    ;
+    if(((PL$5/*par*/["type"] == "UnaryExpression") && ((PL$5/*par*/["operator"] == "*") || (PL$5/*par*/["operator"] == "require")))){
+      PL$5/*par*/["promising"] = true;
+    };
+    ;
+    if((PL$13/*checkIsFunction*/(PL$5/*par*/) && (PL$5/*par*/["promise"] == "*"))){
+      PL$5/*par*/["promising"] = true;
+    };
+    ;
+    var PL$21/*i*/;
+    ;
+    for(PL$21/*i*/ in PL$5/*par*/){
+      if((PL$21/*i*/ == "_extrainfo")){
+        continue;;
+      };
+      ;
+      if((PL$30/*findPromises*/(PL$5/*par*/[PL$21/*i*/]) && ! PL$13/*checkIsFunction*/(PL$5/*par*/[PL$21/*i*/]))){
+        PL$5/*par*/["promising"] = true;
+      };
+      ;};
+    ;
+    if(PL$5/*par*/["promising"]){
+      return true;
+    };
+    ;
+    return false;
     ;});
   ;
   PL$11/*errorMsg*/ = {
@@ -396,7 +430,8 @@ var PL$11/*errorMsg*/;
     "addExtraToPar": PL$24/*addExtraToPar*/,
     "getExtraFromPar": PL$27/*getExtraFromPar*/,
     "statementType": PL$28/*statementType*/,
-    "checkPromising": PL$29/*checkPromising*/
+    "checkPromising": PL$29/*checkPromising*/,
+    "findPromises": PL$30/*findPromises*/
   };
   ;})();
 ;return PL$1;

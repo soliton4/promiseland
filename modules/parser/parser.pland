@@ -18,6 +18,8 @@ var addExtraToPar = basics.addExtraToPar;
 var statementType = basics.statementType;
 var checkPromising = basics.checkPromising;
 
+var findPromises = basics.findPromises;
+
 var loaderStr = require "./loader";
 
 
@@ -54,32 +56,6 @@ var globalNewPromiseStr = function(){
 var Map = promiseland.Map;
 
     
-/* pre processors */
-
-var findPromises = function(par){
-  if (!par || typeof par == "string"){
-    return false;
-  };
-  if (par.type == "UnaryExpression" && (par.operator == "*" || par.operator == "require")){
-    par.promising = true;
-  };
-  if (checkIsFunction(par) && par.promise == "*"){
-    par.promising = true;
-  };
-  var i;
-  for (i in par){
-    if (i == "_extrainfo"){
-      continue;
-    };
-    if (findPromises(par[i]) && !checkIsFunction(par[i])){
-      par.promising = true;
-    };
-  };
-  if (par.promising){
-    return true;
-  };
-  return false;
-};
     
     
     

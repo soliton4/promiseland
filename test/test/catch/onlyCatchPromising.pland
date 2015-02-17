@@ -1,0 +1,25 @@
+psfun = ()*{
+  return;
+};
+
+var catched = false;
+
+(){
+  
+  var a = 1;
+  *psfun();
+  throw "xxx"
+  *psfun();
+  a = 2;
+  
+  catch(e){
+    catched = true;
+  };
+  
+}();
+
+if (catched){
+  return {success: true};
+};
+
+return {success: false};

@@ -75,7 +75,10 @@ return (parInstance, par){
         
         for (i; i < l; ++i){
           if (sAr[i].type == "TryStatement" && !sAr[i].block){
-            sAr[i].block = sAr.splice(0, i);
+            var temp = sAr[i];
+            temp.block = sAr.splice(0, i);
+            basics.findPromises(temp.block); // info about promises is lost when we splice.
+            basics.findPromises(sAr); // info about promises is lost when we splice.
             i = 0;
             l = sAr.length;
           };

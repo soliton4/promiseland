@@ -198,7 +198,9 @@
   *createTest("int/declaration", successFun);
   *createTest("int/initialization", successFun);
 
-//*createTest("int/initialization", successFun);
+  *createTest("catch/onlyCatchPromising", successFun);
+
+//*createTest("catch/onlyCatchPromising", successFun);
 
   
     var c = 0;

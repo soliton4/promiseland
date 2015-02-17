@@ -25,26 +25,26 @@ var errorFun = function(par, err){
 };
 
 
-    var identifierName = function(par){
-      if (typeof par == "string"){
-        return par;
-      };
-      if (par.type == "Literal"){
-        return par.value;
-      };
-      return par.name;
-    };
-    
-    var checkIsFunction = function(par){
-      if (
-        par.type == "FunctionExpression"
-        || par.type == "FunctionDeclaration"
-        || par.type == "MemberFunction"
-      ){
-        return true;
-      };
-      return false;
-    };
+var identifierName = function(par){
+  if (typeof par == "string"){
+    return par;
+  };
+  if (par.type == "Literal"){
+    return par.value;
+  };
+  return par.name;
+};
+
+var checkIsFunction = function(par){
+  if (
+    par.type == "FunctionExpression"
+    || par.type == "FunctionDeclaration"
+    || par.type == "MemberFunction"
+  ){
+    return true;
+  };
+  return false;
+};
 
 
 class VariableNames {
@@ -113,6 +113,35 @@ var checkPromising = function(par){
 };
 
 
+    
+/* pre processors */
+
+var findPromises = function(par){
+  if (!par || typeof par == "string"){
+    return false;
+  };
+  if (par.type == "UnaryExpression" && (par.operator == "*" || par.operator == "require")){
+    par.promising = true;
+  };
+  if (checkIsFunction(par) && par.promise == "*"){
+    par.promising = true;
+  };
+  var i;
+  for (i in par){
+    if (i == "_extrainfo"){
+      continue;
+    };
+    if (findPromises(par[i]) && !checkIsFunction(par[i])){
+      par.promising = true;
+    };
+  };
+  if (par.promising){
+    return true;
+  };
+  return false;
+};
+    
+    
 
 
     var errorMsg = {
@@ -320,6 +349,7 @@ return {
   addExtraToPar: addExtraToPar,
   getExtraFromPar: getExtraFromPar,
   statementType: statementType,
-  checkPromising: checkPromising
+  checkPromising: checkPromising,
+  findPromises: findPromises
   
 };
