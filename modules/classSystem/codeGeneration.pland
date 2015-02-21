@@ -99,7 +99,7 @@ return (classSystem, internals){
         "type": par.valueType,
         property: par.valueProperty
       });
-
+      
       if (!this.canConnect(par["type"], par.property, valuePropertyType)){
         return runtimeError(errorMsg.connectNotPossible, par);
       };
@@ -200,7 +200,10 @@ return (classSystem, internals){
 
   cs.promisingReturnTypeCheck = function(par){
     if (!this.isPromiseOfClass(par["type"])){
-      return runtimeError(errorMsg.notAPromise, par);
+      var cDef = getClass(par["type"]);
+      if (!cDef.isVar){
+        return runtimeError(errorMsg.notAPromise, par);
+      };
     };
     return assembleCode([], par);
   };

@@ -54,13 +54,13 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var Map = promiseland.Map;
-if (promiseland._hasModule({ hashStr: "6db710d1140a0993a149a9f8388443b3" })){ return promiseland._getModule("6db710d1140a0993a149a9f8388443b3"); };
+if (promiseland._hasModule({ hashStr: "254d4bda343bf4cdd8ecb497318d854f" })){ return promiseland._getModule("254d4bda343bf4cdd8ecb497318d854f"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$35/*JSON*/;try{PL$35/*JSON*/ = JSON;}catch(e){};
 var PL$53/*Object*/;try{PL$53/*Object*/ = Object;}catch(e){};
 var PL$87/*Promise*/;try{PL$87/*Promise*/ = Promise;}catch(e){};
 var PL$168/*promiseland*/;try{PL$168/*promiseland*/ = promiseland;}catch(e){};
-var PL$201/*RegExp*/;try{PL$201/*RegExp*/ = RegExp;}catch(e){};
+var PL$207/*RegExp*/;try{PL$207/*RegExp*/ = RegExp;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$64/*pcs*/;
@@ -1183,11 +1183,6 @@ var PL$103/*presets*/;
           PL$157/*constructorStr*/ += "r[freeIndex] = new freeFun();";
         };
         ;
-        if(PL$112/*constructorDef*/){
-          PL$159/*importVar*/(PL$113/*constructorFun*/, "constructorFun");
-          PL$157/*constructorStr*/ += "constructorFun.apply(r, arguments);";
-        };
-        ;
         if(PL$49/*cDef*/["unique"]){
           PL$159/*importVar*/(PL$42/*cf*/, "cf");
           PL$159/*importVar*/(PL$164/*idDef*/, "idDef");
@@ -1234,6 +1229,11 @@ var PL$103/*presets*/;
           PL$157/*constructorStr*/ += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
           PL$157/*constructorStr*/ += "};";
           PL$157/*constructorStr*/ += "r = resPs;";
+        };
+        ;
+        if(PL$112/*constructorDef*/){
+          PL$159/*importVar*/(PL$113/*constructorFun*/, "constructorFun");
+          PL$157/*constructorStr*/ += "constructorFun.apply(realInstance, arguments);";
         };
         ;
         PL$157/*constructorStr*/ += "return r;";
@@ -1334,6 +1334,36 @@ var PL$103/*presets*/;
     "getConstructorReturnType": (function(PL$37/*parType*/){
     
       ;
+      if(this["isProvisional"](PL$37/*parType*/)){
+        var PL$176/*pr*/ = this["_createProvisionalClass"]();
+        ;
+        var PL$84/*self*/ = this;
+        ;
+        (function(){
+        var PL$177 = new __Promise();
+        var PL$179/*promiseland exception catcher*/ = function(code){
+          return function(res){
+            try{ code(res); }catch(e){
+              PL$177.reject(e);
+            };
+          };
+        };
+        var PL$180/*catch rejected*/ = function(e){
+          PL$177.reject(e);
+        };
+        var PL$91/*definedType*/;
+        PL$179/*promiseland exception catcher*/(function(){
+        
+          ;
+          PL$84/*self*/["definitionPromise"](PL$37/*parType*/).then(PL$179/*promiseland exception catcher*/(function(PL$181){PL$91/*definedType*/ = PL$181;
+          PL$84/*self*/["_resolveProvisional"](PL$176/*pr*/, PL$84/*self*/["getConstructorReturnType"](PL$91/*definedType*/));
+          PL$177.resolve(); return;}), PL$180/*catch rejected*/);
+          ;
+        })();return PL$177;
+        })();
+        return PL$176/*pr*/;
+      };
+      ;
       var PL$49/*cDef*/ = PL$41/*getClass*/(PL$37/*parType*/);
       ;
       if(PL$49/*cDef*/["constructorReturnType"]){
@@ -1389,7 +1419,7 @@ var PL$103/*presets*/;
       return false;
       ;}),
     "createFunctionType": (function(PL$34/*par*/){
-    var PL$177/*makeTemporaries*/;
+    var PL$183/*makeTemporaries*/;
     
       ;
       var PL$84/*self*/ = this;
@@ -1403,13 +1433,13 @@ var PL$103/*presets*/;
         "isReady": false
       };
       ;
-      var PL$176/*checkReady*/ = (function(){
+      var PL$182/*checkReady*/ = (function(){
       
         ;
-        PL$177/*makeTemporaries*/();
+        PL$183/*makeTemporaries*/();
         ;});
       ;
-      PL$177/*makeTemporaries*/ = (function(){
+      PL$183/*makeTemporaries*/ = (function(){
       
         ;
         PL$49/*cDef*/["return"] = PL$84/*self*/["_createTemporaryTrackedClass"](PL$49/*cDef*/["return"]);
@@ -1419,26 +1449,26 @@ var PL$103/*presets*/;
           PL$49/*cDef*/["arguments"][PL$63/*i*/] = PL$84/*self*/["_createTemporaryTrackedClass"](PL$49/*cDef*/["arguments"][PL$63/*i*/]);}};
         ;
         ;});
-      var PL$178/*isReady*/ = true;
+      var PL$184/*isReady*/ = true;
       ;
       if(PL$84/*self*/["isProvisional"](PL$49/*cDef*/["return"])){
-        PL$178/*isReady*/ = false;
+        PL$184/*isReady*/ = false;
         PL$84/*self*/["definitionPromise"](PL$49/*cDef*/["return"])["then"]((function(PL$37/*parType*/){
         
           ;
           PL$49/*cDef*/["return"] = PL$37/*parType*/;
-          PL$176/*checkReady*/();
+          PL$182/*checkReady*/();
           ;}));
       };
       ;
-      var PL$179/*resolveTypeFun*/ = (function(PL$180/*parI*/){
+      var PL$185/*resolveTypeFun*/ = (function(PL$186/*parI*/){
       
         ;
         return (function(PL$37/*parType*/){
         
           ;
-          PL$49/*cDef*/["arguments"][PL$180/*parI*/] = PL$37/*parType*/;
-          PL$176/*checkReady*/();
+          PL$49/*cDef*/["arguments"][PL$186/*parI*/] = PL$37/*parType*/;
+          PL$182/*checkReady*/();
           ;});
         ;});
       ;
@@ -1446,16 +1476,16 @@ var PL$103/*presets*/;
       ;
       for(PL$63/*i*/ = 0;(PL$63/*i*/ < PL$49/*cDef*/["arguments"]["length"]);++PL$63/*i*/){{
         if(PL$84/*self*/["isProvisional"](PL$49/*cDef*/["arguments"][PL$63/*i*/])){
-          PL$178/*isReady*/ = false;
-          PL$84/*self*/["definitionPromise"](PL$49/*cDef*/["arguments"][PL$63/*i*/])["then"](PL$179/*resolveTypeFun*/(PL$63/*i*/));
+          PL$184/*isReady*/ = false;
+          PL$84/*self*/["definitionPromise"](PL$49/*cDef*/["arguments"][PL$63/*i*/])["then"](PL$185/*resolveTypeFun*/(PL$63/*i*/));
         };
         ;}};
       ;
       var PL$42/*cf*/ = PL$43/*classHider*/(PL$49/*cDef*/);
       ;
-      if(! PL$178/*isReady*/){
+      if(! PL$184/*isReady*/){
         PL$49/*cDef*/["readyPromise"] = new PL$87/*Promise*/();
-        PL$176/*checkReady*/ = (function(){
+        PL$182/*checkReady*/ = (function(){
         
           ;
           if(PL$84/*self*/["isProvisional"](PL$49/*cDef*/["return"])){
@@ -1470,13 +1500,13 @@ var PL$103/*presets*/;
             };
             ;}};
           ;
-          PL$177/*makeTemporaries*/();
+          PL$183/*makeTemporaries*/();
           PL$49/*cDef*/["isReady"] = true;
           PL$49/*cDef*/["readyPromise"]["resolve"](PL$42/*cf*/);
           ;});
-        PL$176/*checkReady*/();
+        PL$182/*checkReady*/();
       }else{
-      PL$176/*checkReady*/();
+      PL$182/*checkReady*/();
       PL$49/*cDef*/["isReady"] = true;
       };
       ;
@@ -1537,29 +1567,29 @@ var PL$103/*presets*/;
       ;
       return 0;
       ;}),
-    "getFunctionArgumentType": (function(PL$37/*parType*/, PL$181/*parIndex*/){
+    "getFunctionArgumentType": (function(PL$37/*parType*/, PL$187/*parIndex*/){
     
       ;
       var PL$49/*cDef*/ = PL$41/*getClass*/(PL$37/*parType*/);
       ;
-      if((PL$49/*cDef*/["arguments"] && PL$49/*cDef*/["arguments"][PL$181/*parIndex*/])){
-        return PL$49/*cDef*/["arguments"][PL$181/*parIndex*/];
+      if((PL$49/*cDef*/["arguments"] && PL$49/*cDef*/["arguments"][PL$187/*parIndex*/])){
+        return PL$49/*cDef*/["arguments"][PL$187/*parIndex*/];
       };
       return this["getBuiltinType"]("var");
       ;}),
-    "getConstructorArgumentType": (function(PL$37/*parType*/, PL$181/*parIndex*/){
+    "getConstructorArgumentType": (function(PL$37/*parType*/, PL$187/*parIndex*/){
     
       ;
       var PL$49/*cDef*/ = PL$41/*getClass*/(PL$37/*parType*/);
       ;
-      var PL$182/*t*/;
+      var PL$188/*t*/;
       ;
       if(PL$49/*cDef*/["constructorArguments"]){
-        PL$182/*t*/ = PL$49/*cDef*/["constructorArguments"][PL$181/*parIndex*/];
+        PL$188/*t*/ = PL$49/*cDef*/["constructorArguments"][PL$187/*parIndex*/];
       };
       ;
-      if(PL$182/*t*/){
-        return PL$182/*t*/;
+      if(PL$188/*t*/){
+        return PL$188/*t*/;
       };
       ;
       return this["getBuiltinType"]("var");
@@ -1571,12 +1601,12 @@ var PL$103/*presets*/;
       ;
       return PL$49/*cDef*/["constructor"];
       ;}),
-    "getBuiltinType": (function(PL$183/*parName*/){
+    "getBuiltinType": (function(PL$189/*parName*/){
     
       ;
-      return PL$45/*buildInTypesMap*/["get"](PL$183/*parName*/);
+      return PL$45/*buildInTypesMap*/["get"](PL$189/*parName*/);
       ;}),
-    "getBuiltinTypesMap": (function(PL$183/*parName*/){
+    "getBuiltinTypesMap": (function(PL$189/*parName*/){
     
       ;
       return PL$45/*buildInTypesMap*/["clone"]();
@@ -1635,16 +1665,16 @@ var PL$103/*presets*/;
       ;
       throw PL$2/*errorMsg*/["noConstructorAvailable"];
       ;}),
-    "setMemberByDef": (function(PL$184/*parDynInstance*/, PL$70/*parMemberDefinition*/, PL$185/*parValueDynInstance*/){
+    "setMemberByDef": (function(PL$190/*parDynInstance*/, PL$70/*parMemberDefinition*/, PL$191/*parValueDynInstance*/){
     
       ;
-      var PL$72/*realInstance*/ = PL$184/*parDynInstance*/["instance"];
+      var PL$72/*realInstance*/ = PL$190/*parDynInstance*/["instance"];
       ;
-      PL$72/*realInstance*/[PL$70/*parMemberDefinition*/["index"]] = PL$185/*parValueDynInstance*/["getInstanceAsType"](PL$70/*parMemberDefinition*/["type"]);
+      PL$72/*realInstance*/[PL$70/*parMemberDefinition*/["index"]] = PL$191/*parValueDynInstance*/["getInstanceAsType"](PL$70/*parMemberDefinition*/["type"]);
       if(this["isTrackedClass"](PL$70/*parMemberDefinition*/["type"])){
-        var PL$73/*tracker*/ = this["getTrackerFromDynInstance"](PL$184/*parDynInstance*/);
+        var PL$73/*tracker*/ = this["getTrackerFromDynInstance"](PL$190/*parDynInstance*/);
         ;
-        var PL$49/*cDef*/ = PL$41/*getClass*/(PL$185/*parValueDynInstance*/["type"]);
+        var PL$49/*cDef*/ = PL$41/*getClass*/(PL$191/*parValueDynInstance*/["type"]);
         ;
         var PL$74/*trackMemberIdx*/ = PL$49/*cDef*/["map"]["trackMemberIdx"];
         ;
@@ -1652,7 +1682,7 @@ var PL$103/*presets*/;
           PL$72/*realInstance*/[PL$70/*parMemberDefinition*/["trackIndex"]]();
         };
         ;
-        PL$72/*realInstance*/[PL$70/*parMemberDefinition*/["trackIndex"]] = PL$185/*parValueDynInstance*/["instance"][PL$74/*trackMemberIdx*/](PL$73/*tracker*/);
+        PL$72/*realInstance*/[PL$70/*parMemberDefinition*/["trackIndex"]] = PL$191/*parValueDynInstance*/["instance"][PL$74/*trackMemberIdx*/](PL$73/*tracker*/);
       };
       ;
       ;}),
@@ -1663,50 +1693,50 @@ var PL$103/*presets*/;
         return;
       };
       ;
-      var PL$186/*type*/ = PL$38/*parInstance*/[0];
+      var PL$192/*type*/ = PL$38/*parInstance*/[0];
       ;
-      var PL$49/*cDef*/ = PL$41/*getClass*/(PL$186/*type*/);
+      var PL$49/*cDef*/ = PL$41/*getClass*/(PL$192/*type*/);
       ;
       return PL$38/*parInstance*/[PL$49/*cDef*/["map"]["trackRootIdx"]]();
       ;}),
-    "canSet": (function(PL$187/*parTargetType*/, PL$188/*parSourceType*/){
+    "canSet": (function(PL$193/*parTargetType*/, PL$194/*parSourceType*/){
     
       ;
-      if(((PL$187/*parTargetType*/ === undefined) && (PL$188/*parSourceType*/ === undefined))){
+      if(((PL$193/*parTargetType*/ === undefined) && (PL$194/*parSourceType*/ === undefined))){
         return true;
       };
       ;
-      if(((PL$187/*parTargetType*/ === undefined) || (PL$188/*parSourceType*/ === undefined))){
+      if(((PL$193/*parTargetType*/ === undefined) || (PL$194/*parSourceType*/ === undefined))){
         return false;
       };
       ;
-      if((PL$187/*parTargetType*/ === PL$188/*parSourceType*/)){
+      if((PL$193/*parTargetType*/ === PL$194/*parSourceType*/)){
         return true;
       };
       ;
-      if(this["isTemporaryTrackedClass"](PL$188/*parSourceType*/)){
-        if(this["isTemporaryTrackedClass"](PL$187/*parTargetType*/)){
-          return this["canSet"](this["getClassFromTemporaryTracked"](PL$187/*parTargetType*/), this["getClassFromTemporaryTracked"](PL$188/*parSourceType*/));
+      if(this["isTemporaryTrackedClass"](PL$194/*parSourceType*/)){
+        if(this["isTemporaryTrackedClass"](PL$193/*parTargetType*/)){
+          return this["canSet"](this["getClassFromTemporaryTracked"](PL$193/*parTargetType*/), this["getClassFromTemporaryTracked"](PL$194/*parSourceType*/));
         };
         ;
         return false;
       };
       ;
-      if(this["isTemporaryTrackedClass"](PL$187/*parTargetType*/)){
-        return this["canSet"](this["getClassFromTemporaryTracked"](PL$187/*parTargetType*/), PL$188/*parSourceType*/);
+      if(this["isTemporaryTrackedClass"](PL$193/*parTargetType*/)){
+        return this["canSet"](this["getClassFromTemporaryTracked"](PL$193/*parTargetType*/), PL$194/*parSourceType*/);
       };
       ;
-      if((((PL$187/*parTargetType*/["isFunction"] && PL$188/*parSourceType*/["isFunction"]) && this["canSet"](PL$187/*parTargetType*/["returnType"], PL$188/*parSourceType*/["returnType"])) && (PL$187/*parTargetType*/["parameters"]["length"] == PL$188/*parSourceType*/["parameters"]["length"]))){
+      if((((PL$193/*parTargetType*/["isFunction"] && PL$194/*parSourceType*/["isFunction"]) && this["canSet"](PL$193/*parTargetType*/["returnType"], PL$194/*parSourceType*/["returnType"])) && (PL$193/*parTargetType*/["parameters"]["length"] == PL$194/*parSourceType*/["parameters"]["length"]))){
         var PL$65/*allOk*/ = true;
         ;
         var PL$63/*i*/ = 0;
         ;
-        var PL$66/*l*/ = PL$187/*parTargetType*/["parameters"]["length"];
+        var PL$66/*l*/ = PL$193/*parTargetType*/["parameters"]["length"];
         ;
         for(PL$63/*i*/;(PL$63/*i*/ < PL$66/*l*/);++PL$63/*i*/){{
-          var PL$67/*tp*/ = PL$187/*parTargetType*/["parameters"][PL$63/*i*/];
+          var PL$67/*tp*/ = PL$193/*parTargetType*/["parameters"][PL$63/*i*/];
           ;
-          var PL$68/*sp*/ = PL$188/*parSourceType*/["parameters"][PL$63/*i*/];
+          var PL$68/*sp*/ = PL$194/*parSourceType*/["parameters"][PL$63/*i*/];
           ;
           if(! this["canSet"](PL$68/*sp*/, PL$67/*tp*/)){
             PL$65/*allOk*/ = false;
@@ -1721,30 +1751,30 @@ var PL$103/*presets*/;
       ;
       return false;
       ;}),
-    "canConnect": (function(PL$37/*parType*/, PL$189/*parProperty*/, PL$190/*parFunType*/){
+    "canConnect": (function(PL$37/*parType*/, PL$195/*parProperty*/, PL$196/*parFunType*/){
     
       ;
       var PL$49/*cDef*/ = PL$41/*getClass*/(PL$37/*parType*/);
       ;
       var PL$93/*map*/ = PL$49/*cDef*/["map"];
       ;
-      if(PL$93/*map*/["members"][PL$189/*parProperty*/]){
-        var PL$56/*mDef*/ = PL$93/*map*/["members"][PL$189/*parProperty*/];
+      if(PL$93/*map*/["members"][PL$195/*parProperty*/]){
+        var PL$56/*mDef*/ = PL$93/*map*/["members"][PL$195/*parProperty*/];
         ;
-        var PL$191/*propertyType*/ = this["getPropertyType"]({
+        var PL$197/*propertyType*/ = this["getPropertyType"]({
           "type": PL$37/*parType*/,
-          "property": PL$189/*parProperty*/
+          "property": PL$195/*parProperty*/
         });
         ;
-        if(! this["canSet"](PL$191/*propertyType*/, PL$190/*parFunType*/)){
+        if(! this["canSet"](PL$197/*propertyType*/, PL$196/*parFunType*/)){
           return false;
         };
         ;
-        if(! (this["isVar"](PL$191/*propertyType*/) || this["isFunctionType"](PL$191/*propertyType*/))){
+        if(! (this["isVar"](PL$197/*propertyType*/) || this["isFunctionType"](PL$197/*propertyType*/))){
           return false;
         };
         ;
-        if(! (this["isVar"](PL$190/*parFunType*/) || this["isFunctionType"](PL$190/*parFunType*/))){
+        if(! (this["isVar"](PL$196/*parFunType*/) || this["isFunctionType"](PL$196/*parFunType*/))){
           return false;
         };
         ;
@@ -1755,81 +1785,81 @@ var PL$103/*presets*/;
       ;})
   };
   PL$61/*cs*/ = PL$39/*classSystem*/;
-  var PL$192/*getEffectiveFunctionResultType*/ = (function(PL$190/*parFunType*/){
+  var PL$198/*getEffectiveFunctionResultType*/ = (function(PL$196/*parFunType*/){
   
     ;
-    var PL$193/*res*/ = {
+    var PL$199/*res*/ = {
       "promiseResolveType": PL$39/*classSystem*/["getBuiltinType"]("var"),
       "isTemporary": false,
-      "originalResultType": PL$39/*classSystem*/["getFunctionReturnType"](PL$190/*parFunType*/),
-      "resolvePromise": (function(PL$77/*parPromise*/, PL$194/*parValue*/){
+      "originalResultType": PL$39/*classSystem*/["getFunctionReturnType"](PL$196/*parFunType*/),
+      "resolvePromise": (function(PL$77/*parPromise*/, PL$200/*parValue*/){
       
         ;
-        PL$77/*parPromise*/["resolve"](PL$194/*parValue*/);
+        PL$77/*parPromise*/["resolve"](PL$200/*parValue*/);
         ;}),
-      "rejectPromise": (function(PL$77/*parPromise*/, PL$194/*parValue*/){
+      "rejectPromise": (function(PL$77/*parPromise*/, PL$200/*parValue*/){
       
         ;
-        PL$77/*parPromise*/["reject"](PL$194/*parValue*/);
+        PL$77/*parPromise*/["reject"](PL$200/*parValue*/);
         ;})
     };
     ;
-    var PL$195/*resultType*/ = PL$193/*res*/["originalResultType"];
+    var PL$201/*resultType*/ = PL$199/*res*/["originalResultType"];
     ;
-    PL$193/*res*/["newPromise"] = (function(){
+    PL$199/*res*/["newPromise"] = (function(){
     
       ;
       return new PL$87/*Promise*/();
       ;});
-    if(PL$39/*classSystem*/["isTemporaryTrackedClass"](PL$195/*resultType*/)){
-      PL$193/*res*/["isTemporary"] = true;
-      var PL$196/*unTrackedType*/ = PL$39/*classSystem*/["getClassFromTemporaryTracked"](PL$195/*resultType*/);
+    if(PL$39/*classSystem*/["isTemporaryTrackedClass"](PL$201/*resultType*/)){
+      PL$199/*res*/["isTemporary"] = true;
+      var PL$202/*unTrackedType*/ = PL$39/*classSystem*/["getClassFromTemporaryTracked"](PL$201/*resultType*/);
       ;
-      if(PL$39/*classSystem*/["isPromiseOfClass"](PL$196/*unTrackedType*/)){
-        var PL$197/*promiseConstructor*/ = PL$39/*classSystem*/["getTypeConstructor"](PL$196/*unTrackedType*/);
+      if(PL$39/*classSystem*/["isPromiseOfClass"](PL$202/*unTrackedType*/)){
+        var PL$203/*promiseConstructor*/ = PL$39/*classSystem*/["getTypeConstructor"](PL$202/*unTrackedType*/);
         ;
-        PL$193/*res*/["newPromise"] = (function(){
+        PL$199/*res*/["newPromise"] = (function(){
         
           ;
-          return PL$197/*promiseConstructor*/();
+          return PL$203/*promiseConstructor*/();
           ;});
-        PL$193/*res*/["resolvePromise"] = (function(PL$77/*parPromise*/, PL$194/*parValue*/){
+        PL$199/*res*/["resolvePromise"] = (function(PL$77/*parPromise*/, PL$200/*parValue*/){
         
           ;
-          PL$77/*parPromise*/[0]["resolve"](PL$194/*parValue*/);
+          PL$77/*parPromise*/[0]["resolve"](PL$200/*parValue*/);
           ;});
-        PL$193/*res*/["rejectPromise"] = (function(PL$77/*parPromise*/, PL$194/*parValue*/){
+        PL$199/*res*/["rejectPromise"] = (function(PL$77/*parPromise*/, PL$200/*parValue*/){
         
           ;
-          PL$77/*parPromise*/[0]["reject"](PL$194/*parValue*/);
+          PL$77/*parPromise*/[0]["reject"](PL$200/*parValue*/);
           ;});
-        var PL$198/*promiseResolveType*/ = PL$39/*classSystem*/["getClassFromPromiseOf"](PL$196/*unTrackedType*/);
+        var PL$204/*promiseResolveType*/ = PL$39/*classSystem*/["getClassFromPromiseOf"](PL$202/*unTrackedType*/);
         ;
-        PL$193/*res*/["promiseResolveType"] = PL$198/*promiseResolveType*/;
+        PL$199/*res*/["promiseResolveType"] = PL$204/*promiseResolveType*/;
       };
       ;
     };
     ;
-    return PL$193/*res*/;
+    return PL$199/*res*/;
     ;});
   ;
-  var PL$199/*_stringEncodeStr*/ = (function(PL$34/*par*/){
+  var PL$205/*_stringEncodeStr*/ = (function(PL$34/*par*/){
   
     ;
-    var PL$200/*s*/ = PL$34/*par*/["replace"](new PL$201/*RegExp*/("\\\\", "g"), "\\\\");
+    var PL$206/*s*/ = PL$34/*par*/["replace"](new PL$207/*RegExp*/("\\\\", "g"), "\\\\");
     ;
-    PL$200/*s*/ = PL$200/*s*/["replace"](new PL$201/*RegExp*/("\\n", "g"), "\\n");
-    PL$200/*s*/ = PL$200/*s*/["replace"](new PL$201/*RegExp*/("\\r", "g"), "\\r");
-    PL$200/*s*/ = PL$200/*s*/["replace"](new PL$201/*RegExp*/("\\\"", "g"), "\\\"");
-    PL$200/*s*/ = PL$200/*s*/["replace"](new PL$201/*RegExp*/("\\u2028", "g"), "\\u2028");
-    PL$200/*s*/ = PL$200/*s*/["replace"](new PL$201/*RegExp*/("\\u2029", "g"), "\\u2029");
-    return PL$200/*s*/;
+    PL$206/*s*/ = PL$206/*s*/["replace"](new PL$207/*RegExp*/("\\n", "g"), "\\n");
+    PL$206/*s*/ = PL$206/*s*/["replace"](new PL$207/*RegExp*/("\\r", "g"), "\\r");
+    PL$206/*s*/ = PL$206/*s*/["replace"](new PL$207/*RegExp*/("\\\"", "g"), "\\\"");
+    PL$206/*s*/ = PL$206/*s*/["replace"](new PL$207/*RegExp*/("\\u2028", "g"), "\\u2028");
+    PL$206/*s*/ = PL$206/*s*/["replace"](new PL$207/*RegExp*/("\\u2029", "g"), "\\u2029");
+    return PL$206/*s*/;
     ;});
   ;
-  var PL$202/*stringEncodeStr*/ = (function(PL$34/*par*/){
+  var PL$208/*stringEncodeStr*/ = (function(PL$34/*par*/){
   
     ;
-    return (("\"" + PL$199/*_stringEncodeStr*/(PL$34/*par*/)) + "\"");
+    return (("\"" + PL$205/*_stringEncodeStr*/(PL$34/*par*/)) + "\"");
     ;});
   ;
   PL$69/*internals*/ = {
@@ -1837,8 +1867,8 @@ var PL$103/*presets*/;
     "getClass": PL$41/*getClass*/,
     "TrackedPromise": PL$6/*TrackedPromise*/,
     "DynInstance": PL$4/*DynInstance*/,
-    "stringEncodeStr": PL$202/*stringEncodeStr*/,
-    "getEffectiveFunctionResultType": PL$192/*getEffectiveFunctionResultType*/,
+    "stringEncodeStr": PL$208/*stringEncodeStr*/,
+    "getEffectiveFunctionResultType": PL$198/*getEffectiveFunctionResultType*/,
     "privateClassSystem": PL$54/*privateClassSystem*/
   };
   PL$7/*provisional*/(PL$39/*classSystem*/, PL$69/*internals*/);
@@ -1847,7 +1877,7 @@ var PL$103/*presets*/;
   PL$10/*sync*/(PL$39/*classSystem*/, PL$69/*internals*/);
   PL$175/*registerSyncClass*/ = PL$69/*internals*/["registerSyncClass"];
   PL$172/*destroySynced*/ = PL$69/*internals*/["destroySynced"];
-  var PL$203/*getClassBySyncId*/ = PL$69/*internals*/["getClassBySyncId"];
+  var PL$209/*getClassBySyncId*/ = PL$69/*internals*/["getClassBySyncId"];
   ;
   PL$122/*syncFun*/ = PL$69/*internals*/["syncFun"];
   PL$126/*syncFunctionFun*/ = PL$69/*internals*/["syncFunctionFun"];
@@ -1865,9 +1895,9 @@ var PL$103/*presets*/;
     "classSystem": PL$39/*classSystem*/,
     "privateClassSystem": PL$54/*privateClassSystem*/,
     "internalObjects": PL$101/*internalObjects*/,
-    "getClassBySyncId": PL$203/*getClassBySyncId*/,
+    "getClassBySyncId": PL$209/*getClassBySyncId*/,
     "DynInstance": PL$4/*DynInstance*/,
-    "getEffectiveFunctionResultType": PL$192/*getEffectiveFunctionResultType*/
+    "getEffectiveFunctionResultType": PL$198/*getEffectiveFunctionResultType*/
   });
   return PL$39/*classSystem*/;
   ;})();

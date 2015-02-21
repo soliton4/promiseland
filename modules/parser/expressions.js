@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "c674b8a4cb08e513b5ebcbb15c353468" })){ return promiseland._getModule("c674b8a4cb08e513b5ebcbb15c353468"); };
+    if (promiseland._hasModule({ hashStr: "2ced2f8c7d6434d0cddcc03a987d8c21" })){ return promiseland._getModule("2ced2f8c7d6434d0cddcc03a987d8c21"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "c674b8a4cb08e513b5ebcbb15c353468", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "2ced2f8c7d6434d0cddcc03a987d8c21", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -953,7 +953,7 @@ PL$3/*promiseland exception catcher*/(function(){
         PL$34/*res*/["push"](this["getReturnCode"]({
           "return": true,
           "value": PL$77/*valueRes*/
-        }));
+        }), PL$32/*par*/);
         PL$34/*res*/["setType"](PL$19/*statementType*/);
         return PL$34/*res*/;
         ;});

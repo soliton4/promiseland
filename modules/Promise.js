@@ -51,8 +51,9 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "a5c0dd7062bad82c74b4862cc85c54ff" })){ return promiseland._getModule("a5c0dd7062bad82c74b4862cc85c54ff"); };
+if (promiseland._hasModule({ hashStr: "2689a263f04ed8c1cdcba51e5c9de07f" })){ return promiseland._getModule("2689a263f04ed8c1cdcba51e5c9de07f"); };
 var PL$17/*promiseland*/;try{PL$17/*promiseland*/ = promiseland;}catch(e){};
+var PL$37/*setTimeout*/;try{PL$37/*setTimeout*/ = setTimeout;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 
@@ -270,6 +271,14 @@ var PL$1 = (function(){
       PL$33/*p*/["reject"](PL$34/*rea*/);
       ;}));
     return PL$33/*p*/["promise"];
+    ;});
+  PL$17/*promiseland*/["wait"] = (function(PL$35/*parMs*/){
+  
+    ;
+    var PL$36/*cb*/ = new PL$26/*Callback*/();
+    ;
+    PL$37/*setTimeout*/(PL$36/*cb*/, (PL$35/*parMs*/ || 0));
+    return PL$36/*cb*/["promise"];
     ;});
   return PL$2/*Promise*/;
   ;})();

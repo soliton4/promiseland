@@ -51,7 +51,7 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "1f4386164a5899fe9f2eaa45b72938ed" })){ return promiseland._getModule("1f4386164a5899fe9f2eaa45b72938ed"); };
+if (promiseland._hasModule({ hashStr: "a2992b000e773c66846411505f7448ae" })){ return promiseland._getModule("a2992b000e773c66846411505f7448ae"); };
 var PL$3/*promiseland*/;try{PL$3/*promiseland*/ = promiseland;}catch(e){};
 var PL$7/*RegExp*/;try{PL$7/*RegExp*/ = RegExp;}catch(e){};
 var PL$1 = (function(){
@@ -335,6 +335,10 @@ var PL$11/*errorMsg*/;
     "unknownCase": {
       "id": 123,
       "msg": "unknown case"
+    },
+    "unresolvedPromise": {
+      "id": 124,
+      "msg": "unresolved promise"
     },
     "templateSyntaxError": {
       "id": 400,

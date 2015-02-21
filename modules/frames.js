@@ -53,14 +53,12 @@ var __execute = function(promiseland, extra){ __execute = undefined; var __requi
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "0aed023e945d4e514c61d0877dab61d2" })){ return promiseland._getModule("0aed023e945d4e514c61d0877dab61d2"); };
+if (promiseland._hasModule({ hashStr: "2a9fad46f944e8d4ac0f7cf994c4f66d" })){ return promiseland._getModule("2a9fad46f944e8d4ac0f7cf994c4f66d"); };
 var PL$11/*extra*/;try{PL$11/*extra*/ = extra;}catch(e){};
 var PL$40/*Promise*/;try{PL$40/*Promise*/ = Promise;}catch(e){};
 var PL$52/*console*/;try{PL$52/*console*/ = console;}catch(e){};
 var PL$102/*JSON*/;try{PL$102/*JSON*/ = JSON;}catch(e){};
 var PL$152/*promiseland*/;try{PL$152/*promiseland*/ = promiseland;}catch(e){};
-var PL$258/*findFrame*/;try{PL$258/*findFrame*/ = findFrame;}catch(e){};
-var PL$259/*localFrameMap*/;try{PL$259/*localFrameMap*/ = localFrameMap;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 var PL$41/*ContentBase*/;
@@ -894,7 +892,7 @@ var PL$250/*Session*/;
       for(PL$24/*i*/ in this["instances"]){
         PL$120/*all*/["push"](PL$24/*i*/);};
       ;
-      for(PL$24/*i*/ = 1;(PL$24/*i*/ < PL$120/*all*/["length"]);++PL$24/*i*/){{
+      for(PL$24/*i*/ = 0;(PL$24/*i*/ < PL$120/*all*/["length"]);++PL$24/*i*/){{
         this["removeInstance"](PL$120/*all*/[PL$24/*i*/], true);}};
       ;
       ;})
@@ -1840,7 +1838,7 @@ var PL$250/*Session*/;
     ;
     PL$107/*entry*/["push"](PL$257/*parFrame*/);
     ;});
-  PL$258/*findFrame*/ = (function(PL$253/*parName*/){
+  var PL$258/*findFrame*/ = (function(PL$253/*parName*/){
   
     ;
     var PL$107/*entry*/ = PL$256/*frames*/["get"](PL$253/*parName*/);
@@ -1851,7 +1849,9 @@ var PL$250/*Session*/;
     ;
     return PL$107/*entry*/[0];
     ;});
-  PL$259/*localFrameMap*/ = new PL$152/*promiseland*/["Map"]();
+  ;
+  var PL$259/*localFrameMap*/ = new PL$152/*promiseland*/["Map"]();
+  ;
   PL$152/*promiseland*/["isFrameLocal"] = (function(PL$131/*parFrameName*/){
   
     ;

@@ -328,18 +328,40 @@ return (parInstance, par){
             ret.members.push(m);
             
           }else if (prop.kind == "function"){
-            var name = identifierName(prop.id);
+            debugger;
+            var name = identifierName(prop.id || prop._name);
             prop.id = undefined;
+            prop._name = name;
             
-            defaultValue = this.parseExpression(prop.value);
+            defaultValue = this.parseExpression(prop);
             
             type = defaultValue.getType();
-            
-            ret.members.push({
+                  
+            var m = {
               name: name,
               "type": type,
               "defaultValue": defaultValue
-            });
+            };
+            
+            var keywords = prop.keywords;
+            if (keywords && keywords.length){
+              var k;
+              for (k = 0; k < keywords.length; ++k){
+                switch(keywords[k].type){
+                case "const":
+                  m.const = true;
+                  break;
+                case "meta":
+                  m.meta = keywords[k];
+                  break;
+                case "sync":
+                  m.sync = true;
+                  break;
+                };
+              };
+            };
+                  
+            ret.members.push(m);
             
           }else{
             this.error(prop, errorMsg.unknownPropertyAssignmentType);
@@ -375,6 +397,9 @@ return (parInstance, par){
           if (m.meta){
             res.push(",\"meta\":");
             res.push(this.parseExpression(m.meta.expression));
+          };
+          if (m.sync){
+            res.push(",\"sync\": true");
           };
           res.push("}");
           
@@ -425,6 +450,21 @@ return (parInstance, par){
               res.push("undefined");
             };
             comma = true;
+            
+          }else if (prop.kind == "function"){
+            if (comma){
+              res.push(", ");
+            };
+            
+            var name = identifierName(prop.id || prop._name);
+            prop.id = undefined;
+            prop._name = name;
+            
+            
+            res.push(stringEncodeStr(identifierName(name)) + ": ");
+            res.push(this.parseExpression(prop));
+            comma = true;
+            
           };
         };
         

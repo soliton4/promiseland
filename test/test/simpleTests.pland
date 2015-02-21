@@ -200,7 +200,12 @@
 
   *createTest("catch/onlyCatchPromising", successFun);
 
-//*createTest("catch/onlyCatchPromising", successFun);
+  *createTest("track/assign", successFun);
+  *createTest("track/assignConstructor", successFun);
+  *createTest("typesafety/memberFunction", successFun);
+
+  *createTest("track/selfReference", successFun);
+//*createTest("track/selfReference", successFun);
 
   
     var c = 0;

@@ -1,0 +1,49 @@
+
+var destroyed = false;
+
+class type track C1 {
+  member1: (){
+    C1 a = b;
+  },
+  constructor: (){
+    C1 a = this;
+  },
+  destroy: (){
+    
+    destroyed = true;
+    
+  }
+};
+
+C1 b;
+
+b = new C1();
+
+if (destroyed){
+  return {success: false};
+};
+
+b = new C1();
+
+if (!destroyed){
+  return {success: false};
+};
+destroyed = false;
+
+var destroyed2 = false;
+
+(){
+  
+  C1 c = new C1();
+  c.member1();
+  
+  b = new C1();
+  destroyed2 = destroyed;
+}();
+
+if (!destroyed2){
+  return {success: false};
+};
+
+return {success: true};
+  

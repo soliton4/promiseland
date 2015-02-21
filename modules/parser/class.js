@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "8a7e915ae63cedd94e128475b28ef422" })){ return promiseland._getModule("8a7e915ae63cedd94e128475b28ef422"); };
+    if (promiseland._hasModule({ hashStr: "164ccf5abcf35b0ec84da2fedf993f06" })){ return promiseland._getModule("164ccf5abcf35b0ec84da2fedf993f06"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "8a7e915ae63cedd94e128475b28ef422", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "164ccf5abcf35b0ec84da2fedf993f06", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$56/*JSON*/;try{PL$56/*JSON*/ = JSON;}catch(e){};
 var PL$2 = (function(){
@@ -443,16 +443,42 @@ PL$3/*promiseland exception catcher*/(function(){
             PL$50/*ret*/["members"]["push"](PL$52/*m*/);
           }else{
           if((PL$43/*prop*/["kind"] == "function")){
-            var PL$33/*name*/ = PL$16/*identifierName*/(PL$43/*prop*/["id"]);
+            debugger;
+            var PL$33/*name*/ = PL$16/*identifierName*/((PL$43/*prop*/["id"] || PL$43/*prop*/["_name"]));
             ;
             PL$43/*prop*/["id"] = undefined;
-            PL$51/*defaultValue*/ = this["parseExpression"](PL$43/*prop*/["value"]);
+            PL$43/*prop*/["_name"] = PL$33/*name*/;
+            PL$51/*defaultValue*/ = this["parseExpression"](PL$43/*prop*/);
             PL$40/*type*/ = PL$51/*defaultValue*/["getType"]();
-            PL$50/*ret*/["members"]["push"]({
+            PL$52/*m*/ = {
               "name": PL$33/*name*/,
               "type": PL$40/*type*/,
               "defaultValue": PL$51/*defaultValue*/
-            });
+            };
+            PL$53/*keywords*/ = PL$43/*prop*/["keywords"];
+            if((PL$53/*keywords*/ && PL$53/*keywords*/["length"])){
+              PL$54/*k*/;
+              for(PL$54/*k*/ = 0;(PL$54/*k*/ < PL$53/*keywords*/["length"]);++PL$54/*k*/){{
+                switch (PL$53/*keywords*/[PL$54/*k*/]["type"]){
+                  case "const":
+                    
+                    PL$52/*m*/["const"] = true;
+                    break;;
+                  case "meta":
+                    
+                    PL$52/*m*/["meta"] = PL$53/*keywords*/[PL$54/*k*/];
+                    break;;
+                  case "sync":
+                    
+                    PL$52/*m*/["sync"] = true;
+                    break;;
+                  
+                };
+                ;}};
+              ;
+            };
+            ;
+            PL$50/*ret*/["members"]["push"](PL$52/*m*/);
           }else{
           this["error"](PL$43/*prop*/, PL$11/*errorMsg*/["unknownPropertyAssignmentType"]);
           };
@@ -494,6 +520,10 @@ PL$3/*promiseland exception catcher*/(function(){
           if(PL$52/*m*/["meta"]){
             PL$24/*res*/["push"](",\"meta\":");
             PL$24/*res*/["push"](this["parseExpression"](PL$52/*m*/["meta"]["expression"]));
+          };
+          ;
+          if(PL$52/*m*/["sync"]){
+            PL$24/*res*/["push"](",\"sync\": true");
           };
           ;
           PL$24/*res*/["push"]("}");}};
@@ -551,6 +581,20 @@ PL$3/*promiseland exception catcher*/(function(){
             };
             ;
             PL$57/*comma*/ = true;
+          }else{
+          if((PL$43/*prop*/["kind"] == "function")){
+            if(PL$57/*comma*/){
+              PL$24/*res*/["push"](", ");
+            };
+            ;
+            var PL$33/*name*/ = PL$16/*identifierName*/((PL$43/*prop*/["id"] || PL$43/*prop*/["_name"]));
+            ;
+            PL$43/*prop*/["id"] = undefined;
+            PL$43/*prop*/["_name"] = PL$33/*name*/;
+            PL$24/*res*/["push"]((PL$13/*stringEncodeStr*/(PL$16/*identifierName*/(PL$33/*name*/)) + ": "));
+            PL$24/*res*/["push"](this["parseExpression"](PL$43/*prop*/));
+            PL$57/*comma*/ = true;
+          };
           };
           ;}};
         ;

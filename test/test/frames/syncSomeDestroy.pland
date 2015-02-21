@@ -1,0 +1,40 @@
+var destroyed = false;
+
+var isClient = false;
+(() exclusive "client" {
+  isClient = true;
+})();
+
+
+class type sync some C1 {
+  a: 1,
+  destroy: (){
+    destroyed = true;
+  }
+};
+
+C1 local;
+
+
+C1* getC1() frame "server" {
+  C1 temp = new C1();
+  return temp;
+};
+
+
+if (isClient){
+  
+  local = *getC1();
+  if (destroyed){
+    return {success: false};
+  };
+  local = *getC1();
+  if (destroyed){
+    return {success: true};
+  };
+  return {success: false};
+  
+}else{
+  return {success: true};
+};
+

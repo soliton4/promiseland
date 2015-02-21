@@ -246,6 +246,12 @@ var findPromises = function(par){
         id: 123,
         msg: "unknown case"
       },
+      unresolvedPromise: {
+        id: 124,
+        msg: "unresolved promise"
+      },
+      
+      
       
       templateSyntaxError: {
         id: 400,

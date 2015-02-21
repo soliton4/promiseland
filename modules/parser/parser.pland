@@ -512,65 +512,6 @@ var _Result = require "./Result";
         
       
       
-      /*
-        returns {
-          res
-          addCondition()
-        }
-      */
-      this.createConditionalCode = function(parTrueRes, parFalseRes){
-        var self = this;
-        parTrueRes = parTrueRes || this.newResult();
-        parFalseRes = parFalseRes || this.newResult();
-        var isDecided = false;
-        var conditions = [];
-
-        var res = this.newResult();
-        res.replace(parFalseRes);
-        
-        return {
-          res: res,
-          
-          addCondition: function(parCondition){
-            if (isDecided){
-              return;
-            };
-            if (parCondition === true){
-              isDecided = true;
-              res.replace(parTrueRes);
-              return;
-            };
-            if (parCondition === false){
-              return;
-            };
-            
-            conditions.push(parCondition);
-            
-            var ifRes = self.newResult();
-            ifRes.push("((");
-            var i = 0;
-            for (i = 0; i < conditions.length; ++i){
-              if (i){
-                ifRes.push(" && ");
-              };
-              ifRes.push(conditions[i]);
-            };
-            ifRes.push(") ? (");
-            ifRes.push(self.makeCompleteStatementDynamic(parTrueRes));
-            ifRes.push(") : (");
-            ifRes.push(self.makeCompleteStatementDynamic(parFalseRes));
-            ifRes.push("))");
-            
-            var dynRes = self.newResult();
-            dynRes.push(self.makeCompleteStatement(ifRes), undefined, {
-              dynamic: true
-            });
-            
-            res.replace(dynRes);
-            
-          }
-        };
-      };
 
       
       

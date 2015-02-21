@@ -862,7 +862,7 @@ return (parInstance, par){
         res.push(this.getReturnCode({
           return: true,
           value: valueRes
-        }));
+        }), par);
         
         
         res.setType(statementType);

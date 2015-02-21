@@ -1833,6 +1833,32 @@ FrameKeyword // promiseland
 
 FrameInformation  // promiseland
   = keyword:FrameKeyword __ name:StringLiteral { return posRes({name: name, "type": keyword}); }
+
+FunctionSyncClaus
+  = "sync" __ { return posRes({ "type": "sync" }); }
+  
+FunctionConstClaus
+  = "const" __ { return posRes({ "type": "const" }); }
+
+  
+// modifiers for functions
+FunctionKeyword
+  = FrameInformation
+  / FunctionSyncClaus
+  / FunctionConstClaus
+
+FunctionKeywords
+  = arr:FunctionKeyword+ {
+  var present = {};
+  arr.filter(function (e, i, arr) {
+    if (present[e.type]){
+      error('Class keyword ' + e.type + ' can only be used once' + text());
+    };
+    present[e.type] = true;
+  });
+  return arr;
+}  
+  
   
 Typename
   = name:Identifier _ deref:PromiseOperator* {
@@ -1861,7 +1887,7 @@ FunctionDeclarationFunId
 FunctionDeclaration
   = FunctionToken? __ funId:FunctionDeclarationFunId __ // promiseland
     "(" __ params:(FormalParameterList __)? ")" __
-    frame:FrameInformation? __
+    keywords:FunctionKeywords? __
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
@@ -1872,12 +1898,12 @@ FunctionDeclaration
         params:         optionalList(extractOptional(params, 0)),
         body:           body,
         promise:        promise, // promiseland
-        frame:          frame    // promiseland
+        keywords:       keywords    // promiseland
       });
     }
   / template:TemplateLiteral __ FunctionToken? __ id:Identifier __ // promiseland
     "(" __ params:(FormalParameterList __)? ")" __
-    frame:FrameInformation? __
+    keywords:FunctionKeywords? __
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
@@ -1886,9 +1912,9 @@ FunctionDeclaration
         id:     id,
         params: optionalList(extractOptional(params, 0)),
         body:   body,
-        promise:  promise, // promiseland
-        frame:    frame,   // promiseland
-        template: template // promiseland
+        promise:  promise,  // promiseland
+        keywords: keywords, // promiseland
+        template: template  // promiseland
       });
     }
     
@@ -1910,7 +1936,7 @@ FunctionExpressionFunId
 FunctionExpression
   = FunctionToken? __ funId:FunctionExpressionFunId __  // promiseland
     "(" __ params:(FormalParameterList __)? ")" __
-    frame:FrameInformation? __
+    keywords:FunctionKeywords? __
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
@@ -1921,12 +1947,12 @@ FunctionExpression
         params:         optionalList(extractOptional(params, 0)),
         body:           body,
         promise:        promise, // promiseland
-        frame:          frame    // promiseland
+        keywords:       keywords // promiseland
       });
     }
   / template:TemplateLiteral __ FunctionToken? __ funId:FunctionExpressionFunId __  // promiseland
     "(" __ params:(FormalParameterList __)? ")" __
-    frame:FrameInformation? __
+    keywords:FunctionKeywords? __
     promise:PromiseOperator? __
     "{" __ body:FunctionBody __ "}"
     {
@@ -1936,9 +1962,9 @@ FunctionExpression
         returnTypename: funId.returnTypename,
         params:         optionalList(extractOptional(params, 0)),
         body:           body,
-        promise:        promise, // promiseland
-        frame:          frame,   // promiseland
-        template:       template // promiseland
+        promise:        promise,  // promiseland
+        keywords:       keywords, // promiseland
+        template:       template  // promiseland
       });
     }
 

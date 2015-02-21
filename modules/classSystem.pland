@@ -930,11 +930,6 @@ var classSystem = {
 
         };
 
-        // call custorm constructor
-        if (constructorDef){
-          importVar(constructorFun, "constructorFun");
-          constructorStr += "constructorFun.apply(r, arguments);";
-        };
 
         // unique constructor part 2
 
@@ -986,6 +981,12 @@ var classSystem = {
           constructorStr += "pcs.resolvePromise(cDef.constructorReturnType, resPs, nonPromiseResult);";
           constructorStr += "};";
           constructorStr += "r = resPs;";
+        };
+        
+        // call custorm constructor
+        if (constructorDef){
+          importVar(constructorFun, "constructorFun");
+          constructorStr += "constructorFun.apply(realInstance, arguments);";
         };
 
         constructorStr += "return r;";
@@ -1137,7 +1138,20 @@ var classSystem = {
   },
   
   getConstructorReturnType: (parType){
+    
+    if (this.isProvisional(parType)){
+      var pr = this._createProvisionalClass();
+      var self = this;
+      (){
+        var definedType = *self.definitionPromise(parType);
+        self._resolveProvisional(pr, self.getConstructorReturnType(definedType));
+      }();
+      
+      return pr;
+    };
+    
     var cDef = getClass(parType);
+    
     if (cDef.constructorReturnType){
       return cDef.constructorReturnType;
     };

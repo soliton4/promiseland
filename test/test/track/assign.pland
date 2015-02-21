@@ -1,0 +1,14 @@
+class type track C1 {
+  
+};
+
+C1 v1;
+C1 v2 = new C1();
+
+v1 = v2;
+
+catch(e){
+  return {success: false};
+};
+
+return {success: true};

@@ -51,7 +51,9 @@
   *createTest("syncMemberNonTrivial");
   *createTest("syncEvents");
   *createTest("syncEvents2");
-  //*createTest("syncEvents2");
+  *createTest("syncDestroy");
+  *createTest("syncSomeDestroy");
+  //*createTest("syncSomeDestroy");
 
 
 

@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "9c28a3d13cffaca00438e2c7a2ff6b35" })){ return promiseland._getModule("9c28a3d13cffaca00438e2c7a2ff6b35"); };
+    if (promiseland._hasModule({ hashStr: "21ccfc28f0fdcf08919f0baeadba6f3e" })){ return promiseland._getModule("21ccfc28f0fdcf08919f0baeadba6f3e"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "9c28a3d13cffaca00438e2c7a2ff6b35", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "21ccfc28f0fdcf08919f0baeadba6f3e", "module": PL$1, promising: true });
 var PL$6/*promiseland*/;try{PL$6/*promiseland*/ = promiseland;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -506,6 +506,15 @@ PL$3/*promiseland exception catcher*/(function(){
           var PL$57/*typeEntry*/ = this["_getTypeEntry"](PL$56/*typename*/, PL$32/*parParsed*/, PL$20/*par*/);
           ;
           if(PL$57/*typeEntry*/){
+            if((PL$57/*typeEntry*/["type"] && this["isVar"](PL$57/*typeEntry*/["type"]))){
+              this["types"]["set"](PL$29/*name*/, {
+                "name": PL$29/*name*/,
+                "type": PL$57/*typeEntry*/["type"],
+                "isDynamic": false
+              });
+              return this["types"]["get"](PL$29/*name*/);
+            };
+            ;
             var PL$58/*extraRes*/ = PL$57/*typeEntry*/["extraRes"];
             ;
             this["types"]["set"](PL$29/*name*/, {

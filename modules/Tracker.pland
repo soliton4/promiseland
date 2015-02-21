@@ -158,6 +158,14 @@ return (destroyFun){
     }
   };
   
+  /*(){
+    *promiseland.wait(2000);
+    while (rootCnt){
+      console.log("rootCnt: " + rootCnt);
+      *promiseland.wait(5000);
+    };
+  }();*/
+  
   
   return [tracker,
     (){

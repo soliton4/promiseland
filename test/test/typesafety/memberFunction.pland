@@ -1,0 +1,17 @@
+var check = false;
+
+class type C1 {
+  mFun(){
+    check = true;
+  }
+};
+
+C1 a = new C1();
+
+a.mFun();
+
+if (check){
+  return {success: true};
+};
+
+return {success: false};

@@ -1,0 +1,22 @@
+var check = false;
+
+class type track C1 {
+  constructor: (){
+    C1 self = this;
+    check = true;
+  }
+};
+
+C1 v1;
+C1 v2 = new C1();
+
+v1 = v2;
+
+catch(e){
+  return {success: false};
+};
+
+if (check){
+  return {success: true};
+};
+return {success: false};

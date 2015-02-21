@@ -554,7 +554,7 @@ class Transport {
     for (i in this.instances){
       all.push(i);
     };
-    for (i = 1; i < all.length; ++i){
+    for (i = 0; i < all.length; ++i){
       this.removeInstance(all[i], true);
     };
   }
@@ -1228,7 +1228,7 @@ promiseland.addFrame = (parFrame){
   entry.push(parFrame);
 };
     
-findFrame = (parName){
+var findFrame = (parName){
   var entry = frames.get(parName);
   if (!entry){
     return;
@@ -1236,7 +1236,7 @@ findFrame = (parName){
   return entry[0];
 };
     
-localFrameMap = new promiseland.Map();
+var localFrameMap = new promiseland.Map();
 
 promiseland.isFrameLocal = (parFrameName){
   if (localFrameMap.has(parFrameName)){

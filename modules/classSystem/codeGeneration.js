@@ -51,7 +51,7 @@
   defineFun([], function(){
 var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "d4cfa0a8de185b16c8d6761d019e1e40" })){ return promiseland._getModule("d4cfa0a8de185b16c8d6761d019e1e40"); };
+if (promiseland._hasModule({ hashStr: "3e48548823c9c531a7d309d84dc1a0ee" })){ return promiseland._getModule("3e48548823c9c531a7d309d84dc1a0ee"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$44/*Array*/;try{PL$44/*Array*/ = Array;}catch(e){};
 var PL$1 = (function(){
@@ -329,7 +329,12 @@ var PL$1 = (function(){
     
       ;
       if(! this["isPromiseOfClass"](PL$15/*par*/["type"])){
-        return PL$14/*runtimeError*/(PL$2/*errorMsg*/["notAPromise"], PL$15/*par*/);
+        var PL$17/*cDef*/ = PL$8/*getClass*/(PL$15/*par*/["type"]);
+        ;
+        if(! PL$17/*cDef*/["isVar"]){
+          return PL$14/*runtimeError*/(PL$2/*errorMsg*/["notAPromise"], PL$15/*par*/);
+        };
+        ;
       };
       ;
       return PL$18/*assembleCode*/([

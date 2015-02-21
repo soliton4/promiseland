@@ -176,6 +176,14 @@ promiseland.importPromise = function(par){
   return p.promise;
 };
 
+// simple wait function
+promiseland.wait = function(parMs){
+  var cb = new Callback();
+  setTimeout(cb, parMs || 0);
+  return cb.promise;
+};
+
+
 
 return Promise;
 

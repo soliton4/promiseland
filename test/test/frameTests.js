@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "b7c344699fcf102e9f85d6bca5e70730" })){ return promiseland._getModule("b7c344699fcf102e9f85d6bca5e70730"); };
+    if (promiseland._hasModule({ hashStr: "b554123664cfce967bf74e459758bb54" })){ return promiseland._getModule("b554123664cfce967bf74e459758bb54"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "b7c344699fcf102e9f85d6bca5e70730", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "b554123664cfce967bf74e459758bb54", "module": PL$1, promising: true });
 var PL$18/*console*/;try{PL$18/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
@@ -165,8 +165,12 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$11/*createTest*/("syncMemberNonTrivial").then(PL$3/*promiseland exception catcher*/(function(PL$37){PL$37;
   PL$11/*createTest*/("syncEvents").then(PL$3/*promiseland exception catcher*/(function(PL$38){PL$38;
   PL$11/*createTest*/("syncEvents2").then(PL$3/*promiseland exception catcher*/(function(PL$39){PL$39;
+  PL$11/*createTest*/("syncDestroy").then(PL$3/*promiseland exception catcher*/(function(PL$40){PL$40;
+  PL$11/*createTest*/("syncSomeDestroy").then(PL$3/*promiseland exception catcher*/(function(PL$41){PL$41;
   PL$1.resolve(PL$5/*testObj*/); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
