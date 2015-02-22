@@ -20,7 +20,7 @@ var checkPromising = basics.checkPromising;
 
 var findPromises = basics.findPromises;
 
-var loaderStr = require "./loader";
+var loader = require "./loader";
 
 
 var parseFunctionModule = require "./parseFunction";
@@ -559,9 +559,9 @@ var _Result = require "./Result";
     
     
     
-    var createHeader = function(par){
+    var createLoader = function(par){
       if (_pureCode){
-        return "";
+        return par.mainPartStr;
       };
       var resStr = "";
       
@@ -578,7 +578,8 @@ var _Result = require "./Result";
       if (par.makePromiseLandModule){
         loaderParam.promiseLandModule = true;
       };
-      resStr += loaderStr(loaderParam);
+      var loaderJsn = loader(loaderParam);
+      resStr += loaderJsn.headerStr;
       resStr += promiselandRequireStr();
       if (par.useCallback){
         resStr += callbackRequireStr();
@@ -588,6 +589,11 @@ var _Result = require "./Result";
       };
       
       resStr += "if (promiseland._hasModule({ hashStr: \"" + par.hashStr + "\" })){ return promiseland._getModule(\"" + par.hashStr + "\"); };\n";
+      
+      resStr += par.mainPartStr;
+      
+      resStr += loaderJsn.footerStr;
+      
       return resStr;
     };
     
@@ -669,7 +675,7 @@ var _Result = require "./Result";
                 mainPartStr += "return " + cp.resultNameStr + ";\n";
               };
 
-              resStr += createHeader({
+              resStr += createLoader({
                 makePromiseLandModule: makePromiseLandModule,
                 extraModules: extraModules,
                 variableNames: variableNames,
@@ -678,13 +684,8 @@ var _Result = require "./Result";
                 useRequire: cp.common.useRequire,
                 useCallback: cp.common.useCallback,
                 useMap: cp.common.useMap,
-                useClassSystem: cp.common.useClassSystem
-              });
-
-              resStr += mainPartStr;
-
-              resStr += createFooter({
-                makePromiseLandModule: makePromiseLandModule
+                useClassSystem: cp.common.useClassSystem,
+                mainPartStr: mainPartStr
               });
               
             };
