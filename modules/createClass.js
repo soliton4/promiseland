@@ -1,55 +1,5 @@
-(function(){
-  var defineFun;
-  var requireFun;
-  
-  if (typeof exports == "object" && typeof module == "object"){ // CommonJS
-    requireFun = function(modulesAr, callback, errBack){
-      try{
-        var i = 0;
-        var l = modulesAr.length;
-        var args = [];
-        for (i; i < l; ++i){
-          args.push(require(modulesAr[i]));
-        };
-      }catch(e){
-        errBack(e);
-        return;
-      };
-      callback.apply(callback, args);
-    };
-    defineFun = function(requireAr, callback){
-      requireFun(requireAr, function(){
-        module.exports = callback.apply(callback, arguments);
-      });
-    };
-    
-  }else if (typeof define == "function" && define.amd){ // AMD
-    var _define = define;
-    requireFun = require;
-    
-    defineFun = function(par1, par2){
-      if (par1 instanceof Array){
-        par1.unshift("require");
-      }else{
-        par2 = par1;
-        par1 = ["require"];
-      };
-      _define(par1, function(){
-        requireFun = arguments[0];
-        var args = [];
-        for (var i = 1; i < arguments.length; ++i){
-          args.push(arguments[i]);
-        };
-        return par2.apply(par2, args);
-      });
-    };
-    
-  }else{ // Plain browser env
-    alert("not working out!");
-    
-  };
-  defineFun([], function(){
-var __execute = function(promiseland, extra){ __execute = undefined; var __require = requireFun;
+(function(){var __modFun = function(__require){ __modFun = undefined;
+var __execute = function(promiseland, extra){ __execute = undefined;
 
 if (promiseland._hasModule({ hashStr: "4a01c4f3b4388a1628a72080d91dbb50" })){ return promiseland._getModule("4a01c4f3b4388a1628a72080d91dbb50"); };
 var PL$18/*Array*/;try{PL$18/*Array*/ = Array;}catch(e){};
@@ -174,5 +124,30 @@ var PL$1 = (function(){
   return PL$13/*createClass*/;
   ;})();
 ;return PL$1;
-}; return function(){ return __execute.apply(null, arguments); } });
+}; return function(){ return __execute.apply(null, arguments); }; };
+  
+  if (typeof exports == "object" && typeof module == "object"){ // CommonJS
+    module.exports = __modFun(function(modulesAr, callback, errBack){
+      // the require function for CommonJs
+      var args = [];
+      try{
+        var i = 0;
+        var l = modulesAr.length;
+        for (i; i < l; ++i){
+          args.push(require(modulesAr[i]));
+        };
+      }catch(e){
+        errBack(e);
+        return;
+      };
+      callback.apply(callback, args);
+    });
+  
+  }else if (typeof define == "function" && define.amd){ // AMD
+    define(["require"], __modFun);
+  
+  }else{ // Plain browser env
+    __modFun(function(){ throw { msg: "require not possible in non loader mode" }; });
+  
+  };
 })();

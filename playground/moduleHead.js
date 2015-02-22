@@ -15,10 +15,10 @@ var PL$1 = (function(){
   if (typeof exports == "object" && typeof module == "object"){ // CommonJS
     module.exports = __modFun(function(modulesAr, callback, errBack){
       // the require function for CommonJs
+      var args = [];
       try{
         var i = 0;
         var l = modulesAr.length;
-        var args = [];
         for (i; i < l; ++i){
           args.push(require(modulesAr[i]));
         };
