@@ -1,9 +1,9 @@
 {
   "name": "promiseland",
-  "dojoBuild": "package.js",
+  "dojoBuild": "profile.js",
   "version": "0.0.21",
   "description": "promiseLand is a very promising Language.",
-  "main": "./promiseland.js",
+  "main": "./promiseland",
   "repository": {
     "type": "git",
     "url": "https://github.com/soliton4/promiseland.git"
