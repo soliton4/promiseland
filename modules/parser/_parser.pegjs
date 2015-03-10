@@ -161,7 +161,9 @@ SingleLineComment
   = "//" (!LineTerminator SourceCharacter)*
 
 Identifier
-  = !ReservedWord name:IdentifierName { return name; }
+  = !ReservedWord name:IdentifierName { 
+    return name; 
+  }
 
 IdentifierName "identifier"
   = first:IdentifierStart rest:IdentifierPart* {
@@ -548,7 +550,9 @@ EOF
 
 PrimaryExpression
   = ThisToken { return posRes({ type: "ThisExpression" }); }  // promiseland
-  / Identifier
+  / temp:Identifier {
+    return temp;
+  }
   / Literal
   / ArrayLiteral
   / ObjectLiteral
@@ -822,7 +826,7 @@ MemberExpression
         }
     )*
     {
-      return buildTree(first, rest, function(result, element) {
+      var res = buildTree(first, rest, function(result, element) {
         return posRes({
           type:     "MemberExpression",
           object:   result,
@@ -830,6 +834,8 @@ MemberExpression
           computed: element.computed
         });
       });
+
+      return res;
     }
     
 
@@ -1862,11 +1868,14 @@ FunctionKeywords
   
 Typename
   = name:Identifier _ deref:PromiseOperator* {
+    var res = {
+      name: name.name
+    };
     var i;
     for (i = 0; i < deref.length; ++i){
-      name.name += "*";
+      res.name += "*";
     };
-    return name;
+    return posRes(res);
   }
 
 FunctionDeclarationFunId

@@ -205,7 +205,9 @@
   *createTest("typesafety/memberFunction", successFun);
 
   *createTest("track/selfReference", successFun);
-//*createTest("track/selfReference", successFun);
+  *createTest("operator/multi", successFun);
+  *createTest("operator/add", successFun);
+//*createTest("operator/multi", successFun);
 
   
     var c = 0;
