@@ -3,7 +3,7 @@ var __execute = function(promiseland, extra){ __execute = undefined;
 
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
-if (promiseland._hasModule({ hashStr: "6bd61b76756d51bc6ec2dc7c5402904d" })){ return promiseland._getModule("6bd61b76756d51bc6ec2dc7c5402904d"); };
+if (promiseland._hasModule({ hashStr: "4db9bfde40b6089f9ddcdaa969aab38f" })){ return promiseland._getModule("4db9bfde40b6089f9ddcdaa969aab38f"); };
 var PL$3/*extra*/;try{PL$3/*extra*/ = extra;}catch(e){};
 var PL$27/*Promise*/;try{PL$27/*Promise*/ = Promise;}catch(e){};
 var PL$1 = (function(){
@@ -78,275 +78,279 @@ var PL$1 = (function(){
     ;
     var PL$26/*storageEnginePs*/ = new PL$27/*Promise*/();
     ;
-    PL$23/*pcs*/["isSavableType"] = (function(PL$28/*parType*/){
+    PL$23/*pcs*/["isSavableType"] = (function(PL$28/*parType*/, PL$29/*parName*/){
     
+      ;
+      if((PL$29/*parName*/ == "constructor")){
+        return false;
+      };
       ;
       if(PL$22/*cs*/["isVar"](PL$28/*parType*/)){
         return true;
       };
       ;
-      var PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      var PL$30/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
       ;
-      if(PL$29/*cDef*/["savable"]){
+      if(PL$30/*cDef*/["savable"]){
         return true;
       };
       ;
       return false;
       ;});
     PL$23/*pcs*/["registerSavableClass"] = (function(PL$28/*parType*/){
-    var PL$30 = new __Promise();
-    var PL$32/*promiseland exception catcher*/ = function(code){
+    var PL$31 = new __Promise();
+    var PL$33/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$30.reject(e);
+          PL$31.reject(e);
         };
       };
     };
-    var PL$33/*catch rejected*/ = function(e){
-      PL$30.reject(e);
+    var PL$34/*catch rejected*/ = function(e){
+      PL$31.reject(e);
     };
-    var PL$29/*cDef*/;
-    var PL$35/*engine*/;
-    var PL$38/*propertiesAr*/;
-    var PL$39/*properties*/;
-    var PL$40/*map*/;
-    var PL$41/*i*/;
-    var PL$42/*mDef*/;
-    var PL$43/*p*/;
-    PL$32/*promiseland exception catcher*/(function(){
+    var PL$30/*cDef*/;
+    var PL$36/*engine*/;
+    var PL$39/*propertiesAr*/;
+    var PL$40/*properties*/;
+    var PL$41/*map*/;
+    var PL$42/*i*/;
+    var PL$43/*mDef*/;
+    var PL$44/*p*/;
+    PL$33/*promiseland exception catcher*/(function(){
     
       ;
-      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      PL$30/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
       
-      var PL$34 = new __Promise();if(PL$29/*cDef*/["storageEngine"]){
-        PL$35/*engine*/ = PL$29/*cDef*/["storageEngine"];
-        PL$34.resolve();;
+      var PL$35 = new __Promise();if(PL$30/*cDef*/["storageEngine"]){
+        PL$36/*engine*/ = PL$30/*cDef*/["storageEngine"];
+        PL$35.resolve();;
       }else{
-      PL$26/*storageEnginePs*/.then(PL$32/*promiseland exception catcher*/(function(PL$36){PL$35/*engine*/ = PL$36;
-      PL$34.resolve();;}), PL$33/*catch rejected*/);
+      PL$26/*storageEnginePs*/.then(PL$33/*promiseland exception catcher*/(function(PL$37){PL$36/*engine*/ = PL$37;
+      PL$35.resolve();;}), PL$34/*catch rejected*/);
       ;
-      };PL$34.then(PL$32/*promiseland exception catcher*/(function(PL$37){PL$37;;
+      };PL$35.then(PL$33/*promiseland exception catcher*/(function(PL$38){PL$38;;
       ;
-      PL$38/*propertiesAr*/ = [
+      PL$39/*propertiesAr*/ = [
         
       ];
-      PL$39/*properties*/ = {
+      PL$40/*properties*/ = {
         
       };
-      PL$40/*map*/ = PL$29/*cDef*/["map"];
-      PL$41/*i*/ = 0;
-      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
-        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
-        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
+      PL$41/*map*/ = PL$30/*cDef*/["map"];
+      PL$42/*i*/ = 0;
+      for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$41/*map*/["membersAr"]["length"]);++PL$42/*i*/){{
+        PL$43/*mDef*/ = PL$41/*map*/["membersAr"][PL$42/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$43/*mDef*/["type"], PL$43/*mDef*/["name"]) || PL$43/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$43/*p*/ = {
-          "name": PL$42/*mDef*/["name"],
-          "type": PL$42/*mDef*/["type"],
-          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]),
-          "defaultValue": (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$42/*mDef*/["defaultValue"] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$42/*mDef*/["defaultValue"]))
+        PL$44/*p*/ = {
+          "name": PL$43/*mDef*/["name"],
+          "type": PL$43/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"]),
+          "defaultValue": (PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"]) ? PL$43/*mDef*/["defaultValue"] : PL$23/*pcs*/["stringifyInstance"](PL$43/*mDef*/["type"], PL$43/*mDef*/["defaultValue"]))
         };
-        if(PL$42/*mDef*/["meta"]){
-          PL$43/*p*/["meta"] = PL$42/*mDef*/["meta"];
+        if(PL$43/*mDef*/["meta"]){
+          PL$44/*p*/["meta"] = PL$43/*mDef*/["meta"];
         };
         ;
-        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
-        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
+        PL$39/*propertiesAr*/["push"](PL$44/*p*/);
+        PL$40/*properties*/[PL$43/*mDef*/["name"]] = PL$44/*p*/;}};
       ;
       try
       {
-        if(PL$35/*engine*/["registerClass"]){
-          PL$29/*cDef*/["storageHandler"] = PL$35/*engine*/["registerClass"]({
-            "idType": PL$29/*cDef*/["idType"],
-            "properties": PL$39/*properties*/,
-            "propertiesAr": PL$38/*propertiesAr*/,
-            "moduleName": PL$29/*cDef*/["moduleName"],
-            "className": PL$29/*cDef*/["className"],
-            "moduleHash": PL$29/*cDef*/["moduleHash"]
+        if(PL$36/*engine*/["registerClass"]){
+          PL$30/*cDef*/["storageHandler"] = PL$36/*engine*/["registerClass"]({
+            "idType": PL$30/*cDef*/["idType"],
+            "properties": PL$40/*properties*/,
+            "propertiesAr": PL$39/*propertiesAr*/,
+            "moduleName": PL$30/*cDef*/["moduleName"],
+            "className": PL$30/*cDef*/["className"],
+            "moduleHash": PL$30/*cDef*/["moduleHash"]
           });
         };
-        ;}catch(PL$44/*e*/){};
+        ;}catch(PL$45/*e*/){};
       ;
-      PL$30.resolve(); return;}), PL$33/*catch rejected*/);
+      PL$31.resolve(); return;}), PL$34/*catch rejected*/);
       ;
-    })();return PL$30;
+    })();return PL$31;
     });
-    PL$23/*pcs*/["saveInstance"] = (function(PL$28/*parType*/, PL$45/*parInstance*/){
-    var PL$46 = new __Promise();
-    var PL$48/*promiseland exception catcher*/ = function(code){
+    PL$23/*pcs*/["saveInstance"] = (function(PL$28/*parType*/, PL$46/*parInstance*/){
+    var PL$47 = new __Promise();
+    var PL$49/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$46.reject(e);
+          PL$47.reject(e);
         };
       };
     };
-    var PL$49/*catch rejected*/ = function(e){
-      PL$46.reject(e);
+    var PL$50/*catch rejected*/ = function(e){
+      PL$47.reject(e);
     };
-    var PL$29/*cDef*/;
-    var PL$50/*h*/;
-    var PL$38/*propertiesAr*/;
-    var PL$39/*properties*/;
-    var PL$40/*map*/;
-    var PL$41/*i*/;
-    var PL$42/*mDef*/;
-    var PL$43/*p*/;
-    PL$48/*promiseland exception catcher*/(function(){
+    var PL$30/*cDef*/;
+    var PL$51/*h*/;
+    var PL$39/*propertiesAr*/;
+    var PL$40/*properties*/;
+    var PL$41/*map*/;
+    var PL$42/*i*/;
+    var PL$43/*mDef*/;
+    var PL$44/*p*/;
+    PL$49/*promiseland exception catcher*/(function(){
     
       ;
-      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
-      PL$29/*cDef*/["storageHandler"].then(PL$48/*promiseland exception catcher*/(function(PL$51){PL$50/*h*/ = PL$51;
-      PL$38/*propertiesAr*/ = [
+      PL$30/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      PL$30/*cDef*/["storageHandler"].then(PL$49/*promiseland exception catcher*/(function(PL$52){PL$51/*h*/ = PL$52;
+      PL$39/*propertiesAr*/ = [
         
       ];
-      PL$39/*properties*/ = {
+      PL$40/*properties*/ = {
         
       };
-      PL$40/*map*/ = PL$29/*cDef*/["map"];
-      PL$41/*i*/ = 0;
-      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
-        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
-        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
+      PL$41/*map*/ = PL$30/*cDef*/["map"];
+      PL$42/*i*/ = 0;
+      for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$41/*map*/["membersAr"]["length"]);++PL$42/*i*/){{
+        PL$43/*mDef*/ = PL$41/*map*/["membersAr"][PL$42/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$43/*mDef*/["type"], PL$43/*mDef*/["name"]) || PL$43/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$43/*p*/ = {
-          "name": PL$42/*mDef*/["name"],
-          "type": PL$42/*mDef*/["type"],
-          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]),
-          "value": (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$45/*parInstance*/[PL$42/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$45/*parInstance*/[PL$42/*mDef*/["index"]]))
+        PL$44/*p*/ = {
+          "name": PL$43/*mDef*/["name"],
+          "type": PL$43/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"]),
+          "value": (PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"]) ? PL$46/*parInstance*/[PL$43/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$43/*mDef*/["type"], PL$46/*parInstance*/[PL$43/*mDef*/["index"]]))
         };
-        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
-        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
+        PL$39/*propertiesAr*/["push"](PL$44/*p*/);
+        PL$40/*properties*/[PL$43/*mDef*/["name"]] = PL$44/*p*/;}};
       ;
-      PL$50/*h*/["save"]({
-        "properties": PL$39/*properties*/,
-        "propertiesAr": PL$38/*propertiesAr*/
-      }).then(PL$48/*promiseland exception catcher*/(function(PL$52){PL$46.resolve(PL$52); return;
-      PL$46.resolve(); return;}), PL$49/*catch rejected*/);
-      ;}), PL$49/*catch rejected*/);
+      PL$51/*h*/["save"]({
+        "properties": PL$40/*properties*/,
+        "propertiesAr": PL$39/*propertiesAr*/
+      }).then(PL$49/*promiseland exception catcher*/(function(PL$53){PL$47.resolve(PL$53); return;
+      PL$47.resolve(); return;}), PL$50/*catch rejected*/);
+      ;}), PL$50/*catch rejected*/);
       ;
-    })();return PL$46;
+    })();return PL$47;
     });
-    PL$23/*pcs*/["loadInstance"] = (function(PL$28/*parType*/, PL$45/*parInstance*/){
-    var PL$53 = new __Promise();
-    var PL$55/*promiseland exception catcher*/ = function(code){
+    PL$23/*pcs*/["loadInstance"] = (function(PL$28/*parType*/, PL$46/*parInstance*/){
+    var PL$54 = new __Promise();
+    var PL$56/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$53.reject(e);
+          PL$54.reject(e);
         };
       };
     };
-    var PL$56/*catch rejected*/ = function(e){
-      PL$53.reject(e);
+    var PL$57/*catch rejected*/ = function(e){
+      PL$54.reject(e);
     };
-    var PL$29/*cDef*/;
-    var PL$50/*h*/;
-    var PL$38/*propertiesAr*/;
-    var PL$39/*properties*/;
-    var PL$40/*map*/;
-    var PL$41/*i*/;
-    var PL$42/*mDef*/;
-    var PL$43/*p*/;
-    var PL$58/*loadVar*/;
-    PL$55/*promiseland exception catcher*/(function(){
+    var PL$30/*cDef*/;
+    var PL$51/*h*/;
+    var PL$39/*propertiesAr*/;
+    var PL$40/*properties*/;
+    var PL$41/*map*/;
+    var PL$42/*i*/;
+    var PL$43/*mDef*/;
+    var PL$44/*p*/;
+    var PL$59/*loadVar*/;
+    PL$56/*promiseland exception catcher*/(function(){
     
       ;
-      PL$29/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
-      PL$29/*cDef*/["storageHandler"].then(PL$55/*promiseland exception catcher*/(function(PL$57){PL$50/*h*/ = PL$57;
-      PL$38/*propertiesAr*/ = [
+      PL$30/*cDef*/ = PL$24/*getClass*/(PL$28/*parType*/);
+      PL$30/*cDef*/["storageHandler"].then(PL$56/*promiseland exception catcher*/(function(PL$58){PL$51/*h*/ = PL$58;
+      PL$39/*propertiesAr*/ = [
         
       ];
-      PL$39/*properties*/ = {
+      PL$40/*properties*/ = {
         
       };
-      PL$40/*map*/ = PL$29/*cDef*/["map"];
-      PL$41/*i*/ = 0;
-      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
-        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
-        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
+      PL$41/*map*/ = PL$30/*cDef*/["map"];
+      PL$42/*i*/ = 0;
+      for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$41/*map*/["membersAr"]["length"]);++PL$42/*i*/){{
+        PL$43/*mDef*/ = PL$41/*map*/["membersAr"][PL$42/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$43/*mDef*/["type"], PL$43/*mDef*/["name"]) || PL$43/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        PL$43/*p*/ = {
-          "name": PL$42/*mDef*/["name"],
-          "type": PL$42/*mDef*/["type"],
-          "isVar": PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"])
+        PL$44/*p*/ = {
+          "name": PL$43/*mDef*/["name"],
+          "type": PL$43/*mDef*/["type"],
+          "isVar": PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"])
         };
-        if((PL$42/*mDef*/["name"] == "id")){
-          PL$43/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"]) ? PL$45/*parInstance*/[PL$42/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$42/*mDef*/["type"], PL$45/*parInstance*/[PL$42/*mDef*/["index"]]));
+        if((PL$43/*mDef*/["name"] == "id")){
+          PL$44/*p*/["value"] = (PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"]) ? PL$46/*parInstance*/[PL$43/*mDef*/["index"]] : PL$23/*pcs*/["stringifyInstance"](PL$43/*mDef*/["type"], PL$46/*parInstance*/[PL$43/*mDef*/["index"]]));
         };
         ;
-        PL$38/*propertiesAr*/["push"](PL$43/*p*/);
-        PL$39/*properties*/[PL$42/*mDef*/["name"]] = PL$43/*p*/;}};
+        PL$39/*propertiesAr*/["push"](PL$44/*p*/);
+        PL$40/*properties*/[PL$43/*mDef*/["name"]] = PL$44/*p*/;}};
       ;
-      PL$50/*h*/["load"]({
-        "properties": PL$39/*properties*/,
-        "propertiesAr": PL$38/*propertiesAr*/
-      }).then(PL$55/*promiseland exception catcher*/(function(PL$59){PL$58/*loadVar*/ = PL$59;
-      if(! PL$58/*loadVar*/){
-        PL$53.resolve(); return;
+      PL$51/*h*/["load"]({
+        "properties": PL$40/*properties*/,
+        "propertiesAr": PL$39/*propertiesAr*/
+      }).then(PL$56/*promiseland exception catcher*/(function(PL$60){PL$59/*loadVar*/ = PL$60;
+      if(! PL$59/*loadVar*/){
+        PL$54.resolve(); return;
       };
       ;
-      for(PL$41/*i*/ = 0;(PL$41/*i*/ < PL$40/*map*/["membersAr"]["length"]);++PL$41/*i*/){{
-        PL$42/*mDef*/ = PL$40/*map*/["membersAr"][PL$41/*i*/];
-        if((! PL$23/*pcs*/["isSavableType"](PL$42/*mDef*/["type"]) || PL$42/*mDef*/["noSave"])){
+      for(PL$42/*i*/ = 0;(PL$42/*i*/ < PL$41/*map*/["membersAr"]["length"]);++PL$42/*i*/){{
+        PL$43/*mDef*/ = PL$41/*map*/["membersAr"][PL$42/*i*/];
+        if((! PL$23/*pcs*/["isSavableType"](PL$43/*mDef*/["type"], PL$43/*mDef*/["name"]) || PL$43/*mDef*/["noSave"])){
           continue;;
         };
         ;
-        if(PL$23/*pcs*/["hasOwnProperty"](PL$58/*loadVar*/, PL$42/*mDef*/["name"])){
-          if(PL$14/*classSystem*/["isVar"](PL$42/*mDef*/["type"])){
-            PL$23/*pcs*/["setMemberByDefFromInstance"](PL$28/*parType*/, PL$45/*parInstance*/, PL$42/*mDef*/, PL$58/*loadVar*/[PL$42/*mDef*/["name"]]);
+        if(PL$23/*pcs*/["hasOwnProperty"](PL$59/*loadVar*/, PL$43/*mDef*/["name"])){
+          if(PL$14/*classSystem*/["isVar"](PL$43/*mDef*/["type"])){
+            PL$23/*pcs*/["setMemberByDefFromInstance"](PL$28/*parType*/, PL$46/*parInstance*/, PL$43/*mDef*/, PL$59/*loadVar*/[PL$43/*mDef*/["name"]]);
           }else{
           };
           ;
         };
         ;}};
       ;
-      PL$53.resolve(); return;}), PL$56/*catch rejected*/);
-      ;}), PL$56/*catch rejected*/);
+      PL$54.resolve(); return;}), PL$57/*catch rejected*/);
+      ;}), PL$57/*catch rejected*/);
       ;
-    })();return PL$53;
+    })();return PL$54;
     });
-    PL$22/*cs*/["setStorageEngine"] = (function(PL$60/*parStorageEngine*/, PL$28/*parType*/){
-    var PL$61 = new __Promise();
-    var PL$63/*promiseland exception catcher*/ = function(code){
+    PL$22/*cs*/["setStorageEngine"] = (function(PL$61/*parStorageEngine*/, PL$28/*parType*/){
+    var PL$62 = new __Promise();
+    var PL$64/*promiseland exception catcher*/ = function(code){
       return function(res){
         try{ code(res); }catch(e){
-          PL$61.reject(e);
+          PL$62.reject(e);
         };
       };
     };
-    var PL$64/*catch rejected*/ = function(e){
-      PL$61.reject(e);
+    var PL$65/*catch rejected*/ = function(e){
+      PL$62.reject(e);
     };
-    var PL$66/*type*/;
-    var PL$29/*cDef*/;
-    PL$63/*promiseland exception catcher*/(function(){
+    var PL$67/*type*/;
+    var PL$30/*cDef*/;
+    PL$64/*promiseland exception catcher*/(function(){
     
       ;
       
-      var PL$65 = new __Promise();if(PL$28/*parType*/){
-        PL$22/*cs*/["readyPromise"](PL$28/*parType*/).then(PL$63/*promiseland exception catcher*/(function(PL$67){PL$66/*type*/ = PL$67;
-        PL$29/*cDef*/ = PL$24/*getClass*/(PL$66/*type*/);
-        PL$29/*cDef*/["storageEngine"] = PL$60/*parStorageEngine*/;
-        PL$23/*pcs*/["registerSavableClass"](PL$66/*type*/);
-        PL$61.resolve(); return;
-        PL$65.resolve();;}), PL$64/*catch rejected*/);
+      var PL$66 = new __Promise();if(PL$28/*parType*/){
+        PL$22/*cs*/["readyPromise"](PL$28/*parType*/).then(PL$64/*promiseland exception catcher*/(function(PL$68){PL$67/*type*/ = PL$68;
+        PL$30/*cDef*/ = PL$24/*getClass*/(PL$67/*type*/);
+        PL$30/*cDef*/["storageEngine"] = PL$61/*parStorageEngine*/;
+        PL$23/*pcs*/["registerSavableClass"](PL$67/*type*/);
+        PL$62.resolve(); return;
+        PL$66.resolve();;}), PL$65/*catch rejected*/);
         ;
-      }else{PL$65.resolve();
-      };PL$65.then(PL$63/*promiseland exception catcher*/(function(PL$68){PL$68;;
+      }else{PL$66.resolve();
+      };PL$66.then(PL$64/*promiseland exception catcher*/(function(PL$69){PL$69;;
       ;
       try
       {
-        PL$26/*storageEnginePs*/["resolve"](PL$60/*parStorageEngine*/);}catch(__dummy){};
+        PL$26/*storageEnginePs*/["resolve"](PL$61/*parStorageEngine*/);}catch(__dummy){};
       ;
       PL$26/*storageEnginePs*/ = new PL$27/*Promise*/();
-      PL$26/*storageEnginePs*/["resolve"](PL$60/*parStorageEngine*/);
-      PL$61.resolve(); return;}), PL$64/*catch rejected*/);
+      PL$26/*storageEnginePs*/["resolve"](PL$61/*parStorageEngine*/);
+      PL$62.resolve(); return;}), PL$65/*catch rejected*/);
       ;
-    })();return PL$61;
+    })();return PL$62;
     });
     ;});
   ;})();

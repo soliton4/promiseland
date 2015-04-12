@@ -32,7 +32,10 @@ return (classSystem, internals){
   
   var storageEnginePs = new Promise();
   
-  pcs.isSavableType = (parType){
+  pcs.isSavableType = (parType, parName){
+    if (parName == "constructor"){
+      return false;
+    };
     if (cs.isVar(parType)){
       return true;
     };
@@ -57,7 +60,7 @@ return (classSystem, internals){
     var i = 0;
     for (i = 0; i < map.membersAr.length; ++i){
       var mDef = map.membersAr[i];
-      if (!pcs.isSavableType(mDef.type) || mDef.noSave){
+      if (!pcs.isSavableType(mDef.type, mDef.name) || mDef.noSave){
         continue;
       };
       var p = {
@@ -97,7 +100,7 @@ return (classSystem, internals){
     var i = 0;
     for (i = 0; i < map.membersAr.length; ++i){
       var mDef = map.membersAr[i];
-      if (!pcs.isSavableType(mDef.type) || mDef.noSave){
+      if (!pcs.isSavableType(mDef.type, mDef.name) || mDef.noSave){
         continue;
       };
       var p = {
@@ -126,7 +129,7 @@ return (classSystem, internals){
     var i = 0;
     for (i = 0; i < map.membersAr.length; ++i){
       var mDef = map.membersAr[i];
-      if (!pcs.isSavableType(mDef.type) || mDef.noSave){
+      if (!pcs.isSavableType(mDef.type, mDef.name) || mDef.noSave){
         continue;
       };
       var p = {
@@ -151,7 +154,7 @@ return (classSystem, internals){
     //load each individual member
     for (i = 0; i < map.membersAr.length; ++i){
       var mDef = map.membersAr[i];
-      if (!pcs.isSavableType(mDef.type) || mDef.noSave){
+      if (!pcs.isSavableType(mDef.type, mDef.name) || mDef.noSave){
         continue;
       };
       //parInstance

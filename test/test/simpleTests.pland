@@ -187,6 +187,7 @@
   
   *createTest("storage/setStorageEngine", successFun);
   *createTest("storage/meta", successFun);
+  *createTest("storage/noConstructor", successFun);
   *createTest("promise/catchAfterIf", successFun);
   *createTest("map", successFun);
 

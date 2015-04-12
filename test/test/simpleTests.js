@@ -13,9 +13,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "ba418d9f13b97154d50a898304ef238c" })){ return promiseland._getModule("ba418d9f13b97154d50a898304ef238c"); };
+    if (promiseland._hasModule({ hashStr: "10bcca6ffc70ef7d7ec4315445f4128f" })){ return promiseland._getModule("10bcca6ffc70ef7d7ec4315445f4128f"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "ba418d9f13b97154d50a898304ef238c", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "10bcca6ffc70ef7d7ec4315445f4128f", "module": PL$1, promising: true });
 var PL$28/*console*/;try{PL$28/*console*/ = console;}catch(e){};
 var PL$31/*Promise*/;try{PL$31/*Promise*/ = Promise;}catch(e){};
 var PL$2 = (function(){
@@ -38,10 +38,10 @@ var PL$29/*funReturning4*/;
 var PL$33/*funReturning4debug*/;
 var PL$34/*returning4*/;
 var PL$58/*modRes4*/;
-var PL$113/*c*/;
-var PL$114/*s*/;
-var PL$115/*f*/;
-var PL$116/*m*/;
+var PL$114/*c*/;
+var PL$115/*s*/;
+var PL$116/*f*/;
+var PL$117/*m*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
@@ -254,37 +254,39 @@ PL$3/*promiseland exception catcher*/(function(){
   PL$11/*createTest*/("leaveTry", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$95){PL$95;
   PL$11/*createTest*/("storage/setStorageEngine", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$96){PL$96;
   PL$11/*createTest*/("storage/meta", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$97){PL$97;
-  PL$11/*createTest*/("promise/catchAfterIf", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$98){PL$98;
-  PL$11/*createTest*/("map", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$99){PL$99;
-  PL$11/*createTest*/("for/forNoParam", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$100){PL$100;
-  PL$11/*createTest*/("while/doWhile", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$101){PL$101;
-  PL$11/*createTest*/("while/doWhileP", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$102){PL$102;
-  PL$11/*createTest*/("var/varList", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$103){PL$103;
-  PL$11/*createTest*/("int/declaration", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$104){PL$104;
-  PL$11/*createTest*/("int/initialization", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$105){PL$105;
-  PL$11/*createTest*/("catch/onlyCatchPromising", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$106){PL$106;
-  PL$11/*createTest*/("track/assign", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$107){PL$107;
-  PL$11/*createTest*/("track/assignConstructor", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$108){PL$108;
-  PL$11/*createTest*/("typesafety/memberFunction", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$109){PL$109;
-  PL$11/*createTest*/("track/selfReference", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$110){PL$110;
-  PL$11/*createTest*/("operator/multi", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$111){PL$111;
-  PL$11/*createTest*/("operator/add", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$112){PL$112;
-  PL$113/*c*/ = 0;
-  PL$114/*s*/ = 0;
-  PL$115/*f*/ = 0;
-  for(PL$116/*m*/ in PL$5/*testObj*/){
-    PL$113/*c*/++;
-    if(PL$5/*testObj*/[PL$116/*m*/]){
-      PL$114/*s*/++;
+  PL$11/*createTest*/("storage/noConstructor", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$98){PL$98;
+  PL$11/*createTest*/("promise/catchAfterIf", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$99){PL$99;
+  PL$11/*createTest*/("map", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$100){PL$100;
+  PL$11/*createTest*/("for/forNoParam", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$101){PL$101;
+  PL$11/*createTest*/("while/doWhile", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$102){PL$102;
+  PL$11/*createTest*/("while/doWhileP", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$103){PL$103;
+  PL$11/*createTest*/("var/varList", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$104){PL$104;
+  PL$11/*createTest*/("int/declaration", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$105){PL$105;
+  PL$11/*createTest*/("int/initialization", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$106){PL$106;
+  PL$11/*createTest*/("catch/onlyCatchPromising", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$107){PL$107;
+  PL$11/*createTest*/("track/assign", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$108){PL$108;
+  PL$11/*createTest*/("track/assignConstructor", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$109){PL$109;
+  PL$11/*createTest*/("typesafety/memberFunction", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$110){PL$110;
+  PL$11/*createTest*/("track/selfReference", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$111){PL$111;
+  PL$11/*createTest*/("operator/multi", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$112){PL$112;
+  PL$11/*createTest*/("operator/add", PL$7/*successFun*/).then(PL$3/*promiseland exception catcher*/(function(PL$113){PL$113;
+  PL$114/*c*/ = 0;
+  PL$115/*s*/ = 0;
+  PL$116/*f*/ = 0;
+  for(PL$117/*m*/ in PL$5/*testObj*/){
+    PL$114/*c*/++;
+    if(PL$5/*testObj*/[PL$117/*m*/]){
+      PL$115/*s*/++;
     }else{
-    PL$28/*console*/["log"]((PL$116/*m*/ + " failed!"));
-    PL$115/*f*/++;
+    PL$28/*console*/["log"]((PL$117/*m*/ + " failed!"));
+    PL$116/*f*/++;
     };
     ;};
   ;
-  PL$28/*console*/["log"]((((((("run " + PL$113/*c*/) + " tests. ") + PL$114/*s*/) + " successful, ") + PL$115/*f*/) + " failed"));
+  PL$28/*console*/["log"]((((((("run " + PL$114/*c*/) + " tests. ") + PL$115/*s*/) + " successful, ") + PL$116/*f*/) + " failed"));
   PL$1.resolve(PL$5/*testObj*/); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);

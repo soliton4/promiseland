@@ -1,0 +1,69 @@
+try{
+var properties;
+
+var hasConstr = false;
+
+class SaveHandler {
+  registerClass: (par)*{
+    var map = new promiseland.Map();
+    properties = par.properties;
+    for (i = 0; i < par.propertiesAr.length; ++i){
+      if (par.propertiesAr[i].name == "constructor"){
+        hasConstr = true;
+      };
+    };
+    return {
+      save: (par)*{
+        var i = 0;
+        var o = {};
+        for (i = 0; i < par.propertiesAr.length; ++i){
+          if (par.propertiesAr[i].name == "constructor"){
+            hasConstr = true;
+          };
+        };
+      },
+      load: (par)*{
+        return map.get(par.properties.id.value);
+      },
+      delete: (par)*{
+        return map.delete(par.properties.id.value);
+      }
+    };
+    
+  }
+};
+
+class type savable C1{
+  constructor: (var bla){},
+  var meta {
+    type: "int"
+  } x: 1,
+  y: 2
+};
+
+promiseland.classSystem.setStorageEngine(new SaveHandler(), C1);
+
+
+if (hasConstr){
+  return {success: false};
+};
+
+
+C1 a = *(new C1("xxx"));
+
+if (hasConstr){
+  return {success: false};
+};
+
+*a.save();
+
+if (hasConstr){
+  return {success: false};
+};
+
+
+return {success: true};
+}catch(e){
+  console.log(e);
+  return {success: false, error: e};
+}
